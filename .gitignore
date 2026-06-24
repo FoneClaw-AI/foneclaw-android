@@ -1,0 +1,36 @@
+# Build artifacts
+*.apk
+*.aab
+*.dex
+*.class
+
+# Build directories
+build/
+out/
+target/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+nul
+
+# Local config
+local.properties
+.env
+*.env
+
+# Signing
+*.jks
+*.keystore
+keystore.properties
+
+# Gradle
+.gradle/
+gradle/wrapper/gradle-wrapper.jar
