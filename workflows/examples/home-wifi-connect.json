@@ -1,0 +1,21 @@
+{
+  "id": "home_wifi_connect",
+  "name": "Connect Home Wi-Fi",
+  "description": "Connect to the home Wi-Fi network using saved credentials.",
+  "matchPhrases": [
+    "connect home wifi",
+    "connect to home wifi",
+    "use home wifi",
+    "switch to home network"
+  ],
+  "steps": [
+    {
+      "toolName": "wifi_connect",
+      "arguments": {
+        "ssid": "MyHomeNetwork"
+      }
+    }
+  ],
+  "createdAtMillis": 0,
+  "updatedAtMillis": 0
+}
