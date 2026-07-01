@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "ai.android.claw",
+      "sha256_cert_fingerprints": [
+        "B3:1B:3C:85:C6:3B:13:26:CD:79:99:98:1D:FB:7E:55:79:A8:4F:97:54:74:26:55:44:77:50:D2:76:C0:25:EB"
+      ]
+    }
+  }
+]
