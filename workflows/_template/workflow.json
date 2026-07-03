@@ -1,0 +1,26 @@
+{
+  "id": "my-workflow-template",
+  "name": "My Workflow Template",
+  "description": "A template for creating new workflows. Replace with your own values.",
+  "matchPhrases": [
+    "my trigger phrase",
+    "another way to say it"
+  ],
+  "steps": [
+    {
+      "toolName": "tool_name_here",
+      "arguments": {
+        "param1": "value1",
+        "param2": "value2"
+      }
+    },
+    {
+      "toolName": "second_tool_name",
+      "arguments": {
+        "param1": "value1"
+      }
+    }
+  ],
+  "createdAtMillis": 0,
+  "updatedAtMillis": 0
+}

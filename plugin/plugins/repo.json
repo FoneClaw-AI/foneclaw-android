@@ -1,0 +1,8 @@
+{
+    "index": "index.min.json",
+    "meta": {
+        "name": "FoneClaw Official Plugins",
+        "website": "https://example.com/foneclaw/plugins",
+        "signingKeyFingerprint": "debug-or-release-signing-sha256"
+    }
+}

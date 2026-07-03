@@ -1,0 +1,1 @@
+Serve dot-directories such as .well-known when this repository is published as a static site.
