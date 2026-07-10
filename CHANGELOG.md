@@ -7,6 +7,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 ## [Unreleased]
 
 ### Added
+- v0.0.5 release notes for cleaner Agent replies, clearer approvals, cross-app screenshots, and feedback submission fixes
+
+## [v0.0.5] - TBD
+
+### Added
+- Cross-app screenshot flow that opens or switches to a target app before capturing the screen
+- Failure samples for JSON exposure and Agent fallback regression tracking
+
+### Changed
+- Improved Agent reply cleanup for JSON artifacts, internal placeholders, and reasoning artifacts
+- Improved local display handling for screenshot, camera, calendar, memo, mail, SMS, contacts, Wi-Fi, and workflow tool results
+- Improved approval cards with clearer titles, action labels, and target details
+- Updated onboarding visuals
+
+### Fixed
+- Support Center feedback submission configuration for FoneClaw
+- Feedback screenshot upload signing and response parsing
+
+## [v0.0.4] - TBD
+
+### Added
 - Community skills repository with 8 initial skills: bluetooth, daily-device-brief, mail, navigation, openApp, shopping, webResearch, wifi
 - GitHub-safe HTTPS Skill install entry for hosted `SKILL.md` links
 - Skill template for community contributions

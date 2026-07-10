@@ -3,11 +3,11 @@ plugins {
 }
 
 foneclawPlugin {
-    pluginId.set("foneclaw.device.file_manager")
+    pluginId.set("foneclaw:file-manager")
     packageName.set("ai.android.claw.plugin.device.filemanager")
     displayName.set("File Manager Plugin")
-    versionName.set("0.0.2")
-    versionCode.set(2)
+    versionName.set("0.0.3")
+    versionCode.set(3)
     category.set("device")
 }
 

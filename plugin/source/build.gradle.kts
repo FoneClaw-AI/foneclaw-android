@@ -96,9 +96,16 @@ fun validatePluginSpec(spec: PluginSpec) {
     }
 
     val manifest = spec.readManifest()
+    val extensionId = manifest.stringValue("extensionId")
     val packageName = manifest.stringValue("packageName")
     val versionName = manifest.stringValue("versionName")
     val versionCode = manifest.longValue("versionCode")
+    require(extensionId.isFoneClawPluginName()) {
+        "Plugin name must use foneclaw:<name> format: $extensionId"
+    }
+    require(extensionId == "foneclaw:${spec.name}") {
+        "Plugin name must match module name foneclaw:${spec.name}: $extensionId"
+    }
     require(packageName.startsWith("ai.android.claw.plugin.")) {
         "Plugin packageName must start with ai.android.claw.plugin.: $packageName"
     }
@@ -130,10 +137,12 @@ fun validatePluginSpec(spec: PluginSpec) {
 
 fun publishPluginSpec(spec: PluginSpec, buildType: String) {
     val manifest = spec.readManifest()
+    val extensionId = manifest.stringValue("extensionId")
     val packageName = manifest.stringValue("packageName")
     val displayName = manifest.stringValue("displayName")
     val versionName = manifest.stringValue("versionName")
     val versionCode = manifest.longValue("versionCode")
+    val tools = manifest.repoToolEntries()
 
     val apkSourceDir = spec.moduleDir.resolve("build/outputs/apk/$buildType")
     val sourceApk = apkSourceDir.listFiles()
@@ -160,13 +169,20 @@ fun publishPluginSpec(spec: PluginSpec, buildType: String) {
     updateIndexJson(
         pluginsDir = pluginsDir,
         entry = linkedMapOf(
-            "name" to displayName,
+            "schema" to 2,
+            "name" to extensionId,
+            "displayName" to displayName,
             "pkg" to packageName,
             "apk" to "apks/$apkFileName",
             "version" to versionName,
             "code" to versionCode,
             "lang" to spec.category,
             "sha256" to targetApk.sha256(),
+            "signingSha256" to OFFICIAL_PLUGIN_SIGNING_FINGERPRINT.normalizedFingerprint(),
+            "minHostVersion" to MIN_HOST_VERSION,
+            "capabilities" to spec.repoCapabilities(),
+            "tools" to tools,
+            "permissions" to spec.repoPermissions(),
         ),
     )
 
@@ -203,7 +219,7 @@ fun writeRepoJson(pluginsDir: File) {
         "meta" to linkedMapOf(
             "name" to "FoneClaw Official Plugins",
             "website" to "https://example.com/foneclaw/plugins",
-            "signingKeyFingerprint" to "debug-or-release-signing-sha256",
+            "signingKeyFingerprint" to OFFICIAL_PLUGIN_SIGNING_FINGERPRINT,
         ),
     )
     pluginsDir.resolve("repo.json").writeText(JsonOutput.prettyPrint(JsonOutput.toJson(repoJson)))
@@ -249,10 +265,58 @@ fun Map<*, *>.listValue(key: String): List<*> {
     return this[key] as? List<*> ?: error("Missing or invalid list: $key")
 }
 
+fun Map<*, *>.repoToolEntries(): List<Map<String, Any>> {
+    return listValue("tools")
+        .map { tool -> tool.mapValue() }
+        .map { tool ->
+            linkedMapOf(
+                "name" to tool.stringValue("name"),
+                "displayName" to tool.stringValue("displayName"),
+                "description" to tool.stringValue("description"),
+                "risk" to tool.stringValue("risk"),
+                "approvalMode" to tool.stringValue("approvalMode"),
+            )
+        }
+}
+
+fun PluginSpec.repoCapabilities(): List<String> {
+    return when ("${category}:${name}") {
+        "device:file-manager" -> listOf(
+            "file.status",
+            "file.open_settings",
+            "file.list",
+            "file.search",
+            "file.read_text",
+            "file.create",
+            "file.write_text",
+            "file.create_folder",
+            "file.rename",
+            "file.batch_rename",
+            "file.delete",
+            "file.download",
+        )
+        else -> emptyList()
+    }
+}
+
+fun PluginSpec.repoPermissions(): List<String> {
+    return when ("${category}:${name}") {
+        "device:file-manager" -> listOf(
+            "android.permission.MANAGE_EXTERNAL_STORAGE",
+            "android.permission.INTERNET",
+        )
+        else -> emptyList()
+    }
+}
+
 fun String.variantName(): String {
     return replaceFirstChar { char ->
         if (char.isLowerCase()) char.titlecase() else char.toString()
     }
+}
+
+fun String.isFoneClawPluginName(): Boolean {
+    return matches(Regex("""foneclaw:[a-z0-9][a-z0-9-]{0,62}"""))
 }
 
 fun File.sha256(): String {
@@ -267,3 +331,13 @@ fun File.sha256(): String {
     }
     return digest.digest().joinToString("") { byte -> "%02x".format(byte) }
 }
+
+fun String.normalizedFingerprint(): String {
+    return filterNot { char -> char == ':' || char.isWhitespace() }
+        .lowercase()
+}
+
+val MIN_HOST_VERSION = "0.0.6"
+val OFFICIAL_PLUGIN_SIGNING_FINGERPRINT =
+    "E3:31:65:67:CC:A6:49:2D:B9:42:00:80:C9:4D:6E:A4:" +
+        "C3:31:88:67:79:70:DA:58:CE:71:7B:BF:3C:6F:3A:84"

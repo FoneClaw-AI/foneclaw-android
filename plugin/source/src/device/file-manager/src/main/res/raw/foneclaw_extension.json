@@ -1,10 +1,10 @@
 {
   "apiVersion": 1,
-  "extensionId": "foneclaw.device.file_manager",
+  "extensionId": "foneclaw:file-manager",
   "packageName": "ai.android.claw.plugin.device.filemanager",
   "displayName": "File Manager Plugin",
-  "versionName": "0.0.2",
-  "versionCode": 2,
+  "versionName": "0.0.3",
+  "versionCode": 3,
   "tools": [
     {
       "name": "plugin_file_manager_status",
@@ -22,7 +22,7 @@
     {
       "name": "plugin_file_manager_open_all_files_access_settings",
       "displayName": "Open All Files Access Settings",
-      "description": "Open Android system settings so the user can grant MANAGE_EXTERNAL_STORAGE to this plugin.",
+      "description": "Open Android all files access settings for the File Manager Plugin.",
       "risk": "DEVICE_CONTROL",
       "approvalMode": "REQUIRE_APPROVAL",
       "inputSchema": {
@@ -337,7 +337,7 @@
   ],
   "skill": {
     "id": "file-manager-plugin",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "entry": "SKILL.md"
   }
 }

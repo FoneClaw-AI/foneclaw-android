@@ -3,7 +3,7 @@ plugins {
 }
 
 foneclawPlugin {
-    pluginId.set("foneclaw.template.simple")
+    pluginId.set("foneclaw:simple-plugin")
     packageName.set("ai.android.claw.plugin.template.simple")
     displayName.set("Simple Plugin Template")
     versionName.set("0.0.1")

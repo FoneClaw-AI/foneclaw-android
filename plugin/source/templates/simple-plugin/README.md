@@ -14,7 +14,7 @@ After copying:
 6. Publish with:
 
 ```powershell
-.\gradlew.bat -p docs/07-release/foneclaw-android/plugin/source publishPlugin -Pplugin=<category>:<new-plugin>
+.\gradlew.bat -p publish/foneclaw-android/plugin/source publishPlugin -Pplugin=<category>:<new-plugin>
 ```
 
 This template is not included by default in Gradle and is not published by

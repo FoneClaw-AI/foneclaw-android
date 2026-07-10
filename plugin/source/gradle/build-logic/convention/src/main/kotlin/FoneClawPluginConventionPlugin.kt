@@ -6,7 +6,6 @@ import org.gradle.api.Project
 import org.gradle.api.provider.Property
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.getByType
-import java.io.File
 
 abstract class FoneClawPluginExtension {
     abstract val pluginId: Property<String>
@@ -25,8 +24,8 @@ class FoneClawPluginConventionPlugin : Plugin<Project> {
         val android = project.extensions.getByType<ApplicationExtension>()
         val androidComponents = project.extensions.getByType<ApplicationAndroidComponentsExtension>()
         val packageName = project.defaultPluginPackageName()
-        val foneClawSigningStore = project.findFoneClawRoot()
-            .resolve("app/androidclaw-release.jks")
+        val pluginSigningStore = project.rootDir
+            .resolve("androidclaw-plugin.jks")
             .takeIf { file -> file.isFile }
 
         extension.packageName.convention(packageName)
@@ -50,20 +49,20 @@ class FoneClawPluginConventionPlugin : Plugin<Project> {
             }
 
             buildTypes {
-                val foneClawSigningConfig = foneClawSigningStore?.let { storeFile ->
-                    signingConfigs.maybeCreate("foneClawRelease").apply {
+                val pluginSigningConfig = pluginSigningStore?.let { storeFile ->
+                    signingConfigs.maybeCreate("foneClawPluginPublic").apply {
                         this.storeFile = storeFile
-                        storePassword = "androidclaw123"
-                        keyAlias = "androidclaw"
-                        keyPassword = "androidclaw123"
+                        storePassword = "androidclaw-plugin123"
+                        keyAlias = "androidclaw-plugin"
+                        keyPassword = "androidclaw-plugin123"
                     }
                 }
                 getByName("debug") {
-                    signingConfig = foneClawSigningConfig ?: signingConfig
+                    signingConfig = pluginSigningConfig ?: signingConfig
                 }
                 getByName("release") {
                     isMinifyEnabled = false
-                    signingConfig = foneClawSigningConfig ?: signingConfig
+                    signingConfig = pluginSigningConfig ?: signingConfig
                 }
             }
 
@@ -74,6 +73,13 @@ class FoneClawPluginConventionPlugin : Plugin<Project> {
         }
 
         androidComponents.finalizeDsl {
+            val pluginId = extension.pluginId.get()
+            require(pluginId.isFoneClawPluginName()) {
+                "Plugin name must use foneclaw:<name> format: $pluginId"
+            }
+            require(pluginId == "foneclaw:${project.name}") {
+                "Plugin name must match module name foneclaw:${project.name}: $pluginId"
+            }
             android.namespace = extension.packageName.get()
             android.defaultConfig.applicationId = extension.packageName.get()
             android.defaultConfig.versionCode = extension.versionCode.get()
@@ -95,16 +101,8 @@ class FoneClawPluginConventionPlugin : Plugin<Project> {
         }
         return "ai.android.claw.plugin.$category.$pluginName"
     }
+}
 
-    private fun Project.findFoneClawRoot(): File {
-        var current: File? = rootDir
-        repeat(8) {
-            val candidate = current ?: return rootDir
-            if (candidate.resolve("app/androidclaw-release.jks").isFile) {
-                return candidate
-            }
-            current = candidate.parentFile
-        }
-        return rootDir
-    }
+private fun String.isFoneClawPluginName(): Boolean {
+    return matches(Regex("""foneclaw:[a-z0-9][a-z0-9-]{0,62}"""))
 }

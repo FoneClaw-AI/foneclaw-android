@@ -17,7 +17,7 @@
 
     <application
         android:allowBackup="false"
-        android:label="File Manager Plugin"
+        android:label="@string/file_manager_plugin_label"
         android:supportsRtl="true">
 
         <meta-data

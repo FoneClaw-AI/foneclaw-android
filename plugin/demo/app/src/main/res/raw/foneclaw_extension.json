@@ -1,6 +1,6 @@
 {
   "apiVersion": 1,
-  "extensionId": "foneclaw.demo",
+  "extensionId": "foneclaw:demo",
   "packageName": "ai.android.claw.extension.demo",
   "displayName": "Demo Plugin",
   "versionName": "0.0.1",

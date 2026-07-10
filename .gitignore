@@ -29,6 +29,7 @@ local.properties
 
 # Signing
 *.jks
+!plugin/source/androidclaw-plugin.jks
 *.keystore
 keystore.properties
 

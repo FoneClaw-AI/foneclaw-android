@@ -1,7 +1,7 @@
 ---
 name: file-manager-plugin
 description: Manage user files with the official file manager plugin.
-version: 0.0.2
+version: 0.0.3
 ---
 
 # File Manager Plugin

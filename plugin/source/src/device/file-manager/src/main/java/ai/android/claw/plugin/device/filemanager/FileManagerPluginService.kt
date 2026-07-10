@@ -4,12 +4,10 @@ import ai.android.claw.extension.IFoneClawExtensionService
 import ai.android.claw.plugin.PluginBundleKeys
 import android.app.Service
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.os.IBinder
-import android.provider.Settings
 import java.io.File
 import org.json.JSONObject
 
@@ -138,31 +136,12 @@ class FileManagerPluginService : Service() {
     }
 
     private fun openAllFilesAccessSettings(): Bundle {
-        val opened = runCatching {
-            val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                Intent(
-                    Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION,
-                    Uri.parse("package:$packageName"),
-                )
-            } else {
-                Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName"))
-            }.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-        }.recoverCatching {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                startActivity(
-                    Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
-                )
-            } else {
-                throw it
-            }
-        }.isSuccess
+        val opened = openFileManagerAllFilesAccessSettings(newTask = true)
 
         return if (opened) {
             userActionRequired(
                 code = "enable_all_files_access",
-                message = "Opened system settings. Enable all files access for File Manager Plugin.",
+                message = "Opened File Manager Plugin permissions. Enable all files access.",
             )
         } else {
             errorResponse(
@@ -174,7 +153,7 @@ class FileManagerPluginService : Service() {
     }
 
     private fun hasAllFilesAccess(): Boolean {
-        return Build.VERSION.SDK_INT < Build.VERSION_CODES.R || Environment.isExternalStorageManager()
+        return hasFileManagerAllFilesAccess()
     }
 
     private fun managedRoot(): File {

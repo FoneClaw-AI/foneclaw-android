@@ -1,6 +1,6 @@
 {
   "apiVersion": 1,
-  "extensionId": "foneclaw.template.simple",
+  "extensionId": "foneclaw:simple-plugin",
   "packageName": "ai.android.claw.plugin.template.simple",
   "displayName": "Simple Plugin Template",
   "versionName": "0.0.1",
