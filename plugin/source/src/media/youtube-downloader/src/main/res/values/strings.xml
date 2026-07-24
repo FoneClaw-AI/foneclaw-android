@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="youtube_downloader_plugin_label">YouTube Downloader Plugin</string>
+    <string name="youtube_download_channel_name">YouTube downloads</string>
+    <string name="youtube_download_notification_title">YouTube download</string>
+    <string name="youtube_download_action_cancel">Cancel</string>
+    <string name="youtube_download_status_queued">Waiting to download</string>
+    <string name="youtube_download_status_preparing">Preparing download</string>
+    <string name="youtube_download_status_downloading">Downloading</string>
+    <string name="youtube_download_status_merging">Processing media</string>
+    <string name="youtube_download_status_publishing">Saving to media library</string>
+    <string name="youtube_download_status_succeeded">Download complete</string>
+    <string name="youtube_download_status_failed">Download failed</string>
+    <string name="youtube_download_status_canceled">Download canceled</string>
+    <string name="youtube_download_status_interrupted">Download interrupted</string>
+</resources>

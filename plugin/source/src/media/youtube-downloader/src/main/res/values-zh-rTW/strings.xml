@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="youtube_downloader_plugin_label">YouTube 下載外掛程式</string>
+    <string name="youtube_download_channel_name">YouTube 下載</string>
+    <string name="youtube_download_notification_title">YouTube 下載</string>
+    <string name="youtube_download_action_cancel">取消</string>
+    <string name="youtube_download_status_queued">等待下載</string>
+    <string name="youtube_download_status_preparing">正在準備下載</string>
+    <string name="youtube_download_status_downloading">正在下載</string>
+    <string name="youtube_download_status_merging">正在處理媒體</string>
+    <string name="youtube_download_status_publishing">正在儲存至媒體庫</string>
+    <string name="youtube_download_status_succeeded">下載完成</string>
+    <string name="youtube_download_status_failed">下載失敗</string>
+    <string name="youtube_download_status_canceled">下載已取消</string>
+    <string name="youtube_download_status_interrupted">下載已中斷</string>
+</resources>

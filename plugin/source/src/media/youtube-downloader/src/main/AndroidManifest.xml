@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-feature
+        android:name="ai.android.claw.extension"
+        android:required="false" />
+
+    <uses-permission android:name="ai.android.claw.permission.BIND_EXTENSION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:allowBackup="false"
+        android:label="@string/youtube_downloader_plugin_label"
+        android:supportsRtl="true">
+
+        <meta-data
+            android:name="ai.android.claw.extension.api_version"
+            android:value="1" />
+        <meta-data
+            android:name="ai.android.claw.extension.manifest"
+            android:resource="@raw/foneclaw_extension" />
+
+        <service
+            android:name=".YoutubeDownloaderPluginService"
+            android:exported="true"
+            android:permission="ai.android.claw.permission.BIND_EXTENSION">
+            <intent-filter>
+                <action android:name="ai.android.claw.extension.BIND" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".YoutubeDownloadService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" />
+    </application>
+</manifest>

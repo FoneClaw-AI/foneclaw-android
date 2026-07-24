@@ -1,0 +1,113 @@
+{
+  "apiVersion": 1,
+  "extensionId": "foneclaw:youtube-downloader",
+  "packageName": "ai.android.claw.plugin.media.youtubedownloader",
+  "displayName": "YouTube Downloader Plugin",
+  "versionName": "0.0.1",
+  "versionCode": 1,
+  "tools": [
+    {
+      "name": "plugin_youtube_video_info",
+      "displayName": "Read YouTube Video Info",
+      "description": "Read public metadata and actual download choices for exactly one supported YouTube video or Short. Video choices include exact width, height, and estimated bytes; audio choices include container, bitrate, and estimated bytes. This does not create a file.",
+      "risk": "LOW",
+      "approvalMode": "AUTO",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "One HTTPS youtube.com, m.youtube.com, youtu.be, or YouTube Shorts URL."
+          }
+        },
+        "required": ["url"]
+      },
+      "timeoutMillis": 60000
+    },
+    {
+      "name": "plugin_youtube_download",
+      "displayName": "Download YouTube Media",
+      "description": "Queue one public YouTube video or audio download after the user explicitly chooses a format returned by plugin_youtube_video_info. Video resolutions are exact and never silently downgraded. Returns a jobId immediately; downloading continues in a foreground service. If the same video URL is already queued or processing, returns that existing job with alreadyInProgress=true and performs no new action, even when another format was requested.",
+      "risk": "EXTERNAL_EFFECT",
+      "approvalMode": "REQUIRE_APPROVAL",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "One supported public YouTube video or Short URL."
+          },
+          "format": {
+            "type": "string",
+            "description": "Choose exactly one format returned by plugin_youtube_video_info. Video options use exact resolution and never silently downgrade.",
+            "enum": [
+              "video_144p",
+              "video_240p",
+              "video_360p",
+              "video_480p",
+              "video_720p",
+              "video_1080p",
+              "audio_m4a",
+              "audio_mp3"
+            ]
+          },
+          "source": {
+            "type": "string",
+            "description": "Optional request source: share, home_link, or agent_tool."
+          }
+        },
+        "required": ["url", "format"]
+      },
+      "timeoutMillis": 5000
+    },
+    {
+      "name": "plugin_youtube_download_status",
+      "displayName": "Check YouTube Download Status",
+      "description": "Read a local download job by jobId, or list recent jobs with cursor pagination when jobId is omitted.",
+      "risk": "LOW",
+      "approvalMode": "AUTO",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "description": "Optional jobId returned by plugin_youtube_download."
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Maximum recent jobs to return when jobId is omitted, from 1 to 20."
+          },
+          "cursor": {
+            "type": "string",
+            "description": "Optional opaque nextCursor returned by the previous status call."
+          }
+        },
+        "required": []
+      },
+      "timeoutMillis": 3000
+    },
+    {
+      "name": "plugin_youtube_download_cancel",
+      "displayName": "Cancel YouTube Download",
+      "description": "Cancel an active local YouTube download and remove its unfinished staging files.",
+      "risk": "DEVICE_CONTROL",
+      "approvalMode": "REQUIRE_APPROVAL",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "description": "The jobId returned by plugin_youtube_download."
+          }
+        },
+        "required": ["jobId"]
+      },
+      "timeoutMillis": 5000
+    }
+  ],
+  "skill": {
+    "id": "youtube-downloader-plugin",
+    "version": "0.0.1",
+    "entry": "SKILL.md"
+  }
+}

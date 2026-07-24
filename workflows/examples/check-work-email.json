@@ -1,0 +1,24 @@
+{
+  "id": "check_work_email",
+  "name": "Check Work Email",
+  "description": "List the 10 most recent emails from the work inbox.",
+  "matchPhrases": [
+    "check work mail",
+    "check work email",
+    "list work email",
+    "show my work inbox",
+    "any new work mail"
+  ],
+  "steps": [
+    {
+      "toolName": "mail_list",
+      "arguments": {
+        "accountId": "work",
+        "folder": "INBOX",
+        "limit": "10"
+      }
+    }
+  ],
+  "createdAtMillis": 0,
+  "updatedAtMillis": 0
+}

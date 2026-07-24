@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-feature
+        android:name="ai.android.claw.extension"
+        android:required="false" />
+
+    <uses-permission android:name="ai.android.claw.permission.BIND_EXTENSION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+
+    <application
+        android:allowBackup="false"
+        android:label="@string/file_manager_plugin_label"
+        android:supportsRtl="true">
+
+        <meta-data
+            android:name="ai.android.claw.extension.api_version"
+            android:value="1" />
+        <meta-data
+            android:name="ai.android.claw.extension.manifest"
+            android:resource="@raw/foneclaw_extension" />
+
+        <service
+            android:name=".FileManagerPluginService"
+            android:exported="true"
+            android:permission="ai.android.claw.permission.BIND_EXTENSION">
+            <intent-filter>
+                <action android:name="ai.android.claw.extension.BIND" />
+            </intent-filter>
+        </service>
+    </application>
+</manifest>

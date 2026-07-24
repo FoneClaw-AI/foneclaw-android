@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-feature
+        android:name="ai.android.claw.extension"
+        android:required="false" />
+
+    <uses-permission android:name="ai.android.claw.permission.BIND_EXTENSION" />
+
+    <application
+        android:allowBackup="false"
+        android:label="FoneClaw Demo Plugin"
+        android:supportsRtl="true">
+
+        <meta-data
+            android:name="ai.android.claw.extension.api_version"
+            android:value="1" />
+        <meta-data
+            android:name="ai.android.claw.extension.manifest"
+            android:resource="@raw/foneclaw_extension" />
+
+        <service
+            android:name=".FoneClawDemoExtensionService"
+            android:exported="true"
+            android:permission="ai.android.claw.permission.BIND_EXTENSION">
+            <intent-filter>
+                <action android:name="ai.android.claw.extension.BIND" />
+            </intent-filter>
+        </service>
+    </application>
+</manifest>
