@@ -1,0 +1,943 @@
+{
+  "schemaVersion": 1,
+  "catalogType": "foneclaw-built-in-tools",
+  "toolCount": 127,
+  "categoryCount": 11,
+  "categories": [
+    {
+      "name": "Screen and App",
+      "toolCount": 14
+    },
+    {
+      "name": "Device Status and System Control",
+      "toolCount": 55
+    },
+    {
+      "name": "Location and Navigation",
+      "toolCount": 3
+    },
+    {
+      "name": "Mail",
+      "toolCount": 6
+    },
+    {
+      "name": "Communication and Contacts",
+      "toolCount": 8
+    },
+    {
+      "name": "Calendar",
+      "toolCount": 7
+    },
+    {
+      "name": "Memo",
+      "toolCount": 6
+    },
+    {
+      "name": "System Information",
+      "toolCount": 6
+    },
+    {
+      "name": "Web and Shopping",
+      "toolCount": 3
+    },
+    {
+      "name": "Tasks, Workflows, and Shortcuts",
+      "toolCount": 8
+    },
+    {
+      "name": "Skills and Plugins",
+      "toolCount": 11
+    }
+  ],
+  "tools": [
+    {
+      "name": "camera_open_latest_photo",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Open the latest visible photo from the system gallery. Use this only when the user explicitly asks to view or open the newest/latest photo. Do not use this as a follow-up after camera_take_photo unless the user explicitly asks to view or open the captured photo."
+    },
+    {
+      "name": "camera_open_photo",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Open a specific visible photo from the system gallery. Use this only when the user explicitly asks to view or open a specific photo. Do not use this as a follow-up after camera_take_photo unless the user explicitly asks to view or open the captured photo. indexFromLatest is 1-based in newest-first order: 1 opens the latest photo, 2 opens the second latest photo, 3 opens the third latest photo."
+    },
+    {
+      "name": "camera_take_photo",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Capture a new photo and return the saved photo URI when available. Use this when the user's intent is to capture a new photo. Leave lensFacing unset or auto for normal photo capture. Choose lensFacing=front only for front-facing or selfie intent; choose back only when the user explicitly asks for the back camera. Keep explicitLensSelection false for plain/default photo capture, even if the default physical lens is back. Set explicitLensSelection true only when the user explicitly asks for front, back, rear, or selfie capture. Do not call camera_open_latest_photo or camera_open_photo after this tool unless the user explicitly asks to view or open the photo. Call this tool directly. Capture uses the native system camera first. Explicit front/back capture may use the direct backend only if the native camera cannot honor the requested lens. Do not ask the user to grant permission before calling this tool."
+    },
+    {
+      "name": "cross_app_read_screen",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "Open or switch to a target Android app, wait until that app is stably in the foreground, and return the visible accessibility screen tree. Use this when one request asks to both open/switch to an app and read, inspect, describe, or summarize its visible page. Do not split that task into launch_app and get_screen_info. This tool does not capture a screenshot or interact with nodes."
+    },
+    {
+      "name": "cross_app_screenshot",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Open or switch to a target Android app, wait briefly for the app screen to appear, then capture the current screen. Use this only when one user request asks to both open/switch to an app and take a screenshot. Do not use this for screenshot-only requests or app-launch-only requests."
+    },
+    {
+      "name": "get_installed_map_apps",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "Query installed map apps supported by map tools. Returns each app's display name and package name."
+    },
+    {
+      "name": "get_screen_info",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "Get UI elements from the currently visible app screen. Each element has a node ID (for example [n3]) that can be used with tap_node. Do not use this to read, list, search, or summarize Android notifications; use sysinfo tools instead. Do not cache this result because node IDs change on each call."
+    },
+    {
+      "name": "launch_app",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Open a launchable Android app by package name or installed app display name. This changes the foreground app and may expose that app's screen. Use an exact package name when possible. If the result is ambiguous, ask the user to choose one returned package."
+    },
+    {
+      "name": "play_store_check_app",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "Check whether an exact Android package name is listed on Google Play by requesting https://play.google.com/store/apps/details?id=<packageName>. This is a read-only network check. Use it before play_store_install."
+    },
+    {
+      "name": "play_store_install",
+      "category": "Screen and App",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Require approval",
+      "description": "Open a specific Google Play app details page by exact package name, tap Install, and wait for installation to complete. This tool does not open the installed app. Use only when an exact Android packageName is known. Never use this for fuzzy search results or to guess the first app. If packageName is unknown, ask the user for the exact app package first. Stops if Google Play shows paid, purchase, subscription, update, ambiguous UI, or if installation does not complete before timeout."
+    },
+    {
+      "name": "screenshot_open",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Open a specific visible screenshot from the system gallery. index is 1-based in the selected order. sortOrder can be newest or oldest."
+    },
+    {
+      "name": "screenshot_open_latest",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Open the latest visible screenshot from the system gallery. Use this when the user wants to view the newest saved screenshot instead of capturing a new one."
+    },
+    {
+      "name": "screenshot_take",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Capture the current Android screen with the FoneClaw accessibility service and save it to Pictures/FoneClaw/Screenshots. Use this when the user's intent is to capture the current screen. Do not use this when the user wants to view an already saved screenshot; use screenshot_open for viewing saved screenshots."
+    },
+    {
+      "name": "tap_node",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "Tap a UI element on the screen. The element is identified by its node ID, which can be obtained from the screen_info tool."
+    },
+    {
+      "name": "alarm_modify_alarm",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Immediately open the Android Clock alarms page when the user wants to modify, edit, adjust, or change an existing alarm. Call this tool for every separate modification request, even if it was already called earlier in the conversation. Do not ask for confirmation. Android does not provide a reliable public API for editing existing alarms, so this tool only navigates to the Clock app for manual editing."
+    },
+    {
+      "name": "alarm_set_alarm",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Set an Android Clock alarm. Collect missing time/repeat/label details before calling."
+    },
+    {
+      "name": "bluetooth_connected_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Return Bluetooth devices currently connected through public Android Bluetooth profiles visible to normal apps."
+    },
+    {
+      "name": "bluetooth_nearby_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Scan and return nearby Bluetooth devices. Includes BLE scan results and classic Bluetooth discovery results when permissions and Bluetooth state allow it. Devices without a readable name are hidden by default."
+    },
+    {
+      "name": "bluetooth_pair_device",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Start pairing with a Bluetooth device by MAC address. This launches Android's normal bonding flow and may require user confirmation or PIN entry."
+    },
+    {
+      "name": "bluetooth_paired_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Return Bluetooth devices already paired with this Android device."
+    },
+    {
+      "name": "bluetooth_state",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "Return the current Bluetooth adapter state: on, off, turning_on, turning_off, or unknown."
+    },
+    {
+      "name": "close_bluetooth",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Turn Bluetooth off using the public legacy disable API. If Android refuses, report that normal Android apps cannot turn Bluetooth off on this device."
+    },
+    {
+      "name": "device_app_activity_snapshot",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Return a compact recent app activity snapshot from Android UsageStats. Requires usage access; it is not a live background-process monitor."
+    },
+    {
+      "name": "device_app_permission_audit",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Return a compact permission-risk audit for installed apps visible to this app. Risk is heuristic and based on declared/granted sensitive permission groups."
+    },
+    {
+      "name": "device_app_sensitive_audit",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Return compact sensitive app states: accessibility, notification listener, device admin, overlay, battery optimization exemption, and granted sensitive permission groups."
+    },
+    {
+      "name": "device_battery_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "Return compact Android battery and power-save status. No settings are changed."
+    },
+    {
+      "name": "device_health_check",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "Return a compact read-only health snapshot: memory, storage, battery, and network. No settings are changed."
+    },
+    {
+      "name": "device_hidden_app_check",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Return a compact heuristic check for user apps without launcher entries or disabled components. This can flag suspicious apps, but legitimate service-only apps may appear too."
+    },
+    {
+      "name": "device_memory_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "Return compact Android memory status. No settings are changed."
+    },
+    {
+      "name": "device_network_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "Return compact Android active network status and capabilities. No network settings are changed."
+    },
+    {
+      "name": "device_storage_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "Return compact Android internal/shared storage status. No files are scanned or deleted."
+    },
+    {
+      "name": "device_time_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "Return the current Android system time zone and Unix timestamp for time-dependent tool calls. Set verifyWithNtp=true only when the system time is disputed or an online reference is required. NTP verification uses ntp1.aliyun.com and never changes the system clock."
+    },
+    {
+      "name": "dnd_open_policy_access_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Open Android settings where the user can grant FoneClaw Do Not Disturb / Notification Policy access. Do not call this immediately after dnd_set_mode reports that it already opened the settings page."
+    },
+    {
+      "name": "dnd_set_mode",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Set Android Do Not Disturb mode. If policy access is missing or Android rejects the write, this opens the system DND policy access/settings page."
+    },
+    {
+      "name": "dnd_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "Read Android Do Not Disturb policy access state and current interruption filter."
+    },
+    {
+      "name": "flashlight_set_enabled",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Turn the Android flashlight on or off using the system camera torch API."
+    },
+    {
+      "name": "flashlight_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "Return whether the flashlight is available and the last known torch state."
+    },
+    {
+      "name": "flashlight_toggle",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Toggle the Android flashlight. If the current state is unknown, this turns it on."
+    },
+    {
+      "name": "foneclaw_permission_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "Check all current permissions and special-access capabilities of FoneClaw itself. Use this when the user asks which FoneClaw permissions are enabled, missing, limited, or available. This is a fresh read-only check; do not use app audit, notification-panel, or screen-reading tools as a substitute."
+    },
+    {
+      "name": "open_bluetooth",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Request Bluetooth to turn on. For legacy target SDKs this first tries the public enable API, then falls back to Android's system confirmation UI when needed."
+    },
+    {
+      "name": "system_panel_open_notifications",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Open the visible Android notification shade only when the user explicitly asks to open, show, display, or pull down the panel. Never use this to read, inspect, search, list, or summarize notifications; use sysinfo tools for those requests. Requires FoneClaw accessibility service."
+    },
+    {
+      "name": "system_panel_open_quick_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Open Android quick settings / quick toggles / control center panel. Requires FoneClaw accessibility service."
+    },
+    {
+      "name": "system_settings_open_battery_optimization_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Open Android battery optimization settings. If appNameOrPackage is provided, open that app's detail page by package name or installed app label. If it cannot be resolved or opened, return failure and do not open another settings page. If empty, open the system battery optimization list/settings page."
+    },
+    {
+      "name": "system_settings_open_battery_saver_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Open Android Battery Saver / power saving / low power mode settings. Normal apps cannot directly toggle Battery Saver through public APIs, so after settings opens the user must enable or disable it manually. Vendor ROMs may fall back to generic battery settings."
+    },
+    {
+      "name": "system_settings_open_date_time_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Open the Android Date & time settings page directly. Use this for date, time, automatic time, time zone, or automatic time-zone settings. This launches a system settings Intent and does not require accessibility, screen reading, or tapping. After it succeeds, do not call launch_app, get_screen_info, or tap_node."
+    },
+    {
+      "name": "system_settings_open_hotspot_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Open Android hotspot settings. Normal apps cannot reliably toggle hotspot silently through public Android APIs. If the exact hotspot settings page cannot be opened, this returns failure and does not open another settings page."
+    },
+    {
+      "name": "system_settings_open_location_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Open Android location settings. If appNameOrPackage is provided, open that app's detail page by package name or installed app label. If it cannot be resolved or opened, return failure and do not open another settings page. If empty, open the system Location settings page."
+    },
+    {
+      "name": "system_settings_set_auto_rotate",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Enable or disable Android auto rotation. Requires the special modify-system-settings permission."
+    },
+    {
+      "name": "system_settings_set_brightness",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Set Android screen brightness. Manual mode writes percent from 1 to 100; auto mode only enables automatic brightness and ignores percent. Requires the special modify-system-settings permission."
+    },
+    {
+      "name": "system_settings_set_eye_comfort",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Open Android Display settings for Eye comfort/Night Light/blue light filter/reading mode. Use this tool instead of only giving manual instructions for multilingual eye-comfort intents. Android vendors expose the exact switch differently, so this tool opens Display settings and lets the user finish the switch on that page."
+    },
+    {
+      "name": "system_settings_set_font_scale",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Set Android system font scale. Requires the special modify-system-settings permission. Typical values are 0.85 small, 1.0 default, 1.15 large, 1.3 larger, and up to 1.6 extra large."
+    },
+    {
+      "name": "system_settings_set_haptic_feedback",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Enable or disable Android haptic feedback. Requires the special modify-system-settings permission."
+    },
+    {
+      "name": "system_settings_set_screen_timeout",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Set Android screen-off timeout in seconds. Requires the special modify-system-settings permission. Values are clamped to 15..1800 seconds."
+    },
+    {
+      "name": "system_settings_set_touch_sounds",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Enable or disable Android touch sounds. Requires the special modify-system-settings permission."
+    },
+    {
+      "name": "system_settings_set_user_rotation",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Lock Android screen rotation. Requires the special modify-system-settings permission and disables auto rotation. Use portrait, landscape, reverse_portrait, or reverse_landscape."
+    },
+    {
+      "name": "system_settings_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "Return writable system settings permission state plus current screen brightness, font scale, screen timeout, rotation, touch sounds, and haptic feedback. This reads Android system settings only."
+    },
+    {
+      "name": "volume_adjust_stream",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Raise or lower one Android audio stream by one system step. Choose this for relative volume changes."
+    },
+    {
+      "name": "volume_set_all_streams_muted",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Mute or unmute all supported Android audio streams and report which streams actually changed. Choose this for whole-device or all-volume mute requests."
+    },
+    {
+      "name": "volume_set_ringer_mode",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Set Android phone ringer mode. For silent mode, this automatically falls back to muting all audio streams when Android rejects the ringer-mode write."
+    },
+    {
+      "name": "volume_set_stream",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Set one Android audio stream to a target percentage. Choose this when the user asks for an exact volume level."
+    },
+    {
+      "name": "volume_set_stream_muted",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Mute or unmute one Android audio stream. This changes a stream mute state, not the phone ringer mode."
+    },
+    {
+      "name": "volume_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "Read the current Android volume state for audio streams and the current ringer mode."
+    },
+    {
+      "name": "wifi_configured_networks",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "读取 Android 已配置/已保存的 Wi-Fi 网络列表。只返回 SSID、networkId、安全类型、是否像是有凭据、是否隐藏网络、是否当前连接和配置状态；不会返回 Wi-Fi 密码。"
+    },
+    {
+      "name": "wifi_connect",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Connect to a Wi-Fi network. The tool first checks Android's saved Wi-Fi configurations for the SSID and connects directly if it exists. If it is not saved, it uses the provided passphrase to add/connect the network, or falls back to Android's Wi-Fi panel when password input is needed."
+    },
+    {
+      "name": "wifi_disconnect",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Disconnect from the current Wi-Fi access point. The tool first attempts a silent legacy WifiManager disconnect for target API 28 hosts; if Android rejects it, it falls back to opening Android's Wi-Fi panel for user action."
+    },
+    {
+      "name": "wifi_forget",
+      "category": "Device Status and System Control",
+      "risk": "DESTRUCTIVE",
+      "approval": "Require approval",
+      "description": "Forget a saved Wi-Fi network. The tool first attempts silent legacy WifiManager removeNetwork, then falls back to Android's Wi-Fi panel for user action."
+    },
+    {
+      "name": "wifi_scan_networks",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Scan and return nearby Wi-Fi access points. If Wi-Fi is off, this tool first attempts to enable Wi-Fi directly and only falls back to Android's Wi-Fi panel if direct enable fails. Requires location permissions and device location services. Results can reveal location-sensitive network data."
+    },
+    {
+      "name": "wifi_set_enabled",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Enable or disable Android Wi-Fi. The tool first attempts the direct WifiManager operation, then checks whether Android actually reached the requested state; if the request fails or remains pending, it falls back to opening Android's Wi-Fi panel for user action."
+    },
+    {
+      "name": "wifi_status",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Return current Android Wi-Fi status and active Wi-Fi connection details when the app has permission. This reads network state only."
+    },
+    {
+      "name": "get_location",
+      "category": "Location and Navigation",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Get the current Android device location while FoneClaw is in use. Requires foreground location permission only."
+    },
+    {
+      "name": "location_search_nearby_place",
+      "category": "Location and Navigation",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Search nearby place candidates for an ambiguous place name using the current device location. Use this only when the user explicitly asks to find, verify, resolve, choose, or navigate to a place, or when a navigation destination is ambiguous. For calendar creation, a user-provided place name is sufficient: preserve it as locationName and do not call this tool solely because an exact address or coordinates are missing."
+    },
+    {
+      "name": "map_navigate",
+      "category": "Location and Navigation",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Require approval",
+      "description": "Open a route or navigation screen in a map app for a destination and travel mode. This launches an external map app, uses only the provided arguments, and does not read device data."
+    },
+    {
+      "name": "mail_account_list",
+      "category": "Mail",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "List configured mail accounts. Leave query empty to list all accounts. When query is provided, matching priority is account id, email, alias, then fuzzy alias or email. Exact matches can still return multiple accounts."
+    },
+    {
+      "name": "mail_account_save",
+      "category": "Mail",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Test both IMAP and SMTP connections and save the mail account only when both succeed. Call this as soon as every required configuration field is available. This operation requires user approval."
+    },
+    {
+      "name": "mail_delete",
+      "category": "Mail",
+      "risk": "DESTRUCTIVE",
+      "approval": "Require approval",
+      "description": "Move up to 20 exact messageRefs to trash, or permanently delete them only when the user explicitly requested permanent deletion. Never retry an uncertain result."
+    },
+    {
+      "name": "mail_list",
+      "category": "Mail",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "List, filter, or search message summaries. Query searches subject, sender, recipients, and body. Leave accountId empty to use the only account or the unique default account."
+    },
+    {
+      "name": "mail_read",
+      "category": "Mail",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Read one message from a messageRef returned by mail_list and mark it read on the server. After the tool succeeds, summarize the message for the user in the same response."
+    },
+    {
+      "name": "mail_send",
+      "category": "Mail",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Require approval",
+      "description": "Send a new email, reply, reply all, or forward. Requires approval. Attachments must use the exact structured metadata announced with the current user message."
+    },
+    {
+      "name": "call_log_missed",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Read recent missed calls. Use before requests like 'call back the missed call'. After selecting a number, call phone_dial(phoneNumber), then use get_screen_info and tap_node in the dialer."
+    },
+    {
+      "name": "call_log_recent",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Read recent call log entries from Android CallLog. Requires READ_CALL_LOG permission. Use before answering who called recently or before selecting a call to call back."
+    },
+    {
+      "name": "contacts_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "List a limited number of Android contacts. Requires READ_CONTACTS permission. Use only when the user explicitly asks to view contacts."
+    },
+    {
+      "name": "contacts_search",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Search Android contacts by display name or phone number. Requires READ_CONTACTS permission. Use this before dialing when the user gives a contact name such as 'call K K'."
+    },
+    {
+      "name": "phone_dial",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Require approval",
+      "description": "Check whether the phone number exists in contacts, then open the system dialer with the number prefilled. After the dialer opens, call get_screen_info, identify the visible call button, then call tap_node. If the call button is unclear or the screen is not the dialer, stop and ask the user to handle it manually."
+    },
+    {
+      "name": "phone_dial_contact",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Require approval",
+      "description": "Find a contact by name, then open the system dialer with that contact's phone number. Use when the user asks to call a named contact. If multiple contacts match, do not dial; show the matches and ask the user which one to call. After the dialer opens, call get_screen_info, identify the visible call button, then call tap_node."
+    },
+    {
+      "name": "send_to_sms_message",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Require approval",
+      "description": "After approval, open a visible SMS/MMS draft. For a text SMS with a recipient, automatically tap Send only when FoneClaw accessibility is connected and the default message app, recipient, full message body, and one stable Send control are all verified. Attachments, dual-SIM prompts, ambiguous UI, or unavailable accessibility require manual action. After any terminal result, stop tool planning and never call get_screen_info or tap_node."
+    },
+    {
+      "name": "sms_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Query live SMS messages on this Android device. With no keyword, address, contact, or threadId, list recent messages. Set keyword/address/contact to search. Set threadId only from an earlier sms_list result to read that conversation. For a summary request, call once with box=all and then summarize the returned received and sent messages. Never use SysInfo history as a replacement for this live result."
+    },
+    {
+      "name": "calendar_create_event",
+      "category": "Calendar",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Require approval",
+      "description": "Create an Android calendar event. Collect missing time and reminder details before calling. A user-provided place name is sufficient and should be passed directly as locationName. Do not search for an exact address or coordinates unless the user explicitly asks to verify, resolve, choose, or navigate to the place. Prefer startLocalDateTime/endLocalDateTime in yyyy-MM-dd HH:mm for user dates and relative dates; the tool will parse them in the device timezone. Do not create events from model-calculated epoch milliseconds. Use calendarId=0 unless the user explicitly selected a calendar id. After creation, use the tool result actualStart/actualEnd as the user-facing created time."
+    },
+    {
+      "name": "calendar_delete_event",
+      "category": "Calendar",
+      "risk": "DESTRUCTIVE",
+      "approval": "Require approval",
+      "description": "Delete an Android calendar event by id. Search/list events across all calendars with calendarId=0 unless the user explicitly selected a calendar id. Always pass the known title, startMillis, endMillis and location when known so the target is unambiguous."
+    },
+    {
+      "name": "calendar_list_calendars",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "List writable Android calendars. Use this to let the user choose a calendar; do not assume that calendarId=1 is the local or target calendar."
+    },
+    {
+      "name": "calendar_list_events",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "List Android calendar events in a concrete time range. Use for requests like today's schedule, tomorrow's schedule, existing events, or this week's events. Prefer startLocalDateTime/endLocalDateTime in yyyy-MM-dd HH:mm; the tool will parse them in the device timezone. Use startMillis/endMillis only as a deprecated fallback when exact epoch milliseconds came from a trusted tool result. Do not guess calendarId; use calendarId=0 to search all calendars unless the user explicitly selected a calendar id."
+    },
+    {
+      "name": "calendar_open_event",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Open an Android calendar event detail page by event id. Search or list events first when the user describes an event in natural language. Do not guess event id."
+    },
+    {
+      "name": "calendar_search_events",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Search Android calendar events by keyword in a concrete time range. Use before opening, updating, or deleting an event when the user describes the event by title or content. Prefer startLocalDateTime/endLocalDateTime in yyyy-MM-dd HH:mm; the tool will parse them in the device timezone. Use startMillis/endMillis only as a deprecated fallback when exact epoch milliseconds came from a trusted tool result. Do not guess calendarId; use calendarId=0 to search all calendars unless the user explicitly selected a calendar id."
+    },
+    {
+      "name": "calendar_update_event",
+      "category": "Calendar",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Require approval",
+      "description": "Update an Android calendar event by id. Search/list events first when the user describes the target in natural language, and pass known target details with the changed fields. Do not guess calendarId or event id; search all calendars with calendarId=0 unless the user explicitly selected a calendar id. Blank text fields are ignored. Use startMillis/endMillis=0 to keep existing times. Use reminderMinutes=-2 to keep reminders, -1 to remove reminders, and >=0 to replace reminders."
+    },
+    {
+      "name": "memo_create",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Create a user-visible local memo, note, or task record. Use when the user explicitly wants the content kept as a memo or actionable note. Do not use this tool to save or query assistant-managed user profile memory such as preferences, identity, relationships, or response style."
+    },
+    {
+      "name": "memo_delete",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "Require approval",
+      "description": "Soft-delete a local memo by id. Search/list memos first when the user describes the target in natural language so the target id/title is known."
+    },
+    {
+      "name": "memo_list",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "List user-visible local memo records. status can be active, done, archived, or all. Do not use this tool to answer what the assistant remembers about the user, user profile preferences, or conversation history. An empty result means only that no matching local memos exist; it does not mean that no user profile memory exists."
+    },
+    {
+      "name": "memo_mark_done",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Mark a local memo as done or active by id."
+    },
+    {
+      "name": "memo_search",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Search user-visible local memos by keyword in title, content, or tags. status can be active, done, archived, or all. Do not use this tool to search assistant-managed user profile memory or conversation history. An empty result describes only the local memo store."
+    },
+    {
+      "name": "memo_update",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Update a local memo by id. Search/list memos first when the user describes the target in natural language, and pass known target details with the changed fields. Blank title/content/tags are ignored. reminderAtMillis=-2 keeps reminder, -1 clears reminder, and >0 sets reminder."
+    },
+    {
+      "name": "sysinfo_brief_sources",
+      "category": "System Information",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Get local sysinfo sources for a daily brief. This reads already-captured local data; it does not start collection."
+    },
+    {
+      "name": "sysinfo_mark_reviewed",
+      "category": "System Information",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Mark local sysinfo events as reviewed after user confirmation."
+    },
+    {
+      "name": "sysinfo_notification_query",
+      "category": "System Information",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Query already-captured Android notifications when the user explicitly asks for a special time window such as yesterday or the last N minutes, oldest-first ordering, or every notification update instead of one collapsed notification. For an ordinary summary of today's notifications, use sysinfo_today_brief instead. This tool reads only notification events and never opens the notification panel."
+    },
+    {
+      "name": "sysinfo_search",
+      "category": "System Information",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Search already-captured local sysinfo by keyword. Does not scan system sources."
+    },
+    {
+      "name": "sysinfo_thread",
+      "category": "System Information",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Load already-captured local sysinfo events in one threadKey."
+    },
+    {
+      "name": "sysinfo_today_brief",
+      "category": "System Information",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Read already-captured notification contents for the LLM to analyze. Use when the user asks to read, list, review, check, or summarize notifications, unread notifications, important notifications, what happened today, what needs attention today, daily brief, missed messages, or next actions. Reads today's already-captured local sysinfo cache and returns source, title, preview, time, importance, and suggested next steps. After this tool succeeds, synthesize its contents into a semantic user-facing answer in the language requested by the user. Do not use this tool for an explicit recent N-minute window; use sysinfo_notification_query instead. Do not merely echo the raw tool output. Never open the notification panel or read its UI for these requests."
+    },
+    {
+      "name": "shopping_compare",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "Search public web results for a product on shopping platforms and return comparison evidence. Use this before giving shopping price advice."
+    },
+    {
+      "name": "web_fetch",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "Fetch a specific web page by URL and return readable page text."
+    },
+    {
+      "name": "web_search",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "Search the web for relevant pages. Returns result titles, URLs, and short snippets."
+    },
+    {
+      "name": "shortcut_save_agent_prompt",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Save a user-created shortcut that sends a prompt to the agent. Only call this after the user confirms the title, description, and behavior."
+    },
+    {
+      "name": "shortcut_save_direct_tool",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Save a user-created direct tool shortcut. Only call this when every requested action can be fully mapped to known tool steps with complete parameters."
+    },
+    {
+      "name": "task_create",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "Create the complete ordered TODO plan in one call for the current user request. This is a mandatory precondition before any non-task tool when the request requires three or more steps. Pass every bounded user-facing step in items. The plan can be created exactly once and cannot be extended later. Never include task management, cleanup, status-update, or final-response items."
+    },
+    {
+      "name": "task_list",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "List internal TODO items for the current user request. By default returns open, in_progress, and blocked items."
+    },
+    {
+      "name": "task_update",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "Update one internal TODO item. Allowed transitions: open to in_progress, blocked, or abandoned; in_progress to blocked, done, or abandoned; blocked to open or abandoned. Done and abandoned are terminal. Only one task may be in_progress."
+    },
+    {
+      "name": "workflow_delete",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DESTRUCTIVE",
+      "approval": "Require approval",
+      "description": "Delete a saved workflow by id."
+    },
+    {
+      "name": "workflow_list",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "List saved workflows."
+    },
+    {
+      "name": "workflow_save",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Save a reusable workflow. stepsJson must be a JSON array of {toolName, arguments}."
+    },
+    {
+      "name": "add_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Add a new skill document to the skill registry."
+    },
+    {
+      "name": "disable_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Disable a user Skill so it is hidden from the agent prompt."
+    },
+    {
+      "name": "enable_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Enable a valid user Skill so it can be used by the agent."
+    },
+    {
+      "name": "list_skills",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "List user and system Skills with source, enabled state, and validation state."
+    },
+    {
+      "name": "load_skill_detail",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "description": "Load a specialized skill when the task at hand matches one of the skills listed in the system prompt. Use this tool to inject the skill's instructions and resources into current conversation. The output may contain detailed workflow guidance as well as references to scripts, files, etc in the same directory as the skill. The skill name must match one of the skills listed in your system prompt."
+    },
+    {
+      "name": "plugin_request_install",
+      "category": "Skills and Plugins",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Require approval",
+      "description": "Create a structured install proposal for one official plugin. This does not download or install the plugin; HomeScreen must ask the user."
+    },
+    {
+      "name": "plugin_search",
+      "category": "Skills and Plugins",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "Search official FoneClaw plugin metadata when a user asks for a capability that is not available in the current tool list. This only searches metadata and never downloads or installs a plugin."
+    },
+    {
+      "name": "preview_skill_import",
+      "category": "Skills and Plugins",
+      "risk": "LOW",
+      "approval": "Auto",
+      "description": "Preview a pasted SKILL.md document. This parses and validates but does not save."
+    },
+    {
+      "name": "remove_skill",
+      "category": "Skills and Plugins",
+      "risk": "DESTRUCTIVE",
+      "approval": "Require approval",
+      "description": "Remove the skill"
+    },
+    {
+      "name": "save_skill_draft",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Save a SKILL.md document as a disabled user Skill draft."
+    },
+    {
+      "name": "update_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "description": "Update an existing skill document in the skill registry."
+    }
+  ]
+}
