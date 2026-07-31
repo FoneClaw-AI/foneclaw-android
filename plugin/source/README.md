@@ -54,10 +54,12 @@ SHA-256: E3:31:65:67:CC:A6:49:2D:B9:42:00:80:C9:4D:6E:A4:C3:31:88:67:79:70:DA:58
 ```
 
 This key is intentionally public so GitHub and contributors can produce
-reproducible plugin APK builds. It must not be treated as a production trust
-root. FoneClaw host builds should trust this key only in local or test
-configuration by adding its SHA-256 fingerprint to
-`PLUGIN_TRUSTED_FINGERPRINTS`.
+reproducible plugin APK builds. By product decision, FoneClaw host builds,
+including Release, trust this fingerprint as a built-in plugin trust root.
+Because the private key and passwords are public, anyone with this workspace
+can sign an APK accepted by that trust root. Production delivery must disclose
+this supply-chain limitation and use a dual-fingerprint transition before
+rotating to a private production plugin certificate.
 
 ## Build One Plugin
 

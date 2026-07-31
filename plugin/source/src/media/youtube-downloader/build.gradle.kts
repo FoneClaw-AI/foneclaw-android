@@ -7,8 +7,8 @@ foneclawPlugin {
     pluginId.set("foneclaw:youtube-downloader")
     packageName.set("ai.android.claw.plugin.media.youtubedownloader")
     displayName.set("YouTube Downloader Plugin")
-    versionName.set("0.0.1")
-    versionCode.set(1)
+    versionName.set("0.0.2")
+    versionCode.set(2)
     category.set("media")
 }
 

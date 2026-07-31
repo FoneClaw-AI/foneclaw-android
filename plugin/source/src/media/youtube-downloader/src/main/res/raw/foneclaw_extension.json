@@ -3,8 +3,8 @@
   "extensionId": "foneclaw:youtube-downloader",
   "packageName": "ai.android.claw.plugin.media.youtubedownloader",
   "displayName": "YouTube Downloader Plugin",
-  "versionName": "0.0.1",
-  "versionCode": 1,
+  "versionName": "0.0.2",
+  "versionCode": 2,
   "tools": [
     {
       "name": "plugin_youtube_video_info",
@@ -107,7 +107,7 @@
   ],
   "skill": {
     "id": "youtube-downloader-plugin",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "entry": "SKILL.md"
   }
 }

@@ -3,8 +3,8 @@
   "extensionId": "foneclaw:file-manager",
   "packageName": "ai.android.claw.plugin.device.filemanager",
   "displayName": "File Manager Plugin",
-  "versionName": "0.0.3",
-  "versionCode": 3,
+  "versionName": "0.0.4",
+  "versionCode": 4,
   "tools": [
     {
       "name": "plugin_file_manager_status",

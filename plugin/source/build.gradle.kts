@@ -1,6 +1,8 @@
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
+import java.security.KeyStore
 import java.security.MessageDigest
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application) apply false
@@ -157,6 +159,13 @@ fun publishPluginSpec(spec: PluginSpec, buildType: String) {
         versionName = versionName,
         versionCode = versionCode,
     )
+    val actualSigningFingerprint = sourceApk.apkSigningFingerprint()
+    require(
+        actualSigningFingerprint.normalizedFingerprint() ==
+            OFFICIAL_PLUGIN_SIGNING_FINGERPRINT.normalizedFingerprint()
+    ) {
+        "APK signer $actualSigningFingerprint does not match the official plugin signing store."
+    }
 
     val pluginsDir = rootDir.parentFile.resolve("plugins")
     val apksDir = pluginsDir.resolve("apks")
@@ -345,12 +354,83 @@ fun File.sha256(): String {
     return digest.digest().joinToString("") { byte -> "%02x".format(byte) }
 }
 
+fun File.jksSigningFingerprint(storePassword: String, keyAlias: String): String {
+    require(isFile) { "Official plugin signing store is missing: $absolutePath" }
+    val keyStore = KeyStore.getInstance("JKS")
+    inputStream().use { input ->
+        keyStore.load(input, storePassword.toCharArray())
+    }
+    val certificate = requireNotNull(keyStore.getCertificate(keyAlias)) {
+        "Official plugin signing certificate alias '$keyAlias' is missing from $absolutePath"
+    }
+    return MessageDigest.getInstance("SHA-256")
+        .digest(certificate.encoded)
+        .joinToString(separator = ":") { byte -> "%02X".format(byte) }
+}
+
+fun File.apkSigningFingerprint(): String {
+    val process = ProcessBuilder(
+        findApkSigner().absolutePath,
+        "verify",
+        "--print-certs",
+        absolutePath,
+    )
+        .redirectErrorStream(true)
+        .start()
+    val output = process.inputStream.bufferedReader().use { reader -> reader.readText() }
+    val exitCode = process.waitFor()
+    require(exitCode == 0) {
+        "apksigner verification failed for $absolutePath:\n$output"
+    }
+    return Regex(
+        """(?:Signer #1|V[0-9.]+ Signer): certificate SHA-256 digest:\s*([0-9a-fA-F:]+)"""
+    )
+        .find(output)
+        ?.groupValues
+        ?.get(1)
+        ?: error("apksigner did not report a SHA-256 signer for $absolutePath:\n$output")
+}
+
+fun findApkSigner(): File {
+    val localProperties = Properties().apply {
+        rootDir.resolve("local.properties")
+            .takeIf(File::isFile)
+            ?.inputStream()
+            ?.use(::load)
+    }
+    val sdkDir = sequenceOf(
+        System.getenv("ANDROID_HOME"),
+        System.getenv("ANDROID_SDK_ROOT"),
+        localProperties.getProperty("sdk.dir"),
+    )
+        .mapNotNull { value -> value?.trim()?.takeIf(String::isNotBlank) }
+        .map(::File)
+        .firstOrNull(File::isDirectory)
+        ?: error("Android SDK is required to verify the plugin APK signer.")
+    val executableName = if (System.getProperty("os.name").startsWith("Windows")) {
+        "apksigner.bat"
+    } else {
+        "apksigner"
+    }
+    return sdkDir.resolve("build-tools")
+        .listFiles()
+        .orEmpty()
+        .filter(File::isDirectory)
+        .sortedByDescending(File::getName)
+        .map { directory -> directory.resolve(executableName) }
+        .firstOrNull(File::isFile)
+        ?: error("apksigner was not found under ${sdkDir.resolve("build-tools")}.")
+}
+
 fun String.normalizedFingerprint(): String {
     return filterNot { char -> char == ':' || char.isWhitespace() }
         .lowercase()
 }
 
 val MIN_HOST_VERSION = "0.0.6"
-val OFFICIAL_PLUGIN_SIGNING_FINGERPRINT =
-    "E3:31:65:67:CC:A6:49:2D:B9:42:00:80:C9:4D:6E:A4:" +
-        "C3:31:88:67:79:70:DA:58:CE:71:7B:BF:3C:6F:3A:84"
+val OFFICIAL_PLUGIN_SIGNING_FINGERPRINT = rootDir
+    .resolve("androidclaw-plugin.jks")
+    .jksSigningFingerprint(
+        storePassword = "androidclaw-plugin123",
+        keyAlias = "androidclaw-plugin",
+    )
