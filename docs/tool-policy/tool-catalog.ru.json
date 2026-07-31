@@ -1,0 +1,1031 @@
+{
+  "schemaVersion": 3,
+  "catalogType": "foneclaw-built-in-tools",
+  "locale": "ru",
+  "fallbackLocale": "en",
+  "toolCount": 118,
+  "categoryCount": 11,
+  "uiLabels": {
+    "searchPlaceholder": "Поиск инструментов и возможностей",
+    "allCategories": "Все категории",
+    "publicBuiltInTools": "общедоступных встроенных инструментов",
+    "tool": "Инструмент",
+    "risk": "Риск",
+    "approval": "Подтверждение",
+    "description": "Назначение"
+  },
+  "riskLabels": {
+    "DESTRUCTIVE": "Разрушительное действие",
+    "DEVICE_CONTROL": "Управление устройством",
+    "EXTERNAL_EFFECT": "Внешнее действие",
+    "LOW": "Низкий риск",
+    "SENSITIVE_READ": "Чтение конфиденциальных данных"
+  },
+  "approvalLabels": {
+    "AUTO": "Автоматически",
+    "REQUIRE_APPROVAL": "Требуется подтверждение"
+  },
+  "categories": [
+    {
+      "name": "Screen and App",
+      "displayName": "Экран, приложения и мультимедиа",
+      "toolCount": 11
+    },
+    {
+      "name": "Device Status and System Control",
+      "displayName": "Состояние устройства и управление системой",
+      "toolCount": 54
+    },
+    {
+      "name": "Location and Navigation",
+      "displayName": "Местоположение и навигация",
+      "toolCount": 3
+    },
+    {
+      "name": "Mail",
+      "displayName": "Почта",
+      "toolCount": 6
+    },
+    {
+      "name": "Communication and Contacts",
+      "displayName": "Связь и контакты",
+      "toolCount": 5
+    },
+    {
+      "name": "Calendar",
+      "displayName": "Календарь",
+      "toolCount": 7
+    },
+    {
+      "name": "Memo",
+      "displayName": "Заметки",
+      "toolCount": 6
+    },
+    {
+      "name": "System Information",
+      "displayName": "Уведомления и сведения о системе",
+      "toolCount": 4
+    },
+    {
+      "name": "Web and Shopping",
+      "displayName": "Веб и покупки",
+      "toolCount": 3
+    },
+    {
+      "name": "Tasks, Workflows, and Shortcuts",
+      "displayName": "Задачи, рабочие процессы и ярлыки",
+      "toolCount": 8
+    },
+    {
+      "name": "Skills and Plugins",
+      "displayName": "Skills и плагины",
+      "toolCount": 11
+    }
+  ],
+  "tools": [
+    {
+      "name": "camera_open_photo",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Откройте конкретную видимую фотографию из системной галереи. Используйте это только тогда, когда пользователь явно просит просмотреть или открыть определенную фотографию. Не используйте это в качестве продолжения после camera_take_photo, если только пользователь явно не попросит просмотреть или открыть захваченную фотографию. indexFromLatest основан на 1 в порядке «сначала самые новые»: 1 открывает самую последнюю фотографию, 2 открывает вторую последнюю фотографию, 3 открывает третью последнюю фотографию."
+    },
+    {
+      "name": "camera_take_photo",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Сделайте новую фотографию и верните сохраненный URI фотографии, если он доступен. Используйте это, когда намерением пользователя является сделать новую фотографию. Для обычной фотосъемки оставьте параметр LensFacing отключенным или автоматическим. Выберите LensFacing=front только для того, чтобы смотреть лицом вперед или делать селфи; выбирать «назад» только тогда, когда пользователь явно запрашивает заднюю камеру. Оставьте явное значениеLensSelection false для захвата обычных фотографий/фотографий по умолчанию, даже если физический объектив по умолчанию вернулся. Задайте параметр явноLensSelection true только в том случае, если пользователь явно запрашивает съемку спереди, сзади, сзади или селфи. Не вызывайте camera_open_photo после этого инструмента, если только пользователь явно не попросит просмотреть или открыть фотографию. Вызовите этот инструмент напрямую. Capture сначала использует встроенную системную камеру. Явный захват спереди/сзади может использовать прямой сервер только в том случае, если собственная камера не может распознать запрошенный объектив. Не спрашивайте пользователя предоставить разрешение перед вызовом этого инструмента. Технические идентификаторы: lensFacing, lensFacing=front, explicitLensSelection."
+    },
+    {
+      "name": "cross_app_read_screen",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Откройте или переключитесь на целевое приложение Android, подождите, пока это приложение не станет стабильно на переднем плане, и верните видимое дерево экрана специальных возможностей. Используйте это, когда один запрос просит открыть приложение или переключиться на него, а также прочитать, проверить, описать или суммировать его видимую страницу. Не разделяйте эту задачу на launch_app и get_screen_info. Этот инструмент не делает снимки экрана и не взаимодействует с узлами."
+    },
+    {
+      "name": "get_installed_map_apps",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Запросите установленные картографические приложения, поддерживаемые картографическими инструментами. Возвращает отображаемое имя и имя пакета каждого приложения."
+    },
+    {
+      "name": "get_screen_info",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Получите элементы пользовательского интерфейса с видимого в данный момент экрана приложения. Каждый элемент имеет идентификатор узла (например, [n3]), который можно использовать с Tap_node. Не используйте это для чтения, перечисления, поиска или обобщения уведомлений Android; вместо этого используйте инструменты sysinfo. Не кэшируйте этот результат, поскольку идентификаторы узлов меняются при каждом вызове. Технические идентификаторы: tap_node."
+    },
+    {
+      "name": "launch_app",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Откройте запускаемое приложение Android по имени пакета или отображаемому имени установленного приложения. Это изменит приложение на переднем плане и может открыть экран этого приложения. По возможности используйте точное имя пакета. Если результат неоднозначный, попросите пользователя выбрать одну возвращаемую посылку."
+    },
+    {
+      "name": "play_store_check_app",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Проверьте, указано ли точное название пакета Android в Google Play, запросив https://play.google.com/store/apps/details?id=<packageName>. Это проверка сети только для чтения. Используйте его перед play_store_install."
+    },
+    {
+      "name": "play_store_install",
+      "category": "Screen and App",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Откройте страницу сведений о конкретном приложении Google Play по точному названию пакета, нажмите «Установить» и дождитесь завершения установки. Этот инструмент не открывает установленное приложение. Используйте только в том случае, если известно точное имя пакета Android. Никогда не используйте это для нечетких результатов поиска или для угадывания первого приложения. Если packageName неизвестно, сначала запросите у пользователя точный пакет приложения. Останавливается, если Google Play отображает информацию о плате, покупке, подписке, обновлении, неоднозначный пользовательский интерфейс или если установка не завершается до истечения времени ожидания."
+    },
+    {
+      "name": "screenshot_open",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Откройте конкретный видимый снимок экрана из системной галереи. индекс отсчитывается от 1 в выбранном порядке. sortOrder может быть самым новым или самым старым."
+    },
+    {
+      "name": "screenshot_take",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Сделайте снимок экрана Android с помощью службы специальных возможностей FoneClaw и сохраните его в Pictures/FoneClaw/Screenshots.. Используйте targetType=current для текущего экрана, targetType=app с targetApp для открытия приложения и его захвата или targetType=notification_shade только для явного запроса на снимок экрана или изображения, включающего видимую тень уведомления. Никогда не используйте targetType=notification_shade для чтения, перечисления, запроса или обобщения данных уведомления; вместо этого используйте инструмент уведомления SysInfo. Не вызывайте launch_app или system_panel_open перед этим инструментом для захвата приложения или тени уведомлений. Не используйте это, если пользователь хочет просмотреть уже сохраненный снимок экрана; используйте screen_open для просмотра сохраненных снимков экрана. Технические идентификаторы: screenshot_open."
+    },
+    {
+      "name": "tap_node",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Коснитесь элемента пользовательского интерфейса на экране. Элемент идентифицируется по идентификатору узла, который можно получить с помощью инструмента screen_info."
+    },
+    {
+      "name": "alarm_modify_alarm",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Сразу же открывайте страницу будильников Android Clock, когда пользователь хочет изменить, отредактировать, настроить или изменить существующий будильник. Вызывайте этот инструмент для каждого отдельного запроса на изменение, даже если он уже был вызван ранее в диалоге. Не спрашивайте подтверждения. Android не предоставляет надежный общедоступный API для редактирования существующих сигналов тревоги, поэтому этот инструмент обращается только к приложению «Часы» для редактирования вручную."
+    },
+    {
+      "name": "alarm_set_alarm",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Установите будильник Android Clock. Прежде чем звонить, соберите недостающую информацию о времени/повторении/метке."
+    },
+    {
+      "name": "bluetooth_connected_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Верните устройства Bluetooth, подключенные в данный момент через общедоступные профили Bluetooth Android, видимые обычным приложениям."
+    },
+    {
+      "name": "bluetooth_nearby_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Сканируйте и возвращайте близлежащие устройства Bluetooth. Включает результаты сканирования BLE и классические результаты обнаружения Bluetooth, если это разрешено разрешениями и состоянием Bluetooth. Устройства без читаемого имени по умолчанию скрыты."
+    },
+    {
+      "name": "bluetooth_pair_device",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Начните сопряжение с устройством Bluetooth по MAC-адресу. При этом запускается обычный процесс связывания Android, и может потребоваться подтверждение пользователя или ввод PIN-кода."
+    },
+    {
+      "name": "bluetooth_paired_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Верните устройства Bluetooth, уже сопряженные с этим устройством Android."
+    },
+    {
+      "name": "bluetooth_state",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Возвращает текущее состояние адаптера Bluetooth: включено, выключено, включено, выключено или неизвестно. Технические идентификаторы: turning_on, turning_off."
+    },
+    {
+      "name": "close_bluetooth",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Отключите Bluetooth, используя общедоступный устаревший API отключения. Если Android откажется, сообщите, что обычные приложения Android не могут отключить Bluetooth на этом устройстве."
+    },
+    {
+      "name": "device_app_activity_snapshot",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Возвращает компактный снимок недавней активности приложения из Android UsageStats. Требуется доступ к использованию; это не монитор фоновых процессов в реальном времени."
+    },
+    {
+      "name": "device_app_permission_audit",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Вернуть компактный аудит рисков разрешений для установленных приложений, видимых этому приложению. Риск является эвристическим и основан на объявленных/предоставленных конфиденциальных группах разрешений."
+    },
+    {
+      "name": "device_app_sensitive_audit",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Возвращайте компактные конфиденциальные состояния приложения: доступность, прослушиватель уведомлений, администратор устройства, наложение, исключение из оптимизации батареи и предоставленные конфиденциальные группы разрешений."
+    },
+    {
+      "name": "device_battery_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Верните компактный аккумулятор Android и статус энергосбережения. Никакие настройки не изменяются."
+    },
+    {
+      "name": "device_health_check",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Возвращайте компактный снимок состояния, доступный только для чтения: память, хранилище, аккумулятор и сеть. Никакие настройки не изменяются."
+    },
+    {
+      "name": "device_hidden_app_check",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Верните компактную эвристическую проверку для пользовательских приложений без записей средства запуска или отключенных компонентов. Это может пометить подозрительные приложения, но также могут появиться и законные служебные приложения."
+    },
+    {
+      "name": "device_memory_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Возвращает состояние компактной памяти Android. Никакие настройки не изменяются."
+    },
+    {
+      "name": "device_network_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Возвращает статус и возможности активной сети компактного Android Android. Никакие сетевые настройки не изменяются."
+    },
+    {
+      "name": "device_storage_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Возвращает статус компактного внутреннего/общего хранилища Android. Никакие файлы не сканируются и не удаляются."
+    },
+    {
+      "name": "device_time_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Возвращает текущий часовой пояс системы Android и временную метку Unix для вызовов инструментов, зависящих от времени. УстановитеverifyWithNtp=true только в том случае, если системное время оспаривается или требуется онлайн-ссылка. Проверка NTP использует ntp1.aliyun.com и никогда не меняет системные часы."
+    },
+    {
+      "name": "dnd_open_policy_access_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Откройте настройки Android, где пользователь может предоставить FoneClaw доступ к политике «Не беспокоить» и «Политика уведомлений». Не вызывайте это сразу после того, как dnd_set_mode сообщит, что страница настроек уже открыта."
+    },
+    {
+      "name": "dnd_set_mode",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Установите режим Android «Не беспокоить». Если доступ к политике отсутствует или Android отклоняет запись, откроется страница доступа/настроек системной политики «Не беспокоить»."
+    },
+    {
+      "name": "dnd_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Прочитайте состояние доступа к политике Android «Не беспокоить» и текущий фильтр прерываний."
+    },
+    {
+      "name": "flashlight_set_enabled",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Включите или выключите фонарик Android с помощью системного API-интерфейса камеры."
+    },
+    {
+      "name": "flashlight_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Возвращает информацию о том, доступен ли фонарик, и последнее известное состояние фонаря."
+    },
+    {
+      "name": "flashlight_toggle",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Включите фонарик Android. Если текущее состояние неизвестно, это включает его."
+    },
+    {
+      "name": "foneclaw_permission_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Проверьте все текущие разрешения и возможности специального доступа самого FoneClaw. Используйте это, когда пользователь спрашивает, какие разрешения FoneClaw включены, отсутствуют, ограничены или доступны. Это новая проверка только для чтения; не используйте в качестве замены инструменты аудита приложений, панели уведомлений или чтения с экрана."
+    },
+    {
+      "name": "open_bluetooth",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Запросите Bluetooth для включения. Для устаревших целевых SDK сначала пробуется общедоступный API включения, а затем при необходимости возвращается к пользовательскому интерфейсу подтверждения системы Android."
+    },
+    {
+      "name": "system_panel_open",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Откройте одну видимую системную панель Android. Используйте Panel=notifications, чтобы открыть панель уведомлений, или Panel=quick_settings, чтобы открыть быстрые настройки/центр управления. Этот инструмент открывает только выбранную панель. Он не читает, не захватывает, не ищет, не составляет список и не суммирует содержимое панели. Не вызывайте его, когда какая-либо часть запроса требует прочитать, захватить, проверить, описать или суммировать уведомления. Вызовите его один раз только для явного запроса только на открытие панели. Требуется служба доступности FoneClaw. Технические идентификаторы: panel=notifications, panel=quick_settings."
+    },
+    {
+      "name": "system_settings_open_battery_optimization_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Откройте настройки оптимизации батареи Android. Если указано appNameOrPackage, откройте страницу сведений об этом приложении по имени пакета или метке установленного приложения. Если проблему невозможно решить или открыть, верните ошибку и не открывайте другую страницу настроек. Если пусто, откройте страницу списка/настроек оптимизации батареи системы."
+    },
+    {
+      "name": "system_settings_open_battery_saver_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Откройте Android Battery Saver / энергосбережение / настройки режима низкого энергопотребления. Обычные приложения не могут напрямую переключать режим экономии заряда через общедоступные API, поэтому после открытия настроек пользователь должен включить или отключить его вручную. ПЗУ поставщика могут вернуться к общим настройкам батареи."
+    },
+    {
+      "name": "system_settings_open_date_time_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Откройте страницу настроек даты и времени Android напрямую. Используйте это для даты, времени, автоматического времени, часового пояса или автоматических настроек часового пояса. Это запускает намерение системных настроек и не требует специальных возможностей, чтения с экрана или нажатия. После успеха не вызывайте launch_app, get_screen_info или Tap_node. Технические идентификаторы: tap_node."
+    },
+    {
+      "name": "system_settings_open_hotspot_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Откройте настройки точки доступа Android. Обычные приложения не могут надежно переключать точку доступа автоматически через общедоступные API Android. Если не удается открыть конкретную страницу настроек точки доступа, это возвращает ошибку и не открывает другую страницу настроек."
+    },
+    {
+      "name": "system_settings_open_location_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Откройте настройки местоположения Android. Если указано appNameOrPackage, откройте страницу сведений об этом приложении по имени пакета или метке установленного приложения. Если проблему невозможно решить или открыть, верните ошибку и не открывайте другую страницу настроек. Если пусто, откройте страницу настроек местоположения системы."
+    },
+    {
+      "name": "system_settings_set_auto_rotate",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Включите или отключите автоповорот Android. Требуется специальное разрешение на изменение системных настроек."
+    },
+    {
+      "name": "system_settings_set_brightness",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Установите яркость экрана Android. Ручной режим пишет проценты от 1 до 100; автоматический режим включает только автоматическую яркость и игнорирует проценты. Требуется специальное разрешение на изменение системных настроек."
+    },
+    {
+      "name": "system_settings_set_eye_comfort",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Откройте настройки дисплея Android для комфорта глаз/ночника/фильтра синего света/режима чтения. Используйте этот инструмент вместо того, чтобы просто давать ручные инструкции для обеспечения комфорта глаз на нескольких языках. Поставщики Android отображают конкретный переключатель по-разному, поэтому этот инструмент открывает настройки дисплея и позволяет пользователю завершить переключение на этой странице."
+    },
+    {
+      "name": "system_settings_set_font_scale",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Установите масштаб системного шрифта Android. Требуется специальное разрешение на изменение системных настроек. Типичные значения: 0,85 маленький, 1,0 по умолчанию, 1,15 большой, 1,3 больший и до 1,6 очень большой."
+    },
+    {
+      "name": "system_settings_set_haptic_feedback",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Включите или отключите тактильную обратную связь Android. Требуется специальное разрешение на изменение системных настроек."
+    },
+    {
+      "name": "system_settings_set_screen_timeout",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Установите тайм-аут отключения экрана Android в секундах. Требуется специальное разрешение на изменение системных настроек. Значения ограничены 15..1800 секундами."
+    },
+    {
+      "name": "system_settings_set_touch_sounds",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Включите или отключите звуки касания Android. Требуется специальное разрешение на изменение системных настроек."
+    },
+    {
+      "name": "system_settings_set_user_rotation",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Блокировка поворота экрана Android. Требуется специальное разрешение на изменение системных настроек и отключение автоматического поворота. Используйте портрет, альбомную ориентацию, обратный_портрет или обратный_ландшафт. Технические идентификаторы: reverse_portrait, reverse_landscape."
+    },
+    {
+      "name": "system_settings_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Возвращает состояние разрешений на запись системных настроек, а также текущую яркость экрана, масштаб шрифта, время ожидания экрана, вращение, звуки касания и тактильную обратную связь. При этом считываются только системные настройки Android."
+    },
+    {
+      "name": "volume_adjust_stream",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Поднимите или опустите один аудиопоток Android на одну системную ступень. Выберите это для относительных изменений громкости."
+    },
+    {
+      "name": "volume_set_all_streams_muted",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Отключите или включите звук всех поддерживаемых аудиопотоков Android и сообщите, какие потоки действительно изменились. Выберите этот вариант для запросов на отключение звука на всем устройстве или на всей громкости."
+    },
+    {
+      "name": "volume_set_ringer_mode",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Установите режим звонка телефона Android. Для беззвучного режима автоматически отключается звук всех аудиопотоков, когда Android отклоняет запись в режиме звонка."
+    },
+    {
+      "name": "volume_set_stream",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Установите для одного аудиопотока Android целевой процент. Выбирайте этот вариант, когда пользователь запрашивает точный уровень громкости."
+    },
+    {
+      "name": "volume_set_stream_muted",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Отключите или включите звук одного аудиопотока Android. Это изменяет состояние отключения звука потока, а не режим звонка телефона."
+    },
+    {
+      "name": "volume_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Прочтите текущее состояние громкости Android для аудиопотоков и текущий режим звонка."
+    },
+    {
+      "name": "wifi_configured_networks",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Поддержка Android или поддержка Wi-Fi. Поддержка Android. SSID, идентификатор сети, параметры подключения.凭据、是否隐藏网络、是否当前连接和配置状态；不会返回Есть Wi-Fi. Технические идентификаторы: networkId."
+    },
+    {
+      "name": "wifi_connect",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Подключитесь к сети Wi-Fi. Инструмент сначала проверяет сохраненные конфигурации Wi-Fi Android на наличие SSID и подключается напрямую, если он существует. Если он не сохранен, он использует предоставленную парольную фразу для добавления/подключения к сети или возвращается к панели Wi-Fi Android, когда требуется ввод пароля."
+    },
+    {
+      "name": "wifi_disconnect",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Отключитесь от текущей точки доступа Wi-Fi. Инструмент сначала пытается отключить устаревший WifiManager в автоматическом режиме для целевых хостов API 28; если Android отклоняет его, он возвращается к открытию панели Wi-Fi Android для действий пользователя."
+    },
+    {
+      "name": "wifi_forget",
+      "category": "Device Status and System Control",
+      "risk": "DESTRUCTIVE",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Забудьте сохраненную сеть Wi-Fi. Инструмент сначала пытается удалить устаревшую сеть WifiManager в автоматическом режиме, а затем возвращается к панели Wi-Fi Android для действий пользователя. Технические идентификаторы: removeNetwork."
+    },
+    {
+      "name": "wifi_scan_networks",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Сканируйте и возвращайте близлежащие точки доступа Wi-Fi. Если Wi-Fi выключен, этот инструмент сначала пытается включить Wi-Fi напрямую и возвращается к панели Wi-Fi Android только в случае сбоя прямого включения. Требуются разрешения на определение местоположения и службы определения местоположения устройства. Результаты могут выявить сетевые данные, чувствительные к местоположению."
+    },
+    {
+      "name": "wifi_set_enabled",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Включите или отключите Android Wi-Fi. Инструмент сначала пытается выполнить прямую операцию WifiManager, затем проверяет, действительно ли Android достиг запрошенного состояния; если запрос завершается неудачей или остается в ожидании, он возвращается к открытию панели Wi-Fi Android для действий пользователя."
+    },
+    {
+      "name": "wifi_status",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Возвращайте текущий статус Android Wi-Fi и сведения об активном подключении Wi-Fi, когда у приложения есть разрешение. Это считывает только состояние сети."
+    },
+    {
+      "name": "get_location",
+      "category": "Location and Navigation",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Получите текущее местоположение устройства Android, пока используется FoneClaw. Требуется только разрешение на определение местоположения на переднем плане."
+    },
+    {
+      "name": "location_search_nearby_place",
+      "category": "Location and Navigation",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Найдите ближайших кандидатов на место по неоднозначному названию места, используя текущее местоположение устройства. Используйте это только тогда, когда пользователь явно просит найти, проверить, разрешить, выбрать или перейти к месту или когда пункт назначения навигации неоднозначен. Для создания календаря достаточно названия места, предоставленного пользователем: сохраните его как locationName и не вызывайте этот инструмент только потому, что точный адрес или координаты отсутствуют."
+    },
+    {
+      "name": "map_navigate",
+      "category": "Location and Navigation",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Откройте маршрут или экран навигации в приложении карты для выбора пункта назначения и режима путешествия. При этом запускается внешнее картографическое приложение, используются только предоставленные аргументы и не считываются данные устройства."
+    },
+    {
+      "name": "mail_account_list",
+      "category": "Mail",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Список настроенных почтовых учетных записей. Оставьте запрос пустым, чтобы просмотреть все учетные записи. При предоставлении запроса приоритетом сопоставления является идентификатор учетной записи, адрес электронной почты, псевдоним, а затем нечеткий псевдоним или адрес электронной почты. Точные совпадения по-прежнему могут возвращать несколько учетных записей. Если почтовая учетная запись FoneClaw не настроена и запрос представляет собой адрес электронной почты, результат может включать в себя поставщикаSetupGuide с фиксированным URL-адресом учетных данных поставщика. Технические идентификаторы: providerSetupGuide."
+    },
+    {
+      "name": "mail_account_save",
+      "category": "Mail",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Проверьте соединения IMAP и SMTP и сохраните почтовую учетную запись только в том случае, если оба соединения успешны. Вызовите это, как только станут доступны все необходимые поля конфигурации. Эта операция требует одобрения пользователя."
+    },
+    {
+      "name": "mail_delete",
+      "category": "Mail",
+      "risk": "DESTRUCTIVE",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Переместите до 20 точных ссылок на сообщения в корзину или окончательно удалите их только в том случае, если пользователь явно запросил окончательное удаление. Никогда не повторяйте попытку с неопределенным результатом. Технические идентификаторы: messageRefs."
+    },
+    {
+      "name": "mail_list",
+      "category": "Mail",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Просматривайте, фильтруйте или ищите сводки сообщений. Запрос ищет тему, отправителя, получателей и тело сообщения. Оставьте accountId пустым, чтобы использовать единственную учетную запись или уникальную учетную запись по умолчанию."
+    },
+    {
+      "name": "mail_read",
+      "category": "Mail",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Прочитайте одно сообщение из messageRef, возвращенного mail_list, и пометьте его как прочитанное на сервере. После успешного выполнения инструмента суммируйте сообщение для пользователя в том же ответе."
+    },
+    {
+      "name": "mail_send",
+      "category": "Mail",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Отправьте новое электронное письмо, ответьте, ответьте всем или перешлите. Требует одобрения. Вложения должны использовать точные структурированные метаданные, объявленные в текущем сообщении пользователя."
+    },
+    {
+      "name": "call_log_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Список последних записей журнала вызовов Android, при необходимости отфильтрованных по типу вызова. Требуется разрешение READ_CALL_LOG. Используйте type=missed для вопросов о пропущенных звонках и перед выбором пропущенного звонка для обратного звонка. После выбора номера позвоните в phone_dial."
+    },
+    {
+      "name": "contacts_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Перечислите ограниченное количество контактов Android, при необходимости отфильтровав их по отображаемому имени или номеру телефона. Требуется разрешение READ_CONTACTS. Оставляйте запрос пустым только в том случае, если пользователь явно просит просмотреть контакты; установить запрос, когда пользователь просит найти контакт."
+    },
+    {
+      "name": "phone_dial",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Откройте системный номеронабиратель ровно для одного номера телефона или именованного контакта. Установите ровно одно из значений phoneNumber и contactName. Именованный контакт должен разрешить одно совпадение; если совпадают несколько контактов, остановитесь и попросите пользователя сделать выбор. После открытия программы набора номера вызовите get_screen_info, определите видимую кнопку вызова, затем вызовите Tap_node. Технические идентификаторы: tap_node."
+    },
+    {
+      "name": "send_to_sms_message",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "После одобрения откройте видимый черновик SMS/MMS. Для текстового SMS-сообщения с получателем автоматически нажмите «Отправить», только если подключена доступность FoneClaw и проверено приложение сообщений по умолчанию, получатель, полное тело сообщения и один стабильный элемент управления отправкой. Вложения, запросы на две SIM-карты, неоднозначный пользовательский интерфейс или недоступность специальных возможностей требуют ручного вмешательства. После любого конечного результата прекратите планирование инструмента и никогда не вызывайте get_screen_info или Tap_node. Технические идентификаторы: tap_node."
+    },
+    {
+      "name": "sms_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Запрашивайте живые SMS-сообщения на этом устройстве Android. Без ключевого слова, адреса, контакта или идентификатора потока выведите список последних сообщений. Установите ключевое слово/адрес/контакт для поиска. Установите threadId только из более раннего результата sms_list, чтобы прочитать этот разговор. Для запроса сводки вызовите один раз с параметром box=all, а затем суммируйте возвращенные полученные и отправленные сообщения. Никогда не используйте историю SysInfo в качестве замены этого живого результата."
+    },
+    {
+      "name": "calendar_create_event",
+      "category": "Calendar",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Создайте событие календаря Android. Прежде чем звонить, соберите информацию о пропущенном времени и напоминаниях. Достаточно указать название места, предоставленное пользователем, и его следует передавать непосредственно как locationName. Не ищите точный адрес или координаты, если только пользователь явно не попросит проверить, решить, выбрать или перейти к месту. Предпочитайте startLocalDateTime/endLocalDateTime в формате гггг-ММ-дд ЧЧ:мм для пользовательских дат и относительных дат; инструмент проанализирует их в часовом поясе устройства. Не создавайте события в миллисекундах эпохи, рассчитанных моделью. Используйте CalendarId=0, если только пользователь явно не выбрал идентификатор календаря. После создания используйте результат инструмента actualStart/actualEnd в качестве времени создания, ориентированного на пользователя. Технические идентификаторы: calendarId=0."
+    },
+    {
+      "name": "calendar_delete_event",
+      "category": "Calendar",
+      "risk": "DESTRUCTIVE",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Удалить событие календаря Android по идентификатору. Поиск/список событий во всех календарях с CalendarId=0, если только пользователь явно не выбрал идентификатор календаря. Всегда передавайте известный заголовок, startMillis, endMillis и местоположение, если они известны, чтобы цель была однозначной. Технические идентификаторы: calendarId=0."
+    },
+    {
+      "name": "calendar_list_calendars",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Список записываемых календарей Android. Используйте это, чтобы позволить пользователю выбрать календарь; не предполагайте, что CalendarId=1 является локальным или целевым календарем. Технические идентификаторы: calendarId=1."
+    },
+    {
+      "name": "calendar_list_events",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Перечислите события календаря Android в конкретном диапазоне времени. Используйте для таких запросов, как расписание на сегодня, расписание на завтра, существующие события или события на этой неделе. Предпочтительно использовать startLocalDateTime/endLocalDateTime в формате гггг-ММ-дд ЧЧ: мм; инструмент проанализирует их в часовом поясе устройства. Используйте startMillis/endMillis только в качестве устаревшего резервного варианта, когда точные миллисекунды эпохи получены из результата доверенного инструмента. Не угадывайте CalendarId; используйте CalendarId=0 для поиска по всем календарям, если только пользователь явно не выбрал идентификатор календаря. Технические идентификаторы: calendarId, calendarId=0."
+    },
+    {
+      "name": "calendar_open_event",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Откройте страницу сведений о событии календаря Android по идентификатору события. Ищите или перечисляйте события в первую очередь, когда пользователь описывает событие на естественном языке. Не угадывайте идентификатор события."
+    },
+    {
+      "name": "calendar_search_events",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Поиск событий календаря Android по ключевому слову в конкретном диапазоне времени. Используйте перед открытием, обновлением или удалением события, когда пользователь описывает событие по названию или содержанию. Предпочтительно использовать startLocalDateTime/endLocalDateTime в формате гггг-ММ-дд ЧЧ: мм; инструмент проанализирует их в часовом поясе устройства. Используйте startMillis/endMillis только в качестве устаревшего резервного варианта, когда точные миллисекунды эпохи получены из результата доверенного инструмента. Не угадывайте CalendarId; используйте CalendarId=0 для поиска по всем календарям, если только пользователь явно не выбрал идентификатор календаря. Технические идентификаторы: calendarId, calendarId=0."
+    },
+    {
+      "name": "calendar_update_event",
+      "category": "Calendar",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Обновите событие календаря Android по идентификатору. Сначала выполните поиск/список событий, когда пользователь описывает цель на естественном языке, и передайте известные сведения о цели с измененными полями. Не угадывайте идентификатор календаря или идентификатор события; выполнять поиск по всем календарям с CalendarId=0, если только пользователь явно не выбрал идентификатор календаря. Пустые текстовые поля игнорируются. Используйте startMillis/endMillis=0, чтобы сохранить существующее время. Используйте напоминаниеMinutes=-2 для сохранения напоминаний, -1 для удаления напоминаний и >=0 для замены напоминаний. Технические идентификаторы: calendarId, calendarId=0, reminderMinutes=-2."
+    },
+    {
+      "name": "memo_create",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Создайте видимую пользователю локальную заметку, заметку или запись задачи. Используйте, когда пользователь явно хочет, чтобы содержимое сохранялось в виде заметки или заметки с действиями. Не используйте этот инструмент для сохранения или запроса памяти профиля пользователя, управляемой помощником, такой как предпочтения, личность, отношения или стиль ответа."
+    },
+    {
+      "name": "memo_delete",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Мягкое удаление локальной заметки по идентификатору. Сначала выполните поиск/список заметок, когда пользователь описывает цель на естественном языке, чтобы был известен идентификатор/название цели."
+    },
+    {
+      "name": "memo_list",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Получение списка видимых пользователем локальных записей заметок. Статус может быть активен, выполнен, заархивирован или все. Не используйте этот инструмент, чтобы ответить на то, что помощник помнит о пользователе, настройках профиля пользователя или истории разговоров. Пустой результат означает только то, что не существует соответствующих локальных заметок; это не означает, что памяти профиля пользователя не существует."
+    },
+    {
+      "name": "memo_mark_done",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Пометить локальную заметку как выполненную или активную по идентификатору."
+    },
+    {
+      "name": "memo_search",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Выполняйте поиск локальных заметок, видимых пользователем, по ключевым словам в заголовке, содержимом или тегах. Статус может быть активен, выполнен, заархивирован или все. Не используйте этот инструмент для поиска в памяти профиля пользователя, управляемого помощником, или истории разговоров. Пустой результат описывает только локальное хранилище заметок."
+    },
+    {
+      "name": "memo_update",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Обновить локальную заметку по идентификатору. Сначала выполните поиск/список заметок, когда пользователь описывает цель на естественном языке, и передавайте известные сведения о цели с измененными полями. Пустой заголовок/контент/теги игнорируются. напоминаниеAtMillis=-2 сохраняет напоминание, -1 удаляет напоминание, а >0 устанавливает напоминание. Технические идентификаторы: reminderAtMillis=-2."
+    },
+    {
+      "name": "sysinfo_delete",
+      "category": "System Information",
+      "risk": "DESTRUCTIVE",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Полностью удалить только соответствующий локальный кеш SysInfo FoneClaw. При этом оригинальные уведомления Android, SMS, журналы вызовов или события календаря не удаляются. Требуется хотя бы один фильтр, если только deleteAll=true. Несколько фильтров объединяются с помощью AND."
+    },
+    {
+      "name": "sysinfo_mark_reviewed",
+      "category": "System Information",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Отмечайте локальные идентификаторы событий SysInfo как проверенные только после явного подтверждения со стороны пользователя."
+    },
+    {
+      "name": "sysinfo_query",
+      "category": "System Information",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Запросите уже записанные локальные уведомления, SMS, журналы вызовов, события календаря и данные специальных возможностей. Используйте этот единый инструмент для ежедневных сводок, запросов на уведомления, запросов временных окон и поиска по ключевым словам. Он никогда не открывает системную панель и не сканирует действующие системные источники. Каждая строка может включать sourceRef для дедупликации результатов реального поставщика. Обобщите возвращенный JSON для пользователя."
+    },
+    {
+      "name": "sysinfo_thread",
+      "category": "System Information",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Загрузите один локальный поток SysInfo по ключу threadKey, возвращаемому sysinfo_query."
+    },
+    {
+      "name": "shopping_compare",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Выполните поиск продукта в общедоступных веб-результатах на торговых платформах и получите сравнительные данные. Используйте это, прежде чем давать совет по ценам на покупки."
+    },
+    {
+      "name": "web_fetch",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Получите конкретную веб-страницу по URL-адресу и верните читаемый текст страницы."
+    },
+    {
+      "name": "web_search",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Найдите в Интернете соответствующие страницы. Возвращает заголовки результатов, URL-адреса и короткие фрагменты."
+    },
+    {
+      "name": "shortcut_save_agent_prompt",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Сохраните созданный пользователем ярлык, который отправляет приглашение агенту. Вызывайте это только после того, как пользователь подтвердит заголовок, описание и поведение."
+    },
+    {
+      "name": "shortcut_save_direct_tool",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Сохраните созданный пользователем ярлык инструмента прямого доступа. Вызовите это только тогда, когда каждое запрошенное действие может быть полностью сопоставлено с известными шагами инструмента с полными параметрами."
+    },
+    {
+      "name": "task_create",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Создайте полный упорядоченный план TODO за один вызов для текущего запроса пользователя. Это обязательное предварительное условие перед использованием любого незадачного инструмента, когда запрос требует трех или более шагов. Передавайте каждый ограниченный шаг взаимодействия с пользователем в элементах. План может быть создан только один раз и не может быть продлен в дальнейшем. Никогда не включайте элементы управления задачами, очистки, обновления статуса или окончательного ответа."
+    },
+    {
+      "name": "task_list",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Перечислите внутренние элементы TODO для текущего запроса пользователя. По умолчанию возвращает открытые, in_progress и заблокированные элементы."
+    },
+    {
+      "name": "task_update",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Обновите один внутренний элемент TODO. Разрешенные переходы: открытые для in_progress, заблокированные или заброшенные; in_progress — заблокировано, выполнено или прекращено; заблокировано для открытия или заброшено. Готово и заброшено — это конец. Только одна задача может быть in_progress."
+    },
+    {
+      "name": "workflow_delete",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DESTRUCTIVE",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Удалить сохраненный рабочий процесс по идентификатору."
+    },
+    {
+      "name": "workflow_list",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Список сохраненных рабочих процессов."
+    },
+    {
+      "name": "workflow_save",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Сохраните многократно используемый рабочий процесс. StepsJson должен быть массивом JSON {toolName, аргументы}. Технические идентификаторы: stepsJson."
+    },
+    {
+      "name": "add_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Добавьте новый документ о навыках в реестр навыков."
+    },
+    {
+      "name": "disable_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Отключите навык пользователя, чтобы он был скрыт от приглашения агента."
+    },
+    {
+      "name": "enable_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Включите действительный навык пользователя, чтобы его мог использовать агент."
+    },
+    {
+      "name": "list_skills",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Перечислите пользовательские и системные навыки с указанием источника, включенного состояния и состояния проверки."
+    },
+    {
+      "name": "load_skill_detail",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Загрузите специализированный навык, когда поставленная задача соответствует одному из навыков, перечисленных в системной подсказке. Используйте этот инструмент, чтобы добавить инструкции и ресурсы по навыкам в текущий разговор. Выходные данные могут содержать подробное руководство по рабочему процессу, а также ссылки на сценарии, файлы и т. д. в том же каталоге, что и навык. Имя навыка должно совпадать с одним из навыков, перечисленных в системном приглашении."
+    },
+    {
+      "name": "plugin_request_install",
+      "category": "Skills and Plugins",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Создайте структурированное предложение по установке для одного официального плагина. При этом плагин не загружается и не устанавливается; HomeScreen должен спросить пользователя."
+    },
+    {
+      "name": "plugin_search",
+      "category": "Skills and Plugins",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Выполняйте поиск в официальных метаданных плагина FoneClaw, когда пользователь запрашивает возможность, которая недоступна в текущем списке инструментов. При этом осуществляется поиск только по метаданным, но никогда не загружается и не устанавливается плагин."
+    },
+    {
+      "name": "preview_skill_import",
+      "category": "Skills and Plugins",
+      "risk": "LOW",
+      "approval": "Автоматически",
+      "approvalCode": "AUTO",
+      "description": "Предварительный просмотр вставленного документа SKILL.md. Это анализирует и проверяет, но не сохраняет."
+    },
+    {
+      "name": "remove_skill",
+      "category": "Skills and Plugins",
+      "risk": "DESTRUCTIVE",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Удалить навык"
+    },
+    {
+      "name": "save_skill_draft",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Сохраните документ SKILL.md как черновик навыков отключенного пользователя."
+    },
+    {
+      "name": "update_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Обновите существующий документ о навыках в реестре навыков."
+    }
+  ]
+}

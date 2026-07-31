@@ -1,0 +1,1031 @@
+{
+  "schemaVersion": 3,
+  "catalogType": "foneclaw-built-in-tools",
+  "locale": "ko",
+  "fallbackLocale": "en",
+  "toolCount": 118,
+  "categoryCount": 11,
+  "uiLabels": {
+    "searchPlaceholder": "도구 또는 기능 검색",
+    "allCategories": "모든 카테고리",
+    "publicBuiltInTools": "개의 공개 내장 도구",
+    "tool": "도구",
+    "risk": "위험",
+    "approval": "승인",
+    "description": "기능"
+  },
+  "riskLabels": {
+    "DESTRUCTIVE": "삭제 위험 작업",
+    "DEVICE_CONTROL": "기기 제어",
+    "EXTERNAL_EFFECT": "외부 작업",
+    "LOW": "낮은 위험",
+    "SENSITIVE_READ": "민감 정보 읽기"
+  },
+  "approvalLabels": {
+    "AUTO": "자동",
+    "REQUIRE_APPROVAL": "승인 필요"
+  },
+  "categories": [
+    {
+      "name": "Screen and App",
+      "displayName": "화면, 앱 및 미디어",
+      "toolCount": 11
+    },
+    {
+      "name": "Device Status and System Control",
+      "displayName": "기기 상태 및 시스템 제어",
+      "toolCount": 54
+    },
+    {
+      "name": "Location and Navigation",
+      "displayName": "위치 및 내비게이션",
+      "toolCount": 3
+    },
+    {
+      "name": "Mail",
+      "displayName": "메일",
+      "toolCount": 6
+    },
+    {
+      "name": "Communication and Contacts",
+      "displayName": "통신 및 연락처",
+      "toolCount": 5
+    },
+    {
+      "name": "Calendar",
+      "displayName": "캘린더",
+      "toolCount": 7
+    },
+    {
+      "name": "Memo",
+      "displayName": "메모",
+      "toolCount": 6
+    },
+    {
+      "name": "System Information",
+      "displayName": "알림 및 시스템 정보",
+      "toolCount": 4
+    },
+    {
+      "name": "Web and Shopping",
+      "displayName": "웹 및 쇼핑",
+      "toolCount": 3
+    },
+    {
+      "name": "Tasks, Workflows, and Shortcuts",
+      "displayName": "작업, 워크플로 및 바로가기",
+      "toolCount": 8
+    },
+    {
+      "name": "Skills and Plugins",
+      "displayName": "Skill 및 플러그인",
+      "toolCount": 11
+    }
+  ],
+  "tools": [
+    {
+      "name": "camera_open_photo",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "시스템 갤러리에서 눈에 보이는 특정 사진을 엽니다. 사용자가 특정 사진을 보거나 열 것을 명시적으로 요청하는 경우에만 이 기능을 사용하세요. 사용자가 캡처한 사진을 보거나 열도록 명시적으로 요청하지 않는 한 camera_take_photo 이후의 후속 작업으로 이 작업을 사용하지 마세요. indexFromLatest은 1부터 최신순으로 이루어집니다. 1은 최신 사진을 열고, 2는 두 번째 최신 사진을 열고, 3은 세 번째 최신 사진을 엽니다."
+    },
+    {
+      "name": "camera_take_photo",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "새 사진을 촬영하고, 가능한 경우 저장된 사진의 URI를 반환합니다. 사용자가 새 사진 촬영을 요청할 때 사용합니다. 일반 촬영에서는 lensFacing을 지정하지 않거나 auto로 둡니다. 전면 카메라 또는 셀카를 명시적으로 요청한 경우에만 lensFacing=front를 선택하고, 후면 카메라를 명시적으로 요청한 경우에만 back을 선택합니다. 일반 또는 기본 촬영에서는 기본 물리 렌즈가 후면이더라도 explicitLensSelection을 false로 유지합니다. 전면, 후면 또는 셀카를 명시적으로 요청한 경우에만 true로 설정합니다. 사용자가 사진 보기 또는 열기를 명시적으로 요청하지 않는 한 이어서 camera_open_photo를 호출하지 마세요. 이 도구를 직접 호출합니다. 먼저 시스템 기본 카메라를 사용하며, 기본 카메라가 지정한 렌즈를 지원하지 못할 때만 전면 또는 후면을 명시한 촬영에 직접 백엔드를 사용할 수 있습니다. 호출 전에 사용자에게 권한 부여를 요구하지 마세요."
+    },
+    {
+      "name": "cross_app_read_screen",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "대상 Android 앱을 열거나 전환하고, 해당 앱이 안정적으로 포그라운드에 있을 때까지 기다린 후 표시되는 접근성 화면 트리를 반환합니다. 하나의 요청이 앱 열기/전환과 표시되는 페이지 읽기, 검사, 설명 또는 요약을 모두 요구할 때 이 기능을 사용하세요. 해당 작업을 launch_app 및 get_screen_info로 분할하지 마세요. 이 도구는 스크린샷을 캡처하거나 노드와 상호 작용하지 않습니다."
+    },
+    {
+      "name": "get_installed_map_apps",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "지도 도구에서 지원하는 설치된 지도 앱을 쿼리합니다. 각 앱의 표시 이름과 패키지 이름을 반환합니다."
+    },
+    {
+      "name": "get_screen_info",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "현재 표시되는 앱 화면에서 UI 요소를 가져옵니다. 각 요소에는 tap_node와 함께 사용할 수 있는 노드 ID(예: [n3])가 있습니다. Android 알림을 읽고, 나열하고, 검색하고, 요약하는 데 이 기능을 사용하지 마세요. 대신 sysinfo 도구를 사용하세요. 호출할 때마다 노드 ID가 변경되므로 이 결과를 캐시하지 마세요."
+    },
+    {
+      "name": "launch_app",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "패키지 이름 또는 설치된 앱 표시 이름으로 실행 가능한 Android 앱을 엽니다. 이렇게 하면 포그라운드 앱이 변경되고 해당 앱의 화면이 노출될 수 있습니다. 가능하면 정확한 패키지 이름을 사용하세요. 결과가 모호한 경우 사용자에게 반환된 패키지 중 하나를 선택하도록 요청합니다."
+    },
+    {
+      "name": "play_store_check_app",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "https://play.google.com/store/apps/details?id=<packageName>.를 요청하여 정확한 Android 패키지 이름이 Google Play에 나열되어 있는지 확인하십시오. 이는 읽기 전용 네트워크 검사입니다. play_store_install 전에 사용하세요."
+    },
+    {
+      "name": "play_store_install",
+      "category": "Screen and App",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "정확한 패키지 이름으로 특정 Google Play 앱 세부정보 페이지를 열고 설치를 탭한 후 설치가 완료될 때까지 기다립니다. 이 도구는 설치된 앱을 열지 않습니다. 정확한 Android packageName를 알고 있는 경우에만 사용하세요. 퍼지 검색 결과나 첫 번째 앱을 추측하는 데 이 기능을 사용하지 마세요. packageName을 알 수 없는 경우 먼저 사용자에게 정확한 앱 패키지를 물어보세요. Google Play에 유료, 구매, 구독, 업데이트, 모호한 UI가 표시되거나 시간 초과 전에 설치가 완료되지 않는 경우 중지됩니다."
+    },
+    {
+      "name": "screenshot_open",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "시스템 갤러리에서 눈에 보이는 특정 스크린샷을 엽니다. 인덱스는 선택한 순서대로 1부터 시작됩니다. sortOrder은 최신이거나 가장 오래된 것일 수 있습니다."
+    },
+    {
+      "name": "screenshot_take",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "FoneClaw 접근성 서비스로 Android 화면을 캡처하고 Pictures/FoneClaw/Screenshots.에 저장합니다. 현재 화면에는 targetType=current를 사용하고, 앱을 열고 캡처하려면 targetType=app와 targetApp를 사용하고, 눈에 보이는 알림 창과 관련된 명시적인 스크린샷이나 이미지 캡처 요청에는 targetType=notification_shade만 사용하세요. 알림 데이터를 읽거나, 나열하거나, 쿼리하거나, 요약하는 데 targetType=notification_shade을 사용하지 마세요. 대신 SysInfo 알림 도구를 사용하세요. 앱 또는 알림 셰이드 캡처를 위해 이 도구 이전에 launch_app 또는 system_panel_open을 호출하지 마세요. 사용자가 이미 저장된 스크린샷을 보려는 경우에는 이 기능을 사용하지 마세요. 저장된 스크린샷을 보려면 screenshot_open을 사용하세요."
+    },
+    {
+      "name": "tap_node",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "화면에서 UI 요소를 탭하세요. 요소는 screen_info 도구에서 얻을 수 있는 노드 ID로 식별됩니다."
+    },
+    {
+      "name": "alarm_modify_alarm",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "사용자가 기존 알람을 수정, 편집, 조정 또는 변경하려는 경우 즉시 Android 시계 알람 페이지를 엽니다. 대화 초기에 이미 호출했더라도 별도의 수정 요청이 있을 때마다 이 도구를 호출하세요. 확인을 요청하지 마십시오. Android은 기존 알람 편집을 위한 안정적인 공개 API를 제공하지 않으므로 이 도구는 수동 편집을 위해 시계 앱으로만 이동합니다."
+    },
+    {
+      "name": "alarm_set_alarm",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Android 시계 알람을 설정하세요. 전화하기 전에 누락된 시간/반복/라벨 세부정보를 수집하세요."
+    },
+    {
+      "name": "bluetooth_connected_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "일반 앱에 표시되는 공개 Android Bluetooth 프로필을 통해 현재 연결된 Bluetooth 장치를 반환합니다."
+    },
+    {
+      "name": "bluetooth_nearby_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "근처의 Bluetooth개 기기를 검색하고 반환하세요. 권한 및 Bluetooth 상태가 허용하는 경우 BLE 검사 결과와 기본 Bluetooth 검색 결과를 포함합니다. 읽을 수 있는 이름이 없는 장치는 기본적으로 숨겨져 있습니다."
+    },
+    {
+      "name": "bluetooth_pair_device",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "MAC 주소로 Bluetooth 장치와 페어링을 시작하세요. 이는 Android의 일반적인 결합 흐름을 시작하며 사용자 확인 또는 PIN 입력이 필요할 수 있습니다."
+    },
+    {
+      "name": "bluetooth_paired_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "이 Android 장치와 이미 페어링된 Bluetooth 장치를 반환합니다."
+    },
+    {
+      "name": "bluetooth_state",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "현재 Bluetooth 어댑터 상태(켜짐, 꺼짐, turning_on, turning_off 또는 알 수 없음)를 반환합니다."
+    },
+    {
+      "name": "close_bluetooth",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "공개 레거시 비활성화 API을 사용하여 Bluetooth을 끄세요. Android가 거부하는 경우 일반 Android 앱이 이 기기에서 Bluetooth을 끌 수 없다고 보고하세요."
+    },
+    {
+      "name": "device_app_activity_snapshot",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Android UsageStats에서 간단한 최근 앱 활동 스냅샷을 반환합니다. 사용 액세스가 필요합니다. 라이브 백그라운드 프로세스 모니터가 아닙니다."
+    },
+    {
+      "name": "device_app_permission_audit",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "이 앱에 표시되는 설치된 앱에 대한 간단한 권한 위험 감사를 반환합니다. 위험은 경험적이며 선언/부여된 중요한 권한 그룹을 기반으로 합니다."
+    },
+    {
+      "name": "device_app_sensitive_audit",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "접근성, 알림 수신기, 장치 관리자, 오버레이, 배터리 최적화 면제 및 부여된 민감한 권한 그룹 등 압축된 민감한 앱 상태를 반환합니다."
+    },
+    {
+      "name": "device_battery_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "소형 Android 배터리 및 절전 상태를 반환합니다. 설정이 변경되지 않습니다."
+    },
+    {
+      "name": "device_health_check",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "메모리, 스토리지, 배터리, 네트워크 등 컴팩트한 읽기 전용 상태 스냅샷을 반환합니다. 설정이 변경되지 않습니다."
+    },
+    {
+      "name": "device_hidden_app_check",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "런처 항목이나 비활성화된 구성 요소 없이 사용자 앱에 대한 간단한 경험적 검사를 반환합니다. 이로 인해 의심스러운 앱이 표시될 수 있지만 합법적인 서비스 전용 앱도 나타날 수 있습니다."
+    },
+    {
+      "name": "device_memory_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "컴팩트 Android 메모리 상태를 반환합니다. 설정이 변경되지 않습니다."
+    },
+    {
+      "name": "device_network_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "컴팩트 Android 활성 네트워크 상태 및 기능을 반환합니다. 네트워크 설정은 변경되지 않습니다."
+    },
+    {
+      "name": "device_storage_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "컴팩트 Android 내부/공유 저장소 상태를 반환합니다. 파일이 검사되거나 삭제되지 않습니다."
+    },
+    {
+      "name": "device_time_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "시간 종속 도구 호출에 대해 현재 Android 시스템 시간대와 Unix 타임스탬프를 반환합니다. 시스템 시간에 대해 논쟁이 있거나 온라인 참조가 필요한 경우에만 verifyWithNtp=true을 설정하십시오. NTP 확인은 ntp1.aliyun.com을 사용하며 시스템 시계를 변경하지 않습니다."
+    },
+    {
+      "name": "dnd_open_policy_access_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "사용자가 FoneClaw 방해 금지/알림 정책 액세스 권한을 부여할 수 있는 Android 설정을 엽니다. dnd_set_mode가 이미 설정 페이지를 열었다고 보고한 직후에 이를 호출하지 마세요."
+    },
+    {
+      "name": "dnd_set_mode",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Android 방해 금지 모드를 설정하세요. 정책 액세스가 없거나 Android가 쓰기를 거부하는 경우 시스템 DND 정책 액세스/설정 페이지가 열립니다."
+    },
+    {
+      "name": "dnd_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "Android 방해 금지 정책 액세스 상태 및 현재 중단 필터를 읽습니다."
+    },
+    {
+      "name": "flashlight_set_enabled",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "시스템 카메라 토치 API를 사용하여 Android 손전등을 켜거나 끄세요."
+    },
+    {
+      "name": "flashlight_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "손전등을 사용할 수 있는지 여부와 마지막으로 알려진 토치 상태를 반환합니다."
+    },
+    {
+      "name": "flashlight_toggle",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Android 손전등을 전환합니다. 현재 상태를 알 수 없는 경우 이 기능이 켜집니다."
+    },
+    {
+      "name": "foneclaw_permission_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "FoneClaw 자체의 현재 권한과 특수 액세스 기능을 모두 확인하세요. 사용자가 어떤 FoneClaw 권한이 활성화, 누락, 제한 또는 사용 가능한지 물을 때 이를 사용하세요. 이것은 새로운 읽기 전용 검사입니다. 앱 감사, 알림 패널 또는 화면 읽기 도구를 대신 사용하지 마십시오."
+    },
+    {
+      "name": "open_bluetooth",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Bluetooth을(를) 켜도록 요청하세요. 레거시 대상 SDK의 경우 먼저 공개 활성화 API를 시도한 다음 필요할 때 Android의 시스템 확인 UI으로 대체합니다."
+    },
+    {
+      "name": "system_panel_open",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "보이는 Android 시스템 패널 하나를 엽니다. 알림 창을 열려면 panel=notifications를 사용하고, 빠른 설정/제어 센터를 열려면 panel=quick_settings를 사용하세요. 이 도구는 선택한 패널만 엽니다. 패널 내용을 읽거나, 캡처하거나, 검색하거나, 나열하거나, 요약하지 않습니다. 요청의 일부가 알림 읽기, 캡처, 검사, 설명 또는 요약을 요청할 때는 호출하지 마세요. 명시적인 패널 열기 전용 요청에 대해 한 번만 호출하세요. FoneClaw 접근성 서비스가 필요합니다."
+    },
+    {
+      "name": "system_settings_open_battery_optimization_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Android 배터리 최적화 설정을 엽니다. appNameOrPackage이 제공되면 패키지 이름이나 설치된 앱 라벨을 기준으로 해당 앱의 세부정보 페이지를 엽니다. 해결하거나 열 수 없는 경우 실패를 반환하고 다른 설정 페이지를 열지 마십시오. 비어 있는 경우 시스템 배터리 최적화 목록/설정 페이지를 엽니다."
+    },
+    {
+      "name": "system_settings_open_battery_saver_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Android 배터리 절약/절전/저전력 모드 설정을 엽니다. 일반 앱은 공개 API를 통해 배터리 절약 모드를 직접 전환할 수 없으므로 설정이 열린 후 사용자가 수동으로 활성화하거나 비활성화해야 합니다. 공급업체 ROM은 일반 배터리 설정으로 대체될 수 있습니다."
+    },
+    {
+      "name": "system_settings_open_date_time_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Android 날짜 및 시간 설정 페이지를 직접 엽니다. 날짜, 시간, 자동 시간, 시간대 또는 자동 시간대 설정에 사용합니다. 이렇게 하면 시스템 설정 인텐트가 시작되며 접근성, 화면 읽기 또는 탭이 필요하지 않습니다. 성공한 후에는 launch_app, get_screen_info 또는 tap_node를 호출하지 마세요."
+    },
+    {
+      "name": "system_settings_open_hotspot_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Android 핫스팟 설정을 엽니다. 일반 앱은 공개 Android API를 통해 자동으로 핫스팟을 안정적으로 전환할 수 없습니다. 정확한 핫스팟 설정 페이지를 열 수 없는 경우 실패를 반환하고 다른 설정 페이지가 열리지 않습니다."
+    },
+    {
+      "name": "system_settings_open_location_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Android 위치 설정을 엽니다. appNameOrPackage이 제공되면 패키지 이름이나 설치된 앱 라벨을 기준으로 해당 앱의 세부정보 페이지를 엽니다. 해결하거나 열 수 없는 경우 실패를 반환하고 다른 설정 페이지를 열지 마십시오. 비어 있는 경우 시스템 위치 설정 페이지를 엽니다."
+    },
+    {
+      "name": "system_settings_set_auto_rotate",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Android 자동 회전을 활성화 또는 비활성화합니다. 특별한 수정 시스템 설정 권한이 필요합니다."
+    },
+    {
+      "name": "system_settings_set_brightness",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Android 화면 밝기를 설정합니다. 수동 모드는 1에서 100까지 백분율을 기록합니다. 자동 모드는 자동 밝기만 활성화하고 백분율을 무시합니다. 특별한 수정 시스템 설정 권한이 필요합니다."
+    },
+    {
+      "name": "system_settings_set_eye_comfort",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "시력 보호/야간 조명/청색광 필터/읽기 모드에 대한 Android 디스플레이 설정을 엽니다. 다국어 눈의 편안함을 위해 수동 지침만 제공하는 대신 이 도구를 사용하세요. Android 공급업체는 정확한 스위치를 다르게 노출하므로 이 도구는 디스플레이 설정을 열고 사용자가 해당 페이지에서 스위치를 완료할 수 있도록 합니다."
+    },
+    {
+      "name": "system_settings_set_font_scale",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Android 시스템 글꼴 크기를 설정합니다. 특별한 수정 시스템 설정 권한이 필요합니다. 일반적인 값은 작게 0.85, 기본값 1.0, 크게 1.15, 크게 1.3, 최대 1.6 초대형입니다."
+    },
+    {
+      "name": "system_settings_set_haptic_feedback",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Android 햅틱 피드백을 활성화 또는 비활성화합니다. 특별한 수정 시스템 설정 권한이 필요합니다."
+    },
+    {
+      "name": "system_settings_set_screen_timeout",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Android 화면 끄기 시간 제한을 초 단위로 설정합니다. 특별한 수정 시스템 설정 권한이 필요합니다. 값은 15..1800초로 고정됩니다."
+    },
+    {
+      "name": "system_settings_set_touch_sounds",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Android 터치 사운드를 활성화 또는 비활성화합니다. 특별한 수정 시스템 설정 권한이 필요합니다."
+    },
+    {
+      "name": "system_settings_set_user_rotation",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Android 화면 회전을 잠급니다. 특별한 수정 시스템 설정 권한이 필요하며 자동 회전을 비활성화합니다. 세로, 가로, reverse_portrait 또는 reverse_landscape를 사용하세요."
+    },
+    {
+      "name": "system_settings_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "쓰기 가능한 시스템 설정 권한 상태와 현재 화면 밝기, 글꼴 크기, 화면 시간 초과, 회전, 터치 사운드 및 햅틱 피드백을 반환합니다. Android 시스템 설정만 읽습니다."
+    },
+    {
+      "name": "volume_adjust_stream",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "하나의 Android 오디오 스트림을 한 시스템 단계씩 올리거나 내립니다. 상대적인 볼륨 변화를 위해 이것을 선택합니다."
+    },
+    {
+      "name": "volume_set_all_streams_muted",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "지원되는 모든 Android 오디오 스트림을 음소거하거나 음소거 해제하고 실제로 변경된 스트림을 보고합니다. 전체 장치 또는 전체 볼륨 음소거 요청에 대해 이를 선택합니다."
+    },
+    {
+      "name": "volume_set_ringer_mode",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Android 전화 벨소리 모드를 설정합니다. 무음 모드의 경우 Android이 벨소리 모드 쓰기를 거부하면 자동으로 모든 오디오 스트림을 음소거로 대체합니다."
+    },
+    {
+      "name": "volume_set_stream",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "하나의 Android 오디오 스트림을 목표 비율로 설정합니다. 사용자가 정확한 볼륨 레벨을 물을 때 이를 선택하십시오."
+    },
+    {
+      "name": "volume_set_stream_muted",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "하나의 Android 오디오 스트림을 음소거하거나 음소거 해제합니다. 이는 전화 벨소리 모드가 아닌 스트림 음소거 상태를 변경합니다."
+    },
+    {
+      "name": "volume_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "오디오 스트림의 현재 Android 볼륨 상태와 현재 벨소리 모드를 읽습니다."
+    },
+    {
+      "name": "wifi_configured_networks",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "读取 Android 已配置/已保存的 Wi-Fi 网络列表。只返回SSID、networkId、안전한 型、是否이미지是有凭据、是否隐藏网络、是否当前连接和配置状态;不会返回 Wi-Fi 密码。"
+    },
+    {
+      "name": "wifi_connect",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Wi-Fi 네트워크에 연결하세요. 이 도구는 먼저 SSID에 대해 Android의 저장된 Wi-Fi 구성을 확인하고 존재하는 경우 직접 연결합니다. 저장되지 않으면 제공된 암호를 사용하여 네트워크를 추가/연결하거나, 암호 입력이 필요할 때 Android의 Wi-Fi 패널로 대체됩니다."
+    },
+    {
+      "name": "wifi_disconnect",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "현재 Wi-Fi 액세스 포인트에서 연결을 끊습니다. 이 도구는 먼저 대상 API 28개 호스트에 대해 자동 레거시 WifiManager 연결 해제를 시도합니다. Android가 이를 거부하면 사용자 작업을 위해 Android의 Wi-Fi 패널을 여는 것으로 돌아갑니다."
+    },
+    {
+      "name": "wifi_forget",
+      "category": "Device Status and System Control",
+      "risk": "DESTRUCTIVE",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "저장된 Wi-Fi 네트워크를 잊어버립니다. 도구는 먼저 자동 레거시 WifiManager removeNetwork를 시도한 다음 사용자 작업을 위해 Android의 Wi-Fi 패널로 대체합니다."
+    },
+    {
+      "name": "wifi_scan_networks",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "근처 Wi-Fi 액세스 포인트를 스캔하고 반환하세요. Wi-Fi이 꺼져 있으면 이 도구는 먼저 Wi-Fi를 직접 활성화하려고 시도하고 직접 활성화가 실패하는 경우에만 Android의 Wi-Fi 패널로 대체합니다. 위치 권한 및 장치 위치 서비스가 필요합니다. 결과를 통해 위치에 민감한 네트워크 데이터를 확인할 수 있습니다."
+    },
+    {
+      "name": "wifi_set_enabled",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Android Wi-Fi을 활성화하거나 비활성화합니다. 도구는 먼저 직접 WifiManager 작업을 시도한 다음 Android가 실제로 요청된 상태에 도달했는지 확인합니다. 요청이 실패하거나 보류 중인 경우 사용자 작업을 위해 Android의 Wi-Fi 패널을 여는 것으로 대체됩니다."
+    },
+    {
+      "name": "wifi_status",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "앱에 권한이 있으면 현재 Android Wi-Fi 상태와 활성 Wi-Fi 연결 세부정보를 반환합니다. 네트워크 상태만 읽습니다."
+    },
+    {
+      "name": "get_location",
+      "category": "Location and Navigation",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "FoneClaw이 사용되는 동안 현재 Android 장치 위치를 가져옵니다. 전경 위치 권한만 필요합니다."
+    },
+    {
+      "name": "location_search_nearby_place",
+      "category": "Location and Navigation",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "현재 기기 위치를 이용하여 모호한 장소 이름에 대한 주변 장소 후보를 검색합니다. 사용자가 장소 찾기, 확인, 해결, 선택 또는 탐색을 명시적으로 요청하거나 탐색 대상이 모호한 경우에만 이 기능을 사용하세요. 달력 생성의 경우 사용자가 제공한 장소 이름이면 충분합니다. 이를 locationName으로 유지하고 정확한 주소나 좌표가 누락되었다는 이유로 이 도구를 호출하지 마십시오."
+    },
+    {
+      "name": "map_navigate",
+      "category": "Location and Navigation",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "목적지 및 여행 모드에 대한 지도 앱에서 경로 또는 내비게이션 화면을 엽니다. 이렇게 하면 외부 지도 앱이 시작되고 제공된 인수만 사용하며 장치 데이터는 읽지 않습니다."
+    },
+    {
+      "name": "mail_account_list",
+      "category": "Mail",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "구성된 메일 계정을 나열합니다. 모든 계정을 나열하려면 쿼리를 비워 두세요. 쿼리가 제공되면 일치 우선순위는 계정 ID, 이메일, 별칭, 퍼지 별칭 또는 이메일 순입니다. 정확히 일치하면 여러 계정이 반환될 수 있습니다. FoneClaw 메일 계정이 구성되어 있지 않고 쿼리가 이메일 주소인 경우 결과에는 고정 공급자 자격 증명 URL이 있는 providerSetupGuide이 포함될 수 있습니다."
+    },
+    {
+      "name": "mail_account_save",
+      "category": "Mail",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "IMAP 및 SMTP 연결을 모두 테스트하고 둘 다 성공한 경우에만 메일 계정을 저장합니다. 모든 필수 구성 필드를 사용할 수 있게 되는 즉시 이를 호출하세요. 이 작업에는 사용자 승인이 필요합니다."
+    },
+    {
+      "name": "mail_delete",
+      "category": "Mail",
+      "risk": "DESTRUCTIVE",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "최대 20개의 messageRefs을 휴지통으로 이동하거나 사용자가 명시적으로 영구 삭제를 요청한 경우에만 영구 삭제하세요. 불확실한 결과를 다시 시도하지 마십시오."
+    },
+    {
+      "name": "mail_list",
+      "category": "Mail",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "메시지 요약을 나열, 필터링 또는 검색합니다. 쿼리는 제목, 보낸 사람, 받는 사람, 본문을 검색합니다. 유일한 계정을 사용하거나 고유한 기본 계정을 사용하려면 accountId을 비워 두세요."
+    },
+    {
+      "name": "mail_read",
+      "category": "Mail",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "mail_list에서 반환된 messageRef에서 하나의 메시지를 읽고 서버에서 읽은 것으로 표시합니다. 도구가 성공하면 동일한 응답으로 사용자에게 메시지를 요약합니다."
+    },
+    {
+      "name": "mail_send",
+      "category": "Mail",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "새 이메일을 보내거나, 답장하거나, 모두 답장하거나, 전달하세요. 승인이 필요합니다. 첨부 파일은 현재 사용자 메시지와 함께 발표된 정확한 구조화된 메타데이터를 사용해야 합니다."
+    },
+    {
+      "name": "call_log_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "최근 Android 통화 로그 항목을 나열하고 선택적으로 통화 유형별로 필터링합니다. READ_CALL_LOG 권한이 필요합니다. 부재중 전화 질문에 대해서는 type=missed를 사용하고 부재중 전화를 선택하여 다시 전화하기 전에 사용하세요. 번호를 선택한 후 phone_dial에 전화하세요."
+    },
+    {
+      "name": "contacts_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "제한된 수의 Android 연락처를 나열하고 선택적으로 표시 이름이나 전화번호로 필터링합니다. READ_CONTACTS 권한이 필요합니다. 사용자가 연락처 보기를 명시적으로 요청하는 경우에만 쿼리를 비워 두세요. 사용자가 연락처 찾기를 요청할 때 쿼리를 설정합니다."
+    },
+    {
+      "name": "phone_dial",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "정확히 하나의 전화번호 또는 이름이 지정된 연락처에 대한 시스템 다이얼러를 엽니다. phoneNumber과 contactName 중 하나만 설정하세요. 명명된 연락처는 하나의 일치 항목으로 해결되어야 합니다. 여러 연락처가 일치하면 중지하고 사용자에게 선택하도록 요청하세요. 다이얼러가 열리면 get_screen_info에 전화를 걸고 보이는 통화 버튼을 식별한 다음 tap_node에 전화하세요."
+    },
+    {
+      "name": "send_to_sms_message",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "승인 후 눈에 보이는 SMS/MMS 초안을 엽니다. 수신자가 있는 문자 SMS의 경우 FoneClaw 접근성이 연결되고 기본 메시지 앱, 수신자, 전체 메시지 본문 및 하나의 안정적인 보내기 컨트롤이 모두 확인된 경우에만 보내기를 자동으로 탭합니다. 첨부 파일, 듀얼 SIM 프롬프트, 모호한 UI 또는 사용할 수 없는 접근성에는 수동 조치가 필요합니다. 최종 결과가 나온 후에는 도구 계획을 중지하고 get_screen_info 또는 tap_node을 호출하지 마세요."
+    },
+    {
+      "name": "sms_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "이 Android 장치에서 실시간 SMS 메시지를 쿼리합니다. 키워드, 주소, 연락처 또는 threadId가 없으면 최근 메시지를 나열합니다. 검색할 키워드/주소/연락처를 설정하세요. 해당 대화를 읽으려면 이전 sms_list 결과에서만 threadId를 설정하세요. 요약 요청의 경우 box=all로 한 번 호출한 다음 반환된 수신 및 전송 메시지를 요약합니다. 이 실시간 결과를 대체하기 위해 SysInfo 기록을 사용하지 마십시오."
+    },
+    {
+      "name": "calendar_create_event",
+      "category": "Calendar",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Android 달력 이벤트를 만듭니다. 전화하기 전에 누락된 시간과 알림 세부정보를 수집하세요. 사용자가 제공한 장소 이름이면 충분하며 locationName로 직접 전달되어야 합니다. 사용자가 해당 장소에 대한 확인, 확인, 선택 또는 탐색을 명시적으로 요청하지 않는 한 정확한 주소나 좌표를 검색하지 마세요. 사용자 날짜 및 상대 날짜의 경우 yyyy-MM-dd HH:mm의 startLocalDateTime/endLocalDateTime를 선호합니다. 도구는 장치 시간대로 구문 분석합니다. 모델이 계산한 에포크 밀리초에서 이벤트를 생성하지 마십시오. 사용자가 캘린더 ID를 명시적으로 선택하지 않는 한 calendarId=0를 사용하세요. 생성 후 도구 결과 actualStart/actualEnd를 사용자에게 표시되는 생성 시간으로 사용합니다."
+    },
+    {
+      "name": "calendar_delete_event",
+      "category": "Calendar",
+      "risk": "DESTRUCTIVE",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ID별로 Android 캘린더 이벤트를 삭제합니다. 사용자가 캘린더 ID를 명시적으로 선택하지 않는 한 calendarId=0을 사용하여 모든 캘린더에서 이벤트를 검색/나열합니다. 대상이 명확하도록 알려진 제목, startMillis, endMillis 및 알려진 경우 위치를 항상 전달합니다."
+    },
+    {
+      "name": "calendar_list_calendars",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "쓰기 가능한 Android 달력을 나열합니다. 사용자가 달력을 선택할 수 있도록 하려면 이를 사용합니다. calendarId=1이 로컬 또는 대상 달력이라고 가정하지 마십시오."
+    },
+    {
+      "name": "calendar_list_events",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "구체적인 시간 범위의 Android 캘린더 이벤트를 나열합니다. 오늘 일정, 내일 일정, 기존 일정, 이번주 일정 등의 요청에 사용하세요. yyyy-MM-dd HH:mm에서 startLocalDateTime/endLocalDateTime를 선호합니다. 도구는 장치 시간대로 구문 분석합니다. 신뢰할 수 있는 도구 결과에서 정확한 에포크 밀리초가 나온 경우 더 이상 사용되지 않는 대체 수단으로만 startMillis/endMillis를 사용하세요. 추측하지 마세요. calendarId; 사용자가 캘린더 ID를 명시적으로 선택하지 않는 한 모든 캘린더를 검색하려면 calendarId=0을 사용하세요."
+    },
+    {
+      "name": "calendar_open_event",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "이벤트 ID로 Android 캘린더 이벤트 세부정보 페이지를 엽니다. 사용자가 자연어로 이벤트를 설명하는 경우 먼저 이벤트를 검색하거나 나열합니다. 이벤트 ID를 추측하지 마세요."
+    },
+    {
+      "name": "calendar_search_events",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "구체적인 시간 범위에서 키워드로 Android 캘린더 이벤트를 검색하세요. 사용자가 이벤트를 제목이나 내용으로 설명하는 경우 이벤트를 열거나 업데이트하거나 삭제하기 전에 사용합니다. yyyy-MM-dd HH:mm에서 startLocalDateTime/endLocalDateTime를 선호합니다. 도구는 장치 시간대로 구문 분석합니다. 신뢰할 수 있는 도구 결과에서 정확한 에포크 밀리초가 나온 경우 더 이상 사용되지 않는 대체 수단으로만 startMillis/endMillis를 사용하세요. 추측하지 마세요. calendarId; 사용자가 캘린더 ID를 명시적으로 선택하지 않는 한 모든 캘린더를 검색하려면 calendarId=0을 사용하세요."
+    },
+    {
+      "name": "calendar_update_event",
+      "category": "Calendar",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ID별로 Android 캘린더 이벤트를 업데이트합니다. 사용자가 자연어로 대상을 설명할 때 먼저 이벤트를 검색/나열하고 변경된 필드와 함께 알려진 대상 세부 정보를 전달합니다. calendarId 또는 이벤트 ID를 추측하지 마세요. 사용자가 명시적으로 달력 ID를 선택하지 않는 한 calendarId=0로 모든 달력을 검색합니다. 빈 텍스트 필드는 무시됩니다. 기존 시간을 유지하려면 startMillis/endMillis=0를 사용하세요. 알림을 유지하려면 reminderMinutes=-2를 사용하고, 알림을 제거하려면 -1을, 알림을 교체하려면 >=0을 사용하세요."
+    },
+    {
+      "name": "memo_create",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "사용자가 볼 수 있는 로컬 메모, 메모 또는 작업 기록을 만듭니다. 사용자가 콘텐츠를 메모나 실행 가능한 메모로 명시적으로 보관하기를 원하는 경우에 사용하세요. 기본 설정, ID, 관계 또는 응답 스타일과 같은 보조자가 관리하는 사용자 프로필 메모리를 저장하거나 쿼리하는 데 이 도구를 사용하지 마십시오."
+    },
+    {
+      "name": "memo_delete",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ID별로 로컬 메모를 일시 삭제합니다. 사용자가 대상 ID/제목을 알 수 있도록 사용자가 자연어로 대상을 설명할 때 먼저 메모를 검색/나열합니다."
+    },
+    {
+      "name": "memo_list",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "사용자가 볼 수 있는 로컬 메모 기록을 나열합니다. 상태는 활성, 완료, 보관됨 또는 모두일 수 있습니다. 어시스턴트가 사용자, 사용자 프로필 기본 설정 또는 대화 기록에 대해 기억하는 내용에 답하기 위해 이 도구를 사용하지 마세요. 빈 결과는 일치하는 로컬 메모가 없음을 의미합니다. 이는 사용자 프로필 메모리가 존재하지 않는다는 의미는 아닙니다."
+    },
+    {
+      "name": "memo_mark_done",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ID로 로컬 메모를 완료 또는 활성으로 표시합니다."
+    },
+    {
+      "name": "memo_search",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "제목, 내용, 태그의 키워드로 사용자가 볼 수 있는 로컬 메모를 검색합니다. 상태는 활성, 완료, 보관됨 또는 모두일 수 있습니다. 보조자가 관리하는 사용자 프로필 메모리 또는 대화 기록을 검색하는 데 이 도구를 사용하지 마십시오. 빈 결과는 로컬 메모 저장소만 설명합니다."
+    },
+    {
+      "name": "memo_update",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ID별로 로컬 메모를 업데이트합니다. 사용자가 대상을 자연어로 설명할 때 먼저 메모를 검색/나열하고 변경된 필드와 함께 알려진 대상 세부 정보를 전달합니다. 빈 제목/내용/태그는 무시됩니다. reminderAtMillis=-2은 알림을 유지하고, -1은 알림을 지우고, >0은 알림을 설정합니다."
+    },
+    {
+      "name": "sysinfo_delete",
+      "category": "System Information",
+      "risk": "DESTRUCTIVE",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "일치하는 FoneClaw 로컬 SysInfo 캐시만 영구적으로 삭제합니다. 원본 Android 알림, SMS, 통화 기록 또는 캘린더 이벤트는 삭제되지 않습니다. deleteAll=true가 아닌 이상 필터가 하나 이상 필요합니다. 여러 필터는 AND로 결합됩니다."
+    },
+    {
+      "name": "sysinfo_mark_reviewed",
+      "category": "System Information",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "사용자가 명시적으로 확인한 후에만 로컬 SysInfo 이벤트 ID를 검토된 것으로 표시합니다."
+    },
+    {
+      "name": "sysinfo_query",
+      "category": "System Information",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "이미 캡처된 로컬 알림, SMS, 통화 기록, 캘린더 이벤트 및 접근성 입력을 쿼리합니다. 일일 요약, 알림 쿼리, 기간 쿼리 및 키워드 검색에 이 단일 도구를 사용하세요. 시스템 패널을 열거나 라이브 시스템 소스를 검색하지 않습니다. 각 행에는 실시간 공급자 결과에 대한 중복 제거를 위한 sourceRef가 포함될 수 있습니다. 사용자에 대해 반환된 JSON를 요약합니다."
+    },
+    {
+      "name": "sysinfo_thread",
+      "category": "System Information",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "sysinfo_query에서 반환된 threadKey로 하나의 로컬 SysInfo 스레드를 로드합니다."
+    },
+    {
+      "name": "shopping_compare",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "쇼핑 플랫폼에서 제품에 대한 공개 웹 결과를 검색하고 비교 증거를 반환합니다. 쇼핑 가격에 대한 조언을 제공하기 전에 이 정보를 사용하세요."
+    },
+    {
+      "name": "web_fetch",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "URL로 특정 웹페이지를 가져오고 읽을 수 있는 페이지 텍스트를 반환합니다."
+    },
+    {
+      "name": "web_search",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "웹에서 관련 페이지를 검색하세요. 결과 제목, URL 및 짧은 내용을 반환합니다."
+    },
+    {
+      "name": "shortcut_save_agent_prompt",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "상담원에게 메시지를 보내는 사용자가 만든 바로가기를 저장하세요. 사용자가 제목, 설명, 동작을 확인한 후에만 이 호출을 수행하세요."
+    },
+    {
+      "name": "shortcut_save_direct_tool",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "사용자가 만든 직접 도구 바로가기를 저장합니다. 요청된 모든 작업이 완전한 매개변수를 사용하여 알려진 도구 단계에 완전히 매핑될 수 있는 경우에만 이 호출을 호출하세요."
+    },
+    {
+      "name": "task_create",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "현재 사용자 요청에 대해 한 번의 호출로 전체 주문된 TODO 계획을 만듭니다. 이는 요청에 3개 이상의 단계가 필요한 경우 비작업 도구 이전의 필수 전제 조건입니다. 항목의 모든 제한된 사용자 대상 단계를 전달합니다. 계획은 정확히 한 번만 생성할 수 있으며 나중에 확장할 수 없습니다. 작업 관리, 정리, 상태 업데이트 또는 최종 응답 항목을 포함하지 마십시오."
+    },
+    {
+      "name": "task_list",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "현재 사용자 요청에 대한 내부 TODO 항목을 나열합니다. 기본적으로 열린 항목, in_progress 및 차단된 항목을 반환합니다."
+    },
+    {
+      "name": "task_update",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "하나의 내부 TODO 항목을 업데이트합니다. 허용된 전환: in_progress로 열기, 차단 또는 포기됨; in_progress 차단, 완료 또는 포기됨; 개봉이 차단되거나 버려졌습니다. 완료되고 버려진 것은 터미널입니다. 하나의 작업만 in_progress일 수 있습니다."
+    },
+    {
+      "name": "workflow_delete",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DESTRUCTIVE",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ID별로 저장된 워크플로를 삭제합니다."
+    },
+    {
+      "name": "workflow_list",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "저장된 워크플로를 나열합니다."
+    },
+    {
+      "name": "workflow_save",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "재사용 가능한 워크플로를 저장합니다. stepsJson은 {toolName, 인수}의 JSON 배열이어야 합니다."
+    },
+    {
+      "name": "add_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "스킬 레지스트리에 새 스킬 문서를 추가합니다."
+    },
+    {
+      "name": "disable_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "사용자 스킬을 비활성화하여 상담원 프롬프트에서 숨겨집니다."
+    },
+    {
+      "name": "enable_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "에이전트가 사용할 수 있도록 유효한 사용자 스킬을 활성화합니다."
+    },
+    {
+      "name": "list_skills",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "소스, 활성화된 상태 및 검증 상태와 함께 사용자 및 시스템 기술을 나열합니다."
+    },
+    {
+      "name": "load_skill_detail",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "현재 작업이 시스템 프롬프트에 나열된 기술 중 하나와 일치하면 전문 기술을 로드합니다. 이 도구를 사용하여 기술 지침과 리소스를 현재 대화에 삽입하세요. 출력에는 기술과 동일한 디렉터리에 있는 스크립트, 파일 등에 대한 참조뿐만 아니라 자세한 워크플로 지침이 포함될 수 있습니다. 스킬 이름은 시스템 프롬프트에 나열된 스킬 중 하나와 일치해야 합니다."
+    },
+    {
+      "name": "plugin_request_install",
+      "category": "Skills and Plugins",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "하나의 공식 플러그인에 대한 구조화된 설치 제안을 작성하세요. 플러그인을 다운로드하거나 설치하지 않습니다. HomeScreen은 사용자에게 물어봐야 합니다."
+    },
+    {
+      "name": "plugin_search",
+      "category": "Skills and Plugins",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "사용자가 현재 도구 목록에서 사용할 수 없는 기능을 요청하면 공식 FoneClaw 플러그인 메타데이터를 검색합니다. 이는 메타데이터만 검색하고 플러그인을 다운로드하거나 설치하지 않습니다."
+    },
+    {
+      "name": "preview_skill_import",
+      "category": "Skills and Plugins",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "붙여넣은 SKILL.md 문서를 미리 봅니다. 구문 분석하고 유효성을 검사하지만 저장하지는 않습니다."
+    },
+    {
+      "name": "remove_skill",
+      "category": "Skills and Plugins",
+      "risk": "DESTRUCTIVE",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "스킬을 제거하세요"
+    },
+    {
+      "name": "save_skill_draft",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "SKILL.md 문서를 비활성화된 사용자 기술 초안으로 저장합니다."
+    },
+    {
+      "name": "update_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "기술 레지스트리에서 기존 기술 문서를 업데이트합니다."
+    }
+  ]
+}

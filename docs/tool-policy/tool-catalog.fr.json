@@ -1,0 +1,1031 @@
+{
+  "schemaVersion": 3,
+  "catalogType": "foneclaw-built-in-tools",
+  "locale": "fr",
+  "fallbackLocale": "en",
+  "toolCount": 118,
+  "categoryCount": 11,
+  "uiLabels": {
+    "searchPlaceholder": "Rechercher des outils ou des fonctionnalités",
+    "allCategories": "Toutes les catégories",
+    "publicBuiltInTools": "outils intégrés publics",
+    "tool": "Outil",
+    "risk": "Risque",
+    "approval": "Approbation",
+    "description": "Fonction"
+  },
+  "riskLabels": {
+    "DESTRUCTIVE": "Action destructive",
+    "DEVICE_CONTROL": "Contrôle de l’appareil",
+    "EXTERNAL_EFFECT": "Action externe",
+    "LOW": "Risque faible",
+    "SENSITIVE_READ": "Lecture sensible"
+  },
+  "approvalLabels": {
+    "AUTO": "Automatique",
+    "REQUIRE_APPROVAL": "Approbation requise"
+  },
+  "categories": [
+    {
+      "name": "Screen and App",
+      "displayName": "Écran, applications et médias",
+      "toolCount": 11
+    },
+    {
+      "name": "Device Status and System Control",
+      "displayName": "État de l’appareil et commandes système",
+      "toolCount": 54
+    },
+    {
+      "name": "Location and Navigation",
+      "displayName": "Localisation et navigation",
+      "toolCount": 3
+    },
+    {
+      "name": "Mail",
+      "displayName": "E-mail",
+      "toolCount": 6
+    },
+    {
+      "name": "Communication and Contacts",
+      "displayName": "Communication et contacts",
+      "toolCount": 5
+    },
+    {
+      "name": "Calendar",
+      "displayName": "Calendrier",
+      "toolCount": 7
+    },
+    {
+      "name": "Memo",
+      "displayName": "Notes",
+      "toolCount": 6
+    },
+    {
+      "name": "System Information",
+      "displayName": "Notifications et informations système",
+      "toolCount": 4
+    },
+    {
+      "name": "Web and Shopping",
+      "displayName": "Web et achats",
+      "toolCount": 3
+    },
+    {
+      "name": "Tasks, Workflows, and Shortcuts",
+      "displayName": "Tâches, flux de travail et raccourcis",
+      "toolCount": 8
+    },
+    {
+      "name": "Skills and Plugins",
+      "displayName": "Skills et plugins",
+      "toolCount": 11
+    }
+  ],
+  "tools": [
+    {
+      "name": "camera_open_photo",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Ouvrez une photo visible spécifique dans la galerie système. Utilisez-le uniquement lorsque l'utilisateur demande explicitement à afficher ou à ouvrir une photo spécifique. Ne l'utilisez pas comme suivi après camera_take_photo à moins que l'utilisateur ne demande explicitement à voir ou à ouvrir la photo capturée. indexFromLatest est basé sur 1 dans l'ordre le plus récent : 1 ouvre la dernière photo, 2 ouvre la deuxième photo la plus récente, 3 ouvre la troisième photo la plus récente."
+    },
+    {
+      "name": "camera_take_photo",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Capturez une nouvelle photo et renvoyez l'URI de la photo enregistrée lorsqu'elle est disponible. Utilisez-le lorsque l'intention de l'utilisateur est de capturer une nouvelle photo. Laissez lensFacing désactivé ou automatique pour une capture photo normale. Choisissez lensFacing=front uniquement pour une intention de face ou de selfie ; choisissez de revenir uniquement lorsque l'utilisateur demande explicitement la caméra arrière. Gardez explicitLensSelection false pour la capture de photo simple/par défaut, même si l'objectif physique par défaut est de retour. Définissez explicitLensSelection sur true uniquement lorsque l’utilisateur demande explicitement une capture avant, arrière, arrière ou selfie. N'appelez pas camera_open_photo après cet outil à moins que l'utilisateur ne demande explicitement à afficher ou à ouvrir la photo. Appelez cet outil directement. Capture utilise d'abord la caméra système native. La capture avant/arrière explicite peut utiliser le backend direct uniquement si l'appareil photo natif ne peut pas honorer l'objectif demandé. Ne demandez pas à l'utilisateur d'accorder l'autorisation avant d'appeler cet outil."
+    },
+    {
+      "name": "cross_app_read_screen",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Ouvrez ou passez à une application Android cible, attendez que cette application soit stable au premier plan et renvoyez l'arborescence de l'écran d'accessibilité visible. Utilisez-le lorsqu'une requête demande à la fois d'ouvrir/de passer à une application et de lire, inspecter, décrire ou résumer sa page visible. Ne divisez pas cette tâche en launch_app et get_screen_info. Cet outil ne capture pas de capture d'écran et n'interagit pas avec les nœuds."
+    },
+    {
+      "name": "get_installed_map_apps",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Interrogez les applications cartographiques installées prises en charge par les outils cartographiques. Renvoie le nom d’affichage et le nom du package de chaque application."
+    },
+    {
+      "name": "get_screen_info",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Obtenez les éléments de l'interface utilisateur à partir de l'écran de l'application actuellement visible. Chaque élément a un ID de nœud (par exemple [n3]) qui peut être utilisé avec tap_node. Ne l'utilisez pas pour lire, répertorier, rechercher ou résumer les notifications Android ; utilisez plutôt les outils sysinfo. Ne mettez pas ce résultat en cache car les ID de nœud changent à chaque appel."
+    },
+    {
+      "name": "launch_app",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Ouvrez une application Android lançable par nom de package ou nom d'affichage de l'application installée. Cela modifie l'application au premier plan et peut exposer l'écran de cette application. Utilisez un nom de package exact lorsque cela est possible. Si le résultat est ambigu, demandez à l'utilisateur de choisir un colis retourné."
+    },
+    {
+      "name": "play_store_check_app",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Vérifiez si un nom exact de package Android est répertorié sur Google Play en demandant https://play.google.com/store/apps/details?id=<packageName>. Il s'agit d'une vérification réseau en lecture seule. Utilisez-le avant play_store_install."
+    },
+    {
+      "name": "play_store_install",
+      "category": "Screen and App",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Ouvrez une page de détails d'application Google Play spécifique par nom exact du package, appuyez sur Installer et attendez la fin de l'installation. Cet outil n'ouvre pas l'application installée. À utiliser uniquement lorsqu'un nom de package Android exact est connu. Ne l'utilisez jamais pour obtenir des résultats de recherche flous ou pour deviner la première application. Si packageName est inconnu, demandez d’abord à l’utilisateur le package d’application exact. S'arrête si Google Play affiche un paiement, un achat, un abonnement, une mise à jour, une interface utilisateur ambiguë ou si l'installation ne se termine pas avant l'expiration du délai."
+    },
+    {
+      "name": "screenshot_open",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Ouvrez une capture d'écran visible spécifique de la galerie système. l'index est basé sur 1 dans l'ordre sélectionné. sortOrder peut être le plus récent ou le plus ancien."
+    },
+    {
+      "name": "screenshot_take",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Capturez un écran Android avec le service d'accessibilité FoneClaw et enregistrez-le dans Pictures/FoneClaw/Screenshots.. Utilisez targetType=current pour l'écran actuel, targetType=app avec targetApp pour ouvrir une application et la capturer, ou targetType=notification_shade uniquement pour une capture d'écran explicite ou une demande de capture d'image impliquant la nuance de notification visible. N'utilisez jamais targetType=notification_shade pour lire, répertorier, interroger ou résumer les données de notification ; utilisez plutôt un outil de notification SysInfo. N'appelez pas launch_app ou system_panel_open avant cet outil pour la capture d'application ou de notification-shade. Ne l'utilisez pas lorsque l'utilisateur souhaite afficher une capture d'écran déjà enregistrée ; utilisez screenshot_open pour afficher les captures d'écran enregistrées."
+    },
+    {
+      "name": "tap_node",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Appuyez sur un élément de l'interface utilisateur sur l'écran. L'élément est identifié par son ID de nœud, qui peut être obtenu à partir de l'outil screen_info."
+    },
+    {
+      "name": "alarm_modify_alarm",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Ouvrez immédiatement la page des alarmes d'horloge Android lorsque l'utilisateur souhaite modifier, éditer, ajuster ou changer une alarme existante. Appelez cet outil pour chaque demande de modification distincte, même s'il a déjà été appelé plus tôt dans la conversation. Ne demandez pas de confirmation. Android ne fournit pas d'API publique fiable pour modifier les alarmes existantes. Cet outil accède donc uniquement à l'application Clock pour une modification manuelle."
+    },
+    {
+      "name": "alarm_set_alarm",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Réglez une alarme d'horloge Android. Recueillez les détails de temps/répétition/étiquette manquants avant d'appeler."
+    },
+    {
+      "name": "bluetooth_connected_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Renvoie les appareils Bluetooth actuellement connectés via des profils Bluetooth Android publics visibles pour les applications normales."
+    },
+    {
+      "name": "bluetooth_nearby_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Scannez et renvoyez les appareils Bluetooth à proximité. Inclut les résultats de l'analyse BLE et les résultats de la découverte Bluetooth classique lorsque les autorisations et l'état Bluetooth le permettent. Les appareils sans nom lisible sont masqués par défaut."
+    },
+    {
+      "name": "bluetooth_pair_device",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Commencez le couplage avec un appareil Bluetooth par adresse MAC. Cela lance le flux de liaison normal d'Android et peut nécessiter une confirmation de l'utilisateur ou la saisie d'un code PIN."
+    },
+    {
+      "name": "bluetooth_paired_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Renvoyez les appareils Bluetooth déjà associés à cet appareil Android."
+    },
+    {
+      "name": "bluetooth_state",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Renvoie l'état actuel de l'adaptateur Bluetooth : activé, désactivé, tournant_on, tournant_off ou inconnu. Identifiants techniques: turning_on, turning_off."
+    },
+    {
+      "name": "close_bluetooth",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Désactivez Bluetooth à l’aide de l’API de désactivation publique héritée. Si Android refuse, signalez que les applications Android normales ne peuvent pas désactiver Bluetooth sur cet appareil."
+    },
+    {
+      "name": "device_app_activity_snapshot",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Renvoie un instantané compact de l’activité récente de l’application à partir d’Android UsageStats. Nécessite un accès à l'utilisation ; ce n'est pas un moniteur de processus en arrière-plan en direct."
+    },
+    {
+      "name": "device_app_permission_audit",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Renvoie un audit compact des risques d’autorisation pour les applications installées visibles par cette application. Le risque est heuristique et basé sur des groupes d’autorisations sensibles déclarés/accordés."
+    },
+    {
+      "name": "device_app_sensitive_audit",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Renvoie les états compacts et sensibles de l'application : accessibilité, écouteur de notifications, administrateur de l'appareil, superposition, exemption d'optimisation de la batterie et groupes d'autorisations sensibles accordés."
+    },
+    {
+      "name": "device_battery_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Renvoyez la batterie Android compacte et l'état d'économie d'énergie. Aucun paramètre n'est modifié."
+    },
+    {
+      "name": "device_health_check",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Renvoie un instantané compact de l’état de santé en lecture seule : mémoire, stockage, batterie et réseau. Aucun paramètre n'est modifié."
+    },
+    {
+      "name": "device_hidden_app_check",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Renvoie une vérification heuristique compacte pour les applications utilisateur sans entrées de lanceur ni composants désactivés. Cela peut signaler des applications suspectes, mais des applications légitimes réservées aux services peuvent également apparaître."
+    },
+    {
+      "name": "device_memory_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Renvoie l’état de la mémoire Android compacte. Aucun paramètre n'est modifié."
+    },
+    {
+      "name": "device_network_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Renvoie l’état et les capacités du réseau actif Android compact. Aucun paramètre réseau n'est modifié."
+    },
+    {
+      "name": "device_storage_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Renvoie l’état du stockage interne/partagé compact d’Android. Aucun fichier n'est analysé ou supprimé."
+    },
+    {
+      "name": "device_time_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Renvoie le fuseau horaire actuel du système Android et l’horodatage Unix pour les appels d’outils dépendants du temps. Définissez verifyWithNtp=true uniquement lorsque l’heure du système est contestée ou qu’une référence en ligne est requise. La vérification NTP utilise ntp1.aliyun.com et ne modifie jamais l'horloge du système."
+    },
+    {
+      "name": "dnd_open_policy_access_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Ouvrez les paramètres Android où l'utilisateur peut accorder l'accès à FoneClaw Ne pas déranger / Politique de notification. N'appelez pas ceci immédiatement après que dnd_set_mode signale qu'il a déjà ouvert la page des paramètres."
+    },
+    {
+      "name": "dnd_set_mode",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Définissez le mode Ne pas déranger Android. Si l’accès à la stratégie est manquant ou si Android rejette l’écriture, cela ouvre la page d’accès/paramètres de la stratégie système DND."
+    },
+    {
+      "name": "dnd_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Lisez l’état d’accès à la politique Ne pas déranger Android et le filtre d’interruption actuel."
+    },
+    {
+      "name": "flashlight_set_enabled",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Allumez ou éteignez la lampe de poche Android à l'aide de l'API de la torche de la caméra système."
+    },
+    {
+      "name": "flashlight_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Indique si la lampe de poche est disponible et le dernier état connu de la torche."
+    },
+    {
+      "name": "flashlight_toggle",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Basculez la lampe de poche Android. Si l'état actuel est inconnu, cela l'active."
+    },
+    {
+      "name": "foneclaw_permission_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Vérifiez toutes les autorisations actuelles et les capacités d'accès spécial de FoneClaw lui-même. Utilisez-le lorsque l'utilisateur demande quelles autorisations FoneClaw sont activées, manquantes, limitées ou disponibles. Il s'agit d'une nouvelle vérification en lecture seule ; n'utilisez pas d'outils d'audit d'application, de panneau de notification ou de lecture d'écran à la place."
+    },
+    {
+      "name": "open_bluetooth",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Demandez à Bluetooth de s'activer. Pour les SDK cibles hérités, cela essaie d'abord l'API d'activation publique, puis revient à l'interface utilisateur de confirmation du système Android si nécessaire."
+    },
+    {
+      "name": "system_panel_open",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Ouvrez un panneau système Android visible. Utilisez panel=notifications pour ouvrir le volet de notification, ou panel=quick_settings pour ouvrir les paramètres rapides/le centre de contrôle. Cet outil ouvre uniquement le panneau sélectionné. Il ne lit pas, ne capture pas, ne recherche pas, ne répertorie pas et ne résume pas le contenu du panneau. Ne l'appelez pas lorsqu'une partie de la demande demande de lire, capturer, inspecter, décrire ou résumer les notifications. Appelez-le une seule fois pour une demande explicite d'ouverture du panneau uniquement. Nécessite le service d'accessibilité FoneClaw."
+    },
+    {
+      "name": "system_settings_open_battery_optimization_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Ouvrez les paramètres d'optimisation de la batterie Android. Si appNameOrPackage est fourni, ouvrez la page de détails de cette application par nom de package ou étiquette d’application installée. S'il ne peut pas être résolu ou ouvert, renvoyez l'échec et n'ouvrez pas une autre page de paramètres. S'il est vide, ouvrez la page de liste/paramètres d'optimisation de la batterie du système."
+    },
+    {
+      "name": "system_settings_open_battery_saver_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Ouvrez les paramètres de l'économiseur de batterie Android/économie d'énergie/mode faible consommation. Les applications normales ne peuvent pas activer directement l'économiseur de batterie via les API publiques. Par conséquent, une fois les paramètres ouverts, l'utilisateur doit l'activer ou le désactiver manuellement. Les ROM des fournisseurs peuvent revenir aux paramètres de batterie génériques."
+    },
+    {
+      "name": "system_settings_open_date_time_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Ouvrez directement la page des paramètres de date et d’heure Android. Utilisez-le pour les paramètres de date, d’heure, d’heure automatique, de fuseau horaire ou de fuseau horaire automatique. Cela lance une intention de paramètres système et ne nécessite pas d'accessibilité, de lecture d'écran ou de tapotement. Une fois l'opération réussie, n'appelez pas launch_app, get_screen_info ou tap_node."
+    },
+    {
+      "name": "system_settings_open_hotspot_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Ouvrez les paramètres du point d'accès Android. Les applications normales ne peuvent pas basculer de manière fiable et silencieuse vers un point d'accès via les API Android publiques. Si la page exacte des paramètres du point d'accès ne peut pas être ouverte, cela renvoie un échec et n'ouvre pas une autre page de paramètres."
+    },
+    {
+      "name": "system_settings_open_location_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Ouvrez les paramètres de localisation Android. Si appNameOrPackage est fourni, ouvrez la page de détails de cette application par nom de package ou étiquette d’application installée. S'il ne peut pas être résolu ou ouvert, renvoyez l'échec et n'ouvrez pas une autre page de paramètres. Si vide, ouvrez la page des paramètres de localisation du système."
+    },
+    {
+      "name": "system_settings_set_auto_rotate",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Activez ou désactivez la rotation automatique Android. Nécessite l’autorisation spéciale de modification des paramètres du système."
+    },
+    {
+      "name": "system_settings_set_brightness",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Réglez la luminosité de l'écran Android. Le mode manuel écrit un pourcentage de 1 à 100 ; le mode automatique active uniquement la luminosité automatique et ignore le pourcentage. Nécessite l’autorisation spéciale de modification des paramètres du système."
+    },
+    {
+      "name": "system_settings_set_eye_comfort",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Ouvrez les paramètres d'affichage Android pour le confort des yeux/la veilleuse/le filtre de lumière bleue/le mode de lecture. Utilisez cet outil au lieu de donner uniquement des instructions manuelles pour des intentions multilingues de confort oculaire. Les fournisseurs Android exposent le commutateur exact différemment, donc cet outil ouvre les paramètres d'affichage et permet à l'utilisateur de terminer le changement sur cette page."
+    },
+    {
+      "name": "system_settings_set_font_scale",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Définir l'échelle de police du système Android. Nécessite l’autorisation spéciale de modification des paramètres du système. Les valeurs typiques sont 0,85 petit, 1,0 par défaut, 1,15 grand, 1,3 plus grand et jusqu'à 1,6 très grand."
+    },
+    {
+      "name": "system_settings_set_haptic_feedback",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Activez ou désactivez le retour haptique Android. Nécessite l’autorisation spéciale de modification des paramètres du système."
+    },
+    {
+      "name": "system_settings_set_screen_timeout",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Définissez le délai d'extinction de l'écran Android en secondes. Nécessite l’autorisation spéciale de modification des paramètres du système. Les valeurs sont limitées à 15..1800 secondes."
+    },
+    {
+      "name": "system_settings_set_touch_sounds",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Activez ou désactivez les sons tactiles Android. Nécessite l’autorisation spéciale de modification des paramètres du système."
+    },
+    {
+      "name": "system_settings_set_user_rotation",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Verrouillez la rotation de l'écran Android. Nécessite l’autorisation spéciale de modification des paramètres du système et désactive la rotation automatique. Utilisez portrait, paysage, reverse_portrait ou reverse_landscape."
+    },
+    {
+      "name": "system_settings_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Renvoie l'état d'autorisation des paramètres système en écriture ainsi que la luminosité actuelle de l'écran, l'échelle de police, le délai d'expiration de l'écran, la rotation, les sons tactiles et le retour haptique. Cela lit uniquement les paramètres du système Android."
+    },
+    {
+      "name": "volume_adjust_stream",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Augmentez ou diminuez un flux audio Android d'une étape du système. Choisissez ceci pour les changements de volume relatif."
+    },
+    {
+      "name": "volume_set_all_streams_muted",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Désactivez ou réactivez tous les flux audio Android pris en charge et signalez les flux réellement modifiés. Choisissez cette option pour les demandes de mise en sourdine de l'ensemble de l'appareil ou de tous les volumes."
+    },
+    {
+      "name": "volume_set_ringer_mode",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Définissez le mode de sonnerie du téléphone Android. Pour le mode silencieux, cela revient automatiquement à désactiver tous les flux audio lorsqu'Android rejette l'écriture en mode sonnerie."
+    },
+    {
+      "name": "volume_set_stream",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Définissez un flux audio Android sur un pourcentage cible. Choisissez cette option lorsque l'utilisateur demande un niveau de volume exact."
+    },
+    {
+      "name": "volume_set_stream_muted",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Désactivez ou réactivez un flux audio Android. Cela modifie l'état de sourdine du flux, et non le mode de sonnerie du téléphone."
+    },
+    {
+      "name": "volume_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Lisez l'état actuel du volume Android pour les flux audio et le mode de sonnerie actuel."
+    },
+    {
+      "name": "wifi_configured_networks",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Système Android avec connexion Wi-Fi et connexion Wi-Fi. SSID、networkId、安全类型、是否像是有凭据、是否隐藏网络、是否当前连接和配置状态；不会返回 Wi-Fi密码。"
+    },
+    {
+      "name": "wifi_connect",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Connectez-vous à un réseau Wi-Fi. L'outil vérifie d'abord le SSID dans les configurations Wi-Fi enregistrées par Android et se connecte directement s'il existe. S'il n'est pas enregistré, il utilise la phrase secrète fournie pour ajouter/connecter le réseau, ou revient au panneau Wi-Fi d'Android lorsque la saisie d'un mot de passe est nécessaire."
+    },
+    {
+      "name": "wifi_disconnect",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Déconnectez-vous du point d’accès Wi-Fi actuel. L'outil tente d'abord une déconnexion silencieuse de WifiManager hérité pour les hôtes de l'API cible 28 ; si Android le rejette, il revient à ouvrir le panneau Wi-Fi d'Android pour l'action de l'utilisateur."
+    },
+    {
+      "name": "wifi_forget",
+      "category": "Device Status and System Control",
+      "risk": "DESTRUCTIVE",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Oubliez un réseau Wi-Fi enregistré. L'outil tente d'abord de supprimer le réseau silencieux existant de WifiManager, puis revient au panneau Wi-Fi d'Android pour l'action de l'utilisateur. Identifiants techniques: removeNetwork."
+    },
+    {
+      "name": "wifi_scan_networks",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Scannez et retournez les points d'accès Wi-Fi à proximité. Si le Wi-Fi est désactivé, cet outil tente d'abord d'activer le Wi-Fi directement et ne revient au panneau Wi-Fi d'Android que si l'activation directe échoue. Nécessite des autorisations de localisation et des services de localisation de l'appareil. Les résultats peuvent révéler des données réseau sensibles à la localisation."
+    },
+    {
+      "name": "wifi_set_enabled",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Activez ou désactivez le Wi-Fi Android. L'outil tente d'abord l'opération directe WifiManager, puis vérifie si Android a réellement atteint l'état demandé ; si la demande échoue ou reste en attente, elle revient à ouvrir le panneau Wi-Fi d'Android pour l'action de l'utilisateur."
+    },
+    {
+      "name": "wifi_status",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Renvoie l’état actuel du Wi-Fi Android et les détails de la connexion Wi-Fi active lorsque l’application en a l’autorisation. Cela lit uniquement l’état du réseau."
+    },
+    {
+      "name": "get_location",
+      "category": "Location and Navigation",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Obtenez l'emplacement actuel de l'appareil Android pendant que FoneClaw est en cours d'utilisation. Nécessite uniquement une autorisation de localisation au premier plan."
+    },
+    {
+      "name": "location_search_nearby_place",
+      "category": "Location and Navigation",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Recherchez des lieux candidats à proximité pour un nom de lieu ambigu en utilisant l'emplacement actuel de l'appareil. Utilisez-le uniquement lorsque l'utilisateur demande explicitement de rechercher, vérifier, résoudre, choisir ou naviguer vers un lieu, ou lorsqu'une destination de navigation est ambiguë. Pour la création d'un calendrier, un nom de lieu fourni par l'utilisateur est suffisant : conservez-le comme locationName et n'appelez pas cet outil uniquement parce qu'il manque une adresse ou des coordonnées exactes."
+    },
+    {
+      "name": "map_navigate",
+      "category": "Location and Navigation",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Ouvrez un itinéraire ou un écran de navigation dans une application cartographique pour une destination et un mode de déplacement. Cela lance une application cartographique externe, utilise uniquement les arguments fournis et ne lit pas les données de l'appareil."
+    },
+    {
+      "name": "mail_account_list",
+      "category": "Mail",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Répertoriez les comptes de messagerie configurés. Laissez la requête vide pour répertorier tous les comptes. Lorsque la requête est fournie, la priorité de correspondance est l'identifiant du compte, l'e-mail, l'alias, puis l'alias flou ou l'e-mail. Les correspondances exactes peuvent toujours renvoyer plusieurs comptes. Si aucun compte de messagerie FoneClaw n'est configuré et que la requête est une adresse e-mail, le résultat peut inclure supplierSetupGuide avec une URL d'identification de fournisseur fixe. Identifiants techniques: providerSetupGuide."
+    },
+    {
+      "name": "mail_account_save",
+      "category": "Mail",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Testez les connexions IMAP et SMTP et enregistrez le compte de messagerie uniquement lorsque les deux réussissent. Appelez-le dès que tous les champs de configuration requis sont disponibles. Cette opération nécessite l'approbation de l'utilisateur."
+    },
+    {
+      "name": "mail_delete",
+      "category": "Mail",
+      "risk": "DESTRUCTIVE",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Déplacez jusqu'à 20 messageRefs exacts vers la corbeille ou supprimez-les définitivement uniquement lorsque l'utilisateur a explicitement demandé une suppression permanente. Ne réessayez jamais un résultat incertain."
+    },
+    {
+      "name": "mail_list",
+      "category": "Mail",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Répertoriez, filtrez ou recherchez des résumés de messages. La requête recherche le sujet, l'expéditeur, les destinataires et le corps. Laissez accountId vide pour utiliser le compte unique ou le compte unique par défaut."
+    },
+    {
+      "name": "mail_read",
+      "category": "Mail",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Lisez un message à partir d'un messageRef renvoyé par mail_list et marquez-le comme lu sur le serveur. Une fois l’outil réussi, résumez le message destiné à l’utilisateur dans la même réponse."
+    },
+    {
+      "name": "mail_send",
+      "category": "Mail",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Envoyez un nouvel e-mail, répondez, répondez à tous ou transférez. Nécessite une approbation. Les pièces jointes doivent utiliser les métadonnées structurées exactes annoncées avec le message utilisateur actuel."
+    },
+    {
+      "name": "call_log_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Répertoriez les entrées récentes du journal d’appels Android, éventuellement filtrées par type d’appel. Nécessite l'autorisation READ_CALL_LOG. Utilisez type=missed pour les questions sur les appels manqués et avant de sélectionner un appel manqué à rappeler. Après avoir sélectionné un numéro, appelez phone_dial."
+    },
+    {
+      "name": "contacts_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Répertoriez un nombre limité de contacts Android, éventuellement filtrés par nom d'affichage ou numéro de téléphone. Nécessite l'autorisation READ_CONTACTS. Laissez la requête vide uniquement lorsque l'utilisateur demande explicitement à afficher les contacts ; définir une requête lorsque l'utilisateur demande à trouver un contact."
+    },
+    {
+      "name": "phone_dial",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Ouvrez le numéroteur système pour exactement un numéro de téléphone ou un contact nommé. Définissez exactement l’un des éléments phoneNumber et contactName. Un contact nommé doit résoudre une correspondance ; si plusieurs contacts correspondent, arrêtez-vous et demandez à l'utilisateur de choisir. Une fois le numéroteur ouvert, appelez get_screen_info, identifiez le bouton d'appel visible, puis appelez tap_node."
+    },
+    {
+      "name": "send_to_sms_message",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Après approbation, ouvrez un brouillon SMS/MMS visible. Pour un SMS avec un destinataire, appuyez automatiquement sur Envoyer uniquement lorsque l'accessibilité FoneClaw est connectée et que l'application de messagerie par défaut, le destinataire, le corps complet du message et un contrôle d'envoi stable sont tous vérifiés. Les pièces jointes, les invites double SIM, l’interface utilisateur ambiguë ou l’accessibilité indisponible nécessitent une action manuelle. Après tout résultat de terminal, arrêtez la planification de l'outil et n'appelez jamais get_screen_info ou tap_node."
+    },
+    {
+      "name": "sms_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Interrogez les messages SMS en direct sur cet appareil Android. Sans mot-clé, adresse, contact ou threadId, répertoriez les messages récents. Définissez le mot-clé/adresse/contact à rechercher. Définissez threadId uniquement à partir d’un résultat sms_list antérieur pour lire cette conversation. Pour une demande de résumé, appelez une fois avec box=all, puis résumez les messages reçus et envoyés renvoyés. N'utilisez jamais l'historique SysInfo en remplacement de ce résultat en direct."
+    },
+    {
+      "name": "calendar_create_event",
+      "category": "Calendar",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Créez un événement de calendrier Android. Collectez l’heure manquante et les détails des rappels avant d’appeler. Un nom de lieu fourni par l'utilisateur est suffisant et doit être transmis directement en tant que locationName. Ne recherchez pas une adresse ou des coordonnées exactes à moins que l'utilisateur ne demande explicitement de vérifier, résoudre, choisir ou naviguer vers le lieu. Préférez startLocalDateTime/endLocalDateTime en aaaa-MM-jj HH:mm pour les dates utilisateur et les dates relatives ; l'outil les analysera dans le fuseau horaire de l'appareil. Ne créez pas d'événements à partir des millisecondes d'époque calculées par le modèle. Utilisez CalendarId=0 sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier. Après la création, utilisez le résultat de l'outil actualStart/actualEnd comme heure de création destinée à l'utilisateur. Identifiants techniques: calendarId=0."
+    },
+    {
+      "name": "calendar_delete_event",
+      "category": "Calendar",
+      "risk": "DESTRUCTIVE",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Supprimez un événement du calendrier Android par identifiant. Recherchez/répertoriez les événements dans tous les calendriers avec CalendarId=0, sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier. Transmettez toujours le titre connu, startMillis, endMillis et l'emplacement lorsqu'ils sont connus afin que la cible soit sans ambiguïté. Identifiants techniques: calendarId=0."
+    },
+    {
+      "name": "calendar_list_calendars",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Répertoriez les calendriers Android inscriptibles. Utilisez-le pour permettre à l'utilisateur de choisir un calendrier ; ne supposez pas que CalendarId=1 est le calendrier local ou cible. Identifiants techniques: calendarId=1."
+    },
+    {
+      "name": "calendar_list_events",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Répertoriez les événements du calendrier Android dans une plage horaire concrète. À utiliser pour les demandes telles que le programme d'aujourd'hui, le programme de demain, les événements existants ou les événements de cette semaine. Préférez startLocalDateTime/endLocalDateTime en aaaa-MM-jj HH:mm ; l'outil les analysera dans le fuseau horaire de l'appareil. Utilisez startMillis/endMillis uniquement comme solution de secours obsolète lorsque les millisecondes d'époque exacte proviennent d'un résultat d'outil fiable. Ne devinez pas CalendarId ; utilisez CalendarId=0 pour rechercher tous les calendriers, sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier. Identifiants techniques: calendarId, calendarId=0."
+    },
+    {
+      "name": "calendar_open_event",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Ouvrez une page de détails d'événement de calendrier Android par ID d'événement. Recherchez ou répertoriez d'abord les événements lorsque l'utilisateur décrit un événement en langage naturel. Ne devinez pas l'identifiant de l'événement."
+    },
+    {
+      "name": "calendar_search_events",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Recherchez les événements du calendrier Android par mot-clé dans une plage horaire concrète. À utiliser avant d'ouvrir, de mettre à jour ou de supprimer un événement lorsque l'utilisateur décrit l'événement par son titre ou son contenu. Préférez startLocalDateTime/endLocalDateTime en aaaa-MM-jj HH:mm ; l'outil les analysera dans le fuseau horaire de l'appareil. Utilisez startMillis/endMillis uniquement comme solution de secours obsolète lorsque les millisecondes d'époque exacte proviennent d'un résultat d'outil fiable. Ne devinez pas CalendarId ; utilisez CalendarId=0 pour rechercher tous les calendriers, sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier. Identifiants techniques: calendarId, calendarId=0."
+    },
+    {
+      "name": "calendar_update_event",
+      "category": "Calendar",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mettez à jour un événement du calendrier Android par identifiant. Recherchez/répertoriez d'abord les événements lorsque l'utilisateur décrit la cible en langage naturel et transmettez les détails de la cible connue avec les champs modifiés. Ne devinez pas l'identifiant du calendrier ou de l'événement ; recherchez tous les calendriers avec CalendarId = 0, sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier. Les champs de texte vides sont ignorés. Utilisez startMillis/endMillis=0 pour conserver les heures existantes. Utilisez rappelMinutes=-2 pour conserver les rappels, -1 pour supprimer des rappels et >=0 pour remplacer les rappels. Identifiants techniques: calendarId, calendarId=0, reminderMinutes=-2."
+    },
+    {
+      "name": "memo_create",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Créez un mémo, une note ou un enregistrement de tâche local visible par l'utilisateur. À utiliser lorsque l'utilisateur souhaite explicitement que le contenu soit conservé sous forme de mémo ou de note exploitable. N'utilisez pas cet outil pour enregistrer ou interroger la mémoire de profil utilisateur gérée par l'assistant, telle que les préférences, l'identité, les relations ou le style de réponse."
+    },
+    {
+      "name": "memo_delete",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Supprimez de manière logicielle un mémo local par identifiant. Recherchez/répertoriez d'abord les mémos lorsque l'utilisateur décrit la cible en langage naturel afin que l'identifiant/le titre de la cible soit connu."
+    },
+    {
+      "name": "memo_list",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Répertoriez les enregistrements de mémos locaux visibles par l’utilisateur. le statut peut être actif, terminé, archivé ou tout. N'utilisez pas cet outil pour répondre à ce que l'assistant se souvient de l'utilisateur, des préférences du profil utilisateur ou de l'historique des conversations. Un résultat vide signifie uniquement qu'aucun mémo local correspondant n'existe ; cela ne signifie pas qu'il n'existe aucune mémoire de profil utilisateur."
+    },
+    {
+      "name": "memo_mark_done",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Marquez un mémo local comme terminé ou actif par identifiant."
+    },
+    {
+      "name": "memo_search",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Recherchez des mémos locaux visibles par l'utilisateur par mot-clé dans le titre, le contenu ou les balises. le statut peut être actif, terminé, archivé ou tout. N'utilisez pas cet outil pour rechercher dans la mémoire du profil utilisateur géré par l'assistant ou dans l'historique des conversations. Un résultat vide décrit uniquement le magasin de mémos local."
+    },
+    {
+      "name": "memo_update",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mettre à jour un mémo local par identifiant. Recherchez/répertoriez d'abord les mémos lorsque l'utilisateur décrit la cible en langage naturel, et transmettez les détails de la cible connue avec les champs modifiés. Les titres/contenus/balises vides sont ignorés. rappelAtMillis=-2 conserve le rappel, -1 efface le rappel et >0 définit le rappel. Identifiants techniques: reminderAtMillis=-2."
+    },
+    {
+      "name": "sysinfo_delete",
+      "category": "System Information",
+      "risk": "DESTRUCTIVE",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Supprimez définitivement le cache SysInfo local FoneClaw correspondant uniquement. Cela ne supprime jamais les notifications Android d'origine, les SMS, les journaux d'appels ou les événements du calendrier. Au moins un filtre est requis, sauf si deleteAll=true. Plusieurs filtres sont combinés avec AND."
+    },
+    {
+      "name": "sysinfo_mark_reviewed",
+      "category": "System Information",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Marquez les identifiants d’événements SysInfo locaux comme révisés uniquement après confirmation explicite de l’utilisateur."
+    },
+    {
+      "name": "sysinfo_query",
+      "category": "System Information",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Interrogez les notifications locales, les SMS, les journaux d'appels, les événements du calendrier et les entrées d'accessibilité déjà capturés. Utilisez cet outil unique pour les briefs quotidiens, les requêtes de notification, les requêtes de fenêtres horaires et les recherches par mots clés. Il n’ouvre jamais de panneau système ni n’analyse les sources système en direct. Chaque ligne peut inclure sourceRef pour la déduplication par rapport à un résultat de fournisseur actif. Résumez le JSON renvoyé pour l’utilisateur."
+    },
+    {
+      "name": "sysinfo_thread",
+      "category": "System Information",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Chargez un thread SysInfo local par un threadKey renvoyé par sysinfo_query."
+    },
+    {
+      "name": "shopping_compare",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Recherchez un produit dans les résultats du Web public sur les plateformes d'achat et renvoyez des preuves de comparaison. Utilisez-le avant de donner des conseils sur les prix d'achat."
+    },
+    {
+      "name": "web_fetch",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Récupérez une page Web spécifique par URL et renvoyez un texte de page lisible."
+    },
+    {
+      "name": "web_search",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Recherchez sur le Web les pages pertinentes. Renvoie les titres des résultats, les URL et les courts extraits."
+    },
+    {
+      "name": "shortcut_save_agent_prompt",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Enregistrez un raccourci créé par l'utilisateur qui envoie une invite à l'agent. Appelez-le uniquement après que l'utilisateur ait confirmé le titre, la description et le comportement."
+    },
+    {
+      "name": "shortcut_save_direct_tool",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Enregistrez un raccourci d'outil direct créé par l'utilisateur. Appelez-le uniquement lorsque chaque action demandée peut être entièrement mappée aux étapes de l'outil connues avec des paramètres complets."
+    },
+    {
+      "name": "task_create",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Créez le plan TODO commandé complet en un seul appel pour la demande actuelle de l'utilisateur. Il s'agit d'une condition préalable obligatoire avant tout outil non-tâche lorsque la demande nécessite trois étapes ou plus. Réussissez chaque étape limitée destinée à l'utilisateur dans les éléments. Le plan peut être créé une seule fois et ne peut pas être prolongé ultérieurement. N'incluez jamais d'éléments de gestion des tâches, de nettoyage, de mise à jour du statut ou de réponse finale."
+    },
+    {
+      "name": "task_list",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Répertoriez les éléments TODO internes pour la demande utilisateur actuelle. Par défaut, renvoie les éléments ouverts, in_progress et bloqués."
+    },
+    {
+      "name": "task_update",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Mettez à jour un élément TODO interne. Transitions autorisées : ouvertes à in_progress, bloquées ou abandonnées ; in_progress à bloqué, terminé ou abandonné ; bloqué pour ouvrir ou abandonné. Terminé et abandonné sont terminaux. Une seule tâche peut être en cours."
+    },
+    {
+      "name": "workflow_delete",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DESTRUCTIVE",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Supprimez un flux de travail enregistré par identifiant."
+    },
+    {
+      "name": "workflow_list",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Répertoriez les flux de travail enregistrés."
+    },
+    {
+      "name": "workflow_save",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Enregistrez un flux de travail réutilisable. stepsJson doit être un tableau JSON de {toolName, arguments}."
+    },
+    {
+      "name": "add_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Ajoutez un nouveau document de compétences au registre de compétences."
+    },
+    {
+      "name": "disable_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Désactivez une compétence utilisateur afin qu'elle soit masquée dans l'invite de l'agent."
+    },
+    {
+      "name": "enable_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Activez une compétence utilisateur valide afin qu'elle puisse être utilisée par l'agent."
+    },
+    {
+      "name": "list_skills",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Répertoriez les compétences des utilisateurs et du système avec la source, l’état activé et l’état de validation."
+    },
+    {
+      "name": "load_skill_detail",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Chargez une compétence spécialisée lorsque la tâche à accomplir correspond à l'une des compétences répertoriées dans l'invite du système. Utilisez cet outil pour injecter les instructions et les ressources de la compétence dans la conversation en cours. Le résultat peut contenir des instructions détaillées sur le flux de travail ainsi que des références à des scripts, des fichiers, etc. dans le même répertoire que la compétence. Le nom de la compétence doit correspondre à l'une des compétences répertoriées dans l'invite de votre système."
+    },
+    {
+      "name": "plugin_request_install",
+      "category": "Skills and Plugins",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Créez une proposition d'installation structurée pour un plugin officiel. Cela ne télécharge ni n’installe le plugin ; HomeScreen doit demander à l'utilisateur."
+    },
+    {
+      "name": "plugin_search",
+      "category": "Skills and Plugins",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Recherchez les métadonnées officielles du plugin FoneClaw lorsqu'un utilisateur demande une fonctionnalité qui n'est pas disponible dans la liste d'outils actuelle. Cela recherche uniquement les métadonnées et ne télécharge ni n’installe jamais de plugin."
+    },
+    {
+      "name": "preview_skill_import",
+      "category": "Skills and Plugins",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Prévisualisez un document SKILL.md collé. Cela analyse et valide mais n'enregistre pas."
+    },
+    {
+      "name": "remove_skill",
+      "category": "Skills and Plugins",
+      "risk": "DESTRUCTIVE",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Supprimer la compétence"
+    },
+    {
+      "name": "save_skill_draft",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Enregistrez un document SKILL.md en tant que brouillon de compétences d'utilisateur désactivé."
+    },
+    {
+      "name": "update_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mettez à jour un document de compétences existant dans le registre de compétences."
+    }
+  ]
+}

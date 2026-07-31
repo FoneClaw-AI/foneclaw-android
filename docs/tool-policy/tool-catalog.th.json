@@ -1,0 +1,1031 @@
+{
+  "schemaVersion": 3,
+  "catalogType": "foneclaw-built-in-tools",
+  "locale": "th",
+  "fallbackLocale": "en",
+  "toolCount": 118,
+  "categoryCount": 11,
+  "uiLabels": {
+    "searchPlaceholder": "ค้นหาเครื่องมือหรือความสามารถ",
+    "allCategories": "ทุกหมวดหมู่",
+    "publicBuiltInTools": "เครื่องมือในตัวที่เปิดเผยต่อสาธารณะ",
+    "tool": "เครื่องมือ",
+    "risk": "ความเสี่ยง",
+    "approval": "การอนุมัติ",
+    "description": "การทำงาน"
+  },
+  "riskLabels": {
+    "DESTRUCTIVE": "การดำเนินการที่ทำลายข้อมูล",
+    "DEVICE_CONTROL": "ควบคุมอุปกรณ์",
+    "EXTERNAL_EFFECT": "การดำเนินการภายนอก",
+    "LOW": "ความเสี่ยงต่ำ",
+    "SENSITIVE_READ": "อ่านข้อมูลละเอียดอ่อน"
+  },
+  "approvalLabels": {
+    "AUTO": "อัตโนมัติ",
+    "REQUIRE_APPROVAL": "ต้องขออนุมัติ"
+  },
+  "categories": [
+    {
+      "name": "Screen and App",
+      "displayName": "หน้าจอ แอป และสื่อ",
+      "toolCount": 11
+    },
+    {
+      "name": "Device Status and System Control",
+      "displayName": "สถานะอุปกรณ์และการควบคุมระบบ",
+      "toolCount": 54
+    },
+    {
+      "name": "Location and Navigation",
+      "displayName": "ตำแหน่งและการนำทาง",
+      "toolCount": 3
+    },
+    {
+      "name": "Mail",
+      "displayName": "อีเมล",
+      "toolCount": 6
+    },
+    {
+      "name": "Communication and Contacts",
+      "displayName": "การสื่อสารและรายชื่อติดต่อ",
+      "toolCount": 5
+    },
+    {
+      "name": "Calendar",
+      "displayName": "ปฏิทิน",
+      "toolCount": 7
+    },
+    {
+      "name": "Memo",
+      "displayName": "บันทึก",
+      "toolCount": 6
+    },
+    {
+      "name": "System Information",
+      "displayName": "การแจ้งเตือนและข้อมูลระบบ",
+      "toolCount": 4
+    },
+    {
+      "name": "Web and Shopping",
+      "displayName": "เว็บและการช้อปปิ้ง",
+      "toolCount": 3
+    },
+    {
+      "name": "Tasks, Workflows, and Shortcuts",
+      "displayName": "งาน เวิร์กโฟลว์ และทางลัด",
+      "toolCount": 8
+    },
+    {
+      "name": "Skills and Plugins",
+      "displayName": "Skill และปลั๊กอิน",
+      "toolCount": 11
+    }
+  ],
+  "tools": [
+    {
+      "name": "camera_open_photo",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เปิดรูปภาพที่มองเห็นได้เฉพาะจากแกลเลอรีของระบบ ใช้สิ่งนี้เฉพาะเมื่อผู้ใช้ขอดูหรือเปิดรูปภาพที่เฉพาะเจาะจงเท่านั้น อย่าใช้สิ่งนี้เป็นการติดตามผลหลังจาก camera_take_photo เว้นแต่ผู้ใช้จะขอดูหรือเปิดภาพที่ถ่ายอย่างชัดเจน indexFromLatest ยึดตาม 1 โดยเรียงลำดับใหม่สุดก่อน: 1 เปิดภาพถ่ายล่าสุด 2 เปิดภาพถ่ายล่าสุดที่สอง 3 เปิดภาพถ่ายล่าสุดที่สาม"
+    },
+    {
+      "name": "camera_take_photo",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ถ่ายภาพใหม่และส่งคืน URI ภาพที่บันทึกไว้เมื่อพร้อมใช้งาน ใช้ตัวเลือกนี้เมื่อผู้ใช้ตั้งใจที่จะถ่ายภาพใหม่ ไม่ได้ตั้งค่า lensFacing หรืออัตโนมัติสำหรับการถ่ายภาพปกติ เลือก lensFacing=front only สำหรับหันหน้าไปทางด้านหน้าหรือเซลฟี่ เลือกกลับเฉพาะเมื่อผู้ใช้ขอกล้องหลังอย่างชัดเจน เก็บExpectLensSelectionเป็นเท็จสำหรับการถ่ายภาพธรรมดา/ค่าเริ่มต้น แม้ว่าเลนส์จริงเริ่มต้นจะกลับมาแล้วก็ตาม ตั้งค่า clearLensSelection เป็นจริงเฉพาะเมื่อผู้ใช้ขอให้ถ่ายภาพด้านหน้า ด้านหลัง ด้านหลัง หรือเซลฟี่อย่างชัดเจนเท่านั้น อย่าเรียก camera_open_photo หลังจากใช้เครื่องมือนี้ เว้นแต่ผู้ใช้จะขอดูหรือเปิดรูปภาพอย่างชัดเจน โทรหาเครื่องมือนี้โดยตรง Capture จะใช้กล้องระบบเนทิฟก่อน การถ่ายภาพด้านหน้า/ด้านหลังอย่างชัดเจนอาจใช้แบ็คเอนด์โดยตรงเฉพาะในกรณีที่กล้องเนทิฟไม่สามารถให้เกียรติเลนส์ที่ต้องการได้ อย่าขอให้ผู้ใช้ให้สิทธิ์ก่อนเรียกใช้เครื่องมือนี้ ตัวระบุทางเทคนิค: explicitLensSelection."
+    },
+    {
+      "name": "cross_app_read_screen",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "เปิดหรือสลับไปยังแอป Android เป้าหมาย รอจนกว่าแอปนั้นจะเสถียรในเบื้องหน้า และส่งคืนโครงสร้างหน้าจอการเข้าถึงที่มองเห็นได้ ใช้สิ่งนี้เมื่อมีคำขอหนึ่งขอให้เปิด/สลับไปที่แอปและอ่าน ตรวจสอบ อธิบาย หรือสรุปหน้าที่มองเห็นได้ อย่าแยกงานนั้นออกเป็น launch_app และ get_screen_info เครื่องมือนี้ไม่ได้จับภาพหน้าจอหรือโต้ตอบกับโหนด"
+    },
+    {
+      "name": "get_installed_map_apps",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "ค้นหาแอพแผนที่ที่ติดตั้งซึ่งรองรับโดยเครื่องมือแผนที่ ส่งคืนชื่อที่แสดงและชื่อแพ็คเกจของแต่ละแอป"
+    },
+    {
+      "name": "get_screen_info",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "รับองค์ประกอบ UI จากหน้าจอแอปที่มองเห็นได้ในปัจจุบัน แต่ละองค์ประกอบมีรหัสโหนด (เช่น [n3]) ที่สามารถใช้กับ tap_node ห้ามใช้สิ่งนี้เพื่ออ่าน แสดงรายการ ค้นหา หรือสรุปการแจ้งเตือนของ Android ใช้เครื่องมือ sysinfo แทน อย่าแคชผลลัพธ์นี้เนื่องจากรหัสโหนดเปลี่ยนแปลงในการโทรแต่ละครั้ง"
+    },
+    {
+      "name": "launch_app",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เปิดแอป Android ที่เปิดใช้งานได้ตามชื่อแพ็คเกจหรือชื่อที่แสดงของแอปที่ติดตั้ง การดำเนินการนี้จะเปลี่ยนแอปเบื้องหน้าและอาจเปิดเผยหน้าจอของแอปนั้น ใช้ชื่อแพ็คเกจให้ตรงกันทุกประการเมื่อเป็นไปได้ หากผลลัพธ์ไม่ชัดเจน โปรดขอให้ผู้ใช้เลือกแพ็กเกจที่ส่งคืนหนึ่งรายการ"
+    },
+    {
+      "name": "play_store_check_app",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "ตรวจสอบว่าชื่อแพ็คเกจ Android ปรากฏอยู่ใน Google Play หรือไม่โดยขอ https://play.google.com/store/apps/details?id=<packageName> นี่คือการตรวจสอบเครือข่ายแบบอ่านอย่างเดียว ใช้ก่อน play_store_install ตัวระบุทางเทคนิค: https://play.google.com/store/apps/details?id=<packageName>.."
+    },
+    {
+      "name": "play_store_install",
+      "category": "Screen and App",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เปิดหน้ารายละเอียดแอป Google Play เฉพาะตามชื่อแพ็คเกจ แตะติดตั้ง และรอให้การติดตั้งเสร็จสิ้น เครื่องมือนี้ไม่ได้เปิดแอปที่ติดตั้งไว้ ใช้เฉพาะเมื่อทราบชื่อแพ็คเกจ Android ที่แน่นอนเท่านั้น อย่าใช้สิ่งนี้กับผลการค้นหาที่ไม่ชัดเจนหรือเพื่อคาดเดาแอปแรก หากไม่ทราบ packageName ให้สอบถามผู้ใช้เกี่ยวกับแพ็คเกจแอปที่แน่นอนก่อน หยุดหาก Google Play แสดงการชำระเงิน การซื้อ การสมัครสมาชิก การอัปเดต UI ที่ไม่ชัดเจน หรือหากการติดตั้งไม่เสร็จสมบูรณ์ก่อนหมดเวลา"
+    },
+    {
+      "name": "screenshot_open",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เปิดภาพหน้าจอที่มองเห็นได้จากแกลเลอรีระบบ ดัชนีเป็นฐาน 1 ในลำดับที่เลือก sortOrder อาจเป็นข้อมูลใหม่ล่าสุดหรือเก่าที่สุดก็ได้"
+    },
+    {
+      "name": "screenshot_take",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "จับภาพหน้าจอ Android ด้วยบริการการเข้าถึง FoneClaw และบันทึกลงใน Pictures/FoneClaw/Screenshots. ใช้ targetType=current สำหรับหน้าจอปัจจุบัน, targetType=app กับ targetApp สำหรับการเปิดแอปและจับภาพ หรือ targetType=notification_shade สำหรับภาพหน้าจอที่ชัดเจนหรือคำขอจับภาพที่เกี่ยวข้องกับหน้าต่างการแจ้งเตือนที่มองเห็นได้เท่านั้น ห้ามใช้ targetType=notification_shade เพื่ออ่าน แสดงรายการ ค้นหา หรือสรุปข้อมูลการแจ้งเตือน ใช้เครื่องมือแจ้งเตือน SysInfo แทน อย่าเรียก launch_app หรือ system_panel_open ก่อนเครื่องมือนี้สำหรับแอปหรือการจับเฉดสีการแจ้งเตือน อย่าใช้สิ่งนี้เมื่อผู้ใช้ต้องการดูภาพหน้าจอที่บันทึกไว้แล้ว ใช้ screen_open เพื่อดูภาพหน้าจอที่บันทึกไว้ ตัวระบุทางเทคนิค: screenshot_open."
+    },
+    {
+      "name": "tap_node",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "แตะองค์ประกอบ UI บนหน้าจอ องค์ประกอบถูกระบุโดย ID โหนด ซึ่งสามารถรับได้จากเครื่องมือ screen_info"
+    },
+    {
+      "name": "alarm_modify_alarm",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เปิดหน้านาฬิกาปลุก Android ทันทีเมื่อผู้ใช้ต้องการแก้ไข แก้ไข ปรับเปลี่ยน หรือเปลี่ยนแปลงการปลุกที่มีอยู่ เรียกใช้เครื่องมือนี้สำหรับคำขอแก้ไขแต่ละรายการแยกกัน แม้ว่าจะถูกเรียกไปก่อนหน้านี้ในการสนทนาก็ตาม อย่าถามเพื่อยืนยัน Android ไม่มี API สาธารณะที่เชื่อถือได้สำหรับการแก้ไขการปลุกที่มีอยู่ ดังนั้นเครื่องมือนี้จะนำทางไปยังแอป Clock เพื่อแก้ไขด้วยตนเองเท่านั้น"
+    },
+    {
+      "name": "alarm_set_alarm",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ตั้งนาฬิกาปลุก Android รวบรวมรายละเอียดเวลาที่หายไป/ทำซ้ำ/ฉลากก่อนโทร"
+    },
+    {
+      "name": "bluetooth_connected_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "คืนอุปกรณ์ Bluetooth ที่เชื่อมต่ออยู่ในปัจจุบันผ่านโปรไฟล์ Android Bluetooth สาธารณะที่แอปทั่วไปมองเห็นได้"
+    },
+    {
+      "name": "bluetooth_nearby_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "สแกนและส่งคืนอุปกรณ์บลูทูธที่อยู่ใกล้เคียง รวมผลลัพธ์การสแกน BLE และผลลัพธ์การค้นพบ Bluetooth แบบคลาสสิกเมื่อได้รับอนุญาตและสถานะ Bluetooth อนุญาต อุปกรณ์ที่ไม่มีชื่อที่อ่านได้จะถูกซ่อนไว้ตามค่าเริ่มต้น"
+    },
+    {
+      "name": "bluetooth_pair_device",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เริ่มจับคู่กับอุปกรณ์ Bluetooth ด้วยที่อยู่ MAC การดำเนินการนี้จะเปิดกระบวนการเชื่อมต่อตามปกติของ Android และอาจต้องมีการยืนยันผู้ใช้หรือการป้อน PIN"
+    },
+    {
+      "name": "bluetooth_paired_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "คืนอุปกรณ์ Bluetooth ที่จับคู่กับอุปกรณ์ Android นี้แล้ว"
+    },
+    {
+      "name": "bluetooth_state",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "คืนสถานะอแด็ปเตอร์ Bluetooth ปัจจุบัน: เปิด, ปิด, Turning_on, Turn_off หรือไม่ทราบ ตัวระบุทางเทคนิค: turning_on, turning_off."
+    },
+    {
+      "name": "close_bluetooth",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ปิดบลูทูธโดยใช้ API การปิดใช้งานแบบสาธารณะ หาก Android ปฏิเสธ ให้รายงานว่าแอป Android ปกติไม่สามารถปิดบลูทูธบนอุปกรณ์นี้ได้"
+    },
+    {
+      "name": "device_app_activity_snapshot",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ส่งคืนสแนปชอตกิจกรรมแอปล่าสุดแบบย่อจาก Android UsersStats ต้องมีการเข้าถึงการใช้งาน ไม่ใช่การตรวจสอบกระบวนการพื้นหลังแบบสด"
+    },
+    {
+      "name": "device_app_permission_audit",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ส่งคืนการตรวจสอบความเสี่ยงด้านสิทธิ์แบบย่อสำหรับแอปที่ติดตั้งซึ่งแอปนี้มองเห็นได้ ความเสี่ยงเป็นแบบฮิวริสติกและขึ้นอยู่กับกลุ่มสิทธิ์ที่มีความละเอียดอ่อนที่ประกาศ/ให้อนุญาต"
+    },
+    {
+      "name": "device_app_sensitive_audit",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "คืนสถานะแอปที่มีความละเอียดอ่อนขนาดกะทัดรัด: การเข้าถึง, ฟังการแจ้งเตือน, ผู้ดูแลอุปกรณ์, โอเวอร์เลย์, การยกเว้นการเพิ่มประสิทธิภาพแบตเตอรี่ และกลุ่มสิทธิ์ที่ละเอียดอ่อนที่ได้รับ"
+    },
+    {
+      "name": "device_battery_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "คืนแบตเตอรี่ Android ขนาดกะทัดรัดและสถานะประหยัดพลังงาน ไม่มีการเปลี่ยนแปลงการตั้งค่า"
+    },
+    {
+      "name": "device_health_check",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "ส่งคืนสแนปช็อตสุขภาพแบบอ่านอย่างเดียวขนาดกะทัดรัด: หน่วยความจำ พื้นที่เก็บข้อมูล แบตเตอรี่ และเครือข่าย ไม่มีการเปลี่ยนแปลงการตั้งค่า"
+    },
+    {
+      "name": "device_hidden_app_check",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ส่งคืนการตรวจสอบการศึกษาพฤติกรรมแบบย่อสำหรับแอปผู้ใช้ที่ไม่มีรายการตัวเรียกใช้งานหรือคอมโพเนนต์ที่ปิดใช้งาน สิ่งนี้สามารถตั้งค่าสถานะแอปที่น่าสงสัย แต่แอปบริการเท่านั้นที่ถูกต้องตามกฎหมายก็อาจปรากฏขึ้นเช่นกัน"
+    },
+    {
+      "name": "device_memory_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "คืนสถานะหน่วยความจำ Android ขนาดกะทัดรัด ไม่มีการเปลี่ยนแปลงการตั้งค่า"
+    },
+    {
+      "name": "device_network_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "คืนสถานะเครือข่ายและความสามารถที่ใช้งานของ Android ขนาดกะทัดรัด ไม่มีการเปลี่ยนแปลงการตั้งค่าเครือข่าย"
+    },
+    {
+      "name": "device_storage_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "คืนสถานะพื้นที่จัดเก็บข้อมูลภายใน/ที่ใช้ร่วมกันของ Android ขนาดกะทัดรัด ไม่มีไฟล์ที่ถูกสแกนหรือลบ"
+    },
+    {
+      "name": "device_time_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "ส่งคืนโซนเวลาของระบบ Android ปัจจุบันและการประทับเวลา Unix สำหรับการเรียกเครื่องมือขึ้นอยู่กับเวลา ตั้งค่า VerifyWithNtp=true เฉพาะเมื่อมีการโต้แย้งเวลาของระบบหรือจำเป็นต้องมีการอ้างอิงออนไลน์ การตรวจสอบ NTP จะใช้ ntp1.aliyun.com และไม่เคยเปลี่ยนนาฬิกาของระบบ ตัวระบุทางเทคนิค: verifyWithNtp=true."
+    },
+    {
+      "name": "dnd_open_policy_access_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เปิดการตั้งค่า Android ที่ผู้ใช้สามารถให้สิทธิ์การเข้าถึงนโยบายห้ามรบกวน / การแจ้งเตือนของ FoneClaw อย่าเรียกสิ่งนี้ทันทีหลังจาก dnd_set_mode รายงานว่าได้เปิดหน้าการตั้งค่าแล้ว"
+    },
+    {
+      "name": "dnd_set_mode",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ตั้งค่าโหมดห้ามรบกวนของ Android หากไม่มีการเข้าถึงนโยบายหรือ Android ปฏิเสธการเขียน ระบบจะเปิดหน้าการเข้าถึง/การตั้งค่านโยบาย DND ของระบบ"
+    },
+    {
+      "name": "dnd_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "อ่านสถานะการเข้าถึงนโยบาย Android Do Not Disturb และตัวกรองการขัดจังหวะปัจจุบัน"
+    },
+    {
+      "name": "flashlight_set_enabled",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เปิดหรือปิดไฟฉาย Android โดยใช้ API ไฟฉายของกล้องระบบ"
+    },
+    {
+      "name": "flashlight_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "ส่งคืนว่ามีไฟฉายพร้อมใช้งานและสถานะไฟฉายที่ทราบล่าสุดหรือไม่"
+    },
+    {
+      "name": "flashlight_toggle",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "สลับไฟฉาย Android หากไม่ทราบสถานะปัจจุบัน ระบบจะเปิดขึ้น"
+    },
+    {
+      "name": "foneclaw_permission_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "ตรวจสอบสิทธิ์ปัจจุบันและความสามารถพิเศษในการเข้าถึงของ FoneClaw เอง ใช้สิ่งนี้เมื่อผู้ใช้ถามว่าสิทธิ์ FoneClaw ใดบ้างที่เปิดใช้งาน ขาดหายไป จำกัด หรือพร้อมใช้งาน นี่เป็นการตรวจสอบแบบอ่านอย่างเดียวใหม่ อย่าใช้การตรวจสอบแอป แผงการแจ้งเตือน หรือเครื่องมืออ่านหน้าจอแทน"
+    },
+    {
+      "name": "open_bluetooth",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ขอให้เปิดบลูทูธ สำหรับ SDK เป้าหมายแบบเดิม ให้ลองใช้ API ที่เปิดใช้งานสาธารณะก่อน จากนั้นจึงกลับไปที่ UI การยืนยันระบบของ Android เมื่อจำเป็น"
+    },
+    {
+      "name": "system_panel_open",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เปิดแผงระบบ Android ที่มองเห็นได้หนึ่งแผง ใช้แผง=การแจ้งเตือนเพื่อเปิดหน้าต่างแจ้งเตือน หรือใช้แผง=quick_settings เพื่อเปิดการตั้งค่าด่วน/ศูนย์ควบคุม เครื่องมือนี้จะเปิดเฉพาะแผงที่เลือกเท่านั้น จะไม่อ่าน จับภาพ ค้นหา แสดงรายการ หรือสรุปเนื้อหาพาเนล อย่าเรียกเมื่อส่วนหนึ่งส่วนใดของคำขอขอให้อ่าน จับภาพ ตรวจสอบ อธิบาย หรือสรุปการแจ้งเตือน เรียกเพียงครั้งเดียวเท่านั้นสำหรับคำขอแบบเปิดเฉพาะแผงควบคุมที่ชัดเจน ต้องการบริการการเข้าถึง FoneClaw ตัวระบุทางเทคนิค: panel=notifications, panel=quick_settings."
+    },
+    {
+      "name": "system_settings_open_battery_optimization_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เปิดการตั้งค่าการเพิ่มประสิทธิภาพแบตเตอรี่ Android หากมีการระบุ appNameOrPackage ให้เปิดหน้ารายละเอียดของแอปนั้นตามชื่อแพ็กเกจหรือป้ายกำกับแอปที่ติดตั้ง หากไม่สามารถแก้ไขได้หรือเปิดได้ ให้ส่งคืนความล้มเหลวและอย่าเปิดหน้าการตั้งค่าอื่น หากว่างเปล่า ให้เปิดหน้ารายการ/การตั้งค่าการเพิ่มประสิทธิภาพแบตเตอรี่ของระบบ"
+    },
+    {
+      "name": "system_settings_open_battery_saver_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เปิดการตั้งค่าโหมดประหยัดแบตเตอรี่ / ประหยัดพลังงาน / โหมดพลังงานต่ำของ Android แอปปกติไม่สามารถสลับโหมดประหยัดแบตเตอรี่ได้โดยตรงผ่าน API สาธารณะ ดังนั้นหลังจากการตั้งค่าเปิดขึ้น ผู้ใช้จะต้องเปิดหรือปิดใช้งานด้วยตนเอง ROM ของผู้จำหน่ายอาจถอยกลับไปใช้การตั้งค่าแบตเตอรี่ทั่วไป"
+    },
+    {
+      "name": "system_settings_open_date_time_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เปิดหน้าการตั้งค่าวันที่และเวลาของ Android โดยตรง ใช้ตัวเลือกนี้สำหรับการตั้งค่าวันที่ เวลา เวลาอัตโนมัติ เขตเวลา หรือการตั้งค่าเขตเวลาอัตโนมัติ การดำเนินการนี้จะเปิดการตั้งค่าระบบและไม่จำเป็นต้องเข้าถึง อ่านหน้าจอ หรือการแตะ หลังจากที่สำเร็จแล้ว อย่าเรียก launch_app, get_screen_info หรือ tap_node"
+    },
+    {
+      "name": "system_settings_open_hotspot_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เปิดการตั้งค่าฮอตสปอตของ Android แอปปกติไม่สามารถสลับฮอตสปอตได้อย่างน่าเชื่อถือผ่าน Android API สาธารณะ หากไม่สามารถเปิดหน้าการตั้งค่าฮอตสปอตที่แน่นอนได้ จะทำให้เกิดความล้มเหลวและจะไม่เปิดหน้าการตั้งค่าอื่น"
+    },
+    {
+      "name": "system_settings_open_location_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เปิดการตั้งค่าตำแหน่งของ Android หากมีการระบุ appNameOrPackage ให้เปิดหน้ารายละเอียดของแอปนั้นตามชื่อแพ็กเกจหรือป้ายกำกับแอปที่ติดตั้ง หากไม่สามารถแก้ไขได้หรือเปิดได้ ให้ส่งคืนความล้มเหลวและอย่าเปิดหน้าการตั้งค่าอื่น หากว่างเปล่า ให้เปิดหน้าการตั้งค่าตำแหน่งระบบ"
+    },
+    {
+      "name": "system_settings_set_auto_rotate",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เปิดหรือปิดการหมุนอัตโนมัติของ Android ต้องได้รับอนุญาตพิเศษในการปรับเปลี่ยนการตั้งค่าระบบ"
+    },
+    {
+      "name": "system_settings_set_brightness",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ตั้งค่าความสว่างหน้าจอ Android โหมดแมนนวลเขียนเปอร์เซ็นต์ตั้งแต่ 1 ถึง 100 โหมดอัตโนมัติเปิดใช้งานเฉพาะความสว่างอัตโนมัติและละเว้นเปอร์เซ็นต์ ต้องได้รับอนุญาตพิเศษในการปรับเปลี่ยนการตั้งค่าระบบ"
+    },
+    {
+      "name": "system_settings_set_eye_comfort",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เปิดการตั้งค่าการแสดงผล Android สำหรับความสบายตา/แสงกลางคืน/ตัวกรองแสงสีฟ้า/โหมดการอ่าน ใช้เครื่องมือนี้แทนที่จะให้คำแนะนำแบบแมนนวลสำหรับความสบายตาหลายภาษา ผู้จำหน่าย Android เปิดเผยสวิตช์ที่แตกต่างกันออกไป ดังนั้นเครื่องมือนี้จึงเปิดการตั้งค่าการแสดงผลและอนุญาตให้ผู้ใช้ดำเนินการเปลี่ยนในหน้านั้นให้เสร็จสิ้น"
+    },
+    {
+      "name": "system_settings_set_font_scale",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ตั้งค่าขนาดแบบอักษรของระบบ Android ต้องได้รับอนุญาตพิเศษในการปรับเปลี่ยนการตั้งค่าระบบ ค่าทั่วไปคือ 0.85 เล็ก, 1.0 ค่าเริ่มต้น, 1.15 ใหญ่, 1.3 ใหญ่ขึ้น และมากถึง 1.6 ใหญ่พิเศษ"
+    },
+    {
+      "name": "system_settings_set_haptic_feedback",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เปิดหรือปิดใช้งานการตอบสนองแบบสัมผัสของ Android ต้องได้รับอนุญาตพิเศษในการปรับเปลี่ยนการตั้งค่าระบบ"
+    },
+    {
+      "name": "system_settings_set_screen_timeout",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ตั้งค่าการหมดเวลาปิดหน้าจอ Android เป็นวินาที ต้องได้รับอนุญาตพิเศษในการปรับเปลี่ยนการตั้งค่าระบบ ค่าจะถูกบีบไว้ที่ 15..1800 วินาที"
+    },
+    {
+      "name": "system_settings_set_touch_sounds",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เปิดหรือปิดเสียงสัมผัสของ Android ต้องได้รับอนุญาตพิเศษในการปรับเปลี่ยนการตั้งค่าระบบ"
+    },
+    {
+      "name": "system_settings_set_user_rotation",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ล็อคการหมุนหน้าจอ Android ต้องได้รับอนุญาตพิเศษในการแก้ไขการตั้งค่าระบบและปิดใช้งานการหมุนอัตโนมัติ ใช้แนวตั้ง แนวนอน Reverse_Portrait หรือ Reverse_landscape ตัวระบุทางเทคนิค: reverse_portrait, reverse_landscape."
+    },
+    {
+      "name": "system_settings_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "คืนสถานะสิทธิ์การตั้งค่าระบบที่เขียนได้ รวมถึงความสว่างหน้าจอปัจจุบัน ขนาดแบบอักษร การหมดเวลาหน้าจอ การหมุน เสียงสัมผัส และการตอบสนองแบบสัมผัส สิ่งนี้จะอ่านการตั้งค่าระบบ Android เท่านั้น"
+    },
+    {
+      "name": "volume_adjust_stream",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เพิ่มหรือลดสตรีมเสียง Android หนึ่งรายการทีละขั้นตอนของระบบ เลือกตัวเลือกนี้สำหรับการเปลี่ยนแปลงปริมาณสัมพัทธ์"
+    },
+    {
+      "name": "volume_set_all_streams_muted",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ปิดหรือเปิดเสียงสตรีมเสียง Android ที่รองรับทั้งหมด และรายงานว่าสตรีมใดมีการเปลี่ยนแปลงจริง เลือกตัวเลือกนี้สำหรับคำขอปิดเสียงทั้งอุปกรณ์หรือทุกระดับเสียง"
+    },
+    {
+      "name": "volume_set_ringer_mode",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ตั้งค่าโหมดเสียงเรียกเข้าโทรศัพท์ Android สำหรับโหมดปิดเสียง การตั้งค่านี้จะกลับไปปิดเสียงสตรีมเสียงทั้งหมดโดยอัตโนมัติเมื่อ Android ปฏิเสธการเขียนโหมดเสียงเรียกเข้า"
+    },
+    {
+      "name": "volume_set_stream",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ตั้งค่าสตรีมเสียง Android หนึ่งรายการเป็นเปอร์เซ็นต์เป้าหมาย เลือกตัวเลือกนี้เมื่อผู้ใช้ถามถึงระดับเสียงที่แน่นอน"
+    },
+    {
+      "name": "volume_set_stream_muted",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ปิดหรือเปิดเสียงสตรีมเสียง Android หนึ่งรายการ การดำเนินการนี้จะเปลี่ยนสถานะปิดเสียงสตรีม ไม่ใช่โหมดเสียงกริ่งโทรศัพท์"
+    },
+    {
+      "name": "volume_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "อ่านสถานะระดับเสียง Android ปัจจุบันสำหรับสตรีมเสียงและโหมดเสียงเรียกเข้าปัจจุบัน"
+    },
+    {
+      "name": "wifi_configured_networks",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "การเชื่อมต่อ Android 已配置/已保存的 Wi-Fi 网络列表。只返回SSID、networkId、安全类型、是否ตัวกรอง是有凭据、是否隐藏网络、是否当前连接和配置状态; 不会返回 Wi-Fi"
+    },
+    {
+      "name": "wifi_connect",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เชื่อมต่อกับเครือข่าย Wi-Fi ก่อนอื่นเครื่องมือจะตรวจสอบการกำหนดค่า Wi-Fi ที่บันทึกไว้ของ Android สำหรับ SSID และเชื่อมต่อโดยตรงหากมีอยู่ หากไม่ได้บันทึก ระบบจะใช้ข้อความรหัสผ่านที่ให้มาเพื่อเพิ่ม/เชื่อมต่อเครือข่าย หรือกลับไปที่แผง Wi-Fi ของ Android เมื่อจำเป็นต้องป้อนรหัสผ่าน"
+    },
+    {
+      "name": "wifi_disconnect",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ตัดการเชื่อมต่อจากจุดเชื่อมต่อ Wi-Fi ปัจจุบัน เครื่องมือนี้จะพยายามยกเลิกการเชื่อมต่อ WifiManager แบบดั้งเดิมแบบเงียบสำหรับโฮสต์ API 28 เป้าหมายก่อน หาก Android ปฏิเสธ ระบบจะกลับไปเปิดแผง Wi-Fi ของ Android เพื่อให้ผู้ใช้ดำเนินการ"
+    },
+    {
+      "name": "wifi_forget",
+      "category": "Device Status and System Control",
+      "risk": "DESTRUCTIVE",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ลืมเครือข่าย Wi-Fi ที่บันทึกไว้ เครื่องมือนี้จะพยายามลบเครือข่าย WifiManager รุ่นเก่าแบบเงียบก่อน จากนั้นจึงกลับไปที่แผง Wi-Fi ของ Android เพื่อให้ผู้ใช้ดำเนินการ ตัวระบุทางเทคนิค: removeNetwork."
+    },
+    {
+      "name": "wifi_scan_networks",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "สแกนและส่งคืนจุดเชื่อมต่อ Wi-Fi ที่อยู่ใกล้เคียง หากปิด Wi-Fi เครื่องมือนี้จะพยายามเปิดใช้งาน Wi-Fi โดยตรงก่อน และจะกลับไปที่แผง Wi-Fi ของ Android เท่านั้น หากการเปิดใช้งานโดยตรงล้มเหลว ต้องมีการอนุญาตตำแหน่งและบริการระบุตำแหน่งของอุปกรณ์ ผลลัพธ์สามารถเปิดเผยข้อมูลเครือข่ายที่ละเอียดอ่อนตามตำแหน่งได้"
+    },
+    {
+      "name": "wifi_set_enabled",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เปิดหรือปิดใช้งาน Wi-Fi ของ Android เครื่องมือนี้จะพยายามดำเนินการ WifiManager โดยตรงก่อน จากนั้นตรวจสอบว่า Android เข้าถึงสถานะที่ร้องขอจริงหรือไม่ หากคำขอล้มเหลวหรือยังคงค้างอยู่ คำขอจะกลับไปเปิดแผง Wi-Fi ของ Android เพื่อให้ผู้ใช้ดำเนินการ"
+    },
+    {
+      "name": "wifi_status",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "คืนสถานะ Android Wi-Fi ปัจจุบันและรายละเอียดการเชื่อมต่อ Wi-Fi ที่ใช้งานอยู่เมื่อแอปได้รับอนุญาต สิ่งนี้จะอ่านสถานะเครือข่ายเท่านั้น"
+    },
+    {
+      "name": "get_location",
+      "category": "Location and Navigation",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "รับตำแหน่งอุปกรณ์ Android ปัจจุบันขณะใช้งาน FoneClaw ต้องได้รับอนุญาตจากตำแหน่งเบื้องหน้าเท่านั้น"
+    },
+    {
+      "name": "location_search_nearby_place",
+      "category": "Location and Navigation",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ค้นหาผู้สมัครสถานที่ใกล้เคียงเพื่อหาชื่อสถานที่ที่ไม่ชัดเจนโดยใช้ตำแหน่งอุปกรณ์ปัจจุบัน ใช้สิ่งนี้เฉพาะเมื่อผู้ใช้ขอให้ค้นหา ตรวจสอบ แก้ไข เลือก หรือนำทางไปยังสถานที่ หรือเมื่อปลายทางการนำทางไม่ชัดเจนเท่านั้น สำหรับการสร้างปฏิทิน ชื่อสถานที่ที่ผู้ใช้ระบุก็เพียงพอแล้ว โดยคงไว้เป็น locationName และอย่าเรียกใช้เครื่องมือนี้เพียงเพราะไม่มีที่อยู่หรือพิกัดที่แน่นอน"
+    },
+    {
+      "name": "map_navigate",
+      "category": "Location and Navigation",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เปิดหน้าจอเส้นทางหรือการนำทางในแอปแผนที่สำหรับจุดหมายปลายทางและโหมดการเดินทาง การดำเนินการนี้จะเปิดแอปแผนที่ภายนอก ใช้เฉพาะอาร์กิวเมนต์ที่ให้มา และไม่อ่านข้อมูลอุปกรณ์"
+    },
+    {
+      "name": "mail_account_list",
+      "category": "Mail",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "แสดงรายการบัญชีเมลที่กำหนดค่า เว้นว่างข้อความค้นหาไว้เพื่อแสดงรายการบัญชีทั้งหมด เมื่อมีการระบุคำค้นหา ลำดับความสำคัญที่ตรงกันคือรหัสบัญชี อีเมล ชื่อแทน จากนั้นจึงระบุนามแฝงหรืออีเมลที่ไม่ชัดเจน การจับคู่ที่ตรงทั้งหมดยังสามารถส่งคืนหลายบัญชีได้ หากไม่มีการกำหนดค่าบัญชีเมล FoneClaw และการสืบค้นเป็นที่อยู่อีเมล ผลลัพธ์อาจมี providerSetupGuide พร้อมด้วย URL ข้อมูลประจำตัวของผู้ให้บริการคงที่"
+    },
+    {
+      "name": "mail_account_save",
+      "category": "Mail",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ทดสอบทั้งการเชื่อมต่อ IMAP และ SMTP และบันทึกบัญชีเมลเมื่อทั้งสองสำเร็จเท่านั้น เรียกสิ่งนี้ทันทีที่ทุกฟิลด์การกำหนดค่าที่จำเป็นพร้อมใช้งาน การดำเนินการนี้ต้องได้รับอนุมัติจากผู้ใช้"
+    },
+    {
+      "name": "mail_delete",
+      "category": "Mail",
+      "risk": "DESTRUCTIVE",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ย้าย messageRefs ทั้งหมดไม่เกิน 20 รายการไปที่ถังขยะ หรือลบออกอย่างถาวรเฉพาะเมื่อผู้ใช้ร้องขอการลบถาวรอย่างชัดเจน อย่าลองผลลัพธ์ที่ไม่แน่นอนอีกครั้ง"
+    },
+    {
+      "name": "mail_list",
+      "category": "Mail",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "แสดงรายการ กรอง หรือค้นหาข้อความสรุป แบบสอบถามค้นหาหัวเรื่อง ผู้ส่ง ผู้รับ และเนื้อหา ปล่อย accountId ว่างไว้เพื่อใช้บัญชีเดียวหรือบัญชีเริ่มต้นที่ไม่ซ้ำกัน"
+    },
+    {
+      "name": "mail_read",
+      "category": "Mail",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "อ่านหนึ่งข้อความจาก messageRef ที่ส่งคืนโดย mail_list และทำเครื่องหมายว่าอ่านแล้วบนเซิร์ฟเวอร์ หลังจากที่เครื่องมือสำเร็จ ให้สรุปข้อความสำหรับผู้ใช้ในการตอบกลับเดียวกัน"
+    },
+    {
+      "name": "mail_send",
+      "category": "Mail",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ส่งอีเมลใหม่ ตอบกลับ ตอบกลับทั้งหมด หรือส่งต่อ จำเป็นต้องได้รับการอนุมัติ ไฟล์แนบต้องใช้ข้อมูลเมตาที่มีโครงสร้างตรงตามที่ประกาศพร้อมกับข้อความผู้ใช้ปัจจุบัน"
+    },
+    {
+      "name": "call_log_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "แสดงรายการบันทึกการโทร Android ล่าสุด สามารถเลือกกรองตามประเภทการโทร ต้องได้รับอนุญาต READ_CALL_LOG ใช้ type=missed สำหรับคำถามสายที่ไม่ได้รับ และก่อนเลือกสายที่ไม่ได้รับเพื่อโทรกลับ หลังจากเลือกหมายเลขแล้ว ให้โทรไปที่ phone_dial"
+    },
+    {
+      "name": "contacts_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "แสดงรายการรายชื่อติดต่อ Android ในจำนวนที่จำกัด สามารถเลือกกรองตามชื่อที่แสดงหรือหมายเลขโทรศัพท์ได้ ต้องได้รับอนุญาต READ_CONTACTS ปล่อยให้แบบสอบถามว่างเฉพาะเมื่อผู้ใช้ขอให้ดูผู้ติดต่ออย่างชัดเจน ตั้งค่าการค้นหาเมื่อผู้ใช้ขอให้ค้นหาผู้ติดต่อ"
+    },
+    {
+      "name": "phone_dial",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เปิดตัวเรียกเลขหมายของระบบสำหรับหมายเลขโทรศัพท์เดียวหรือผู้ติดต่อที่ระบุชื่อ ตั้งค่าหมายเลขโทรศัพท์และชื่อผู้ติดต่ออย่างใดอย่างหนึ่ง ผู้ติดต่อที่มีชื่อจะต้องแก้ไขให้ตรงกัน หากผู้ติดต่อหลายรายการตรงกัน ให้หยุดและขอให้ผู้ใช้เลือก หลังจากที่แป้นหมุนเปิดขึ้น ให้โทร get_screen_info ระบุปุ่มโทรที่มองเห็นได้ จากนั้นโทร tap_node ตัวระบุทางเทคนิค: phoneNumber, contactName."
+    },
+    {
+      "name": "send_to_sms_message",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "หลังจากอนุมัติแล้ว ให้เปิดร่าง SMS/MMS ที่มองเห็นได้ สำหรับข้อความ SMS กับผู้รับ ให้แตะส่งโดยอัตโนมัติเฉพาะเมื่อเชื่อมต่อการเข้าถึง FoneClaw และแอปข้อความเริ่มต้น ผู้รับ เนื้อหาข้อความแบบเต็ม และการควบคุมการส่งที่เสถียรหนึ่งรายการได้รับการตรวจสอบทั้งหมด ไฟล์แนบ ข้อความแจ้งสองซิม UI ที่ไม่ชัดเจน หรือการเข้าถึงที่ไม่พร้อมใช้งานจำเป็นต้องมีการดำเนินการโดยเจ้าหน้าที่ หลังจากผลลัพธ์เทอร์มินัลใดๆ ให้หยุดการวางแผนเครื่องมือและอย่าเรียก get_screen_info หรือ tap_node"
+    },
+    {
+      "name": "sms_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ค้นหาข้อความ SMS สดบนอุปกรณ์ Android นี้ โดยไม่มีคำหลัก ที่อยู่ ผู้ติดต่อ หรือ threadId แสดงรายการข้อความล่าสุด ตั้งค่าคำสำคัญ/ที่อยู่/ผู้ติดต่อเพื่อค้นหา ตั้งค่า threadId จากผลลัพธ์ sms_list ก่อนหน้าเท่านั้นเพื่ออ่านการสนทนานั้น สำหรับคำขอสรุป ให้โทรหนึ่งครั้งด้วย box=all จากนั้นสรุปข้อความที่ได้รับและส่งกลับ อย่าใช้ประวัติ SysInfo แทนผลลัพธ์สดนี้"
+    },
+    {
+      "name": "calendar_create_event",
+      "category": "Calendar",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "สร้างกิจกรรมในปฏิทิน Android รวบรวมเวลาที่หายไปและรายละเอียดการเตือนก่อนโทร ชื่อสถานที่ที่ผู้ใช้ระบุนั้นเพียงพอแล้ว และควรส่งผ่านเป็นชื่อตำแหน่งโดยตรง อย่าค้นหาที่อยู่หรือพิกัดที่แน่นอน เว้นแต่ผู้ใช้จะขอให้ยืนยัน แก้ไข เลือก หรือนำทางไปยังสถานที่นั้นอย่างชัดเจน ต้องการ startLocalDateTime/endLocalDateTime ใน yyyy-MM-dd HH:mm สำหรับวันที่ของผู้ใช้และวันที่ที่เกี่ยวข้อง เครื่องมือจะแยกวิเคราะห์ในเขตเวลาของอุปกรณ์ อย่าสร้างเหตุการณ์จากมิลลิวินาทีของยุคที่คำนวณด้วยโมเดล ใช้ CalendarId=0 เว้นแต่ผู้ใช้จะเลือกรหัสปฏิทินอย่างชัดเจน หลังจากการสร้าง ใช้ผลลัพธ์ของเครื่องมือ realStart/actualEnd เป็นเวลาที่สร้างโดยผู้ใช้ ตัวระบุทางเทคนิค: locationName, calendarId=0, actualStart."
+    },
+    {
+      "name": "calendar_delete_event",
+      "category": "Calendar",
+      "risk": "DESTRUCTIVE",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ลบกิจกรรมในปฏิทิน Android ด้วยรหัส ค้นหา/แสดงรายการกิจกรรมในปฏิทินทั้งหมดด้วย CalendarId=0 เว้นแต่ผู้ใช้จะเลือกรหัสปฏิทินอย่างชัดเจน ส่งชื่อที่ทราบ startMillis, endMillis และตำแหน่งเสมอเมื่อทราบ เพื่อให้เป้าหมายไม่คลุมเครือ ตัวระบุทางเทคนิค: calendarId=0."
+    },
+    {
+      "name": "calendar_list_calendars",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "แสดงรายการปฏิทิน Android ที่เขียนได้ ใช้สิ่งนี้เพื่อให้ผู้ใช้เลือกปฏิทิน อย่าถือว่า CalendarId=1 เป็นปฏิทินในเครื่องหรือเป้าหมาย ตัวระบุทางเทคนิค: calendarId=1."
+    },
+    {
+      "name": "calendar_list_events",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "แสดงรายการกิจกรรมในปฏิทิน Android ในช่วงเวลาที่เป็นรูปธรรม ใช้สำหรับคำขอ เช่น กำหนดการของวันนี้ กำหนดการของวันพรุ่งนี้ กิจกรรมที่มีอยู่ หรือกิจกรรมของสัปดาห์นี้ ต้องการ startLocalDateTime/endLocalDateTime ใน yyyy-MM-dd HH:mm; เครื่องมือจะแยกวิเคราะห์ในเขตเวลาของอุปกรณ์ ใช้ startMillis/endMillis เป็นทางเลือกสำรองที่เลิกใช้แล้วเท่านั้น เมื่อช่วงเวลามิลลิวินาทีที่แน่นอนมาจากผลลัพธ์ของเครื่องมือที่เชื่อถือได้ อย่าเดา CalendarId; ใช้ CalendarId=0 เพื่อค้นหาปฏิทินทั้งหมด เว้นแต่ผู้ใช้จะเลือกรหัสปฏิทินอย่างชัดเจน ตัวระบุทางเทคนิค: calendarId, calendarId=0."
+    },
+    {
+      "name": "calendar_open_event",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เปิดหน้ารายละเอียดกิจกรรมปฏิทิน Android ตามรหัสกิจกรรม ค้นหาหรือแสดงรายการเหตุการณ์ก่อนเมื่อผู้ใช้อธิบายเหตุการณ์ในภาษาธรรมชาติ อย่าเดารหัสเหตุการณ์"
+    },
+    {
+      "name": "calendar_search_events",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ค้นหากิจกรรมในปฏิทิน Android ด้วยคำหลักในช่วงเวลาที่เป็นรูปธรรม ใช้ก่อนเปิด อัปเดต หรือลบกิจกรรมเมื่อผู้ใช้อธิบายกิจกรรมตามชื่อหรือเนื้อหา ต้องการ startLocalDateTime/endLocalDateTime ใน yyyy-MM-dd HH:mm; เครื่องมือจะแยกวิเคราะห์ในเขตเวลาของอุปกรณ์ ใช้ startMillis/endMillis เป็นทางเลือกสำรองที่เลิกใช้แล้วเท่านั้น เมื่อช่วงเวลามิลลิวินาทีที่แน่นอนมาจากผลลัพธ์ของเครื่องมือที่เชื่อถือได้ อย่าเดา CalendarId; ใช้ CalendarId=0 เพื่อค้นหาปฏิทินทั้งหมด เว้นแต่ผู้ใช้จะเลือกรหัสปฏิทินอย่างชัดเจน ตัวระบุทางเทคนิค: calendarId, calendarId=0."
+    },
+    {
+      "name": "calendar_update_event",
+      "category": "Calendar",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "อัปเดตกิจกรรมในปฏิทิน Android ด้วยรหัส ค้นหา/แสดงรายการเหตุการณ์ก่อนเมื่อผู้ใช้อธิบายเป้าหมายในภาษาธรรมชาติ และส่งรายละเอียดเป้าหมายที่ทราบพร้อมกับฟิลด์ที่เปลี่ยนแปลง อย่าเดารหัสปฏิทินหรือรหัสกิจกรรม ค้นหาปฏิทินทั้งหมดด้วย CalendarId=0 เว้นแต่ผู้ใช้จะเลือกรหัสปฏิทินอย่างชัดเจน ช่องข้อความว่างจะถูกละเว้น ใช้ startMillis/endMillis=0 เพื่อเก็บเวลาที่มีอยู่ ใช้ alertMinutes=-2 เพื่อเก็บตัวเตือน -1 เพื่อลบตัวเตือน และ >=0 เพื่อแทนที่ตัวเตือน ตัวระบุทางเทคนิค: calendarId, calendarId=0, reminderMinutes=-2."
+    },
+    {
+      "name": "memo_create",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "สร้างบันทึกช่วยจำ บันทึกย่อ หรือบันทึกงานในเครื่องที่ผู้ใช้มองเห็นได้ ใช้เมื่อผู้ใช้ต้องการให้เนื้อหาเก็บไว้เป็นบันทึกช่วยจำหรือบันทึกที่สามารถดำเนินการได้อย่างชัดเจน อย่าใช้เครื่องมือนี้เพื่อบันทึกหรือสอบถามหน่วยความจำโปรไฟล์ผู้ใช้ที่จัดการโดยผู้ช่วย เช่น การกำหนดค่าตามความชอบ ข้อมูลประจำตัว ความสัมพันธ์ หรือรูปแบบการตอบกลับ"
+    },
+    {
+      "name": "memo_delete",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ลบบันทึกในเครื่องด้วยรหัสอย่างนุ่มนวล ค้นหา/บันทึกรายการก่อนเมื่อผู้ใช้อธิบายเป้าหมายในภาษาธรรมชาติ เพื่อให้ทราบรหัส/ชื่อเรื่องเป้าหมาย"
+    },
+    {
+      "name": "memo_list",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "แสดงรายการบันทึกบันทึกในเครื่องที่ผู้ใช้มองเห็นได้ สถานะสามารถใช้งานอยู่ เสร็จแล้ว เก็บถาวร หรือทั้งหมดได้ อย่าใช้เครื่องมือนี้เพื่อตอบสิ่งที่ผู้ช่วยจดจำเกี่ยวกับผู้ใช้ การตั้งค่าโปรไฟล์ผู้ใช้ หรือประวัติการสนทนา ผลลัพธ์ที่ว่างเปล่าหมายความว่าไม่มีบันทึกช่วยจำในเครื่องที่ตรงกันเท่านั้น ไม่ได้หมายความว่าไม่มีหน่วยความจำโปรไฟล์ผู้ใช้อยู่"
+    },
+    {
+      "name": "memo_mark_done",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ทำเครื่องหมายบันทึกในเครื่องว่าเสร็จสิ้นหรือใช้งานอยู่โดย ID"
+    },
+    {
+      "name": "memo_search",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ค้นหาบันทึกช่วยจำในท้องถิ่นที่ผู้ใช้มองเห็นด้วยคำสำคัญในชื่อเรื่อง เนื้อหา หรือแท็ก สถานะสามารถใช้งานอยู่ เสร็จแล้ว เก็บถาวร หรือทั้งหมดได้ อย่าใช้เครื่องมือนี้เพื่อค้นหาหน่วยความจำโปรไฟล์ผู้ใช้ที่จัดการโดยผู้ช่วยหรือประวัติการสนทนา ผลลัพธ์ที่ว่างเปล่าจะอธิบายเฉพาะที่เก็บบันทึกในเครื่องเท่านั้น"
+    },
+    {
+      "name": "memo_update",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "อัปเดตบันทึกช่วยจำท้องถิ่นด้วยรหัส ค้นหา/แสดงรายการบันทึกก่อนเมื่อผู้ใช้อธิบายเป้าหมายในภาษาธรรมชาติ และส่งรายละเอียดเป้าหมายที่ทราบพร้อมกับฟิลด์ที่เปลี่ยนแปลง ชื่อ/เนื้อหา/แท็กที่ว่างเปล่าจะถูกละเว้น alertAtMillis=-2 เก็บการแจ้งเตือน, -1 ล้างการแจ้งเตือน และ >0 ตั้งค่าการแจ้งเตือน ตัวระบุทางเทคนิค: reminderAtMillis=-2."
+    },
+    {
+      "name": "sysinfo_delete",
+      "category": "System Information",
+      "risk": "DESTRUCTIVE",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ลบแคช SysInfo ภายใน FoneClaw ที่ตรงกันอย่างถาวรเท่านั้น การดำเนินการนี้จะไม่ลบการแจ้งเตือน Android, SMS, บันทึกการโทร หรือกิจกรรมในปฏิทินดั้งเดิม ต้องมีตัวกรองอย่างน้อยหนึ่งรายการ ยกเว้นว่า DeleteAll=true ตัวกรองหลายตัวจะรวมกับ AND ตัวระบุทางเทคนิค: deleteAll=true."
+    },
+    {
+      "name": "sysinfo_mark_reviewed",
+      "category": "System Information",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ทำเครื่องหมายรหัสเหตุการณ์ SysInfo ในเครื่องว่าตรวจสอบแล้วหลังจากที่ผู้ใช้ยืนยันอย่างชัดเจนแล้วเท่านั้น"
+    },
+    {
+      "name": "sysinfo_query",
+      "category": "System Information",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ค้นหาการแจ้งเตือนในท้องถิ่น, SMS, บันทึกการโทร, กิจกรรมในปฏิทิน และอินพุตการเข้าถึงที่บันทึกไว้แล้ว ใช้เครื่องมือเดียวนี้สำหรับสรุปรายวัน คำถามเกี่ยวกับการแจ้งเตือน ข้อความค้นหาตามกรอบเวลา และการค้นหาคำหลัก มันจะไม่เปิดแผงระบบหรือสแกนแหล่งที่มาของระบบที่ใช้งานจริง แต่ละแถวอาจมี sourceRef สำหรับการขจัดข้อมูลซ้ำซ้อนกับผลลัพธ์ของผู้ให้บริการแบบเรียลไทม์ สรุป JSON ที่ส่งคืนสำหรับผู้ใช้"
+    },
+    {
+      "name": "sysinfo_thread",
+      "category": "System Information",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "โหลดหนึ่งเธรด SysInfo ภายในเครื่องโดย threadKey ที่ส่งคืนโดย sysinfo_query"
+    },
+    {
+      "name": "shopping_compare",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "ค้นหาผลลัพธ์ทางเว็บสาธารณะสำหรับผลิตภัณฑ์บนแพลตฟอร์มการช็อปปิ้งและส่งคืนหลักฐานการเปรียบเทียบ ใช้สิ่งนี้ก่อนที่จะให้คำแนะนำราคาช้อปปิ้ง"
+    },
+    {
+      "name": "web_fetch",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "ดึงข้อมูลหน้าเว็บเฉพาะตาม URL และส่งคืนข้อความหน้าที่อ่านได้"
+    },
+    {
+      "name": "web_search",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "ค้นหาเว็บสำหรับหน้าที่เกี่ยวข้อง ส่งคืนชื่อผลลัพธ์ URL และตัวอย่างสั้น"
+    },
+    {
+      "name": "shortcut_save_agent_prompt",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "บันทึกทางลัดที่ผู้ใช้สร้างขึ้นซึ่งส่งข้อความแจ้งไปยังตัวแทน เรียกสิ่งนี้หลังจากที่ผู้ใช้ยืนยันชื่อเรื่อง คำอธิบาย และลักษณะการทำงานแล้วเท่านั้น"
+    },
+    {
+      "name": "shortcut_save_direct_tool",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "บันทึกทางลัดเครื่องมือโดยตรงที่ผู้ใช้สร้างขึ้น เรียกสิ่งนี้เฉพาะเมื่อทุกการกระทำที่ร้องขอสามารถแมปกับขั้นตอนเครื่องมือที่ทราบพร้อมพารามิเตอร์ที่สมบูรณ์ได้อย่างสมบูรณ์"
+    },
+    {
+      "name": "task_create",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "สร้างแผน TODO ที่สั่งซื้อเสร็จสมบูรณ์ในการเรียกครั้งเดียวสำหรับคำขอของผู้ใช้ปัจจุบัน นี่เป็นเงื่อนไขบังคับก่อนเครื่องมือที่ไม่ใช่งานใดๆ เมื่อคำขอต้องการสามขั้นตอนขึ้นไป ผ่านทุกขั้นตอนที่ผู้ใช้ต้องเผชิญในรายการ สามารถสร้างแผนได้เพียงครั้งเดียวและไม่สามารถขยายได้ในภายหลัง ไม่ต้องรวมการจัดการงาน การล้างข้อมูล การอัปเดตสถานะ หรือการตอบกลับขั้นสุดท้าย"
+    },
+    {
+      "name": "task_list",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "แสดงรายการ TODO ภายในสำหรับคำขอของผู้ใช้ปัจจุบัน ตามค่าเริ่มต้นจะส่งคืนรายการเปิด, in_progress และรายการที่ถูกบล็อก"
+    },
+    {
+      "name": "task_update",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "อัปเดตรายการสิ่งที่ต้องทำภายในหนึ่งรายการ การเปลี่ยนที่อนุญาต: เปิดเป็น in_progress, ถูกบล็อก หรือละทิ้ง; in_progress สู่การบล็อก เสร็จสิ้น หรือละทิ้ง ถูกบล็อกให้เปิดหรือละทิ้ง เสร็จแล้วละทิ้งเป็นปลายทาง มีงานเดียวเท่านั้นที่อาจจะอยู่ใน_ความคืบหน้า"
+    },
+    {
+      "name": "workflow_delete",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DESTRUCTIVE",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ลบเวิร์กโฟลว์ที่บันทึกไว้ตามรหัส"
+    },
+    {
+      "name": "workflow_list",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "แสดงรายการเวิร์กโฟลว์ที่บันทึกไว้"
+    },
+    {
+      "name": "workflow_save",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "บันทึกเวิร์กโฟลว์ที่ใช้ซ้ำได้ stepJson ต้องเป็นอาร์เรย์ JSON ของ {toolName, arguments} ตัวระบุทางเทคนิค: stepsJson."
+    },
+    {
+      "name": "add_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เพิ่มเอกสารทักษะใหม่ลงในทะเบียนทักษะ"
+    },
+    {
+      "name": "disable_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ปิดใช้งานทักษะผู้ใช้เพื่อให้ถูกซ่อนจากพรอมต์ของตัวแทน"
+    },
+    {
+      "name": "enable_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เปิดใช้งานทักษะผู้ใช้ที่ถูกต้องเพื่อให้ตัวแทนสามารถใช้งานได้"
+    },
+    {
+      "name": "list_skills",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "แสดงรายการทักษะผู้ใช้และระบบพร้อมแหล่งที่มา สถานะที่เปิดใช้งาน และสถานะการตรวจสอบ"
+    },
+    {
+      "name": "load_skill_detail",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "โหลดทักษะพิเศษเมื่องานในมือตรงกับทักษะใดทักษะหนึ่งที่แสดงอยู่ในพร้อมท์ของระบบ ใช้เครื่องมือนี้เพื่อแทรกคำแนะนำและทรัพยากรของทักษะลงในการสนทนาปัจจุบัน ผลลัพธ์อาจมีคำแนะนำขั้นตอนการทำงานโดยละเอียด รวมถึงการอ้างอิงถึงสคริปต์ ไฟล์ ฯลฯ ในไดเร็กทอรีเดียวกันกับทักษะ ชื่อทักษะจะต้องตรงกับหนึ่งในทักษะที่ระบุไว้ในข้อความแจ้งของระบบของคุณ"
+    },
+    {
+      "name": "plugin_request_install",
+      "category": "Skills and Plugins",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "สร้างข้อเสนอการติดตั้งแบบมีโครงสร้างสำหรับปลั๊กอินอย่างเป็นทางการหนึ่งปลั๊กอิน สิ่งนี้ไม่ดาวน์โหลดหรือติดตั้งปลั๊กอิน หน้าจอหลักจะต้องถามผู้ใช้"
+    },
+    {
+      "name": "plugin_search",
+      "category": "Skills and Plugins",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "ค้นหาข้อมูลเมตาปลั๊กอิน FoneClaw อย่างเป็นทางการเมื่อผู้ใช้ถามถึงความสามารถที่ไม่มีอยู่ในรายการเครื่องมือปัจจุบัน นี่เป็นเพียงการค้นหาข้อมูลเมตาและไม่ต้องดาวน์โหลดหรือติดตั้งปลั๊กอิน"
+    },
+    {
+      "name": "preview_skill_import",
+      "category": "Skills and Plugins",
+      "risk": "LOW",
+      "approval": "อัตโนมัติ",
+      "approvalCode": "AUTO",
+      "description": "ดูตัวอย่างเอกสาร SKILL.md ที่วาง การดำเนินการนี้จะแยกวิเคราะห์และตรวจสอบแต่ไม่ได้บันทึก"
+    },
+    {
+      "name": "remove_skill",
+      "category": "Skills and Plugins",
+      "risk": "DESTRUCTIVE",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "เอาทักษะออกไป"
+    },
+    {
+      "name": "save_skill_draft",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "บันทึกเอกสาร SKILL.md เป็นร่างทักษะผู้ใช้ที่ถูกปิดใช้งาน"
+    },
+    {
+      "name": "update_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "อัปเดตเอกสารทักษะที่มีอยู่ในทะเบียนทักษะ"
+    }
+  ]
+}

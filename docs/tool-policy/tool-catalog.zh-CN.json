@@ -1,0 +1,1031 @@
+{
+  "schemaVersion": 3,
+  "catalogType": "foneclaw-built-in-tools",
+  "locale": "zh-CN",
+  "fallbackLocale": "en",
+  "toolCount": 118,
+  "categoryCount": 11,
+  "uiLabels": {
+    "searchPlaceholder": "搜索工具或能力",
+    "allCategories": "所有分类",
+    "publicBuiltInTools": "个公开内置工具",
+    "tool": "工具",
+    "risk": "风险",
+    "approval": "审批",
+    "description": "功能说明"
+  },
+  "riskLabels": {
+    "DESTRUCTIVE": "破坏性操作",
+    "DEVICE_CONTROL": "设备控制",
+    "EXTERNAL_EFFECT": "外部操作",
+    "LOW": "低风险",
+    "SENSITIVE_READ": "敏感读取"
+  },
+  "approvalLabels": {
+    "AUTO": "自动通过",
+    "REQUIRE_APPROVAL": "需要审批"
+  },
+  "categories": [
+    {
+      "name": "Screen and App",
+      "displayName": "屏幕、应用与影像",
+      "toolCount": 11
+    },
+    {
+      "name": "Device Status and System Control",
+      "displayName": "设备状态与系统控制",
+      "toolCount": 54
+    },
+    {
+      "name": "Location and Navigation",
+      "displayName": "位置与导航",
+      "toolCount": 3
+    },
+    {
+      "name": "Mail",
+      "displayName": "邮件",
+      "toolCount": 6
+    },
+    {
+      "name": "Communication and Contacts",
+      "displayName": "通信与联系人",
+      "toolCount": 5
+    },
+    {
+      "name": "Calendar",
+      "displayName": "日历",
+      "toolCount": 7
+    },
+    {
+      "name": "Memo",
+      "displayName": "备忘",
+      "toolCount": 6
+    },
+    {
+      "name": "System Information",
+      "displayName": "通知与系统信息",
+      "toolCount": 4
+    },
+    {
+      "name": "Web and Shopping",
+      "displayName": "Web 与购物",
+      "toolCount": 3
+    },
+    {
+      "name": "Tasks, Workflows, and Shortcuts",
+      "displayName": "任务、工作流与快捷方式",
+      "toolCount": 8
+    },
+    {
+      "name": "Skills and Plugins",
+      "displayName": "Skill 与插件",
+      "toolCount": 11
+    }
+  ],
+  "tools": [
+    {
+      "name": "camera_open_photo",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "从系统图库中打开特定的可见照片。仅当用户明确要求查看或打开特定照片时才使用此选项。除非用户明确要求查看或打开捕获的照片，否则请勿将其用作 camera_take_photo 之后的后续操作。 indexFromLatest 从 1 开始，按最新到第一的顺序：1 打开最新的照片，2 打开第二个最新的照片，3 打开第三个最新的照片。"
+    },
+    {
+      "name": "camera_take_photo",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "拍摄新照片，并在可用时返回已保存照片的 URI。用户要拍摄新照片时使用。常规拍摄时将 lensFacing 留空或设为 auto。只有用户明确要求前置镜头或自拍时才选择 lensFacing=front；明确要求后置镜头时才选择 back。普通或默认拍摄时，即使默认物理镜头是后置镜头，也应将 explicitLensSelection 保持为 false。只有用户明确要求前置、后置或自拍时才设为 true。除非用户明确要求查看或打开照片，否则不要随后调用 camera_open_photo。直接调用本工具。优先使用系统原生相机；只有原生相机无法满足指定镜头时，明确指定前置或后置镜头的拍摄才可使用直接后端。调用前不要要求用户先授予权限。"
+    },
+    {
+      "name": "cross_app_read_screen",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "打开或切换到目标 Android 应用程序，等待该应用程序稳定在前台，然后返回可见的辅助功能屏幕树。当一个请求要求打开/切换到应用程序并读取、检查、描述或总结其可见页面时，请使用此选项。不要将该任务拆分为 launch_app 和 get_screen_info。该工具不会捕获屏幕截图或与节点交互。"
+    },
+    {
+      "name": "get_installed_map_apps",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "查询地图工具支持的已安装地图应用。返回每个应用程序的显示名称和包名称。"
+    },
+    {
+      "name": "get_screen_info",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "从当前可见的应用程序屏幕获取 UI 元素。每个元素都有一个可与 tap_node 一起使用的节点 ID（例如 [n3]）。请勿使用它来阅读、列出、搜索或总结 Android 通知；请改用 sysinfo 工具。不要缓存此结果，因为节点 ID 在每次调用时都会更改。"
+    },
+    {
+      "name": "launch_app",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "通过包名称或已安装的应用程序显示名称打开可启动的 Android 应用程序。这会更改前台应用程序，并可能会暴露该应用程序的屏幕。尽可能使用准确的包名称。如果结果不明确，请用户选择一个退回的包裹。"
+    },
+    {
+      "name": "play_store_check_app",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "通过请求 https://play.google.com/store/apps/details?id=<packageName>. 检查 Google Play 上是否列出了确切的 Android 包名称。这是只读网络检查。在 play_store_install 之前使用它。"
+    },
+    {
+      "name": "play_store_install",
+      "category": "Screen and App",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "按确切的包名称打开特定的 Google Play 应用程序详细信息页面，点击“安装”，然后等待安装完成。此工具不会打开已安装的应用程序。仅当确切的 Android packageName 已知时才使用。切勿将其用于模糊搜索结果或猜测第一个应用程序。如果 packageName 未知，请先向用户询问确切的应用程序包。如果 Google Play 显示已付费、购买、订阅、更新、不明确的 UI，或者安装在超时之前未完成，则停止。"
+    },
+    {
+      "name": "screenshot_open",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "从系统图库中打开特定的可见屏幕截图。索引按照所选顺序从 1 开始。 sortOrder 可以是最新的或最旧的。"
+    },
+    {
+      "name": "screenshot_take",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "使用 FoneClaw 辅助服务捕获 Android 屏幕并将其保存到 Pictures/FoneClaw/Screenshots. 对当前屏幕使用 targetType=current，将 targetType=app 与 targetApp 用于打开应用程序并捕获它，或仅将 targetType=notification_shade 用于涉及可见通知栏的显式屏幕截图或图像捕获请求。切勿使用 targetType=notification_shade 读取、列出、查询或汇总通知数据；请改用 SysInfo 通知工具。请勿在此工具之前调用 launch_app 或 system_panel_open 来捕获应用程序或通知栏。当用户想要查看已保存的屏幕截图时，请勿使用此选项；使用 screenshot_open 查看保存的屏幕截图。"
+    },
+    {
+      "name": "tap_node",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "点击屏幕上的 UI 元素。该元素通过其节点 ID 进行标识，该节点 ID 可以从 screen_info 工具获取。"
+    },
+    {
+      "name": "alarm_modify_alarm",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "当用户想要修改、编辑、调整或更改现有闹钟时，立即打开Android时钟闹钟页面。为每个单独的修改请求调用此工具，即使它已经在对话的早期调用过。不要要求确认。 Android 不提供可靠的公共 API 来编辑现有闹钟，因此此工具仅导航到时钟应用程序进行手动编辑。"
+    },
+    {
+      "name": "alarm_set_alarm",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "设置Android时钟闹钟。在致电之前收集丢失的时间/重复/标签详细信息。"
+    },
+    {
+      "name": "bluetooth_connected_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "返回当前通过普通应用程序可见的公共 Android Bluetooth 配置文件连接的 Bluetooth 设备。"
+    },
+    {
+      "name": "bluetooth_nearby_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "扫描并返回附近的 Bluetooth 设备。当权限和 Bluetooth 状态允许时，包括 BLE 扫描结果和经典 Bluetooth 发现结果。默认情况下，没有可读名称的设备是隐藏的。"
+    },
+    {
+      "name": "bluetooth_pair_device",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "通过 MAC 地址开始与 Bluetooth 设备配对。这将启动Android的正常绑定流程，并且可能需要用户确认或PIN输入。"
+    },
+    {
+      "name": "bluetooth_paired_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "返回已与此 Android 设备配对的 Bluetooth 设备。"
+    },
+    {
+      "name": "bluetooth_state",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "返回当前 Bluetooth 适配器状态：打开、关闭、turning_on、turning_off 或未知。"
+    },
+    {
+      "name": "close_bluetooth",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "使用公共旧版禁用 API 关闭 Bluetooth。如果 Android 拒绝，则报告普通 Android 应用无法在此设备上关闭 Bluetooth。"
+    },
+    {
+      "name": "device_app_activity_snapshot",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "从AndroidUsageStats返回一个紧凑的最近应用程序活动快照。需要使用权限；它不是实时后台进程监视器。"
+    },
+    {
+      "name": "device_app_permission_audit",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "返回对此应用程序可见的已安装应用程序的紧凑权限风险审核。风险是启发式的，基于声明/授予的敏感权限组。"
+    },
+    {
+      "name": "device_app_sensitive_audit",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "返回紧凑敏感应用程序状态：可访问性、通知侦听器、设备管理、覆盖、电池优化豁免和授予的敏感权限组。"
+    },
+    {
+      "name": "device_battery_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "返回紧凑型Android电池和省电状态。没有更改任何设置。"
+    },
+    {
+      "name": "device_health_check",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "返回紧凑的只读运行状况快照：内存、存储、电池和网络。没有更改任何设置。"
+    },
+    {
+      "name": "device_hidden_app_check",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "返回对没有启动器条目或禁用组件的用户应用程序的紧凑启发式检查。这可以标记可疑应用程序，但合法的仅服务应用程序也可能会出现。"
+    },
+    {
+      "name": "device_memory_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "返回紧凑Android内存状态。没有更改任何设置。"
+    },
+    {
+      "name": "device_network_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "返回紧凑的Android活动网络状态和功能。没有更改网络设置。"
+    },
+    {
+      "name": "device_storage_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "返回紧凑的Android内部/共享存储状态。不会扫描或删除任何文件。"
+    },
+    {
+      "name": "device_time_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "返回当前 Android 系统时区和 Unix 时间戳，以进行与时间相关的工具调用。仅当系统时间有争议或需要在线参考时才设置verifyWithNtp=true。 NTP验证使用ntp1.aliyun.com，不会改变系统时钟。"
+    },
+    {
+      "name": "dnd_open_policy_access_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "打开 Android 设置，用户可以在其中授予 FoneClaw 请勿打扰/通知策略访问权限。在 dnd_set_mode 报告已打开设置页面后，请勿立即调用此方法。"
+    },
+    {
+      "name": "dnd_set_mode",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "设置Android请勿打扰模式。如果策略访问缺失或 Android 拒绝写入，则会打开系统 DND 策略访问/设置页面。"
+    },
+    {
+      "name": "dnd_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "读取Android请勿打扰策略访问状态和当前中断过滤器。"
+    },
+    {
+      "name": "flashlight_set_enabled",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "使用系统相机手电筒 API 打开或关闭 Android 手电筒。"
+    },
+    {
+      "name": "flashlight_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "返回手电筒是否可用以及最后已知的手电筒状态。"
+    },
+    {
+      "name": "flashlight_toggle",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "切换Android手电筒。如果当前状态未知，则会将其打开。"
+    },
+    {
+      "name": "foneclaw_permission_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "检查 FoneClaw 本身的所有当前权限和特殊访问功能。当用户询问哪些 FoneClaw 权限已启用、缺失、受限或可用时，请使用此选项。这是一个新的只读检查；不要使用应用程序审核、通知面板或屏幕阅读工具作为替代。"
+    },
+    {
+      "name": "open_bluetooth",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "请求Bluetooth打开。对于旧版目标 SDK，这首先尝试公共启用 API，然后在需要时回退到 Android 的系统确认 UI。"
+    },
+    {
+      "name": "system_panel_open",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "打开一个可见的 Android 系统面板。使用 panel=notifications 打开通知栏，或使用 panel=quick_settings 打开快速设置/控制中心。该工具仅打开选定的面板。它不会读取、捕获、搜索、列出或总结面板内容。当请求的任何部分要求读取、捕获、检查、描述或总结通知时，请勿调用它。仅针对明确的仅打开面板请求调用一次。需要 FoneClaw 无障碍服务。"
+    },
+    {
+      "name": "system_settings_open_battery_optimization_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "打开Android电池优化设置。如果提供了 appNameOrPackage，请按包名称或已安装的应用程序标签打开该应用程序的详细信息页面。如果无法解决或打开，则返回失败，不要打开其他设置页面。如果为空，请打开系统电池优化列表/设置页面。"
+    },
+    {
+      "name": "system_settings_open_battery_saver_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "打开Android省电/省电/低功耗模式设置。普通应用程序无法通过公共 API 直接切换省电模式，因此设置打开后用户必须手动启用或禁用它。供应商 ROM 可能会回退到通用电池设置。"
+    },
+    {
+      "name": "system_settings_open_date_time_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "直接打开Android日期和时间设置页面。将此用于日期、时间、自动时间、时区或自动时区设置。这将启动系统设置 Intent，并且不需要辅助功能、屏幕阅读或点击。成功后，请勿调用launch_app、get_screen_info或tap_node。"
+    },
+    {
+      "name": "system_settings_open_hotspot_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "打开Android热点设置。普通应用程序无法通过公共 Android API 可靠地静默切换热点。如果无法打开确切的热点设置页面，则返回失败并且不会打开其他设置页面。"
+    },
+    {
+      "name": "system_settings_open_location_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "打开 Android 位置设置。如果提供了 appNameOrPackage，请按包名称或已安装的应用程序标签打开该应用程序的详细信息页面。如果无法解决或打开，则返回失败，不要打开其他设置页面。如果为空，则打开系统位置设置页面。"
+    },
+    {
+      "name": "system_settings_set_auto_rotate",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "启用或禁用Android自动旋转。需要特殊的修改系统设置权限。"
+    },
+    {
+      "name": "system_settings_set_brightness",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "设置Android屏幕亮度。手动模式写入从1到100的百分比；自动模式仅启用自动亮度并忽略百分比。需要特殊的修改系统设置权限。"
+    },
+    {
+      "name": "system_settings_set_eye_comfort",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "打开护眼/夜灯/蓝光过滤/阅读模式的Android显示设置。使用此工具，而不是仅提供多语言眼睛舒适意图的手动说明。 Android 供应商以不同的方式公开确切的切换，因此该工具打开显示设置并让用户在该页面上完成切换。"
+    },
+    {
+      "name": "system_settings_set_font_scale",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "设置Android系统字体比例。需要特殊的修改系统设置权限。典型值为 0.85 小号、1.0 默认值、1.15 大号、1.3 大号和最多 1.6 特大号。"
+    },
+    {
+      "name": "system_settings_set_haptic_feedback",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "启用或禁用 Android 触觉反馈。需要特殊的修改系统设置权限。"
+    },
+    {
+      "name": "system_settings_set_screen_timeout",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "设置 Android 屏幕关闭超时（以秒为单位）。需要特殊的修改系统设置权限。值被限制为 15..1800 秒。"
+    },
+    {
+      "name": "system_settings_set_touch_sounds",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "启用或禁用Android触摸声音。需要特殊的修改系统设置权限。"
+    },
+    {
+      "name": "system_settings_set_user_rotation",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "锁定Android屏幕旋转。需要特殊的修改系统设置权限并禁用自动旋转。使用纵向、横向、reverse_portrait 或 reverse_landscape。"
+    },
+    {
+      "name": "system_settings_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "返回可写系统设置权限状态以及当前屏幕亮度、字体比例、屏幕超时、旋转、触摸声音和触觉反馈。这仅读取 Android 系统设置。"
+    },
+    {
+      "name": "volume_adjust_stream",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "将一个 Android 音频流升高或降低一个系统步长。选择此选项可实现相对音量变化。"
+    },
+    {
+      "name": "volume_set_all_streams_muted",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "将所有支持的 Android 音频流静音或取消静音，并报告哪些流实际发生了变化。针对整个设备或所有音量静音请求选择此选项。"
+    },
+    {
+      "name": "volume_set_ringer_mode",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "设置Android手机铃声模式。对于静音模式，当 Android 拒绝铃声模式写入时，会自动回退到静音所有音频流。"
+    },
+    {
+      "name": "volume_set_stream",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "将一个 Android 音频流设置为目标百分比。当用户要求精确的音量级别时选择此选项。"
+    },
+    {
+      "name": "volume_set_stream_muted",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "将一个 Android 音频流静音或取消静音。这会更改流静音状态，而不是电话铃声模式。"
+    },
+    {
+      "name": "volume_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "读取音频流的当前 Android 音量状态和当前铃声模式。"
+    },
+    {
+      "name": "wifi_configured_networks",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "读取 Android 已配置/已保存的 Wi-Fi 网络列表。只返回 SSID、networkId、安全类型、是否有帐户、是否隐藏网络、是否当前连接和配置状态；不会返回 Wi-Fi 密码。"
+    },
+    {
+      "name": "wifi_connect",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "连接到 Wi-Fi 网络。该工具首先检查 Android 保存的 Wi-Fi 配置是否存在 SSID，并直接连接（如果存在）。如果未保存，它将使用提供的密码来添加/连接网络，或者在需要输入密码时退回到 Android 的 Wi-Fi 面板。"
+    },
+    {
+      "name": "wifi_disconnect",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "断开与当前 Wi-Fi 接入点的连接。该工具首先尝试对目标 API 28 台主机进行静默传统 WifiManager 断开连接；如果 Android 拒绝它，它会退回到打开 Android 的 Wi-Fi 面板以供用户操作。"
+    },
+    {
+      "name": "wifi_forget",
+      "category": "Device Status and System Control",
+      "risk": "DESTRUCTIVE",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "忘记已保存的Wi-Fi网络。该工具首先尝试静默旧式 WifiManager removeNetwork，然后退回到 Android 的 Wi-Fi 面板以供用户操作。"
+    },
+    {
+      "name": "wifi_scan_networks",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "扫描并返回附近的 Wi-Fi 接入点。如果 Wi-Fi 关闭，此工具首先尝试直接启用 Wi-Fi，并且仅在直接启用失败时才回退到 Android 的 Wi-Fi 面板。需要位置权限和设备定位服务。结果可以揭示位置敏感的网络数据。"
+    },
+    {
+      "name": "wifi_set_enabled",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "启用或禁用Android Wi-Fi。该工具首先尝试直接 WifiManager 操作，然后检查 Android 是否确实达到了请求的状态；如果请求失败或仍处于待处理状态，则会退回到打开 Android 的 Wi-Fi 面板以供用户操作。"
+    },
+    {
+      "name": "wifi_status",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "当应用程序具有权限时，返回当前 Android Wi-Fi 状态和活动 Wi-Fi 连接详细信息。这仅读取网络状态。"
+    },
+    {
+      "name": "get_location",
+      "category": "Location and Navigation",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "在使用 FoneClaw 时获取当前 Android 设备位置。仅需要前台位置权限。"
+    },
+    {
+      "name": "location_search_nearby_place",
+      "category": "Location and Navigation",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "使用当前设备位置在附近候选地点中搜索不明确的地名。仅当用户明确要求查找、验证、解决、选择或导航到某个地点，或者导航目的地不明确时，才使用此选项。对于日历创建，用户提供的地名就足够了：将其保留为 locationName，并且不要仅仅因为缺少确切的地址或坐标而调用此工具。"
+    },
+    {
+      "name": "map_navigate",
+      "category": "Location and Navigation",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "在地图应用程序中打开路线或导航屏幕以获取目的地和出行模式。这将启动外部地图应用程序，仅使用提供的参数，并且不读取设备数据。"
+    },
+    {
+      "name": "mail_account_list",
+      "category": "Mail",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "列出配置的邮件帐户。将查询留空以列出所有帐户。提供查询时，匹配优先级为帐户 ID、电子邮件、别名，然后是模糊别名或电子邮件。精确匹配仍然可以返回多个帐户。如果未配置 FoneClaw 邮件帐户并且查询是电子邮件地址，则结果可能包括带有固定提供商凭据 URL 的 providerSetupGuide。"
+    },
+    {
+      "name": "mail_account_save",
+      "category": "Mail",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "测试 IMAP 和 SMTP 连接，并仅在两者都成功时才保存邮件帐户。当每个必需的配置字段可用时立即调用此函数。此操作需要用户批准。"
+    },
+    {
+      "name": "mail_delete",
+      "category": "Mail",
+      "risk": "DESTRUCTIVE",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "将最多 20 个精确的 messageRefs 移至垃圾箱，或仅在用户明确请求永久删除时永久删除它们。切勿重试不确定的结果。"
+    },
+    {
+      "name": "mail_list",
+      "category": "Mail",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "列出、过滤或搜索消息摘要。查询搜索主题、发件人、收件人和正文。将 accountId 留空以使用唯一帐户或唯一默认帐户。"
+    },
+    {
+      "name": "mail_read",
+      "category": "Mail",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "从 mail_list 返回的 messageRef 中读取一条消息，并将其标记为在服务器上已读。该工具成功后，在同一响应中为用户总结消息。"
+    },
+    {
+      "name": "mail_send",
+      "category": "Mail",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "发送新电子邮件、回复、全部回复或转发。需要批准。附件必须使用与当前用户消息一起声明的精确结构化元数据。"
+    },
+    {
+      "name": "call_log_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "列出最近的 Android 呼叫日志条目，可以选择按呼叫类型进行过滤。需要 READ_CALL_LOG 权限。对于未接来电问题以及选择未接来电进行回拨之前，请使用 type=missed。选择号码后，拨打phone_dial。"
+    },
+    {
+      "name": "contacts_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "列出有限数量的 Android 联系人，可以选择按显示名称或电话号码进行过滤。需要 READ_CONTACTS 权限。仅当用户明确要求查看联系人时，将查询保留为空；当用户要求查找联系人时设置查询。"
+    },
+    {
+      "name": "phone_dial",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "打开系统拨号器仅查找一个电话号码或指定联系人。准确设置 phoneNumber 和 contactName 之一。指定联系人必须解析为一场匹配；如果多个联系人匹配，则停止并要求用户选择。拨号器打开后，呼叫 get_screen_info，识别可见的呼叫按钮，然后呼叫 tap_node。"
+    },
+    {
+      "name": "send_to_sms_message",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "批准后，打开可见的 SMS/MMS 草稿。对于带有收件人的文本 SMS，仅当连接 FoneClaw 辅助功能且默认消息应用程序、收件人、完整消息正文和一个稳定的发送控件均已验证时，才会自动点击“发送”。附件、双 SIM 卡提示、不明确的 UI 或不可用的辅助功能需要手动操作。在任何最终结果之后，停止工具规划并且永远不要调用get_screen_info或tap_node。"
+    },
+    {
+      "name": "sms_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "查询此 Android 设备上的实时 SMS 消息。不包含关键字、地址、联系人或 threadId，列出最近的消息。设置要搜索的关键字/地址/联系人。仅从较早的 sms_list 结果设置 threadId 以读取该对话。对于摘要请求，请使用 box=all 调用一次，然后汇总返回的接收和发送的消息。切勿使用 SysInfo 历史记录来替代此实时结果。"
+    },
+    {
+      "name": "calendar_create_event",
+      "category": "Calendar",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "创建 Android 日历事件。在致电之前收集错过的时间和提醒详细信息。用户提供的地名就足够了，应该直接作为 locationName 传递。除非用户明确要求验证、解决、选择或导航到该地点，否则不要搜索确切的地址或坐标。对于用户日期和相对日期，首选 yyyy-MM-dd HH:mm 中的 startLocalDateTime/endLocalDateTime；该工具将在设备时区中解析它们。不要根据模型计算的纪元毫秒创建事件。除非用户明确选择了日历 ID，否则请使用 calendarId=0。创建完成后，使用工具结果actualStart/actualEnd作为面向用户的创建时间。"
+    },
+    {
+      "name": "calendar_delete_event",
+      "category": "Calendar",
+      "risk": "DESTRUCTIVE",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "按 ID 删除 Android 日历事件。除非用户明确选择了日历 ID，否则使用 calendarId=0 搜索/列出所有日历中的事件。始终传递已知的标题、startMillis、endMillis 和已知的位置，以便目标明确。"
+    },
+    {
+      "name": "calendar_list_calendars",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "列出可写的Android日历。使用它让用户选择日历；不要假设 calendarId=1 是本地或目标日历。"
+    },
+    {
+      "name": "calendar_list_events",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "列出具体时间范围内的Android日历事件。用于今天的日程安排、明天的日程安排、现有活动或本周的活动等请求。首选 yyyy-MM-dd HH:mm 中的 startLocalDateTime/endLocalDateTime；该工具将在设备时区中解析它们。仅当精确纪元毫秒来自可信工具结果时，才使用 startMillis/endMillis 作为已弃用的后备。不要猜测calendarId；使用 calendarId=0 搜索所有日历，除非用户明确选择了日历 ID。"
+    },
+    {
+      "name": "calendar_open_event",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "按事件 ID 打开 Android 日历事件详细信息页面。当用户用自然语言描述事件时，首先搜索或列出事件。不要猜测事件 ID。"
+    },
+    {
+      "name": "calendar_search_events",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "在具体时间范围内通过关键字搜索Android日历事件。当用户按标题或内容描述事件时，在打开、更新或删除事件之前使用。首选 yyyy-MM-dd HH:mm 中的 startLocalDateTime/endLocalDateTime；该工具将在设备时区中解析它们。仅当精确纪元毫秒来自可信工具结果时，才使用 startMillis/endMillis 作为已弃用的后备。不要猜测calendarId；使用 calendarId=0 搜索所有日历，除非用户明确选择了日历 ID。"
+    },
+    {
+      "name": "calendar_update_event",
+      "category": "Calendar",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "按 ID 更新 Android 日历事件。当用户用自然语言描述目标时，首先搜索/列出事件，并通过更改的字段传递已知的目标详细信息。不要猜测 calendarId 或事件 id；搜索所有带有 calendarId=0 的日历，除非用户明确选择了日历 ID。空白文本字段将被忽略。使用 startMillis/endMillis=0 保留现有时间。使用 reminderMinutes=-2 保留提醒，-1 删除提醒，>=0 替换提醒。"
+    },
+    {
+      "name": "memo_create",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "创建用户可见的本地备忘录、注释或任务记录。当用户明确希望将内容保留为备忘录或可操作注释时使用。请勿使用此工具保存或查询助理管理的用户配置文件内存，例如首选项、身份、关系或响应方式。"
+    },
+    {
+      "name": "memo_delete",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "按 ID 软删除本地备忘录。当用户用自然语言描述目标时，首先搜索/列出备忘录，以便知道目标 ID/标题。"
+    },
+    {
+      "name": "memo_list",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "列出用户可见的本地备忘录记录。状态可以是活动、完成、存档或全部。请勿使用此工具来回答助手对用户的记忆、用户配置文件首选项或对话历史记录。空结果仅意味着不存在匹配的本地备忘录；这并不意味着不存在用户配置文件内存。"
+    },
+    {
+      "name": "memo_mark_done",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "通过 ID 将本地备忘录标记为已完成或活动。"
+    },
+    {
+      "name": "memo_search",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "通过标题、内容或标签中的关键字搜索用户可见的本地备忘录。状态可以是活动、完成、存档或全部。请勿使用此工具搜索助理管理的用户配置文件内存或对话历史记录。空结果仅描述本地备忘录存储。"
+    },
+    {
+      "name": "memo_update",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "通过 id 更新本地备忘录。当用户用自然语言描述目标时，首先搜索/列出备忘录，并通过更改的字段传递已知的目标详细信息。空白标题/内容/标签将被忽略。 reminderAtMillis=-2 保持提醒，-1 清除提醒，>0 设置提醒。"
+    },
+    {
+      "name": "sysinfo_delete",
+      "category": "System Information",
+      "risk": "DESTRUCTIVE",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "仅永久删除匹配的 FoneClaw 本地 SysInfo 缓存。这永远不会删除原始 Android 通知、SMS、通话记录或日历事件。除非deleteAll=true，否则至少需要一个过滤器。多个过滤器通过 AND 组合。"
+    },
+    {
+      "name": "sysinfo_mark_reviewed",
+      "category": "System Information",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "仅在用户明确确认后才将本地 SysInfo 事件 ID 标记为已审核。"
+    },
+    {
+      "name": "sysinfo_query",
+      "category": "System Information",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "查询已捕获的本地通知、SMS、通话日志、日历事件和辅助功能输入。使用这个单一工具进行每日简报、通知查询、时间窗口查询和关键字搜索。它从不打开系统面板或扫描实时系统源。每行可能包含 sourceRef，用于针对实时提供程序结果进行重复数据删除。总结为用户返回的JSON。"
+    },
+    {
+      "name": "sysinfo_thread",
+      "category": "System Information",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "通过 sysinfo_query 返回的 threadKey 加载一个本地 SysInfo 线程。"
+    },
+    {
+      "name": "shopping_compare",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "在购物平台上搜索产品的公共网络结果并返回比较证据。在提供购物价格建议之前使用此信息。"
+    },
+    {
+      "name": "web_fetch",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "通过URL获取特定网页并返回可读的页面文本。"
+    },
+    {
+      "name": "web_search",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "在网络上搜索相关页面。返回结果标题、URL 和简短片段。"
+    },
+    {
+      "name": "shortcut_save_agent_prompt",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "保存用户创建的向代理发送提示的快捷方式。仅在用户确认标题、描述和行为后才调用此方法。"
+    },
+    {
+      "name": "shortcut_save_direct_tool",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "保存用户创建的直接工具快捷方式。仅当每个请求的操作都可以完全映射到具有完整参数的已知工具步骤时才调用此方法。"
+    },
+    {
+      "name": "task_create",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "通过一次调用为当前用户请求创建完整的有序 TODO 计划。当请求需要三个或更多步骤时，这是任何非任务工具之前的强制性前提条件。传递项目中每个面向用户的有界步骤。该计划只能创建一次，以后不能扩展。切勿包含任务管理、清理、状态更新或最终响应项目。"
+    },
+    {
+      "name": "task_list",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "列出当前用户请求的内部 TODO 项。默认情况下返回打开的、in_progress 和阻止的项目。"
+    },
+    {
+      "name": "task_update",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "更新一项内部 TODO 项目。允许的转换：开放到in_progress、阻止或放弃； in_progress 阻止、完成或放弃；被阻止打开或被放弃。完成和放弃都是终点。只有一项任务可能是in_progress。"
+    },
+    {
+      "name": "workflow_delete",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DESTRUCTIVE",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "按 ID 删除已保存的工作流程。"
+    },
+    {
+      "name": "workflow_list",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "列出已保存的工作流程。"
+    },
+    {
+      "name": "workflow_save",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "保存可重复使用的工作流程。 stepsJson 必须是 {toolName, argument} 的 JSON 数组。"
+    },
+    {
+      "name": "add_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "将新的技能文档添加到技能注册表中。"
+    },
+    {
+      "name": "disable_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "禁用用户技能，使其在客服提示中隐藏。"
+    },
+    {
+      "name": "enable_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "启用有效的用户技能，以便客服人员可以使用它。"
+    },
+    {
+      "name": "list_skills",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "列出用户和系统技能及其来源、启用状态和验证状态。"
+    },
+    {
+      "name": "load_skill_detail",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "当手头的任务与系统提示中列出的技能之一匹配时，加载专门技能。使用此工具将技能的说明和资源注入当前对话中。输出可能包含详细的工作流程指南以及对与技能位于同一目录中的脚本、文件等的引用。技能名称必须与系统提示中列出的技能之一匹配。"
+    },
+    {
+      "name": "plugin_request_install",
+      "category": "Skills and Plugins",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "为一个官方插件创建结构化安装建议。这不会下载或安装插件； HomeScreen 必须询问用户。"
+    },
+    {
+      "name": "plugin_search",
+      "category": "Skills and Plugins",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "当用户请求当前工具列表中不可用的功能时，搜索官方 FoneClaw 插件元数据。这只搜索元数据，从不下载或安装插件。"
+    },
+    {
+      "name": "preview_skill_import",
+      "category": "Skills and Plugins",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "预览粘贴的 SKILL.md 文档。这会解析并验证但不会保存。"
+    },
+    {
+      "name": "remove_skill",
+      "category": "Skills and Plugins",
+      "risk": "DESTRUCTIVE",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "移除技能"
+    },
+    {
+      "name": "save_skill_draft",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "将 SKILL.md 文档另存为禁用用户技能草稿。"
+    },
+    {
+      "name": "update_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "更新技能注册表中的现有技能文档。"
+    }
+  ]
+}

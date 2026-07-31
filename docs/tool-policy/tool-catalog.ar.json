@@ -1,0 +1,1031 @@
+{
+  "schemaVersion": 3,
+  "catalogType": "foneclaw-built-in-tools",
+  "locale": "ar",
+  "fallbackLocale": "en",
+  "toolCount": 118,
+  "categoryCount": 11,
+  "uiLabels": {
+    "searchPlaceholder": "ابحث عن الأدوات أو الإمكانات",
+    "allCategories": "جميع الفئات",
+    "publicBuiltInTools": "أداة مدمجة عامة",
+    "tool": "الأداة",
+    "risk": "المخاطر",
+    "approval": "الموافقة",
+    "description": "ما الذي تفعله"
+  },
+  "riskLabels": {
+    "DESTRUCTIVE": "إجراء تدميري",
+    "DEVICE_CONTROL": "التحكم بالجهاز",
+    "EXTERNAL_EFFECT": "إجراء خارجي",
+    "LOW": "مخاطر منخفضة",
+    "SENSITIVE_READ": "قراءة حساسة"
+  },
+  "approvalLabels": {
+    "AUTO": "تلقائي",
+    "REQUIRE_APPROVAL": "تتطلب موافقة"
+  },
+  "categories": [
+    {
+      "name": "Screen and App",
+      "displayName": "الشاشة والتطبيقات والوسائط",
+      "toolCount": 11
+    },
+    {
+      "name": "Device Status and System Control",
+      "displayName": "حالة الجهاز وعناصر تحكم النظام",
+      "toolCount": 54
+    },
+    {
+      "name": "Location and Navigation",
+      "displayName": "الموقع والتنقل",
+      "toolCount": 3
+    },
+    {
+      "name": "Mail",
+      "displayName": "البريد",
+      "toolCount": 6
+    },
+    {
+      "name": "Communication and Contacts",
+      "displayName": "الاتصالات وجهات الاتصال",
+      "toolCount": 5
+    },
+    {
+      "name": "Calendar",
+      "displayName": "التقويم",
+      "toolCount": 7
+    },
+    {
+      "name": "Memo",
+      "displayName": "المذكرات",
+      "toolCount": 6
+    },
+    {
+      "name": "System Information",
+      "displayName": "الإشعارات ومعلومات النظام",
+      "toolCount": 4
+    },
+    {
+      "name": "Web and Shopping",
+      "displayName": "الويب والتسوق",
+      "toolCount": 3
+    },
+    {
+      "name": "Tasks, Workflows, and Shortcuts",
+      "displayName": "المهام وسير العمل والاختصارات",
+      "toolCount": 8
+    },
+    {
+      "name": "Skills and Plugins",
+      "displayName": "المهارات والمكونات الإضافية",
+      "toolCount": 11
+    }
+  ],
+  "tools": [
+    {
+      "name": "camera_open_photo",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "افتح صورة مرئية محددة من معرض النظام. استخدم هذا فقط عندما يطلب المستخدم صراحة عرض أو فتح صورة معينة. لا تستخدم هذا كمتابعة بعد Camera_take_photo ما لم يطلب المستخدم صراحةً عرض الصورة الملتقطة أو فتحها. يعتمد مؤشر IndexFromLatest على 1 بناءً على الترتيب الأحدث أولاً: 1 يفتح أحدث صورة، 2 يفتح ثاني أحدث صورة، 3 يفتح ثالث أحدث صورة. المعرّفات التقنية: camera_take_photo, indexFromLatest."
+    },
+    {
+      "name": "camera_take_photo",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "التقط صورة جديدة وأعد URI للصورة المحفوظة عندما يكون ذلك متاحًا. استخدم هذا عندما يكون نية المستخدم هو التقاط صورة جديدة. اترك lensFacing بدون ضبط أو قم تلقائيًا بالتقاط الصور العادية. اختر lensFacing=front فقط للواجهة الأمامية أو صورة السيلفي؛ يمكنك الاختيار مرة أخرى فقط عندما يطلب المستخدم صراحةً الكاميرا الخلفية. احتفظ بخطأ تحديد العدسة الواضح لالتقاط الصور العادية/الافتراضية، حتى لو عادت العدسة الفعلية الافتراضية. قم بتعيين خيار الخيار الصريح على \"صحيح\" فقط عندما يطلب المستخدم صراحةً التقاط الصور الأمامية أو الخلفية أو الخلفية أو صور السيلفي. لا تستدعي Camera_open_photo بعد هذه الأداة ما لم يطلب المستخدم صراحةً عرض الصورة أو فتحها. اتصل بهذه الأداة مباشرة. يستخدم Capture كاميرا النظام الأصلية أولاً. قد يستخدم الالتقاط الأمامي/الخلفي الصريح الواجهة الخلفية المباشرة فقط إذا لم تتمكن الكاميرا الأصلية من تلبية العدسة المطلوبة. لا تطلب من المستخدم منح الإذن قبل الاتصال بهذه الأداة. المعرّفات التقنية: explicitLensSelection, camera_open_photo."
+    },
+    {
+      "name": "cross_app_read_screen",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "افتح تطبيق Android المستهدف أو قم بالتبديل إليه، وانتظر حتى يصبح هذا التطبيق ثابتًا في المقدمة، ثم قم بإرجاع شجرة شاشة إمكانية الوصول المرئية. استخدم هذا عندما يطلب أحد الطلبات فتح/التبديل إلى تطبيق وقراءة صفحته المرئية أو فحصها أو وصفها أو تلخيصها. لا تقم بتقسيم هذه المهمة إلى Launch_app وget_screen_info. لا تلتقط هذه الأداة لقطة شاشة أو تتفاعل مع العقد. المعرّفات التقنية: launch_app."
+    },
+    {
+      "name": "get_installed_map_apps",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "الاستعلام عن تطبيقات الخرائط المثبتة والمدعومة بأدوات الخرائط. لإرجاع اسم العرض واسم الحزمة لكل تطبيق."
+    },
+    {
+      "name": "get_screen_info",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "احصل على عناصر واجهة المستخدم من شاشة التطبيق المرئية حاليًا. يحتوي كل عنصر على معرف عقدة (على سبيل المثال [n3]) يمكن استخدامه مع Tap_node. لا تستخدم هذا لقراءة إشعارات Android أو إدراجها أو البحث فيها أو تلخيصها؛ استخدم أدوات sysinfo بدلاً من ذلك. لا تقم بتخزين هذه النتيجة مؤقتًا لأن معرفات العقدة تتغير في كل مكالمة. المعرّفات التقنية: tap_node."
+    },
+    {
+      "name": "launch_app",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "افتح تطبيق Android قابلاً للتشغيل حسب اسم الحزمة أو اسم عرض التطبيق المثبت. يؤدي هذا إلى تغيير التطبيق الأمامي وقد يعرض شاشة هذا التطبيق. استخدم اسم الحزمة الدقيق عندما يكون ذلك ممكنًا. إذا كانت النتيجة غامضة، فاطلب من المستخدم اختيار طرد واحد تم إرجاعه."
+    },
+    {
+      "name": "play_store_check_app",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "تحقق مما إذا كان اسم حزمة Android الدقيق مدرجًا في Google Play عن طريق طلب https://play.google.com/store/apps/details?id=<packageName>. هذا فحص للشبكة للقراءة فقط. استخدمه قبل play_store_install."
+    },
+    {
+      "name": "play_store_install",
+      "category": "Screen and App",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "افتح صفحة تفاصيل تطبيق Google Play محددة حسب اسم الحزمة بالضبط، وانقر فوق تثبيت، وانتظر حتى يكتمل التثبيت. هذه الأداة لا تفتح التطبيق المثبت. يُستخدم فقط عندما يكون اسم حزمة Android محددًا. لا تستخدم هذا مطلقًا للحصول على نتائج بحث غامضة أو لتخمين التطبيق الأول. إذا كان اسم الحزمة غير معروف، فاطلب من المستخدم الحصول على حزمة التطبيق المحددة أولاً. يتوقف إذا أظهر Google Play الدفع، أو الشراء، أو الاشتراك، أو التحديث، أو واجهة المستخدم الغامضة، أو إذا لم يكتمل التثبيت قبل انتهاء المهلة. المعرّفات التقنية: packageName."
+    },
+    {
+      "name": "screenshot_open",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "افتح لقطة شاشة مرئية محددة من معرض النظام. الفهرس يعتمد على 1 بالترتيب المحدد. يمكن أن يكونsortOrder هو الأحدث أو الأقدم."
+    },
+    {
+      "name": "screenshot_take",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "التقط شاشة Android باستخدام خدمة إمكانية الوصول FoneClaw واحفظها في Pictures/FoneClaw/Screenshots. استخدم targetType=current للشاشة الحالية، أو targetType=app مع targetApp لفتح تطبيق والتقاطه، أو targetType=notification_shade فقط للحصول على لقطة شاشة صريحة أو طلب التقاط صورة يتضمن مركز الإشعارات المرئي. لا تستخدم أبدًا targetType=notification_shade لقراءة بيانات الإشعارات أو إدراجها أو الاستعلام عنها أو تلخيصها؛ استخدم أداة إعلام SysInfo بدلاً من ذلك. لا تتصل بـ Launch_app أو system_panel_open قبل هذه الأداة لالتقاط التطبيق أو ظل الإشعارات. لا تستخدم هذا عندما يريد المستخدم عرض لقطة الشاشة المحفوظة بالفعل؛ استخدم Screen_open لعرض لقطات الشاشة المحفوظة. المعرّفات التقنية: launch_app, screenshot_open."
+    },
+    {
+      "name": "tap_node",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "اضغط على عنصر واجهة المستخدم على الشاشة. يتم تعريف العنصر بواسطة معرف العقدة الخاص به، والذي يمكن الحصول عليه من أداة screen_info."
+    },
+    {
+      "name": "alarm_modify_alarm",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "افتح صفحة منبهات Android Clock فورًا عندما يريد المستخدم تعديل منبه موجود أو تحريره أو ضبطه أو تغييره. قم باستدعاء هذه الأداة لكل طلب تعديل منفصل، حتى لو تم استدعاؤها مسبقًا في المحادثة. لا تطلب التأكيد. لا يوفر Android واجهة برمجة تطبيقات عامة موثوقة لتحرير التنبيهات الموجودة، لذا تنتقل هذه الأداة فقط إلى تطبيق الساعة للتحرير اليدوي."
+    },
+    {
+      "name": "alarm_set_alarm",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ضبط منبه على مدار الساعة لنظام Android. اجمع تفاصيل الوقت/التكرار/الملصق المفقود قبل الاتصال."
+    },
+    {
+      "name": "bluetooth_connected_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم بإرجاع أجهزة Bluetooth المتصلة حاليًا من خلال ملفات تعريف Android Bluetooth العامة المرئية للتطبيقات العادية."
+    },
+    {
+      "name": "bluetooth_nearby_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "مسح وإرجاع أجهزة البلوتوث القريبة. يتضمن نتائج مسح BLE ونتائج اكتشاف Bluetooth الكلاسيكية عندما تسمح الأذونات وحالة Bluetooth بذلك. يتم إخفاء الأجهزة التي ليس لها اسم قابل للقراءة بشكل افتراضي."
+    },
+    {
+      "name": "bluetooth_pair_device",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ابدأ الاقتران بجهاز Bluetooth عن طريق عنوان MAC. يؤدي هذا إلى إطلاق تدفق الترابط الطبيعي لنظام Android وقد يتطلب تأكيد المستخدم أو إدخال رقم التعريف الشخصي."
+    },
+    {
+      "name": "bluetooth_paired_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم بإرجاع أجهزة Bluetooth المقترنة بالفعل بجهاز Android هذا."
+    },
+    {
+      "name": "bluetooth_state",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "قم بإرجاع حالة محول Bluetooth الحالية: تشغيل أو إيقاف تشغيل أو تشغيل أو إيقاف تشغيل أو غير معروف. المعرّفات التقنية: turning_on, turning_off."
+    },
+    {
+      "name": "close_bluetooth",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم بإيقاف تشغيل Bluetooth باستخدام واجهة برمجة التطبيقات العامة لتعطيل الإرث. إذا رفض Android، فأبلغ أن تطبيقات Android العادية لا يمكنها إيقاف تشغيل Bluetooth على هذا الجهاز."
+    },
+    {
+      "name": "device_app_activity_snapshot",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم بإرجاع لقطة مدمجة لنشاط التطبيق الحديث من Android UsageStats. يتطلب الوصول إلى الاستخدام؛ إنها ليست شاشة عملية خلفية حية."
+    },
+    {
+      "name": "device_app_permission_audit",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم بإرجاع تدقيق مدمج لمخاطر الأذونات للتطبيقات المثبتة المرئية لهذا التطبيق. المخاطر هي إرشادية وتستند إلى مجموعات الأذونات الحساسة المعلنة/الممنوحة."
+    },
+    {
+      "name": "device_app_sensitive_audit",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "إرجاع حالات التطبيق الحساسة المدمجة: إمكانية الوصول، ومستمع الإشعارات، ومسؤول الجهاز، والتراكب، وإعفاء تحسين البطارية، ومجموعات الأذونات الحساسة الممنوحة."
+    },
+    {
+      "name": "device_battery_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "قم بإرجاع بطارية Android المدمجة وحالة توفير الطاقة. لم يتم تغيير أي إعدادات."
+    },
+    {
+      "name": "device_health_check",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "قم بإرجاع لقطة صحية مضغوطة للقراءة فقط: الذاكرة والتخزين والبطارية والشبكة. لم يتم تغيير أي إعدادات."
+    },
+    {
+      "name": "device_hidden_app_check",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم بإرجاع فحص إرشادي مضغوط لتطبيقات المستخدم دون إدخالات المشغل أو المكونات المعطلة. يمكن أن يؤدي هذا إلى وضع علامة على التطبيقات المشبوهة، ولكن قد تظهر أيضًا تطبيقات الخدمة الشرعية فقط."
+    },
+    {
+      "name": "device_memory_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "إرجاع حالة ذاكرة Android المدمجة. لم يتم تغيير أي إعدادات."
+    },
+    {
+      "name": "device_network_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "إرجاع حالة وإمكانات شبكة Android النشطة المدمجة. لم يتم تغيير إعدادات الشبكة."
+    },
+    {
+      "name": "device_storage_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "إرجاع حالة التخزين الداخلي/المشترك لنظام Android المضغوط. لا يتم فحص أو حذف أي ملفات."
+    },
+    {
+      "name": "device_time_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "قم بإرجاع المنطقة الزمنية الحالية لنظام Android والطابع الزمني لنظام Unix لاستدعاءات الأدوات المعتمدة على الوقت. قم بتعيين VerifyWithNtp=true فقط عندما يكون وقت النظام محل نزاع أو عند الحاجة إلى مرجع عبر الإنترنت. يستخدم التحقق من NTP ntp1.aliyun.com ولا يغير ساعة النظام مطلقًا. المعرّفات التقنية: verifyWithNtp=true."
+    },
+    {
+      "name": "dnd_open_policy_access_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "افتح إعدادات Android حيث يمكن للمستخدم منح FoneClaw Do Not Disturb / Notification Policy الوصول. لا تتصل بهذا فورًا بعد أن أبلغ dnd_set_mode أنه فتح صفحة الإعدادات بالفعل."
+    },
+    {
+      "name": "dnd_set_mode",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "اضبط وضع عدم الإزعاج على Android. إذا كان الوصول إلى السياسة مفقودًا أو رفض Android الكتابة، فسيؤدي ذلك إلى فتح صفحة الوصول/الإعدادات إلى سياسة DND للنظام."
+    },
+    {
+      "name": "dnd_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "اقرأ حالة الوصول إلى سياسة Android Do Not Disturb ومرشح الانقطاع الحالي."
+    },
+    {
+      "name": "flashlight_set_enabled",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم بتشغيل أو إيقاف تشغيل مصباح Android اليدوي باستخدام واجهة برمجة تطبيقات شعلة كاميرا النظام."
+    },
+    {
+      "name": "flashlight_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "قم بإرجاع ما إذا كان المصباح اليدوي متاحًا وآخر حالة شعلة معروفة."
+    },
+    {
+      "name": "flashlight_toggle",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "تبديل مصباح أندرويد. إذا كانت الحالة الحالية غير معروفة، فسيتم تشغيلها."
+    },
+    {
+      "name": "foneclaw_permission_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "تحقق من جميع الأذونات الحالية وإمكانيات الوصول الخاصة لـ FoneClaw نفسه. استخدم هذا عندما يسأل المستخدم عن أذونات FoneClaw الممكّنة أو المفقودة أو المحدودة أو المتوفرة. هذا فحص جديد للقراءة فقط؛ لا تستخدم أدوات تدقيق التطبيق أو لوحة الإشعارات أو قراءة الشاشة كبديل."
+    },
+    {
+      "name": "open_bluetooth",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "اطلب تشغيل البلوتوث. بالنسبة إلى مجموعات SDK المستهدفة القديمة، يحاول هذا أولاً تمكين واجهة برمجة التطبيقات العامة، ثم يعود إلى واجهة مستخدم تأكيد نظام Android عند الحاجة."
+    },
+    {
+      "name": "system_panel_open",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "افتح لوحة نظام Android مرئية. استخدم لوحة = الإخطارات لفتح مركز الإشعارات، أو لوحة = إعدادات سريعة لفتح الإعدادات السريعة / مركز التحكم. تفتح هذه الأداة اللوحة المحددة فقط. ولا يقرأ محتوى اللوحة أو يلتقطه أو يبحث فيه أو يدرجه أو يلخصه. لا تستدعيه عندما يطلب أي جزء من الطلب قراءة الإشعارات أو التقاطها أو فحصها أو وصفها أو تلخيصها. اتصل بها مرة واحدة فقط لطلب صريح مفتوح فقط للوحة. يتطلب خدمة إمكانية الوصول FoneClaw. المعرّفات التقنية: panel=notifications, panel=quick_settings."
+    },
+    {
+      "name": "system_settings_open_battery_optimization_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "افتح إعدادات تحسين بطارية Android. إذا تم توفير appNameOrPackage، فافتح صفحة تفاصيل التطبيق حسب اسم الحزمة أو تصنيف التطبيق المثبت. إذا تعذر حلها أو فتحها، قم بإرجاع الفشل ولا تفتح صفحة إعدادات أخرى. إذا كان فارغًا، فافتح صفحة/قائمة إعدادات تحسين بطارية النظام."
+    },
+    {
+      "name": "system_settings_open_battery_saver_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "افتح إعدادات توفير طاقة Android / توفير الطاقة / وضع الطاقة المنخفضة. لا يمكن للتطبيقات العادية تبديل توفير البطارية مباشرة من خلال واجهات برمجة التطبيقات العامة، لذا بعد فتح الإعدادات، يجب على المستخدم تمكينها أو تعطيلها يدويًا. قد تعود أقراص ROM الخاصة بالمورد إلى إعدادات البطارية العامة."
+    },
+    {
+      "name": "system_settings_open_date_time_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "افتح صفحة إعدادات التاريخ والوقت في Android مباشرةً. استخدم هذا للتاريخ أو الوقت أو الوقت التلقائي أو المنطقة الزمنية أو إعدادات المنطقة الزمنية التلقائية. يؤدي هذا إلى تشغيل نية إعدادات النظام ولا يتطلب إمكانية الوصول أو قراءة الشاشة أو النقر. بعد نجاحه، لا تتصل بـ Launch_app، أو get_screen_info، أو Tap_node. المعرّفات التقنية: launch_app, tap_node."
+    },
+    {
+      "name": "system_settings_open_hotspot_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "افتح إعدادات نقطة اتصال Android. لا يمكن للتطبيقات العادية تبديل نقطة الاتصال بشكل موثوق بصمت من خلال واجهات برمجة تطبيقات Android العامة. إذا تعذر فتح صفحة إعدادات نقطة الاتصال الدقيقة، فسيؤدي ذلك إلى إرجاع الفشل ولا يفتح صفحة إعدادات أخرى."
+    },
+    {
+      "name": "system_settings_open_location_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "افتح إعدادات الموقع في أندرويد. إذا تم توفير appNameOrPackage، فافتح صفحة تفاصيل التطبيق حسب اسم الحزمة أو تصنيف التطبيق المثبت. إذا تعذر حلها أو فتحها، قم بإرجاع الفشل ولا تفتح صفحة إعدادات أخرى. إذا كان فارغًا، فافتح صفحة إعدادات موقع النظام."
+    },
+    {
+      "name": "system_settings_set_auto_rotate",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "تمكين أو تعطيل التدوير التلقائي لنظام Android. يتطلب إذن تعديل إعدادات النظام الخاص."
+    },
+    {
+      "name": "system_settings_set_brightness",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ضبط سطوع شاشة أندرويد. يكتب الوضع اليدوي النسبة المئوية من 1 إلى 100؛ يعمل الوضع التلقائي على تمكين السطوع التلقائي فقط ويتجاهل النسبة المئوية. يتطلب إذن تعديل إعدادات النظام الخاص."
+    },
+    {
+      "name": "system_settings_set_eye_comfort",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "افتح إعدادات شاشة Android لراحة العين/الإضاءة الليلية/مرشح الضوء الأزرق/وضع القراءة. استخدم هذه الأداة بدلاً من إعطاء تعليمات يدوية فقط لأغراض راحة العين متعددة اللغات. يعرض موردو Android المفتاح الدقيق بشكل مختلف، لذلك تفتح هذه الأداة إعدادات العرض وتسمح للمستخدم بإنهاء التبديل على تلك الصفحة."
+    },
+    {
+      "name": "system_settings_set_font_scale",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ضبط مقياس خط نظام Android. يتطلب إذن تعديل إعدادات النظام الخاص. القيم النموذجية هي 0.85 صغير، و1.0 افتراضي، و1.15 كبير، و1.3 أكبر، وما يصل إلى 1.6 كبير جدًا."
+    },
+    {
+      "name": "system_settings_set_haptic_feedback",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "تمكين أو تعطيل ردود الفعل اللمسية لنظام Android. يتطلب إذن تعديل إعدادات النظام الخاص."
+    },
+    {
+      "name": "system_settings_set_screen_timeout",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "اضبط مهلة إيقاف تشغيل شاشة Android بالثواني. يتطلب إذن تعديل إعدادات النظام الخاص. يتم تثبيت القيم على 15..1800 ثانية."
+    },
+    {
+      "name": "system_settings_set_touch_sounds",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "تمكين أو تعطيل أصوات اللمس في Android. يتطلب إذن تعديل إعدادات النظام الخاص."
+    },
+    {
+      "name": "system_settings_set_user_rotation",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قفل دوران شاشة الاندرويد. يتطلب إذنًا خاصًا لتعديل إعدادات النظام وتعطيل التدوير التلقائي. استخدم عموديًا أو أفقيًا أو عكسيًا أو أفقيًا عكسيًا. المعرّفات التقنية: reverse_portrait, reverse_landscape."
+    },
+    {
+      "name": "system_settings_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "إرجاع حالة إذن إعدادات النظام القابلة للكتابة بالإضافة إلى سطوع الشاشة الحالي، وحجم الخط، ومهلة الشاشة، والتدوير، وأصوات اللمس، والتعليقات اللمسية. هذا يقرأ إعدادات نظام Android فقط."
+    },
+    {
+      "name": "volume_adjust_stream",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم برفع أو خفض دفق صوت Android واحد بخطوة نظام واحدة. اختر هذا لتغييرات الحجم النسبية."
+    },
+    {
+      "name": "volume_set_all_streams_muted",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "كتم أو إلغاء كتم صوت جميع عمليات البث الصوتي المدعومة على Android والإبلاغ عن عمليات البث التي تغيرت بالفعل. اختر هذا لطلبات كتم صوت الجهاز بالكامل أو كل مستوى الصوت."
+    },
+    {
+      "name": "volume_set_ringer_mode",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ضبط وضع رنين هاتف Android. بالنسبة للوضع الصامت، يعود هذا تلقائيًا إلى كتم جميع التدفقات الصوتية عندما يرفض Android الكتابة في وضع الرنين."
+    },
+    {
+      "name": "volume_set_stream",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم بتعيين دفق صوتي واحد على Android إلى نسبة مئوية مستهدفة. اختر هذا عندما يطلب المستخدم مستوى الصوت المحدد."
+    },
+    {
+      "name": "volume_set_stream_muted",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "كتم أو إلغاء كتم صوت دفق صوتي واحد على Android. يؤدي هذا إلى تغيير حالة كتم البث، وليس وضع رنين الهاتف."
+    },
+    {
+      "name": "volume_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "اقرأ حالة مستوى صوت Android الحالية لتدفقات الصوت ووضع الرنين الحالي."
+    },
+    {
+      "name": "wifi_configured_networks",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "جهاز Android يعمل بنظام Android/جهاز Wi-Fi يعمل بنظام Android. SSID، ومعرف الشبكة، ومعرف الشبكة، ومعرف الشبكة، ومعرف الشبكة، ومعرف الشبكة، وشبكة Wi-Fi密码. المعرّفات التقنية: networkId."
+    },
+    {
+      "name": "wifi_connect",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "الاتصال بشبكة Wi-Fi. تتحقق الأداة أولاً من تكوينات Wi-Fi المحفوظة على نظام Android لـ SSID وتتصل مباشرة إذا كانت موجودة. إذا لم يتم حفظها، فإنها تستخدم عبارة المرور المقدمة لإضافة/الاتصال بالشبكة، أو ترجع إلى لوحة Wi-Fi في Android عند الحاجة إلى إدخال كلمة المرور."
+    },
+    {
+      "name": "wifi_disconnect",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قطع الاتصال بنقطة وصول Wi-Fi الحالية. تحاول الأداة أولاً قطع اتصال WifiManager القديم الصامت لمضيفي API 28 المستهدفين؛ إذا رفضه Android، فسيعود الأمر إلى فتح لوحة Wi-Fi في Android لاتخاذ إجراء المستخدم."
+    },
+    {
+      "name": "wifi_forget",
+      "category": "Device Status and System Control",
+      "risk": "DESTRUCTIVE",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ننسى شبكة Wi-Fi المحفوظة. تحاول الأداة أولاً إزالة شبكة WifiManager القديمة الصامتة، ثم تعود إلى لوحة Wi-Fi في نظام Android لاتخاذ إجراء المستخدم. المعرّفات التقنية: removeNetwork."
+    },
+    {
+      "name": "wifi_scan_networks",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "مسح وإرجاع نقاط وصول Wi-Fi القريبة. في حالة إيقاف تشغيل Wi-Fi، تحاول هذه الأداة أولاً تمكين Wi-Fi مباشرةً ولا تعود إلى لوحة Wi-Fi في Android إلا في حالة فشل التمكين المباشر. يتطلب أذونات الموقع وخدمات موقع الجهاز. يمكن أن تكشف النتائج عن بيانات الشبكة الحساسة للموقع."
+    },
+    {
+      "name": "wifi_set_enabled",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "تمكين أو تعطيل شبكة Wi-Fi لنظام Android. تحاول الأداة أولاً تنفيذ عملية WifiManager المباشرة، ثم تتحقق مما إذا كان Android قد وصل بالفعل إلى الحالة المطلوبة؛ إذا فشل الطلب أو ظل معلقًا، فسيعود الأمر إلى فتح لوحة Wi-Fi في Android لاتخاذ إجراء المستخدم."
+    },
+    {
+      "name": "wifi_status",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم بإرجاع حالة Android Wi-Fi الحالية وتفاصيل اتصال Wi-Fi النشطة عندما يكون لدى التطبيق إذن. هذا يقرأ حالة الشبكة فقط."
+    },
+    {
+      "name": "get_location",
+      "category": "Location and Navigation",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "احصل على الموقع الحالي لجهاز Android أثناء استخدام FoneClaw. يتطلب إذن الموقع الأمامي فقط."
+    },
+    {
+      "name": "location_search_nearby_place",
+      "category": "Location and Navigation",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ابحث عن الأماكن القريبة المرشحة لاسم مكان غامض باستخدام موقع الجهاز الحالي. استخدم هذا فقط عندما يطلب المستخدم صراحةً العثور على مكان أو التحقق منه أو حله أو اختياره أو التنقل إليه، أو عندما تكون وجهة التنقل غامضة. لإنشاء التقويم، يكفي اسم المكان الذي قدمه المستخدم: احتفظ به كـ locationName ولا تستدعي هذه الأداة فقط لأن العنوان الدقيق أو الإحداثيات مفقودة."
+    },
+    {
+      "name": "map_navigate",
+      "category": "Location and Navigation",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "افتح مسارًا أو شاشة تنقل في تطبيق الخريطة للوجهة ووضع السفر. يؤدي هذا إلى تشغيل تطبيق خرائط خارجي، ويستخدم الوسائط المتوفرة فقط، ولا يقرأ بيانات الجهاز."
+    },
+    {
+      "name": "mail_account_list",
+      "category": "Mail",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "قائمة حسابات البريد التي تم تكوينها. اترك الاستعلام فارغًا لسرد كافة الحسابات. عند تقديم الاستعلام، تكون الأولوية المطابقة هي معرف الحساب، والبريد الإلكتروني، والاسم المستعار، ثم الاسم المستعار الغامض أو البريد الإلكتروني. لا يزال بإمكان المطابقات التامة إرجاع حسابات متعددة. إذا لم يتم تكوين أي حساب بريد FoneClaw وكان الاستعلام هو عنوان بريد إلكتروني، فقد تتضمن النتيجة ProvideSetupGuide مع عنوان URL لبيانات اعتماد الموفر الثابت. المعرّفات التقنية: providerSetupGuide."
+    },
+    {
+      "name": "mail_account_save",
+      "category": "Mail",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "اختبر اتصالات IMAP وSMTP واحفظ حساب البريد فقط عندما ينجح كلاهما. اتصل بهذا بمجرد توفر كل حقل تكوين مطلوب. تتطلب هذه العملية موافقة المستخدم."
+    },
+    {
+      "name": "mail_delete",
+      "category": "Mail",
+      "risk": "DESTRUCTIVE",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "انقل ما يصل إلى 20 مرجعًا محددًا للرسالة إلى سلة المهملات، أو احذفها نهائيًا فقط عندما يطلب المستخدم صراحةً الحذف الدائم. لا تحاول أبدًا الحصول على نتيجة غير مؤكدة. المعرّفات التقنية: messageRefs."
+    },
+    {
+      "name": "mail_list",
+      "category": "Mail",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "قم بإدراج ملخصات الرسائل أو تصفيتها أو البحث فيها. الاستعلام يبحث عن الموضوع والمرسل والمستلمين والنص. اترك معرف الحساب فارغًا لاستخدام الحساب الوحيد أو الحساب الافتراضي الفريد. المعرّفات التقنية: accountId."
+    },
+    {
+      "name": "mail_read",
+      "category": "Mail",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "اقرأ رسالة واحدة من messageRef التي تم إرجاعها بواسطة mail_list وقم بوضع علامة عليها كمقروءة على الخادم. وبعد نجاح الأداة، قم بتلخيص الرسالة للمستخدم في نفس الرد."
+    },
+    {
+      "name": "mail_send",
+      "category": "Mail",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم بإرسال بريد إلكتروني جديد أو الرد أو الرد على الكل أو إعادة التوجيه. يتطلب الموافقة. يجب أن تستخدم المرفقات بيانات التعريف المنظمة الدقيقة المعلن عنها في رسالة المستخدم الحالية."
+    },
+    {
+      "name": "call_log_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم بإدراج إدخالات سجل مكالمات Android الأخيرة، مع تصفيتها اختياريًا حسب نوع المكالمة. يتطلب إذن READ_CALL_LOG. استخدم type=missed لأسئلة المكالمات الفائتة وقبل تحديد مكالمة لم يرد عليها لمعاودة الاتصال. بعد تحديد رقم، اتصل بـ phone_dial."
+    },
+    {
+      "name": "contacts_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم بإدراج عدد محدود من جهات اتصال Android، مع تصفيتها اختياريًا حسب اسم العرض أو رقم الهاتف. يتطلب إذن READ_CONTACTS. اترك الاستعلام فارغًا فقط عندما يطلب المستخدم صراحةً عرض جهات الاتصال؛ تعيين الاستعلام عندما يطلب المستخدم العثور على جهة اتصال."
+    },
+    {
+      "name": "phone_dial",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "افتح طالب النظام لرقم هاتف واحد أو جهة اتصال محددة بالضبط. قم بتعيين واحد بالضبط من رقم الهاتف واسم جهة الاتصال. يجب أن تتوافق جهة الاتصال المسماة مع مباراة واحدة؛ في حالة تطابق جهات اتصال متعددة، توقف واطلب من المستخدم الاختيار. بعد فتح برنامج الاتصال، اتصل بـ get_screen_info، وحدد زر الاتصال المرئي، ثم اتصل بـ Tap_node. المعرّفات التقنية: phoneNumber, contactName, tap_node."
+    },
+    {
+      "name": "send_to_sms_message",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "بعد الموافقة، افتح مسودة SMS/MMS مرئية. بالنسبة إلى رسالة نصية قصيرة مع مستلم، اضغط تلقائيًا على \"إرسال\" فقط عندما تكون إمكانية الوصول إلى FoneClaw متصلة ويتم التحقق من تطبيق الرسائل الافتراضي والمستلم ونص الرسالة بالكامل وعنصر تحكم إرسال ثابت واحد. تتطلب المرفقات أو المطالبات باستخدام بطاقة SIM المزدوجة أو واجهة المستخدم الغامضة أو إمكانية الوصول غير المتاحة إجراءً يدويًا. بعد أي نتيجة نهائية، أوقف تخطيط الأداة ولا تتصل مطلقًا بـ get_screen_info أو Tap_node. المعرّفات التقنية: tap_node."
+    },
+    {
+      "name": "sms_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "الاستعلام عن الرسائل النصية القصيرة المباشرة على جهاز Android هذا. بدون كلمة رئيسية أو عنوان أو جهة اتصال أو معرف مؤشر الترابط، قم بإدراج الرسائل الأخيرة. قم بتعيين الكلمة الرئيسية/العنوان/جهة الاتصال للبحث. قم بتعيين معرف الموضوع فقط من نتيجة sms_list سابقة لقراءة تلك المحادثة. للحصول على طلب ملخص، اتصل مرة واحدة بـ box=all ثم قم بتلخيص الرسائل المستلمة والمرسلة التي تم إرجاعها. لا تستخدم مطلقًا سجل SysInfo كبديل لهذه النتيجة المباشرة. المعرّفات التقنية: threadId."
+    },
+    {
+      "name": "calendar_create_event",
+      "category": "Calendar",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "إنشاء حدث تقويم Android. جمع الوقت المفقود وتفاصيل التذكير قبل الاتصال. يعد اسم المكان الذي قدمه المستخدم كافيًا ويجب تمريره مباشرة باسم locationName. لا تبحث عن عنوان أو إحداثيات محددة إلا إذا طلب المستخدم صراحة التحقق من المكان أو حله أو اختياره أو التنقل إليه. تفضل startLocalDateTime/endLocalDateTime في yyyy-MM-dd HH:mm لتواريخ المستخدم والتواريخ النسبية؛ ستقوم الأداة بتحليلها في المنطقة الزمنية للجهاز. لا تقم بإنشاء أحداث من المللي ثانية الزمنية المحسوبة بالنموذج. استخدم CalendarId=0 ما لم يحدد المستخدم معرف التقويم بشكل صريح. بعد الإنشاء، استخدم نتيجة الأداة الفعليةStart/actualEnd كوقت الإنشاء الذي يواجه المستخدم. المعرّفات التقنية: calendarId=0, actualStart."
+    },
+    {
+      "name": "calendar_delete_event",
+      "category": "Calendar",
+      "risk": "DESTRUCTIVE",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "حذف حدث تقويم Android بالمعرف. ابحث عن/أدرج الأحداث عبر جميع التقويمات ذات معرف التقويم = 0 ما لم يحدد المستخدم معرف التقويم بشكل صريح. قم دائمًا بتمرير العنوان المعروف وstartMillis وendMillis والموقع عندما يكون معروفًا بحيث يكون الهدف واضحًا. المعرّفات التقنية: calendarId=0."
+    },
+    {
+      "name": "calendar_list_calendars",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قائمة تقويمات أندرويد القابلة للكتابة. استخدم هذا للسماح للمستخدم باختيار التقويم؛ لا تفترض أن CalendarId=1 هو التقويم المحلي أو المستهدف. المعرّفات التقنية: calendarId=1."
+    },
+    {
+      "name": "calendar_list_events",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم بإدراج أحداث تقويم Android في نطاق زمني محدد. يُستخدم لطلبات مثل جدول اليوم أو جدول الغد أو الأحداث الحالية أو أحداث هذا الأسبوع. تفضل startLocalDateTime/endLocalDateTime في yyyy-MM-dd HH:mm; ستقوم الأداة بتحليلها في المنطقة الزمنية للجهاز. استخدم startMillis/endMillis فقط كإجراء احتياطي مهمل عندما تأتي المللي ثانية المحددة من نتيجة أداة موثوقة. لا تخمن معرف التقويم؛ استخدم CalendarId=0 للبحث في جميع التقويمات ما لم يحدد المستخدم معرف التقويم بشكل صريح. المعرّفات التقنية: calendarId, calendarId=0."
+    },
+    {
+      "name": "calendar_open_event",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "افتح صفحة تفاصيل حدث تقويم Android حسب معرف الحدث. ابحث عن الأحداث أو أدرجها أولاً عندما يصف المستخدم حدثًا باللغة الطبيعية. لا تخمن معرف الحدث."
+    },
+    {
+      "name": "calendar_search_events",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ابحث عن أحداث تقويم Android عن طريق الكلمات الرئيسية في نطاق زمني محدد. يُستخدم قبل فتح حدث أو تحديثه أو حذفه عندما يصف المستخدم الحدث حسب العنوان أو المحتوى. تفضل startLocalDateTime/endLocalDateTime في yyyy-MM-dd HH:mm; ستقوم الأداة بتحليلها في المنطقة الزمنية للجهاز. استخدم startMillis/endMillis فقط كإجراء احتياطي مهمل عندما تأتي المللي ثانية المحددة من نتيجة أداة موثوقة. لا تخمن معرف التقويم؛ استخدم CalendarId=0 للبحث في جميع التقويمات ما لم يحدد المستخدم معرف التقويم بشكل صريح. المعرّفات التقنية: calendarId, calendarId=0."
+    },
+    {
+      "name": "calendar_update_event",
+      "category": "Calendar",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم بتحديث حدث تقويم Android بواسطة المعرف. قم بالبحث/سرد الأحداث أولاً عندما يصف المستخدم الهدف باللغة الطبيعية، ثم يمرر تفاصيل الهدف المعروفة مع الحقول التي تم تغييرها. لا تخمن معرف التقويم أو معرف الحدث؛ ابحث في جميع التقاويم باستخدام CalendarId=0 ما لم يحدد المستخدم معرف التقويم بشكل صريح. يتم تجاهل حقول النص الفارغة. استخدم startMillis/endMillis=0 للاحتفاظ بالأوقات الحالية. استخدم ReminerMinutes=-2 للاحتفاظ بالتذكيرات، و-1 لإزالة التذكيرات، و>=0 لاستبدال التذكيرات. المعرّفات التقنية: calendarId, calendarId=0, reminderMinutes=-2."
+    },
+    {
+      "name": "memo_create",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم بإنشاء مذكرة أو ملاحظة أو سجل مهمة محلي مرئي للمستخدم. يُستخدم عندما يريد المستخدم صراحةً الاحتفاظ بالمحتوى كمذكرة أو ملاحظة قابلة للتنفيذ. لا تستخدم هذه الأداة لحفظ أو الاستعلام عن ذاكرة ملف تعريف المستخدم المُدارة بواسطة المساعد، مثل التفضيلات أو الهوية أو العلاقات أو نمط الاستجابة."
+    },
+    {
+      "name": "memo_delete",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "حذف مذكرة محلية بواسطة المعرف. ابحث عن المذكرات/أدرجها أولاً عندما يصف المستخدم الهدف باللغة الطبيعية حتى يكون معرف/عنوان الهدف معروفًا."
+    },
+    {
+      "name": "memo_list",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قائمة سجلات المذكرات المحلية المرئية للمستخدم. يمكن أن تكون الحالة نشطة أو منجزة أو مؤرشفة أو كلها. لا تستخدم هذه الأداة للإجابة على ما يتذكره المساعد عن المستخدم أو تفضيلات ملف تعريف المستخدم أو سجل المحادثات. النتيجة الفارغة تعني فقط عدم وجود مذكرات محلية مطابقة؛ فهذا لا يعني عدم وجود ذاكرة لملف تعريف المستخدم."
+    },
+    {
+      "name": "memo_mark_done",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "وضع علامة على مذكرة محلية على أنها منجزة أو نشطة بواسطة المعرف."
+    },
+    {
+      "name": "memo_search",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ابحث في المذكرات المحلية المرئية للمستخدم حسب الكلمة الرئيسية في العنوان أو المحتوى أو العلامات. يمكن أن تكون الحالة نشطة أو منتهية أو مؤرشفة أو كلها. لا تستخدم هذه الأداة للبحث في ذاكرة ملف تعريف المستخدم الذي يديره المساعد أو سجل المحادثات. تصف النتيجة الفارغة مخزن المذكرة المحلي فقط."
+    },
+    {
+      "name": "memo_update",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "تحديث مذكرة محلية عن طريق الهوية. ابحث عن/أدرج المذكرات أولاً عندما يصف المستخدم الهدف باللغة الطبيعية، ثم قم بتمرير تفاصيل الهدف المعروفة مع الحقول التي تم تغييرها. يتم تجاهل العنوان/المحتوى/العلامات الفارغة. ReminderAtMillis=-2 يحتفظ بالتذكير، -1 يمسح التذكير، و>0 يضبط التذكير. المعرّفات التقنية: reminderAtMillis=-2."
+    },
+    {
+      "name": "sysinfo_delete",
+      "category": "System Information",
+      "risk": "DESTRUCTIVE",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم بحذف ذاكرة التخزين المؤقت SysInfo المحلية المطابقة لـ FoneClaw بشكل دائم فقط. لا يؤدي هذا أبدًا إلى حذف إشعارات Android الأصلية أو الرسائل النصية القصيرة أو سجلات المكالمات أو أحداث التقويم. مطلوب عامل تصفية واحد على الأقل ما لم يكن حذف الكل = صحيحًا. يتم دمج عوامل التصفية المتعددة مع AND. المعرّفات التقنية: deleteAll=true."
+    },
+    {
+      "name": "sysinfo_mark_reviewed",
+      "category": "System Information",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم بوضع علامة على معرفات أحداث SysInfo المحلية كمراجعة فقط بعد تأكيد المستخدم بشكل صريح."
+    },
+    {
+      "name": "sysinfo_query",
+      "category": "System Information",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "الاستعلام عن الإشعارات المحلية التي تم التقاطها بالفعل، والرسائل النصية القصيرة، وسجلات المكالمات، وأحداث التقويم، وإدخال إمكانية الوصول. استخدم هذه الأداة الفردية للملخصات اليومية واستعلامات الإشعارات واستعلامات الإطار الزمني وعمليات البحث عن الكلمات الرئيسية. لا يفتح أبدًا لوحة النظام أو يقوم بمسح مصادر النظام المباشرة. قد يتضمن كل صف sourceRef لإلغاء البيانات المكررة مقابل نتيجة الموفر المباشر. قم بتلخيص JSON الذي تم إرجاعه للمستخدم."
+    },
+    {
+      "name": "sysinfo_thread",
+      "category": "System Information",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم بتحميل مؤشر ترابط SysInfo محلي واحد بواسطة ThreadKey الذي تم إرجاعه بواسطة sysinfo_query. المعرّفات التقنية: threadKey."
+    },
+    {
+      "name": "shopping_compare",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "ابحث في نتائج الويب العامة عن أحد المنتجات على منصات التسوق وأرجع أدلة المقارنة. استخدم هذا قبل تقديم المشورة بشأن أسعار التسوق."
+    },
+    {
+      "name": "web_fetch",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "جلب صفحة ويب محددة عن طريق عنوان URL وإرجاع نص الصفحة القابل للقراءة."
+    },
+    {
+      "name": "web_search",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "ابحث في الويب عن الصفحات ذات الصلة. إرجاع عناوين النتائج وعناوين URL والمقتطفات القصيرة."
+    },
+    {
+      "name": "shortcut_save_agent_prompt",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "احفظ الاختصار الذي أنشأه المستخدم والذي يرسل مطالبة إلى الوكيل. قم باستدعاء هذا فقط بعد أن يؤكد المستخدم العنوان والوصف والسلوك."
+    },
+    {
+      "name": "shortcut_save_direct_tool",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "احفظ اختصار الأداة المباشرة الذي أنشأه المستخدم. لا يتم استدعاء هذا إلا عندما يكون من الممكن تعيين كل إجراء مطلوب بشكل كامل لخطوات الأداة المعروفة مع المعلمات الكاملة."
+    },
+    {
+      "name": "task_create",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "قم بإنشاء خطة TODO المطلوبة الكاملة في مكالمة واحدة لطلب المستخدم الحالي. يعد هذا شرطًا إلزاميًا قبل استخدام أي أداة غير مهمة عندما يتطلب الطلب ثلاث خطوات أو أكثر. قم بتمرير كل خطوة محدودة تواجه المستخدم في العناصر. يمكن إنشاء الخطة مرة واحدة بالضبط ولا يمكن تمديدها لاحقًا. لا تقم مطلقًا بتضمين عناصر إدارة المهام أو التنظيف أو تحديث الحالة أو الاستجابة النهائية."
+    },
+    {
+      "name": "task_list",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "قم بإدراج عناصر TODO الداخلية لطلب المستخدم الحالي. بشكل افتراضي، يتم إرجاع العناصر المفتوحة، وقيد التقدم، والعناصر المحظورة. المعرّفات التقنية: in_progress."
+    },
+    {
+      "name": "task_update",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "قم بتحديث عنصر TODO داخلي واحد. التحولات المسموح بها: مفتوحة للتقدم، أو محظورة، أو مهجورة؛ in_progress للحظر أو التنفيذ أو التخلي؛ منعت لفتح أو التخلي عنها. تم الانتهاء منه والتخلي عنه نهائيًا. قد تكون هناك مهمة واحدة فقط قيد التقدم."
+    },
+    {
+      "name": "workflow_delete",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DESTRUCTIVE",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "حذف سير عمل محفوظ بواسطة المعرف."
+    },
+    {
+      "name": "workflow_list",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قائمة سير العمل المحفوظة."
+    },
+    {
+      "name": "workflow_save",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "حفظ سير عمل قابل لإعادة الاستخدام. يجب أن تكون StepsJson عبارة عن مصفوفة JSON مكونة من {toolName, الوسيطات}. المعرّفات التقنية: stepsJson."
+    },
+    {
+      "name": "add_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "أضف مستند مهارات جديد إلى سجل المهارات."
+    },
+    {
+      "name": "disable_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم بتعطيل مهارة المستخدم بحيث تكون مخفية من موجه الوكيل."
+    },
+    {
+      "name": "enable_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم بتمكين مهارة مستخدم صالحة حتى يمكن للوكيل استخدامها."
+    },
+    {
+      "name": "list_skills",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم بإدراج مهارات المستخدم والنظام مع المصدر والحالة الممكّنة وحالة التحقق من الصحة."
+    },
+    {
+      "name": "load_skill_detail",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم بتحميل مهارة متخصصة عندما تتطابق المهمة الحالية مع إحدى المهارات المدرجة في موجه النظام. استخدم هذه الأداة لإدخال تعليمات وموارد المهارة في المحادثة الحالية. قد يحتوي الإخراج على إرشادات مفصلة لسير العمل بالإضافة إلى مراجع للبرامج النصية والملفات وما إلى ذلك في نفس دليل المهارة. يجب أن يتطابق اسم المهارة مع إحدى المهارات المدرجة في موجه النظام الخاص بك."
+    },
+    {
+      "name": "plugin_request_install",
+      "category": "Skills and Plugins",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم بإنشاء اقتراح تثبيت منظم لمكون إضافي رسمي واحد. لا يؤدي هذا إلى تنزيل البرنامج الإضافي أو تثبيته؛ يجب أن تطلب الشاشة الرئيسية من المستخدم."
+    },
+    {
+      "name": "plugin_search",
+      "category": "Skills and Plugins",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "ابحث عن البيانات التعريفية الرسمية للمكون الإضافي FoneClaw عندما يطلب المستخدم إمكانية غير متوفرة في قائمة الأدوات الحالية. يقوم هذا بالبحث فقط في البيانات الوصفية ولا يقوم مطلقًا بتنزيل أو تثبيت مكون إضافي."
+    },
+    {
+      "name": "preview_skill_import",
+      "category": "Skills and Plugins",
+      "risk": "LOW",
+      "approval": "تلقائي",
+      "approvalCode": "AUTO",
+      "description": "قم بمعاينة مستند SKILL.md الذي تم لصقه. هذا يوزع ويتحقق من صحة ولكن لا يحفظ."
+    },
+    {
+      "name": "remove_skill",
+      "category": "Skills and Plugins",
+      "risk": "DESTRUCTIVE",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "إزالة المهارة"
+    },
+    {
+      "name": "save_skill_draft",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "احفظ مستند SKILL.md كمسودة مهارات مستخدم معطلة."
+    },
+    {
+      "name": "update_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "قم بتحديث وثيقة المهارات الموجودة في سجل المهارات."
+    }
+  ]
+}

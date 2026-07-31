@@ -1,0 +1,1031 @@
+{
+  "schemaVersion": 3,
+  "catalogType": "foneclaw-built-in-tools",
+  "locale": "in",
+  "fallbackLocale": "en",
+  "toolCount": 118,
+  "categoryCount": 11,
+  "uiLabels": {
+    "searchPlaceholder": "Cari alat atau kemampuan",
+    "allCategories": "Semua kategori",
+    "publicBuiltInTools": "alat bawaan publik",
+    "tool": "Alat",
+    "risk": "Risiko",
+    "approval": "Persetujuan",
+    "description": "Fungsinya"
+  },
+  "riskLabels": {
+    "DESTRUCTIVE": "Tindakan destruktif",
+    "DEVICE_CONTROL": "Kontrol perangkat",
+    "EXTERNAL_EFFECT": "Tindakan eksternal",
+    "LOW": "Risiko rendah",
+    "SENSITIVE_READ": "Pembacaan sensitif"
+  },
+  "approvalLabels": {
+    "AUTO": "Otomatis",
+    "REQUIRE_APPROVAL": "Perlu persetujuan"
+  },
+  "categories": [
+    {
+      "name": "Screen and App",
+      "displayName": "Layar, aplikasi, dan media",
+      "toolCount": 11
+    },
+    {
+      "name": "Device Status and System Control",
+      "displayName": "Status perangkat dan kontrol sistem",
+      "toolCount": 54
+    },
+    {
+      "name": "Location and Navigation",
+      "displayName": "Lokasi dan navigasi",
+      "toolCount": 3
+    },
+    {
+      "name": "Mail",
+      "displayName": "Email",
+      "toolCount": 6
+    },
+    {
+      "name": "Communication and Contacts",
+      "displayName": "Komunikasi dan kontak",
+      "toolCount": 5
+    },
+    {
+      "name": "Calendar",
+      "displayName": "Kalender",
+      "toolCount": 7
+    },
+    {
+      "name": "Memo",
+      "displayName": "Memo",
+      "toolCount": 6
+    },
+    {
+      "name": "System Information",
+      "displayName": "Notifikasi dan informasi sistem",
+      "toolCount": 4
+    },
+    {
+      "name": "Web and Shopping",
+      "displayName": "Web dan belanja",
+      "toolCount": 3
+    },
+    {
+      "name": "Tasks, Workflows, and Shortcuts",
+      "displayName": "Tugas, alur kerja, dan pintasan",
+      "toolCount": 8
+    },
+    {
+      "name": "Skills and Plugins",
+      "displayName": "Skill dan plugin",
+      "toolCount": 11
+    }
+  ],
+  "tools": [
+    {
+      "name": "camera_open_photo",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Open a specific visible photo from the system gallery. Gunakan ini hanya ketika pengguna secara eksplisit meminta untuk melihat atau membuka foto tertentu. Do not use this as a follow-up after camera_take_photo unless the user explicitly asks to view or open the captured photo. indexFromLatest berbasis 1 pada urutan terbaru-pertama: 1 membuka foto terbaru, 2 membuka foto terbaru kedua, 3 membuka foto terbaru ketiga."
+    },
+    {
+      "name": "camera_take_photo",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Ambil foto baru dan kembalikan URI foto yang disimpan bila tersedia. Gunakan ini saat pengguna ingin mengambil foto baru. Biarkan lensFacing tidak disetel atau otomatis untuk pengambilan foto normal. Pilih lensFacing=front only untuk menghadap ke depan atau selfie; pilih kembali hanya ketika pengguna secara eksplisit meminta kamera belakang. Pertahankan eksplisitLensSelection false untuk pengambilan foto biasa/default, meskipun lensa fisik default kembali. Setel eksplisitLensSelection ke benar hanya ketika pengguna secara eksplisit meminta pengambilan gambar depan, belakang, belakang, atau selfie. Jangan panggil camera_open_photo setelah alat ini kecuali pengguna secara eksplisit meminta untuk melihat atau membuka foto. Hubungi alat ini secara langsung. Capture uses the native system camera first. Pengambilan gambar depan/belakang secara eksplisit dapat menggunakan backend langsung hanya jika kamera asli tidak dapat memenuhi lensa yang diminta. Jangan meminta pengguna untuk memberikan izin sebelum memanggil alat ini. Pengenal teknis: explicitLensSelection."
+    },
+    {
+      "name": "cross_app_read_screen",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Buka atau alihkan ke aplikasi Android target, tunggu hingga aplikasi tersebut stabil di latar depan, dan kembalikan hierarki layar aksesibilitas yang terlihat. Gunakan ini ketika satu permintaan meminta untuk membuka/beralih ke suatu aplikasi dan membaca, memeriksa, menjelaskan, atau meringkas halaman yang terlihat. Jangan bagi tugas itu menjadi launch_app dan get_screen_info. Alat ini tidak menangkap tangkapan layar atau berinteraksi dengan node."
+    },
+    {
+      "name": "get_installed_map_apps",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Query installed map apps supported by map tools. Mengembalikan nama tampilan dan nama paket setiap aplikasi."
+    },
+    {
+      "name": "get_screen_info",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Dapatkan elemen UI dari layar aplikasi yang terlihat saat ini. Setiap elemen memiliki ID node (misalnya [n3]) yang dapat digunakan dengan tap_node. Jangan gunakan ini untuk membaca, membuat daftar, mencari, atau meringkas notifikasi Android; use sysinfo tools instead. Jangan simpan hasil ini dalam cache karena ID node berubah pada setiap panggilan."
+    },
+    {
+      "name": "launch_app",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Buka aplikasi Android yang dapat diluncurkan berdasarkan nama paket atau nama tampilan aplikasi yang diinstal. Ini mengubah aplikasi latar depan dan mungkin mengekspos layar aplikasi tersebut. Gunakan nama paket yang tepat bila memungkinkan. Jika hasilnya ambigu, minta pengguna untuk memilih satu paket yang dikembalikan."
+    },
+    {
+      "name": "play_store_check_app",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Periksa apakah nama paket Android yang tepat tercantum di Google Play dengan meminta https://play.google.com/store/apps/details?id=<packageName>. Ini adalah pemeriksaan jaringan hanya-baca. Gunakan sebelum play_store_install."
+    },
+    {
+      "name": "play_store_install",
+      "category": "Screen and App",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Buka halaman detail aplikasi Google Play tertentu berdasarkan nama paket persisnya, ketuk Instal, dan tunggu hingga instalasi selesai. Alat ini tidak membuka aplikasi yang diinstal. Gunakan hanya ketika nama paket Android yang tepat diketahui. Jangan pernah menggunakan ini untuk hasil pencarian yang tidak jelas atau untuk menebak aplikasi pertama. Jika nama paket tidak diketahui, tanyakan terlebih dahulu paket aplikasi yang sebenarnya kepada pengguna. Berhenti jika Google Play menampilkan UI berbayar, pembelian, langganan, pembaruan, ambigu, atau jika pemasangan tidak selesai sebelum waktu habis. Pengenal teknis: packageName."
+    },
+    {
+      "name": "screenshot_open",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Buka tangkapan layar tertentu yang terlihat dari galeri sistem. indeks berbasis 1 dalam urutan yang dipilih. sortOrder bisa terbaru atau terlama."
+    },
+    {
+      "name": "screenshot_take",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Tangkap layar Android dengan layanan aksesibilitas FoneClaw dan simpan ke Pictures/FoneClaw/Screenshots. Gunakan targetType=current untuk layar saat ini, targetType=app dengan targetApp untuk membuka aplikasi dan menangkapnya, atau targetType=notification_shade hanya untuk tangkapan layar eksplisit atau permintaan pengambilan gambar yang melibatkan bayangan notifikasi yang terlihat. Jangan pernah menggunakan targetType=notification_shade untuk membaca, membuat daftar, menanyakan, atau meringkas data notifikasi; gunakan alat notifikasi SysInfo sebagai gantinya. Jangan panggil launch_app atau system_panel_open sebelum alat ini untuk menangkap bayangan aplikasi atau notifikasi. Jangan gunakan ini ketika pengguna ingin melihat tangkapan layar yang sudah disimpan; gunakan screenshot_open untuk melihat tangkapan layar yang disimpan."
+    },
+    {
+      "name": "tap_node",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Ketuk elemen UI di layar. Elemen diidentifikasi berdasarkan ID simpulnya, yang dapat diperoleh dari alat screen_info."
+    },
+    {
+      "name": "alarm_modify_alarm",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Segera buka halaman Alarm Jam Android ketika pengguna ingin memodifikasi, mengedit, menyesuaikan, atau mengubah alarm yang ada. Panggil alat ini untuk setiap permintaan modifikasi terpisah, meskipun sudah dipanggil sebelumnya dalam percakapan. Jangan meminta konfirmasi. Android tidak menyediakan API publik yang andal untuk mengedit alarm yang ada, jadi alat ini hanya menavigasi ke aplikasi Jam untuk mengedit secara manual."
+    },
+    {
+      "name": "alarm_set_alarm",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Setel alarm Jam Android. Kumpulkan detail waktu/pengulangan/label yang hilang sebelum menelepon."
+    },
+    {
+      "name": "bluetooth_connected_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Kembalikan perangkat Bluetooth yang saat ini terhubung melalui profil Bluetooth Android publik yang terlihat oleh aplikasi normal."
+    },
+    {
+      "name": "bluetooth_nearby_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Pindai dan kembalikan perangkat Bluetooth terdekat. Termasuk hasil pemindaian BLE dan hasil penemuan Bluetooth klasik ketika izin dan status Bluetooth mengizinkannya. Perangkat tanpa nama yang dapat dibaca disembunyikan secara default."
+    },
+    {
+      "name": "bluetooth_pair_device",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mulai memasangkan dengan perangkat Bluetooth berdasarkan alamat MAC. Ini meluncurkan alur ikatan normal Android dan mungkin memerlukan konfirmasi pengguna atau entri PIN."
+    },
+    {
+      "name": "bluetooth_paired_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Kembalikan perangkat Bluetooth yang sudah dipasangkan dengan perangkat Android ini."
+    },
+    {
+      "name": "bluetooth_state",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Mengembalikan status adaptor Bluetooth saat ini: hidup, mati, hidup_hidup, mati_mati, atau tidak diketahui. Pengenal teknis: turning_on, turning_off."
+    },
+    {
+      "name": "close_bluetooth",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Matikan Bluetooth menggunakan API penonaktifan warisan publik. Jika Android menolak, laporkan bahwa aplikasi Android normal tidak dapat mematikan Bluetooth di perangkat ini."
+    },
+    {
+      "name": "device_app_activity_snapshot",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Menampilkan cuplikan aktivitas aplikasi terkini yang ringkas dari Android UsageStats. Membutuhkan akses penggunaan; ini bukan monitor proses latar belakang langsung."
+    },
+    {
+      "name": "device_app_permission_audit",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Menampilkan audit risiko izin ringkas untuk aplikasi terinstal yang terlihat oleh aplikasi ini. Risiko bersifat heuristik dan didasarkan pada kelompok izin sensitif yang dinyatakan/diberikan."
+    },
+    {
+      "name": "device_app_sensitive_audit",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mengembalikan status aplikasi yang ringkas dan sensitif: aksesibilitas, pemroses notifikasi, admin perangkat, hamparan, pengecualian pengoptimalan baterai, dan grup izin sensitif yang diberikan."
+    },
+    {
+      "name": "device_battery_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Kembalikan baterai Android ringkas dan status hemat daya. Tidak ada pengaturan yang diubah."
+    },
+    {
+      "name": "device_health_check",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Kembalikan snapshot kesehatan read-only yang ringkas: memori, penyimpanan, baterai, dan jaringan. Tidak ada pengaturan yang diubah."
+    },
+    {
+      "name": "device_hidden_app_check",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mengembalikan pemeriksaan heuristik ringkas untuk aplikasi pengguna tanpa entri peluncur atau komponen yang dinonaktifkan. Hal ini dapat menandai aplikasi yang mencurigakan, namun aplikasi khusus layanan yang sah mungkin juga muncul."
+    },
+    {
+      "name": "device_memory_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Kembalikan status memori Android yang ringkas. Tidak ada pengaturan yang diubah."
+    },
+    {
+      "name": "device_network_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Mengembalikan status dan kemampuan jaringan aktif Android yang ringkas. Tidak ada pengaturan jaringan yang diubah."
+    },
+    {
+      "name": "device_storage_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Kembalikan status penyimpanan internal/bersama Android yang ringkas. Tidak ada file yang dipindai atau dihapus."
+    },
+    {
+      "name": "device_time_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Mengembalikan zona waktu sistem Android saat ini dan stempel waktu Unix untuk panggilan alat yang bergantung pada waktu. Setel verifikasiWithNtp=true hanya ketika waktu sistem diperdebatkan atau referensi online diperlukan. Verifikasi NTP menggunakan ntp1.aliyun.com dan tidak pernah mengubah jam sistem. Pengenal teknis: verifyWithNtp=true."
+    },
+    {
+      "name": "dnd_open_policy_access_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Buka pengaturan Android di mana pengguna dapat memberikan akses Jangan Ganggu / Kebijakan Pemberitahuan kepada FoneClaw. Jangan langsung memanggil ini setelah dnd_set_mode melaporkan bahwa halaman pengaturan telah dibuka."
+    },
+    {
+      "name": "dnd_set_mode",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Setel mode Jangan Ganggu Android. Jika akses kebijakan tidak ada atau Android menolak penulisan, tindakan ini akan membuka halaman akses/pengaturan kebijakan DND sistem."
+    },
+    {
+      "name": "dnd_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Baca status akses kebijakan Jangan Ganggu Android dan filter interupsi saat ini."
+    },
+    {
+      "name": "flashlight_set_enabled",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Nyalakan atau matikan senter Android menggunakan API obor kamera sistem."
+    },
+    {
+      "name": "flashlight_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Kembalikan apakah senter tersedia dan status obor terakhir yang diketahui."
+    },
+    {
+      "name": "flashlight_toggle",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Alihkan senter Android. Jika keadaan saat ini tidak diketahui, ini akan mengaktifkannya."
+    },
+    {
+      "name": "foneclaw_permission_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Periksa semua izin saat ini dan kemampuan akses khusus dari FoneClaw itu sendiri. Gunakan ini ketika pengguna menanyakan izin FoneClaw mana yang diaktifkan, hilang, terbatas, atau tersedia. Ini adalah pemeriksaan baru yang hanya dapat dibaca; jangan gunakan audit aplikasi, panel notifikasi, atau alat pembaca layar sebagai penggantinya."
+    },
+    {
+      "name": "open_bluetooth",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Minta Bluetooth untuk dihidupkan. Untuk SDK target lama, hal ini terlebih dahulu mencoba API pengaktifan publik, lalu kembali ke UI konfirmasi sistem Android bila diperlukan."
+    },
+    {
+      "name": "system_panel_open",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Buka satu panel sistem Android yang terlihat. Gunakan panel=notifications untuk membuka bayangan notifikasi, atau panel=quick_settings untuk membuka pengaturan cepat/pusat kendali. Alat ini hanya membuka panel yang dipilih. Itu tidak membaca, menangkap, mencari, membuat daftar, atau meringkas konten panel. Jangan menyebutnya ketika ada bagian dari permintaan yang meminta untuk membaca, menangkap, memeriksa, mendeskripsikan, atau meringkas notifikasi. Panggil sekali saja untuk permintaan panel terbuka saja. Membutuhkan layanan aksesibilitas FoneClaw."
+    },
+    {
+      "name": "system_settings_open_battery_optimization_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Buka pengaturan pengoptimalan baterai Android. Jika appNameOrPackage disediakan, buka halaman detail aplikasi tersebut berdasarkan nama paket atau label aplikasi yang diinstal. Jika tidak dapat diatasi atau dibuka, kembalikan kegagalan dan jangan buka halaman pengaturan lain. Jika kosong, buka halaman daftar/pengaturan pengoptimalan baterai sistem."
+    },
+    {
+      "name": "system_settings_open_battery_saver_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Buka pengaturan Penghemat Baterai Android / hemat daya / mode daya rendah. Aplikasi normal tidak dapat secara langsung mengaktifkan Penghemat Baterai melalui API publik, jadi setelah pengaturan terbuka, pengguna harus mengaktifkan atau menonaktifkannya secara manual. ROM Vendor mungkin kembali ke pengaturan baterai umum."
+    },
+    {
+      "name": "system_settings_open_date_time_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Buka halaman pengaturan Tanggal & waktu Android secara langsung. Gunakan ini untuk pengaturan tanggal, waktu, waktu otomatis, zona waktu, atau zona waktu otomatis. Ini meluncurkan Intent pengaturan sistem dan tidak memerlukan aksesibilitas, pembacaan layar, atau ketukan. Setelah berhasil, jangan panggil launch_app, get_screen_info, atau tap_node."
+    },
+    {
+      "name": "system_settings_open_hotspot_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Buka pengaturan hotspot Android. Aplikasi normal tidak dapat secara andal mengalihkan hotspot secara diam-diam melalui API Android publik. Jika halaman pengaturan hotspot yang sebenarnya tidak dapat dibuka, ini akan mengembalikan kegagalan dan tidak membuka halaman pengaturan lainnya."
+    },
+    {
+      "name": "system_settings_open_location_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Buka pengaturan lokasi Android. Jika appNameOrPackage disediakan, buka halaman detail aplikasi tersebut berdasarkan nama paket atau label aplikasi yang diinstal. Jika tidak dapat diselesaikan atau dibuka, kembalikan kegagalan dan jangan buka halaman pengaturan lain. Jika kosong, buka halaman pengaturan Lokasi sistem."
+    },
+    {
+      "name": "system_settings_set_auto_rotate",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mengaktifkan atau menonaktifkan rotasi otomatis Android. Memerlukan izin ubah pengaturan sistem khusus."
+    },
+    {
+      "name": "system_settings_set_brightness",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Atur kecerahan layar Android. Mode manual menulis persen dari 1 hingga 100; mode otomatis hanya mengaktifkan kecerahan otomatis dan mengabaikan persen. Memerlukan izin ubah pengaturan sistem khusus."
+    },
+    {
+      "name": "system_settings_set_eye_comfort",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Buka pengaturan Tampilan Android untuk Kenyamanan mata/Cahaya Malam/filter cahaya biru/mode membaca. Gunakan alat ini daripada hanya memberikan instruksi manual untuk kenyamanan mata multibahasa. Vendor Android menampilkan peralihan yang sebenarnya secara berbeda, sehingga alat ini membuka pengaturan Tampilan dan memungkinkan pengguna menyelesaikan peralihan di halaman tersebut."
+    },
+    {
+      "name": "system_settings_set_font_scale",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Atur skala font sistem Android. Memerlukan izin ubah pengaturan sistem khusus. Nilai umumnya adalah 0,85 kecil, 1,0 default, 1,15 besar, 1,3 lebih besar, dan hingga 1,6 ekstra besar."
+    },
+    {
+      "name": "system_settings_set_haptic_feedback",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mengaktifkan atau menonaktifkan umpan balik haptic Android. Memerlukan izin ubah pengaturan sistem khusus."
+    },
+    {
+      "name": "system_settings_set_screen_timeout",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Setel batas waktu mati layar Android dalam hitungan detik. Memerlukan izin ubah pengaturan sistem khusus. Nilai dibatasi menjadi 15..1800 detik."
+    },
+    {
+      "name": "system_settings_set_touch_sounds",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mengaktifkan atau menonaktifkan suara sentuhan Android. Memerlukan izin ubah pengaturan sistem khusus."
+    },
+    {
+      "name": "system_settings_set_user_rotation",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Kunci rotasi layar Android. Memerlukan izin ubah pengaturan sistem khusus dan menonaktifkan rotasi otomatis. Gunakan potret, lanskap, reverse_portrait, atau reverse_landscape."
+    },
+    {
+      "name": "system_settings_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Mengembalikan status izin pengaturan sistem yang dapat ditulis ditambah kecerahan layar saat ini, skala font, batas waktu layar, rotasi, suara sentuhan, dan umpan balik haptik. Ini hanya membaca pengaturan sistem Android."
+    },
+    {
+      "name": "volume_adjust_stream",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Menaikkan atau menurunkan satu aliran audio Android sebanyak satu langkah sistem. Pilih ini untuk perubahan volume relatif."
+    },
+    {
+      "name": "volume_set_all_streams_muted",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Matikan atau suarakan semua aliran audio Android yang didukung dan laporkan aliran mana yang benar-benar berubah. Pilih ini untuk permintaan bisu seluruh perangkat atau semua volume."
+    },
+    {
+      "name": "volume_set_ringer_mode",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Setel mode dering ponsel Android. Untuk mode senyap, ini secara otomatis kembali mematikan semua aliran audio ketika Android menolak penulisan mode dering."
+    },
+    {
+      "name": "volume_set_stream",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Tetapkan satu aliran audio Android ke persentase target. Pilih ini ketika pengguna meminta tingkat volume yang tepat."
+    },
+    {
+      "name": "volume_set_stream_muted",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Menonaktifkan atau mengaktifkan satu aliran audio Android. Ini mengubah status senyap streaming, bukan mode dering telepon."
+    },
+    {
+      "name": "volume_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Baca status volume Android saat ini untuk streaming audio dan mode dering saat ini."
+    },
+    {
+      "name": "wifi_configured_networks",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "读取 Android 已配置/已保存的 Wi-Fi 网络列表。只返回SSID、networkId、安全类型、是否像是有凭据、是否隐藏网络、是否当前连接和配置状态；不会返回 Wi-Fi密码。"
+    },
+    {
+      "name": "wifi_connect",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Hubungkan ke jaringan Wi-Fi. Alat ini pertama-tama memeriksa konfigurasi Wi-Fi Android yang disimpan untuk SSID dan menghubungkan secara langsung jika ada. Jika tidak disimpan, ia akan menggunakan frasa sandi yang disediakan untuk menambah/menghubungkan jaringan, atau kembali ke panel Wi-Fi Android saat masukan kata sandi diperlukan."
+    },
+    {
+      "name": "wifi_disconnect",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Putuskan sambungan dari titik akses Wi-Fi saat ini. Alat ini pertama-tama mencoba memutuskan sambungan WifiManager lama secara senyap untuk host API 28 target; jika Android menolaknya, Android akan kembali membuka panel Wi-Fi Android untuk tindakan pengguna."
+    },
+    {
+      "name": "wifi_forget",
+      "category": "Device Status and System Control",
+      "risk": "DESTRUCTIVE",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Lupakan jaringan Wi-Fi yang tersimpan. Alat ini pertama-tama mencoba menghapusNetwork WifiManager lama secara senyap, lalu kembali ke panel Wi-Fi Android untuk tindakan pengguna. Pengenal teknis: removeNetwork."
+    },
+    {
+      "name": "wifi_scan_networks",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Pindai dan kembalikan titik akses Wi-Fi terdekat. Jika Wi-Fi mati, alat ini pertama-tama akan mencoba mengaktifkan Wi-Fi secara langsung dan hanya kembali ke panel Wi-Fi Android jika pengaktifan langsung gagal. Membutuhkan izin lokasi dan layanan lokasi perangkat. Hasilnya dapat mengungkapkan data jaringan yang sensitif terhadap lokasi."
+    },
+    {
+      "name": "wifi_set_enabled",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mengaktifkan atau menonaktifkan Wi-Fi Android. Alat ini pertama-tama mencoba operasi WifiManager langsung, lalu memeriksa apakah Android benar-benar mencapai status yang diminta; jika permintaan gagal atau tetap tertunda, permintaan akan kembali membuka panel Wi-Fi Android untuk tindakan pengguna."
+    },
+    {
+      "name": "wifi_status",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Kembalikan status Wi-Fi Android saat ini dan detail koneksi Wi-Fi aktif ketika aplikasi memiliki izin. Ini hanya membaca status jaringan."
+    },
+    {
+      "name": "get_location",
+      "category": "Location and Navigation",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Dapatkan lokasi perangkat Android saat ini saat FoneClaw sedang digunakan. Hanya memerlukan izin lokasi latar depan."
+    },
+    {
+      "name": "location_search_nearby_place",
+      "category": "Location and Navigation",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Cari kandidat tempat terdekat untuk nama tempat yang ambigu menggunakan lokasi perangkat saat ini. Gunakan ini hanya ketika pengguna secara eksplisit meminta untuk menemukan, memverifikasi, menyelesaikan, memilih, atau menavigasi ke suatu tempat, atau ketika tujuan navigasi tidak jelas. Untuk pembuatan kalender, nama tempat yang disediakan pengguna sudah cukup: pertahankan sebagai locationName dan jangan memanggil alat ini hanya karena alamat atau koordinat pastinya tidak ada."
+    },
+    {
+      "name": "map_navigate",
+      "category": "Location and Navigation",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Buka layar rute atau navigasi di aplikasi peta untuk tujuan dan mode perjalanan. Tindakan ini meluncurkan aplikasi peta eksternal, hanya menggunakan argumen yang disediakan, dan tidak membaca data perangkat."
+    },
+    {
+      "name": "mail_account_list",
+      "category": "Mail",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Daftar akun email yang dikonfigurasi. Biarkan kueri kosong untuk mencantumkan semua akun. Ketika kueri diberikan, prioritas pencocokan adalah id akun, email, alias, lalu alias fuzzy atau email. Pencocokan persis masih dapat menghasilkan banyak akun. Jika tidak ada akun email FoneClaw yang dikonfigurasi dan kuerinya adalah alamat email, hasilnya mungkin menyertakan ProviderSetupGuide dengan URL kredensial penyedia tetap. Pengenal teknis: providerSetupGuide."
+    },
+    {
+      "name": "mail_account_save",
+      "category": "Mail",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Uji koneksi IMAP dan SMTP dan simpan akun email hanya jika keduanya berhasil. Hubungi ini segera setelah semua bidang konfigurasi yang diperlukan tersedia. Operasi ini memerlukan persetujuan pengguna."
+    },
+    {
+      "name": "mail_delete",
+      "category": "Mail",
+      "risk": "DESTRUCTIVE",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Pindahkan hingga 20 messageRef yang tepat ke sampah, atau hapus secara permanen hanya jika pengguna secara eksplisit meminta penghapusan permanen. Jangan pernah mencoba lagi hasil yang tidak pasti. Pengenal teknis: messageRefs."
+    },
+    {
+      "name": "mail_list",
+      "category": "Mail",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Daftar, filter, atau cari ringkasan pesan. Kueri mencari subjek, pengirim, penerima, dan isi. Biarkan accountId kosong untuk menggunakan satu-satunya akun atau akun default unik."
+    },
+    {
+      "name": "mail_read",
+      "category": "Mail",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Baca satu pesan dari messageRef yang dikembalikan oleh mail_list dan tandai sudah dibaca di server. Setelah alat tersebut berhasil, rangkum pesan untuk pengguna dalam respons yang sama."
+    },
+    {
+      "name": "mail_send",
+      "category": "Mail",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Kirim email baru, balas, balas semua, atau teruskan. Membutuhkan persetujuan. Lampiran harus menggunakan metadata terstruktur persis seperti yang diumumkan bersama pesan pengguna saat ini."
+    },
+    {
+      "name": "call_log_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Cantumkan entri log panggilan Android terbaru, yang dapat difilter berdasarkan jenis panggilan. Membutuhkan izin READ_CALL_LOG. Gunakan type=missed untuk pertanyaan panggilan tidak terjawab dan sebelum memilih panggilan tidak terjawab untuk dihubungi kembali. Setelah memilih nomor, hubungi phone_dial."
+    },
+    {
+      "name": "contacts_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Buat daftar kontak Android dalam jumlah terbatas, yang dapat difilter berdasarkan nama tampilan atau nomor telepon. Membutuhkan izin READ_CONTACTS. Biarkan kueri kosong hanya ketika pengguna secara eksplisit meminta untuk melihat kontak; atur kueri ketika pengguna meminta untuk menemukan kontak."
+    },
+    {
+      "name": "phone_dial",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Buka dialer sistem untuk satu nomor telepon atau kontak bernama. Tetapkan tepat salah satu Nomor Telepon dan NamaKontak. Kontak yang disebutkan harus menyelesaikan satu kecocokan; jika beberapa kontak cocok, berhenti dan minta pengguna untuk memilih. Setelah dialer terbuka, panggil get_screen_info, identifikasi tombol panggilan yang terlihat, lalu panggil tap_node. Pengenal teknis: phoneNumber, contactName."
+    },
+    {
+      "name": "send_to_sms_message",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Setelah disetujui, buka draf SMS/MMS yang terlihat. Untuk SMS teks dengan penerima, secara otomatis ketuk Kirim hanya ketika aksesibilitas FoneClaw terhubung dan aplikasi pesan default, penerima, isi pesan lengkap, dan satu kontrol Kirim yang stabil semuanya diverifikasi. Lampiran, perintah dual-SIM, UI ambigu, atau aksesibilitas tidak tersedia memerlukan tindakan manual. Setelah hasil terminal apa pun, hentikan perencanaan alat dan jangan pernah memanggil get_screen_info atau tap_node."
+    },
+    {
+      "name": "sms_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Kueri pesan SMS langsung di perangkat Android ini. Tanpa kata kunci, alamat, kontak, atau threadId, daftarkan pesan terbaru. Tetapkan kata kunci/alamat/kontak untuk dicari. Setel threadId hanya dari hasil sms_list sebelumnya untuk membaca percakapan itu. Untuk permintaan ringkasan, panggil sekali dengan box=all lalu rangkum pesan yang diterima dan dikirim kembali. Jangan pernah menggunakan riwayat SysInfo sebagai pengganti hasil langsung ini."
+    },
+    {
+      "name": "calendar_create_event",
+      "category": "Calendar",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Buat acara kalender Android. Kumpulkan waktu yang hilang dan detail pengingat sebelum menelepon. Nama tempat yang disediakan pengguna sudah cukup dan harus diteruskan langsung sebagai locationName. Jangan menelusuri alamat atau koordinat yang tepat kecuali pengguna secara eksplisit meminta untuk memverifikasi, menyelesaikan, memilih, atau menavigasi ke tempat tersebut. Lebih suka startLocalDateTime/endLocalDateTime dalam yyyy-MM-dd HH:mm untuk tanggal pengguna dan tanggal relatif; alat ini akan menguraikannya dalam zona waktu perangkat. Jangan membuat peristiwa dari epoch milidetik yang dihitung model. Gunakan kalenderId=0 kecuali pengguna secara eksplisit memilih id kalender. Setelah pembuatan, gunakan hasil alat aktualStart/actualEnd sebagai waktu pembuatan yang dapat dilihat pengguna. Pengenal teknis: calendarId=0, actualStart."
+    },
+    {
+      "name": "calendar_delete_event",
+      "category": "Calendar",
+      "risk": "DESTRUCTIVE",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Hapus acara kalender Android berdasarkan id. Telusuri/daftar acara di semua kalender dengan CalendarId=0 kecuali pengguna secara eksplisit memilih id kalender. Selalu berikan judul, startMillis, endMillis, dan lokasi yang diketahui jika diketahui sehingga targetnya tidak ambigu. Pengenal teknis: calendarId=0."
+    },
+    {
+      "name": "calendar_list_calendars",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Daftar kalender Android yang dapat ditulis. Gunakan ini untuk memungkinkan pengguna memilih kalender; jangan berasumsi bahwa kalenderId=1 adalah kalender lokal atau target. Pengenal teknis: calendarId=1."
+    },
+    {
+      "name": "calendar_list_events",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Cantumkan acara kalender Android dalam rentang waktu yang konkret. Gunakan untuk permintaan seperti jadwal hari ini, jadwal besok, acara yang ada, atau acara minggu ini. Lebih suka startLocalDateTime/endLocalDateTime di yyyy-MM-dd HH:mm; alat ini akan menguraikannya dalam zona waktu perangkat. Gunakan startMillis/endMillis hanya sebagai pengganti yang tidak digunakan lagi ketika milidetik jangka waktu yang tepat berasal dari hasil alat yang tepercaya. Jangan menebak Id kalender; gunakan kalenderId=0 untuk mencari semua kalender kecuali pengguna secara eksplisit memilih id kalender. Pengenal teknis: calendarId, calendarId=0."
+    },
+    {
+      "name": "calendar_open_event",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Buka halaman detail acara kalender Android berdasarkan id acara. Cari atau daftarkan peristiwa terlebih dahulu ketika pengguna mendeskripsikan suatu peristiwa dalam bahasa alami. Jangan menebak id acara."
+    },
+    {
+      "name": "calendar_search_events",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Cari acara kalender Android berdasarkan kata kunci dalam rentang waktu tertentu. Gunakan sebelum membuka, memperbarui, atau menghapus acara ketika pengguna mendeskripsikan acara berdasarkan judul atau konten. Lebih suka startLocalDateTime/endLocalDateTime di yyyy-MM-dd HH:mm; alat ini akan menguraikannya dalam zona waktu perangkat. Gunakan startMillis/endMillis hanya sebagai pengganti yang tidak digunakan lagi ketika milidetik jangka waktu yang tepat berasal dari hasil alat yang tepercaya. Jangan menebak Id kalender; gunakan kalenderId=0 untuk mencari semua kalender kecuali pengguna secara eksplisit memilih id kalender. Pengenal teknis: calendarId, calendarId=0."
+    },
+    {
+      "name": "calendar_update_event",
+      "category": "Calendar",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Perbarui acara kalender Android berdasarkan id. Cari/daftar peristiwa terlebih dahulu ketika pengguna mendeskripsikan target dalam bahasa alami, dan meneruskan detail target yang diketahui dengan bidang yang diubah. Jangan menebak Id kalender atau id acara; telusuri semua kalender dengan CalendarId=0 kecuali pengguna secara eksplisit memilih id kalender. Bidang teks kosong diabaikan. Gunakan startMillis/endMillis=0 untuk menyimpan waktu yang ada. Gunakan pengingatMinutes=-2 untuk menyimpan pengingat, -1 untuk menghapus pengingat, dan >=0 untuk mengganti pengingat. Pengenal teknis: calendarId, calendarId=0, reminderMinutes=-2."
+    },
+    {
+      "name": "memo_create",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Buat memo, catatan, atau rekaman tugas lokal yang dapat dilihat pengguna. Gunakan ketika pengguna secara eksplisit ingin konten disimpan sebagai memo atau catatan yang dapat ditindaklanjuti. Jangan gunakan alat ini untuk menyimpan atau menanyakan memori profil pengguna yang dikelola asisten seperti preferensi, identitas, hubungan, atau gaya respons."
+    },
+    {
+      "name": "memo_delete",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Hapus sementara memo lokal berdasarkan id. Pencarian/daftar memo terlebih dahulu ketika pengguna mendeskripsikan target dalam bahasa alami sehingga id/judul target diketahui."
+    },
+    {
+      "name": "memo_list",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Daftar catatan memo lokal yang dapat dilihat pengguna. statusnya bisa aktif, selesai, diarsipkan, atau semuanya. Jangan gunakan alat ini untuk menjawab apa yang diingat asisten tentang pengguna, preferensi profil pengguna, atau riwayat percakapan. Hasil yang kosong berarti tidak ada memo lokal yang cocok; ini tidak berarti bahwa tidak ada memori profil pengguna."
+    },
+    {
+      "name": "memo_mark_done",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Tandai memo lokal sebagai selesai atau aktif berdasarkan id."
+    },
+    {
+      "name": "memo_search",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Cari memo lokal yang dapat dilihat pengguna berdasarkan kata kunci dalam judul, konten, atau tag. statusnya bisa aktif, selesai, diarsipkan, atau semuanya. Jangan gunakan alat ini untuk mencari memori profil pengguna yang dikelola asisten atau riwayat percakapan. Hasil yang kosong hanya menjelaskan penyimpanan memo lokal."
+    },
+    {
+      "name": "memo_update",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Perbarui memo lokal berdasarkan id. Cari/daftar memo terlebih dahulu ketika pengguna menjelaskan target dalam bahasa alami, dan meneruskan detail target yang diketahui dengan bidang yang diubah. Judul/konten/tag kosong diabaikan. reminderAtMillis=-2 menyimpan pengingat, -1 menghapus pengingat, dan >0 menyetel pengingat."
+    },
+    {
+      "name": "sysinfo_delete",
+      "category": "System Information",
+      "risk": "DESTRUCTIVE",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Hapus secara permanen cache SysInfo lokal FoneClaw yang cocok saja. Ini tidak pernah menghapus notifikasi Android asli, SMS, log panggilan, atau acara kalender. Setidaknya satu filter diperlukan kecuali deleteAll=true. Beberapa filter digabungkan dengan AND."
+    },
+    {
+      "name": "sysinfo_mark_reviewed",
+      "category": "System Information",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Tandai id peristiwa SysInfo lokal sebagai telah ditinjau hanya setelah pengguna mengonfirmasi secara eksplisit."
+    },
+    {
+      "name": "sysinfo_query",
+      "category": "System Information",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Kueri notifikasi lokal, SMS, log panggilan, acara kalender, dan masukan aksesibilitas yang sudah diambil. Gunakan alat tunggal ini untuk ringkasan harian, kueri pemberitahuan, kueri jangka waktu, dan penelusuran kata kunci. Itu tidak pernah membuka panel sistem atau memindai sumber sistem langsung. Setiap baris dapat menyertakan sourceRef untuk deduplikasi terhadap hasil penyedia langsung. Ringkaslah JSON yang dikembalikan untuk pengguna."
+    },
+    {
+      "name": "sysinfo_thread",
+      "category": "System Information",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Muat satu thread SysInfo lokal dengan threadKey yang dikembalikan oleh sysinfo_query."
+    },
+    {
+      "name": "shopping_compare",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Telusuri hasil web publik untuk suatu produk di platform belanja dan kembalikan bukti perbandingan. Gunakan ini sebelum memberikan saran harga belanja."
+    },
+    {
+      "name": "web_fetch",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Ambil halaman web tertentu berdasarkan URL dan kembalikan teks halaman yang dapat dibaca."
+    },
+    {
+      "name": "web_search",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Telusuri web untuk halaman yang relevan. Mengembalikan judul hasil, URL, dan cuplikan pendek."
+    },
+    {
+      "name": "shortcut_save_agent_prompt",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Simpan pintasan yang dibuat pengguna yang mengirimkan perintah ke agen. Hanya panggil ini setelah pengguna mengonfirmasi judul, deskripsi, dan perilaku."
+    },
+    {
+      "name": "shortcut_save_direct_tool",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Simpan pintasan alat langsung yang dibuat pengguna. Hanya panggil ini ketika setiap tindakan yang diminta dapat sepenuhnya dipetakan ke langkah-langkah alat yang diketahui dengan parameter lengkap."
+    },
+    {
+      "name": "task_create",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Buat rencana TODO lengkap yang dipesan dalam satu panggilan untuk permintaan pengguna saat ini. Ini adalah prasyarat wajib sebelum alat non-tugas apa pun ketika permintaan memerlukan tiga langkah atau lebih. Lewati setiap langkah terbatas yang dihadapi pengguna dalam item. Rencana tersebut dapat dibuat tepat satu kali dan tidak dapat diperpanjang lagi di kemudian hari. Jangan pernah menyertakan item manajemen tugas, pembersihan, pembaruan status, atau respons akhir."
+    },
+    {
+      "name": "task_list",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Cantumkan item TODO internal untuk permintaan pengguna saat ini. Secara default mengembalikan item yang terbuka, sedang_berkembang, dan diblokir. Pengenal teknis: in_progress."
+    },
+    {
+      "name": "task_update",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Perbarui satu item TODO internal. Transisi yang diperbolehkan: terbuka untuk in_progress, diblokir, atau ditinggalkan; in_progress ke diblokir, selesai, atau ditinggalkan; diblokir untuk dibuka atau ditinggalkan. Selesai dan ditinggalkan adalah terminal. Hanya satu tugas yang mungkin sedang_berproses."
+    },
+    {
+      "name": "workflow_delete",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DESTRUCTIVE",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Hapus alur kerja yang disimpan berdasarkan id."
+    },
+    {
+      "name": "workflow_list",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Daftar alur kerja yang disimpan."
+    },
+    {
+      "name": "workflow_save",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Simpan alur kerja yang dapat digunakan kembali. stepsJson harus berupa array JSON dari {toolName, argument}."
+    },
+    {
+      "name": "add_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Tambahkan dokumen keterampilan baru ke registri keterampilan."
+    },
+    {
+      "name": "disable_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Nonaktifkan Keterampilan pengguna sehingga disembunyikan dari perintah agen."
+    },
+    {
+      "name": "enable_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Aktifkan Skill pengguna yang valid sehingga dapat digunakan oleh agen."
+    },
+    {
+      "name": "list_skills",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Cantumkan Keterampilan pengguna dan sistem dengan sumber, status yang diaktifkan, dan status validasi."
+    },
+    {
+      "name": "load_skill_detail",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Muat keterampilan khusus ketika tugas yang ada cocok dengan salah satu keterampilan yang tercantum dalam prompt sistem. Gunakan alat ini untuk memasukkan instruksi dan sumber daya keterampilan ke dalam percakapan saat ini. Outputnya mungkin berisi panduan alur kerja terperinci serta referensi ke skrip, file, dll dalam direktori yang sama dengan keterampilan. Nama keterampilan harus sesuai dengan salah satu keterampilan yang tercantum dalam prompt sistem Anda."
+    },
+    {
+      "name": "plugin_request_install",
+      "category": "Skills and Plugins",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Buat proposal instalasi terstruktur untuk satu plugin resmi. Ini tidak mengunduh atau menginstal plugin; HomeScreen harus bertanya kepada pengguna."
+    },
+    {
+      "name": "plugin_search",
+      "category": "Skills and Plugins",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Cari metadata plugin FoneClaw resmi ketika pengguna meminta kemampuan yang tidak tersedia dalam daftar alat saat ini. Ini hanya mencari metadata dan tidak pernah mengunduh atau memasang plugin."
+    },
+    {
+      "name": "preview_skill_import",
+      "category": "Skills and Plugins",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Pratinjau dokumen SKILL.md yang ditempel. Ini mem-parsing dan memvalidasi tetapi tidak menyimpan."
+    },
+    {
+      "name": "remove_skill",
+      "category": "Skills and Plugins",
+      "risk": "DESTRUCTIVE",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Hapus keterampilannya"
+    },
+    {
+      "name": "save_skill_draft",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Simpan dokumen SKILL.md sebagai draf Keterampilan pengguna yang dinonaktifkan."
+    },
+    {
+      "name": "update_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Perbarui dokumen keterampilan yang ada di registri keterampilan."
+    }
+  ]
+}

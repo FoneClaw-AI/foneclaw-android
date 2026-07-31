@@ -1,0 +1,1031 @@
+{
+  "schemaVersion": 3,
+  "catalogType": "foneclaw-built-in-tools",
+  "locale": "vi",
+  "fallbackLocale": "en",
+  "toolCount": 118,
+  "categoryCount": 11,
+  "uiLabels": {
+    "searchPlaceholder": "Tìm kiếm công cụ hoặc khả năng",
+    "allCategories": "Tất cả danh mục",
+    "publicBuiltInTools": "công cụ tích hợp công khai",
+    "tool": "Công cụ",
+    "risk": "Rủi ro",
+    "approval": "Phê duyệt",
+    "description": "Chức năng"
+  },
+  "riskLabels": {
+    "DESTRUCTIVE": "Thao tác phá hủy",
+    "DEVICE_CONTROL": "Điều khiển thiết bị",
+    "EXTERNAL_EFFECT": "Thao tác bên ngoài",
+    "LOW": "Rủi ro thấp",
+    "SENSITIVE_READ": "Đọc dữ liệu nhạy cảm"
+  },
+  "approvalLabels": {
+    "AUTO": "Tự động",
+    "REQUIRE_APPROVAL": "Cần phê duyệt"
+  },
+  "categories": [
+    {
+      "name": "Screen and App",
+      "displayName": "Màn hình, ứng dụng và nội dung đa phương tiện",
+      "toolCount": 11
+    },
+    {
+      "name": "Device Status and System Control",
+      "displayName": "Trạng thái thiết bị và điều khiển hệ thống",
+      "toolCount": 54
+    },
+    {
+      "name": "Location and Navigation",
+      "displayName": "Vị trí và điều hướng",
+      "toolCount": 3
+    },
+    {
+      "name": "Mail",
+      "displayName": "Email",
+      "toolCount": 6
+    },
+    {
+      "name": "Communication and Contacts",
+      "displayName": "Liên lạc và danh bạ",
+      "toolCount": 5
+    },
+    {
+      "name": "Calendar",
+      "displayName": "Lịch",
+      "toolCount": 7
+    },
+    {
+      "name": "Memo",
+      "displayName": "Ghi chú",
+      "toolCount": 6
+    },
+    {
+      "name": "System Information",
+      "displayName": "Thông báo và thông tin hệ thống",
+      "toolCount": 4
+    },
+    {
+      "name": "Web and Shopping",
+      "displayName": "Web và mua sắm",
+      "toolCount": 3
+    },
+    {
+      "name": "Tasks, Workflows, and Shortcuts",
+      "displayName": "Tác vụ, quy trình và lối tắt",
+      "toolCount": 8
+    },
+    {
+      "name": "Skills and Plugins",
+      "displayName": "Skill và plugin",
+      "toolCount": 11
+    }
+  ],
+  "tools": [
+    {
+      "name": "camera_open_photo",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mở một bức ảnh hiển thị cụ thể từ thư viện hệ thống. Chỉ sử dụng tùy chọn này khi người dùng yêu cầu xem hoặc mở một ảnh cụ thể một cách rõ ràng. Không sử dụng tùy chọn này để theo dõi sau camera_take_photo trừ khi người dùng yêu cầu xem hoặc mở ảnh đã chụp một cách rõ ràng. indexFromLatest dựa trên 1 theo thứ tự mới nhất: 1 mở ảnh mới nhất, 2 mở ảnh mới nhất thứ hai, 3 mở ảnh mới nhất thứ ba."
+    },
+    {
+      "name": "camera_take_photo",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Chụp ảnh mới và trả lại URI ảnh đã lưu khi có sẵn. Sử dụng tính năng này khi mục đích của người dùng là chụp một bức ảnh mới. Không đặt lensFacing hoặc tự động để chụp ảnh bình thường. Chỉ chọn lensFacing=front cho mục đích quay mặt trước hoặc chụp ảnh selfie; chỉ chọn quay lại khi người dùng yêu cầu rõ ràng về camera sau. Giữ cho ClearLensSelection sai để chụp ảnh đơn giản/mặc định, ngay cả khi ống kính vật lý mặc định hoạt động trở lại. Chỉ đặt clearLensSelection đúng khi người dùng yêu cầu chụp ảnh mặt trước, mặt sau, mặt sau hoặc ảnh selfie một cách rõ ràng. Không gọi camera_open_photo sau công cụ này trừ khi người dùng yêu cầu xem hoặc mở ảnh một cách rõ ràng. Gọi trực tiếp công cụ này. Capture sử dụng máy ảnh hệ thống gốc trước tiên. Chụp trước/sau rõ ràng chỉ có thể sử dụng phụ trợ trực tiếp nếu máy ảnh gốc không thể đáp ứng ống kính được yêu cầu. Không yêu cầu người dùng cấp quyền trước khi gọi công cụ này. Định danh kỹ thuật: explicitLensSelection."
+    },
+    {
+      "name": "cross_app_read_screen",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Mở hoặc chuyển sang ứng dụng Android mục tiêu, đợi cho đến khi ứng dụng đó ổn định ở nền trước và trả về cây màn hình hỗ trợ tiếp cận hiển thị. Sử dụng tùy chọn này khi một yêu cầu yêu cầu vừa mở/chuyển sang một ứng dụng vừa đọc, kiểm tra, mô tả hoặc tóm tắt trang hiển thị của ứng dụng đó. Đừng chia nhiệm vụ đó thành launch_app và get_screen_info. Công cụ này không chụp ảnh màn hình hoặc tương tác với các nút."
+    },
+    {
+      "name": "get_installed_map_apps",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Truy vấn các ứng dụng bản đồ đã cài đặt được hỗ trợ bởi các công cụ bản đồ. Trả về tên hiển thị và tên gói của từng ứng dụng."
+    },
+    {
+      "name": "get_screen_info",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Nhận các thành phần giao diện người dùng từ màn hình ứng dụng hiện đang hiển thị. Mỗi phần tử có ID nút (ví dụ [n3]) có thể được sử dụng với tap_node. Không sử dụng tính năng này để đọc, liệt kê, tìm kiếm hoặc tóm tắt các thông báo của Android; thay vào đó hãy sử dụng các công cụ sysinfo. Không lưu kết quả này vào bộ đệm vì ID nút thay đổi trong mỗi cuộc gọi."
+    },
+    {
+      "name": "launch_app",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mở ứng dụng Android có thể khởi chạy theo tên gói hoặc tên hiển thị ứng dụng đã cài đặt. Điều này sẽ thay đổi ứng dụng trên nền trước và có thể hiển thị màn hình của ứng dụng đó. Sử dụng tên gói chính xác khi có thể. Nếu kết quả không rõ ràng, hãy yêu cầu người dùng chọn một gói được trả lại."
+    },
+    {
+      "name": "play_store_check_app",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Kiểm tra xem tên gói Android chính xác có được liệt kê trên Google Play hay không bằng cách yêu cầu https://play.google.com/store/apps/details?id=<packageName>. Đây là kiểm tra mạng chỉ đọc. Sử dụng nó trước play_store_install."
+    },
+    {
+      "name": "play_store_install",
+      "category": "Screen and App",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mở trang chi tiết ứng dụng Google Play cụ thể theo tên gói chính xác, nhấn Cài đặt và đợi quá trình cài đặt hoàn tất. Công cụ này không mở ứng dụng đã cài đặt. Chỉ sử dụng khi biết Tên gói Android chính xác. Không bao giờ sử dụng điều này cho kết quả tìm kiếm mờ hoặc đoán ứng dụng đầu tiên. Nếu không xác định được packageName, trước tiên hãy hỏi người dùng gói ứng dụng chính xác. Dừng nếu Google Play hiển thị trả phí, mua hàng, đăng ký, cập nhật, giao diện người dùng không rõ ràng hoặc nếu quá trình cài đặt không hoàn tất trước khi hết thời gian chờ."
+    },
+    {
+      "name": "screenshot_open",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mở một ảnh chụp màn hình cụ thể có thể nhìn thấy từ thư viện hệ thống. chỉ mục dựa trên 1 theo thứ tự đã chọn. thứ tự sắp xếp có thể mới nhất hoặc cũ nhất. Định danh kỹ thuật: sortOrder."
+    },
+    {
+      "name": "screenshot_take",
+      "category": "Screen and App",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Chụp màn hình Android bằng dịch vụ trợ năng FoneClaw và lưu vào Pictures/FoneClaw/Screenshots.. Sử dụng targetType=current cho màn hình hiện tại, targetType=app với targetApp để mở và chụp ứng dụng hoặc targetType=notification_shade chỉ dành cho yêu cầu chụp ảnh màn hình hoặc ảnh chụp màn hình rõ ràng liên quan đến ngăn thông báo hiển thị. Không bao giờ sử dụng targetType=notification_shade để đọc, liệt kê, truy vấn hoặc tóm tắt dữ liệu thông báo; thay vào đó hãy sử dụng công cụ thông báo SysInfo. Không gọi launch_app hoặc system_panel_open trước công cụ này để chụp ứng dụng hoặc bóng thông báo. Không sử dụng tính năng này khi người dùng muốn xem ảnh chụp màn hình đã lưu; sử dụng ảnh chụp màn hình_open để xem ảnh chụp màn hình đã lưu. Định danh kỹ thuật: screenshot_open."
+    },
+    {
+      "name": "tap_node",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Nhấn vào một thành phần UI trên màn hình. Phần tử được xác định bằng ID nút của nó, có thể lấy được từ công cụ screen_info."
+    },
+    {
+      "name": "alarm_modify_alarm",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mở ngay trang báo thức Đồng hồ Android khi người dùng muốn sửa đổi, chỉnh sửa, điều chỉnh hoặc thay đổi báo thức hiện có. Gọi công cụ này cho mọi yêu cầu sửa đổi riêng biệt, ngay cả khi yêu cầu đó đã được gọi trước đó trong cuộc trò chuyện. Đừng yêu cầu xác nhận. Android không cung cấp API công khai đáng tin cậy để chỉnh sửa các báo thức hiện có, vì vậy công cụ này chỉ điều hướng đến ứng dụng Đồng hồ để chỉnh sửa thủ công."
+    },
+    {
+      "name": "alarm_set_alarm",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Đặt báo thức Đồng hồ Android. Thu thập thông tin chi tiết về thời gian/lặp lại/nhãn bị thiếu trước khi gọi."
+    },
+    {
+      "name": "bluetooth_connected_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Trả lại các thiết bị Bluetooth hiện được kết nối thông qua cấu hình Bluetooth Android công khai hiển thị với các ứng dụng thông thường."
+    },
+    {
+      "name": "bluetooth_nearby_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Quét và trả lại các thiết bị Bluetooth gần đó. Bao gồm kết quả quét BLE và kết quả khám phá Bluetooth cổ điển khi quyền và trạng thái Bluetooth cho phép. Theo mặc định, các thiết bị không có tên dễ đọc sẽ bị ẩn."
+    },
+    {
+      "name": "bluetooth_pair_device",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Bắt đầu ghép nối với thiết bị Bluetooth theo địa chỉ MAC. Thao tác này khởi chạy luồng liên kết thông thường của Android và có thể yêu cầu xác nhận của người dùng hoặc nhập mã PIN."
+    },
+    {
+      "name": "bluetooth_paired_devices",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Trả lại các thiết bị Bluetooth đã ghép nối với thiết bị Android này."
+    },
+    {
+      "name": "bluetooth_state",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Trả về trạng thái bộ điều hợp Bluetooth hiện tại: bật, tắt, Turn_on, Turn_off hoặc không xác định. Định danh kỹ thuật: turning_on, turning_off."
+    },
+    {
+      "name": "close_bluetooth",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Tắt Bluetooth bằng API vô hiệu hóa kế thừa công khai. Nếu Android từ chối, hãy báo cáo rằng các ứng dụng Android thông thường không thể tắt Bluetooth trên thiết bị này."
+    },
+    {
+      "name": "device_app_activity_snapshot",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Trả về ảnh chụp nhanh hoạt động ứng dụng gần đây nhỏ gọn từ Android UsageStats. Yêu cầu quyền truy cập sử dụng; nó không phải là một trình giám sát quá trình nền trực tiếp."
+    },
+    {
+      "name": "device_app_permission_audit",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Trả lại bản kiểm tra rủi ro cấp phép nhỏ gọn cho các ứng dụng đã cài đặt hiển thị với ứng dụng này. Rủi ro mang tính tự nghiệm và dựa trên các nhóm quyền nhạy cảm đã được tuyên bố/cấp."
+    },
+    {
+      "name": "device_app_sensitive_audit",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Trả về các trạng thái ứng dụng nhạy cảm nhỏ gọn: khả năng truy cập, trình nghe thông báo, quản trị viên thiết bị, lớp phủ, miễn tối ưu hóa pin và các nhóm quyền nhạy cảm được cấp."
+    },
+    {
+      "name": "device_battery_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Trả lại trạng thái tiết kiệm pin và pin Android nhỏ gọn. Không có cài đặt nào được thay đổi."
+    },
+    {
+      "name": "device_health_check",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Trả về ảnh chụp nhanh tình trạng chỉ đọc nhỏ gọn: bộ nhớ, bộ lưu trữ, pin và mạng. Không có cài đặt nào được thay đổi."
+    },
+    {
+      "name": "device_hidden_app_check",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Trả về kiểm tra heuristic nhỏ gọn cho các ứng dụng của người dùng không có mục nhập trình khởi chạy hoặc các thành phần bị tắt. Điều này có thể gắn cờ các ứng dụng đáng ngờ nhưng các ứng dụng hợp pháp chỉ dành cho dịch vụ cũng có thể xuất hiện."
+    },
+    {
+      "name": "device_memory_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Trả về trạng thái bộ nhớ Android nhỏ gọn. Không có cài đặt nào được thay đổi."
+    },
+    {
+      "name": "device_network_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Trả về trạng thái và khả năng mạng hoạt động nhỏ gọn của Android. Không có cài đặt mạng nào được thay đổi."
+    },
+    {
+      "name": "device_storage_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Trả về trạng thái lưu trữ nội bộ/chia sẻ nhỏ gọn của Android. Không có tập tin nào được quét hoặc xóa."
+    },
+    {
+      "name": "device_time_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Trả về múi giờ hệ thống Android hiện tại và dấu thời gian Unix cho các lệnh gọi công cụ phụ thuộc vào thời gian. Chỉ đặt verifyWithNtp=true khi thời gian hệ thống bị tranh chấp hoặc cần có tham chiếu trực tuyến. Xác minh NTP sử dụng ntp1.aliyun.com và không bao giờ thay đổi đồng hồ hệ thống."
+    },
+    {
+      "name": "dnd_open_policy_access_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mở cài đặt Android nơi người dùng có thể cấp quyền truy cập Chính sách thông báo / không làm phiền cho FoneClaw. Đừng gọi nó ngay sau khi dnd_set_mode báo cáo rằng nó đã mở trang cài đặt."
+    },
+    {
+      "name": "dnd_set_mode",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Đặt chế độ Không làm phiền của Android. Nếu quyền truy cập chính sách bị thiếu hoặc Android từ chối ghi, thao tác này sẽ mở trang cài đặt/truy cập chính sách DND của hệ thống."
+    },
+    {
+      "name": "dnd_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Đọc trạng thái truy cập chính sách Không làm phiền của Android và bộ lọc gián đoạn hiện tại."
+    },
+    {
+      "name": "flashlight_set_enabled",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Bật hoặc tắt đèn pin Android bằng API đèn pin của máy ảnh hệ thống."
+    },
+    {
+      "name": "flashlight_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Trả lại xem đèn pin có khả dụng hay không và trạng thái đèn pin đã biết gần đây nhất."
+    },
+    {
+      "name": "flashlight_toggle",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Chuyển đổi đèn pin Android. Nếu trạng thái hiện tại không xác định, thao tác này sẽ bật tính năng này."
+    },
+    {
+      "name": "foneclaw_permission_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Kiểm tra tất cả các quyền hiện tại và khả năng truy cập đặc biệt của chính FoneClaw. Sử dụng tùy chọn này khi người dùng hỏi quyền nào của FoneClaw được bật, bị thiếu, bị giới hạn hoặc có sẵn. Đây là kiểm tra chỉ đọc mới; không sử dụng các công cụ kiểm tra ứng dụng, bảng thông báo hoặc đọc màn hình để thay thế."
+    },
+    {
+      "name": "open_bluetooth",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Yêu cầu bật Bluetooth. Đối với SDK mục tiêu cũ, điều này trước tiên sẽ thử API kích hoạt công khai, sau đó quay lại giao diện người dùng xác nhận hệ thống của Android khi cần."
+    },
+    {
+      "name": "system_panel_open",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mở một bảng hệ thống Android có thể nhìn thấy. Sử dụng panel=notifications để mở bóng thông báo hoặc panel=quick_settings để mở cài đặt nhanh / trung tâm điều khiển. Công cụ này chỉ mở bảng đã chọn. Nó không đọc, nắm bắt, tìm kiếm, liệt kê hoặc tóm tắt nội dung bảng điều khiển. Không gọi nó khi bất kỳ phần nào của yêu cầu yêu cầu đọc, nắm bắt, kiểm tra, mô tả hoặc tóm tắt thông báo. Chỉ gọi nó một lần cho một yêu cầu chỉ mở bảng điều khiển rõ ràng. Yêu cầu dịch vụ trợ năng FoneClaw."
+    },
+    {
+      "name": "system_settings_open_battery_optimization_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mở cài đặt tối ưu hóa pin Android. Nếu appNameOrPackage được cung cấp, hãy mở trang chi tiết của ứng dụng đó theo tên gói hoặc nhãn ứng dụng đã cài đặt. Nếu không thể giải quyết hoặc mở được, hãy trả về lỗi và không mở trang cài đặt khác. Nếu trống, hãy mở trang cài đặt/danh sách tối ưu hóa pin hệ thống."
+    },
+    {
+      "name": "system_settings_open_battery_saver_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mở cài đặt Chế độ tiết kiệm pin / tiết kiệm pin / chế độ năng lượng thấp của Android. Các ứng dụng thông thường không thể chuyển đổi trực tiếp Trình tiết kiệm pin thông qua các API công khai, vì vậy sau khi mở cài đặt, người dùng phải bật hoặc tắt tính năng này theo cách thủ công. ROM của nhà cung cấp có thể quay lại cài đặt pin chung."
+    },
+    {
+      "name": "system_settings_open_date_time_settings",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mở trực tiếp trang cài đặt Ngày và giờ của Android. Sử dụng tùy chọn này cho cài đặt ngày, giờ, giờ tự động, múi giờ hoặc múi giờ tự động. Thao tác này sẽ khởi chạy Ý định cài đặt hệ thống và không yêu cầu khả năng truy cập, đọc màn hình hoặc nhấn. Sau khi thành công, không gọi launch_app, get_screen_info hoặc tap_node."
+    },
+    {
+      "name": "system_settings_open_hotspot_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mở cài đặt điểm phát sóng Android. Các ứng dụng thông thường không thể chuyển đổi điểm phát sóng một cách đáng tin cậy thông qua các API Android công khai. Nếu không thể mở được trang cài đặt điểm phát sóng chính xác, điều này sẽ trả về lỗi và không mở được trang cài đặt khác."
+    },
+    {
+      "name": "system_settings_open_location_entry",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mở cài đặt vị trí của Android. Nếu appNameOrPackage được cung cấp, hãy mở trang chi tiết của ứng dụng đó theo tên gói hoặc nhãn ứng dụng đã cài đặt. Nếu không thể giải quyết hoặc mở được, hãy trả về lỗi và không mở trang cài đặt khác. Nếu trống, hãy mở trang cài đặt Vị trí của hệ thống."
+    },
+    {
+      "name": "system_settings_set_auto_rotate",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Bật hoặc tắt tính năng xoay tự động của Android. Yêu cầu quyền sửa đổi cài đặt hệ thống đặc biệt."
+    },
+    {
+      "name": "system_settings_set_brightness",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Đặt độ sáng màn hình Android. Chế độ thủ công ghi phần trăm từ 1 đến 100; chế độ tự động chỉ cho phép độ sáng tự động và bỏ qua phần trăm. Yêu cầu quyền sửa đổi cài đặt hệ thống đặc biệt."
+    },
+    {
+      "name": "system_settings_set_eye_comfort",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mở cài đặt Màn hình Android cho Làm dịu mắt/Ánh sáng ban đêm/bộ lọc ánh sáng xanh/chế độ đọc. Hãy sử dụng công cụ này thay vì chỉ đưa ra hướng dẫn thủ công cho mục đích làm dịu mắt bằng nhiều ngôn ngữ. Các nhà cung cấp Android hiển thị quá trình chuyển đổi chính xác theo cách khác nhau, vì vậy công cụ này sẽ mở cài đặt Hiển thị và cho phép người dùng hoàn tất quá trình chuyển đổi trên trang đó."
+    },
+    {
+      "name": "system_settings_set_font_scale",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Đặt tỷ lệ phông chữ hệ thống Android. Yêu cầu quyền sửa đổi cài đặt hệ thống đặc biệt. Các giá trị điển hình là 0,85 nhỏ, 1,0 mặc định, 1,15 lớn, 1,3 lớn hơn và tối đa 1,6 cực lớn."
+    },
+    {
+      "name": "system_settings_set_haptic_feedback",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Bật hoặc tắt phản hồi xúc giác của Android. Yêu cầu quyền sửa đổi cài đặt hệ thống đặc biệt."
+    },
+    {
+      "name": "system_settings_set_screen_timeout",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Đặt thời gian tắt màn hình Android tính bằng giây. Yêu cầu quyền sửa đổi cài đặt hệ thống đặc biệt. Các giá trị được giới hạn ở mức 15..1800 giây."
+    },
+    {
+      "name": "system_settings_set_touch_sounds",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Bật hoặc tắt âm thanh chạm của Android. Yêu cầu quyền sửa đổi cài đặt hệ thống đặc biệt."
+    },
+    {
+      "name": "system_settings_set_user_rotation",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Khóa xoay màn hình Android. Yêu cầu quyền sửa đổi cài đặt hệ thống đặc biệt và tắt tính năng tự động xoay. Sử dụng dọc, ngang, đảo ngược_portrait hoặc đảo ngược_landscape. Định danh kỹ thuật: reverse_portrait, reverse_landscape."
+    },
+    {
+      "name": "system_settings_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Trả về trạng thái quyền cài đặt hệ thống có thể ghi cộng với độ sáng màn hình hiện tại, tỷ lệ phông chữ, thời gian chờ màn hình, xoay, âm thanh chạm và phản hồi xúc giác. Điều này chỉ đọc cài đặt hệ thống Android."
+    },
+    {
+      "name": "volume_adjust_stream",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Tăng hoặc giảm một luồng âm thanh Android theo một bước hệ thống. Chọn tùy chọn này để thay đổi âm lượng tương đối."
+    },
+    {
+      "name": "volume_set_all_streams_muted",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Tắt tiếng hoặc bật tiếng tất cả các luồng âm thanh Android được hỗ trợ và báo cáo luồng nào thực sự đã thay đổi. Chọn tùy chọn này cho các yêu cầu tắt tiếng toàn bộ thiết bị hoặc toàn bộ âm lượng."
+    },
+    {
+      "name": "volume_set_ringer_mode",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Đặt chế độ chuông điện thoại Android. Đối với chế độ im lặng, thao tác này sẽ tự động chuyển sang tắt tiếng tất cả các luồng âm thanh khi Android từ chối ghi ở chế độ chuông."
+    },
+    {
+      "name": "volume_set_stream",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Đặt một luồng âm thanh Android thành tỷ lệ phần trăm mục tiêu. Chọn tùy chọn này khi người dùng yêu cầu mức âm lượng chính xác."
+    },
+    {
+      "name": "volume_set_stream_muted",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Tắt tiếng hoặc bật tiếng một luồng âm thanh Android. Điều này thay đổi trạng thái tắt tiếng của luồng, không phải chế độ chuông điện thoại."
+    },
+    {
+      "name": "volume_status",
+      "category": "Device Status and System Control",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Đọc trạng thái âm lượng hiện tại của Android đối với luồng âm thanh và chế độ chuông hiện tại."
+    },
+    {
+      "name": "wifi_configured_networks",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Thiết bị Wi-Fi cho Android có thể hỗ trợ Wi-Fi SSID、networkId、安全类型、是否像是有凭据、是否隐藏网络、是否当前连接和配置状态；不会返回 Wi-Fi密码。"
+    },
+    {
+      "name": "wifi_connect",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Kết nối với mạng Wi-Fi. Trước tiên, công cụ này sẽ kiểm tra cấu hình Wi-Fi đã lưu của Android để tìm SSID và kết nối trực tiếp nếu nó tồn tại. Nếu không được lưu, nó sẽ sử dụng cụm mật khẩu được cung cấp để thêm/kết nối mạng hoặc quay lại bảng điều khiển Wi-Fi của Android khi cần nhập mật khẩu."
+    },
+    {
+      "name": "wifi_disconnect",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Ngắt kết nối khỏi điểm truy cập Wi-Fi hiện tại. Trước tiên, công cụ này thử ngắt kết nối WifiManager cũ một cách im lặng đối với các máy chủ API 28 mục tiêu; nếu Android từ chối, nó sẽ quay lại mở bảng điều khiển Wi-Fi của Android để người dùng thực hiện thao tác."
+    },
+    {
+      "name": "wifi_forget",
+      "category": "Device Status and System Control",
+      "risk": "DESTRUCTIVE",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Quên mạng Wi-Fi đã lưu. Trước tiên, công cụ này sẽ thử loại bỏ Mạng WifiManager cũ ở chế độ im lặng, sau đó quay trở lại bảng điều khiển Wi-Fi của Android để người dùng thực hiện thao tác. Định danh kỹ thuật: removeNetwork."
+    },
+    {
+      "name": "wifi_scan_networks",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Quét và trả lại các điểm truy cập Wi-Fi gần đó. Nếu Wi-Fi tắt, trước tiên, công cụ này sẽ cố gắng bật Wi-Fi trực tiếp và chỉ quay lại bảng điều khiển Wi-Fi của Android nếu bật trực tiếp không thành công. Yêu cầu quyền truy cập vị trí và dịch vụ định vị thiết bị. Kết quả có thể tiết lộ dữ liệu mạng nhạy cảm với vị trí."
+    },
+    {
+      "name": "wifi_set_enabled",
+      "category": "Device Status and System Control",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Bật hoặc tắt Wi-Fi Android. Trước tiên, công cụ này thử thao tác WifiManager trực tiếp, sau đó kiểm tra xem Android có thực sự đạt đến trạng thái được yêu cầu hay không; nếu yêu cầu không thành công hoặc vẫn đang chờ xử lý, yêu cầu sẽ quay lại mở bảng điều khiển Wi-Fi của Android để người dùng thực hiện hành động."
+    },
+    {
+      "name": "wifi_status",
+      "category": "Device Status and System Control",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Trả về trạng thái Wi-Fi hiện tại của Android và chi tiết kết nối Wi-Fi đang hoạt động khi ứng dụng có quyền. Điều này chỉ đọc trạng thái mạng."
+    },
+    {
+      "name": "get_location",
+      "category": "Location and Navigation",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Nhận vị trí thiết bị Android hiện tại trong khi FoneClaw đang được sử dụng. Chỉ yêu cầu quyền truy cập vị trí ở nền trước."
+    },
+    {
+      "name": "location_search_nearby_place",
+      "category": "Location and Navigation",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Tìm kiếm các địa điểm lân cận để tìm tên địa điểm không rõ ràng bằng cách sử dụng vị trí thiết bị hiện tại. Chỉ sử dụng tùy chọn này khi người dùng yêu cầu tìm, xác minh, giải quyết, chọn hoặc điều hướng đến một địa điểm một cách rõ ràng hoặc khi đích điều hướng không rõ ràng. Để tạo lịch, tên địa điểm do người dùng cung cấp là đủ: giữ nguyên tên đó là locationName và không gọi công cụ này chỉ vì thiếu địa chỉ hoặc tọa độ chính xác."
+    },
+    {
+      "name": "map_navigate",
+      "category": "Location and Navigation",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mở tuyến đường hoặc màn hình điều hướng trong ứng dụng bản đồ để biết điểm đến và chế độ di chuyển. Thao tác này sẽ khởi chạy ứng dụng bản đồ bên ngoài, chỉ sử dụng các đối số được cung cấp và không đọc dữ liệu thiết bị."
+    },
+    {
+      "name": "mail_account_list",
+      "category": "Mail",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Liệt kê các tài khoản thư được cấu hình. Để trống truy vấn để liệt kê tất cả các tài khoản. Khi truy vấn được cung cấp, mức độ ưu tiên phù hợp là id tài khoản, email, bí danh, sau đó là bí danh mờ hoặc email. Kết quả khớp chính xác vẫn có thể trả về nhiều tài khoản. Nếu không có tài khoản thư FoneClaw nào được định cấu hình và truy vấn là địa chỉ email, kết quả có thể bao gồm ProviderSetupGuide với URL thông tin xác thực của nhà cung cấp cố định. Định danh kỹ thuật: providerSetupGuide."
+    },
+    {
+      "name": "mail_account_save",
+      "category": "Mail",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Kiểm tra cả kết nối IMAP và SMTP và chỉ lưu tài khoản thư khi cả hai đều thành công. Hãy gọi điều này ngay khi mọi trường cấu hình bắt buộc đều có sẵn. Hoạt động này yêu cầu sự chấp thuận của người dùng."
+    },
+    {
+      "name": "mail_delete",
+      "category": "Mail",
+      "risk": "DESTRUCTIVE",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Chuyển tối đa 20 thư chính xác vào thùng rác hoặc chỉ xóa chúng vĩnh viễn khi người dùng yêu cầu xóa vĩnh viễn một cách rõ ràng. Không bao giờ thử lại một kết quả không chắc chắn. Định danh kỹ thuật: messageRefs."
+    },
+    {
+      "name": "mail_list",
+      "category": "Mail",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Liệt kê, lọc hoặc tóm tắt tin nhắn tìm kiếm. Truy vấn tìm kiếm chủ đề, người gửi, người nhận và nội dung. Để trống id tài khoản để sử dụng tài khoản duy nhất hoặc tài khoản mặc định duy nhất. Định danh kỹ thuật: accountId."
+    },
+    {
+      "name": "mail_read",
+      "category": "Mail",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Đọc một tin nhắn từ một tin nhắnRef được trả về bởi mail_list và đánh dấu nó đã đọc trên máy chủ. Sau khi công cụ thành công, hãy tóm tắt thông báo cho người dùng trong cùng một phản hồi. Định danh kỹ thuật: messageRef."
+    },
+    {
+      "name": "mail_send",
+      "category": "Mail",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Gửi email mới, trả lời, trả lời tất cả hoặc chuyển tiếp. Yêu cầu phê duyệt. Tệp đính kèm phải sử dụng siêu dữ liệu có cấu trúc chính xác được thông báo cùng với thông báo của người dùng hiện tại."
+    },
+    {
+      "name": "call_log_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Liệt kê các mục nhật ký cuộc gọi Android gần đây, được lọc tùy ý theo loại cuộc gọi. Yêu cầu quyền READ_CALL_LOG. Sử dụng type=missed cho các câu hỏi về cuộc gọi nhỡ và trước khi chọn cuộc gọi nhỡ để gọi lại. Sau khi chọn số, hãy gọi phone_dial."
+    },
+    {
+      "name": "contacts_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Liệt kê một số lượng liên hệ Android có giới hạn, được lọc tùy ý theo tên hiển thị hoặc số điện thoại. Yêu cầu quyền READ_CONTACTS. Chỉ để trống truy vấn khi người dùng yêu cầu xem danh bạ một cách rõ ràng; đặt truy vấn khi người dùng yêu cầu tìm liên hệ."
+    },
+    {
+      "name": "phone_dial",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mở trình quay số hệ thống để tìm chính xác một số điện thoại hoặc liên hệ được đặt tên. Đặt chính xác một trong số điện thoại và tên liên lạc. Người liên hệ được đặt tên phải phân giải thành một kết quả phù hợp; nếu nhiều liên hệ trùng khớp thì dừng lại và yêu cầu người dùng lựa chọn. Sau khi trình quay số mở ra, hãy gọi get_screen_info, xác định nút gọi hiển thị, sau đó gọi tap_node. Định danh kỹ thuật: phoneNumber, contactName."
+    },
+    {
+      "name": "send_to_sms_message",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Sau khi được phê duyệt, hãy mở bản nháp SMS/MMS hiển thị. Đối với tin nhắn SMS có người nhận, hãy tự động nhấn Chỉ gửi khi khả năng truy cập FoneClaw được kết nối và ứng dụng tin nhắn mặc định, người nhận, nội dung tin nhắn đầy đủ và một điều khiển Gửi ổn định đều được xác minh. Tệp đính kèm, lời nhắc hai SIM, giao diện người dùng mơ hồ hoặc khả năng truy cập không khả dụng yêu cầu thao tác thủ công. Sau bất kỳ kết quả cuối cùng nào, hãy dừng lập kế hoạch công cụ và không bao giờ gọi get_screen_info hoặc tap_node."
+    },
+    {
+      "name": "sms_list",
+      "category": "Communication and Contacts",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Truy vấn tin nhắn SMS trực tiếp trên thiết bị Android này. Không có từ khóa, địa chỉ, liên hệ hoặc threadId, hãy liệt kê các tin nhắn gần đây. Đặt từ khóa/địa chỉ/liên hệ để tìm kiếm. Chỉ đặt threadId từ kết quả sms_list trước đó để đọc cuộc trò chuyện đó. Đối với yêu cầu tóm tắt, hãy gọi một lần với box=all rồi tóm tắt các tin nhắn đã nhận và đã gửi được trả về. Không bao giờ sử dụng lịch sử SysInfo để thay thế cho kết quả trực tiếp này."
+    },
+    {
+      "name": "calendar_create_event",
+      "category": "Calendar",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Tạo sự kiện lịch Android. Thu thập thông tin chi tiết về thời gian còn thiếu và lời nhắc trước khi gọi. Tên địa điểm do người dùng cung cấp là đủ và phải được chuyển trực tiếp dưới dạng locationName. Không tìm kiếm địa chỉ hoặc tọa độ chính xác trừ khi người dùng yêu cầu xác minh, giải quyết, chọn hoặc điều hướng đến địa điểm một cách rõ ràng. Ưu tiên startLocalDateTime/endLocalDateTime trong yyyy-MM-dd HH:mm cho ngày của người dùng và ngày tương đối; công cụ sẽ phân tích chúng theo múi giờ của thiết bị. Không tạo sự kiện từ mili giây kỷ nguyên được tính toán theo mô hình. Sử dụng lịchId=0 trừ khi người dùng chọn id lịch một cách rõ ràng. Sau khi tạo, hãy sử dụng kết quả của công cụ realStart/actualEnd làm thời gian tạo mà người dùng phải đối mặt. Định danh kỹ thuật: calendarId=0, actualStart."
+    },
+    {
+      "name": "calendar_delete_event",
+      "category": "Calendar",
+      "risk": "DESTRUCTIVE",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Xóa sự kiện lịch Android theo id. Tìm kiếm/liệt kê các sự kiện trên tất cả các lịch với CalendarId=0 trừ khi người dùng chọn id lịch một cách rõ ràng. Luôn chuyển tiêu đề đã biết, startMillis, endMillis và vị trí khi đã biết để mục tiêu không rõ ràng. Định danh kỹ thuật: calendarId=0."
+    },
+    {
+      "name": "calendar_list_calendars",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Liệt kê lịch Android có thể ghi. Sử dụng tính năng này để cho phép người dùng chọn lịch; đừng cho rằng lịchId=1 là lịch địa phương hoặc lịch đích. Định danh kỹ thuật: calendarId=1."
+    },
+    {
+      "name": "calendar_list_events",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Liệt kê các sự kiện trên lịch của Android trong một khoảng thời gian cụ thể. Sử dụng cho các yêu cầu như lịch trình hôm nay, lịch trình ngày mai, sự kiện hiện có hoặc sự kiện trong tuần này. Ưu tiên startLocalDateTime/endLocalDateTime tính bằng yyyy-MM-dd HH:mm; công cụ sẽ phân tích chúng theo múi giờ của thiết bị. Chỉ sử dụng startMillis/endMillis làm dự phòng không được dùng nữa khi mili giây kỷ nguyên chính xác đến từ kết quả công cụ đáng tin cậy. Đừng đoán lịchId; sử dụng lịchId=0 để tìm kiếm tất cả các lịch trừ khi người dùng chọn id lịch một cách rõ ràng. Định danh kỹ thuật: calendarId, calendarId=0."
+    },
+    {
+      "name": "calendar_open_event",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Mở trang chi tiết sự kiện trên lịch Android theo id sự kiện. Tìm kiếm hoặc liệt kê các sự kiện trước tiên khi người dùng mô tả một sự kiện bằng ngôn ngữ tự nhiên. Đừng đoán id sự kiện."
+    },
+    {
+      "name": "calendar_search_events",
+      "category": "Calendar",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Tìm kiếm các sự kiện trên lịch Android theo từ khóa trong khoảng thời gian cụ thể. Sử dụng trước khi mở, cập nhật hoặc xóa sự kiện khi người dùng mô tả sự kiện theo tiêu đề hoặc nội dung. Ưu tiên startLocalDateTime/endLocalDateTime tính bằng yyyy-MM-dd HH:mm; công cụ sẽ phân tích chúng theo múi giờ của thiết bị. Chỉ sử dụng startMillis/endMillis làm dự phòng không được dùng nữa khi mili giây kỷ nguyên chính xác đến từ kết quả công cụ đáng tin cậy. Đừng đoán lịchId; sử dụng lịchId=0 để tìm kiếm tất cả các lịch trừ khi người dùng chọn id lịch một cách rõ ràng. Định danh kỹ thuật: calendarId, calendarId=0."
+    },
+    {
+      "name": "calendar_update_event",
+      "category": "Calendar",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Cập nhật sự kiện lịch Android theo id. Trước tiên, hãy tìm kiếm/liệt kê các sự kiện khi người dùng mô tả mục tiêu bằng ngôn ngữ tự nhiên và chuyển các chi tiết mục tiêu đã biết với các trường đã thay đổi. Đừng đoán Id lịch hoặc id sự kiện; tìm kiếm tất cả các lịch với CalendarId=0 trừ khi người dùng chọn id lịch một cách rõ ràng. Các trường văn bản trống sẽ bị bỏ qua. Sử dụng startMillis/endMillis=0 để giữ thời gian hiện có. Sử dụng lời nhắcMinutes=-2 để giữ lời nhắc, -1 để xóa lời nhắc và >=0 để thay thế lời nhắc. Định danh kỹ thuật: calendarId, calendarId=0, reminderMinutes=-2."
+    },
+    {
+      "name": "memo_create",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Tạo bản ghi nhớ, ghi chú hoặc bản ghi tác vụ cục bộ mà người dùng có thể nhìn thấy. Sử dụng khi người dùng rõ ràng muốn nội dung được lưu giữ dưới dạng bản ghi nhớ hoặc ghi chú có thể thực hiện được. Không sử dụng công cụ này để lưu hoặc truy vấn bộ nhớ hồ sơ người dùng do trợ lý quản lý chẳng hạn như tùy chọn, danh tính, mối quan hệ hoặc kiểu phản hồi."
+    },
+    {
+      "name": "memo_delete",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Xóa mềm một bản ghi nhớ cục bộ theo id. Trước tiên hãy tìm kiếm/liệt kê các bản ghi nhớ khi người dùng mô tả mục tiêu bằng ngôn ngữ tự nhiên để biết id/tiêu đề mục tiêu."
+    },
+    {
+      "name": "memo_list",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Liệt kê các bản ghi ghi nhớ cục bộ mà người dùng có thể nhìn thấy. trạng thái có thể là đang hoạt động, đã hoàn tất, đã lưu trữ hoặc tất cả. Không sử dụng công cụ này để trả lời những gì trợ lý nhớ về người dùng, tùy chọn hồ sơ người dùng hoặc lịch sử hội thoại. Kết quả trống chỉ có nghĩa là không tồn tại bản ghi nhớ cục bộ phù hợp; điều đó không có nghĩa là không có bộ nhớ hồ sơ người dùng nào tồn tại."
+    },
+    {
+      "name": "memo_mark_done",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Đánh dấu một bản ghi nhớ cục bộ là đã hoàn tất hoặc đang hoạt động theo id."
+    },
+    {
+      "name": "memo_search",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Tìm kiếm các bản ghi nhớ cục bộ mà người dùng có thể nhìn thấy theo từ khóa trong tiêu đề, nội dung hoặc thẻ. trạng thái có thể là đang hoạt động, đã hoàn tất, đã lưu trữ hoặc tất cả. Không sử dụng công cụ này để tìm kiếm bộ nhớ hồ sơ người dùng hoặc lịch sử hội thoại do trợ lý quản lý. Kết quả trống chỉ mô tả kho lưu trữ ghi nhớ cục bộ."
+    },
+    {
+      "name": "memo_update",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Cập nhật bản ghi nhớ cục bộ theo id. Trước tiên, hãy tìm kiếm/liệt kê các bản ghi nhớ khi người dùng mô tả mục tiêu bằng ngôn ngữ tự nhiên và chuyển các chi tiết mục tiêu đã biết bằng các trường đã thay đổi. Tiêu đề/nội dung/thẻ trống sẽ bị bỏ qua. nhắc nhởAtMillis=-2 giữ lời nhắc, -1 xóa lời nhắc và >0 đặt lời nhắc. Định danh kỹ thuật: reminderAtMillis=-2."
+    },
+    {
+      "name": "sysinfo_delete",
+      "category": "System Information",
+      "risk": "DESTRUCTIVE",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Chỉ xóa vĩnh viễn bộ đệm SysInfo cục bộ phù hợp của FoneClaw. Điều này không bao giờ xóa các thông báo, SMS, nhật ký cuộc gọi hoặc sự kiện lịch gốc của Android. Cần có ít nhất một bộ lọc trừ khi deleteAll=true. Nhiều bộ lọc được kết hợp với AND."
+    },
+    {
+      "name": "sysinfo_mark_reviewed",
+      "category": "System Information",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Đánh dấu các id sự kiện SysInfo cục bộ là chỉ được xem xét sau khi người dùng xác nhận rõ ràng."
+    },
+    {
+      "name": "sysinfo_query",
+      "category": "System Information",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Truy vấn các thông báo cục bộ, SMS, nhật ký cuộc gọi, sự kiện lịch và đầu vào trợ năng đã được ghi lại. Sử dụng công cụ duy nhất này để tóm tắt hàng ngày, truy vấn thông báo, truy vấn trong khoảng thời gian và tìm kiếm từ khóa. Nó không bao giờ mở bảng hệ thống hoặc quét các nguồn hệ thống trực tiếp. Mỗi hàng có thể bao gồm sourceRef để loại bỏ trùng lặp so với kết quả của nhà cung cấp trực tiếp. Tóm tắt JSON trả về cho người dùng."
+    },
+    {
+      "name": "sysinfo_thread",
+      "category": "System Information",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Tải một luồng SysInfo cục bộ bằng một threadKey được sysinfo_query trả về."
+    },
+    {
+      "name": "shopping_compare",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Tìm kiếm kết quả web công khai cho một sản phẩm trên nền tảng mua sắm và trả về bằng chứng so sánh. Hãy sử dụng điều này trước khi đưa ra lời khuyên về giá mua sắm."
+    },
+    {
+      "name": "web_fetch",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Tìm nạp một trang web cụ thể theo URL và trả về văn bản trang có thể đọc được."
+    },
+    {
+      "name": "web_search",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Tìm kiếm trên web các trang có liên quan. Trả về tiêu đề kết quả, URL và đoạn trích ngắn."
+    },
+    {
+      "name": "shortcut_save_agent_prompt",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Lưu lối tắt do người dùng tạo để gửi lời nhắc đến tổng đài viên. Chỉ gọi lệnh này sau khi người dùng xác nhận tiêu đề, mô tả và hành vi."
+    },
+    {
+      "name": "shortcut_save_direct_tool",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Lưu lối tắt công cụ trực tiếp do người dùng tạo. Chỉ gọi lệnh này khi mọi hành động được yêu cầu có thể được ánh xạ đầy đủ tới các bước công cụ đã biết với các tham số đầy đủ."
+    },
+    {
+      "name": "task_create",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Tạo kế hoạch TODO được đặt hàng hoàn chỉnh trong một cuộc gọi cho yêu cầu hiện tại của người dùng. Đây là điều kiện tiên quyết bắt buộc trước bất kỳ công cụ không phải nhiệm vụ nào khi yêu cầu yêu cầu ba bước trở lên. Vượt qua mọi bước giới hạn mà người dùng phải đối mặt trong các mục. Kế hoạch có thể được tạo chính xác một lần và không thể gia hạn sau này. Không bao giờ bao gồm các mục quản lý tác vụ, dọn dẹp, cập nhật trạng thái hoặc phản hồi cuối cùng."
+    },
+    {
+      "name": "task_list",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Liệt kê các mục TODO nội bộ cho yêu cầu hiện tại của người dùng. Theo mặc định trả về các mục đang mở, đang tiến hành và bị chặn. Định danh kỹ thuật: in_progress."
+    },
+    {
+      "name": "task_update",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Cập nhật một mục TODO nội bộ. Chuyển đổi được phép: mở cho in_progress, bị chặn hoặc bị bỏ qua; in_progress để bị chặn, hoàn thành hoặc bị bỏ rơi; bị chặn để mở hoặc bị bỏ rơi. Xong và bị bỏ rơi là thiết bị đầu cuối. Chỉ có một nhiệm vụ có thể đang được thực hiện."
+    },
+    {
+      "name": "workflow_delete",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DESTRUCTIVE",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Xóa quy trình làm việc đã lưu theo id."
+    },
+    {
+      "name": "workflow_list",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Liệt kê các quy trình công việc đã lưu."
+    },
+    {
+      "name": "workflow_save",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Lưu quy trình làm việc có thể sử dụng lại. stepJson phải là một mảng JSON gồm {toolName, đối số}. Định danh kỹ thuật: stepsJson."
+    },
+    {
+      "name": "add_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Thêm tài liệu kỹ năng mới vào sổ đăng ký kỹ năng."
+    },
+    {
+      "name": "disable_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Vô hiệu hóa Kỹ năng của người dùng để nó bị ẩn khỏi lời nhắc của nhân viên."
+    },
+    {
+      "name": "enable_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Kích hoạt Kỹ năng người dùng hợp lệ để đại lý có thể sử dụng nó."
+    },
+    {
+      "name": "list_skills",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Liệt kê các Kỹ năng của người dùng và hệ thống với nguồn, trạng thái kích hoạt và trạng thái xác thực."
+    },
+    {
+      "name": "load_skill_detail",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Tải một kỹ năng chuyên biệt khi nhiệm vụ hiện tại khớp với một trong các kỹ năng được liệt kê trong lời nhắc hệ thống. Sử dụng công cụ này để đưa các hướng dẫn và tài nguyên của kỹ năng vào cuộc trò chuyện hiện tại. Đầu ra có thể chứa hướng dẫn chi tiết về quy trình làm việc cũng như các tham chiếu đến tập lệnh, tệp, v.v. trong cùng thư mục với kỹ năng. Tên kỹ năng phải khớp với một trong các kỹ năng được liệt kê trong lời nhắc hệ thống của bạn."
+    },
+    {
+      "name": "plugin_request_install",
+      "category": "Skills and Plugins",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Tạo đề xuất cài đặt có cấu trúc cho một plugin chính thức. Việc này không tải xuống hoặc cài đặt plugin; HomeScreen phải hỏi người dùng."
+    },
+    {
+      "name": "plugin_search",
+      "category": "Skills and Plugins",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Tìm kiếm siêu dữ liệu plugin chính thức của FoneClaw khi người dùng yêu cầu một khả năng không có trong danh sách công cụ hiện tại. Điều này chỉ tìm kiếm siêu dữ liệu và không bao giờ tải xuống hoặc cài đặt plugin."
+    },
+    {
+      "name": "preview_skill_import",
+      "category": "Skills and Plugins",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Xem trước tài liệu SKILL.md đã dán. Điều này phân tích và xác nhận nhưng không lưu."
+    },
+    {
+      "name": "remove_skill",
+      "category": "Skills and Plugins",
+      "risk": "DESTRUCTIVE",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Loại bỏ kỹ năng"
+    },
+    {
+      "name": "save_skill_draft",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Lưu tài liệu SKILL.md dưới dạng bản nháp Kỹ năng của người dùng bị vô hiệu hóa."
+    },
+    {
+      "name": "update_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Cập nhật tài liệu kỹ năng hiện có trong sổ đăng ký kỹ năng."
+    }
+  ]
+}
