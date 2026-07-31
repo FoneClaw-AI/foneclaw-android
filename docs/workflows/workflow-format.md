@@ -98,8 +98,12 @@ The highest-scoring workflow wins. If two workflows tie for the top score, the m
 
 The WorkflowStepExecutor currently supports mail-related tools:
 
-- `mail_list`, `mail_read`, `mail_send`, `mail_mark_read`, `mail_delete`
+- `mail_list`, `mail_read`, `mail_send`, `mail_delete`
 - `mail_account_list`, `mail_account_delete`, `mail_account_rename`
+
+Existing workflows that already contain `mail_mark_read` can still replay that step for
+compatibility, but new workflows should not use it because the Main Agent no longer exposes
+that Function Schema.
 
 Support for additional tool categories will be added in future releases.
 

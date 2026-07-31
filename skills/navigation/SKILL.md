@@ -1,7 +1,7 @@
 ---
 name: RoutePlanningNavigationSkill
 description: This skill is used by an Android Agent to plan a route and open a navigation session in a map application.
-version: 1.0.0
+version: 1.1.0
 ---
 # Route Navigation Planning Agent Skill
 
@@ -21,9 +21,9 @@ Start route navigation for the user using an appropriate map application and tra
 
 ## Required Tools
 
-- Installed application list tool
-- Phone location tool
-- Map navigation tool
+- `get_installed_map_apps`
+- `get_location`
+- `map_navigate`
 
 ## Workflow
 
@@ -71,18 +71,19 @@ The selected map application must include both the application display name and 
 
 4. If location retrieval succeeds, determine the best travel mode based on the relationship between the current location and the destination.
 
-Supported travel modes may include:
+Map the selected travel mode to exactly one supported `travelMode` value:
 
-- Driving
-- Walking
-- Cycling
-- Electric bicycle
-- Public transportation
+- Driving: `driving`
+- Walking: `walking`
+- Cycling: `bicycling`
+- Electric bicycle: `electric_bicycling`
+- Public transportation: `public_transport`
 
 ### 5. Start Map Navigation
 
-1. After determining the **map application name**, **map application package name**, **destination**, and **travel mode**, call the corresponding map navigation tool.
-2. The map navigation tool call must include `map_app_package_name`. Do not invoke the tool with only the application display name.
+1. After determining the **map application name**, **map application package name**, **destination**, and **travel mode**, call `map_navigate` once.
+2. Pass the resolved destination as `destination` and the exact value from the travel mode mapping as `travelMode`.
+3. Pass `packageName=map_app_package_name`. Do not pass the application display name as `packageName`.
 
 ## Completion Criteria
 
@@ -102,7 +103,8 @@ The skill should terminate and notify the user when any of the following occurs:
 
 - Do not ask the user for missing information unless the destination cannot be determined.
 - Select the map application in this order: user’s current input, extracted user preference, last used map application, random installed map application.
-- Always resolve and pass the selected map application package name to the map navigation tool.
+- Always resolve and pass the selected map application package name to `map_navigate`.
+- Never call retired route-specific tools such as `map_drive` or `map_walk`.
 - Prefer navigation history when it can complete the destination.
 - Use current phone location as the starting point.
 - Select the map application automatically when the user does not specify one.

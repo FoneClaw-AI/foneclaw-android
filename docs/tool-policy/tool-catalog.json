@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
   "catalogType": "foneclaw-built-in-tools",
-  "toolCount": 127,
+  "toolCount": 118,
   "categoryCount": 11,
   "categories": [
     {
       "name": "Screen and App",
-      "toolCount": 14
+      "toolCount": 11
     },
     {
       "name": "Device Status and System Control",
-      "toolCount": 55
+      "toolCount": 54
     },
     {
       "name": "Location and Navigation",
@@ -22,7 +22,7 @@
     },
     {
       "name": "Communication and Contacts",
-      "toolCount": 8
+      "toolCount": 5
     },
     {
       "name": "Calendar",
@@ -34,7 +34,7 @@
     },
     {
       "name": "System Information",
-      "toolCount": 6
+      "toolCount": 4
     },
     {
       "name": "Web and Shopping",
@@ -51,13 +51,6 @@
   ],
   "tools": [
     {
-      "name": "camera_open_latest_photo",
-      "category": "Screen and App",
-      "risk": "SENSITIVE_READ",
-      "approval": "Require approval",
-      "description": "Open the latest visible photo from the system gallery. Use this only when the user explicitly asks to view or open the newest/latest photo. Do not use this as a follow-up after camera_take_photo unless the user explicitly asks to view or open the captured photo."
-    },
-    {
       "name": "camera_open_photo",
       "category": "Screen and App",
       "risk": "SENSITIVE_READ",
@@ -69,7 +62,7 @@
       "category": "Screen and App",
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
-      "description": "Capture a new photo and return the saved photo URI when available. Use this when the user's intent is to capture a new photo. Leave lensFacing unset or auto for normal photo capture. Choose lensFacing=front only for front-facing or selfie intent; choose back only when the user explicitly asks for the back camera. Keep explicitLensSelection false for plain/default photo capture, even if the default physical lens is back. Set explicitLensSelection true only when the user explicitly asks for front, back, rear, or selfie capture. Do not call camera_open_latest_photo or camera_open_photo after this tool unless the user explicitly asks to view or open the photo. Call this tool directly. Capture uses the native system camera first. Explicit front/back capture may use the direct backend only if the native camera cannot honor the requested lens. Do not ask the user to grant permission before calling this tool."
+      "description": "Capture a new photo and return the saved photo URI when available. Use this when the user's intent is to capture a new photo. Leave lensFacing unset or auto for normal photo capture. Choose lensFacing=front only for front-facing or selfie intent; choose back only when the user explicitly asks for the back camera. Keep explicitLensSelection false for plain/default photo capture, even if the default physical lens is back. Set explicitLensSelection true only when the user explicitly asks for front, back, rear, or selfie capture. Do not call camera_open_photo after this tool unless the user explicitly asks to view or open the photo. Call this tool directly. Capture uses the native system camera first. Explicit front/back capture may use the direct backend only if the native camera cannot honor the requested lens. Do not ask the user to grant permission before calling this tool."
     },
     {
       "name": "cross_app_read_screen",
@@ -77,13 +70,6 @@
       "risk": "LOW",
       "approval": "Auto",
       "description": "Open or switch to a target Android app, wait until that app is stably in the foreground, and return the visible accessibility screen tree. Use this when one request asks to both open/switch to an app and read, inspect, describe, or summarize its visible page. Do not split that task into launch_app and get_screen_info. This tool does not capture a screenshot or interact with nodes."
-    },
-    {
-      "name": "cross_app_screenshot",
-      "category": "Screen and App",
-      "risk": "SENSITIVE_READ",
-      "approval": "Require approval",
-      "description": "Open or switch to a target Android app, wait briefly for the app screen to appear, then capture the current screen. Use this only when one user request asks to both open/switch to an app and take a screenshot. Do not use this for screenshot-only requests or app-launch-only requests."
     },
     {
       "name": "get_installed_map_apps",
@@ -128,18 +114,11 @@
       "description": "Open a specific visible screenshot from the system gallery. index is 1-based in the selected order. sortOrder can be newest or oldest."
     },
     {
-      "name": "screenshot_open_latest",
-      "category": "Screen and App",
-      "risk": "SENSITIVE_READ",
-      "approval": "Require approval",
-      "description": "Open the latest visible screenshot from the system gallery. Use this when the user wants to view the newest saved screenshot instead of capturing a new one."
-    },
-    {
       "name": "screenshot_take",
       "category": "Screen and App",
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
-      "description": "Capture the current Android screen with the FoneClaw accessibility service and save it to Pictures/FoneClaw/Screenshots. Use this when the user's intent is to capture the current screen. Do not use this when the user wants to view an already saved screenshot; use screenshot_open for viewing saved screenshots."
+      "description": "Capture an Android screen with the FoneClaw accessibility service and save it to Pictures/FoneClaw/Screenshots. Use targetType=current for the current screen, targetType=app with targetApp for opening an app and capturing it, or targetType=notification_shade only for an explicit screenshot or image-capture request involving the visible notification shade. Never use targetType=notification_shade to read, list, query, or summarize notification data; use a SysInfo notification tool instead. Do not call launch_app or system_panel_open before this tool for app or notification-shade capture. Do not use this when the user wants to view an already saved screenshot; use screenshot_open for viewing saved screenshots."
     },
     {
       "name": "tap_node",
@@ -331,18 +310,11 @@
       "description": "Request Bluetooth to turn on. For legacy target SDKs this first tries the public enable API, then falls back to Android's system confirmation UI when needed."
     },
     {
-      "name": "system_panel_open_notifications",
-      "category": "Device Status and System Control",
-      "risk": "SENSITIVE_READ",
-      "approval": "Require approval",
-      "description": "Open the visible Android notification shade only when the user explicitly asks to open, show, display, or pull down the panel. Never use this to read, inspect, search, list, or summarize notifications; use sysinfo tools for those requests. Requires FoneClaw accessibility service."
-    },
-    {
-      "name": "system_panel_open_quick_settings",
+      "name": "system_panel_open",
       "category": "Device Status and System Control",
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
-      "description": "Open Android quick settings / quick toggles / control center panel. Requires FoneClaw accessibility service."
+      "description": "Open one visible Android system panel. Use panel=notifications to open the notification shade, or panel=quick_settings to open quick settings / control center. This tool only opens the selected panel. It does not read, capture, search, list, or summarize panel content. Do not call it when any part of the request asks to read, capture, inspect, describe, or summarize notifications. Call it once only for an explicit panel-open-only request. Requires FoneClaw accessibility service."
     },
     {
       "name": "system_settings_open_battery_optimization_entry",
@@ -559,7 +531,7 @@
       "category": "Mail",
       "risk": "LOW",
       "approval": "Auto",
-      "description": "List configured mail accounts. Leave query empty to list all accounts. When query is provided, matching priority is account id, email, alias, then fuzzy alias or email. Exact matches can still return multiple accounts."
+      "description": "List configured mail accounts. Leave query empty to list all accounts. When query is provided, matching priority is account id, email, alias, then fuzzy alias or email. Exact matches can still return multiple accounts. If no FoneClaw mail account is configured and query is an email address, the result may include providerSetupGuide with a fixed provider credential URL."
     },
     {
       "name": "mail_account_save",
@@ -597,46 +569,25 @@
       "description": "Send a new email, reply, reply all, or forward. Requires approval. Attachments must use the exact structured metadata announced with the current user message."
     },
     {
-      "name": "call_log_missed",
+      "name": "call_log_list",
       "category": "Communication and Contacts",
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
-      "description": "Read recent missed calls. Use before requests like 'call back the missed call'. After selecting a number, call phone_dial(phoneNumber), then use get_screen_info and tap_node in the dialer."
-    },
-    {
-      "name": "call_log_recent",
-      "category": "Communication and Contacts",
-      "risk": "SENSITIVE_READ",
-      "approval": "Require approval",
-      "description": "Read recent call log entries from Android CallLog. Requires READ_CALL_LOG permission. Use before answering who called recently or before selecting a call to call back."
+      "description": "List recent Android call log entries, optionally filtered by call type. Requires READ_CALL_LOG permission. Use type=missed for missed-call questions and before selecting a missed call to call back. After selecting a number, call phone_dial."
     },
     {
       "name": "contacts_list",
       "category": "Communication and Contacts",
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
-      "description": "List a limited number of Android contacts. Requires READ_CONTACTS permission. Use only when the user explicitly asks to view contacts."
-    },
-    {
-      "name": "contacts_search",
-      "category": "Communication and Contacts",
-      "risk": "SENSITIVE_READ",
-      "approval": "Require approval",
-      "description": "Search Android contacts by display name or phone number. Requires READ_CONTACTS permission. Use this before dialing when the user gives a contact name such as 'call K K'."
+      "description": "List a limited number of Android contacts, optionally filtered by display name or phone number. Requires READ_CONTACTS permission. Leave query empty only when the user explicitly asks to view contacts; set query when the user asks to find a contact."
     },
     {
       "name": "phone_dial",
       "category": "Communication and Contacts",
       "risk": "EXTERNAL_EFFECT",
       "approval": "Require approval",
-      "description": "Check whether the phone number exists in contacts, then open the system dialer with the number prefilled. After the dialer opens, call get_screen_info, identify the visible call button, then call tap_node. If the call button is unclear or the screen is not the dialer, stop and ask the user to handle it manually."
-    },
-    {
-      "name": "phone_dial_contact",
-      "category": "Communication and Contacts",
-      "risk": "EXTERNAL_EFFECT",
-      "approval": "Require approval",
-      "description": "Find a contact by name, then open the system dialer with that contact's phone number. Use when the user asks to call a named contact. If multiple contacts match, do not dial; show the matches and ask the user which one to call. After the dialer opens, call get_screen_info, identify the visible call button, then call tap_node."
+      "description": "Open the system dialer for exactly one phone number or named contact. Set exactly one of phoneNumber and contactName. A named contact must resolve to one match; if multiple contacts match, stop and ask the user to choose. After the dialer opens, call get_screen_info, identify the visible call button, then call tap_node."
     },
     {
       "name": "send_to_sms_message",
@@ -744,46 +695,32 @@
       "description": "Update a local memo by id. Search/list memos first when the user describes the target in natural language, and pass known target details with the changed fields. Blank title/content/tags are ignored. reminderAtMillis=-2 keeps reminder, -1 clears reminder, and >0 sets reminder."
     },
     {
-      "name": "sysinfo_brief_sources",
+      "name": "sysinfo_delete",
       "category": "System Information",
-      "risk": "SENSITIVE_READ",
+      "risk": "DESTRUCTIVE",
       "approval": "Require approval",
-      "description": "Get local sysinfo sources for a daily brief. This reads already-captured local data; it does not start collection."
+      "description": "Permanently delete matching FoneClaw local SysInfo cache only. This never deletes original Android notifications, SMS, call logs, or calendar events. At least one filter is required unless deleteAll=true. Multiple filters are combined with AND."
     },
     {
       "name": "sysinfo_mark_reviewed",
       "category": "System Information",
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
-      "description": "Mark local sysinfo events as reviewed after user confirmation."
+      "description": "Mark local SysInfo event ids as reviewed only after the user explicitly confirms."
     },
     {
-      "name": "sysinfo_notification_query",
+      "name": "sysinfo_query",
       "category": "System Information",
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
-      "description": "Query already-captured Android notifications when the user explicitly asks for a special time window such as yesterday or the last N minutes, oldest-first ordering, or every notification update instead of one collapsed notification. For an ordinary summary of today's notifications, use sysinfo_today_brief instead. This tool reads only notification events and never opens the notification panel."
-    },
-    {
-      "name": "sysinfo_search",
-      "category": "System Information",
-      "risk": "SENSITIVE_READ",
-      "approval": "Require approval",
-      "description": "Search already-captured local sysinfo by keyword. Does not scan system sources."
+      "description": "Query already-captured local notifications, SMS, call logs, calendar events, and accessibility input. Use this single tool for daily briefs, notification queries, time-window queries, and keyword searches. It never opens a system panel or scans live system sources. Each row may include sourceRef for deduplication against a live provider result. Summarize the returned JSON for the user."
     },
     {
       "name": "sysinfo_thread",
       "category": "System Information",
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
-      "description": "Load already-captured local sysinfo events in one threadKey."
-    },
-    {
-      "name": "sysinfo_today_brief",
-      "category": "System Information",
-      "risk": "SENSITIVE_READ",
-      "approval": "Require approval",
-      "description": "Read already-captured notification contents for the LLM to analyze. Use when the user asks to read, list, review, check, or summarize notifications, unread notifications, important notifications, what happened today, what needs attention today, daily brief, missed messages, or next actions. Reads today's already-captured local sysinfo cache and returns source, title, preview, time, importance, and suggested next steps. After this tool succeeds, synthesize its contents into a semantic user-facing answer in the language requested by the user. Do not use this tool for an explicit recent N-minute window; use sysinfo_notification_query instead. Do not merely echo the raw tool output. Never open the notification panel or read its UI for these requests."
+      "description": "Load one local SysInfo thread by a threadKey returned by sysinfo_query."
     },
     {
       "name": "shopping_compare",

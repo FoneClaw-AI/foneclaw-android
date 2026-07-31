@@ -9,7 +9,7 @@ Every tool is classified into one of five risk levels, ordered from least to mos
 | Level | Description | Examples |
 |-------|-------------|----------|
 | **LOW** | Read-only, no side effects, no sensitive data | `web_search`, `bluetooth_state`, `device_battery_status` |
-| **SENSITIVE_READ** | Reads private/user data | `mail_list`, `sms_recent`, `contacts_search`, `get_location`, `screenshot_take` |
+| **SENSITIVE_READ** | Reads private/user data | `mail_list`, `sms_list`, `contacts_list`, `get_location`, `screenshot_take` |
 | **DEVICE_CONTROL** | Changes device state | `wifi_connect`, `volume_set_stream`, `flashlight_toggle`, `dnd_set_mode` |
 | **EXTERNAL_EFFECT** | Affects external systems or the real world | `mail_send`, `phone_dial`, `send_to_sms_message`, `calendar_create_event` |
 | **DESTRUCTIVE** | Permanently destroys data | `mail_delete`, `wifi_forget`, `workflow_delete`, `calendar_delete_event` |
@@ -67,11 +67,11 @@ These tools run instantly without user confirmation:
 These tools read private data and always ask for permission:
 
 - Mail: `mail_list`, `mail_read`, `mail_account_list`, `mail_account_test`
-- SMS: `sms_recent`, `sms_search`, `sms_thread`, `sms_summary`
-- Phone: `call_log_recent`, `call_log_missed`, `contacts_search`, `contacts_list`
+- SMS: `sms_list`
+- Phone: `call_log_list`, `contacts_list`
 - Screen: `get_screen_info`, `screenshot_take`, `screenshot_open_latest`
 - Location: `get_location`, `location_search_nearby_place`
-- System info: `sysinfo_today_brief`, `sysinfo_search`, `sysinfo_thread`
+- System info: `sysinfo_query`, `sysinfo_thread`
 - Workflows: `workflow_list`
 - Skills: `load_skill_detail`
 
@@ -88,6 +88,7 @@ These tools change device state:
 - Alarm: `alarm_set_alarm`, `alarm_modify_alarm`
 - Screen: `tap_node`, `launch_app`
 - DND: `dnd_set_mode`
+- System info: `sysinfo_mark_reviewed`
 - Skills: `add_skill`, `update_skill`
 
 ### Require Approval (EXTERNAL_EFFECT)
@@ -96,9 +97,9 @@ These tools interact with external systems:
 
 - Mail: `mail_send`
 - SMS: `send_to_sms_message`
-- Phone: `phone_dial`, `phone_dial_contact`
+- Phone: `phone_dial`
 - Calendar: `calendar_create_event`
-- Maps: `map_drive`, `map_walk`, `map_bicycle`, `map_electric_bicycle`, `map_public_transport`
+- Maps: `map_navigate` (`travelMode` selects the route mode)
 
 ### Require Approval (DESTRUCTIVE)
 
@@ -108,6 +109,7 @@ These tools permanently delete data:
 - Wi-Fi: `wifi_forget`
 - Calendar: `calendar_delete_event`
 - Memos: `memo_delete`
+- System info: `sysinfo_delete`
 - Workflows: `workflow_delete`
 - Skills: `remove_skill`
 

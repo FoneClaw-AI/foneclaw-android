@@ -81,7 +81,7 @@ Tools are organized into domain-specific `ToolSet` classes. Each ToolSet groups 
 - `MailToolSet` — mail_list, mail_read, mail_send, mail_delete, etc.
 - `WiFiToolSet` — wifi_status, wifi_scan_networks, wifi_connect, etc.
 - `ScreenToolSet` — get_screen_info, tap_node
-- `MapToolSet` — map_drive, map_walk, map_public_transport
+- `MapToolSet` - map_navigate (travel mode selected by parameter)
 - ...and 12 more ToolSets covering 120+ tools total
 
 ### Tool Registration

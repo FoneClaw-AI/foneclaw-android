@@ -20,22 +20,28 @@ require sending messages, changing settings, or deleting data.
 - `device_network_status`: Check current network transport and connectivity.
 - `calendar_list_events`: List upcoming calendar events in a requested time window.
 - `memo_list`: List local memos when the user wants reminders included.
-- `sysinfo_today_brief`: Summarize today's local system information sources.
+- `sysinfo_query`: Query already-captured local system information by source and time window.
 
 ## Recommended Workflows
 
 ### 1. Morning brief
 
-1. Ask for the time range if the user did not specify today, this morning, or the next 24 hours.
-2. Call `device_battery_status` to check battery and power-save state.
-3. Call `device_network_status` to check connectivity.
-4. Call `calendar_list_events` for the requested time range.
-5. If the user asks for reminders or notes, call `memo_list`.
-6. Reply with a short brief grouped as device status, schedule, reminders, and next step.
+1. Treat broad requests to catch up on important, pending, missed, or actionable phone information
+   as this workflow even when the user does not say "brief".
+2. Resolve the requested time range; use today when no range is given.
+3. In one batch, call `sysinfo_query(sourceType=all)`, live `sms_list(box=all)`, and live
+   `calendar_list_events(calendarId=0)` for the same range.
+4. If SysInfo collection is disabled or partial, continue with the live SMS and calendar results
+   and state the missing coverage.
+5. Call `device_battery_status`, `device_network_status`, or `memo_list` only when relevant.
+6. Deduplicate SMS and calendar items returned by both paths. Prefer the live provider row and
+   display/count it once; use source reference/provider id first, then exact source, actor/title,
+   occurrence time, and normalized preview.
+7. Reply with a short brief grouped by actionability, schedule, updates, and next step.
 
 ### 2. Low-distraction ClawFone recap
 
-1. Call `sysinfo_today_brief` to gather today's supported local sources.
+1. Follow the same SysInfo plus live SMS/calendar workflow as the morning brief.
 2. Call `device_battery_status` to decide whether the user should charge soon.
 3. Reply in a compact format suitable for a small screen.
 4. If permissions or services are missing, explain exactly which source could not be covered.

@@ -6,10 +6,32 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 ## [Unreleased]
 
+No unreleased changes.
+
+## [v0.1.0] - 2026-07-31
+
 ### Added
-- v0.0.9 release notes for notification summaries, permission recovery, Home Markdown output, SMS/model/request handling, and the preview YouTube downloader plugin package in the plugin repository
-- Missing public release notes for v0.0.6, v0.0.7, and v0.0.8
-- v0.0.5 release notes for cleaner Agent replies, clearer approvals, cross-app screenshots, and feedback submission fixes
+- Per-tool management with search, categories, enable controls, availability states, and approval overrides
+- Deterministic device-time calibration and cross-source personal overviews
+- Clickable Markdown links across Home headings, paragraphs, lists, and tables
+- Generated public Tool Catalog JSON aligned with the human-readable Markdown catalog
+
+### Changed
+- Consolidated mail, SMS, phone, map, SysInfo, camera, screenshot, and system-panel tool contracts
+- Expanded mail account setup, pagination, references, reply/forward, attachments, and deletion workflows
+- Improved recordings, transcription, accessibility guidance, and online model endpoint presets
+- Updated File Manager Plugin to `0.0.4 (4)` and YouTube Downloader Plugin to `0.0.2 (2)`
+
+### Fixed
+- Permission recovery uses current client status instead of stale missing-permission conclusions
+- Completed tasks and unknown external-effect results avoid unsafe duplicate tool execution
+- Trusted plugin install proposals and continuation requests survive Home state recreation
+
+### Known Issues
+- Released as a GitHub Pre-release; not submitted to Google Play
+- P0 failure-sample and complete multi-device regression gates remain incomplete
+- Plugin / Skill Capability Routing MVP is design-only in this release
+- YouTube plugin format, cancellation, recovery, storage, and license validation remains incomplete
 
 ## [v0.0.9] - 2026-07-24
 
