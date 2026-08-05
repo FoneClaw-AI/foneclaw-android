@@ -657,7 +657,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "List, filter, or search message summaries. Query searches subject, sender, recipients, and body. Leave accountId empty to use the only account or the unique default account."
+      "description": "List, filter, or search message summaries. Query searches subject, sender, recipients, and body. Call this Tool again for every new list, search, filter, date-range, summary, or reformat request even when conversation history contains earlier mail results. Historical messageRefs may be reused only for an operation on an exact already-selected message. Leave accountId empty to use the only account or the unique default account."
     },
     {
       "name": "mail_read",

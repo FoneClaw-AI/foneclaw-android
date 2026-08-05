@@ -657,7 +657,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Enumere, filtre o busque resúmenes de mensajes. La consulta busca asunto, remitente, destinatarios y cuerpo. Deje accountId vacío para usar la única cuenta o la cuenta predeterminada única."
+      "description": "Enumera, filtra o busca resúmenes de mensajes. La consulta busca en el asunto, el remitente, los destinatarios y el cuerpo. Vuelve a llamar a esta herramienta para cada nueva lista, búsqueda, filtro, intervalo de fechas, resumen o cambio de formato, aunque el historial ya contenga resultados de correo. Los messageRefs anteriores solo pueden reutilizarse para operar sobre un mensaje concreto ya seleccionado. Deja accountId vacío para usar la única cuenta o la única cuenta predeterminada."
     },
     {
       "name": "mail_read",

@@ -657,7 +657,7 @@
       "risk": "LOW",
       "approval": "Automatisch",
       "approvalCode": "AUTO",
-      "description": "Nachrichtenzusammenfassungen auflisten, filtern oder durchsuchen. Die Abfrage durchsucht Betreff, Absender, Empfänger und Text. Lassen Sie „accountId“ leer, um das einzige Konto oder das eindeutige Standardkonto zu verwenden."
+      "description": "Listet Nachrichtenzusammenfassungen auf, filtert oder durchsucht Betreff, Absender, Empfänger und Inhalt. Rufen Sie dieses Tool für jede neue Liste, Suche, Filterung, Zeitspanne, Zusammenfassung oder Neuformatierung erneut auf, auch wenn der Gesprächsverlauf bereits E-Mail-Ergebnisse enthält. Frühere messageRefs dürfen nur für eine Aktion an einer bereits eindeutig ausgewählten Nachricht wiederverwendet werden. Lassen Sie accountId leer, um das einzige Konto oder das eindeutig festgelegte Standardkonto zu verwenden."
     },
     {
       "name": "mail_read",

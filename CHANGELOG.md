@@ -8,6 +8,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.1.1] - 2026-08-05
+
+### Added
+- Multi-conversation management with recent sessions, switching, renaming, clearing, and unread state
+- Strict cross-conversation FIFO task queue with independent running and waiting indicators
+- Continuous history loading and improved long-conversation browsing
+
+### Changed
+- Reorganized the Home execution flow for more reliable completion, cancellation, and recovery
+- Improved mail presentation, long-text actions, URL recognition, and custom shortcut feedback
+- Strengthened session-bound approvals, task isolation, permission recovery, voice input, and tool image handling
+- Updated the 15-locale Tool Catalog description for fresh mail-list and search requests
+
+### Known Issues
+- App and Core focused unit-test tasks are blocked by stale test-source calls; ten earlier failures remain accepted release exceptions
+- Cross-app screen reading policy remains a P0 review item
+- The trusted-plugin path for YouTube links remains provisional and is not the final solution
+- Full multi-device regression remains pending
+
 ## [v0.1.0] - 2026-07-31
 
 ### Added

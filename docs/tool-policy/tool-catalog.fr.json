@@ -657,7 +657,7 @@
       "risk": "LOW",
       "approval": "Automatique",
       "approvalCode": "AUTO",
-      "description": "Répertoriez, filtrez ou recherchez des résumés de messages. La requête recherche le sujet, l'expéditeur, les destinataires et le corps. Laissez accountId vide pour utiliser le compte unique ou le compte unique par défaut."
+      "description": "Répertorie, filtre ou recherche des résumés de messages dans l’objet, l’expéditeur, les destinataires et le corps. Appelez de nouveau cet outil pour chaque nouvelle liste, recherche, filtre, plage de dates, synthèse ou remise en forme, même si l’historique contient déjà des résultats de messagerie. D’anciens messageRefs ne peuvent être réutilisés que pour une opération sur un message précis déjà sélectionné. Laissez accountId vide pour utiliser le seul compte disponible ou l’unique compte par défaut."
     },
     {
       "name": "mail_read",

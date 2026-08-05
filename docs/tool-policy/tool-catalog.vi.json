@@ -657,7 +657,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Liệt kê, lọc hoặc tóm tắt tin nhắn tìm kiếm. Truy vấn tìm kiếm chủ đề, người gửi, người nhận và nội dung. Để trống id tài khoản để sử dụng tài khoản duy nhất hoặc tài khoản mặc định duy nhất. Định danh kỹ thuật: accountId."
+      "description": "Liệt kê, lọc hoặc tìm kiếm phần tóm tắt thư theo chủ đề, người gửi, người nhận và nội dung. Hãy gọi lại công cụ này cho mỗi yêu cầu danh sách, tìm kiếm, bộ lọc, khoảng ngày, tóm tắt hoặc định dạng lại mới, ngay cả khi lịch sử trò chuyện đã có kết quả thư trước đó. messageRefs cũ chỉ được dùng lại cho thao tác trên đúng thư đã được chọn rõ ràng. Để trống accountId để dùng tài khoản duy nhất hoặc tài khoản mặc định duy nhất."
     },
     {
       "name": "mail_read",

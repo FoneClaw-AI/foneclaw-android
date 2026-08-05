@@ -657,7 +657,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Daftar, filter, atau cari ringkasan pesan. Kueri mencari subjek, pengirim, penerima, dan isi. Biarkan accountId kosong untuk menggunakan satu-satunya akun atau akun default unik."
+      "description": "Mencantumkan, memfilter, atau mencari ringkasan pesan berdasarkan subjek, pengirim, penerima, dan isi. Panggil alat ini lagi untuk setiap permintaan daftar, pencarian, filter, rentang tanggal, rangkuman, atau pemformatan ulang yang baru, meskipun riwayat percakapan sudah memuat hasil email sebelumnya. messageRefs lama hanya boleh digunakan kembali untuk tindakan pada pesan tertentu yang sudah dipilih. Kosongkan accountId untuk memakai satu-satunya akun atau satu-satunya akun default."
     },
     {
       "name": "mail_read",

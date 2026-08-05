@@ -4,14 +4,15 @@ FoneClaw APKs are distributed through **GitHub Releases**. Each release includes
 
 ## Latest Release
 
-**v0.1.0** — GitHub Pre-release, July 31, 2026
+**v0.1.1** — GitHub Pre-release, August 5, 2026
 
-[Download APK](https://github.com/FoneClaw-AI/foneclaw-android/releases/tag/v0.1.0) | [Release Notes](v0.1.0.md)
+[Download APK](https://github.com/FoneClaw-AI/foneclaw-android/releases/tag/v0.1.1) | [Release Notes](v0.1.1.md)
 
 ## All Versions
 
 | Version | Date | Status |
 |---------|------|--------|
+| [v0.1.1](v0.1.1.md) | 2026-08-05 | GitHub Pre-release |
 | [v0.1.0](v0.1.0.md) | 2026-07-31 | GitHub Pre-release |
 | [v0.0.9](v0.0.9.md) | 2026-07-24 | Package Prepared |
 | [v0.0.8](v0.0.8.md) | 2026-07-22 | GitHub Pre-release |
@@ -31,14 +32,14 @@ FoneClaw includes a built-in OTA (Over-the-Air) update checker. When a new versi
 **Response format:**
 ```json
 {
-  "version": "0.1.0",
-  "versionCode": 10,
+  "version": "0.1.1",
+  "versionCode": 11,
   "minVersionCode": 1,
   "forceUpdate": false,
-  "releaseNotes": "Added per-tool management and safer consolidated device and communication tools.",
-  "apkPath": "/FoneClaw/Version/V0.1.0/app-onlineTts-release.apk",
-  "apkSize": 79991330,
-  "apkMd5": "5ebf00ba6d22fbddf5dfac9e075dc6dc"
+  "releaseNotes": "Added multi-conversation management and more reliable queued task execution.",
+  "apkPath": "/FoneClaw/Version/V0.1.1/app-onlineTts-release.apk",
+  "apkSize": 80028050,
+  "apkMd5": "429b336afcff070f2e7b2b8ed03d7aac"
 }
 ```
 

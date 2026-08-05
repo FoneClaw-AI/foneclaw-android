@@ -657,7 +657,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Liste, filtre ou pesquise resumos de mensagens. A consulta pesquisa assunto, remetente, destinatários e corpo. Deixe accountId vazio para usar a conta única ou a conta padrão exclusiva."
+      "description": "Lista, filtra ou pesquisa resumos de mensagens. A consulta pesquisa assunto, remetente, destinatários e corpo. Chame esta ferramenta novamente para cada nova lista, pesquisa, filtro, intervalo de datas, resumo ou reformatação, mesmo que o histórico já contenha resultados de e-mail. messageRefs anteriores só podem ser reutilizados em uma operação sobre uma mensagem específica já selecionada. Deixe accountId vazio para usar a única conta ou a única conta padrão."
     },
     {
       "name": "mail_read",
