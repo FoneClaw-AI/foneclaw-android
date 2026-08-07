@@ -28,7 +28,7 @@ FoneClaw APKs are distributed through **GitHub Releases**. Each release includes
 
 FoneClaw includes a built-in OTA (Over-the-Air) update checker. When a new version is available, the app displays an update notification with release notes and a download link.
 
-**OTA Endpoint:** `GET https://public-files-foneclaw-ai.oss-us-west-1.aliyuncs.com/FoneClaw/Version/version.json`
+**OTA Endpoint:** `GET https://public-files.foneclaw.ai/FoneClaw/Version/version.json`
 
 **Response format:**
 ```json
