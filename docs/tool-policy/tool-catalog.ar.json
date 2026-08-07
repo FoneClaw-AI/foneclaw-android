@@ -161,7 +161,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "تتطلب موافقة",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "التقط شاشة Android باستخدام خدمة إمكانية الوصول FoneClaw واحفظها في Pictures/FoneClaw/Screenshots. استخدم targetType=current للشاشة الحالية، أو targetType=app مع targetApp لفتح تطبيق والتقاطه، أو targetType=notification_shade فقط للحصول على لقطة شاشة صريحة أو طلب التقاط صورة يتضمن مركز الإشعارات المرئي. لا تستخدم أبدًا targetType=notification_shade لقراءة بيانات الإشعارات أو إدراجها أو الاستعلام عنها أو تلخيصها؛ استخدم أداة إعلام SysInfo بدلاً من ذلك. لا تتصل بـ Launch_app أو system_panel_open قبل هذه الأداة لالتقاط التطبيق أو ظل الإشعارات. لا تستخدم هذا عندما يريد المستخدم عرض لقطة الشاشة المحفوظة بالفعل؛ استخدم Screen_open لعرض لقطات الشاشة المحفوظة. المعرّفات التقنية: launch_app, screenshot_open."
+      "description": "التقط شاشة Android باستخدام خدمة إمكانية الوصول FoneClaw. تُحفظ الصورة في ذاكرة التخزين المؤقت الخاصة بالتطبيق لاستخدام Agent ولا تُضاف إلى معرض النظام. استخدم targetType=current للشاشة الحالية، أو targetType=app مع targetApp لفتح تطبيق والتقاطه، أو targetType=notification_shade فقط للحصول على لقطة شاشة صريحة أو طلب التقاط صورة يتضمن مركز الإشعارات المرئي. لا تستخدم أبدًا targetType=notification_shade لقراءة بيانات الإشعارات أو إدراجها أو الاستعلام عنها أو تلخيصها؛ استخدم أداة إعلام SysInfo بدلاً من ذلك. لا تتصل بـ Launch_app أو system_panel_open قبل هذه الأداة لالتقاط التطبيق أو ظل الإشعارات. لا تستخدم هذا عندما يريد المستخدم عرض لقطة الشاشة المحفوظة بالفعل؛ استخدم Screen_open لعرض لقطات الشاشة المحفوظة. المعرّفات التقنية: launch_app, screenshot_open."
     },
     {
       "name": "tap_node",

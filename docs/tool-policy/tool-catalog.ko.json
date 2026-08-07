@@ -161,7 +161,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "FoneClaw 접근성 서비스로 Android 화면을 캡처하고 Pictures/FoneClaw/Screenshots.에 저장합니다. 현재 화면에는 targetType=current를 사용하고, 앱을 열고 캡처하려면 targetType=app와 targetApp를 사용하고, 눈에 보이는 알림 창과 관련된 명시적인 스크린샷이나 이미지 캡처 요청에는 targetType=notification_shade만 사용하세요. 알림 데이터를 읽거나, 나열하거나, 쿼리하거나, 요약하는 데 targetType=notification_shade을 사용하지 마세요. 대신 SysInfo 알림 도구를 사용하세요. 앱 또는 알림 셰이드 캡처를 위해 이 도구 이전에 launch_app 또는 system_panel_open을 호출하지 마세요. 사용자가 이미 저장된 스크린샷을 보려는 경우에는 이 기능을 사용하지 마세요. 저장된 스크린샷을 보려면 screenshot_open을 사용하세요."
+      "description": "FoneClaw 접근성 서비스로 Android 화면을 캡처합니다. 캡처 이미지는 Agent 사용을 위해 앱 전용 캐시에 보관되며 시스템 갤러리에는 추가되지 않습니다. 현재 화면에는 targetType=current를 사용하고, 앱을 열고 캡처하려면 targetType=app와 targetApp를 사용하고, 눈에 보이는 알림 창과 관련된 명시적인 스크린샷이나 이미지 캡처 요청에는 targetType=notification_shade만 사용하세요. 알림 데이터를 읽거나, 나열하거나, 쿼리하거나, 요약하는 데 targetType=notification_shade을 사용하지 마세요. 대신 SysInfo 알림 도구를 사용하세요. 앱 또는 알림 셰이드 캡처를 위해 이 도구 이전에 launch_app 또는 system_panel_open을 호출하지 마세요. 사용자가 이미 저장된 스크린샷을 보려는 경우에는 이 기능을 사용하지 마세요. 저장된 스크린샷을 보려면 screenshot_open을 사용하세요."
     },
     {
       "name": "tap_node",

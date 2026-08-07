@@ -161,7 +161,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "FoneClaw アクセシビリティ サービスを使用して Android 画面をキャプチャし、Pictures/FoneClaw/Screenshots. に保存します。現在の画面には targetType=current を使用し、アプリを開いてキャプチャするには targetType=app と targetApp を使用します。または、表示される通知シェードを含む明示的なスクリーンショットまたは画像キャプチャ リクエストの場合にのみ targetType=notification_shade を使用します。通知データの読み取り、リスト、クエリ、または要約には targetType=notification_shade を決して使用しないでください。代わりに SysInfo 通知ツールを使用してください。アプリまたは通知シェードのキャプチャのために、このツールの前に launch_app または system_panel_open を呼び出さないでください。ユーザーが既に保存されているスクリーンショットを表示したい場合には、これを使用しないでください。保存されたスクリーンショットを表示するには、screenshot_open を使用します。"
+      "description": "FoneClaw アクセシビリティ サービスを使用して Android 画面をキャプチャし。キャプチャ画像は Agent が使用するアプリ専用キャッシュに保持され、システムのギャラリーには追加されません。現在の画面には targetType=current を使用し、アプリを開いてキャプチャするには targetType=app と targetApp を使用します。または、表示される通知シェードを含む明示的なスクリーンショットまたは画像キャプチャ リクエストの場合にのみ targetType=notification_shade を使用します。通知データの読み取り、リスト、クエリ、または要約には targetType=notification_shade を決して使用しないでください。代わりに SysInfo 通知ツールを使用してください。アプリまたは通知シェードのキャプチャのために、このツールの前に launch_app または system_panel_open を呼び出さないでください。ユーザーが既に保存されているスクリーンショットを表示したい場合には、これを使用しないでください。保存されたスクリーンショットを表示するには、screenshot_open を使用します。"
     },
     {
       "name": "tap_node",

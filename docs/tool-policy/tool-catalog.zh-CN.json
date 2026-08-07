@@ -161,7 +161,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "使用 FoneClaw 辅助服务捕获 Android 屏幕并将其保存到 Pictures/FoneClaw/Screenshots. 对当前屏幕使用 targetType=current，将 targetType=app 与 targetApp 用于打开应用程序并捕获它，或仅将 targetType=notification_shade 用于涉及可见通知栏的显式屏幕截图或图像捕获请求。切勿使用 targetType=notification_shade 读取、列出、查询或汇总通知数据；请改用 SysInfo 通知工具。请勿在此工具之前调用 launch_app 或 system_panel_open 来捕获应用程序或通知栏。当用户想要查看已保存的屏幕截图时，请勿使用此选项；使用 screenshot_open 查看保存的屏幕截图。"
+      "description": "使用 FoneClaw 辅助服务捕获 Android 屏幕。截取的图片保存在应用私有缓存中供 Agent 使用，不会添加到系统图库 对当前屏幕使用 targetType=current，将 targetType=app 与 targetApp 用于打开应用程序并捕获它，或仅将 targetType=notification_shade 用于涉及可见通知栏的显式屏幕截图或图像捕获请求。切勿使用 targetType=notification_shade 读取、列出、查询或汇总通知数据；请改用 SysInfo 通知工具。请勿在此工具之前调用 launch_app 或 system_panel_open 来捕获应用程序或通知栏。当用户想要查看已保存的屏幕截图时，请勿使用此选项；使用 screenshot_open 查看保存的屏幕截图。"
     },
     {
       "name": "tap_node",

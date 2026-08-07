@@ -8,6 +8,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.1.2] - 2026-08-07
+
+### Added
+- Floating assistant with a movable bubble and compact cross-app conversation panel
+- One-tap current-screen attachment that excludes FoneClaw overlays and uses app-private cache
+- Initial quick actions for discovering and starting common tasks
+
+### Changed
+- Improved task continuity, approvals, stopping, and permission recovery between Home and the floating assistant
+- Improved Do Not Disturb, volume, meeting-mode shortcut, and screenshot state confirmation
+- Expanded privacy-safe product analytics without collecting prompts, messages, personal content, screenshots, or account identifiers
+- Updated all 15 Tool Catalog locales to document private-cache screenshot handling
+
+### Known Issues
+- Focused App and Core unit-test tasks are blocked at test-source compilation by stale test calls
+- A fresh release-run full-device regression was not performed; current floating-assistant evidence comes from development checks
+- Android versions below 11 and secure windows cannot use AccessibilityService screenshot capture
+- OEM background and power-saving policies may require additional setup for the floating assistant
+
 ## [v0.1.1] - 2026-08-05
 
 ### Added
