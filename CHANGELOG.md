@@ -8,6 +8,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.1.2-fix] - 2026-08-07
+
+### Added
+- Initial Plugin and Skill capability-routing foundation with Manifest v2 matching and context metadata
+- Local AutoAttach, Suggest, and Fallback routing that does not execute Tools or bypass approvals
+- Plugin activation review, Pending Activation handling, and atomic capability snapshots
+- Explicit Skill learning with preview and confirmation before saving a disabled draft
+
+### Changed
+- Improved floating-assistant window sizing, keyboard handling, outside-touch collapse, and permission recovery
+- Upgraded the YouTube Downloader Plugin to `0.0.3 (3)` and its Manifest/Skill v2 contract
+- Strengthened runtime task and approval consistency plus backup and data-extraction boundaries
+
+### Known Issues
+- Plugin/Skill routing remains an initial implementation and needs complete corpus, Tool V2, installation recovery, and device validation
+- GitHub-download plugin discovery and YouTube delivery device flow remains pending
+- Existing App/Core full-test source-contract blockers remain tracked
+
 ## [v0.1.2] - 2026-08-07
 
 ### Added

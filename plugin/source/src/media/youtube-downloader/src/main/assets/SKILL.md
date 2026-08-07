@@ -1,7 +1,7 @@
 ---
-name: youtube-downloader-plugin
+name: youtube-download
 description: Download a public YouTube video or Short as user-selected video or audio.
-version: 0.0.1
+version: 0.0.3
 ---
 
 # YouTube Downloader

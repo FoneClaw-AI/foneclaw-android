@@ -1,10 +1,10 @@
 {
-  "apiVersion": 1,
+  "apiVersion": 2,
   "extensionId": "foneclaw:youtube-downloader",
   "packageName": "ai.android.claw.plugin.media.youtubedownloader",
   "displayName": "YouTube Downloader Plugin",
-  "versionName": "0.0.2",
-  "versionCode": 2,
+  "versionName": "0.0.3",
+  "versionCode": 3,
   "tools": [
     {
       "name": "plugin_youtube_video_info",
@@ -105,9 +105,42 @@
       "timeoutMillis": 5000
     }
   ],
-  "skill": {
-    "id": "youtube-downloader-plugin",
-    "version": "0.0.2",
-    "entry": "SKILL.md"
-  }
+  "skills": [
+    {
+      "id": "youtube-download",
+      "version": "0.0.3",
+      "entry": "SKILL.md",
+      "requiredTools": [
+        "plugin_youtube_video_info",
+        "plugin_youtube_download"
+      ],
+      "optionalTools": [
+        "plugin_youtube_download_status",
+        "plugin_youtube_download_cancel"
+      ],
+      "match": {
+        "urlHosts": [
+          "youtube.com",
+          "m.youtube.com",
+          "youtu.be"
+        ],
+        "maxUrls": 1,
+        "terms": {
+          "en": ["download", "save video", "save audio"],
+          "zh-CN": ["下载", "保存视频", "保存音频"],
+          "zh-TW": ["下載", "儲存影片", "儲存音訊"]
+        },
+        "examples": {
+          "en": ["Download this YouTube video", "Save this YouTube video as audio"],
+          "zh-CN": ["下载这个 YouTube 视频", "把这个 YouTube 视频保存成音频"],
+          "zh-TW": ["幫我下載這個 YouTube 影片", "把這個 YouTube 影片儲存成音訊"]
+        },
+        "negativeExamples": {
+          "en": ["summarize this YouTube video", "translate this YouTube video"],
+          "zh-CN": ["总结一下这个 YouTube 视频", "翻译这个 YouTube 视频"],
+          "zh-TW": ["總結這個 YouTube 影片", "翻譯這個 YouTube 影片"]
+        }
+      }
+    }
+  ]
 }

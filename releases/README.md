@@ -4,14 +4,15 @@ FoneClaw APKs are distributed through **GitHub Releases**. Each release includes
 
 ## Latest Release
 
-**v0.1.2** — GitHub Pre-release, August 7, 2026
+**v0.1.2-fix** — GitHub Pre-release, August 7, 2026
 
-[Download APK](https://github.com/FoneClaw-AI/foneclaw-android/releases/tag/v0.1.2) | [Release Notes](v0.1.2.md)
+[Download APK](https://github.com/FoneClaw-AI/foneclaw-android/releases/tag/v0.1.2-fix) | [Release Notes](v0.1.2-fix.md)
 
 ## All Versions
 
 | Version | Date | Status |
 |---------|------|--------|
+| [v0.1.2-fix](v0.1.2-fix.md) | 2026-08-07 | GitHub Pre-release |
 | [v0.1.2](v0.1.2.md) | 2026-08-07 | GitHub Pre-release |
 | [v0.1.1](v0.1.1.md) | 2026-08-05 | GitHub Pre-release |
 | [v0.1.0](v0.1.0.md) | 2026-07-31 | GitHub Pre-release |
@@ -33,14 +34,14 @@ FoneClaw includes a built-in OTA (Over-the-Air) update checker. When a new versi
 **Response format:**
 ```json
 {
-  "version": "0.1.2",
-  "versionCode": 12,
+  "version": "0.1.2-fix",
+  "versionCode": 13,
   "minVersionCode": 1,
   "forceUpdate": false,
-  "releaseNotes": "Added a floating assistant and improved cross-app task continuity.",
-  "apkPath": "/FoneClaw/Version/V0.1.2/app-onlineTts-release.apk",
-  "apkSize": 80147610,
-  "apkMd5": "373ac17751e0720da173dc2af73f4d2f"
+  "releaseNotes": "Improved floating-assistant reliability and added the first safe Plugin/Skill capability-routing foundation.",
+  "apkPath": "/FoneClaw/Version/V0.1.2-fix/app-onlineTts-release.apk",
+  "apkSize": 80177470,
+  "apkMd5": "6a3c1bad9d98b5a267d2515e9e60a614"
 }
 ```
 
