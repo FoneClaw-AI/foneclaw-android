@@ -8,6 +8,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.1.3] - 2026-08-14
+
+### Added
+- User action bar and user action controller for enhanced assistant interaction
+- GUI page with drag support, permission recovery, and GUI foreground permission interception
+- SkillImportPreviewer with related unit tests for better skill management
+- Direct vs Google Play distribution isolation at compile time
+
+### Changed
+- Improved floating assistant overlay behavior with better top bar display cutout insets and transparency
+- Enhanced reply content with free-range copy selection, and added copy, feedback, and share retry buttons to floating window
+- Improved system screenshot summary monitoring and cross-app/screenshot planning with failure message formatting
+- Unified assistant interaction experience with improved recording and shortcut functionality
+- Improved analytics with intent and permission outcome classification, and floating assistant task entry tracking
+- Optimized global three-button white background logic, shortcut/recording sliding effects, and approval card UI
+
+### Known Issues
+- Plugin/Skill routing remains an initial implementation and needs complete corpus, Tool V2, installation recovery, and device validation
+- GitHub-download plugin discovery and YouTube delivery device flow remains pending
+- Existing App/Core full-test source-contract blockers remain tracked
+
 ## [v0.1.2-fix] - 2026-08-07
 
 ### Added
