@@ -8,6 +8,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.1.5] - 2026-08-19
+
+### Added
+- Member system and notification updates with backend API v1 integration
+- Distribution-specific builds for FoneClaw, Google Play, and Lebest platforms
+- Skill usage feedback review with exponential backoff for endpoint failures
+
+### Changed
+- Improved home page UI with refined neutral chat chrome and settings page visual unification
+- Fixed voice state initialization before collection and terminal ASR polling failures
+- Optimized recording experience with fixes for horizontal bar flashing and duplicate prompts
+- Enhanced extension refresh and release metadata management
+- Stabilized recorder cleanup after merge
+- Updated documentation with v0.1.5 release candidate hashes and build constraints
+
+### Known Issues
+- Plugin/Skill routing remains an initial implementation and needs complete corpus, Tool V2, installation recovery, and device validation
+- GitHub-download plugin discovery and YouTube delivery device flow remains pending
+- Existing App/Core full-test source-contract blockers remain tracked
+
 ## [v0.1.3] - 2026-08-14
 
 ### Added
