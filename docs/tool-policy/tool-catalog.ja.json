@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "ja",
   "fallbackLocale": "en",
-  "toolCount": 118,
+  "toolCount": 123,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "ツールや機能を検索",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "画面、アプリ、メディア",
-      "toolCount": 11
+      "toolCount": 12
     },
     {
       "name": "Device Status and System Control",
@@ -79,7 +79,7 @@
     {
       "name": "Skills and Plugins",
       "displayName": "Skill とプラグイン",
-      "toolCount": 11
+      "toolCount": 15
     }
   ],
   "tools": [
@@ -105,7 +105,7 @@
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "ターゲットの Android アプリを開くか切り替えて、そのアプリが安定してフォアグラウンドになるまで待機し、表示されるアクセシビリティ画面ツリーを返します。 1 つのリクエストで、アプリを開く/アプリに切り替えることと、表示されているページの読み取り、検査、説明、要約の両方を要求する場合にこれを使用します。そのタスクを launch_app と get_screen_info に分割しないでください。このツールはスクリーンショットをキャプチャしたり、ノードと対話したりしません。"
+      "description": "対象の Android アプリを開くか切り替え、そのアプリが安定してフォアグラウンドになるまで待って、表示中のアクセシビリティ画面ツリーを返します。1 つのリクエストでアプリの起動または切り替えと、表示中の既存コントロールの読み取り、検査、説明、要約、タップの両方が求められ、専用のドメインツールでは完了できない場合に使用します。この処理を launch_app と get_screen_info に分割しないでください。このツール自体はスクリーンショットの撮影やノードのタップを行いません。ユーザーがタップを求めた場合に限り、新しく返されたノード ID を tap_node で使用してください。"
     },
     {
       "name": "get_installed_map_apps",
@@ -121,7 +121,15 @@
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "現在表示されているアプリ画面から UI 要素を取得します。各要素には、tap_node とともに使用できるノード ID (たとえば、[n3]) があります。 Android 通知の読み取り、リスト、検索、または要約にはこれを使用しないでください。代わりに sysinfo ツールを使用してください。ノード ID は呼び出しごとに変わるため、この結果はキャッシュしないでください。"
+      "description": "現在表示されているアプリ画面から UI 要素を取得します。各要素にはノード ID（例：[n3]）があり、tap_node または input_text で使用できます。Android 通知の読み取り、一覧表示、検索、要約には使用せず、代わりに sysinfo ツールを使用してください。ノード ID は呼び出すたびに変わるため、この結果をキャッシュしないでください。"
+    },
+    {
+      "name": "input_text",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "承認が必要",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "現在の Android アプリで表示されている編集可能なフィールドのテキストを置き換えます。まず get_screen_info を呼び出し、edit とマークされた現在のノードを渡してください。この操作はテキストを入力するだけで、フォームの送信、送信ボタンのタップ、Enter キーの押下は行いません。ノード ID を再利用しないでください。"
     },
     {
       "name": "launch_app",
@@ -553,7 +561,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Android が構成済み/保存されている Wi-Fi ネットワーク リストを取得します。 SSID、networkId、安全タイプ、画像が存在するかどうか、ネットワークが接続されているかどうか、現在の接続および構成状態かどうかのみを返します。Wi-Fi 暗号は返しません。"
+      "description": "Android で構成済み/保存済みの Wi-Fi ネットワーク リストを読み取ります。SSID、networkId、セキュリティ タイプ、資格情報の有無、非表示ネットワークかどうか、現在の接続状態、構成状態のみを返します。Wi-Fi パスワードは返しません。"
     },
     {
       "name": "wifi_connect",
@@ -940,6 +948,14 @@
       "description": "再利用可能なワークフローを保存します。 stepsJson は、{toolName, argument} の JSON 配列である必要があります。"
     },
     {
+      "name": "accept_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "承認が必要",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ユーザー確認後、保留中の Skill 提案を承認して適用します。"
+    },
+    {
       "name": "add_skill",
       "category": "Skills and Plugins",
       "risk": "DEVICE_CONTROL",
@@ -962,6 +978,14 @@
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "有効なユーザー スキルを有効にして、エージェントが使用できるようにします。"
+    },
+    {
+      "name": "list_skill_proposals",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "承認が必要",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ユーザーの明示的な確認が必要な保留中の Skill 変更を一覧表示します。"
     },
     {
       "name": "list_skills",
@@ -1004,12 +1028,28 @@
       "description": "貼り付けた SKILL.md ドキュメントをプレビューします。これは解析して検証しますが、保存はしません。"
     },
     {
+      "name": "reject_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DESTRUCTIVE",
+      "approval": "承認が必要",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ユーザー確認後、保留中の Skill 提案を却下して削除します。"
+    },
+    {
       "name": "remove_skill",
       "category": "Skills and Plugins",
       "risk": "DESTRUCTIVE",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "スキルを削除する"
+      "description": "スキルを削除する。"
+    },
+    {
+      "name": "rollback_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "承認が必要",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ユーザー Skill を直近にアーカイブされた内容リビジョンへ復元します。"
     },
     {
       "name": "save_skill_draft",

@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "zh-CN",
   "fallbackLocale": "en",
-  "toolCount": 118,
+  "toolCount": 123,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "搜索工具或能力",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "屏幕、应用与影像",
-      "toolCount": 11
+      "toolCount": 12
     },
     {
       "name": "Device Status and System Control",
@@ -79,7 +79,7 @@
     {
       "name": "Skills and Plugins",
       "displayName": "Skill 与插件",
-      "toolCount": 11
+      "toolCount": 15
     }
   ],
   "tools": [
@@ -105,7 +105,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "打开或切换到目标 Android 应用程序，等待该应用程序稳定在前台，然后返回可见的辅助功能屏幕树。当一个请求要求打开/切换到应用程序并读取、检查、描述或总结其可见页面时，请使用此选项。不要将该任务拆分为 launch_app 和 get_screen_info。该工具不会捕获屏幕截图或与节点交互。"
+      "description": "打开或切换到目标 Android 应用，等待其稳定处于前台，然后返回可见的无障碍屏幕树。当一个请求既要求打开或切换应用，又要求读取、检查、描述、总结或点击现有可见控件，并且没有专用领域工具可以完成请求时，使用此工具。不要把该任务拆成 launch_app 和 get_screen_info。此工具本身不会截图或点击节点；只有用户要求点击时，才使用新返回的节点 ID 调用 tap_node。"
     },
     {
       "name": "get_installed_map_apps",
@@ -121,7 +121,15 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "从当前可见的应用程序屏幕获取 UI 元素。每个元素都有一个可与 tap_node 一起使用的节点 ID（例如 [n3]）。请勿使用它来阅读、列出、搜索或总结 Android 通知；请改用 sysinfo 工具。不要缓存此结果，因为节点 ID 在每次调用时都会更改。"
+      "description": "获取当前可见应用屏幕上的 UI 元素。每个元素都有一个节点 ID（例如 [n3]），可供 tap_node 或 input_text 使用。不要用此工具读取、列出、搜索或总结 Android 通知；应改用 sysinfo 工具。不要缓存结果，因为节点 ID 每次调用都会变化。"
+    },
+    {
+      "name": "input_text",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "替换当前 Android 应用中一个可见可编辑输入框里的文字。先调用 get_screen_info，并传入一个当前标记为 edit 的节点。此操作只输入文字；不会提交表单、点击发送或按回车键。不要重复使用节点 ID。"
     },
     {
       "name": "launch_app",
@@ -553,7 +561,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "读取 Android 已配置/已保存的 Wi-Fi 网络列表。只返回 SSID、networkId、安全类型、是否有帐户、是否隐藏网络、是否当前连接和配置状态；不会返回 Wi-Fi 密码。"
+      "description": "读取 Android 已配置/已保存的 Wi-Fi 网络列表。只返回 SSID、networkId、安全类型、是否有凭据、是否隐藏网络、是否当前连接和配置状态；不会返回 Wi-Fi 密码。"
     },
     {
       "name": "wifi_connect",
@@ -940,6 +948,14 @@
       "description": "保存可重复使用的工作流程。 stepsJson 必须是 {toolName, argument} 的 JSON 数组。"
     },
     {
+      "name": "accept_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "在用户确认后接受并应用一项待处理的 Skill 提案。"
+    },
+    {
       "name": "add_skill",
       "category": "Skills and Plugins",
       "risk": "DEVICE_CONTROL",
@@ -962,6 +978,14 @@
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "启用有效的用户技能，以便客服人员可以使用它。"
+    },
+    {
+      "name": "list_skill_proposals",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "列出需要用户明确确认的待处理 Skill 变更。"
     },
     {
       "name": "list_skills",
@@ -1004,12 +1028,28 @@
       "description": "预览粘贴的 SKILL.md 文档。这会解析并验证但不会保存。"
     },
     {
+      "name": "reject_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DESTRUCTIVE",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "在用户确认后拒绝并移除一项待处理的 Skill 提案。"
+    },
+    {
       "name": "remove_skill",
       "category": "Skills and Plugins",
       "risk": "DESTRUCTIVE",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "移除技能"
+      "description": "移除技能。"
+    },
+    {
+      "name": "rollback_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "将用户 Skill 恢复到最近归档的内容版本。"
     },
     {
       "name": "save_skill_draft",

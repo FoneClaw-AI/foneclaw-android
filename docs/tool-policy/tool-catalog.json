@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "en",
   "fallbackLocale": "en",
-  "toolCount": 118,
+  "toolCount": 123,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Search tools or capabilities",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "Screen and App",
-      "toolCount": 11
+      "toolCount": 12
     },
     {
       "name": "Device Status and System Control",
@@ -79,7 +79,7 @@
     {
       "name": "Skills and Plugins",
       "displayName": "Skills and Plugins",
-      "toolCount": 11
+      "toolCount": 15
     }
   ],
   "tools": [
@@ -97,7 +97,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Capture a new photo and return the saved photo URI when available. Use this when the user's intent is to capture a new photo. Leave lensFacing unset or auto for normal photo capture. Choose lensFacing=front only for front-facing or selfie intent; choose back only when the user explicitly asks for the back camera. Keep explicitLensSelection false for plain/default photo capture, even if the default physical lens is back. Set explicitLensSelection true only when the user explicitly asks for front, back, rear, or selfie capture. Do not call camera_open_photo after this tool unless the user explicitly asks to view or open the photo. Call this tool directly. Capture uses the native system camera first. Explicit front/back capture may use the direct backend only if the native camera cannot honor the requested lens. Do not ask the user to grant permission before calling this tool."
+      "description": "Capture a new photo and return it as an image attachment when model vision is available. Use this when the user's intent is to capture a new photo. Leave lensFacing unset or auto for normal photo capture. Choose lensFacing=front only for front-facing or selfie intent; choose back only when the user explicitly asks for the back camera. Keep explicitLensSelection false for plain/default photo capture, even if the default physical lens is back. Set explicitLensSelection true only when the user explicitly asks for front, back, rear, or selfie capture. Do not call camera_open_photo after this tool unless the user explicitly asks to view or open the photo. Call this tool directly. Capture uses the native system camera first. Explicit front/back capture may use the direct backend only if the native camera cannot honor the requested lens. Do not ask the user to grant permission before calling this tool."
     },
     {
       "name": "cross_app_read_screen",
@@ -105,7 +105,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Open or switch to a target Android app, wait until that app is stably in the foreground, and return the visible accessibility screen tree. Use this when one request asks to both open/switch to an app and read, inspect, describe, or summarize its visible page. Do not split that task into launch_app and get_screen_info. This tool does not capture a screenshot or interact with nodes."
+      "description": "Open or switch to a target Android app, wait until that app is stably in the foreground, and return the visible accessibility screen tree. Use this when one request asks to both open/switch to an app and read, inspect, describe, summarize, or tap an existing visible control, and no dedicated domain tool can complete the request. Do not split that task into launch_app and get_screen_info. This tool does not capture a screenshot or tap nodes itself; use fresh returned node IDs with tap_node only when the user requested a tap."
     },
     {
       "name": "get_installed_map_apps",
@@ -121,7 +121,15 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Get UI elements from the currently visible app screen. Each element has a node ID (for example [n3]) that can be used with tap_node. Do not use this to read, list, search, or summarize Android notifications; use sysinfo tools instead. Do not cache this result because node IDs change on each call."
+      "description": "Get UI elements from the currently visible app screen. Each element has a node ID (for example [n3]) that can be used with tap_node or input_text. Do not use this to read, list, search, or summarize Android notifications; use sysinfo tools instead. Do not cache this result because node IDs change on each call."
+    },
+    {
+      "name": "input_text",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Replace the text in one visible editable field in the current Android app. Call get_screen_info first and pass a current node marked edit. This action only enters text; it does not submit the form, tap Send, or press Enter. Do not reuse node IDs."
     },
     {
       "name": "launch_app",
@@ -553,7 +561,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "读取 Android 已配置/已保存的 Wi-Fi 网络列表。只返回 SSID、networkId、安全类型、是否像是有凭据、是否隐藏网络、是否当前连接和配置状态；不会返回 Wi-Fi 密码。"
+      "description": "Read the list of configured/saved Wi-Fi networks on Android. Returns only SSID, networkId, security type, whether credentials exist, whether the network is hidden, current connection status, and configuration state. Does not return Wi-Fi passwords."
     },
     {
       "name": "wifi_connect",
@@ -940,6 +948,14 @@
       "description": "Save a reusable workflow. stepsJson must be a JSON array of {toolName, arguments}."
     },
     {
+      "name": "accept_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Accept and apply one pending Skill proposal after user confirmation."
+    },
+    {
       "name": "add_skill",
       "category": "Skills and Plugins",
       "risk": "DEVICE_CONTROL",
@@ -962,6 +978,14 @@
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Enable a valid user Skill so it can be used by the agent."
+    },
+    {
+      "name": "list_skill_proposals",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "List pending Skill changes that require explicit user confirmation."
     },
     {
       "name": "list_skills",
@@ -1004,12 +1028,28 @@
       "description": "Preview a pasted SKILL.md document. This parses and validates but does not save."
     },
     {
+      "name": "reject_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DESTRUCTIVE",
+      "approval": "Require approval",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Reject and remove one pending Skill proposal after user confirmation."
+    },
+    {
       "name": "remove_skill",
       "category": "Skills and Plugins",
       "risk": "DESTRUCTIVE",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Remove the skill"
+    },
+    {
+      "name": "rollback_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Restore a user Skill to its most recently archived content revision."
     },
     {
       "name": "save_skill_draft",

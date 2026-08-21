@@ -8,6 +8,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.1.6] - 2026-08-21
+
+### Added
+- Reliable image attachment and captured-image reanalysis using stable file URLs
+- Structured screenshot and camera results for follow-up Agent tasks
+- Comprehensive LLM event diagnostics with sensitive-content protection
+
+### Changed
+- Improved multimodal request preparation, image token budgeting, prompt compression, and attachment renewal
+- Improved cross-app progress feedback and reasoning visibility for longer tasks
+- Bounded mail-list execution and blocked failed OSS attachments before LLM requests
+- Improved public Tool Catalog wording and regional Chinese localization consistency
+- Hardened the project-managed multi-channel release workflow and rollback contracts
+
+### Known Issues
+- Google Play publication and metadata remain gated on the version becoming live
+- Lebest publication remains gated on OEM re-signing and device upgrade verification
+- A fresh full-device regression was not performed during this release run
+
 ## [v0.1.5] - 2026-08-19
 
 ### Added

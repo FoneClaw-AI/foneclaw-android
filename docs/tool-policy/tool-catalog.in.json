@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "in",
   "fallbackLocale": "en",
-  "toolCount": 118,
+  "toolCount": 123,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Cari alat atau kemampuan",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "Layar, aplikasi, dan media",
-      "toolCount": 11
+      "toolCount": 12
     },
     {
       "name": "Device Status and System Control",
@@ -79,7 +79,7 @@
     {
       "name": "Skills and Plugins",
       "displayName": "Skill dan plugin",
-      "toolCount": 11
+      "toolCount": 15
     }
   ],
   "tools": [
@@ -105,7 +105,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Buka atau alihkan ke aplikasi Android target, tunggu hingga aplikasi tersebut stabil di latar depan, dan kembalikan hierarki layar aksesibilitas yang terlihat. Gunakan ini ketika satu permintaan meminta untuk membuka/beralih ke suatu aplikasi dan membaca, memeriksa, menjelaskan, atau meringkas halaman yang terlihat. Jangan bagi tugas itu menjadi launch_app dan get_screen_info. Alat ini tidak menangkap tangkapan layar atau berinteraksi dengan node."
+      "description": "Buka atau alihkan ke aplikasi Android target, tunggu hingga aplikasi stabil di latar depan, lalu kembalikan hierarki aksesibilitas yang terlihat. Gunakan saat satu permintaan meminta membuka atau beralih aplikasi sekaligus membaca, memeriksa, menjelaskan, meringkas, atau mengetuk kontrol yang sudah terlihat, dan tidak ada alat domain khusus yang dapat menyelesaikannya. Jangan pisahkan tugas menjadi launch_app dan get_screen_info. Alat ini tidak mengambil tangkapan layar atau mengetuk node sendiri; gunakan ID node yang baru dikembalikan dengan tap_node hanya jika pengguna meminta ketukan."
     },
     {
       "name": "get_installed_map_apps",
@@ -121,7 +121,15 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Dapatkan elemen UI dari layar aplikasi yang terlihat saat ini. Setiap elemen memiliki ID node (misalnya [n3]) yang dapat digunakan dengan tap_node. Jangan gunakan ini untuk membaca, membuat daftar, mencari, atau meringkas notifikasi Android; use sysinfo tools instead. Jangan simpan hasil ini dalam cache karena ID node berubah pada setiap panggilan."
+      "description": "Dapatkan elemen UI dari layar aplikasi yang sedang terlihat. Setiap elemen memiliki ID node, misalnya [n3], yang dapat digunakan dengan tap_node atau input_text. Jangan gunakan alat ini untuk membaca, mencantumkan, mencari, atau meringkas notifikasi Android; gunakan alat sysinfo. Jangan simpan hasil dalam cache karena ID node berubah pada setiap panggilan."
+    },
+    {
+      "name": "input_text",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Ganti teks dalam satu kolom yang terlihat dan dapat diedit di aplikasi Android saat ini. Panggil get_screen_info terlebih dahulu dan teruskan node saat ini yang ditandai edit. Tindakan ini hanya memasukkan teks; tidak mengirim formulir, mengetuk Kirim, atau menekan Enter. Jangan gunakan ulang ID node."
     },
     {
       "name": "launch_app",
@@ -553,7 +561,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "读取 Android 已配置/已保存的 Wi-Fi 网络列表。只返回SSID、networkId、安全类型、是否像是有凭据、是否隐藏网络、是否当前连接和配置状态；不会返回 Wi-Fi密码。"
+      "description": "Baca daftar jaringan Wi-Fi yang dikonfigurasi/disimpan di Android. Hanya mengembalikan SSID, networkId, jenis keamanan, apakah ada kredensial, apakah jaringan tersembunyi, status koneksi saat ini, dan status konfigurasi. Tidak mengembalikan kata sandi Wi-Fi."
     },
     {
       "name": "wifi_connect",
@@ -940,6 +948,14 @@
       "description": "Simpan alur kerja yang dapat digunakan kembali. stepsJson harus berupa array JSON dari {toolName, argument}."
     },
     {
+      "name": "accept_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Terima dan terapkan satu usulan Skill tertunda setelah konfirmasi pengguna."
+    },
+    {
       "name": "add_skill",
       "category": "Skills and Plugins",
       "risk": "DEVICE_CONTROL",
@@ -962,6 +978,14 @@
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Aktifkan Skill pengguna yang valid sehingga dapat digunakan oleh agen."
+    },
+    {
+      "name": "list_skill_proposals",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Cantumkan perubahan Skill tertunda yang memerlukan konfirmasi eksplisit pengguna."
     },
     {
       "name": "list_skills",
@@ -1004,12 +1028,28 @@
       "description": "Pratinjau dokumen SKILL.md yang ditempel. Ini mem-parsing dan memvalidasi tetapi tidak menyimpan."
     },
     {
+      "name": "reject_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DESTRUCTIVE",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Tolak dan hapus satu usulan Skill tertunda setelah konfirmasi pengguna."
+    },
+    {
       "name": "remove_skill",
       "category": "Skills and Plugins",
       "risk": "DESTRUCTIVE",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Hapus keterampilannya"
+      "description": "Hapus keterampilannya."
+    },
+    {
+      "name": "rollback_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Pulihkan Skill pengguna ke revisi konten yang terakhir diarsipkan."
     },
     {
       "name": "save_skill_draft",

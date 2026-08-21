@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "es",
   "fallbackLocale": "en",
-  "toolCount": 118,
+  "toolCount": 123,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Buscar herramientas o funciones",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "Pantalla, aplicaciones y contenido multimedia",
-      "toolCount": 11
+      "toolCount": 12
     },
     {
       "name": "Device Status and System Control",
@@ -79,7 +79,7 @@
     {
       "name": "Skills and Plugins",
       "displayName": "Skills y complementos",
-      "toolCount": 11
+      "toolCount": 15
     }
   ],
   "tools": [
@@ -105,7 +105,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Abra o cambie a una aplicación Android de destino, espere hasta que esa aplicación esté estable en primer plano y regrese al árbol de pantalla de accesibilidad visible. Utilice esto cuando una solicitud solicite abrir/cambiar a una aplicación y leer, inspeccionar, describir o resumir su página visible. No divida esa tarea en launch_app y get_screen_info. Esta herramienta no realiza una captura de pantalla ni interactúa con los nodos."
+      "description": "Abre o cambia a una aplicación Android de destino, espera a que permanezca estable en primer plano y devuelve el árbol de accesibilidad visible. Úsala cuando una misma solicitud pida abrir o cambiar de aplicación y también leer, inspeccionar, describir, resumir o tocar un control visible existente, y ninguna herramienta específica del dominio pueda completar la solicitud. No dividas la tarea entre launch_app y get_screen_info. Esta herramienta no toma capturas ni toca nodos por sí sola; usa con tap_node los ID de nodo recién devueltos únicamente cuando el usuario haya pedido tocar un control."
     },
     {
       "name": "get_installed_map_apps",
@@ -121,7 +121,15 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Obtenga UI elementos de la pantalla de la aplicación actualmente visible. Cada elemento tiene un ID de nodo (por ejemplo, [n3]) que se puede utilizar con tap_node. No utilice esto para leer, enumerar, buscar o resumir Android notificaciones; utilice las herramientas sysinfo en su lugar. No almacene en caché este resultado porque los ID de los nodos cambian en cada llamada."
+      "description": "Obtiene los elementos de la interfaz de la pantalla de la aplicación visible. Cada elemento tiene un ID de nodo, por ejemplo [n3], que puede usarse con tap_node o input_text. No uses esta herramienta para leer, enumerar, buscar o resumir notificaciones de Android; usa las herramientas sysinfo. No almacenes el resultado en caché porque los ID de nodo cambian en cada llamada."
+    },
+    {
+      "name": "input_text",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Requiere aprobación",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Reemplaza el texto de un campo editable visible en la aplicación Android actual. Llama primero a get_screen_info y pasa un nodo actual marcado como edit. Esta acción solo introduce texto; no envía el formulario, no toca Enviar ni pulsa Enter. No reutilices los ID de nodo."
     },
     {
       "name": "launch_app",
@@ -553,7 +561,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "读取 Android 已配置/已保存的 Wi-Fi 网络列表。只返回SSID、networkId、安全类型、是否像是有凭据、是否隐藏网络、是否当前连接和配置状态；不会返回 Wi-Fi密码。"
+      "description": "Lee la lista de redes Wi-Fi configuradas/guardadas en Android. Devuelve solo SSID, networkId, tipo de seguridad, si tiene credenciales, si la red está oculta, el estado de conexión actual y el estado de configuración. No devuelve contraseñas Wi-Fi."
     },
     {
       "name": "wifi_connect",
@@ -940,6 +948,14 @@
       "description": "Guarde un flujo de trabajo reutilizable. stepsJson debe ser una matriz JSON de {toolName, argumentos}."
     },
     {
+      "name": "accept_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Requiere aprobación",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Acepta y aplica una propuesta de Skill pendiente tras la confirmación del usuario."
+    },
+    {
       "name": "add_skill",
       "category": "Skills and Plugins",
       "risk": "DEVICE_CONTROL",
@@ -962,6 +978,14 @@
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Habilite una habilidad de usuario válida para que pueda ser utilizada por el agente."
+    },
+    {
+      "name": "list_skill_proposals",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "Requiere aprobación",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Enumera los cambios de Skill pendientes que requieren confirmación explícita del usuario."
     },
     {
       "name": "list_skills",
@@ -1004,12 +1028,28 @@
       "description": "Obtenga una vista previa de un documento SKILL.md pegado. Esto analiza y valida pero no guarda."
     },
     {
+      "name": "reject_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DESTRUCTIVE",
+      "approval": "Requiere aprobación",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Rechaza y elimina una propuesta de Skill pendiente tras la confirmación del usuario."
+    },
+    {
       "name": "remove_skill",
       "category": "Skills and Plugins",
       "risk": "DESTRUCTIVE",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Quitar la habilidad"
+      "description": "Quitar la habilidad."
+    },
+    {
+      "name": "rollback_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Requiere aprobación",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Restaura una Skill de usuario a la revisión de contenido archivada más reciente."
     },
     {
       "name": "save_skill_draft",

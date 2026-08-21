@@ -7,7 +7,7 @@ For safety behavior, see [Tool Policy System](overview.md).
 
 ## Catalog Summary
 
-- Public tools: **118**
+- Public tools: **123**
 - Categories: **11**
 
 ## How to Use This Catalog
@@ -34,9 +34,10 @@ For safety behavior, see [Tool Policy System](overview.md).
 |---|---|---|---|
 | `camera_open_photo` | SENSITIVE_READ | Require approval | Open a specific visible photo from the system gallery. Use this only when the user explicitly asks to view or open a specific photo. Do not use this as a follow-up after camera_take_photo unless the user explicitly asks to view or open the captured photo. indexFromLatest is 1-based in newest-first order: 1 opens the latest photo, 2 opens the second latest photo, 3 opens the third latest photo. |
 | `camera_take_photo` | SENSITIVE_READ | Require approval | Capture a new photo and return the saved photo URI when available. Use this when the user's intent is to capture a new photo. Leave lensFacing unset or auto for normal photo capture. Choose lensFacing=front only for front-facing or selfie intent; choose back only when the user explicitly asks for the back camera. Keep explicitLensSelection false for plain/default photo capture, even if the default physical lens is back. Set explicitLensSelection true only when the user explicitly asks for front, back, rear, or selfie capture. Do not call camera_open_photo after this tool unless the user explicitly asks to view or open the photo. Call this tool directly. Capture uses the native system camera first. Explicit front/back capture may use the direct backend only if the native camera cannot honor the requested lens. Do not ask the user to grant permission before calling this tool. |
-| `cross_app_read_screen` | LOW | Auto | Open or switch to a target Android app, wait until that app is stably in the foreground, and return the visible accessibility screen tree. Use this when one request asks to both open/switch to an app and read, inspect, describe, or summarize its visible page. Do not split that task into launch_app and get_screen_info. This tool does not capture a screenshot or interact with nodes. |
+| `cross_app_read_screen` | LOW | Auto | Open or switch to a target Android app, wait until that app is stably in the foreground, and return the visible accessibility screen tree. Use this when one request asks to both open/switch to an app and read, inspect, describe, summarize, or tap an existing visible control, and no dedicated domain tool can complete the request. Do not split that task into launch_app and get_screen_info. This tool does not capture a screenshot or tap nodes itself; use fresh returned node IDs with tap_node only when the user requested a tap. |
 | `get_installed_map_apps` | LOW | Auto | Query installed map apps supported by map tools. Returns each app's display name and package name. |
-| `get_screen_info` | LOW | Auto | Get UI elements from the currently visible app screen. Each element has a node ID (for example [n3]) that can be used with tap_node. Do not use this to read, list, search, or summarize Android notifications; use sysinfo tools instead. Do not cache this result because node IDs change on each call. |
+| `get_screen_info` | LOW | Auto | Get UI elements from the currently visible app screen. Each element has a node ID (for example [n3]) that can be used with tap_node or input_text. Do not use this to read, list, search, or summarize Android notifications; use sysinfo tools instead. Do not cache this result because node IDs change on each call. |
+| `input_text` | DEVICE_CONTROL | Require approval | Replace the text in one visible editable field in the current Android app. Call get_screen_info first and pass a current node marked edit. This action only enters text; it does not submit the form, tap Send, or press Enter. Do not reuse node IDs. |
 | `launch_app` | DEVICE_CONTROL | Require approval | Open a launchable Android app by package name or installed app display name. This changes the foreground app and may expose that app's screen. Use an exact package name when possible. If the result is ambiguous, ask the user to choose one returned package. |
 | `play_store_check_app` | LOW | Auto | Check whether an exact Android package name is listed on Google Play by requesting https://play.google.com/store/apps/details?id=<packageName>. This is a read-only network check. Use it before play_store_install. |
 | `play_store_install` | EXTERNAL_EFFECT | Require approval | Open a specific Google Play app details page by exact package name, tap Install, and wait for installation to complete. This tool does not open the installed app. Use only when an exact Android packageName is known. Never use this for fuzzy search results or to guess the first app. If packageName is unknown, ask the user for the exact app package first. Stops if Google Play shows paid, purchase, subscription, update, ambiguous UI, or if installation does not complete before timeout. |
@@ -189,15 +190,19 @@ For safety behavior, see [Tool Policy System](overview.md).
 
 | Tool | Risk | Approval | What it does |
 |---|---|---|---|
+| `accept_skill_proposal` | DEVICE_CONTROL | Require approval | Accept and apply one pending Skill proposal after user confirmation. |
 | `add_skill` | DEVICE_CONTROL | Require approval | Add a new skill document to the skill registry. |
 | `disable_skill` | DEVICE_CONTROL | Require approval | Disable a user Skill so it is hidden from the agent prompt. |
 | `enable_skill` | DEVICE_CONTROL | Require approval | Enable a valid user Skill so it can be used by the agent. |
 | `list_skills` | SENSITIVE_READ | Require approval | List user and system Skills with source, enabled state, and validation state. |
+| `list_skill_proposals` | SENSITIVE_READ | Require approval | List pending Skill changes that require explicit user confirmation. |
 | `load_skill_detail` | SENSITIVE_READ | Require approval | Load a specialized skill when the task at hand matches one of the skills listed in the system prompt. Use this tool to inject the skill's instructions and resources into current conversation. The output may contain detailed workflow guidance as well as references to scripts, files, etc in the same directory as the skill. The skill name must match one of the skills listed in your system prompt. |
 | `plugin_request_install` | EXTERNAL_EFFECT | Require approval | Create a structured install proposal for one official plugin. This does not download or install the plugin; HomeScreen must ask the user. |
 | `plugin_search` | LOW | Auto | Search official FoneClaw plugin metadata when a user asks for a capability that is not available in the current tool list. This only searches metadata and never downloads or installs a plugin. |
 | `preview_skill_import` | LOW | Auto | Preview a pasted SKILL.md document. This parses and validates but does not save. |
 | `remove_skill` | DESTRUCTIVE | Require approval | Remove the skill |
+| `reject_skill_proposal` | DESTRUCTIVE | Require approval | Reject and remove one pending Skill proposal after user confirmation. |
+| `rollback_skill` | DEVICE_CONTROL | Require approval | Restore a user Skill to its most recently archived content revision. |
 | `save_skill_draft` | DEVICE_CONTROL | Require approval | Save a SKILL.md document as a disabled user Skill draft. |
 | `update_skill` | DEVICE_CONTROL | Require approval | Update an existing skill document in the skill registry. |
 

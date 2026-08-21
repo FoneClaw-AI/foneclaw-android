@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "ar",
   "fallbackLocale": "en",
-  "toolCount": 118,
+  "toolCount": 123,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "ابحث عن الأدوات أو الإمكانات",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "الشاشة والتطبيقات والوسائط",
-      "toolCount": 11
+      "toolCount": 12
     },
     {
       "name": "Device Status and System Control",
@@ -79,7 +79,7 @@
     {
       "name": "Skills and Plugins",
       "displayName": "المهارات والمكونات الإضافية",
-      "toolCount": 11
+      "toolCount": 15
     }
   ],
   "tools": [
@@ -105,7 +105,7 @@
       "risk": "LOW",
       "approval": "تلقائي",
       "approvalCode": "AUTO",
-      "description": "افتح تطبيق Android المستهدف أو قم بالتبديل إليه، وانتظر حتى يصبح هذا التطبيق ثابتًا في المقدمة، ثم قم بإرجاع شجرة شاشة إمكانية الوصول المرئية. استخدم هذا عندما يطلب أحد الطلبات فتح/التبديل إلى تطبيق وقراءة صفحته المرئية أو فحصها أو وصفها أو تلخيصها. لا تقم بتقسيم هذه المهمة إلى Launch_app وget_screen_info. لا تلتقط هذه الأداة لقطة شاشة أو تتفاعل مع العقد. المعرّفات التقنية: launch_app."
+      "description": "افتح تطبيق Android مستهدفًا أو انتقل إليه، وانتظر حتى يستقر في المقدمة، ثم أعد شجرة شاشة إمكانية الوصول الظاهرة. استخدم هذه الأداة عندما يطلب طلب واحد فتح تطبيق أو الانتقال إليه مع قراءة عنصر تحكم ظاهر حالي أو فحصه أو وصفه أو تلخيصه أو الضغط عليه، ولا تستطيع أداة متخصصة إكمال الطلب. لا تقسّم المهمة بين launch_app وget_screen_info. لا تلتقط هذه الأداة لقطة شاشة ولا تضغط على العقد بنفسها؛ استخدم معرّفات العقد الجديدة مع tap_node فقط عندما يطلب المستخدم الضغط."
     },
     {
       "name": "get_installed_map_apps",
@@ -121,7 +121,15 @@
       "risk": "LOW",
       "approval": "تلقائي",
       "approvalCode": "AUTO",
-      "description": "احصل على عناصر واجهة المستخدم من شاشة التطبيق المرئية حاليًا. يحتوي كل عنصر على معرف عقدة (على سبيل المثال [n3]) يمكن استخدامه مع Tap_node. لا تستخدم هذا لقراءة إشعارات Android أو إدراجها أو البحث فيها أو تلخيصها؛ استخدم أدوات sysinfo بدلاً من ذلك. لا تقم بتخزين هذه النتيجة مؤقتًا لأن معرفات العقدة تتغير في كل مكالمة. المعرّفات التقنية: tap_node."
+      "description": "احصل على عناصر واجهة المستخدم من شاشة التطبيق الظاهرة حاليًا. لكل عنصر معرّف عقدة، مثل [n3]، يمكن استخدامه مع tap_node أو input_text. لا تستخدم هذه الأداة لقراءة إشعارات Android أو إدراجها أو البحث فيها أو تلخيصها؛ استخدم أدوات sysinfo بدلًا منها. لا تخزّن النتيجة مؤقتًا لأن معرّفات العقد تتغير مع كل استدعاء."
+    },
+    {
+      "name": "input_text",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "استبدل النص في حقل واحد ظاهر وقابل للتحرير في تطبيق Android الحالي. استدعِ get_screen_info أولاً ومرّر عقدة حالية تحمل العلامة edit. يُدخل هذا الإجراء النص فقط؛ ولا يرسل النموذج أو يضغط على إرسال أو مفتاح Enter. لا تعِد استخدام معرّفات العقد."
     },
     {
       "name": "launch_app",
@@ -553,7 +561,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "تتطلب موافقة",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "جهاز Android يعمل بنظام Android/جهاز Wi-Fi يعمل بنظام Android. SSID، ومعرف الشبكة، ومعرف الشبكة، ومعرف الشبكة، ومعرف الشبكة، ومعرف الشبكة، وشبكة Wi-Fi密码. المعرّفات التقنية: networkId."
+      "description": "يقرأ قائمة شبكات Wi-Fi المُكوَّنة/المحفوظة على Android. يُرجع فقط SSID وnetworkId ونوع الأمان ووجود بيانات اعتماد ومدى إخفاء الشبكة وحالة الاتصال الحالية وحالة التكوين. لا يُرجع كلمات مرور Wi-Fi."
     },
     {
       "name": "wifi_connect",
@@ -940,6 +948,14 @@
       "description": "حفظ سير عمل قابل لإعادة الاستخدام. يجب أن تكون StepsJson عبارة عن مصفوفة JSON مكونة من {toolName, الوسيطات}. المعرّفات التقنية: stepsJson."
     },
     {
+      "name": "accept_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "اقبل اقتراح Skill معلقًا وطبقه بعد تأكيد المستخدم."
+    },
+    {
       "name": "add_skill",
       "category": "Skills and Plugins",
       "risk": "DEVICE_CONTROL",
@@ -962,6 +978,14 @@
       "approval": "تتطلب موافقة",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "قم بتمكين مهارة مستخدم صالحة حتى يمكن للوكيل استخدامها."
+    },
+    {
+      "name": "list_skill_proposals",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "اعرض تغييرات Skill المعلقة التي تتطلب تأكيدًا صريحًا من المستخدم."
     },
     {
       "name": "list_skills",
@@ -1004,12 +1028,28 @@
       "description": "قم بمعاينة مستند SKILL.md الذي تم لصقه. هذا يوزع ويتحقق من صحة ولكن لا يحفظ."
     },
     {
+      "name": "reject_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DESTRUCTIVE",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ارفض اقتراح Skill معلقًا وأزله بعد تأكيد المستخدم."
+    },
+    {
       "name": "remove_skill",
       "category": "Skills and Plugins",
       "risk": "DESTRUCTIVE",
       "approval": "تتطلب موافقة",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "إزالة المهارة"
+      "description": "إزالة المهارة."
+    },
+    {
+      "name": "rollback_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "استعد Skill المستخدم إلى أحدث مراجعة محتوى مؤرشفة."
     },
     {
       "name": "save_skill_draft",

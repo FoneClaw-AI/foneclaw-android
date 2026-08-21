@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "vi",
   "fallbackLocale": "en",
-  "toolCount": 118,
+  "toolCount": 123,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Tìm kiếm công cụ hoặc khả năng",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "Màn hình, ứng dụng và nội dung đa phương tiện",
-      "toolCount": 11
+      "toolCount": 12
     },
     {
       "name": "Device Status and System Control",
@@ -79,7 +79,7 @@
     {
       "name": "Skills and Plugins",
       "displayName": "Skill và plugin",
-      "toolCount": 11
+      "toolCount": 15
     }
   ],
   "tools": [
@@ -105,7 +105,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Mở hoặc chuyển sang ứng dụng Android mục tiêu, đợi cho đến khi ứng dụng đó ổn định ở nền trước và trả về cây màn hình hỗ trợ tiếp cận hiển thị. Sử dụng tùy chọn này khi một yêu cầu yêu cầu vừa mở/chuyển sang một ứng dụng vừa đọc, kiểm tra, mô tả hoặc tóm tắt trang hiển thị của ứng dụng đó. Đừng chia nhiệm vụ đó thành launch_app và get_screen_info. Công cụ này không chụp ảnh màn hình hoặc tương tác với các nút."
+      "description": "Mở hoặc chuyển sang ứng dụng Android đích, chờ ứng dụng ổn định ở nền trước rồi trả về cây trợ năng đang hiển thị. Dùng công cụ này khi một yêu cầu vừa cần mở hoặc chuyển ứng dụng, vừa cần đọc, kiểm tra, mô tả, tóm tắt hoặc nhấn vào một điều khiển đang hiển thị, và không có công cụ chuyên biệt nào hoàn thành được yêu cầu. Không tách tác vụ thành launch_app và get_screen_info. Công cụ này không tự chụp màn hình hoặc nhấn vào nút; chỉ dùng ID nút mới trả về với tap_node khi người dùng yêu cầu nhấn."
     },
     {
       "name": "get_installed_map_apps",
@@ -121,7 +121,15 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Nhận các thành phần giao diện người dùng từ màn hình ứng dụng hiện đang hiển thị. Mỗi phần tử có ID nút (ví dụ [n3]) có thể được sử dụng với tap_node. Không sử dụng tính năng này để đọc, liệt kê, tìm kiếm hoặc tóm tắt các thông báo của Android; thay vào đó hãy sử dụng các công cụ sysinfo. Không lưu kết quả này vào bộ đệm vì ID nút thay đổi trong mỗi cuộc gọi."
+      "description": "Lấy các thành phần UI từ màn hình ứng dụng đang hiển thị. Mỗi thành phần có một ID nút, ví dụ [n3], có thể dùng với tap_node hoặc input_text. Không dùng công cụ này để đọc, liệt kê, tìm kiếm hoặc tóm tắt thông báo Android; hãy dùng các công cụ sysinfo. Không lưu kết quả vào bộ nhớ đệm vì ID nút thay đổi sau mỗi lần gọi."
+    },
+    {
+      "name": "input_text",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Thay thế văn bản trong một trường có thể chỉnh sửa đang hiển thị trong ứng dụng Android hiện tại. Trước tiên, hãy gọi get_screen_info và truyền một nút hiện tại được đánh dấu edit. Thao tác này chỉ nhập văn bản; không gửi biểu mẫu, nhấn Gửi hoặc nhấn Enter. Không sử dụng lại ID nút."
     },
     {
       "name": "launch_app",
@@ -553,7 +561,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Thiết bị Wi-Fi cho Android có thể hỗ trợ Wi-Fi SSID、networkId、安全类型、是否像是有凭据、是否隐藏网络、是否当前连接和配置状态；不会返回 Wi-Fi密码。"
+      "description": "Đọc danh sách mạng Wi-Fi đã cấu hình/lưu trên Android. Chỉ trả về SSID, networkId, loại bảo mật, có thông tin xác thực hay không, mạng có bị ẩn hay không, trạng thái kết nối hiện tại và trạng thái cấu hình. Không trả về mật khẩu Wi-Fi."
     },
     {
       "name": "wifi_connect",
@@ -940,6 +948,14 @@
       "description": "Lưu quy trình làm việc có thể sử dụng lại. stepJson phải là một mảng JSON gồm {toolName, đối số}. Định danh kỹ thuật: stepsJson."
     },
     {
+      "name": "accept_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Chấp nhận và áp dụng một đề xuất Skill đang chờ sau khi người dùng xác nhận."
+    },
+    {
       "name": "add_skill",
       "category": "Skills and Plugins",
       "risk": "DEVICE_CONTROL",
@@ -962,6 +978,14 @@
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Kích hoạt Kỹ năng người dùng hợp lệ để đại lý có thể sử dụng nó."
+    },
+    {
+      "name": "list_skill_proposals",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Liệt kê các thay đổi Skill đang chờ cần người dùng xác nhận rõ ràng."
     },
     {
       "name": "list_skills",
@@ -1004,12 +1028,28 @@
       "description": "Xem trước tài liệu SKILL.md đã dán. Điều này phân tích và xác nhận nhưng không lưu."
     },
     {
+      "name": "reject_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DESTRUCTIVE",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Từ chối và xóa một đề xuất Skill đang chờ sau khi người dùng xác nhận."
+    },
+    {
       "name": "remove_skill",
       "category": "Skills and Plugins",
       "risk": "DESTRUCTIVE",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Loại bỏ kỹ năng"
+      "description": "Loại bỏ kỹ năng."
+    },
+    {
+      "name": "rollback_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Khôi phục Skill người dùng về bản sửa đổi nội dung được lưu trữ gần nhất."
     },
     {
       "name": "save_skill_draft",

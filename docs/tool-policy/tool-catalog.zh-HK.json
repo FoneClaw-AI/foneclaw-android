@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "zh-HK",
   "fallbackLocale": "en",
-  "toolCount": 118,
+  "toolCount": 123,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "搜尋工具或功能",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "畫面、應用程式與影像",
-      "toolCount": 11
+      "toolCount": 12
     },
     {
       "name": "Device Status and System Control",
@@ -79,7 +79,7 @@
     {
       "name": "Skills and Plugins",
       "displayName": "Skill 與插件",
-      "toolCount": 11
+      "toolCount": 15
     }
   ],
   "tools": [
@@ -105,7 +105,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "打開或切換到目標 Android 應用程序，等待該應用程式穩定在前台，然後返回可見的輔助功能螢幕樹。當一個請求要求開啟/切換到應用程式並讀取、檢查、描述或總結其可見頁面時，請使用此選項。不要將該任務拆分為 launch_app 和 get_screen_info。該工具不會捕獲螢幕截圖或與節點互動。"
+      "description": "開啟或切換至目標 Android 應用程式，等待其穩定顯示於前景，然後傳回可見的無障礙螢幕樹。當一個要求既要開啟或切換應用程式，又要讀取、檢查、描述、總結或點按現有可見控制項，而且沒有專用領域工具可以完成要求時，使用此工具。不要把該任務拆成 launch_app 和 get_screen_info。此工具本身不會擷取螢幕畫面或點按節點；只有使用者要求點按時，才使用新傳回的節點 ID 呼叫 tap_node。"
     },
     {
       "name": "get_installed_map_apps",
@@ -121,7 +121,15 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "從目前可見的應用程式畫面取得 UI 元素。每個元素都有一個可與 tap_node 一起使用的節點 ID（例如 [n3]）。請勿使用它來閱讀、列出、搜尋或總結 Android 通知；請改用 sysinfo 工具。不要快取此結果，因為節點 ID 在每次呼叫時都會變更。"
+      "description": "取得目前可見應用程式畫面上的 UI 元素。每個元素都有一個節點 ID（例如 [n3]），可供 tap_node 或 input_text 使用。不要用此工具讀取、列出、搜尋或總結 Android 通知；應改用 sysinfo 工具。不要快取結果，因為節點 ID 每次呼叫都會變更。"
+    },
+    {
+      "name": "input_text",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要審批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "取代目前 Android 應用程式中一個可見可編輯輸入框內的文字。先呼叫 get_screen_info，並傳入一個目前標記為 edit 的節點。此操作只輸入文字；不會提交表單、點按傳送或按 Enter 鍵。不要重複使用節點 ID。"
     },
     {
       "name": "launch_app",
@@ -553,7 +561,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要審批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "讀取 Android 已設定/已儲存的 Wi-Fi 網路清單。只回傳 SSID、networkId、安全性類型、是否有帳戶、是否隱藏網路、是否目前連線和設定狀態；不會回傳 Wi-Fi 密碼。"
+      "description": "讀取 Android 已設定/已儲存的 Wi-Fi 網路清單。僅傳回 SSID、networkId、安全性類型、是否有憑據、是否隱藏網路、是否目前連線和設定狀態；不會傳回 Wi-Fi 密碼。"
     },
     {
       "name": "wifi_connect",
@@ -940,6 +948,14 @@
       "description": "儲存可重複使用的工作流程。 stepsJson 必須是 {toolName, argument} 的 JSON 陣列。"
     },
     {
+      "name": "accept_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要審批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "在使用者確認後接受並套用一項待處理的 Skill 提案。"
+    },
+    {
       "name": "add_skill",
       "category": "Skills and Plugins",
       "risk": "DEVICE_CONTROL",
@@ -962,6 +978,14 @@
       "approval": "需要審批",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "啟用有效的使用者技能，以便客服人員可以使用它。"
+    },
+    {
+      "name": "list_skill_proposals",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要審批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "列出需要使用者明確確認的待處理 Skill 變更。"
     },
     {
       "name": "list_skills",
@@ -1004,12 +1028,28 @@
       "description": "預覽貼上的 SKILL.md 文件。這會解析並驗證但不會保存。"
     },
     {
+      "name": "reject_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DESTRUCTIVE",
+      "approval": "需要審批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "在使用者確認後拒絕並移除一項待處理的 Skill 提案。"
+    },
+    {
       "name": "remove_skill",
       "category": "Skills and Plugins",
       "risk": "DESTRUCTIVE",
       "approval": "需要審批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "移除技能"
+      "description": "移除技能。"
+    },
+    {
+      "name": "rollback_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要審批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "將使用者 Skill 還原至最近封存的內容版本。"
     },
     {
       "name": "save_skill_draft",

@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "th",
   "fallbackLocale": "en",
-  "toolCount": 118,
+  "toolCount": 123,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "ค้นหาเครื่องมือหรือความสามารถ",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "หน้าจอ แอป และสื่อ",
-      "toolCount": 11
+      "toolCount": 12
     },
     {
       "name": "Device Status and System Control",
@@ -79,7 +79,7 @@
     {
       "name": "Skills and Plugins",
       "displayName": "Skill และปลั๊กอิน",
-      "toolCount": 11
+      "toolCount": 15
     }
   ],
   "tools": [
@@ -105,7 +105,7 @@
       "risk": "LOW",
       "approval": "อัตโนมัติ",
       "approvalCode": "AUTO",
-      "description": "เปิดหรือสลับไปยังแอป Android เป้าหมาย รอจนกว่าแอปนั้นจะเสถียรในเบื้องหน้า และส่งคืนโครงสร้างหน้าจอการเข้าถึงที่มองเห็นได้ ใช้สิ่งนี้เมื่อมีคำขอหนึ่งขอให้เปิด/สลับไปที่แอปและอ่าน ตรวจสอบ อธิบาย หรือสรุปหน้าที่มองเห็นได้ อย่าแยกงานนั้นออกเป็น launch_app และ get_screen_info เครื่องมือนี้ไม่ได้จับภาพหน้าจอหรือโต้ตอบกับโหนด"
+      "description": "เปิดหรือสลับไปยังแอป Android เป้าหมาย รอจนกว่าแอปจะแสดงอยู่เบื้องหน้าอย่างเสถียร แล้วส่งคืนโครงสร้างการช่วยเหลือพิเศษที่มองเห็น ใช้เมื่อคำขอเดียวต้องการทั้งเปิดหรือสลับแอป และอ่าน ตรวจสอบ อธิบาย สรุป หรือแตะตัวควบคุมที่มองเห็นอยู่ โดยไม่มีเครื่องมือเฉพาะโดเมนที่ทำคำขอให้เสร็จได้ อย่าแยกงานเป็น launch_app และ get_screen_info เครื่องมือนี้จะไม่จับภาพหน้าจอหรือแตะโหนดเอง ใช้ ID โหนดที่เพิ่งส่งคืนกับ tap_node เฉพาะเมื่อผู้ใช้ขอให้แตะเท่านั้น"
     },
     {
       "name": "get_installed_map_apps",
@@ -121,7 +121,15 @@
       "risk": "LOW",
       "approval": "อัตโนมัติ",
       "approvalCode": "AUTO",
-      "description": "รับองค์ประกอบ UI จากหน้าจอแอปที่มองเห็นได้ในปัจจุบัน แต่ละองค์ประกอบมีรหัสโหนด (เช่น [n3]) ที่สามารถใช้กับ tap_node ห้ามใช้สิ่งนี้เพื่ออ่าน แสดงรายการ ค้นหา หรือสรุปการแจ้งเตือนของ Android ใช้เครื่องมือ sysinfo แทน อย่าแคชผลลัพธ์นี้เนื่องจากรหัสโหนดเปลี่ยนแปลงในการโทรแต่ละครั้ง"
+      "description": "รับองค์ประกอบ UI จากหน้าจอแอปที่กำลังแสดง แต่ละองค์ประกอบมี ID โหนด เช่น [n3] ซึ่งใช้กับ tap_node หรือ input_text ได้ อย่าใช้เครื่องมือนี้เพื่ออ่าน แสดงรายการ ค้นหา หรือสรุปการแจ้งเตือน Android ให้ใช้เครื่องมือ sysinfo แทน อย่าแคชผลลัพธ์เนื่องจาก ID โหนดจะเปลี่ยนทุกครั้งที่เรียก"
+    },
+    {
+      "name": "input_text",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "แทนที่ข้อความในช่องที่แก้ไขได้และมองเห็นอยู่หนึ่งช่องในแอป Android ปัจจุบัน เรียก get_screen_info ก่อน แล้วส่งโหนดปัจจุบันที่มีเครื่องหมาย edit การดำเนินการนี้ป้อนข้อความเท่านั้น โดยจะไม่ส่งแบบฟอร์ม แตะส่ง หรือกด Enter อย่าใช้ ID โหนดซ้ำ"
     },
     {
       "name": "launch_app",
@@ -553,7 +561,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "ต้องขออนุมัติ",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "การเชื่อมต่อ Android 已配置/已保存的 Wi-Fi 网络列表。只返回SSID、networkId、安全类型、是否ตัวกรอง是有凭据、是否隐藏网络、是否当前连接和配置状态; 不会返回 Wi-Fi"
+      "description": "อ่านรายการเครือข่าย Wi-Fi ที่กำหนดค่า/บันทึกไว้บน Android ส่งคืนเฉพาะ SSID, networkId, ประเภทความปลอดภัย, มีข้อมูลรับรองหรือไม่, เครือข่ายถูกซ่อนหรือไม่, สถานะการเชื่อมต่อปัจจุบัน และสถานะการกำหนดค่า ไม่ส่งคืนรหัสผ่าน Wi-Fi"
     },
     {
       "name": "wifi_connect",
@@ -940,6 +948,14 @@
       "description": "บันทึกเวิร์กโฟลว์ที่ใช้ซ้ำได้ stepJson ต้องเป็นอาร์เรย์ JSON ของ {toolName, arguments} ตัวระบุทางเทคนิค: stepsJson."
     },
     {
+      "name": "accept_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ยอมรับและใช้ข้อเสนอ Skill ที่รอดำเนินการหลังจากผู้ใช้ยืนยัน"
+    },
+    {
       "name": "add_skill",
       "category": "Skills and Plugins",
       "risk": "DEVICE_CONTROL",
@@ -962,6 +978,14 @@
       "approval": "ต้องขออนุมัติ",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "เปิดใช้งานทักษะผู้ใช้ที่ถูกต้องเพื่อให้ตัวแทนสามารถใช้งานได้"
+    },
+    {
+      "name": "list_skill_proposals",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "แสดงรายการการเปลี่ยนแปลง Skill ที่รอดำเนินการซึ่งต้องได้รับการยืนยันจากผู้ใช้อย่างชัดเจน"
     },
     {
       "name": "list_skills",
@@ -1004,12 +1028,28 @@
       "description": "ดูตัวอย่างเอกสาร SKILL.md ที่วาง การดำเนินการนี้จะแยกวิเคราะห์และตรวจสอบแต่ไม่ได้บันทึก"
     },
     {
+      "name": "reject_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DESTRUCTIVE",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ปฏิเสธและนำข้อเสนอ Skill ที่รอดำเนินการออกหลังจากผู้ใช้ยืนยัน"
+    },
+    {
       "name": "remove_skill",
       "category": "Skills and Plugins",
       "risk": "DESTRUCTIVE",
       "approval": "ต้องขออนุมัติ",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "เอาทักษะออกไป"
+      "description": "เอาทักษะออกไป."
+    },
+    {
+      "name": "rollback_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "คืนค่า Skill ของผู้ใช้เป็นการแก้ไขเนื้อหาที่เก็บถาวรล่าสุด"
     },
     {
       "name": "save_skill_draft",

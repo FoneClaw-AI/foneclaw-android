@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "pt",
   "fallbackLocale": "en",
-  "toolCount": 118,
+  "toolCount": 123,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Pesquisar ferramentas ou recursos",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "Tela, aplicativos e mídia",
-      "toolCount": 11
+      "toolCount": 12
     },
     {
       "name": "Device Status and System Control",
@@ -79,7 +79,7 @@
     {
       "name": "Skills and Plugins",
       "displayName": "Skills e plugins",
-      "toolCount": 11
+      "toolCount": 15
     }
   ],
   "tools": [
@@ -105,7 +105,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Abra ou mude para um aplicativo Android de destino, espere até que esse aplicativo esteja estável em primeiro plano e retorne a árvore da tela de acessibilidade visível. Use isso quando uma solicitação solicitar a abertura/alternação para um aplicativo e a leitura, inspeção, descrição ou resumo de sua página visível. Não divida essa tarefa em launch_app e get_screen_info. Esta ferramenta não captura uma captura de tela nem interage com os nós."
+      "description": "Abra ou alterne para um app Android de destino, aguarde até que ele permaneça estável em primeiro plano e retorne a árvore de acessibilidade visível. Use quando uma única solicitação pedir para abrir ou alternar o app e também ler, inspecionar, descrever, resumir ou tocar em um controle visível existente, e nenhuma ferramenta específica do domínio puder concluir a solicitação. Não divida a tarefa entre launch_app e get_screen_info. Esta ferramenta não captura a tela nem toca nos nós por conta própria; use com tap_node os IDs de nó recém-retornados somente quando o usuário solicitar um toque."
     },
     {
       "name": "get_installed_map_apps",
@@ -121,7 +121,15 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Obtenha elementos UI da tela do aplicativo atualmente visível. Cada elemento possui um ID de nó (por exemplo [n3]) que pode ser usado com tap_node. Não use isso para ler, listar, pesquisar ou resumir notificações Android; use ferramentas sysinfo. Não armazene esse resultado em cache porque os IDs dos nós mudam em cada chamada."
+      "description": "Obtém os elementos da interface da tela do app visível. Cada elemento tem um ID de nó, por exemplo [n3], que pode ser usado com tap_node ou input_text. Não use esta ferramenta para ler, listar, pesquisar ou resumir notificações do Android; use as ferramentas sysinfo. Não armazene o resultado em cache, pois os IDs dos nós mudam a cada chamada."
+    },
+    {
+      "name": "input_text",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Requer aprovação",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Substitua o texto de um campo editável visível no app Android atual. Primeiro, chame get_screen_info e passe um nó atual marcado como edit. Esta ação apenas insere texto; ela não envia o formulário, toca em Enviar nem pressiona Enter. Não reutilize IDs de nó."
     },
     {
       "name": "launch_app",
@@ -553,7 +561,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requer aprovação",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "读取 Android 已配置/已保存的 Wi-Fi 网络列表。只返回SSID、networkId、安全类型、是否像是有凭据、是否隐藏网络、是否当前连接和配置状态；不会返回Wi-Fi 密码。"
+      "description": "Lê a lista de redes Wi-Fi configuradas/salvas no Android. Retorna apenas SSID, networkId, tipo de segurança, se possui credenciais, se a rede está oculta, status de conexão atual e estado de configuração. Não retorna senhas Wi-Fi."
     },
     {
       "name": "wifi_connect",
@@ -940,6 +948,14 @@
       "description": "Salve um fluxo de trabalho reutilizável. stepsJson deve ser uma matriz JSON de {toolName, argumentos}."
     },
     {
+      "name": "accept_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Requer aprovação",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Aceita e aplica uma proposta de Skill pendente após a confirmação do usuário."
+    },
+    {
       "name": "add_skill",
       "category": "Skills and Plugins",
       "risk": "DEVICE_CONTROL",
@@ -962,6 +978,14 @@
       "approval": "Requer aprovação",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Habilite uma habilidade de usuário válida para que possa ser usada pelo agente."
+    },
+    {
+      "name": "list_skill_proposals",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "Requer aprovação",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Lista alterações de Skill pendentes que exigem confirmação explícita do usuário."
     },
     {
       "name": "list_skills",
@@ -1004,12 +1028,28 @@
       "description": "Visualize um documento SKILL.md colado. Isso analisa e valida, mas não salva."
     },
     {
+      "name": "reject_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DESTRUCTIVE",
+      "approval": "Requer aprovação",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Rejeita e remove uma proposta de Skill pendente após a confirmação do usuário."
+    },
+    {
       "name": "remove_skill",
       "category": "Skills and Plugins",
       "risk": "DESTRUCTIVE",
       "approval": "Requer aprovação",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Remova a habilidade"
+      "description": "Remova a habilidade."
+    },
+    {
+      "name": "rollback_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Requer aprovação",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Restaura uma Skill de usuário para a revisão de conteúdo arquivada mais recente."
     },
     {
       "name": "save_skill_draft",

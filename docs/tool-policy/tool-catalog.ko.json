@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "ko",
   "fallbackLocale": "en",
-  "toolCount": 118,
+  "toolCount": 123,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "도구 또는 기능 검색",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "화면, 앱 및 미디어",
-      "toolCount": 11
+      "toolCount": 12
     },
     {
       "name": "Device Status and System Control",
@@ -79,7 +79,7 @@
     {
       "name": "Skills and Plugins",
       "displayName": "Skill 및 플러그인",
-      "toolCount": 11
+      "toolCount": 15
     }
   ],
   "tools": [
@@ -105,7 +105,7 @@
       "risk": "LOW",
       "approval": "자동",
       "approvalCode": "AUTO",
-      "description": "대상 Android 앱을 열거나 전환하고, 해당 앱이 안정적으로 포그라운드에 있을 때까지 기다린 후 표시되는 접근성 화면 트리를 반환합니다. 하나의 요청이 앱 열기/전환과 표시되는 페이지 읽기, 검사, 설명 또는 요약을 모두 요구할 때 이 기능을 사용하세요. 해당 작업을 launch_app 및 get_screen_info로 분할하지 마세요. 이 도구는 스크린샷을 캡처하거나 노드와 상호 작용하지 않습니다."
+      "description": "대상 Android 앱을 열거나 전환하고 앱이 안정적으로 포그라운드에 표시될 때까지 기다린 다음 보이는 접근성 화면 트리를 반환합니다. 하나의 요청에서 앱 열기 또는 전환과 기존의 보이는 컨트롤 읽기, 검사, 설명, 요약 또는 탭을 함께 요구하고 전용 도메인 도구로 완료할 수 없을 때 사용하세요. 이 작업을 launch_app과 get_screen_info로 나누지 마세요. 이 도구 자체는 스크린샷을 캡처하거나 노드를 탭하지 않습니다. 사용자가 탭을 요청한 경우에만 새로 반환된 노드 ID를 tap_node와 함께 사용하세요."
     },
     {
       "name": "get_installed_map_apps",
@@ -121,7 +121,15 @@
       "risk": "LOW",
       "approval": "자동",
       "approvalCode": "AUTO",
-      "description": "현재 표시되는 앱 화면에서 UI 요소를 가져옵니다. 각 요소에는 tap_node와 함께 사용할 수 있는 노드 ID(예: [n3])가 있습니다. Android 알림을 읽고, 나열하고, 검색하고, 요약하는 데 이 기능을 사용하지 마세요. 대신 sysinfo 도구를 사용하세요. 호출할 때마다 노드 ID가 변경되므로 이 결과를 캐시하지 마세요."
+      "description": "현재 표시된 앱 화면에서 UI 요소를 가져옵니다. 각 요소에는 tap_node 또는 input_text에 사용할 수 있는 노드 ID(예: [n3])가 있습니다. Android 알림을 읽거나 나열, 검색, 요약하는 데 사용하지 말고 대신 sysinfo 도구를 사용하세요. 호출할 때마다 노드 ID가 바뀌므로 결과를 캐시하지 마세요."
+    },
+    {
+      "name": "input_text",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "현재 Android 앱에 표시된 편집 가능한 입력란 하나의 텍스트를 바꿉니다. 먼저 get_screen_info를 호출하고 edit로 표시된 현재 노드를 전달하세요. 이 작업은 텍스트만 입력하며 양식 제출, 보내기 탭 또는 Enter 키 입력은 하지 않습니다. 노드 ID를 재사용하지 마세요."
     },
     {
       "name": "launch_app",
@@ -553,7 +561,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "读取 Android 已配置/已保存的 Wi-Fi 网络列表。只返回SSID、networkId、안전한 型、是否이미지是有凭据、是否隐藏网络、是否当前连接和配置状态;不会返回 Wi-Fi 密码。"
+      "description": "Android에서 구성/저장된 Wi-Fi 네트워크 목록을 읽습니다. SSID, networkId, 보안 유형, 자격 증명 여부, 숨겨진 네트워크 여부, 현재 연결 상태 및 구성 상태만 반환합니다. Wi-Fi 비밀번호는 반환하지 않습니다."
     },
     {
       "name": "wifi_connect",
@@ -940,6 +948,14 @@
       "description": "재사용 가능한 워크플로를 저장합니다. stepsJson은 {toolName, 인수}의 JSON 배열이어야 합니다."
     },
     {
+      "name": "accept_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "사용자 확인 후 보류 중인 Skill 제안을 승인하고 적용합니다."
+    },
+    {
       "name": "add_skill",
       "category": "Skills and Plugins",
       "risk": "DEVICE_CONTROL",
@@ -962,6 +978,14 @@
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "에이전트가 사용할 수 있도록 유효한 사용자 스킬을 활성화합니다."
+    },
+    {
+      "name": "list_skill_proposals",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "사용자의 명시적 확인이 필요한 보류 중인 Skill 변경 사항을 나열합니다."
     },
     {
       "name": "list_skills",
@@ -1004,12 +1028,28 @@
       "description": "붙여넣은 SKILL.md 문서를 미리 봅니다. 구문 분석하고 유효성을 검사하지만 저장하지는 않습니다."
     },
     {
+      "name": "reject_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DESTRUCTIVE",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "사용자 확인 후 보류 중인 Skill 제안을 거부하고 제거합니다."
+    },
+    {
       "name": "remove_skill",
       "category": "Skills and Plugins",
       "risk": "DESTRUCTIVE",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "스킬을 제거하세요"
+      "description": "스킬을 제거하세요."
+    },
+    {
+      "name": "rollback_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "사용자 Skill을 가장 최근에 보관된 콘텐츠 리비전으로 복원합니다."
     },
     {
       "name": "save_skill_draft",

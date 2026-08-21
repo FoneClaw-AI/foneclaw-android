@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "de",
   "fallbackLocale": "en",
-  "toolCount": 118,
+  "toolCount": 123,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Tools oder Funktionen suchen",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "Bildschirm, Apps und Medien",
-      "toolCount": 11
+      "toolCount": 12
     },
     {
       "name": "Device Status and System Control",
@@ -79,7 +79,7 @@
     {
       "name": "Skills and Plugins",
       "displayName": "Skills und Plugins",
-      "toolCount": 11
+      "toolCount": 15
     }
   ],
   "tools": [
@@ -105,7 +105,7 @@
       "risk": "LOW",
       "approval": "Automatisch",
       "approvalCode": "AUTO",
-      "description": "Öffnen Sie eine Ziel-Android-App oder wechseln Sie zu ihr, warten Sie, bis sich diese App stabil im Vordergrund befindet, und kehren Sie zur sichtbaren Baumstruktur des Barrierefreiheitsbildschirms zurück. Verwenden Sie dies, wenn eine Anfrage dazu auffordert, eine App zu öffnen bzw. zu ihr zu wechseln und die sichtbare Seite zu lesen, zu prüfen, zu beschreiben oder zusammenzufassen. Teilen Sie diese Aufgabe nicht in launch_app und get_screen_info auf. Dieses Tool erfasst keinen Screenshot und interagiert nicht mit Knoten."
+      "description": "Öffnen Sie eine Android-Ziel-App oder wechseln Sie zu ihr, warten Sie, bis sie stabil im Vordergrund angezeigt wird, und geben Sie den sichtbaren Bedienungshilfen-Baum zurück. Verwenden Sie dieses Tool, wenn eine Anfrage sowohl das Öffnen oder Wechseln einer App als auch das Lesen, Prüfen, Beschreiben, Zusammenfassen oder Antippen eines vorhandenen sichtbaren Steuerelements verlangt und kein spezielles Domänen-Tool die Anfrage abschließen kann. Teilen Sie die Aufgabe nicht in launch_app und get_screen_info auf. Dieses Tool erstellt selbst keinen Screenshot und tippt keine Knoten an; verwenden Sie neu zurückgegebene Knoten-IDs nur dann mit tap_node, wenn der Benutzer ein Antippen verlangt hat."
     },
     {
       "name": "get_installed_map_apps",
@@ -121,7 +121,15 @@
       "risk": "LOW",
       "approval": "Automatisch",
       "approvalCode": "AUTO",
-      "description": "Rufen Sie UI-Elemente vom aktuell sichtbaren App-Bildschirm ab. Jedes Element hat eine Knoten-ID (zum Beispiel [n3]), die mit tap_node verwendet werden kann. Verwenden Sie dies nicht zum Lesen, Auflisten, Suchen oder Zusammenfassen von Android-Benachrichtigungen. Verwenden Sie stattdessen Sysinfo-Tools. Dieses Ergebnis nicht zwischenspeichern, da sich die Knoten-IDs bei jedem Aufruf ändern."
+      "description": "Ruft UI-Elemente vom derzeit sichtbaren App-Bildschirm ab. Jedes Element besitzt eine Knoten-ID, zum Beispiel [n3], die mit tap_node oder input_text verwendet werden kann. Verwenden Sie dieses Tool nicht zum Lesen, Auflisten, Suchen oder Zusammenfassen von Android-Benachrichtigungen, sondern die sysinfo-Tools. Speichern Sie das Ergebnis nicht zwischen, da sich die Knoten-IDs bei jedem Aufruf ändern."
+    },
+    {
+      "name": "input_text",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Genehmigung erforderlich",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Ersetzt den Text in einem sichtbaren, bearbeitbaren Feld der aktuellen Android-App. Rufen Sie zuerst get_screen_info auf und übergeben Sie einen aktuellen, mit edit markierten Knoten. Diese Aktion gibt nur Text ein; sie sendet das Formular nicht, tippt nicht auf Senden und drückt nicht die Eingabetaste. Verwenden Sie Knoten-IDs nicht erneut."
     },
     {
       "name": "launch_app",
@@ -553,7 +561,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "读取 Android 已配置/已保存的 Wi-Fi 网络列表.只返回SSID, Netzwerk-ID, Netzwerk-ID, Netzwerk-ID, Netzwerk-ID, WLAN-Netzwerk密码. Technische Bezeichner: networkId."
+      "description": "Liest die Liste der konfigurierten/gespeicherten Wi-Fi-Netzwerke auf Android. Gibt nur SSID, networkId, Sicherheitstyp, ob Anmeldeinformationen vorhanden sind, ob das Netzwerk ausgeblendet ist, den aktuellen Verbindungsstatus und den Konfigurationsstatus zurück. Gibt keine Wi-Fi-Passwörter zurück."
     },
     {
       "name": "wifi_connect",
@@ -940,6 +948,14 @@
       "description": "Speichern Sie einen wiederverwendbaren Workflow. „stepsJson“ muss ein JSON-Array von {toolName, arguments} sein."
     },
     {
+      "name": "accept_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Genehmigung erforderlich",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Akzeptiert und übernimmt einen ausstehenden Skill-Vorschlag nach Bestätigung durch den Benutzer."
+    },
+    {
       "name": "add_skill",
       "category": "Skills and Plugins",
       "risk": "DEVICE_CONTROL",
@@ -962,6 +978,14 @@
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Aktivieren Sie einen gültigen Benutzer-Skill, damit er vom Agenten verwendet werden kann."
+    },
+    {
+      "name": "list_skill_proposals",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "Genehmigung erforderlich",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Listet ausstehende Skill-Änderungen auf, die eine ausdrückliche Benutzerbestätigung erfordern."
     },
     {
       "name": "list_skills",
@@ -1004,12 +1028,28 @@
       "description": "Vorschau eines eingefügten SKILL.md-Dokuments. Dadurch wird analysiert und validiert, aber nicht gespeichert."
     },
     {
+      "name": "reject_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DESTRUCTIVE",
+      "approval": "Genehmigung erforderlich",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Lehnt einen ausstehenden Skill-Vorschlag nach Bestätigung durch den Benutzer ab und entfernt ihn."
+    },
+    {
       "name": "remove_skill",
       "category": "Skills and Plugins",
       "risk": "DESTRUCTIVE",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Entferne die Fertigkeit"
+      "description": "Entferne die Fertigkeit."
+    },
+    {
+      "name": "rollback_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Genehmigung erforderlich",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Stellt einen Benutzer-Skill auf die zuletzt archivierte Inhaltsrevision zurück."
     },
     {
       "name": "save_skill_draft",

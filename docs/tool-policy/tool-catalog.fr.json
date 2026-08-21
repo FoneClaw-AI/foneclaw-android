@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "fr",
   "fallbackLocale": "en",
-  "toolCount": 118,
+  "toolCount": 123,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Rechercher des outils ou des fonctionnalités",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "Écran, applications et médias",
-      "toolCount": 11
+      "toolCount": 12
     },
     {
       "name": "Device Status and System Control",
@@ -79,7 +79,7 @@
     {
       "name": "Skills and Plugins",
       "displayName": "Skills et plugins",
-      "toolCount": 11
+      "toolCount": 15
     }
   ],
   "tools": [
@@ -105,7 +105,7 @@
       "risk": "LOW",
       "approval": "Automatique",
       "approvalCode": "AUTO",
-      "description": "Ouvrez ou passez à une application Android cible, attendez que cette application soit stable au premier plan et renvoyez l'arborescence de l'écran d'accessibilité visible. Utilisez-le lorsqu'une requête demande à la fois d'ouvrir/de passer à une application et de lire, inspecter, décrire ou résumer sa page visible. Ne divisez pas cette tâche en launch_app et get_screen_info. Cet outil ne capture pas de capture d'écran et n'interagit pas avec les nœuds."
+      "description": "Ouvrez l’application Android cible ou passez-y, attendez qu’elle soit stable au premier plan, puis renvoyez l’arborescence d’accessibilité visible. Utilisez cet outil lorsqu’une même demande exige d’ouvrir ou de changer d’application et de lire, inspecter, décrire, résumer ou toucher un contrôle visible existant, et qu’aucun outil métier dédié ne peut l’exécuter. Ne divisez pas la tâche entre launch_app et get_screen_info. Cet outil ne capture pas l’écran et ne touche pas les nœuds lui-même ; utilisez les ID de nœud nouvellement renvoyés avec tap_node uniquement si l’utilisateur a demandé un toucher."
     },
     {
       "name": "get_installed_map_apps",
@@ -121,7 +121,15 @@
       "risk": "LOW",
       "approval": "Automatique",
       "approvalCode": "AUTO",
-      "description": "Obtenez les éléments de l'interface utilisateur à partir de l'écran de l'application actuellement visible. Chaque élément a un ID de nœud (par exemple [n3]) qui peut être utilisé avec tap_node. Ne l'utilisez pas pour lire, répertorier, rechercher ou résumer les notifications Android ; utilisez plutôt les outils sysinfo. Ne mettez pas ce résultat en cache car les ID de nœud changent à chaque appel."
+      "description": "Récupère les éléments d’interface de l’écran d’application visible. Chaque élément possède un ID de nœud, par exemple [n3], utilisable avec tap_node ou input_text. N’utilisez pas cet outil pour lire, répertorier, rechercher ou résumer les notifications Android ; utilisez plutôt les outils sysinfo. Ne mettez pas le résultat en cache, car les ID de nœud changent à chaque appel."
+    },
+    {
+      "name": "input_text",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Remplacez le texte d’un champ modifiable visible dans l’application Android actuelle. Appelez d’abord get_screen_info et transmettez un nœud actuel marqué edit. Cette action saisit uniquement le texte ; elle n’envoie pas le formulaire, ne touche pas Envoyer et n’appuie pas sur Entrée. Ne réutilisez pas les ID de nœud."
     },
     {
       "name": "launch_app",
@@ -553,7 +561,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Système Android avec connexion Wi-Fi et connexion Wi-Fi. SSID、networkId、安全类型、是否像是有凭据、是否隐藏网络、是否当前连接和配置状态；不会返回 Wi-Fi密码。"
+      "description": "Lit la liste des réseaux Wi-Fi configurés/enregistrés sur Android. Retourne uniquement le SSID, le networkId, le type de sécurité, si des identifiants existent, si le réseau est masqué, l'état de connexion actuel et l'état de la configuration. Ne retourne pas les mots de passe Wi-Fi."
     },
     {
       "name": "wifi_connect",
@@ -940,6 +948,14 @@
       "description": "Enregistrez un flux de travail réutilisable. stepsJson doit être un tableau JSON de {toolName, arguments}."
     },
     {
+      "name": "accept_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Accepte et applique une proposition de Skill en attente après confirmation de l’utilisateur."
+    },
+    {
       "name": "add_skill",
       "category": "Skills and Plugins",
       "risk": "DEVICE_CONTROL",
@@ -962,6 +978,14 @@
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Activez une compétence utilisateur valide afin qu'elle puisse être utilisée par l'agent."
+    },
+    {
+      "name": "list_skill_proposals",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Répertorie les modifications de Skill en attente qui exigent une confirmation explicite de l’utilisateur."
     },
     {
       "name": "list_skills",
@@ -1004,12 +1028,28 @@
       "description": "Prévisualisez un document SKILL.md collé. Cela analyse et valide mais n'enregistre pas."
     },
     {
+      "name": "reject_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DESTRUCTIVE",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Rejette et supprime une proposition de Skill en attente après confirmation de l’utilisateur."
+    },
+    {
       "name": "remove_skill",
       "category": "Skills and Plugins",
       "risk": "DESTRUCTIVE",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Supprimer la compétence"
+      "description": "Supprimer la compétence."
+    },
+    {
+      "name": "rollback_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Restaure une Skill utilisateur vers la dernière révision de contenu archivée."
     },
     {
       "name": "save_skill_draft",

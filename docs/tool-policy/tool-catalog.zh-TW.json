@@ -3,16 +3,16 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "zh-TW",
   "fallbackLocale": "en",
-  "toolCount": 118,
+  "toolCount": 123,
   "categoryCount": 11,
   "uiLabels": {
-    "searchPlaceholder": "搜尋工具或功能",
-    "allCategories": "所有分類",
+    "searchPlaceholder": "搜尋工具或能力",
+    "allCategories": "全部分類",
     "publicBuiltInTools": "個公開內建工具",
     "tool": "工具",
     "risk": "風險",
     "approval": "核准",
-    "description": "功能說明"
+    "description": "用途說明"
   },
   "riskLabels": {
     "DESTRUCTIVE": "破壞性操作",
@@ -28,8 +28,8 @@
   "categories": [
     {
       "name": "Screen and App",
-      "displayName": "畫面、應用程式與影像",
-      "toolCount": 11
+      "displayName": "螢幕、應用程式與多媒體",
+      "toolCount": 12
     },
     {
       "name": "Device Status and System Control",
@@ -43,7 +43,7 @@
     },
     {
       "name": "Mail",
-      "displayName": "郵件",
+      "displayName": "電子郵件",
       "toolCount": 6
     },
     {
@@ -53,12 +53,12 @@
     },
     {
       "name": "Calendar",
-      "displayName": "日曆",
+      "displayName": "行事曆",
       "toolCount": 7
     },
     {
       "name": "Memo",
-      "displayName": "備忘",
+      "displayName": "備忘錄",
       "toolCount": 6
     },
     {
@@ -73,13 +73,13 @@
     },
     {
       "name": "Tasks, Workflows, and Shortcuts",
-      "displayName": "任務、工作流程與捷徑",
+      "displayName": "工作、流程與快速鍵",
       "toolCount": 8
     },
     {
       "name": "Skills and Plugins",
       "displayName": "Skill 與外掛程式",
-      "toolCount": 11
+      "toolCount": 15
     }
   ],
   "tools": [
@@ -89,7 +89,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "從系統圖庫中開啟特定的可見照片。僅當使用者明確要求查看或開啟特定照片時才使用此選項。除非使用者明確要求查看或打開捕獲的照片，否則請勿將其用作 camera_take_photo 之後的後續操作。 indexFromLatest 從 1 開始，按最新到第一的順序：1 開啟最新的照片，2 開啟第二張最新的照片，3 開啟第三個最新的照片。"
+      "description": "從系統圖庫中開啟特定的可見照片。僅當使用者明確要求查看或開啟特定照片時才使用此選項。除非使用者明確要求查看或開啟捕獲的照片，否則請勿將其用作 camera_take_photo 之後的後續操作。 indexFromLatest 從 1 開始，按最新到第一的順序：1 開啟最新的照片，2 開啟第二張最新的照片，3 開啟第三個最新的照片。"
     },
     {
       "name": "camera_take_photo",
@@ -105,7 +105,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "打開或切換到目標 Android 應用程序，等待該應用程式穩定在前台，然後返回可見的輔助功能螢幕樹。當一個請求要求開啟/切換到應用程式並讀取、檢查、描述或總結其可見頁面時，請使用此選項。不要將該任務拆分為 launch_app 和 get_screen_info。該工具不會捕獲螢幕截圖或與節點互動。"
+      "description": "開啟或切換至目標 Android 應用程式，等待其穩定顯示於前景，然後傳回可見的無障礙螢幕樹。當一個要求既要開啟或切換應用程式，又要讀取、檢查、描述、摘要或點選現有可見控制項，而且沒有專用領域工具可以完成要求時，使用此工具。不要把該任務拆成 launch_app 和 get_screen_info。此工具本身不會擷取螢幕畫面或點選節點；只有使用者要求點選時，才使用新傳回的節點 ID 呼叫 tap_node。"
     },
     {
       "name": "get_installed_map_apps",
@@ -113,7 +113,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "查詢地圖工具支援的已安裝地圖應用程式。傳回每個應用程式的顯示名稱和套件名稱。"
+      "description": "查詢地圖工具支援的已安裝地圖應用程式。回傳每個應用程式的顯示名稱和套件名稱。"
     },
     {
       "name": "get_screen_info",
@@ -121,7 +121,15 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "從目前可見的應用程式畫面取得 UI 元素。每個元素都有一個可與 tap_node 一起使用的節點 ID（例如 [n3]）。請勿使用它來閱讀、列出、搜尋或總結 Android 通知；請改用 sysinfo 工具。不要快取此結果，因為節點 ID 在每次呼叫時都會變更。"
+      "description": "取得目前可見應用程式畫面上的 UI 元素。每個元素都有一個節點 ID（例如 [n3]），可供 tap_node 或 input_text 使用。不要用此工具讀取、列出、搜尋或摘要 Android 通知；應改用 sysinfo 工具。不要快取結果，因為節點 ID 每次呼叫都會變更。"
+    },
+    {
+      "name": "input_text",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要核准",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "取代目前 Android 應用程式中一個可見可編輯輸入框內的文字。先呼叫 get_screen_info，並傳入一個目前標記為 edit 的節點。此操作只輸入文字；不會提交表單、點選傳送或按 Enter 鍵。不要重複使用節點 ID。"
     },
     {
       "name": "launch_app",
@@ -129,7 +137,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "透過套件名稱或已安裝的應用程式顯示名稱開啟可啟動的 Android 應用程式。這會更改前台應用程序，並可能暴露該應用程式的螢幕。盡可能使用準確的套件名稱。如果結果不明確，請使用者選擇一個退回的包裹。"
+      "description": "透過套件名稱或已安裝的應用程式顯示名稱開啟可啟動的 Android 應用程式。這會更改前景應用程式，並可能暴露該應用程式的螢幕。盡可能使用準確的套件名稱。如果結果不明確，請使用者選擇一個退回的包裹。"
     },
     {
       "name": "play_store_check_app",
@@ -145,7 +153,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "按確切的套件名稱開啟特定的 Google Play 應用程式詳細資料頁面，點擊“安裝”，然後等待安裝完成。此工具不會開啟已安裝的應用程式。僅當確切的 Android packageName 已知時才使用。切勿將其用於模糊搜尋結果或猜測第一個應用程式。如果 packageName 未知，請先向使用者詢問確切的應用程式套件。如果 Google Play 顯示已付費、購買、訂閱、更新、不明確的 UI，或安裝在逾時之前未完成，則停止。"
+      "description": "按確切的套件名稱開啟特定的 Google Play 應用程式詳細資料頁面，點選“安裝”，然後等待安裝完成。此工具不會開啟已安裝的應用程式。僅當確切的 Android packageName 已知時才使用。切勿將其用於模糊搜尋結果或猜測第一個應用程式。如果 packageName 未知，請先向使用者詢問確切的應用程式套件。如果 Google Play 顯示已付費、購買、訂閱、更新、不明確的 UI，或安裝在逾時之前未完成，則停止。"
     },
     {
       "name": "screenshot_open",
@@ -153,7 +161,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "從系統圖庫中開啟特定的可見螢幕截圖。索引按照所選順序從 1 開始。 sortOrder 可以是最新的或最舊的。"
+      "description": "從系統圖庫中開啟特定的可見螢幕螢幕截圖。索引按照所選順序從 1 開始。 sortOrder 可以是最新的或最舊的。"
     },
     {
       "name": "screenshot_take",
@@ -161,7 +169,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "使用 FoneClaw 輔助服務擷取 Android 螢幕。擷取的圖片會保存在應用程式私人快取中供 Agent 使用，不會加入系統圖庫 對目前螢幕使用 targetType=current，將 targetType=app 與 targetApp 用於開啟應用程式並擷取它，或僅將 targetType=notification_shade 用於涉及可見通知欄的明確螢幕截圖或影像擷取請求。切勿使用 targetType=notification_shade 讀取、列出、查詢或匯總通知資料；請改用 SysInfo 通知工具。請勿在此工具之前呼叫 launch_app 或 system_panel_open 來擷取應用程式或通知列。當使用者想要查看已儲存的螢幕截圖時，請勿使用此選項；使用 screenshot_open 查看已儲存的螢幕截圖。"
+      "description": "使用 FoneClaw 輔助服務擷取 Android 螢幕。擷取的圖片會儲存在應用程式私人快取中供 Agent 使用，不會加入系統圖庫 對目前螢幕使用 targetType=current，將 targetType=app 與 targetApp 用於開啟應用程式並擷取它，或僅將 targetType=notification_shade 用於涉及可見通知列的明確螢幕螢幕截圖或影像擷取請求。切勿使用 targetType=notification_shade 讀取、列出、查詢或匯總通知資料；請改用 SysInfo 通知工具。請勿在此工具之前呼叫 launch_app 或 system_panel_open 來擷取應用程式或通知列。當使用者想要查看已儲存的螢幕螢幕截圖時，請勿使用此選項；使用 screenshot_open 查看已儲存的螢幕螢幕截圖。"
     },
     {
       "name": "tap_node",
@@ -193,7 +201,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "傳回目前透過普通應用程式可見的公共 Android Bluetooth 設定檔連接的 Bluetooth 裝置。"
+      "description": "回傳目前透過普通應用程式可見的公共 Android Bluetooth 設定檔連接的 Bluetooth 裝置。"
     },
     {
       "name": "bluetooth_nearby_devices",
@@ -201,7 +209,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "掃描並返回附近的 Bluetooth 裝置。當權限和 Bluetooth 狀態允許時，包括 BLE 掃描結果和經典 Bluetooth 發現結果。預設情況下，沒有可讀名稱的裝置是隱藏的。"
+      "description": "掃描並傳回附近的 藍牙 裝置。當權限和 藍牙 狀態允許時，包括 BLE 掃描結果和經典 藍牙 發現結果。預設情況下，沒有可讀名稱的裝置是隱藏的。"
     },
     {
       "name": "bluetooth_pair_device",
@@ -209,7 +217,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "透過 MAC 位址開始與 Bluetooth 裝置配對。這將啟動Android的正常綁定流程，並且可能需要使用者確認或PIN輸入。"
+      "description": "透過 MAC 位址開始與 藍牙 裝置配對。這將啟動Android的正常綁定流程，並且可能需要使用者確認或PIN輸入。"
     },
     {
       "name": "bluetooth_paired_devices",
@@ -217,7 +225,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "傳回已與此 Android 裝置配對的 Bluetooth 裝置。"
+      "description": "回傳已與此 Android 裝置配對的 Bluetooth 裝置。"
     },
     {
       "name": "bluetooth_state",
@@ -225,7 +233,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "傳回目前 Bluetooth 適配器狀態：開啟、關閉、turning_on、turning_off 或未知。"
+      "description": "回傳目前 Bluetooth 適配器狀態：開啟、關閉、turning_on、turning_off 或未知。"
     },
     {
       "name": "close_bluetooth",
@@ -233,7 +241,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "使用公共舊版停用 API 關閉 Bluetooth。如果 Android 拒絕，則報告普通 Android 應用程式無法在此裝置上關閉 Bluetooth。"
+      "description": "使用公共舊版停用 API 關閉 藍牙。如果 Android 拒絕，則報告普通 Android 應用程式無法在此裝置上關閉 藍牙。"
     },
     {
       "name": "device_app_activity_snapshot",
@@ -241,7 +249,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "從AndroidUsageStats傳回一個緊湊的最近應用程式活動快照。需要使用權限；它不是即時後台進程監視器。"
+      "description": "從AndroidUsageStats回傳一個緊湊的最近應用程式活動快照。需要使用權限；它不是即時後台進程監視器。"
     },
     {
       "name": "device_app_permission_audit",
@@ -249,7 +257,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "傳回對此應用程式可見的已安裝應用程式的緊湊權限風險審核。風險是啟發式的，基於聲明/授予的敏感權限組。"
+      "description": "回傳對此應用程式可見的已安裝應用程式的緊湊權限風險審核。風險是啟發式的，基於聲明/授予的敏感權限組。"
     },
     {
       "name": "device_app_sensitive_audit",
@@ -257,7 +265,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "傳回緊湊敏感應用程式狀態：可存取性、通知偵聽器、裝置管理、覆蓋、電池最佳化豁免和授予的敏感權限群組。"
+      "description": "回傳緊湊敏感應用程式狀態：可存取性、通知偵聽器、裝置管理、覆蓋、電池最佳化豁免和授予的敏感權限群組。"
     },
     {
       "name": "device_battery_status",
@@ -265,7 +273,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "返回緊湊型Android電池和省電狀態。沒有更改任何設定。"
+      "description": "傳回緊湊型Android電池和省電狀態。沒有更改任何設定。"
     },
     {
       "name": "device_health_check",
@@ -273,7 +281,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "傳回緊湊的唯讀運行狀況快照：記憶體、儲存、電池和網路。沒有更改任何設定。"
+      "description": "回傳緊湊的唯讀運行狀況快照：記憶體、儲存、電池和網路。沒有更改任何設定。"
     },
     {
       "name": "device_hidden_app_check",
@@ -281,7 +289,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "傳回對沒有啟動器條目或停用元件的使用者應用程式的緊湊啟發式檢查。這可以標記可疑應用程序，但合法的僅服務應用程式也可能會出現。"
+      "description": "回傳對沒有啟動器條目或停用元件的使用者應用程式的緊湊啟發式檢查。這可以標記可疑應用程序，但合法的僅服務應用程式也可能會出現。"
     },
     {
       "name": "device_memory_status",
@@ -289,7 +297,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "傳回緊湊Android記憶體狀態。沒有更改任何設定。"
+      "description": "回傳緊湊Android記憶體狀態。沒有更改任何設定。"
     },
     {
       "name": "device_network_status",
@@ -297,7 +305,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "傳回緊湊的Android活動網路狀態和功能。沒有更改網路設定。"
+      "description": "回傳緊湊的Android活動網路狀態和功能。沒有更改網路設定。"
     },
     {
       "name": "device_storage_status",
@@ -305,7 +313,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "傳回緊湊的Android內部/共享儲存狀態。不會掃描或刪除任何檔案。"
+      "description": "回傳緊湊的Android內部/共享儲存狀態。不會掃描或刪除任何檔案。"
     },
     {
       "name": "device_time_status",
@@ -313,7 +321,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "傳回目前 Android 系統時區和 Unix 時間戳，以進行與時間相關的工具呼叫。僅當系統時間有爭議或需要線上參考時才設定verifyWithNtp=true。 NTP驗證使用ntp1.aliyun.com，不會改變系統時鐘。"
+      "description": "回傳目前 Android 系統時區和 Unix 時間戳，以進行與時間相關的工具呼叫。僅當系統時間有爭議或需要線上參考時才設定verifyWithNtp=true。 NTP驗證使用ntp1.aliyun.com，不會改變系統時鐘。"
     },
     {
       "name": "dnd_open_policy_access_settings",
@@ -337,7 +345,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "讀取Android請勿打擾策略存取狀態和目前中斷過濾器。"
+      "description": "讀取Android請勿打擾策略存取狀態和目前中斷篩選器。"
     },
     {
       "name": "flashlight_set_enabled",
@@ -353,7 +361,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "返回手電筒是否可用以及最後已知的手電筒狀態。"
+      "description": "傳回手電筒是否可用以及最後已知的手電筒狀態。"
     },
     {
       "name": "flashlight_toggle",
@@ -377,7 +385,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "請求Bluetooth開啟。對於舊版目標 SDK，這首先嘗試公共啟用 API，然後在需要時回退到 Android 的系統確認 UI。"
+      "description": "請求藍牙開啟。對於舊版目標 SDK，這首先嘗試公共啟用 API，然後在需要時回退到 Android 的系統確認 UI。"
     },
     {
       "name": "system_panel_open",
@@ -385,7 +393,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "開啟一個可見的 Android 系統面板。使用 panel=notifications 開啟通知欄，或使用 panel=quick_settings 開啟快速設定/控制中心。該工具僅開啟選定的面板。它不會讀取、捕獲、搜尋、列出或總結面板內容。當請求的任何部分要求讀取、捕獲、檢查、描述或總結通知時，請勿呼叫它。僅針對明確的僅開啟面板請求呼叫一次。需要 FoneClaw 無障礙服務。"
+      "description": "開啟一個可見的 Android 系統面板。使用 panel=notifications 開啟通知欄，或使用 panel=quick_settings 開啟快速設定/控制中心。該工具僅開啟選定的面板。它不會讀取、捕獲、搜尋、列出或摘要面板內容。當請求的任何部分要求讀取、捕獲、檢查、描述或摘要通知時，請勿呼叫它。僅針對明確的僅開啟面板請求呼叫一次。需要 FoneClaw 無障礙服務。"
     },
     {
       "name": "system_settings_open_battery_optimization_entry",
@@ -393,7 +401,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "開啟Android電池優化設定。如果提供了 appNameOrPackage，請按套件名稱或已安裝的應用程式標籤開啟該應用程式的詳細資訊頁面。如果無法解決或打開，則返回失敗，不要打開其他設定頁面。如果為空，請開啟系統電池優化清單/設定頁面。"
+      "description": "開啟Android電池優化設定。如果提供了 appNameOrPackage，請按套件名稱或已安裝的應用程式標籤開啟該應用程式的詳細資訊頁面。如果無法解決或開啟，則傳回失敗，不要開啟其他設定頁面。如果為空，請開啟系統電池優化清單/設定頁面。"
     },
     {
       "name": "system_settings_open_battery_saver_settings",
@@ -401,7 +409,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "開啟Android省電/省電/低耗電量模式設定。普通應用程式無法透過公共 API 直接切換省電模式，因此設定開啟後用戶必須手動啟用或停用它。供應商 ROM 可能會回退到通用電池設定。"
+      "description": "開啟Android省電/省電/低耗電量模式設定。普通應用程式無法透過公共 API 直接切換省電模式，因此設定開啟後使用者必須手動啟用或停用它。供應商 ROM 可能會回退到通用電池設定。"
     },
     {
       "name": "system_settings_open_date_time_settings",
@@ -409,7 +417,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "直接開啟Android日期和時間設定頁面。將此用於日期、時間、自動時間、時區或自動時區設定。這將啟動系統設定 Intent，並且不需要輔助功能、螢幕閱讀或點擊。成功後，請勿呼叫launch_app、get_screen_info或tap_node。"
+      "description": "直接開啟Android日期和時間設定頁面。將此用於日期、時間、自動時間、時區或自動時區設定。這將啟動系統設定 Intent，並且不需要輔助功能、螢幕閱讀或點選。成功後，請勿呼叫launch_app、get_screen_info或tap_node。"
     },
     {
       "name": "system_settings_open_hotspot_entry",
@@ -417,7 +425,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "開啟Android熱點設定。普通應用程式無法透過公共 Android API 可靠地靜默切換熱點。如果無法開啟確切的熱點設定頁面，則返回失敗並且不會開啟其他設定頁面。"
+      "description": "開啟Android熱點設定。普通應用程式無法透過公共 Android API 可靠地靜默切換熱點。如果無法開啟確切的熱點設定頁面，則傳回失敗並且不會開啟其他設定頁面。"
     },
     {
       "name": "system_settings_open_location_entry",
@@ -425,7 +433,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "開啟 Android 位置設定。如果提供了 appNameOrPackage，請按套件名稱或已安裝的應用程式標籤開啟該應用程式的詳細資訊頁面。如果無法解決或打開，則返回失敗，不要打開其他設定頁面。如果為空，則開啟系統位置設定頁面。"
+      "description": "開啟 Android 位置設定。如果提供了 appNameOrPackage，請按套件名稱或已安裝的應用程式標籤開啟該應用程式的詳細資訊頁面。如果無法解決或開啟，則傳回失敗，不要開啟其他設定頁面。如果為空，則開啟系統位置設定頁面。"
     },
     {
       "name": "system_settings_set_auto_rotate",
@@ -449,7 +457,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "開啟護眼/夜燈/藍光過濾/閱讀模式的Android顯示設定。使用此工具，而不是僅提供多語言眼睛舒適意圖的手動說明。 Android 供應商以不同的方式公開確切的切換，因此該工具開啟顯示設定並讓使用者在該頁面上完成切換。"
+      "description": "開啟護眼/夜燈/藍光篩選/閱讀模式的Android顯示設定。使用此工具，而不是僅提供多語言眼睛舒適意圖的手動說明。 Android 供應商以不同的方式公開確切的切換，因此該工具開啟顯示設定並讓使用者在該頁面上完成切換。"
     },
     {
       "name": "system_settings_set_font_scale",
@@ -497,7 +505,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "返回可寫入系統設定權限狀態以及當前螢幕亮度、字體比例、螢幕超時、旋轉、觸控聲音和觸覺回饋。這僅讀取 Android 系統設定。"
+      "description": "傳回可寫入系統設定權限狀態以及目前螢幕亮度、字體比例、螢幕超時、旋轉、觸控聲音和觸覺回饋。這僅讀取 Android 系統設定。"
     },
     {
       "name": "volume_adjust_stream",
@@ -505,7 +513,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "將一個 Android 音頻流升高或降低一個系統步長。選擇此選項可實現相對音量變化。"
+      "description": "將一個 Android 音訊流升高或降低一個系統步長。選擇此選項可實現相對音量變化。"
     },
     {
       "name": "volume_set_all_streams_muted",
@@ -553,7 +561,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "讀取 Android 已設定/已儲存的 Wi-Fi 網路清單。只回傳 SSID、networkId、安全性類型、是否有帳戶、是否隱藏網路、是否目前連線和設定狀態；不會回傳 Wi-Fi 密碼。"
+      "description": "讀取 Android 已設定/已儲存的 Wi-Fi 網路清單。僅回傳 SSID、networkId、安全性類型、是否有認證資訊、是否隱藏網路、是否目前連線和組態狀態；不會回傳 Wi-Fi 密碼。"
     },
     {
       "name": "wifi_connect",
@@ -561,7 +569,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "連接到 Wi-Fi 網路。工具首先檢查 Android 儲存的 Wi-Fi 配置是否存在 SSID，並直接連接（如果存在）。如果未儲存，它將使用提供的密碼來新增/連接網絡，或在需要輸入密碼時退回到 Android 的 Wi-Fi 面板。"
+      "description": "連接到 Wi-Fi 網路。工具首先檢查 Android 儲存的 Wi-Fi 組態是否存在 SSID，並直接連接（如果存在）。如果未儲存，它將使用提供的密碼來新增/連接網路，或在需要輸入密碼時退回到 Android 的 Wi-Fi 面板。"
     },
     {
       "name": "wifi_disconnect",
@@ -569,7 +577,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "中斷與目前 Wi-Fi 接入點的連線。該工具首先嘗試對目標 API 28 台主機進行靜默傳統 WifiManager 斷開連接；如果 Android 拒絕它，它會退回到打開 Android 的 Wi-Fi 面板以供用戶操作。"
+      "description": "中斷與目前 Wi-Fi 接入點的連線。該工具首先嘗試對目標 API 28 台主機進行靜默傳統 WifiManager 斷開連接；如果 Android 拒絕它，它會退回到開啟 Android 的 Wi-Fi 面板以供使用者操作。"
     },
     {
       "name": "wifi_forget",
@@ -585,7 +593,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "掃描並返回附近的 Wi-Fi 接入點。如果 Wi-Fi 關閉，此工具首先嘗試直接啟用 Wi-Fi，並且僅在直接啟用失敗時才回退到 Android 的 Wi-Fi 面板。需要位置權限和設備定位服務。結果可以揭示位置敏感的網路數據。"
+      "description": "掃描並傳回附近的 Wi-Fi 接入點。如果 Wi-Fi 關閉，此工具首先嘗試直接啟用 Wi-Fi，並且僅在直接啟用失敗時才回退到 Android 的 Wi-Fi 面板。需要位置權限和裝置定位服務。結果可以揭示位置敏感的網路資料。"
     },
     {
       "name": "wifi_set_enabled",
@@ -601,7 +609,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "當應用程式具有權限時，傳回目前 Android Wi-Fi 狀態和活動 Wi-Fi 連線詳細資料。這僅讀取網路狀態。"
+      "description": "當應用程式具有權限時，回傳目前 Android Wi-Fi 狀態和活動 Wi-Fi 連線詳細資料。這僅讀取網路狀態。"
     },
     {
       "name": "get_location",
@@ -609,7 +617,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "在使用 FoneClaw 時取得目前 Android 裝置位置。僅需要前台位置權限。"
+      "description": "在使用 FoneClaw 時取得目前 Android 裝置位置。僅需要前景位置權限。"
     },
     {
       "name": "location_search_nearby_place",
@@ -617,7 +625,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "使用目前設備位置在附近候選地點中搜尋不明確的地名。只有當使用者明確要求尋找、驗證、解決、選擇或導航到某個地點，或導航目的地不明確時，才使用此選項。對於日曆創建，使用者提供的地名就足夠了：將其保留為 locationName，並且不要僅僅因為缺少確切的地址或座標而呼叫此工具。"
+      "description": "使用目前裝置位置在附近候選地點中搜尋不明確的地名。只有當使用者明確要求尋找、驗證、解決、選擇或導航到某個地點，或導航目的地不明確時，才使用此選項。對於行事曆創建，使用者提供的地名就足夠了：將其保留為 locationName，並且不要僅僅因為缺少確切的地址或座標而呼叫此工具。"
     },
     {
       "name": "map_navigate",
@@ -625,7 +633,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "在地圖應用程式中開啟路線或導航畫面以取得目的地和旅遊模式。這將啟動外部地圖應用程序，僅使用提供的參數，並且不讀取設備資料。"
+      "description": "在地圖應用程式中開啟路線或導航畫面以取得目的地和旅遊模式。這將啟動外部地圖應用程式，僅使用提供的參數，並且不讀取裝置資料。"
     },
     {
       "name": "mail_account_list",
@@ -633,7 +641,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "列出已配置的郵件帳號。將查詢留空以列出所有帳戶。提供查詢時，符合優先順序為帳戶 ID、電子郵件、別名，然後是模糊別名或電子郵件。精確匹配仍然可以傳回多個帳戶。如果未配置 FoneClaw 郵件帳戶且查詢是電子郵件地址，則結果可能包括帶有固定提供者憑證 URL 的 providerSetupGuide。"
+      "description": "列出已配置的郵件帳號。將查詢留空以列出所有帳戶。提供查詢時，符合優先順序為帳戶 ID、電子郵件、別名，然後是模糊別名或電子郵件。精確匹配仍然可以回傳多個帳戶。如果未配置 FoneClaw 郵件帳戶且查詢是電子郵件地址，則結果可能包括帶有固定提供者憑證 URL 的 providerSetupGuide。"
     },
     {
       "name": "mail_account_save",
@@ -641,7 +649,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "測試 IMAP 和 SMTP 連接，並僅在兩者都成功時才保存郵件帳戶。當每個必需的配置欄位可用時立即呼叫此函數。此操作需要使用者批准。"
+      "description": "測試 IMAP 和 SMTP 連接，並僅在兩者都成功時才儲存郵件帳戶。當每個必需的組態欄位可用時立即呼叫此函式。此操作需要使用者批准。"
     },
     {
       "name": "mail_delete",
@@ -649,7 +657,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "將最多 20 個精確的 messageRefs 移至垃圾箱，或僅在用戶明確要求永久刪除時永久刪除它們。切勿重試不確定的結果。"
+      "description": "將最多 20 個精確的 messageRefs 移至垃圾桶，或僅在使用者明確要求永久刪除時永久刪除它們。切勿重試不確定的結果。"
     },
     {
       "name": "mail_list",
@@ -665,7 +673,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "從 mail_list 傳回的 messageRef 讀取一則訊息，並將其標記為在伺服器上已讀。該工具成功後，在同一回應中為用戶總結訊息。"
+      "description": "從 mail_list 回傳的 messageRef 讀取一則訊息，並將其標記為在伺服器上已讀。該工具成功後，在同一回應中為用戶摘要訊息。"
     },
     {
       "name": "mail_send",
@@ -673,7 +681,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "發送新電子郵件、回覆、全部回覆或轉發。需要批准。附件必須使用與目前使用者訊息一起聲明的精確結構化元資料。"
+      "description": "傳送新電子郵件、回覆、全部回覆或轉發。需要批准。附件必須使用與目前使用者訊息一起聲明的精確結構化元資料。"
     },
     {
       "name": "call_log_list",
@@ -681,7 +689,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "列出最近的 Android 通話日誌條目，可以選擇按呼叫類型篩選。需要 READ_CALL_LOG 權限。對於未接來電問題以及選擇未接來電進行回撥之前，請使用 type=missed。選擇號碼後，撥打phone_dial。"
+      "description": "列出最近的 Android 通話記錄條目，可以選擇按呼叫類型篩選。需要 READ_CALL_LOG 權限。對於未接來電問題以及選擇未接來電進行回撥之前，請使用 type=missed。選擇號碼後，撥打phone_dial。"
     },
     {
       "name": "contacts_list",
@@ -705,7 +713,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "批准後，開啟可見的 SMS/MMS 草稿。對於帶有收件人的文字 SMS，只有當連接 FoneClaw 輔助功能且預設訊息應用程式、收件人、完整訊息正文和一個穩定的發送控制項均已驗證時，才會自動點擊「傳送」。附件、雙 SIM 卡提示、不明確的 UI 或不可用的輔助功能需要手動操作。在任何最終結果之後，停止工具規劃並且永遠不要呼叫get_screen_info或tap_node。"
+      "description": "批准後，開啟可見的 SMS/MMS 草稿。對於帶有收件人的文字 SMS，只有當連接 FoneClaw 輔助功能且預設訊息應用程式、收件人、完整訊息正文和一個穩定的傳送控制項均已驗證時，才會自動點選「傳送」。附件、雙 SIM 卡提示、不明確的 UI 或不可用的輔助功能需要手動操作。在任何最終結果之後，停止工具規劃並且永遠不要呼叫get_screen_info或tap_node。"
     },
     {
       "name": "sms_list",
@@ -713,7 +721,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "查詢此 Android 裝置上的即時 SMS 訊息。不包含關鍵字、地址、聯絡人或 threadId，列出最近的訊息。設定要搜尋的關鍵字/地址/聯絡人。僅從較早的 sms_list 結果設定 threadId 以讀取該對話。對於摘要請求，請使用 box=all 呼叫一次，然後匯總傳回的接收和傳送的訊息。切勿使用 SysInfo 歷史記錄來取代此即時結果。"
+      "description": "查詢此 Android 裝置上的即時 SMS 訊息。不包含關鍵字、地址、聯絡人或 threadId，列出最近的訊息。設定要搜尋的關鍵字/地址/聯絡人。僅從較早的 sms_list 結果設定 threadId 以讀取該對話。對於摘要請求，請使用 box=all 呼叫一次，然後匯總回傳的接收和傳送的訊息。切勿使用 SysInfo 歷史記錄來取代此即時結果。"
     },
     {
       "name": "calendar_create_event",
@@ -721,7 +729,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "建立 Android 日曆事件。在致電之前收集錯過的時間和提醒詳細資訊。使用者提供的地名就足夠了，應該直接作為 locationName 傳遞。除非使用者明確要求驗證、解決、選擇或導航到該地點，否則不要搜尋確切的地址或座標。對於使用者日期和相對日期，首選 yyyy-MM-dd HH:mm 中的 startLocalDateTime/endLocalDateTime；該工具將在裝置時區中解析它們。不要根據模型計算的紀元毫秒創建事件。除非使用者明確選擇了日曆 ID，否則請使用 calendarId=0。建立完成後，使用工具結果actualStart/actualEnd作為使用者導向的建立時間。"
+      "description": "建立 Android 行事曆事件。在致電之前收集錯過的時間和提醒詳細資訊。使用者提供的地名就足夠了，應該直接作為 locationName 傳遞。除非使用者明確要求驗證、解決、選擇或導航到該地點，否則不要搜尋確切的地址或座標。對於使用者日期和相對日期，首選 yyyy-MM-dd HH:mm 中的 startLocalDateTime/endLocalDateTime；該工具將在裝置時區中解析它們。不要根據模型計算的紀元毫秒創建事件。除非使用者明確選擇了行事曆 ID，否則請使用 calendarId=0。建立完成後，使用工具結果actualStart/actualEnd作為使用者導向的建立時間。"
     },
     {
       "name": "calendar_delete_event",
@@ -729,7 +737,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "按 ID 刪除 Android 日曆事件。除非使用者明確選擇了日曆 ID，否則使用 calendarId=0 搜尋/列出所有日曆中的事件。始終傳遞已知的標題、startMillis、endMillis 和已知的位置，以便目標明確。"
+      "description": "按 ID 刪除 Android 行事曆事件。除非使用者明確選擇了行事曆 ID，否則使用 calendarId=0 搜尋/列出所有行事曆中的事件。始終傳遞已知的標題、startMillis、endMillis 和已知的位置，以便目標明確。"
     },
     {
       "name": "calendar_list_calendars",
@@ -737,7 +745,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "列出可寫入的Android日曆。使用它讓使用者選擇日曆；不要假設 calendarId=1 是本機或目標日曆。"
+      "description": "列出可寫入的Android行事曆。使用它讓使用者選擇行事曆；不要假設 calendarId=1 是本機或目標行事曆。"
     },
     {
       "name": "calendar_list_events",
@@ -745,7 +753,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "列出具體時間範圍內的Android日曆事件。用於今天的日程安排、明天的日程安排、現有活動或本週的活動等請求。首選 yyyy-MM-dd HH:mm 中的 startLocalDateTime/endLocalDateTime；工具將在裝置時區中解析它們。只有當精確紀元毫秒來自可信工具結果時，才使用 startMillis/endMillis 作為已棄用的後備。不要猜測calendarId；使用 calendarId=0 搜尋所有日曆，除非使用者明確選擇了日曆 ID。"
+      "description": "列出具體時間範圍內的Android行事曆事件。用於今天的行程安排、明天的行程安排、現有活動或本週的活動等請求。首選 yyyy-MM-dd HH:mm 中的 startLocalDateTime/endLocalDateTime；工具將在裝置時區中解析它們。只有當精確紀元毫秒來自可信工具結果時，才使用 startMillis/endMillis 作為已棄用的後備。不要猜測calendarId；使用 calendarId=0 搜尋所有行事曆，除非使用者明確選擇了行事曆 ID。"
     },
     {
       "name": "calendar_open_event",
@@ -753,7 +761,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "按事件 ID 開啟 Android 日曆事件詳細資料頁面。當使用者用自然語言描述事件時，首先搜尋或列出事件。不要猜測事件 ID。"
+      "description": "按事件 ID 開啟 Android 行事曆事件詳細資料頁面。當使用者用自然語言描述事件時，首先搜尋或列出事件。不要猜測事件 ID。"
     },
     {
       "name": "calendar_search_events",
@@ -761,7 +769,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "在具體時間範圍內透過關鍵字搜尋Android日曆事件。當使用者按標題或內容描述事件時，在開啟、更新或刪除事件之前使用。首選 yyyy-MM-dd HH:mm 中的 startLocalDateTime/endLocalDateTime；工具將在裝置時區中解析它們。只有當精確紀元毫秒來自可信工具結果時，才使用 startMillis/endMillis 作為已棄用的後備。不要猜測calendarId；使用 calendarId=0 搜尋所有日曆，除非使用者明確選擇了日曆 ID。"
+      "description": "在具體時間範圍內透過關鍵字搜尋Android行事曆事件。當使用者按標題或內容描述事件時，在開啟、更新或刪除事件之前使用。首選 yyyy-MM-dd HH:mm 中的 startLocalDateTime/endLocalDateTime；工具將在裝置時區中解析它們。只有當精確紀元毫秒來自可信工具結果時，才使用 startMillis/endMillis 作為已棄用的後備。不要猜測calendarId；使用 calendarId=0 搜尋所有行事曆，除非使用者明確選擇了行事曆 ID。"
     },
     {
       "name": "calendar_update_event",
@@ -769,7 +777,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "按 ID 更新 Android 日曆事件。當使用者以自然語言描述目標時，首先搜尋/列出事件，並透過變更的欄位傳遞已知的目標詳細資訊。不要猜測 calendarId 或事件 id；搜尋所有帶有 calendarId=0 的日曆，除非使用者明確選擇了日曆 ID。空白文字欄位將被忽略。使用 startMillis/endMillis=0 保留現有時間。使用 reminderMinutes=-2 保留提醒，-1 刪除提醒，>=0 取代提醒。"
+      "description": "按 ID 更新 Android 行事曆事件。當使用者以自然語言描述目標時，首先搜尋/列出事件，並透過變更的欄位傳遞已知的目標詳細資訊。不要猜測 calendarId 或事件 id；搜尋所有帶有 calendarId=0 的行事曆，除非使用者明確選擇了行事曆 ID。空白文字欄位將被忽略。使用 startMillis/endMillis=0 保留現有時間。使用 reminderMinutes=-2 保留提醒，-1 刪除提醒，>=0 取代提醒。"
     },
     {
       "name": "memo_create",
@@ -777,7 +785,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "建立使用者可見的本機備忘錄、註解或任務記錄。當使用者明確希望將內容保留為備忘錄或可操作註釋時使用。請勿使用此工具儲存或查詢助理管理的使用者設定檔內存，例如首選項、身分、關係或回應方式。"
+      "description": "建立使用者可見的本機備忘錄、註解或工作記錄。當使用者明確希望將內容保留為備忘錄或可操作註釋時使用。請勿使用此工具儲存或查詢助理管理的使用者設定檔記憶體，例如首選項、身分、關係或回應方式。"
     },
     {
       "name": "memo_delete",
@@ -825,7 +833,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "僅永久刪除符合的 FoneClaw 本機 SysInfo 快取。這永遠不會刪除原始 Android 通知、SMS、通話記錄或日曆事件。除非deleteAll=true，否則至少需要一個過濾器。多個過濾器透過 AND 組合。"
+      "description": "僅永久刪除符合的 FoneClaw 本機 SysInfo 快取。這永遠不會刪除原始 Android 通知、SMS、通話記錄或行事曆事件。除非deleteAll=true，否則至少需要一個篩選器。多個篩選器透過 AND 組合。"
     },
     {
       "name": "sysinfo_mark_reviewed",
@@ -841,7 +849,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "查詢已擷取的本機通知、SMS、通話日誌、行事曆事件和輔助功能輸入。使用這個單一工具進行每日簡報、通知查詢、時間窗口查詢和關鍵字搜尋。它從不打開系統面板或掃描即時系統來源。每行可能包含 sourceRef，用於針對即時提供者結果進行重複資料刪除。總結為使用者回傳的JSON。"
+      "description": "查詢已擷取的本機通知、SMS、通話日誌、行事曆事件和輔助功能輸入。使用這個單一工具進行每日簡報、通知查詢、時間窗口查詢和關鍵字搜尋。它從不打開系統面板或掃描即時系統來源。每行可能包含 sourceRef，用於針對即時提供者結果進行重複資料刪除。摘要為使用者回傳的JSON。"
     },
     {
       "name": "sysinfo_thread",
@@ -849,7 +857,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "透過 sysinfo_query 傳回的 threadKey 載入一個本機 SysInfo 執行緒。"
+      "description": "透過 sysinfo_query 回傳的 threadKey 載入一個本機 SysInfo 執行緒。"
     },
     {
       "name": "shopping_compare",
@@ -857,7 +865,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "在購物平台上搜尋產品的公共網路結果並傳回比較證據。在提供購物價格建議之前使用此資訊。"
+      "description": "在購物平台上搜尋產品的公共網路結果並回傳比較證據。在提供購物價格建議之前使用此資訊。"
     },
     {
       "name": "web_fetch",
@@ -865,7 +873,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "透過URL取得特定網頁並返回可讀的頁面文字。"
+      "description": "透過URL取得特定網頁並傳回可讀的頁面文字。"
     },
     {
       "name": "web_search",
@@ -873,7 +881,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "在網路上搜尋相關頁面。傳回結果標題、URL 和簡短片段。"
+      "description": "在網路上搜尋相關頁面。回傳結果標題、URL 和簡短片段。"
     },
     {
       "name": "shortcut_save_agent_prompt",
@@ -881,7 +889,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "儲存使用者建立的向代理程式發送提示的捷徑。僅在使用者確認標題、描述和行為後才呼叫此方法。"
+      "description": "儲存使用者建立的向代理程式傳送提示的捷徑。僅在使用者確認標題、描述和行為後才呼叫此方法。"
     },
     {
       "name": "shortcut_save_direct_tool",
@@ -897,7 +905,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "透過一次呼叫為當前使用者請求建立完整的有序 TODO 計劃。當請求需要三個或更多步驟時，這是任何非任務工具之前的強制性前提條件。傳遞專案中每個面向使用者的有界步驟。該計劃只能創建一次，以後不能擴展。切勿包含任務管理、清理、狀態更新或最終回應項目。"
+      "description": "透過一次呼叫為目前使用者請求建立完整的有序 TODO 計劃。當請求需要三個或更多步驟時，這是任何非工作工具之前的強制性前提條件。傳遞專案中每個面向使用者的有界步驟。該計劃只能創建一次，以後不能擴展。切勿包含工作管理、清理、狀態更新或最終回應專案。"
     },
     {
       "name": "task_list",
@@ -905,7 +913,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "列出目前使用者請求的內部 TODO 項。預設會傳回開啟的、in_progress 和封鎖的項目。"
+      "description": "列出目前使用者請求的內部 TODO 項。預設會回傳開啟的、in_progress 和封鎖的項目。"
     },
     {
       "name": "task_update",
@@ -913,7 +921,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "更新一項內部 TODO 專案。允許的轉換：開放到in_progress、阻止或放棄； in_progress 阻止、完成或放棄；被阻止打開或被放棄。完成和放棄都是終點。只有一項任務可能是in_progress。"
+      "description": "更新一項內部 TODO 專案。允許的轉換：開放到in_progress、阻止或放棄； in_progress 阻止、完成或放棄；被阻止開啟或被放棄。完成和放棄都是終點。只有一項工作可能是in_progress。"
     },
     {
       "name": "workflow_delete",
@@ -940,12 +948,20 @@
       "description": "儲存可重複使用的工作流程。 stepsJson 必須是 {toolName, argument} 的 JSON 陣列。"
     },
     {
+      "name": "accept_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要核准",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "在使用者確認後接受並套用一項待處理的 Skill 提案。"
+    },
+    {
       "name": "add_skill",
       "category": "Skills and Plugins",
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "將新的技能文件新增至技能註冊表中。"
+      "description": "將新的技能檔案新增至技能註冊表中。"
     },
     {
       "name": "disable_skill",
@@ -964,6 +980,14 @@
       "description": "啟用有效的使用者技能，以便客服人員可以使用它。"
     },
     {
+      "name": "list_skill_proposals",
+      "category": "Skills and Plugins",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要核准",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "列出需要使用者明確確認的待處理 Skill 變更。"
+    },
+    {
       "name": "list_skills",
       "category": "Skills and Plugins",
       "risk": "SENSITIVE_READ",
@@ -977,7 +1001,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "當手頭上的任務與系統提示中列出的技能之一相符時，請載入專門技能。使用此工具將技能的說明和資源注入當前對話中。輸出可能包含詳細的工作流程指南以及與技能位於同一目錄中的腳本、文件等的引用。技能名稱必須與系統提示中列出的技能之一相符。"
+      "description": "當手頭上的工作與系統提示中列出的技能之一相符時，請載入專門技能。使用此工具將技能的說明和資源注入目前對話中。輸出可能包含詳細的工作流程指南以及與技能位於同一目錄中的腳本、檔案等的引用。技能名稱必須與系統提示中列出的技能之一相符。"
     },
     {
       "name": "plugin_request_install",
@@ -985,7 +1009,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "為一個官方插件創建結構化安裝建議。這不會下載或安裝插件； HomeScreen 必須詢問用戶。"
+      "description": "為一個官方外掛程式創建結構化安裝建議。這不會下載或安裝外掛程式； HomeScreen 必須詢問使用者。"
     },
     {
       "name": "plugin_search",
@@ -993,7 +1017,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "當使用者要求目前工具清單中不可用的功能時，搜尋官方 FoneClaw 外掛程式元資料。這只搜尋元數據，從不下載或安裝插件。"
+      "description": "當使用者要求目前工具清單中不可用的功能時，搜尋官方 FoneClaw 外掛程式元資料。這只搜尋元資料，從不下載或安裝外掛程式。"
     },
     {
       "name": "preview_skill_import",
@@ -1001,7 +1025,15 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "預覽貼上的 SKILL.md 文件。這會解析並驗證但不會保存。"
+      "description": "預覽貼上的 SKILL.md 檔案。這會解析並驗證但不會儲存。"
+    },
+    {
+      "name": "reject_skill_proposal",
+      "category": "Skills and Plugins",
+      "risk": "DESTRUCTIVE",
+      "approval": "需要核准",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "在使用者確認後拒絕並移除一項待處理的 Skill 提案。"
     },
     {
       "name": "remove_skill",
@@ -1009,7 +1041,15 @@
       "risk": "DESTRUCTIVE",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "移除技能"
+      "description": "移除技能。"
+    },
+    {
+      "name": "rollback_skill",
+      "category": "Skills and Plugins",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要核准",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "將使用者 Skill 還原至最近封存的內容版本。"
     },
     {
       "name": "save_skill_draft",
@@ -1017,7 +1057,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "將 SKILL.md 文件另存為停用使用者技能草稿。"
+      "description": "將 SKILL.md 檔案另存為停用使用者技能草稿。"
     },
     {
       "name": "update_skill",
@@ -1025,7 +1065,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "更新技能註冊表中的現有技能文件。"
+      "description": "更新技能註冊表中的現有技能檔案。"
     }
   ]
 }
