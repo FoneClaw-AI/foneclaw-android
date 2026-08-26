@@ -921,7 +921,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Actualice un elemento TODO interno. Transiciones permitidas: abiertas a in_progress, bloqueadas o abandonadas; in_progress a bloqueado, hecho o abandonado; bloqueado para abrir o abandonado. Lo hecho y lo abandonado son terminales. Sólo una tarea puede ser in_progress."
+      "description": "Actualiza un elemento TODO interno. Transiciones permitidas: open a in_progress, blocked o abandoned; in_progress a blocked, done o abandoned; blocked a open o abandoned. done y abandoned son estados terminales. Solo una tarea puede estar en in_progress."
     },
     {
       "name": "workflow_delete",
@@ -945,7 +945,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Guarde un flujo de trabajo reutilizable. stepsJson debe ser una matriz JSON de {toolName, argumentos}."
+      "description": "Guarde un flujo de trabajo reutilizable. stepsJson debe ser una matriz JSON de {toolName, argument}."
     },
     {
       "name": "accept_skill_proposal",

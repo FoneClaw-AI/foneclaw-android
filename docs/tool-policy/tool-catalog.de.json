@@ -9,7 +9,7 @@
     "searchPlaceholder": "Tools oder Funktionen suchen",
     "allCategories": "Alle Kategorien",
     "publicBuiltInTools": "öffentlich verfügbare integrierte Tools",
-    "tool": "Tool",
+    "tool": "Werkzeug",
     "risk": "Risiko",
     "approval": "Genehmigung",
     "description": "Funktion"
@@ -193,7 +193,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Stellen Sie einen Android-Wecker ein. Erfassen Sie vor dem Anruf fehlende Zeit-/Wiederholungs-/Kennzeichnungsdetails."
+      "description": "Stellen Sie einen Android-Wecker ein. Erfassen Sie vor dem Aufruf dieses Tools fehlende Zeit-/Wiederholungs-/Kennzeichnungsdetails."
     },
     {
       "name": "bluetooth_connected_devices",
@@ -233,7 +233,7 @@
       "risk": "LOW",
       "approval": "Automatisch",
       "approvalCode": "AUTO",
-      "description": "Gibt den aktuellen Status des Bluetooth-Adapters zurück: „on“, „off“, „Turning_on“, „Turning_off“ oder „Unknown“. Technische Bezeichner: turning_on, turning_off."
+      "description": "Gibt den aktuellen Status des Bluetooth-Adapters zurück: „on“, „off“, „turning_on“, „Turning_off“ oder „Unknown“. Technische Bezeichner: turning_on, turning_off."
     },
     {
       "name": "close_bluetooth",
@@ -729,7 +729,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Erstellen Sie ein Android-Kalenderereignis. Sammeln Sie vor dem Anruf fehlende Zeit- und Erinnerungsdetails. Ein vom Benutzer bereitgestellter Ortsname ist ausreichend und sollte direkt als locationName übergeben werden. Suchen Sie nicht nach einer genauen Adresse oder Koordinaten, es sei denn, der Benutzer fordert ausdrücklich dazu auf, den Ort zu überprüfen, aufzulösen, auszuwählen oder dorthin zu navigieren. Bevorzugen Sie startLocalDateTime/endLocalDateTime in jjjj-MM-tt HH:mm für Benutzerdaten und relative Daten; Das Tool analysiert sie in der Zeitzone des Geräts. Erstellen Sie keine Ereignisse aus modellberechneten Epochen-Millisekunden. Verwenden Sie „calendarId=0“, es sei denn, der Benutzer hat explizit eine Kalender-ID ausgewählt. Verwenden Sie nach der Erstellung das Tool-Ergebnis „actualStart/actualEnd“ als benutzerseitige Erstellungszeit."
+      "description": "Erstellen Sie ein Android-Kalenderereignis. Sammeln Sie vor dem Aufruf dieses Tools fehlende Zeit- und Erinnerungsdetails. Ein vom Benutzer bereitgestellter Ortsname ist ausreichend und sollte direkt als locationName übergeben werden. Suchen Sie nicht nach einer genauen Adresse oder Koordinaten, es sei denn, der Benutzer fordert ausdrücklich dazu auf, den Ort zu überprüfen, aufzulösen, auszuwählen oder dorthin zu navigieren. Bevorzugen Sie startLocalDateTime/endLocalDateTime in jjjj-MM-tt HH:mm für Benutzerdaten und relative Daten; Das Tool analysiert sie in der Zeitzone des Geräts. Erstellen Sie keine Ereignisse aus modellberechneten Epochen-Millisekunden. Verwenden Sie „calendarId=0“, es sei denn, der Benutzer hat explizit eine Kalender-ID ausgewählt. Verwenden Sie nach der Erstellung das Tool-Ergebnis „actualStart/actualEnd“ als benutzerseitige Erstellungszeit."
     },
     {
       "name": "calendar_delete_event",
@@ -737,7 +737,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Löschen Sie ein Android-Kalenderereignis anhand der ID. Suchen/listen Sie Ereignisse in allen Kalendern mit CalendarId=0, es sei denn, der Benutzer hat explizit eine Kalender-ID ausgewählt. Übergeben Sie immer den bekannten Titel, startMillis, endMillis und den Ort, sofern bekannt, damit das Ziel eindeutig ist. Technische Bezeichner: calendarId=0."
+      "description": "Löschen Sie ein Android-Kalenderereignis anhand der ID. Suchen/listen Sie Ereignisse in allen Kalendern mit calendarId=0, es sei denn, der Benutzer hat explizit eine Kalender-ID ausgewählt. Übergeben Sie immer den bekannten Titel, startMillis, endMillis und den Ort, sofern bekannt, damit das Ziel eindeutig ist. Technische Bezeichner: calendarId=0."
     },
     {
       "name": "calendar_list_calendars",
@@ -745,7 +745,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Listen Sie beschreibbare Android-Kalender auf. Verwenden Sie diese Option, um dem Benutzer die Auswahl eines Kalenders zu ermöglichen. Gehen Sie nicht davon aus, dass CalendarId=1 der lokale oder Zielkalender ist. Technische Bezeichner: calendarId=1."
+      "description": "Listen Sie beschreibbare Android-Kalender auf. Verwenden Sie diese Option, um dem Benutzer die Auswahl eines Kalenders zu ermöglichen. Gehen Sie nicht davon aus, dass calendarId=1 der lokale oder Zielkalender ist. Technische Bezeichner: calendarId=1."
     },
     {
       "name": "calendar_list_events",
@@ -753,7 +753,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Listen Sie Android-Kalenderereignisse in einem konkreten Zeitraum auf. Verwenden Sie diese Option für Anfragen wie den heutigen Zeitplan, den morgigen Zeitplan, bestehende Veranstaltungen oder die Veranstaltungen dieser Woche. Bevorzugen Sie startLocalDateTime/endLocalDateTime in jjjj-MM-tt HH:mm; Das Tool analysiert sie in der Zeitzone des Geräts. Verwenden Sie startMillis/endMillis nur als veralteten Fallback, wenn genaue Epochenmillisekunden von einem vertrauenswürdigen Toolergebnis stammen. Kalender-ID nicht erraten; Verwenden Sie CalendarId=0, um alle Kalender zu durchsuchen, es sei denn, der Benutzer hat explizit eine Kalender-ID ausgewählt. Technische Bezeichner: calendarId, calendarId=0."
+      "description": "Listen Sie Android-Kalenderereignisse in einem konkreten Zeitraum auf. Verwenden Sie diese Option für Anfragen wie den heutigen Zeitplan, den morgigen Zeitplan, bestehende Veranstaltungen oder die Veranstaltungen dieser Woche. Bevorzugen Sie startLocalDateTime/endLocalDateTime in jjjj-MM-tt HH:mm; Das Tool analysiert sie in der Zeitzone des Geräts. Verwenden Sie startMillis/endMillis nur als veralteten Fallback, wenn genaue Epochenmillisekunden von einem vertrauenswürdigen Toolergebnis stammen. Kalender-ID nicht erraten; Verwenden Sie calendarId=0, um alle Kalender zu durchsuchen, es sei denn, der Benutzer hat explizit eine Kalender-ID ausgewählt. Technische Bezeichner: calendarId, calendarId=0."
     },
     {
       "name": "calendar_open_event",
@@ -769,7 +769,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Durchsuchen Sie Android-Kalenderereignisse nach Schlüsselwörtern in einem bestimmten Zeitraum. Verwenden Sie diese Option vor dem Öffnen, Aktualisieren oder Löschen eines Ereignisses, wenn der Benutzer das Ereignis anhand des Titels oder Inhalts beschreibt. Bevorzugen Sie startLocalDateTime/endLocalDateTime in jjjj-MM-tt HH:mm; Das Tool analysiert sie in der Zeitzone des Geräts. Verwenden Sie startMillis/endMillis nur als veralteten Fallback, wenn genaue Epochenmillisekunden von einem vertrauenswürdigen Toolergebnis stammen. Kalender-ID nicht erraten; Verwenden Sie CalendarId=0, um alle Kalender zu durchsuchen, es sei denn, der Benutzer hat explizit eine Kalender-ID ausgewählt. Technische Bezeichner: calendarId, calendarId=0."
+      "description": "Durchsuchen Sie Android-Kalenderereignisse nach Schlüsselwörtern in einem bestimmten Zeitraum. Verwenden Sie diese Option vor dem Öffnen, Aktualisieren oder Löschen eines Ereignisses, wenn der Benutzer das Ereignis anhand des Titels oder Inhalts beschreibt. Bevorzugen Sie startLocalDateTime/endLocalDateTime in jjjj-MM-tt HH:mm; Das Tool analysiert sie in der Zeitzone des Geräts. Verwenden Sie startMillis/endMillis nur als veralteten Fallback, wenn genaue Epochenmillisekunden von einem vertrauenswürdigen Toolergebnis stammen. Kalender-ID nicht erraten; Verwenden Sie calendarId=0, um alle Kalender zu durchsuchen, es sei denn, der Benutzer hat explizit eine Kalender-ID ausgewählt. Technische Bezeichner: calendarId, calendarId=0."
     },
     {
       "name": "calendar_update_event",
@@ -777,7 +777,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Aktualisieren Sie ein Android-Kalenderereignis anhand der ID. Suchen/listen Sie Ereignisse zuerst auf, wenn der Benutzer das Ziel in natürlicher Sprache beschreibt, und übergeben Sie bekannte Zieldetails mit den geänderten Feldern. Erraten Sie nicht die Kalender-ID oder die Ereignis-ID. Alle Kalender mit CalendarId=0 durchsuchen, es sei denn, der Benutzer hat explizit eine Kalender-ID ausgewählt. Leere Textfelder werden ignoriert. Verwenden Sie startMillis/endMillis=0, um bestehende Zeiten beizubehalten. Verwenden Sie „reminderMinutes=-2“, um Erinnerungen beizubehalten, „-1“, um Erinnerungen zu entfernen, und „>=0“, um Erinnerungen zu ersetzen. Technische Bezeichner: calendarId, calendarId=0."
+      "description": "Aktualisieren Sie ein Android-Kalenderereignis anhand der ID. Suchen/listen Sie Ereignisse zuerst auf, wenn der Benutzer das Ziel in natürlicher Sprache beschreibt, und übergeben Sie bekannte Zieldetails mit den geänderten Feldern. Erraten Sie nicht die Kalender-ID oder die Ereignis-ID. Alle Kalender mit calendarId=0 durchsuchen, es sei denn, der Benutzer hat explizit eine Kalender-ID ausgewählt. Leere Textfelder werden ignoriert. Verwenden Sie startMillis/endMillis=0, um bestehende Zeiten beizubehalten. Verwenden Sie „reminderMinutes=-2“, um Erinnerungen beizubehalten, „-1“, um Erinnerungen zu entfernen, und „>=0“, um Erinnerungen zu ersetzen. Technische Bezeichner: calendarId, calendarId=0."
     },
     {
       "name": "memo_create",
@@ -825,7 +825,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Aktualisieren Sie ein lokales Memo nach ID. Suchen/listen Sie Memos zuerst auf, wenn der Benutzer das Ziel in natürlicher Sprache beschreibt, und übergeben Sie bekannte Zieldetails mit den geänderten Feldern. Leere Titel/Inhalte/Tags werden ignoriert. ReminderAtMillis=-2 behält die Erinnerung bei, -1 löscht die Erinnerung und >0 legt die Erinnerung fest. Technische Bezeichner: reminderAtMillis=-2."
+      "description": "Aktualisieren Sie ein lokales Memo nach ID. Suchen/listen Sie Memos zuerst auf, wenn der Benutzer das Ziel in natürlicher Sprache beschreibt, und übergeben Sie bekannte Zieldetails mit den geänderten Feldern. Leere Titel/Inhalte/Tags werden ignoriert. reminderAtMillis=-2 behält die Erinnerung bei, -1 löscht die Erinnerung und >0 legt die Erinnerung fest. Technische Bezeichner: reminderAtMillis=-2."
     },
     {
       "name": "sysinfo_delete",
@@ -857,7 +857,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Laden Sie einen lokalen SysInfo-Thread mit einem ThreadKey, der von sysinfo_query zurückgegeben wird. Technische Bezeichner: threadKey."
+      "description": "Laden Sie einen lokalen SysInfo-Thread mit einem threadKey, der von sysinfo_query zurückgegeben wird. Technische Bezeichner: threadKey."
     },
     {
       "name": "shopping_compare",
@@ -921,7 +921,7 @@
       "risk": "LOW",
       "approval": "Automatisch",
       "approvalCode": "AUTO",
-      "description": "Aktualisieren Sie ein internes TODO-Element. Zulässige Übergänge: offen bis in_progress, blockiert oder abgebrochen; in_progress zu blockiert, erledigt oder abgebrochen; zum Öffnen blockiert oder aufgegeben. Fertig und aufgegeben sind unheilbar. Es darf nur eine Aufgabe in_progress sein."
+      "description": "Aktualisiert einen internen TODO-Eintrag. Zulässige Übergänge: open zu in_progress, blocked oder abandoned; in_progress zu blocked, done oder abandoned; blocked zu open oder abandoned. done und abandoned sind Endzustände. Es darf jeweils nur eine Aufgabe in_progress sein."
     },
     {
       "name": "workflow_delete",
@@ -945,7 +945,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Speichern Sie einen wiederverwendbaren Workflow. „stepsJson“ muss ein JSON-Array von {toolName, arguments} sein."
+      "description": "Speichern Sie einen wiederverwendbaren Workflow. „stepsJson“ muss ein JSON-Array von {toolName, argument} sein."
     },
     {
       "name": "accept_skill_proposal",

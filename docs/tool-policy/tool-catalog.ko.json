@@ -193,7 +193,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Android 시계 알람을 설정하세요. 전화하기 전에 누락된 시간/반복/라벨 세부정보를 수집하세요."
+      "description": "Android 시계 알람을 설정하세요. 이 도구를 호출하기 전에 누락된 시간/반복/라벨 세부정보를 수집하세요."
     },
     {
       "name": "bluetooth_connected_devices",
@@ -689,7 +689,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "최근 Android 통화 로그 항목을 나열하고 선택적으로 통화 유형별로 필터링합니다. READ_CALL_LOG 권한이 필요합니다. 부재중 전화 질문에 대해서는 type=missed를 사용하고 부재중 전화를 선택하여 다시 전화하기 전에 사용하세요. 번호를 선택한 후 phone_dial에 전화하세요."
+      "description": "최근 Android 통화 로그 항목을 나열하고 선택적으로 통화 유형별로 필터링합니다. READ_CALL_LOG 권한이 필요합니다. 부재중 전화 질문에 대해서는 type=missed를 사용하고 부재중 전화를 선택해 다시 걸기 전에 사용하세요. 번호를 선택한 후 phone_dial을 호출하세요."
     },
     {
       "name": "contacts_list",
@@ -729,7 +729,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Android 달력 이벤트를 만듭니다. 전화하기 전에 누락된 시간과 알림 세부정보를 수집하세요. 사용자가 제공한 장소 이름이면 충분하며 locationName로 직접 전달되어야 합니다. 사용자가 해당 장소에 대한 확인, 확인, 선택 또는 탐색을 명시적으로 요청하지 않는 한 정확한 주소나 좌표를 검색하지 마세요. 사용자 날짜 및 상대 날짜의 경우 yyyy-MM-dd HH:mm의 startLocalDateTime/endLocalDateTime를 선호합니다. 도구는 장치 시간대로 구문 분석합니다. 모델이 계산한 에포크 밀리초에서 이벤트를 생성하지 마십시오. 사용자가 캘린더 ID를 명시적으로 선택하지 않는 한 calendarId=0를 사용하세요. 생성 후 도구 결과 actualStart/actualEnd를 사용자에게 표시되는 생성 시간으로 사용합니다."
+      "description": "Android 달력 이벤트를 만듭니다. 이 도구를 호출하기 전에 누락된 시간과 알림 세부정보를 수집하세요. 사용자가 제공한 장소 이름이면 충분하며 locationName로 직접 전달되어야 합니다. 사용자가 해당 장소에 대한 확인, 확인, 선택 또는 탐색을 명시적으로 요청하지 않는 한 정확한 주소나 좌표를 검색하지 마세요. 사용자 날짜 및 상대 날짜의 경우 yyyy-MM-dd HH:mm의 startLocalDateTime/endLocalDateTime를 선호합니다. 도구는 장치 시간대로 구문 분석합니다. 모델이 계산한 에포크 밀리초에서 이벤트를 생성하지 마십시오. 사용자가 캘린더 ID를 명시적으로 선택하지 않는 한 calendarId=0를 사용하세요. 생성 후 도구 결과 actualStart/actualEnd를 사용자에게 표시되는 생성 시간으로 사용합니다."
     },
     {
       "name": "calendar_delete_event",
@@ -921,7 +921,7 @@
       "risk": "LOW",
       "approval": "자동",
       "approvalCode": "AUTO",
-      "description": "하나의 내부 TODO 항목을 업데이트합니다. 허용된 전환: in_progress로 열기, 차단 또는 포기됨; in_progress 차단, 완료 또는 포기됨; 개봉이 차단되거나 버려졌습니다. 완료되고 버려진 것은 터미널입니다. 하나의 작업만 in_progress일 수 있습니다."
+      "description": "내부 TODO 항목 하나를 업데이트합니다. 허용되는 상태 전환은 open에서 in_progress, blocked 또는 abandoned로, in_progress에서 blocked, done 또는 abandoned로, blocked에서 open 또는 abandoned로입니다. done과 abandoned는 최종 상태입니다. 동시에 in_progress 상태인 작업은 하나만 가능합니다."
     },
     {
       "name": "workflow_delete",
@@ -945,7 +945,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "재사용 가능한 워크플로를 저장합니다. stepsJson은 {toolName, 인수}의 JSON 배열이어야 합니다."
+      "description": "재사용 가능한 워크플로를 저장합니다. stepsJson은 {toolName, argument}의 JSON 배열이어야 합니다."
     },
     {
       "name": "accept_skill_proposal",

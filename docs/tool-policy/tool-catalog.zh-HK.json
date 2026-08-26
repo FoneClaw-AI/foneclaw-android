@@ -193,7 +193,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要審批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "設定Android時鐘鬧鐘。在致電之前收集遺失的時間/重複/標籤詳細資訊。"
+      "description": "設定Android時鐘鬧鐘。在呼叫此工具前收集缺少的時間資料/重複/標籤詳細資訊。"
     },
     {
       "name": "bluetooth_connected_devices",
@@ -377,7 +377,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "檢查 FoneClaw 本身的所有目前權限和特殊存取功能。當使用者詢問哪些 FoneClaw 權限已啟用、缺失、受限或可用時，請使用此選項。這是一個新的唯讀檢查；不要使用應用程式審核、通知面板或螢幕閱讀工具作為替代。"
+      "description": "檢查 FoneClaw 本身的所有目前權限和特殊存取功能。當使用者詢問哪些 FoneClaw 權限已啟用、缺失、受限或可用時，請使用此選項。這是一次即時執行的唯讀檢查；不要使用應用程式審核、通知面板或螢幕閱讀工具作為替代。"
     },
     {
       "name": "open_bluetooth",
@@ -705,7 +705,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "需要審批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "開啟系統撥號器僅尋找一個電話號碼或指定聯絡人。準確設定 phoneNumber 和 contactName 之一。指定聯絡人必須解析為一場匹配；如果多個聯絡人匹配，則停止並要求使用者選擇。撥號器開啟後，呼叫 get_screen_info，識別可見的呼叫按鈕，然後呼叫 tap_node。"
+      "description": "開啟系統撥號器僅針對一個電話號碼或指定聯絡人。準確設定 phoneNumber 和 contactName 之一。指定聯絡人必須只配對一個結果；如果多個聯絡人匹配，則停止並要求使用者選擇。撥號器開啟後，呼叫 get_screen_info，識別可見的呼叫按鈕，然後呼叫 tap_node。"
     },
     {
       "name": "send_to_sms_message",
@@ -729,7 +729,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "需要審批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "建立 Android 日曆事件。在致電之前收集錯過的時間和提醒詳細資訊。使用者提供的地名就足夠了，應該直接作為 locationName 傳遞。除非使用者明確要求驗證、解決、選擇或導航到該地點，否則不要搜尋確切的地址或座標。對於使用者日期和相對日期，首選 yyyy-MM-dd HH:mm 中的 startLocalDateTime/endLocalDateTime；該工具將在裝置時區中解析它們。不要根據模型計算的紀元毫秒創建事件。除非使用者明確選擇了日曆 ID，否則請使用 calendarId=0。建立完成後，使用工具結果actualStart/actualEnd作為使用者導向的建立時間。"
+      "description": "建立 Android 日曆事件。在呼叫此工具前收集缺少的時間資料和提醒詳細資訊。使用者提供的地名就足夠了，應該直接作為 locationName 傳遞。除非使用者明確要求驗證、解決、選擇或導航到該地點，否則不要搜尋確切的地址或座標。對於使用者日期和相對日期，首選 yyyy-MM-dd HH:mm 中的 startLocalDateTime/endLocalDateTime；該工具將在裝置時區中解析它們。不要根據模型計算的紀元毫秒創建事件。除非使用者明確選擇了日曆 ID，否則請使用 calendarId=0。建立完成後，使用工具結果actualStart/actualEnd作為使用者導向的建立時間。"
     },
     {
       "name": "calendar_delete_event",
@@ -921,7 +921,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "更新一項內部 TODO 專案。允許的轉換：開放到in_progress、阻止或放棄； in_progress 阻止、完成或放棄；被阻止打開或被放棄。完成和放棄都是終點。只有一項任務可能是in_progress。"
+      "description": "更新一個內部 TODO 項目。允許的狀態轉換：open 可轉為 in_progress、blocked 或 abandoned；in_progress 可轉為 blocked、done 或 abandoned；blocked 可轉為 open 或 abandoned。done 和 abandoned 是終態。同一時間只能有一個工作處於 in_progress。"
     },
     {
       "name": "workflow_delete",
@@ -969,7 +969,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要審批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "停用使用者技能，使其在客服提示中隱藏。"
+      "description": "停用使用者 Skill，使其不再出現在 Agent 提示中。"
     },
     {
       "name": "enable_skill",
@@ -977,7 +977,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要審批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "啟用有效的使用者技能，以便客服人員可以使用它。"
+      "description": "啟用有效的使用者 Skill，讓 Agent 可以使用。"
     },
     {
       "name": "list_skill_proposals",

@@ -169,7 +169,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "FoneClaw アクセシビリティ サービスを使用して Android 画面をキャプチャし。キャプチャ画像は Agent が使用するアプリ専用キャッシュに保持され、システムのギャラリーには追加されません。現在の画面には targetType=current を使用し、アプリを開いてキャプチャするには targetType=app と targetApp を使用します。または、表示される通知シェードを含む明示的なスクリーンショットまたは画像キャプチャ リクエストの場合にのみ targetType=notification_shade を使用します。通知データの読み取り、リスト、クエリ、または要約には targetType=notification_shade を決して使用しないでください。代わりに SysInfo 通知ツールを使用してください。アプリまたは通知シェードのキャプチャのために、このツールの前に launch_app または system_panel_open を呼び出さないでください。ユーザーが既に保存されているスクリーンショットを表示したい場合には、これを使用しないでください。保存されたスクリーンショットを表示するには、screenshot_open を使用します。"
+      "description": "FoneClaw アクセシビリティ サービスを使用して Android 画面をキャプチャします。キャプチャ画像は Agent が使用するアプリ専用キャッシュに保持され、システムのギャラリーには追加されません。現在の画面には targetType=current を使用し、アプリを開いてキャプチャするには targetType=app と targetApp を使用します。または、表示される通知シェードを含む明示的なスクリーンショットまたは画像キャプチャ リクエストの場合にのみ targetType=notification_shade を使用します。通知データの読み取り、リスト、クエリ、または要約には targetType=notification_shade を決して使用しないでください。代わりに SysInfo 通知ツールを使用してください。アプリまたは通知シェードのキャプチャのために、このツールの前に launch_app または system_panel_open を呼び出さないでください。ユーザーが既に保存されているスクリーンショットを表示したい場合には、これを使用しないでください。保存されたスクリーンショットを表示するには、screenshot_open を使用します。"
     },
     {
       "name": "tap_node",
@@ -193,7 +193,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Android 時計アラームを設定します。電話をかける前に、不足している時間/リピート/ラベルの詳細を収集します。"
+      "description": "Android 時計アラームを設定します。このツールを呼び出す前に、不足している時間/リピート/ラベルの詳細を収集します。"
     },
     {
       "name": "bluetooth_connected_devices",
@@ -729,7 +729,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Android カレンダー イベントを作成します。電話をかける前に、不在時間とリマインダーの詳細を収集します。ユーザーが指定した場所名で十分なので、locationName として直接渡す必要があります。ユーザーがその場所を確認、解決、選択、または移動することを明示的に要求しない限り、正確な住所や座標を検索しないでください。ユーザー日付と相対日付には、yyyy-MM-dd HH:mm の startLocalDateTime/endLocalDateTime を優先します。ツールはデバイスのタイムゾーンでそれらを解析します。モデルが計算したエポックミリ秒からイベントを作成しないでください。ユーザーがカレンダー ID を明示的に選択しない限り、calendarId=0 を使用します。作成後、ツールの結果 actualStart/actualEnd をユーザー側の作成時刻として使用します。"
+      "description": "Android カレンダー イベントを作成します。このツールを呼び出す前に、不足している時刻情報とリマインダーの詳細を収集します。ユーザーが指定した場所名で十分なので、locationName として直接渡す必要があります。ユーザーがその場所を確認、解決、選択、または移動することを明示的に要求しない限り、正確な住所や座標を検索しないでください。ユーザー日付と相対日付には、yyyy-MM-dd HH:mm の startLocalDateTime/endLocalDateTime を優先します。ツールはデバイスのタイムゾーンでそれらを解析します。モデルが計算したエポックミリ秒からイベントを作成しないでください。ユーザーがカレンダー ID を明示的に選択しない限り、calendarId=0 を使用します。作成後、ツールの結果 actualStart/actualEnd をユーザー側の作成時刻として使用します。"
     },
     {
       "name": "calendar_delete_event",
@@ -921,7 +921,7 @@
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "内部 TODO 項目を 1 つ更新します。許可された遷移: in_progress に対してオープン、ブロック、または放棄。 in_progress はブロック、完了、または放棄されます。開けられないようにブロックされているか、放棄されています。完了と放棄は末期です。 in_progress にできるタスクは 1 つだけです。"
+      "description": "内部 TODO 項目を 1 件更新します。許可される状態遷移は、open から in_progress、blocked、abandoned、in_progress から blocked、done、abandoned、blocked から open または abandoned です。done と abandoned は最終状態です。in_progress にできるタスクは同時に 1 件だけです。"
     },
     {
       "name": "workflow_delete",

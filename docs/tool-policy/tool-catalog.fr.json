@@ -193,7 +193,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Réglez une alarme d'horloge Android. Recueillez les détails de temps/répétition/étiquette manquants avant d'appeler."
+      "description": "Réglez une alarme d'horloge Android. Recueillez les détails de temps/répétition/étiquette manquants avant d'appeler cet outil."
     },
     {
       "name": "bluetooth_connected_devices",
@@ -729,7 +729,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Créez un événement de calendrier Android. Collectez l’heure manquante et les détails des rappels avant d’appeler. Un nom de lieu fourni par l'utilisateur est suffisant et doit être transmis directement en tant que locationName. Ne recherchez pas une adresse ou des coordonnées exactes à moins que l'utilisateur ne demande explicitement de vérifier, résoudre, choisir ou naviguer vers le lieu. Préférez startLocalDateTime/endLocalDateTime en aaaa-MM-jj HH:mm pour les dates utilisateur et les dates relatives ; l'outil les analysera dans le fuseau horaire de l'appareil. Ne créez pas d'événements à partir des millisecondes d'époque calculées par le modèle. Utilisez CalendarId=0 sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier. Après la création, utilisez le résultat de l'outil actualStart/actualEnd comme heure de création destinée à l'utilisateur. Identifiants techniques: calendarId=0."
+      "description": "Créez un événement de calendrier Android. Collectez l’heure manquante et les détails des rappels avant d’appeler cet outil. Un nom de lieu fourni par l'utilisateur est suffisant et doit être transmis directement en tant que locationName. Ne recherchez pas une adresse ou des coordonnées exactes à moins que l'utilisateur ne demande explicitement de vérifier, résoudre, choisir ou naviguer vers le lieu. Préférez startLocalDateTime/endLocalDateTime en aaaa-MM-jj HH:mm pour les dates utilisateur et les dates relatives ; l'outil les analysera dans le fuseau horaire de l'appareil. Ne créez pas d'événements à partir des millisecondes d'époque calculées par le modèle. Utilisez calendarId=0 sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier. Après la création, utilisez le résultat de l'outil actualStart/actualEnd comme heure de création destinée à l'utilisateur. Identifiants techniques: calendarId=0."
     },
     {
       "name": "calendar_delete_event",
@@ -737,7 +737,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Supprimez un événement du calendrier Android par identifiant. Recherchez/répertoriez les événements dans tous les calendriers avec CalendarId=0, sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier. Transmettez toujours le titre connu, startMillis, endMillis et l'emplacement lorsqu'ils sont connus afin que la cible soit sans ambiguïté. Identifiants techniques: calendarId=0."
+      "description": "Supprimez un événement du calendrier Android par identifiant. Recherchez/répertoriez les événements dans tous les calendriers avec calendarId=0, sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier. Transmettez toujours le titre connu, startMillis, endMillis et l'emplacement lorsqu'ils sont connus afin que la cible soit sans ambiguïté. Identifiants techniques: calendarId=0."
     },
     {
       "name": "calendar_list_calendars",
@@ -745,7 +745,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Répertoriez les calendriers Android inscriptibles. Utilisez-le pour permettre à l'utilisateur de choisir un calendrier ; ne supposez pas que CalendarId=1 est le calendrier local ou cible. Identifiants techniques: calendarId=1."
+      "description": "Répertoriez les calendriers Android inscriptibles. Utilisez-le pour permettre à l'utilisateur de choisir un calendrier ; ne supposez pas que calendarId=1 est le calendrier local ou cible. Identifiants techniques: calendarId=1."
     },
     {
       "name": "calendar_list_events",
@@ -753,7 +753,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Répertoriez les événements du calendrier Android dans une plage horaire concrète. À utiliser pour les demandes telles que le programme d'aujourd'hui, le programme de demain, les événements existants ou les événements de cette semaine. Préférez startLocalDateTime/endLocalDateTime en aaaa-MM-jj HH:mm ; l'outil les analysera dans le fuseau horaire de l'appareil. Utilisez startMillis/endMillis uniquement comme solution de secours obsolète lorsque les millisecondes d'époque exacte proviennent d'un résultat d'outil fiable. Ne devinez pas CalendarId ; utilisez CalendarId=0 pour rechercher tous les calendriers, sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier. Identifiants techniques: calendarId, calendarId=0."
+      "description": "Répertoriez les événements du calendrier Android dans une plage horaire concrète. À utiliser pour les demandes telles que le programme d'aujourd'hui, le programme de demain, les événements existants ou les événements de cette semaine. Préférez startLocalDateTime/endLocalDateTime en aaaa-MM-jj HH:mm ; l'outil les analysera dans le fuseau horaire de l'appareil. Utilisez startMillis/endMillis uniquement comme solution de secours obsolète lorsque les millisecondes d'époque exacte proviennent d'un résultat d'outil fiable. Ne devinez pas calendarId ; utilisez calendarId=0 pour rechercher tous les calendriers, sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier. Identifiants techniques: calendarId, calendarId=0."
     },
     {
       "name": "calendar_open_event",
@@ -769,7 +769,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Recherchez les événements du calendrier Android par mot-clé dans une plage horaire concrète. À utiliser avant d'ouvrir, de mettre à jour ou de supprimer un événement lorsque l'utilisateur décrit l'événement par son titre ou son contenu. Préférez startLocalDateTime/endLocalDateTime en aaaa-MM-jj HH:mm ; l'outil les analysera dans le fuseau horaire de l'appareil. Utilisez startMillis/endMillis uniquement comme solution de secours obsolète lorsque les millisecondes d'époque exacte proviennent d'un résultat d'outil fiable. Ne devinez pas CalendarId ; utilisez CalendarId=0 pour rechercher tous les calendriers, sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier. Identifiants techniques: calendarId, calendarId=0."
+      "description": "Recherchez les événements du calendrier Android par mot-clé dans une plage horaire concrète. À utiliser avant d'ouvrir, de mettre à jour ou de supprimer un événement lorsque l'utilisateur décrit l'événement par son titre ou son contenu. Préférez startLocalDateTime/endLocalDateTime en aaaa-MM-jj HH:mm ; l'outil les analysera dans le fuseau horaire de l'appareil. Utilisez startMillis/endMillis uniquement comme solution de secours obsolète lorsque les millisecondes d'époque exacte proviennent d'un résultat d'outil fiable. Ne devinez pas calendarId ; utilisez calendarId=0 pour rechercher tous les calendriers, sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier. Identifiants techniques: calendarId, calendarId=0."
     },
     {
       "name": "calendar_update_event",
@@ -777,7 +777,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Mettez à jour un événement du calendrier Android par identifiant. Recherchez/répertoriez d'abord les événements lorsque l'utilisateur décrit la cible en langage naturel et transmettez les détails de la cible connue avec les champs modifiés. Ne devinez pas l'identifiant du calendrier ou de l'événement ; recherchez tous les calendriers avec CalendarId = 0, sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier. Les champs de texte vides sont ignorés. Utilisez startMillis/endMillis=0 pour conserver les heures existantes. Utilisez rappelMinutes=-2 pour conserver les rappels, -1 pour supprimer des rappels et >=0 pour remplacer les rappels. Identifiants techniques: calendarId, calendarId=0, reminderMinutes=-2."
+      "description": "Mettez à jour un événement du calendrier Android par identifiant. Recherchez/répertoriez d'abord les événements lorsque l'utilisateur décrit la cible en langage naturel et transmettez les détails de la cible connue avec les champs modifiés. Ne devinez pas l'identifiant du calendrier ou de l'événement ; recherchez tous les calendriers avec calendarId = 0, sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier. Les champs de texte vides sont ignorés. Utilisez startMillis/endMillis=0 pour conserver les heures existantes. Utilisez rappelMinutes=-2 pour conserver les rappels, -1 pour supprimer des rappels et >=0 pour remplacer les rappels. Identifiants techniques: calendarId, calendarId=0, reminderMinutes=-2."
     },
     {
       "name": "memo_create",
@@ -921,7 +921,7 @@
       "risk": "LOW",
       "approval": "Automatique",
       "approvalCode": "AUTO",
-      "description": "Mettez à jour un élément TODO interne. Transitions autorisées : ouvertes à in_progress, bloquées ou abandonnées ; in_progress à bloqué, terminé ou abandonné ; bloqué pour ouvrir ou abandonné. Terminé et abandonné sont terminaux. Une seule tâche peut être en cours."
+      "description": "Met à jour un élément TODO interne. Transitions autorisées : open vers in_progress, blocked ou abandoned ; in_progress vers blocked, done ou abandoned ; blocked vers open ou abandoned. done et abandoned sont des états finaux. Une seule tâche peut être en in_progress."
     },
     {
       "name": "workflow_delete",
@@ -945,7 +945,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Enregistrez un flux de travail réutilisable. stepsJson doit être un tableau JSON de {toolName, arguments}."
+      "description": "Enregistrez un flux de travail réutilisable. stepsJson doit être un tableau JSON de {toolName, argument}."
     },
     {
       "name": "accept_skill_proposal",

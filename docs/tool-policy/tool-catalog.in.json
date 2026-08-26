@@ -193,7 +193,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Setel alarm Jam Android. Kumpulkan detail waktu/pengulangan/label yang hilang sebelum menelepon."
+      "description": "Setel alarm Jam Android. Kumpulkan detail waktu/pengulangan/label yang hilang sebelum memanggil alat ini."
     },
     {
       "name": "bluetooth_connected_devices",
@@ -641,7 +641,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Daftar akun email yang dikonfigurasi. Biarkan kueri kosong untuk mencantumkan semua akun. Ketika kueri diberikan, prioritas pencocokan adalah id akun, email, alias, lalu alias fuzzy atau email. Pencocokan persis masih dapat menghasilkan banyak akun. Jika tidak ada akun email FoneClaw yang dikonfigurasi dan kuerinya adalah alamat email, hasilnya mungkin menyertakan ProviderSetupGuide dengan URL kredensial penyedia tetap. Pengenal teknis: providerSetupGuide."
+      "description": "Daftar akun email yang dikonfigurasi. Biarkan kueri kosong untuk mencantumkan semua akun. Ketika kueri diberikan, prioritas pencocokan adalah id akun, email, alias, lalu alias fuzzy atau email. Pencocokan persis masih dapat menghasilkan banyak akun. Jika tidak ada akun email FoneClaw yang dikonfigurasi dan kuerinya adalah alamat email, hasilnya mungkin menyertakan providerSetupGuide dengan URL kredensial penyedia tetap. Pengenal teknis: providerSetupGuide."
     },
     {
       "name": "mail_account_save",
@@ -729,7 +729,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Buat acara kalender Android. Kumpulkan waktu yang hilang dan detail pengingat sebelum menelepon. Nama tempat yang disediakan pengguna sudah cukup dan harus diteruskan langsung sebagai locationName. Jangan menelusuri alamat atau koordinat yang tepat kecuali pengguna secara eksplisit meminta untuk memverifikasi, menyelesaikan, memilih, atau menavigasi ke tempat tersebut. Lebih suka startLocalDateTime/endLocalDateTime dalam yyyy-MM-dd HH:mm untuk tanggal pengguna dan tanggal relatif; alat ini akan menguraikannya dalam zona waktu perangkat. Jangan membuat peristiwa dari epoch milidetik yang dihitung model. Gunakan kalenderId=0 kecuali pengguna secara eksplisit memilih id kalender. Setelah pembuatan, gunakan hasil alat aktualStart/actualEnd sebagai waktu pembuatan yang dapat dilihat pengguna. Pengenal teknis: calendarId=0, actualStart."
+      "description": "Buat acara kalender Android. Kumpulkan detail waktu yang belum ada dan detail pengingat sebelum memanggil alat ini. Nama tempat yang disediakan pengguna sudah cukup dan harus diteruskan langsung sebagai locationName. Jangan menelusuri alamat atau koordinat yang tepat kecuali pengguna secara eksplisit meminta untuk memverifikasi, menyelesaikan, memilih, atau menavigasi ke tempat tersebut. Lebih suka startLocalDateTime/endLocalDateTime dalam yyyy-MM-dd HH:mm untuk tanggal pengguna dan tanggal relatif; alat ini akan menguraikannya dalam zona waktu perangkat. Jangan membuat peristiwa dari epoch milidetik yang dihitung model. Gunakan kalenderId=0 kecuali pengguna secara eksplisit memilih id kalender. Setelah pembuatan, gunakan hasil alat aktualStart/actualEnd sebagai waktu pembuatan yang dapat dilihat pengguna. Pengenal teknis: calendarId=0, actualStart."
     },
     {
       "name": "calendar_delete_event",
@@ -737,7 +737,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Hapus acara kalender Android berdasarkan id. Telusuri/daftar acara di semua kalender dengan CalendarId=0 kecuali pengguna secara eksplisit memilih id kalender. Selalu berikan judul, startMillis, endMillis, dan lokasi yang diketahui jika diketahui sehingga targetnya tidak ambigu. Pengenal teknis: calendarId=0."
+      "description": "Hapus acara kalender Android berdasarkan id. Telusuri/daftar acara di semua kalender dengan calendarId=0 kecuali pengguna secara eksplisit memilih id kalender. Selalu berikan judul, startMillis, endMillis, dan lokasi yang diketahui jika diketahui sehingga targetnya tidak ambigu. Pengenal teknis: calendarId=0."
     },
     {
       "name": "calendar_list_calendars",
@@ -777,7 +777,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Perbarui acara kalender Android berdasarkan id. Cari/daftar peristiwa terlebih dahulu ketika pengguna mendeskripsikan target dalam bahasa alami, dan meneruskan detail target yang diketahui dengan bidang yang diubah. Jangan menebak Id kalender atau id acara; telusuri semua kalender dengan CalendarId=0 kecuali pengguna secara eksplisit memilih id kalender. Bidang teks kosong diabaikan. Gunakan startMillis/endMillis=0 untuk menyimpan waktu yang ada. Gunakan pengingatMinutes=-2 untuk menyimpan pengingat, -1 untuk menghapus pengingat, dan >=0 untuk mengganti pengingat. Pengenal teknis: calendarId, calendarId=0, reminderMinutes=-2."
+      "description": "Perbarui acara kalender Android berdasarkan id. Cari/daftar peristiwa terlebih dahulu ketika pengguna mendeskripsikan target dalam bahasa alami, dan meneruskan detail target yang diketahui dengan bidang yang diubah. Jangan menebak Id kalender atau id acara; telusuri semua kalender dengan calendarId=0 kecuali pengguna secara eksplisit memilih id kalender. Bidang teks kosong diabaikan. Gunakan startMillis/endMillis=0 untuk menyimpan waktu yang ada. Gunakan reminderMinutes=-2 untuk menyimpan pengingat, -1 untuk menghapus pengingat, dan >=0 untuk mengganti pengingat. Pengenal teknis: calendarId, calendarId=0, reminderMinutes=-2."
     },
     {
       "name": "memo_create",
@@ -921,7 +921,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Perbarui satu item TODO internal. Transisi yang diperbolehkan: terbuka untuk in_progress, diblokir, atau ditinggalkan; in_progress ke diblokir, selesai, atau ditinggalkan; diblokir untuk dibuka atau ditinggalkan. Selesai dan ditinggalkan adalah terminal. Hanya satu tugas yang mungkin sedang_berproses."
+      "description": "Memperbarui satu item TODO internal. Transisi yang diizinkan: open ke in_progress, blocked, atau abandoned; in_progress ke blocked, done, atau abandoned; blocked ke open atau abandoned. done dan abandoned adalah status akhir. Hanya satu tugas yang boleh berstatus in_progress."
     },
     {
       "name": "workflow_delete",

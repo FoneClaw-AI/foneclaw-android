@@ -8,6 +8,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.1.7] - 2026-08-26
+
+### Added
+- Persistent Information Inbox for notifications, SMS, call logs, calendar events, and mail
+- Complete Memo management with search, editing, status switching, and multi-select deletion
+- FoneClaw Plus entitlement and iCart purchase flows with pending-upgrade recovery
+
+### Changed
+- Improved Home, floating assistant, recordings, shortcuts, Markdown rendering, and dark-theme consistency
+- Separated member endpoints by build type and aligned bootstrap-based capability access
+- Improved SysInfo persistence and collection reliability across supported sources
+- Hardened deterministic release metadata, artifact verification, remote checks, and rollback planning
+
+### Fixed
+- Notification icon rendering, reply copy actions, image attachment resolution, approval interactions, recording cleanup, and ASR behavior
+
+### Scope
+- Google and Lebest production OSS metadata are not part of this FoneClaw release
+
 ## [v0.1.6] - 2026-08-21
 
 ### Added
