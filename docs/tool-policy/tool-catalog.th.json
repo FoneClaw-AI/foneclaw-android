@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "th",
   "fallbackLocale": "en",
-  "toolCount": 123,
+  "toolCount": 124,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "ค้นหาเครื่องมือหรือความสามารถ",
@@ -49,7 +49,7 @@
     {
       "name": "Communication and Contacts",
       "displayName": "การสื่อสารและรายชื่อติดต่อ",
-      "toolCount": 5
+      "toolCount": 6
     },
     {
       "name": "Calendar",
@@ -690,6 +690,14 @@
       "approval": "ต้องขออนุมัติ",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "แสดงรายการบันทึกการโทร Android ล่าสุด สามารถเลือกกรองตามประเภทการโทร ต้องได้รับอนุญาต READ_CALL_LOG ใช้ type=missed สำหรับคำถามสายที่ไม่ได้รับ และก่อนเลือกสายที่ไม่ได้รับเพื่อโทรกลับ หลังจากเลือกหมายเลขแล้ว ให้โทรไปที่ phone_dial"
+    },
+    {
+      "name": "contacts_create",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "ต้องขออนุมัติ",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "สร้างรายชื่อติดต่อ Android ภายในเครื่องหนึ่งรายการโดยตรงผ่าน Contacts Provider โดยไม่เปิดแอปรายชื่อติดต่อ ต้องมีสิทธิ์ READ_CONTACTS และ WRITE_CONTACTS ตั้งค่า displayName และอย่างน้อยหนึ่งรายการระหว่าง phoneNumber หรือ emailAddress หากมีหมายเลขโทรศัพท์หรือที่อยู่อีเมลที่ตรงกันอยู่แล้ว จะไม่สร้างรายชื่อติดต่อซ้ำ"
     },
     {
       "name": "contacts_list",

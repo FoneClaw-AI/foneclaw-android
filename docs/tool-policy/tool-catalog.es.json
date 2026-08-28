@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "es",
   "fallbackLocale": "en",
-  "toolCount": 123,
+  "toolCount": 124,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Buscar herramientas o funciones",
@@ -49,7 +49,7 @@
     {
       "name": "Communication and Contacts",
       "displayName": "Comunicación y contactos",
-      "toolCount": 5
+      "toolCount": 6
     },
     {
       "name": "Calendar",
@@ -690,6 +690,14 @@
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Muestra las entradas recientes del registro de llamadas Android, opcionalmente filtradas por tipo de llamada. Requiere permiso READ_CALL_LOG. Utilice type=missed para preguntas sobre llamadas perdidas y antes de seleccionar una llamada perdida para devolver la llamada. Después de seleccionar un número, llama a phone_dial."
+    },
+    {
+      "name": "contacts_create",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Requiere aprobación",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Crea un contacto Android local del dispositivo directamente mediante Contacts Provider sin abrir la aplicación Contactos. Requiere los permisos READ_CONTACTS y WRITE_CONTACTS. Establece displayName y al menos uno de phoneNumber o emailAddress. Si ya existe exactamente el mismo número de teléfono o correo electrónico, no crea un duplicado."
     },
     {
       "name": "contacts_list",

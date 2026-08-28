@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "ko",
   "fallbackLocale": "en",
-  "toolCount": 123,
+  "toolCount": 124,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "도구 또는 기능 검색",
@@ -49,7 +49,7 @@
     {
       "name": "Communication and Contacts",
       "displayName": "통신 및 연락처",
-      "toolCount": 5
+      "toolCount": 6
     },
     {
       "name": "Calendar",
@@ -690,6 +690,14 @@
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "최근 Android 통화 로그 항목을 나열하고 선택적으로 통화 유형별로 필터링합니다. READ_CALL_LOG 권한이 필요합니다. 부재중 전화 질문에 대해서는 type=missed를 사용하고 부재중 전화를 선택해 다시 걸기 전에 사용하세요. 번호를 선택한 후 phone_dial을 호출하세요."
+    },
+    {
+      "name": "contacts_create",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "연락처 앱을 열지 않고 Contacts Provider를 통해 기기 로컬 Android 연락처 한 개를 직접 만듭니다. READ_CONTACTS 및 WRITE_CONTACTS 권한이 필요합니다. displayName을 설정하고 phoneNumber 또는 emailAddress 중 하나 이상을 설정하세요. 정확히 같은 전화번호나 이메일 주소가 이미 있으면 중복 연락처를 만들지 않습니다."
     },
     {
       "name": "contacts_list",

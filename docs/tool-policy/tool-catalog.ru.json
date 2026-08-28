@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "ru",
   "fallbackLocale": "en",
-  "toolCount": 123,
+  "toolCount": 124,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Поиск инструментов и возможностей",
@@ -49,7 +49,7 @@
     {
       "name": "Communication and Contacts",
       "displayName": "Связь и контакты",
-      "toolCount": 5
+      "toolCount": 6
     },
     {
       "name": "Calendar",
@@ -690,6 +690,14 @@
       "approval": "Требуется подтверждение",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Список последних записей журнала вызовов Android, при необходимости отфильтрованных по типу вызова. Требуется разрешение READ_CALL_LOG. Используйте type=missed для вопросов о пропущенных звонках и перед выбором пропущенного звонка для обратного звонка. После выбора номера позвоните в phone_dial."
+    },
+    {
+      "name": "contacts_create",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Требуется подтверждение",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Создает один локальный контакт Android напрямую через Contacts Provider, не открывая приложение «Контакты». Требуются разрешения READ_CONTACTS и WRITE_CONTACTS. Укажите displayName и хотя бы одно из полей phoneNumber или emailAddress. Если точно такой же номер телефона или адрес электронной почты уже существует, дубликат не создается."
     },
     {
       "name": "contacts_list",

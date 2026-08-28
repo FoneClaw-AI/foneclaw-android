@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "zh-CN",
   "fallbackLocale": "en",
-  "toolCount": 123,
+  "toolCount": 124,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "搜索工具或能力",
@@ -49,7 +49,7 @@
     {
       "name": "Communication and Contacts",
       "displayName": "通信与联系人",
-      "toolCount": 5
+      "toolCount": 6
     },
     {
       "name": "Calendar",
@@ -690,6 +690,14 @@
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "列出最近的 Android 呼叫日志条目，可以选择按呼叫类型进行过滤。需要 READ_CALL_LOG 权限。对于未接来电问题以及选择未接来电进行回拨之前，请使用 type=missed。选择号码后，拨打phone_dial。"
+    },
+    {
+      "name": "contacts_create",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "通过 Contacts Provider 直接创建一个设备本地 Android 联系人，不打开联系人应用。需要 READ_CONTACTS 和 WRITE_CONTACTS 权限。设置 displayName，并至少设置 phoneNumber 或 emailAddress 之一。如果已存在完全相同的电话号码或邮箱地址，则不创建重复联系人。"
     },
     {
       "name": "contacts_list",

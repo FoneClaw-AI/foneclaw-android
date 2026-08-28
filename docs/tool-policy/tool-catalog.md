@@ -7,7 +7,7 @@ For safety behavior, see [Tool Policy System](overview.md).
 
 ## Catalog Summary
 
-- Public tools: **123**
+- Public tools: **124**
 - Categories: **11**
 
 ## How to Use This Catalog
@@ -128,6 +128,7 @@ For safety behavior, see [Tool Policy System](overview.md).
 | Tool | Risk | Approval | What it does |
 |---|---|---|---|
 | `call_log_list` | SENSITIVE_READ | Require approval | List recent Android call log entries, optionally filtered by call type. Requires READ_CALL_LOG permission. Use type=missed for missed-call questions and before selecting a missed call to call back. After selecting a number, call phone_dial. |
+| `contacts_create` | EXTERNAL_EFFECT | Require approval | Create one device-local Android contact directly through the Contacts Provider without opening the Contacts app. Requires READ_CONTACTS and WRITE_CONTACTS permissions. Set displayName and at least one of phoneNumber or emailAddress. If an exact phone number or email address already exists, do not create a duplicate. |
 | `contacts_list` | SENSITIVE_READ | Require approval | List a limited number of Android contacts, optionally filtered by display name or phone number. Requires READ_CONTACTS permission. Leave query empty only when the user explicitly asks to view contacts; set query when the user asks to find a contact. |
 | `phone_dial` | EXTERNAL_EFFECT | Require approval | Open the system dialer for exactly one phone number or named contact. Set exactly one of phoneNumber and contactName. A named contact must resolve to one match; if multiple contacts match, stop and ask the user to choose. After the dialer opens, call get_screen_info, identify the visible call button, then call tap_node. |
 | `send_to_sms_message` | EXTERNAL_EFFECT | Require approval | After approval, open a visible SMS/MMS draft. For a text SMS with a recipient, automatically tap Send only when FoneClaw accessibility is connected and the default message app, recipient, full message body, and one stable Send control are all verified. Attachments, dual-SIM prompts, ambiguous UI, or unavailable accessibility require manual action. After any terminal result, stop tool planning and never call get_screen_info or tap_node. |

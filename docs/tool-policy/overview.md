@@ -11,7 +11,7 @@ Every tool is classified into one of five risk levels, ordered from least to mos
 | **LOW** | Read-only, no side effects, no sensitive data | `web_search`, `bluetooth_state`, `device_battery_status` |
 | **SENSITIVE_READ** | Reads private/user data | `mail_list`, `sms_list`, `contacts_list`, `get_location`, `screenshot_take` |
 | **DEVICE_CONTROL** | Changes device state | `wifi_connect`, `volume_set_stream`, `flashlight_toggle`, `dnd_set_mode` |
-| **EXTERNAL_EFFECT** | Affects external systems or the real world | `mail_send`, `phone_dial`, `send_to_sms_message`, `calendar_create_event` |
+| **EXTERNAL_EFFECT** | Affects external systems or the real world | `mail_send`, `phone_dial`, `contacts_create`, `send_to_sms_message`, `calendar_create_event` |
 | **DESTRUCTIVE** | Permanently destroys data | `mail_delete`, `wifi_forget`, `workflow_delete`, `calendar_delete_event` |
 
 ## Approval Modes
@@ -97,7 +97,7 @@ These tools interact with external systems:
 
 - Mail: `mail_send`
 - SMS: `send_to_sms_message`
-- Phone: `phone_dial`
+- Phone: `phone_dial`, `contacts_create`
 - Calendar: `calendar_create_event`
 - Maps: `map_navigate` (`travelMode` selects the route mode)
 

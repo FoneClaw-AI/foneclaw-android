@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "vi",
   "fallbackLocale": "en",
-  "toolCount": 123,
+  "toolCount": 124,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Tìm kiếm công cụ hoặc khả năng",
@@ -49,7 +49,7 @@
     {
       "name": "Communication and Contacts",
       "displayName": "Liên lạc và danh bạ",
-      "toolCount": 5
+      "toolCount": 6
     },
     {
       "name": "Calendar",
@@ -690,6 +690,14 @@
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Liệt kê các mục nhật ký cuộc gọi Android gần đây, được lọc tùy ý theo loại cuộc gọi. Yêu cầu quyền READ_CALL_LOG. Sử dụng type=missed cho các câu hỏi về cuộc gọi nhỡ và trước khi chọn cuộc gọi nhỡ để gọi lại. Sau khi chọn số, hãy gọi phone_dial."
+    },
+    {
+      "name": "contacts_create",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Tạo trực tiếp một liên hệ Android cục bộ trên thiết bị qua Contacts Provider mà không mở ứng dụng Danh bạ. Yêu cầu quyền READ_CONTACTS và WRITE_CONTACTS. Đặt displayName và ít nhất một trong hai trường phoneNumber hoặc emailAddress. Nếu đã có số điện thoại hoặc địa chỉ email trùng khớp hoàn toàn, liên hệ trùng lặp sẽ không được tạo."
     },
     {
       "name": "contacts_list",

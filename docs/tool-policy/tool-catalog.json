@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "en",
   "fallbackLocale": "en",
-  "toolCount": 123,
+  "toolCount": 124,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Search tools or capabilities",
@@ -49,7 +49,7 @@
     {
       "name": "Communication and Contacts",
       "displayName": "Communication and Contacts",
-      "toolCount": 5
+      "toolCount": 6
     },
     {
       "name": "Calendar",
@@ -169,7 +169,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Capture an Android screen with the FoneClaw accessibility service. The captured image is kept in app-private cache for Agent use and is not added to the system Gallery. Use targetType=current for the current screen, targetType=app with targetApp for opening an app and capturing it, or targetType=notification_shade only for an explicit screenshot or image-capture request involving the visible notification shade. Never use targetType=notification_shade to read, list, query, or summarize notification data; use a SysInfo notification tool instead. Do not call launch_app or system_panel_open before this tool for app or notification-shade capture. Do not use this when the user wants to view an already saved screenshot; use screenshot_open for viewing saved screenshots."
+      "description": "Capture an Android screen with the FoneClaw accessibility service. The captured image is kept in app-private cache for Agent use and is not added to the system Gallery. Use targetType=current for the current screen, targetType=app with targetApp for opening an app and capturing it, or targetType=notification_shade only for an explicit screenshot or image-capture request involving the visible notification shade. Never use targetType=notification_shade to read, list, query, or summarize notification data; use a SysInfo notification tool instead. Never use this tool merely to locate or verify a control, recover a stale GUI node, or compensate for missing accessibility labels during cross-app GUI automation. Do not call launch_app or system_panel_open before this tool for app or notification-shade capture. Do not use this when the user wants to view an already saved screenshot; use screenshot_open for viewing saved screenshots."
     },
     {
       "name": "tap_node",
@@ -692,6 +692,14 @@
       "description": "List recent Android call log entries, optionally filtered by call type. Requires READ_CALL_LOG permission. Use type=missed for missed-call questions and before selecting a missed call to call back. After selecting a number, call phone_dial."
     },
     {
+      "name": "contacts_create",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Require approval",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Create one device-local Android contact directly through the Contacts Provider without opening the Contacts app. Requires READ_CONTACTS and WRITE_CONTACTS permissions. Set displayName and at least one of phoneNumber or emailAddress. If an exact phone number or email address already exists, do not create a duplicate."
+    },
+    {
       "name": "contacts_list",
       "category": "Communication and Contacts",
       "risk": "SENSITIVE_READ",
@@ -833,7 +841,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Permanently delete matching FoneClaw local SysInfo cache only. This never deletes original Android notifications, SMS, call logs, or calendar events. At least one filter is required unless deleteAll=true. Multiple filters are combined with AND."
+      "description": "Permanently delete matching FoneClaw local SysInfo cache only. This never deletes original Android notifications, SMS, mail, call logs, or calendar events. At least one filter is required unless deleteAll=true. Multiple filters are combined with AND."
     },
     {
       "name": "sysinfo_mark_reviewed",
@@ -849,7 +857,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Query already-captured local notifications, SMS, call logs, calendar events, and accessibility input. Use this single tool for daily briefs, notification queries, time-window queries, and keyword searches. It never opens a system panel or scans live system sources. Each row may include sourceRef for deduplication against a live provider result. Summarize the returned JSON for the user."
+      "description": "Query already-captured local notifications, SMS, mail summaries, call logs, calendar events, and accessibility input. Use this single tool for daily briefs, queries, time-window queries, and keyword searches. It never opens a system panel or scans live system sources. Each row may include sourceRef for deduplication against a live provider result. Summarize the returned JSON for the user."
     },
     {
       "name": "sysinfo_thread",

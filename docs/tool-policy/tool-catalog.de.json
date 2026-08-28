@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "de",
   "fallbackLocale": "en",
-  "toolCount": 123,
+  "toolCount": 124,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Tools oder Funktionen suchen",
@@ -49,7 +49,7 @@
     {
       "name": "Communication and Contacts",
       "displayName": "Kommunikation und Kontakte",
-      "toolCount": 5
+      "toolCount": 6
     },
     {
       "name": "Calendar",
@@ -690,6 +690,14 @@
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Listet aktuelle Android-Anrufprotokolleinträge auf, optional gefiltert nach Anruftyp. Erfordert die Berechtigung READ_CALL_LOG. Verwenden Sie type=missed für Fragen zu verpassten Anrufen und bevor Sie einen verpassten Anruf auswählen, um zurückzurufen. Nachdem Sie eine Nummer ausgewählt haben, rufen Sie phone_dial auf."
+    },
+    {
+      "name": "contacts_create",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Genehmigung erforderlich",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Erstellt über den Contacts Provider direkt einen lokalen Android-Kontakt auf dem Gerät, ohne die Kontakte-App zu öffnen. Erfordert die Berechtigungen READ_CONTACTS und WRITE_CONTACTS. Legen Sie displayName und mindestens eines der Felder phoneNumber oder emailAddress fest. Wenn dieselbe Telefonnummer oder E-Mail-Adresse bereits vorhanden ist, wird kein Duplikat erstellt."
     },
     {
       "name": "contacts_list",

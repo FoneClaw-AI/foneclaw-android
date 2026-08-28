@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "ar",
   "fallbackLocale": "en",
-  "toolCount": 123,
+  "toolCount": 124,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "ابحث عن الأدوات أو الإمكانات",
@@ -49,7 +49,7 @@
     {
       "name": "Communication and Contacts",
       "displayName": "الاتصالات وجهات الاتصال",
-      "toolCount": 5
+      "toolCount": 6
     },
     {
       "name": "Calendar",
@@ -690,6 +690,14 @@
       "approval": "تتطلب موافقة",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "قم بإدراج إدخالات سجل مكالمات Android الأخيرة، مع تصفيتها اختياريًا حسب نوع المكالمة. يتطلب إذن READ_CALL_LOG. استخدم type=missed لأسئلة المكالمات الفائتة وقبل تحديد مكالمة لم يرد عليها لمعاودة الاتصال. بعد تحديد رقم، اتصل بـ phone_dial."
+    },
+    {
+      "name": "contacts_create",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "تتطلب موافقة",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "ينشئ جهة اتصال Android محلية واحدة على الجهاز مباشرة عبر Contacts Provider من دون فتح تطبيق جهات الاتصال. يتطلب إذني READ_CONTACTS وWRITE_CONTACTS. عيّن displayName وواحدًا على الأقل من phoneNumber أو emailAddress. إذا كان رقم الهاتف أو عنوان البريد الإلكتروني نفسه موجودًا بالفعل، فلن يتم إنشاء جهة اتصال مكررة."
     },
     {
       "name": "contacts_list",

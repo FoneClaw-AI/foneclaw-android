@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "in",
   "fallbackLocale": "en",
-  "toolCount": 123,
+  "toolCount": 124,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Cari alat atau kemampuan",
@@ -49,7 +49,7 @@
     {
       "name": "Communication and Contacts",
       "displayName": "Komunikasi dan kontak",
-      "toolCount": 5
+      "toolCount": 6
     },
     {
       "name": "Calendar",
@@ -690,6 +690,14 @@
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Cantumkan entri log panggilan Android terbaru, yang dapat difilter berdasarkan jenis panggilan. Membutuhkan izin READ_CALL_LOG. Gunakan type=missed untuk pertanyaan panggilan tidak terjawab dan sebelum memilih panggilan tidak terjawab untuk dihubungi kembali. Setelah memilih nomor, hubungi phone_dial."
+    },
+    {
+      "name": "contacts_create",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Membuat satu kontak Android lokal perangkat secara langsung melalui Contacts Provider tanpa membuka aplikasi Kontak. Memerlukan izin READ_CONTACTS dan WRITE_CONTACTS. Tetapkan displayName dan setidaknya salah satu dari phoneNumber atau emailAddress. Jika nomor telepon atau alamat email yang sama persis sudah ada, kontak duplikat tidak dibuat."
     },
     {
       "name": "contacts_list",

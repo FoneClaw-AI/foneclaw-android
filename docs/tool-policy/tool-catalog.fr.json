@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "fr",
   "fallbackLocale": "en",
-  "toolCount": 123,
+  "toolCount": 124,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Rechercher des outils ou des fonctionnalités",
@@ -49,7 +49,7 @@
     {
       "name": "Communication and Contacts",
       "displayName": "Communication et contacts",
-      "toolCount": 5
+      "toolCount": 6
     },
     {
       "name": "Calendar",
@@ -690,6 +690,14 @@
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Répertoriez les entrées récentes du journal d’appels Android, éventuellement filtrées par type d’appel. Nécessite l'autorisation READ_CALL_LOG. Utilisez type=missed pour les questions sur les appels manqués et avant de sélectionner un appel manqué à rappeler. Après avoir sélectionné un numéro, appelez phone_dial."
+    },
+    {
+      "name": "contacts_create",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Crée un contact Android local sur l’appareil directement via Contacts Provider, sans ouvrir l’application Contacts. Nécessite les autorisations READ_CONTACTS et WRITE_CONTACTS. Définissez displayName et au moins l’un des champs phoneNumber ou emailAddress. Si le même numéro de téléphone ou la même adresse e-mail existe déjà, aucun doublon n’est créé."
     },
     {
       "name": "contacts_list",

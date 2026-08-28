@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "ja",
   "fallbackLocale": "en",
-  "toolCount": 123,
+  "toolCount": 124,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "ツールや機能を検索",
@@ -49,7 +49,7 @@
     {
       "name": "Communication and Contacts",
       "displayName": "通信と連絡先",
-      "toolCount": 5
+      "toolCount": 6
     },
     {
       "name": "Calendar",
@@ -690,6 +690,14 @@
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "最近の Android 通話ログ エントリを一覧表示します。オプションで通話タイプ別にフィルタリングできます。 READ_CALL_LOG 権限が必要です。不在着信に関する質問や、不在着信を選択して折り返し電話する前に、type=missed を使用します。番号を選択したら、phone_dial に電話します。"
+    },
+    {
+      "name": "contacts_create",
+      "category": "Communication and Contacts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "承認が必要",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "連絡先アプリを開かずに、Contacts Provider を通じて端末ローカルの Android 連絡先を 1 件直接作成します。READ_CONTACTS と WRITE_CONTACTS の権限が必要です。displayName を設定し、phoneNumber または emailAddress の少なくとも一方を設定します。同一の電話番号またはメールアドレスがすでに存在する場合、重複する連絡先は作成しません。"
     },
     {
       "name": "contacts_list",
