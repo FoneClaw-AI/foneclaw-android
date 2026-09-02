@@ -8,6 +8,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.1.9] - 2026-09-01
+
+### Added
+- Coordinated domain agents for specialized parts of complex requests, with visible progress and conversations
+- Clearer subscription-plan, remaining-points, reset-time, and upgrade information
+
+### Changed
+- Improved floating-assistant conversations, voice input, long replies, copying, retrying, and feedback
+- Improved screen navigation with directional scrolling and fresh-screen verification
+- Improved AI-response reports with relevant conversation context
+- Improved supporting subscription and AI-response services
+
+### Scope
+- Google APK/AAB remain submission candidates until Play review and rollout complete
+- Lebest APK remains an OEM re-signing candidate and is not a final OEM package
+
 ## [v0.1.7] - 2026-08-26
 
 ### Added

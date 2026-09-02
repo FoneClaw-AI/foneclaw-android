@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "es",
   "fallbackLocale": "en",
-  "toolCount": 124,
+  "toolCount": 125,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Buscar herramientas o funciones",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "Pantalla, aplicaciones y contenido multimedia",
-      "toolCount": 12
+      "toolCount": 13
     },
     {
       "name": "Device Status and System Control",
@@ -172,12 +172,20 @@
       "description": "Capture una pantalla Android con el servicio de accesibilidad FoneClaw. La imagen se conserva en la caché privada de la aplicación para que la use el Agent y no se añade a la galería del sistema. Utilice targetType=current para la pantalla actual, targetType=app con targetApp para abrir una aplicación y capturarla, o targetType=notification_shade solo para una captura de pantalla explícita o una solicitud de captura de imagen que involucre el tono de notificación visible. Nunca utilice targetType=notification_shade para leer, enumerar, consultar o resumir datos de notificaciones; utilice una herramienta de notificación SysInfo en su lugar. No llame a launch_app o system_panel_open antes de esta herramienta para la captura de aplicaciones o tonos de notificación. No utilice esto cuando el usuario quiera ver una captura de pantalla ya guardada; use screenshot_open para ver capturas de pantalla guardadas."
     },
     {
+      "name": "scroll",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Automática",
+      "approvalCode": "AUTO",
+      "description": "Desplaza la aplicación actual en la dirección solicitada. Usa preferentemente un nodo desplazable de la información de pantalla más reciente o el área visible si no hay ningún contenedor desplazable disponible. Vuelve a comprobar la pantalla después get_screen_info."
+    },
+    {
       "name": "tap_node",
       "category": "Screen and App",
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Toca un elemento UI en la pantalla. El elemento se identifica por su ID de nodo, que se puede obtener de la herramienta screen_info."
+      "description": "Toca un elemento UI en la pantalla. El elemento se identifica por su ID de nodo, que se puede obtener de la herramienta screen_info get_screen_info."
     },
     {
       "name": "alarm_modify_alarm",
@@ -737,7 +745,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Crea un evento de calendario Android. Recopile el tiempo faltante y los detalles de los recordatorios antes de llamar. Un nombre de lugar proporcionado por el usuario es suficiente y debe pasarse directamente como locationName. No buscar una dirección exacta o coordenadas a menos que el usuario pida explícitamente verificar, resolver, elegir o navegar hasta el lugar. Prefiera startLocalDateTime/endLocalDateTime en aaaa-MM-dd HH:mm para fechas de usuario y fechas relativas; la herramienta los analizará en la zona horaria del dispositivo. No cree eventos a partir de milisegundos de época calculados por el modelo. Utilice calendarId=0 a menos que el usuario haya seleccionado explícitamente una identificación de calendario. Después de la creación, utilice el resultado de la herramienta actualStart/actualEnd como el momento de creación de cara al usuario."
+      "description": "Crea un evento de calendario Android. Para un evento de todo el día, configure allDay=true y use la medianoche local del día de inicio y la medianoche local exclusiva del día siguiente como fin.Recopile el tiempo faltante y los detalles de los recordatorios antes de llamar. Un nombre de lugar proporcionado por el usuario es suficiente y debe pasarse directamente como locationName. No buscar una dirección exacta o coordenadas a menos que el usuario pida explícitamente verificar, resolver, elegir o navegar hasta el lugar. Prefiera startLocalDateTime/endLocalDateTime en aaaa-MM-dd HH:mm para fechas de usuario y fechas relativas; la herramienta los analizará en la zona horaria del dispositivo. No cree eventos a partir de milisegundos de época calculados por el modelo. Utilice calendarId=0 a menos que el usuario haya seleccionado explícitamente una identificación de calendario. Después de la creación, utilice el resultado de la herramienta actualStart/actualEnd como el momento de creación de cara al usuario."
     },
     {
       "name": "calendar_delete_event",
@@ -833,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Actualizar una nota local por identificación. Busque/enumere notas primero cuando el usuario describa el objetivo en lenguaje natural y pase los detalles conocidos del objetivo con los campos modificados. Se ignoran los títulos, contenidos y etiquetas en blanco. reminderAtMillis=-2 mantiene el recordatorio, -1 lo borra y >0 establece el recordatorio."
+      "description": "Actualizar una nota local por identificación. Busque/enumere notas primero cuando el usuario describa el objetivo en lenguaje natural y pase los detalles conocidos del objetivo con los campos modificados. Se ignoran los títulos, contenidos y etiquetas en blanco. reminderAtMillis=-2 mantiene el recordatorio, -1 lo borra y >0 establece el recordatorio. endAtMillis sigue las mismas reglas para mantener, borrar o establecer."
     },
     {
       "name": "sysinfo_delete",
@@ -889,7 +897,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Busque en la web páginas relevantes. Devuelve títulos de resultados, URL y fragmentos cortos."
+      "description": "Devuelve los títulos, las URL exactas de las fuentes y fragmentos breves. Conserve la URL exacta después de cada resultado resumido en la respuesta final."
     },
     {
       "name": "shortcut_save_agent_prompt",

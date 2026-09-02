@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "ko",
   "fallbackLocale": "en",
-  "toolCount": 124,
+  "toolCount": 125,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "도구 또는 기능 검색",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "화면, 앱 및 미디어",
-      "toolCount": 12
+      "toolCount": 13
     },
     {
       "name": "Device Status and System Control",
@@ -172,12 +172,20 @@
       "description": "FoneClaw 접근성 서비스로 Android 화면을 캡처합니다. 캡처 이미지는 Agent 사용을 위해 앱 전용 캐시에 보관되며 시스템 갤러리에는 추가되지 않습니다. 현재 화면에는 targetType=current를 사용하고, 앱을 열고 캡처하려면 targetType=app와 targetApp를 사용하고, 눈에 보이는 알림 창과 관련된 명시적인 스크린샷이나 이미지 캡처 요청에는 targetType=notification_shade만 사용하세요. 알림 데이터를 읽거나, 나열하거나, 쿼리하거나, 요약하는 데 targetType=notification_shade을 사용하지 마세요. 대신 SysInfo 알림 도구를 사용하세요. 앱 또는 알림 셰이드 캡처를 위해 이 도구 이전에 launch_app 또는 system_panel_open을 호출하지 마세요. 사용자가 이미 저장된 스크린샷을 보려는 경우에는 이 기능을 사용하지 마세요. 저장된 스크린샷을 보려면 screenshot_open을 사용하세요."
     },
     {
+      "name": "scroll",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "현재 앱을 요청한 방향으로 스크롤합니다. 최신 화면 정보의 스크롤 가능한 노드를 우선 사용하고, 사용할 수 있는 스크롤 컨테이너가 없으면 현재 화면 영역을 사용합니다. 스크롤 후 화면을 다시 확인하세요 get_screen_info."
+    },
+    {
       "name": "tap_node",
       "category": "Screen and App",
       "risk": "LOW",
       "approval": "자동",
       "approvalCode": "AUTO",
-      "description": "화면에서 UI 요소를 탭하세요. 요소는 screen_info 도구에서 얻을 수 있는 노드 ID로 식별됩니다."
+      "description": "화면에서 UI 요소를 탭하세요. 요소는 screen_info 도구에서 얻을 수 있는 노드 ID로 식별됩니다 get_screen_info."
     },
     {
       "name": "alarm_modify_alarm",
@@ -737,7 +745,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Android 달력 이벤트를 만듭니다. 이 도구를 호출하기 전에 누락된 시간과 알림 세부정보를 수집하세요. 사용자가 제공한 장소 이름이면 충분하며 locationName로 직접 전달되어야 합니다. 사용자가 해당 장소에 대한 확인, 확인, 선택 또는 탐색을 명시적으로 요청하지 않는 한 정확한 주소나 좌표를 검색하지 마세요. 사용자 날짜 및 상대 날짜의 경우 yyyy-MM-dd HH:mm의 startLocalDateTime/endLocalDateTime를 선호합니다. 도구는 장치 시간대로 구문 분석합니다. 모델이 계산한 에포크 밀리초에서 이벤트를 생성하지 마십시오. 사용자가 캘린더 ID를 명시적으로 선택하지 않는 한 calendarId=0를 사용하세요. 생성 후 도구 결과 actualStart/actualEnd를 사용자에게 표시되는 생성 시간으로 사용합니다."
+      "description": "Android 달력 이벤트를 만듭니다. 종일 일정의 경우 allDay=true로 설정하고 시작은 해당 날짜의 현지 자정, 종료는 다음 날 현지 자정(미포함)으로 지정하세요.이 도구를 호출하기 전에 누락된 시간과 알림 세부정보를 수집하세요. 사용자가 제공한 장소 이름이면 충분하며 locationName로 직접 전달되어야 합니다. 사용자가 해당 장소에 대한 확인, 확인, 선택 또는 탐색을 명시적으로 요청하지 않는 한 정확한 주소나 좌표를 검색하지 마세요. 사용자 날짜 및 상대 날짜의 경우 yyyy-MM-dd HH:mm의 startLocalDateTime/endLocalDateTime를 선호합니다. 도구는 장치 시간대로 구문 분석합니다. 모델이 계산한 에포크 밀리초에서 이벤트를 생성하지 마십시오. 사용자가 캘린더 ID를 명시적으로 선택하지 않는 한 calendarId=0를 사용하세요. 생성 후 도구 결과 actualStart/actualEnd를 사용자에게 표시되는 생성 시간으로 사용합니다."
     },
     {
       "name": "calendar_delete_event",
@@ -833,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "ID별로 로컬 메모를 업데이트합니다. 사용자가 대상을 자연어로 설명할 때 먼저 메모를 검색/나열하고 변경된 필드와 함께 알려진 대상 세부 정보를 전달합니다. 빈 제목/내용/태그는 무시됩니다. reminderAtMillis=-2은 알림을 유지하고, -1은 알림을 지우고, >0은 알림을 설정합니다."
+      "description": "ID별로 로컬 메모를 업데이트합니다. 사용자가 대상을 자연어로 설명할 때 먼저 메모를 검색/나열하고 변경된 필드와 함께 알려진 대상 세부 정보를 전달합니다. 빈 제목/내용/태그는 무시됩니다. reminderAtMillis=-2은 알림을 유지하고, -1은 알림을 지우고, >0은 알림을 설정합니다. endAtMillis도 동일한 유지, 지우기, 설정 규칙을 따릅니다."
     },
     {
       "name": "sysinfo_delete",
@@ -889,7 +897,7 @@
       "risk": "LOW",
       "approval": "자동",
       "approvalCode": "AUTO",
-      "description": "웹에서 관련 페이지를 검색하세요. 결과 제목, URL 및 짧은 내용을 반환합니다."
+      "description": "결과 제목, 정확한 출처 URL 및 짧은 요약을 반환합니다. 최종 답변에서 각 결과를 요약할 때 정확한 URL을 유지하세요."
     },
     {
       "name": "shortcut_save_agent_prompt",

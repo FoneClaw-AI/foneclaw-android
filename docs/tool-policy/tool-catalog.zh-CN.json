@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "zh-CN",
   "fallbackLocale": "en",
-  "toolCount": 124,
+  "toolCount": 125,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "搜索工具或能力",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "屏幕、应用与影像",
-      "toolCount": 12
+      "toolCount": 13
     },
     {
       "name": "Device Status and System Control",
@@ -172,12 +172,20 @@
       "description": "使用 FoneClaw 辅助服务捕获 Android 屏幕。截取的图片保存在应用私有缓存中供 Agent 使用，不会添加到系统图库 对当前屏幕使用 targetType=current，将 targetType=app 与 targetApp 用于打开应用程序并捕获它，或仅将 targetType=notification_shade 用于涉及可见通知栏的显式屏幕截图或图像捕获请求。切勿使用 targetType=notification_shade 读取、列出、查询或汇总通知数据；请改用 SysInfo 通知工具。请勿在此工具之前调用 launch_app 或 system_panel_open 来捕获应用程序或通知栏。当用户想要查看已保存的屏幕截图时，请勿使用此选项；使用 screenshot_open 查看保存的屏幕截图。"
     },
     {
+      "name": "scroll",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "按指定方向滚动当前应用。优先使用最新屏幕信息中的可滚动节点；没有可用的滚动容器时使用当前视口。滚动后请重新检查屏幕。 get_screen_info."
+    },
+    {
       "name": "tap_node",
       "category": "Screen and App",
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "点击屏幕上的 UI 元素。该元素通过其节点 ID 进行标识，该节点 ID 可以从 screen_info 工具获取。"
+      "description": "点击屏幕上的 UI 元素。该元素通过其节点 ID 进行标识，该节点 ID 可以从 screen_info 工具获取。 get_screen_info."
     },
     {
       "name": "alarm_modify_alarm",
@@ -737,7 +745,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "创建 Android 日历事件。在调用此工具前收集缺少的时间信息和提醒详细信息。用户提供的地名就足够了，应该直接作为 locationName 传递。除非用户明确要求验证、解决、选择或导航到该地点，否则不要搜索确切的地址或坐标。对于用户日期和相对日期，首选 yyyy-MM-dd HH:mm 中的 startLocalDateTime/endLocalDateTime；该工具将在设备时区中解析它们。不要根据模型计算的纪元毫秒创建事件。除非用户明确选择了日历 ID，否则请使用 calendarId=0。创建完成后，使用工具结果actualStart/actualEnd作为面向用户的创建时间。"
+      "description": "创建 Android 日历事件。对于全天事件，请设置 allDay=true，并将开始时间设为本地当天零点、结束时间设为下一天零点（不含）。在调用此工具前收集缺少的时间信息和提醒详细信息。用户提供的地名就足够了，应该直接作为 locationName 传递。除非用户明确要求验证、解决、选择或导航到该地点，否则不要搜索确切的地址或坐标。对于用户日期和相对日期，首选 yyyy-MM-dd HH:mm 中的 startLocalDateTime/endLocalDateTime；该工具将在设备时区中解析它们。不要根据模型计算的纪元毫秒创建事件。除非用户明确选择了日历 ID，否则请使用 calendarId=0。创建完成后，使用工具结果actualStart/actualEnd作为面向用户的创建时间。"
     },
     {
       "name": "calendar_delete_event",
@@ -833,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "通过 id 更新本地备忘录。当用户用自然语言描述目标时，首先搜索/列出备忘录，并通过更改的字段传递已知的目标详细信息。空白标题/内容/标签将被忽略。 reminderAtMillis=-2 保持提醒，-1 清除提醒，>0 设置提醒。"
+      "description": "通过 id 更新本地备忘录。当用户用自然语言描述目标时，首先搜索/列出备忘录，并通过更改的字段传递已知的目标详细信息。空白标题/内容/标签将被忽略。 reminderAtMillis=-2 保持提醒，-1 清除提醒，>0 设置提醒。 endAtMillis 遵循相同的保留、清除和设置规则。"
     },
     {
       "name": "sysinfo_delete",
@@ -889,7 +897,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "在网络上搜索相关页面。返回结果标题、URL 和简短片段。"
+      "description": "返回结果标题、准确来源 URL 和简短片段。最终回答中总结每个结果时，请保留其准确 URL。"
     },
     {
       "name": "shortcut_save_agent_prompt",

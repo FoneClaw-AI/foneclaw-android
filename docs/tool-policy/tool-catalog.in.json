@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "in",
   "fallbackLocale": "en",
-  "toolCount": 124,
+  "toolCount": 125,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Cari alat atau kemampuan",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "Layar, aplikasi, dan media",
-      "toolCount": 12
+      "toolCount": 13
     },
     {
       "name": "Device Status and System Control",
@@ -172,12 +172,20 @@
       "description": "Tangkap layar Android dengan layanan aksesibilitas FoneClaw. Gambar disimpan dalam cache privat aplikasi untuk digunakan Agent dan tidak ditambahkan ke galeri sistem. Gunakan targetType=current untuk layar saat ini, targetType=app dengan targetApp untuk membuka aplikasi dan menangkapnya, atau targetType=notification_shade hanya untuk tangkapan layar eksplisit atau permintaan pengambilan gambar yang melibatkan bayangan notifikasi yang terlihat. Jangan pernah menggunakan targetType=notification_shade untuk membaca, membuat daftar, menanyakan, atau meringkas data notifikasi; gunakan alat notifikasi SysInfo sebagai gantinya. Jangan panggil launch_app atau system_panel_open sebelum alat ini untuk menangkap bayangan aplikasi atau notifikasi. Jangan gunakan ini ketika pengguna ingin melihat tangkapan layar yang sudah disimpan; gunakan screenshot_open untuk melihat tangkapan layar yang disimpan."
     },
     {
+      "name": "scroll",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Menggulir aplikasi saat ini ke arah yang diminta. Utamakan node yang dapat digulir dari informasi layar terbaru, atau gunakan area layar yang terlihat jika tidak ada kontainer yang dapat digulir. Periksa kembali layar setelah menggulir get_screen_info."
+    },
+    {
       "name": "tap_node",
       "category": "Screen and App",
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Ketuk elemen UI di layar. Elemen diidentifikasi berdasarkan ID simpulnya, yang dapat diperoleh dari alat screen_info."
+      "description": "Ketuk elemen UI di layar. Elemen diidentifikasi berdasarkan ID simpulnya, yang dapat diperoleh dari alat screen_info get_screen_info."
     },
     {
       "name": "alarm_modify_alarm",
@@ -737,7 +745,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Buat acara kalender Android. Kumpulkan detail waktu yang belum ada dan detail pengingat sebelum memanggil alat ini. Nama tempat yang disediakan pengguna sudah cukup dan harus diteruskan langsung sebagai locationName. Jangan menelusuri alamat atau koordinat yang tepat kecuali pengguna secara eksplisit meminta untuk memverifikasi, menyelesaikan, memilih, atau menavigasi ke tempat tersebut. Lebih suka startLocalDateTime/endLocalDateTime dalam yyyy-MM-dd HH:mm untuk tanggal pengguna dan tanggal relatif; alat ini akan menguraikannya dalam zona waktu perangkat. Jangan membuat peristiwa dari epoch milidetik yang dihitung model. Gunakan kalenderId=0 kecuali pengguna secara eksplisit memilih id kalender. Setelah pembuatan, gunakan hasil alat aktualStart/actualEnd sebagai waktu pembuatan yang dapat dilihat pengguna. Pengenal teknis: calendarId=0, actualStart."
+      "description": "Buat acara kalender Android. Untuk acara sepanjang hari, tetapkan allDay=true, gunakan tengah malam lokal pada hari mulai dan tengah malam lokal hari berikutnya secara eksklusif sebagai akhir.Kumpulkan detail waktu yang belum ada dan detail pengingat sebelum memanggil alat ini. Nama tempat yang disediakan pengguna sudah cukup dan harus diteruskan langsung sebagai locationName. Jangan menelusuri alamat atau koordinat yang tepat kecuali pengguna secara eksplisit meminta untuk memverifikasi, menyelesaikan, memilih, atau menavigasi ke tempat tersebut. Lebih suka startLocalDateTime/endLocalDateTime dalam yyyy-MM-dd HH:mm untuk tanggal pengguna dan tanggal relatif; alat ini akan menguraikannya dalam zona waktu perangkat. Jangan membuat peristiwa dari epoch milidetik yang dihitung model. Gunakan kalenderId=0 kecuali pengguna secara eksplisit memilih id kalender. Setelah pembuatan, gunakan hasil alat aktualStart/actualEnd sebagai waktu pembuatan yang dapat dilihat pengguna. Pengenal teknis: calendarId=0, actualStart."
     },
     {
       "name": "calendar_delete_event",
@@ -833,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Perbarui memo lokal berdasarkan id. Cari/daftar memo terlebih dahulu ketika pengguna menjelaskan target dalam bahasa alami, dan meneruskan detail target yang diketahui dengan bidang yang diubah. Judul/konten/tag kosong diabaikan. reminderAtMillis=-2 menyimpan pengingat, -1 menghapus pengingat, dan >0 menyetel pengingat."
+      "description": "Perbarui memo lokal berdasarkan id. Cari/daftar memo terlebih dahulu ketika pengguna menjelaskan target dalam bahasa alami, dan meneruskan detail target yang diketahui dengan bidang yang diubah. Judul/konten/tag kosong diabaikan. reminderAtMillis=-2 menyimpan pengingat, -1 menghapus pengingat, dan >0 menyetel pengingat. endAtMillis mengikuti aturan simpan, hapus, dan atur yang sama."
     },
     {
       "name": "sysinfo_delete",
@@ -889,7 +897,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Telusuri web untuk halaman yang relevan. Mengembalikan judul hasil, URL, dan cuplikan pendek."
+      "description": "Mengembalikan judul hasil, URL sumber yang tepat, dan cuplikan singkat. Pertahankan URL yang tepat setelah setiap hasil yang diringkas dalam jawaban akhir."
     },
     {
       "name": "shortcut_save_agent_prompt",

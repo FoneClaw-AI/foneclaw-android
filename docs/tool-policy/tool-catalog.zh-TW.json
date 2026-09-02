@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "zh-TW",
   "fallbackLocale": "en",
-  "toolCount": 124,
+  "toolCount": 125,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "搜尋工具或能力",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "螢幕、應用程式與多媒體",
-      "toolCount": 12
+      "toolCount": 13
     },
     {
       "name": "Device Status and System Control",
@@ -172,12 +172,20 @@
       "description": "使用 FoneClaw 輔助服務擷取 Android 螢幕。擷取的圖片會儲存在應用程式私人快取中供 Agent 使用，不會加入系統圖庫 對目前螢幕使用 targetType=current，將 targetType=app 與 targetApp 用於開啟應用程式並擷取它，或僅將 targetType=notification_shade 用於涉及可見通知列的明確螢幕螢幕截圖或影像擷取請求。切勿使用 targetType=notification_shade 讀取、列出、查詢或匯總通知資料；請改用 SysInfo 通知工具。請勿在此工具之前呼叫 launch_app 或 system_panel_open 來擷取應用程式或通知列。當使用者想要查看已儲存的螢幕螢幕截圖時，請勿使用此選項；使用 screenshot_open 查看已儲存的螢幕螢幕截圖。"
     },
     {
+      "name": "scroll",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "自動通過",
+      "approvalCode": "AUTO",
+      "description": "按指定方向捲動目前應用程式。優先使用最新螢幕資訊中的可捲動節點；沒有可用的捲動容器時使用目前檢視區。捲動後請重新檢查螢幕。 get_screen_info."
+    },
+    {
       "name": "tap_node",
       "category": "Screen and App",
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "點選螢幕上的 UI 元素。該元素透過其節點 ID 進行標識，該節點 ID 可以從 screen_info 工具取得。"
+      "description": "點選螢幕上的 UI 元素。該元素透過其節點 ID 進行標識，該節點 ID 可以從 screen_info 工具取得。 get_screen_info."
     },
     {
       "name": "alarm_modify_alarm",
@@ -737,7 +745,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "建立 Android 行事曆事件。在呼叫此工具前收集缺少的時間資訊和提醒詳細資訊。使用者提供的地名就足夠了，應該直接作為 locationName 傳遞。除非使用者明確要求驗證、解決、選擇或導航到該地點，否則不要搜尋確切的地址或座標。對於使用者日期和相對日期，首選 yyyy-MM-dd HH:mm 中的 startLocalDateTime/endLocalDateTime；該工具將在裝置時區中解析它們。不要根據模型計算的紀元毫秒創建事件。除非使用者明確選擇了行事曆 ID，否則請使用 calendarId=0。建立完成後，使用工具結果actualStart/actualEnd作為使用者導向的建立時間。"
+      "description": "建立 Android 行事曆事件。若為全天事件，請設定 allDay=true，開始時間使用當日本地午夜，結束時間使用次日本地午夜（不含）。在呼叫此工具前收集缺少的時間資訊和提醒詳細資訊。使用者提供的地名就足夠了，應該直接作為 locationName 傳遞。除非使用者明確要求驗證、解決、選擇或導航到該地點，否則不要搜尋確切的地址或座標。對於使用者日期和相對日期，首選 yyyy-MM-dd HH:mm 中的 startLocalDateTime/endLocalDateTime；該工具將在裝置時區中解析它們。不要根據模型計算的紀元毫秒創建事件。除非使用者明確選擇了行事曆 ID，否則請使用 calendarId=0。建立完成後，使用工具結果actualStart/actualEnd作為使用者導向的建立時間。"
     },
     {
       "name": "calendar_delete_event",
@@ -833,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "透過 id 更新本地備忘錄。當使用者用自然語言描述目標時，首先搜尋/列出備忘錄，並透過更改的欄位傳遞已知的目標詳細資訊。空白標題/內容/標籤將被忽略。 reminderAtMillis=-2 保持提醒，-1 清除提醒，>0 設定提醒。"
+      "description": "透過 id 更新本地備忘錄。當使用者用自然語言描述目標時，首先搜尋/列出備忘錄，並透過更改的欄位傳遞已知的目標詳細資訊。空白標題/內容/標籤將被忽略。 reminderAtMillis=-2 保持提醒，-1 清除提醒，>0 設定提醒。 endAtMillis 遵循相同的保留、清除與設定規則。"
     },
     {
       "name": "sysinfo_delete",
@@ -889,7 +897,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "在網路上搜尋相關頁面。回傳結果標題、URL 和簡短片段。"
+      "description": "回傳結果標題、精確來源 URL 與簡短摘要。最終回覆摘要每項結果時，請保留其精確 URL。"
     },
     {
       "name": "shortcut_save_agent_prompt",

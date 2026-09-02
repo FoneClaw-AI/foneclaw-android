@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "ja",
   "fallbackLocale": "en",
-  "toolCount": 124,
+  "toolCount": 125,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "ツールや機能を検索",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "画面、アプリ、メディア",
-      "toolCount": 12
+      "toolCount": 13
     },
     {
       "name": "Device Status and System Control",
@@ -172,12 +172,20 @@
       "description": "FoneClaw アクセシビリティ サービスを使用して Android 画面をキャプチャします。キャプチャ画像は Agent が使用するアプリ専用キャッシュに保持され、システムのギャラリーには追加されません。現在の画面には targetType=current を使用し、アプリを開いてキャプチャするには targetType=app と targetApp を使用します。または、表示される通知シェードを含む明示的なスクリーンショットまたは画像キャプチャ リクエストの場合にのみ targetType=notification_shade を使用します。通知データの読み取り、リスト、クエリ、または要約には targetType=notification_shade を決して使用しないでください。代わりに SysInfo 通知ツールを使用してください。アプリまたは通知シェードのキャプチャのために、このツールの前に launch_app または system_panel_open を呼び出さないでください。ユーザーが既に保存されているスクリーンショットを表示したい場合には、これを使用しないでください。保存されたスクリーンショットを表示するには、screenshot_open を使用します。"
     },
     {
+      "name": "scroll",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "自動",
+      "approvalCode": "AUTO",
+      "description": "現在のアプリを指定した方向にスクロールします。最新の画面情報にあるスクロール可能なノードを優先し、利用できない場合は表示中の画面領域を使用します。スクロール後に画面をもう一度確認してください。 get_screen_info."
+    },
+    {
       "name": "tap_node",
       "category": "Screen and App",
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "画面上の UI 要素をタップします。要素はノード ID によって識別されます。ノード ID は screen_info ツールから取得できます。"
+      "description": "画面上の UI 要素をタップします。要素はノード ID によって識別されます。ノード ID は screen_info ツールから取得できます。 get_screen_info."
     },
     {
       "name": "alarm_modify_alarm",
@@ -737,7 +745,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Android カレンダー イベントを作成します。このツールを呼び出す前に、不足している時刻情報とリマインダーの詳細を収集します。ユーザーが指定した場所名で十分なので、locationName として直接渡す必要があります。ユーザーがその場所を確認、解決、選択、または移動することを明示的に要求しない限り、正確な住所や座標を検索しないでください。ユーザー日付と相対日付には、yyyy-MM-dd HH:mm の startLocalDateTime/endLocalDateTime を優先します。ツールはデバイスのタイムゾーンでそれらを解析します。モデルが計算したエポックミリ秒からイベントを作成しないでください。ユーザーがカレンダー ID を明示的に選択しない限り、calendarId=0 を使用します。作成後、ツールの結果 actualStart/actualEnd をユーザー側の作成時刻として使用します。"
+      "description": "Android カレンダー イベントを作成します。終日イベントでは allDay=true を設定し、開始を当日の現地午前0時、終了を翌日の現地午前0時（排他的）にしてください。このツールを呼び出す前に、不足している時刻情報とリマインダーの詳細を収集します。ユーザーが指定した場所名で十分なので、locationName として直接渡す必要があります。ユーザーがその場所を確認、解決、選択、または移動することを明示的に要求しない限り、正確な住所や座標を検索しないでください。ユーザー日付と相対日付には、yyyy-MM-dd HH:mm の startLocalDateTime/endLocalDateTime を優先します。ツールはデバイスのタイムゾーンでそれらを解析します。モデルが計算したエポックミリ秒からイベントを作成しないでください。ユーザーがカレンダー ID を明示的に選択しない限り、calendarId=0 を使用します。作成後、ツールの結果 actualStart/actualEnd をユーザー側の作成時刻として使用します。"
     },
     {
       "name": "calendar_delete_event",
@@ -833,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "ローカルメモをIDで更新します。ユーザーが自然言語でターゲットを説明するときに最初にメモを検索/リストし、変更されたフィールドで既知のターゲットの詳細を渡します。空白のタイトル/コンテンツ/タグは無視されます。 reminderAtMillis=-2 はリマインダーを保持し、-1 はリマインダーをクリアし、>0 はリマインダーを設定します。"
+      "description": "ローカルメモをIDで更新します。ユーザーが自然言語でターゲットを説明するときに最初にメモを検索/リストし、変更されたフィールドで既知のターゲットの詳細を渡します。空白のタイトル/コンテンツ/タグは無視されます。 reminderAtMillis=-2 はリマインダーを保持し、-1 はリマインダーをクリアし、>0 はリマインダーを設定します。 endAtMillis も同じ保持、解除、設定の規則に従います。"
     },
     {
       "name": "sysinfo_delete",
@@ -889,7 +897,7 @@
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "Web で関連するページを検索します。結果のタイトル、URL、短いスニペットを返します。"
+      "description": "結果のタイトル、正確な参照元 URL、短いスニペットを返します。最終回答で各結果を要約するときは、正確な URL を保持してください。"
     },
     {
       "name": "shortcut_save_agent_prompt",

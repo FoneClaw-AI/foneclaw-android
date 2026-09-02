@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "fr",
   "fallbackLocale": "en",
-  "toolCount": 124,
+  "toolCount": 125,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Rechercher des outils ou des fonctionnalités",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "Écran, applications et médias",
-      "toolCount": 12
+      "toolCount": 13
     },
     {
       "name": "Device Status and System Control",
@@ -172,12 +172,20 @@
       "description": "Capturez un écran Android avec le service d'accessibilité FoneClaw. L’image est conservée dans le cache privé de l’application pour l’Agent et n’est pas ajoutée à la galerie système. Utilisez targetType=current pour l'écran actuel, targetType=app avec targetApp pour ouvrir une application et la capturer, ou targetType=notification_shade uniquement pour une capture d'écran explicite ou une demande de capture d'image impliquant la nuance de notification visible. N'utilisez jamais targetType=notification_shade pour lire, répertorier, interroger ou résumer les données de notification ; utilisez plutôt un outil de notification SysInfo. N'appelez pas launch_app ou system_panel_open avant cet outil pour la capture d'application ou de notification-shade. Ne l'utilisez pas lorsque l'utilisateur souhaite afficher une capture d'écran déjà enregistrée ; utilisez screenshot_open pour afficher les captures d'écran enregistrées."
     },
     {
+      "name": "scroll",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Fait défiler l’application actuelle dans la direction demandée. Utilisez de préférence un nœud défilable provenant des dernières informations d’écran, ou la zone visible si aucun conteneur défilable n’est disponible. Vérifiez à nouveau l’écran après le défilement get_screen_info."
+    },
+    {
       "name": "tap_node",
       "category": "Screen and App",
       "risk": "LOW",
       "approval": "Automatique",
       "approvalCode": "AUTO",
-      "description": "Appuyez sur un élément de l'interface utilisateur sur l'écran. L'élément est identifié par son ID de nœud, qui peut être obtenu à partir de l'outil screen_info."
+      "description": "Appuyez sur un élément de l'interface utilisateur sur l'écran. L'élément est identifié par son ID de nœud, qui peut être obtenu à partir de l'outil screen_info get_screen_info."
     },
     {
       "name": "alarm_modify_alarm",
@@ -737,7 +745,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Créez un événement de calendrier Android. Collectez l’heure manquante et les détails des rappels avant d’appeler cet outil. Un nom de lieu fourni par l'utilisateur est suffisant et doit être transmis directement en tant que locationName. Ne recherchez pas une adresse ou des coordonnées exactes à moins que l'utilisateur ne demande explicitement de vérifier, résoudre, choisir ou naviguer vers le lieu. Préférez startLocalDateTime/endLocalDateTime en aaaa-MM-jj HH:mm pour les dates utilisateur et les dates relatives ; l'outil les analysera dans le fuseau horaire de l'appareil. Ne créez pas d'événements à partir des millisecondes d'époque calculées par le modèle. Utilisez calendarId=0 sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier. Après la création, utilisez le résultat de l'outil actualStart/actualEnd comme heure de création destinée à l'utilisateur. Identifiants techniques: calendarId=0."
+      "description": "Créez un événement de calendrier Android. Pour un événement sur toute la journée, définissez allDay=true, avec le début à minuit local le jour concerné et la fin exclusive à minuit local le lendemain.Collectez l’heure manquante et les détails des rappels avant d’appeler cet outil. Un nom de lieu fourni par l'utilisateur est suffisant et doit être transmis directement en tant que locationName. Ne recherchez pas une adresse ou des coordonnées exactes à moins que l'utilisateur ne demande explicitement de vérifier, résoudre, choisir ou naviguer vers le lieu. Préférez startLocalDateTime/endLocalDateTime en aaaa-MM-jj HH:mm pour les dates utilisateur et les dates relatives ; l'outil les analysera dans le fuseau horaire de l'appareil. Ne créez pas d'événements à partir des millisecondes d'époque calculées par le modèle. Utilisez calendarId=0 sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier. Après la création, utilisez le résultat de l'outil actualStart/actualEnd comme heure de création destinée à l'utilisateur. Identifiants techniques: calendarId=0."
     },
     {
       "name": "calendar_delete_event",
@@ -833,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Mettre à jour un mémo local par identifiant. Recherchez/répertoriez d'abord les mémos lorsque l'utilisateur décrit la cible en langage naturel, et transmettez les détails de la cible connue avec les champs modifiés. Les titres/contenus/balises vides sont ignorés. rappelAtMillis=-2 conserve le rappel, -1 efface le rappel et >0 définit le rappel. Identifiants techniques: reminderAtMillis=-2."
+      "description": "Mettre à jour un mémo local par identifiant. Recherchez/répertoriez d'abord les mémos lorsque l'utilisateur décrit la cible en langage naturel, et transmettez les détails de la cible connue avec les champs modifiés. Les titres/contenus/balises vides sont ignorés. rappelAtMillis=-2 conserve le rappel, -1 efface le rappel et >0 définit le rappel. Identifiants techniques: reminderAtMillis=-2. endAtMillis suit les mêmes règles de conservation, d’effacement et de définition."
     },
     {
       "name": "sysinfo_delete",
@@ -889,7 +897,7 @@
       "risk": "LOW",
       "approval": "Automatique",
       "approvalCode": "AUTO",
-      "description": "Recherchez sur le Web les pages pertinentes. Renvoie les titres des résultats, les URL et les courts extraits."
+      "description": "Renvoie les titres, les URL sources exactes et de courts extraits. Conservez l’URL exacte après chaque résultat résumé dans la réponse finale."
     },
     {
       "name": "shortcut_save_agent_prompt",

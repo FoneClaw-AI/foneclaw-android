@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "en",
   "fallbackLocale": "en",
-  "toolCount": 124,
+  "toolCount": 125,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Search tools or capabilities",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "Screen and App",
-      "toolCount": 12
+      "toolCount": 13
     },
     {
       "name": "Device Status and System Control",
@@ -121,7 +121,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Get UI elements from the currently visible app screen. Each element has a node ID (for example [n3]) that can be used with tap_node or input_text. Do not use this to read, list, search, or summarize Android notifications; use sysinfo tools instead. Do not cache this result because node IDs change on each call."
+      "description": "Get UI elements from the currently visible app screen. Each element has a node ID (for example [n3]) that can be used with tap_node, scroll, or input_text. Do not use this to read, list, search, or summarize Android notifications; use sysinfo tools instead. Do not cache this result because node IDs change on each call."
     },
     {
       "name": "input_text",
@@ -172,12 +172,20 @@
       "description": "Capture an Android screen with the FoneClaw accessibility service. The captured image is kept in app-private cache for Agent use and is not added to the system Gallery. Use targetType=current for the current screen, targetType=app with targetApp for opening an app and capturing it, or targetType=notification_shade only for an explicit screenshot or image-capture request involving the visible notification shade. Never use targetType=notification_shade to read, list, query, or summarize notification data; use a SysInfo notification tool instead. Never use this tool merely to locate or verify a control, recover a stale GUI node, or compensate for missing accessibility labels during cross-app GUI automation. Do not call launch_app or system_panel_open before this tool for app or notification-shade capture. Do not use this when the user wants to view an already saved screenshot; use screenshot_open for viewing saved screenshots."
     },
     {
+      "name": "scroll",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Auto",
+      "approvalCode": "AUTO",
+      "description": "Scroll the current app by using a compatible accessibility scroll action when supported, otherwise perform a bounded swipe gesture. Prefer a fresh node ID marked scroll by get_screen_info. Use viewport only when the screen exposes no usable scroll container. Direction is the viewport destination: down reveals content below, up reveals content above, right reveals content to the right, and left reveals content to the left. This does not confirm that content changed, so call get_screen_info after every successful call before another action."
+    },
+    {
       "name": "tap_node",
       "category": "Screen and App",
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Tap a UI element on the screen. The element is identified by its node ID, which can be obtained from the screen_info tool."
+      "description": "Tap a UI element on the screen. The element is identified by its node ID, which can be obtained from get_screen_info."
     },
     {
       "name": "alarm_modify_alarm",
@@ -737,7 +745,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Create an Android calendar event. Collect missing time and reminder details before calling. A user-provided place name is sufficient and should be passed directly as locationName. Do not search for an exact address or coordinates unless the user explicitly asks to verify, resolve, choose, or navigate to the place. Prefer startLocalDateTime/endLocalDateTime in yyyy-MM-dd HH:mm for user dates and relative dates; the tool will parse them in the device timezone. Do not create events from model-calculated epoch milliseconds. Use calendarId=0 unless the user explicitly selected a calendar id. After creation, use the tool result actualStart/actualEnd as the user-facing created time."
+      "description": "Create an Android calendar event. Collect missing time and reminder details before calling. For an all-day event, set allDay=true and use local midnight for the start and the exclusive next-day local midnight for the end. A user-provided place name is sufficient and should be passed directly as locationName. Do not search for an exact address or coordinates unless the user explicitly asks to verify, resolve, choose, or navigate to the place. Prefer startLocalDateTime/endLocalDateTime in yyyy-MM-dd HH:mm for user dates and relative dates; the tool will parse them in the device timezone. Do not create events from model-calculated epoch milliseconds. Use calendarId=0 unless the user explicitly selected a calendar id. After creation, use the tool result actualStart/actualEnd as the user-facing created time."
     },
     {
       "name": "calendar_delete_event",
@@ -833,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Update a local memo by id. Search/list memos first when the user describes the target in natural language, and pass known target details with the changed fields. Blank title/content/tags are ignored. reminderAtMillis=-2 keeps reminder, -1 clears reminder, and >0 sets reminder."
+      "description": "Update a local memo by id. Search/list memos first when the user describes the target in natural language, and pass known target details with the changed fields. Blank title/content/tags are ignored. reminderAtMillis=-2 keeps reminder, -1 clears reminder, and >0 sets reminder. endAtMillis follows the same keep/clear/set rules."
     },
     {
       "name": "sysinfo_delete",
@@ -889,7 +897,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Search the web for relevant pages. Returns result titles, URLs, and short snippets."
+      "description": "Search the web for relevant pages. Returns result titles, exact source URLs, and short snippets. Preserve the exact URL after each result summarized in the final answer."
     },
     {
       "name": "shortcut_save_agent_prompt",
@@ -913,7 +921,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Create the complete ordered TODO plan in one call for the current user request. This is a mandatory precondition before any non-task tool when the request requires three or more steps. Pass every bounded user-facing step in items. The plan can be created exactly once and cannot be extended later. Never include task management, cleanup, status-update, or final-response items."
+      "description": "Create the complete ordered TODO plan in one call for the current user request. This is a mandatory precondition before any non-task Tool when routing produces two or more concrete Main steps or crosses Profiles. Count each delegate or Plugin Tool call as one step; one delegate remains one step regardless of its Worker internals. Pass every bounded user-facing step in items. The plan can be created exactly once and cannot be extended later. Never include task management, cleanup, status-update, or final-response items."
     },
     {
       "name": "task_list",

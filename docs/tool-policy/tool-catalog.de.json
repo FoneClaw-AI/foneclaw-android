@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "de",
   "fallbackLocale": "en",
-  "toolCount": 124,
+  "toolCount": 125,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Tools oder Funktionen suchen",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "Bildschirm, Apps und Medien",
-      "toolCount": 12
+      "toolCount": 13
     },
     {
       "name": "Device Status and System Control",
@@ -172,12 +172,20 @@
       "description": "Erfassen Sie einen Android-Bildschirm mit dem FoneClaw-Eingabehilfedienst. Das Bild bleibt für den Agent im privaten App-Cache und wird nicht zur Systemgalerie hinzugefügt. Verwenden Sie targetType=current für den aktuellen Bildschirm, targetType=app mit targetApp zum Öffnen und Erfassen einer App oder targetType=notification_shade nur für eine explizite Screenshot- oder Bildaufnahmeanforderung mit dem sichtbaren Benachrichtigungsschatten. Verwenden Sie niemals targetType=notification_shade, um Benachrichtigungsdaten zu lesen, aufzulisten, abzufragen oder zusammenzufassen. Verwenden Sie stattdessen ein SysInfo-Benachrichtigungstool. Rufen Sie launch_app oder system_panel_open nicht vor diesem Tool für die App- oder Notification-Shade-Erfassung auf. Verwenden Sie dies nicht, wenn der Benutzer einen bereits gespeicherten Screenshot anzeigen möchte; Verwenden Sie „screenshot_open“, um gespeicherte Screenshots anzuzeigen."
     },
     {
+      "name": "scroll",
+      "category": "Screen and App",
+      "risk": "LOW",
+      "approval": "Automatisch",
+      "approvalCode": "AUTO",
+      "description": "Scrollt die aktuelle App in die gewünschte Richtung. Verwenden Sie bevorzugt einen scrollbaren Knoten aus den neuesten Bildschirminformationen oder den sichtbaren Bereich, wenn kein scrollbarer Container verfügbar ist. Prüfen Sie den Bildschirm danach erneut get_screen_info."
+    },
+    {
       "name": "tap_node",
       "category": "Screen and App",
       "risk": "LOW",
       "approval": "Automatisch",
       "approvalCode": "AUTO",
-      "description": "Tippen Sie auf ein UI-Element auf dem Bildschirm. Das Element wird durch seine Knoten-ID identifiziert, die über das Tool screen_info abgerufen werden kann."
+      "description": "Tippen Sie auf ein UI-Element auf dem Bildschirm. Das Element wird durch seine Knoten-ID identifiziert, die über das Tool screen_info abgerufen werden kann get_screen_info."
     },
     {
       "name": "alarm_modify_alarm",
@@ -737,7 +745,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Erstellen Sie ein Android-Kalenderereignis. Sammeln Sie vor dem Aufruf dieses Tools fehlende Zeit- und Erinnerungsdetails. Ein vom Benutzer bereitgestellter Ortsname ist ausreichend und sollte direkt als locationName übergeben werden. Suchen Sie nicht nach einer genauen Adresse oder Koordinaten, es sei denn, der Benutzer fordert ausdrücklich dazu auf, den Ort zu überprüfen, aufzulösen, auszuwählen oder dorthin zu navigieren. Bevorzugen Sie startLocalDateTime/endLocalDateTime in jjjj-MM-tt HH:mm für Benutzerdaten und relative Daten; Das Tool analysiert sie in der Zeitzone des Geräts. Erstellen Sie keine Ereignisse aus modellberechneten Epochen-Millisekunden. Verwenden Sie „calendarId=0“, es sei denn, der Benutzer hat explizit eine Kalender-ID ausgewählt. Verwenden Sie nach der Erstellung das Tool-Ergebnis „actualStart/actualEnd“ als benutzerseitige Erstellungszeit."
+      "description": "Erstellen Sie ein Android-Kalenderereignis. Setzen Sie für einen ganztägigen Termin allDay=true, den Beginn auf die lokale Mitternacht des Tages und das exklusive Ende auf die lokale Mitternacht des Folgetags.Sammeln Sie vor dem Aufruf dieses Tools fehlende Zeit- und Erinnerungsdetails. Ein vom Benutzer bereitgestellter Ortsname ist ausreichend und sollte direkt als locationName übergeben werden. Suchen Sie nicht nach einer genauen Adresse oder Koordinaten, es sei denn, der Benutzer fordert ausdrücklich dazu auf, den Ort zu überprüfen, aufzulösen, auszuwählen oder dorthin zu navigieren. Bevorzugen Sie startLocalDateTime/endLocalDateTime in jjjj-MM-tt HH:mm für Benutzerdaten und relative Daten; Das Tool analysiert sie in der Zeitzone des Geräts. Erstellen Sie keine Ereignisse aus modellberechneten Epochen-Millisekunden. Verwenden Sie „calendarId=0“, es sei denn, der Benutzer hat explizit eine Kalender-ID ausgewählt. Verwenden Sie nach der Erstellung das Tool-Ergebnis „actualStart/actualEnd“ als benutzerseitige Erstellungszeit."
     },
     {
       "name": "calendar_delete_event",
@@ -833,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Aktualisieren Sie ein lokales Memo nach ID. Suchen/listen Sie Memos zuerst auf, wenn der Benutzer das Ziel in natürlicher Sprache beschreibt, und übergeben Sie bekannte Zieldetails mit den geänderten Feldern. Leere Titel/Inhalte/Tags werden ignoriert. reminderAtMillis=-2 behält die Erinnerung bei, -1 löscht die Erinnerung und >0 legt die Erinnerung fest. Technische Bezeichner: reminderAtMillis=-2."
+      "description": "Aktualisieren Sie ein lokales Memo nach ID. Suchen/listen Sie Memos zuerst auf, wenn der Benutzer das Ziel in natürlicher Sprache beschreibt, und übergeben Sie bekannte Zieldetails mit den geänderten Feldern. Leere Titel/Inhalte/Tags werden ignoriert. reminderAtMillis=-2 behält die Erinnerung bei, -1 löscht die Erinnerung und >0 legt die Erinnerung fest. Technische Bezeichner: reminderAtMillis=-2. endAtMillis folgt denselben Regeln zum Beibehalten, Löschen und Festlegen."
     },
     {
       "name": "sysinfo_delete",
@@ -889,7 +897,7 @@
       "risk": "LOW",
       "approval": "Automatisch",
       "approvalCode": "AUTO",
-      "description": "Durchsuchen Sie das Internet nach relevanten Seiten. Gibt Ergebnistitel, URLs und kurze Snippets zurück."
+      "description": "Gibt Ergebnistitel, exakte Quell-URLs und kurze Auszüge zurück. Behalten Sie im endgültigen Ergebnis nach jeder Zusammenfassung die exakte URL bei."
     },
     {
       "name": "shortcut_save_agent_prompt",
