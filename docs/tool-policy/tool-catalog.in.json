@@ -649,7 +649,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Daftar akun email yang dikonfigurasi. Biarkan kueri kosong untuk mencantumkan semua akun. Ketika kueri diberikan, prioritas pencocokan adalah id akun, email, alias, lalu alias fuzzy atau email. Pencocokan persis masih dapat menghasilkan banyak akun. Jika tidak ada akun email FoneClaw yang dikonfigurasi dan kuerinya adalah alamat email, hasilnya mungkin menyertakan providerSetupGuide dengan URL kredensial penyedia tetap. Pengenal teknis: providerSetupGuide."
+      "description": "Mencantumkan akun email yang dikonfigurasi. Kueri kosong menampilkan semua akun; jika diisi, pencocokan dilakukan berdasarkan ID akun, email, alias, lalu alias atau email secara samar. Kecocokan persis tetap dapat menghasilkan beberapa akun. Jika kueri email persis tidak cocok dengan akun yang dikonfigurasi, hasilnya dapat menyertakan providerSetupGuide dengan URL kredensial penyedia tetap. Untuk alamat Gmail, providerSetupGuide.accountConfigPreset berisi semua kolom IMAP, SMTP, dan nama pengguna yang tidak rahasia; teruskan tanpa perubahan ke saveAccount dan tanyakan hanya kata sandi aplikasi yang masih diperlukan. Preset server tidak dikembalikan untuk domain lain."
     },
     {
       "name": "mail_account_save",
@@ -737,7 +737,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Kueri pesan SMS langsung di perangkat Android ini. Tanpa kata kunci, alamat, kontak, atau threadId, daftarkan pesan terbaru. Tetapkan kata kunci/alamat/kontak untuk dicari. Setel threadId hanya dari hasil sms_list sebelumnya untuk membaca percakapan itu. Untuk permintaan ringkasan, panggil sekali dengan box=all lalu rangkum pesan yang diterima dan dikirim kembali. Jangan pernah menggunakan riwayat SysInfo sebagai pengganti hasil langsung ini."
+      "description": "Mengueri SMS langsung di perangkat Android ini. Tanpa kata kunci, alamat, kontak, atau threadId, tampilkan pesan terbaru; gunakan kolom tersebut untuk mencari. Tetapkan threadId hanya dari hasil sms_list sebelumnya. Untuk ringkasan, panggil sekali dengan box=all dan includeBody=true, lalu rangkum hanya pesan masuk dan keluar yang dikembalikan. Gunakan returnedBreakdown untuk jumlah dan pertahankan baris byAddress secara terpisah. Jangan pernah mengganti hasil langsung ini dengan riwayat SysInfo."
     },
     {
       "name": "calendar_create_event",
@@ -801,7 +801,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Buat memo, catatan, atau rekaman tugas lokal yang dapat dilihat pengguna. Gunakan ketika pengguna secara eksplisit ingin konten disimpan sebagai memo atau catatan yang dapat ditindaklanjuti. Jangan gunakan alat ini untuk menyimpan atau menanyakan memori profil pengguna yang dikelola asisten seperti preferensi, identitas, hubungan, atau gaya respons."
+      "description": "Buat memo, catatan, atau rekaman tugas lokal yang dapat dilihat pengguna. Gunakan ketika pengguna secara eksplisit ingin konten disimpan sebagai memo atau catatan yang dapat ditindaklanjuti. Jangan gunakan alat ini untuk menyimpan atau menanyakan memori profil pengguna yang dikelola asisten seperti preferensi, identitas, hubungan, atau gaya respons. Tentukan tanggal memo langsung dari lingkungan Worker tanpa memanggil alat Calendar atau Alarm."
     },
     {
       "name": "memo_delete",
@@ -841,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Perbarui memo lokal berdasarkan id. Cari/daftar memo terlebih dahulu ketika pengguna menjelaskan target dalam bahasa alami, dan meneruskan detail target yang diketahui dengan bidang yang diubah. Judul/konten/tag kosong diabaikan. reminderAtMillis=-2 menyimpan pengingat, -1 menghapus pengingat, dan >0 menyetel pengingat. endAtMillis mengikuti aturan simpan, hapus, dan atur yang sama."
+      "description": "Memperbarui memo lokal berdasarkan ID. Saat pengguna menjelaskan target dengan bahasa alami, cari atau cantumkan memo terlebih dahulu, lalu teruskan detail target yang diketahui bersama kolom yang diubah. Judul, isi, tag, dan tanggal kosong mempertahankan nilai yang ada. Gunakan tanggal yyyy-MM-dd yang ditentukan dari lingkungan Worker saat ini; jangan menghitung milidetik epoch atau memanggil alat Calendar atau Alarm hanya untuk menentukan tanggal memo."
     },
     {
       "name": "sysinfo_delete",

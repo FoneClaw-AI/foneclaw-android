@@ -649,7 +649,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Lista de cuentas de correo configuradas. Deje la consulta vacía para enumerar todas las cuentas. Cuando se proporciona una consulta, la prioridad coincidente es la identificación de la cuenta, el correo electrónico, el alias y luego el alias difuso o el correo electrónico. Las coincidencias exactas aún pueden devolver varias cuentas. Si no se configura ninguna cuenta de correo FoneClaw y la consulta es una dirección de correo electrónico, el resultado puede incluir providerSetupGuide con una credencial de proveedor fija URL."
+      "description": "Enumera las cuentas de correo configuradas. Deja la consulta vacía para verlas todas. Si se proporciona una consulta, busca por ID de cuenta, correo, alias y después alias o correo aproximado. Una coincidencia exacta aún puede devolver varias cuentas. Si un correo exacto no coincide con una cuenta configurada, el resultado puede incluir providerSetupGuide con una URL fija de credenciales del proveedor. Para direcciones de Gmail, providerSetupGuide.accountConfigPreset contiene todos los campos no secretos de IMAP, SMTP y nombre de usuario; pásalos sin cambios a saveAccount y solicita al usuario solo la contraseña de aplicación pendiente. No se devuelve un ajuste de servidor para otros dominios."
     },
     {
       "name": "mail_account_save",
@@ -737,7 +737,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Consulta mensajes SMS activos en este dispositivo Android. Sin palabra clave, dirección, contacto o threadId, enumera los mensajes recientes. Establezca la palabra clave/dirección/contacto para buscar. Establezca threadId solo desde un resultado sms_list anterior para leer esa conversación. Para una solicitud de resumen, llame una vez con box=all y luego resuma los mensajes enviados y recibidos devueltos. Nunca uses el historial de SysInfo como reemplazo de este resultado en vivo."
+      "description": "Consulta SMS en vivo en este dispositivo Android. Sin palabra clave, dirección, contacto o threadId, muestra los mensajes recientes; usa esos campos para buscar. Define threadId solo a partir de un resultado anterior de sms_list. Para un resumen, llama una vez con box=all e includeBody=true y resume únicamente los mensajes recibidos y enviados devueltos. Usa returnedBreakdown para los recuentos y mantén separadas sus filas byAddress. Nunca sustituyas este resultado en vivo por el historial de SysInfo."
     },
     {
       "name": "calendar_create_event",
@@ -801,7 +801,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Cree un memorando, nota o registro de tarea local visible para el usuario. Úselo cuando el usuario desee explícitamente que el contenido se mantenga como una nota o una nota procesable. No utilice esta herramienta para guardar o consultar la memoria del perfil de usuario administrado por el asistente, como preferencias, identidad, relaciones o estilo de respuesta."
+      "description": "Cree un memorando, nota o registro de tarea local visible para el usuario. Úselo cuando el usuario desee explícitamente que el contenido se mantenga como una nota o una nota procesable. No utilice esta herramienta para guardar o consultar la memoria del perfil de usuario administrado por el asistente, como preferencias, identidad, relaciones o estilo de respuesta. Resuelve las fechas de la nota directamente desde el entorno Worker sin llamar a las herramientas Calendar ni Alarm."
     },
     {
       "name": "memo_delete",
@@ -841,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Actualizar una nota local por identificación. Busque/enumere notas primero cuando el usuario describa el objetivo en lenguaje natural y pase los detalles conocidos del objetivo con los campos modificados. Se ignoran los títulos, contenidos y etiquetas en blanco. reminderAtMillis=-2 mantiene el recordatorio, -1 lo borra y >0 establece el recordatorio. endAtMillis sigue las mismas reglas para mantener, borrar o establecer."
+      "description": "Actualiza una nota local por ID. Si el usuario describe el objetivo en lenguaje natural, primero busca o enumera las notas y envía los datos conocidos del objetivo junto con los campos modificados. Los títulos, contenidos, etiquetas y fechas en blanco conservan sus valores actuales. Usa fechas yyyy-MM-dd resueltas desde el entorno Worker actual; nunca calcules milisegundos desde la época ni llames a las herramientas Calendar o Alarm solo para resolver la fecha de una nota."
     },
     {
       "name": "sysinfo_delete",

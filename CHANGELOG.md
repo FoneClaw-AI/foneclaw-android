@@ -8,6 +8,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.2.0] - 2026-09-07
+
+### Added
+- Live delegated-task progress and cleaner worker results
+- Dedicated custom AI model section with direct editing
+- Clearer SMS result tables and consolidated web source presentation
+
+### Changed
+- Clearer upgrade pricing, current-plan credit, availability, and renewal information
+- More reliable guided Gmail account setup
+- More predictable one-step messaging and personal-organization actions
+
+### Scope
+- Google APK/AAB remain submission candidates until Play review and rollout complete
+- Lebest APK remains an OEM re-signing candidate and is not a final OEM package
+
 ## [v0.1.9] - 2026-09-01
 
 ### Added

@@ -649,7 +649,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Listar contas de e-mail configuradas. Deixe a consulta vazia para listar todas as contas. Quando a consulta é fornecida, a prioridade correspondente é o ID da conta, email, alias e, em seguida, alias difusos ou email. As correspondências exatas ainda podem retornar várias contas. Se nenhuma conta de e-mail FoneClaw estiver configurada e a consulta for um endereço de e-mail, o resultado poderá incluir providerSetupGuide com uma credencial de provedor fixa URL."
+      "description": "Lista as contas de e-mail configuradas. Deixe a consulta vazia para listar todas. Quando fornecida, a correspondência segue ID da conta, e-mail, alias e depois alias ou e-mail aproximado. Uma correspondência exata ainda pode retornar várias contas. Se uma consulta de e-mail exata não tiver conta configurada correspondente, o resultado poderá incluir providerSetupGuide com uma URL fixa de credenciais do provedor. Para endereços Gmail, providerSetupGuide.accountConfigPreset contém todos os campos não secretos de IMAP, SMTP e nome de usuário; passe-os sem alterações para saveAccount e peça ao usuário apenas a senha de app restante. Nenhuma predefinição de servidor é retornada para outros domínios."
     },
     {
       "name": "mail_account_save",
@@ -737,7 +737,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requer aprovação",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Consulte mensagens SMS ativas neste dispositivo Android. Sem palavra-chave, endereço, contato ou threadId, liste as mensagens recentes. Defina palavra-chave/endereço/contato para pesquisar. Defina threadId apenas de um resultado sms_list anterior para ler essa conversa. Para uma solicitação de resumo, ligue uma vez com box=all e depois resuma as mensagens recebidas e enviadas retornadas. Nunca use o histórico SysInfo como substituto para este resultado ao vivo."
+      "description": "Consulta SMS ao vivo neste dispositivo Android. Sem palavra-chave, endereço, contato ou threadId, lista as mensagens recentes; use esses campos para pesquisar. Defina threadId somente a partir de um resultado anterior de sms_list. Para um resumo, chame uma vez com box=all e includeBody=true e resuma apenas as mensagens recebidas e enviadas retornadas. Use returnedBreakdown para as contagens e mantenha separadas suas linhas byAddress. Nunca substitua este resultado ao vivo pelo histórico do SysInfo."
     },
     {
       "name": "calendar_create_event",
@@ -801,7 +801,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requer aprovação",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Crie um memorando, nota ou registro de tarefa local visível ao usuário. Use quando o usuário desejar explicitamente que o conteúdo seja mantido como um memorando ou nota acionável. Não use esta ferramenta para salvar ou consultar a memória do perfil do usuário gerenciado pelo assistente, como preferências, identidade, relacionamentos ou estilo de resposta."
+      "description": "Crie um memorando, nota ou registro de tarefa local visível ao usuário. Use quando o usuário desejar explicitamente que o conteúdo seja mantido como um memorando ou nota acionável. Não use esta ferramenta para salvar ou consultar a memória do perfil do usuário gerenciado pelo assistente, como preferências, identidade, relacionamentos ou estilo de resposta. Resolva as datas do memorando diretamente no ambiente Worker sem chamar as ferramentas Calendar ou Alarm."
     },
     {
       "name": "memo_delete",
@@ -841,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requer aprovação",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Atualize um memorando local por ID. Pesquise/liste memorandos primeiro quando o usuário descreve o alvo em linguagem natural e passe detalhes conhecidos do alvo com os campos alterados. Título/conteúdo/tags em branco são ignorados. reminderAtMillis=-2 mantém o lembrete, -1 limpa o lembrete e >0 define o lembrete. endAtMillis segue as mesmas regras de manter, limpar ou definir."
+      "description": "Atualiza um memorando local por ID. Quando o usuário descrever o alvo em linguagem natural, primeiro pesquise ou liste os memorandos e envie os detalhes conhecidos do alvo junto com os campos alterados. Título, conteúdo, tags e datas em branco preservam os valores atuais. Use datas yyyy-MM-dd resolvidas no ambiente Worker atual; nunca calcule milissegundos desde a época nem chame as ferramentas Calendar ou Alarm apenas para resolver a data de um memorando."
     },
     {
       "name": "sysinfo_delete",

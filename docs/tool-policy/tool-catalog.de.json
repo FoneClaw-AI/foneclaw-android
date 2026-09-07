@@ -649,7 +649,7 @@
       "risk": "LOW",
       "approval": "Automatisch",
       "approvalCode": "AUTO",
-      "description": "Konfigurierte E-Mail-Konten auflisten. Lassen Sie die Abfrage leer, um alle Konten aufzulisten. Wenn eine Abfrage bereitgestellt wird, ist die Übereinstimmungspriorität Konto-ID, E-Mail, Alias ​​und dann Fuzzy-Alias ​​oder E-Mail. Bei exakten Übereinstimmungen können immer noch mehrere Konten zurückgegeben werden. Wenn kein FoneClaw-E-Mail-Konto konfiguriert ist und die Abfrage eine E-Mail-Adresse ist, enthält das Ergebnis möglicherweise „providerSetupGuide“ mit einer festen Anbieter-Anmeldeinformations-URL."
+      "description": "Listet konfigurierte E-Mail-Konten auf. Eine leere Abfrage zeigt alle Konten; andernfalls wird nach Konto-ID, E-Mail, Alias und anschließend unscharfem Alias oder E-Mail gesucht. Auch eine exakte Übereinstimmung kann mehrere Konten liefern. Gibt es für eine exakte E-Mail-Abfrage kein konfiguriertes Konto, kann das Ergebnis providerSetupGuide mit einer festen Anbieter-Zugangsdaten-URL enthalten. Bei Gmail-Adressen enthält providerSetupGuide.accountConfigPreset alle nicht geheimen IMAP-, SMTP- und Benutzernamenfelder. Übergeben Sie diese unverändert an saveAccount und fragen Sie nur nach dem noch fehlenden App-Passwort. Für andere Domains wird keine Servervoreinstellung zurückgegeben."
     },
     {
       "name": "mail_account_save",
@@ -737,7 +737,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Fragen Sie Live-SMS-Nachrichten auf diesem Android-Gerät ab. Listen Sie aktuelle Nachrichten ohne Schlüsselwort, Adresse, Kontakt oder Thread-ID auf. Legen Sie Stichwort/Adresse/Kontakt für die Suche fest. Legen Sie threadId nur aus einem früheren sms_list-Ergebnis fest, um diese Konversation zu lesen. Für eine Zusammenfassungsanforderung rufen Sie einmal mit box=all auf und fassen dann die zurückgegebenen empfangenen und gesendeten Nachrichten zusammen. Verwenden Sie den SysInfo-Verlauf niemals als Ersatz für dieses Live-Ergebnis."
+      "description": "Fragt aktuelle SMS auf diesem Android-Gerät ab. Ohne Schlüsselwort, Adresse, Kontakt oder threadId werden die neuesten Nachrichten angezeigt; diese Felder dienen der Suche. Setzen Sie threadId nur aus einem früheren sms_list-Ergebnis. Rufen Sie für eine Zusammenfassung einmal mit box=all und includeBody=true auf und fassen Sie ausschließlich die zurückgegebenen empfangenen und gesendeten Nachrichten zusammen. Verwenden Sie returnedBreakdown für Anzahlen und halten Sie dessen byAddress-Zeilen getrennt. Ersetzen Sie dieses Live-Ergebnis nie durch den SysInfo-Verlauf."
     },
     {
       "name": "calendar_create_event",
@@ -801,7 +801,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Erstellen Sie ein für den Benutzer sichtbares lokales Memo, eine Notiz oder einen Aufgabendatensatz. Verwenden Sie diese Option, wenn der Benutzer ausdrücklich möchte, dass der Inhalt als Memo oder umsetzbare Notiz aufbewahrt wird. Verwenden Sie dieses Tool nicht zum Speichern oder Abfragen des vom Assistenten verwalteten Benutzerprofilspeichers wie Präferenzen, Identität, Beziehungen oder Antwortstil."
+      "description": "Erstellen Sie ein für den Benutzer sichtbares lokales Memo, eine Notiz oder einen Aufgabendatensatz. Verwenden Sie diese Option, wenn der Benutzer ausdrücklich möchte, dass der Inhalt als Memo oder umsetzbare Notiz aufbewahrt wird. Verwenden Sie dieses Tool nicht zum Speichern oder Abfragen des vom Assistenten verwalteten Benutzerprofilspeichers wie Präferenzen, Identität, Beziehungen oder Antwortstil. Lösen Sie Memo-Daten direkt aus der Worker-Umgebung auf, ohne Calendar- oder Alarm-Tools aufzurufen."
     },
     {
       "name": "memo_delete",
@@ -841,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Aktualisieren Sie ein lokales Memo nach ID. Suchen/listen Sie Memos zuerst auf, wenn der Benutzer das Ziel in natürlicher Sprache beschreibt, und übergeben Sie bekannte Zieldetails mit den geänderten Feldern. Leere Titel/Inhalte/Tags werden ignoriert. reminderAtMillis=-2 behält die Erinnerung bei, -1 löscht die Erinnerung und >0 legt die Erinnerung fest. Technische Bezeichner: reminderAtMillis=-2. endAtMillis folgt denselben Regeln zum Beibehalten, Löschen und Festlegen."
+      "description": "Aktualisiert ein lokales Memo anhand der ID. Wenn der Benutzer das Ziel in natürlicher Sprache beschreibt, suchen Sie zuerst nach Memos oder listen Sie sie auf und übergeben Sie bekannte Zieldetails zusammen mit den geänderten Feldern. Leere Titel-, Inhalts-, Tag- und Datumsfelder behalten ihre aktuellen Werte. Verwenden Sie Datumswerte im Format yyyy-MM-dd aus der aktuellen Worker-Umgebung; berechnen Sie niemals Epochen-Millisekunden und rufen Sie Calendar- oder Alarm-Tools nicht nur zur Bestimmung eines Memo-Datums auf."
     },
     {
       "name": "sysinfo_delete",

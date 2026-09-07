@@ -649,7 +649,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Liệt kê các tài khoản thư được cấu hình. Để trống truy vấn để liệt kê tất cả các tài khoản. Khi truy vấn được cung cấp, mức độ ưu tiên phù hợp là id tài khoản, email, bí danh, sau đó là bí danh mờ hoặc email. Kết quả khớp chính xác vẫn có thể trả về nhiều tài khoản. Nếu không có tài khoản thư FoneClaw nào được định cấu hình và truy vấn là địa chỉ email, kết quả có thể bao gồm providerSetupGuide với URL thông tin xác thực của nhà cung cấp cố định. Định danh kỹ thuật: providerSetupGuide."
+      "description": "Liệt kê các tài khoản thư đã cấu hình. Để trống truy vấn để xem tất cả; nếu có truy vấn, hệ thống khớp theo ID tài khoản, email, bí danh, rồi bí danh hoặc email gần đúng. Khớp chính xác vẫn có thể trả về nhiều tài khoản. Nếu truy vấn email chính xác không khớp tài khoản đã cấu hình, kết quả có thể gồm providerSetupGuide với URL thông tin xác thực cố định của nhà cung cấp. Với địa chỉ Gmail, providerSetupGuide.accountConfigPreset chứa đầy đủ các trường IMAP, SMTP và tên người dùng không bí mật; chuyển nguyên trạng sang saveAccount và chỉ hỏi người dùng mật khẩu ứng dụng còn thiếu. Không trả về thiết lập máy chủ sẵn cho miền khác."
     },
     {
       "name": "mail_account_save",
@@ -737,7 +737,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Truy vấn tin nhắn SMS trực tiếp trên thiết bị Android này. Không có từ khóa, địa chỉ, liên hệ hoặc threadId, hãy liệt kê các tin nhắn gần đây. Đặt từ khóa/địa chỉ/liên hệ để tìm kiếm. Chỉ đặt threadId từ kết quả sms_list trước đó để đọc cuộc trò chuyện đó. Đối với yêu cầu tóm tắt, hãy gọi một lần với box=all rồi tóm tắt các tin nhắn đã nhận và đã gửi được trả về. Không bao giờ sử dụng lịch sử SysInfo để thay thế cho kết quả trực tiếp này."
+      "description": "Truy vấn SMS trực tiếp trên thiết bị Android này. Khi không có từ khóa, địa chỉ, liên hệ hoặc threadId, công cụ liệt kê tin gần đây; dùng các trường đó để tìm kiếm. Chỉ đặt threadId từ kết quả sms_list trước đó. Với yêu cầu tóm tắt, gọi một lần bằng box=all và includeBody=true rồi chỉ tóm tắt các tin đã nhận và gửi được trả về. Dùng returnedBreakdown để lấy số lượng và giữ riêng từng hàng byAddress. Không bao giờ thay kết quả trực tiếp này bằng lịch sử SysInfo."
     },
     {
       "name": "calendar_create_event",
@@ -801,7 +801,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Tạo bản ghi nhớ, ghi chú hoặc bản ghi tác vụ cục bộ mà người dùng có thể nhìn thấy. Sử dụng khi người dùng rõ ràng muốn nội dung được lưu giữ dưới dạng bản ghi nhớ hoặc ghi chú có thể thực hiện được. Không sử dụng công cụ này để lưu hoặc truy vấn bộ nhớ hồ sơ người dùng do trợ lý quản lý chẳng hạn như tùy chọn, danh tính, mối quan hệ hoặc kiểu phản hồi."
+      "description": "Tạo bản ghi nhớ, ghi chú hoặc bản ghi tác vụ cục bộ mà người dùng có thể nhìn thấy. Sử dụng khi người dùng rõ ràng muốn nội dung được lưu giữ dưới dạng bản ghi nhớ hoặc ghi chú có thể thực hiện được. Không sử dụng công cụ này để lưu hoặc truy vấn bộ nhớ hồ sơ người dùng do trợ lý quản lý chẳng hạn như tùy chọn, danh tính, mối quan hệ hoặc kiểu phản hồi. Xác định ngày của ghi chú trực tiếp từ môi trường Worker mà không gọi công cụ Calendar hoặc Alarm."
     },
     {
       "name": "memo_delete",
@@ -841,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Cập nhật bản ghi nhớ cục bộ theo id. Trước tiên, hãy tìm kiếm/liệt kê các bản ghi nhớ khi người dùng mô tả mục tiêu bằng ngôn ngữ tự nhiên và chuyển các chi tiết mục tiêu đã biết bằng các trường đã thay đổi. Tiêu đề/nội dung/thẻ trống sẽ bị bỏ qua. nhắc nhởAtMillis=-2 giữ lời nhắc, -1 xóa lời nhắc và >0 đặt lời nhắc. Định danh kỹ thuật: reminderAtMillis=-2. endAtMillis tuân theo cùng quy tắc giữ, xóa và đặt."
+      "description": "Cập nhật ghi chú cục bộ theo ID. Khi người dùng mô tả mục tiêu bằng ngôn ngữ tự nhiên, trước tiên hãy tìm kiếm hoặc liệt kê ghi chú, rồi truyền các chi tiết mục tiêu đã biết cùng những trường cần thay đổi. Tiêu đề, nội dung, thẻ và chuỗi ngày để trống sẽ giữ nguyên giá trị hiện tại. Dùng ngày dạng yyyy-MM-dd được xác định từ môi trường Worker hiện tại; không tính mili giây epoch hoặc gọi công cụ Calendar hay Alarm chỉ để xác định ngày của ghi chú."
     },
     {
       "name": "sysinfo_delete",

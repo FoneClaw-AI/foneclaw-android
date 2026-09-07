@@ -649,7 +649,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "列出配置的邮件帐户。将查询留空以列出所有帐户。提供查询时，匹配优先级为帐户 ID、电子邮件、别名，然后是模糊别名或电子邮件。精确匹配仍然可以返回多个帐户。如果未配置 FoneClaw 邮件帐户并且查询是电子邮件地址，则结果可能包括带有固定提供商凭据 URL 的 providerSetupGuide。"
+      "description": "列出已配置的邮件帐户。查询为空时列出全部帐户；提供查询时，按帐户 ID、电子邮件、别名及模糊别名或邮件地址依次匹配，精确匹配仍可能返回多个帐户。若精确邮箱查询没有已配置的匹配项，结果可能包含带固定服务商凭据网址的 providerSetupGuide。对于 Gmail 地址，providerSetupGuide.accountConfigPreset 包含完整的非秘密 IMAP、SMTP 和用户名字段；调用 saveAccount 时须原样传递，并且只向用户询问剩余的应用专用密码。其他域名不会返回服务器预设。"
     },
     {
       "name": "mail_account_save",
@@ -737,7 +737,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "查询此 Android 设备上的实时 SMS 消息。不包含关键字、地址、联系人或 threadId，列出最近的消息。设置要搜索的关键字/地址/联系人。仅从较早的 sms_list 结果设置 threadId 以读取该对话。对于摘要请求，请使用 box=all 调用一次，然后汇总返回的接收和发送的消息。切勿使用 SysInfo 历史记录来替代此实时结果。"
+      "description": "查询此 Android 设备上的实时 SMS 消息。不包含关键字、地址、联系人或 threadId 时列出最近消息；设置关键字、地址或联系人以搜索。仅使用先前 sms_list 结果中的 threadId 读取对应会话。对于摘要请求，使用 box=all 和 includeBody=true 调用一次，并且只汇总返回的收发消息。使用 returnedBreakdown 统计数量，并分别保留其中的 byAddress 各行。切勿用 SysInfo 历史记录替代此实时结果。"
     },
     {
       "name": "calendar_create_event",
@@ -801,7 +801,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "创建用户可见的本地备忘录、注释或任务记录。当用户明确希望将内容保留为备忘录或可操作注释时使用。请勿使用此工具保存或查询助理管理的用户配置文件内存，例如首选项、身份、关系或响应方式。"
+      "description": "创建用户可见的本地备忘录、注释或任务记录。当用户明确希望将内容保留为备忘录或可操作注释时使用。请勿使用此工具保存或查询助理管理的用户配置文件内存，例如首选项、身份、关系或响应方式。 直接根据 Worker 环境解析备忘录日期，不要调用 Calendar 或 Alarm 工具。"
     },
     {
       "name": "memo_delete",
@@ -841,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "通过 id 更新本地备忘录。当用户用自然语言描述目标时，首先搜索/列出备忘录，并通过更改的字段传递已知的目标详细信息。空白标题/内容/标签将被忽略。 reminderAtMillis=-2 保持提醒，-1 清除提醒，>0 设置提醒。 endAtMillis 遵循相同的保留、清除和设置规则。"
+      "description": "通过 ID 更新本地备忘录。用户以自然语言描述目标时，先搜索或列出备忘录，并随变更字段传递已知目标详情。空白的标题、内容、标签和日期字符串保持现有值。使用从当前 Worker 环境解析的 yyyy-MM-dd 日期；绝不计算纪元毫秒，也不要仅为解析备忘录日期调用 Calendar 或 Alarm 工具。"
     },
     {
       "name": "sysinfo_delete",

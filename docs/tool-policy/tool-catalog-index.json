@@ -25,92 +25,92 @@
     {
       "locale": "en",
       "path": "/FoneClaw/ToolPolicy/tool-catalog.json",
-      "size": 56657,
-      "sha256": "9a7e767c63451b4b3043d6beb743e387849da67717900c5ac38ad08d35da0232"
+      "size": 57144,
+      "sha256": "192d5d9620166802e34b0e2a675a0e23ad52ac6dbf565af7708808bad79564e5"
     },
     {
       "locale": "zh-CN",
       "path": "/FoneClaw/ToolPolicy/tool-catalog.zh-CN.json",
-      "size": 54681,
-      "sha256": "b4214b26a0f49c631fe92be3aa0c407739a73b1ab81e6c6f462c67b759714e8e"
+      "size": 55105,
+      "sha256": "8a4154ae064bd2695208f7da029593b971c3da003cde9df61ebb897ce6f4ed9a"
     },
     {
       "locale": "zh-HK",
       "path": "/FoneClaw/ToolPolicy/tool-catalog.zh-HK.json",
-      "size": 55003,
-      "sha256": "45d95dbdab24ef43c2a01cc49040f89e498c9fd0a2c7cad65a9ae9fc6caeda4a"
+      "size": 55439,
+      "sha256": "efc1f2cda17a16fcdbcc7b9d194cfcd88ca1e37dfaa9c8ffda2a0ccd3d73e7a1"
     },
     {
       "locale": "zh-TW",
       "path": "/FoneClaw/ToolPolicy/tool-catalog.zh-TW.json",
-      "size": 55129,
-      "sha256": "00337555ff66095c330acca58ba19da08e34603af5395c3e03bfcc519578a622"
+      "size": 55571,
+      "sha256": "738d0334b248f25e7d11f4bfa3a8a58ed079a32b6d5df21951ac93272f09fa3d"
     },
     {
       "locale": "ja",
       "path": "/FoneClaw/ToolPolicy/tool-catalog.ja.json",
-      "size": 71133,
-      "sha256": "ace8f41e34e7fafded779e06d09181a061091e74b2dabdfeae2b6d549463ca53"
+      "size": 71498,
+      "sha256": "4ad7d778cc627d51ef947f0b123c9f4c1b94afbed40558057fe5913197861719"
     },
     {
       "locale": "ko",
       "path": "/FoneClaw/ToolPolicy/tool-catalog.ko.json",
-      "size": 63838,
-      "sha256": "0ef1b85ce746fcd58a4a2d756285444897bdff045c56ec28343bd7ae37fb890e"
+      "size": 64339,
+      "sha256": "17af52121d9339b1ab75da3f350ab01e16fa93fea5498f8ece5c210e6d39e0e1"
     },
     {
       "locale": "es",
       "path": "/FoneClaw/ToolPolicy/tool-catalog.es.json",
-      "size": 63602,
-      "sha256": "cc60b26d0d922aebb514080c4b6b1cf72519134b0915ed4a2352c8a0f683712c"
+      "size": 63965,
+      "sha256": "75716c5053c7215ea1b64b047940199568aa9553eadf72a323498c48169fe223"
     },
     {
       "locale": "pt",
       "path": "/FoneClaw/ToolPolicy/tool-catalog.pt.json",
-      "size": 61971,
-      "sha256": "6c025585ec5b887f8e360a528afd5af5a3c5ca7cdab2cc7f02bec55d064e8c1a"
+      "size": 62443,
+      "sha256": "f9ee4acef1af5204c69c2de22103ad98e8c5473a62e2628c9f5cf75ffb1309cd"
     },
     {
       "locale": "ru",
       "path": "/FoneClaw/ToolPolicy/tool-catalog.ru.json",
-      "size": 93323,
-      "sha256": "ffbb210424dfbfebd0a701fc4aa7f2cab31ee2f8e272eae071708e067fe75dd7"
+      "size": 93417,
+      "sha256": "28d68b43ad4b1deb051304e98d9ac1e3c72d68179e2d6342759862e6474eed3d"
     },
     {
       "locale": "fr",
       "path": "/FoneClaw/ToolPolicy/tool-catalog.fr.json",
-      "size": 65988,
-      "sha256": "097b27632939cf4700c8d2cf962cc29501c168b42e942288066aaf6aac4fed03"
+      "size": 66349,
+      "sha256": "24e63b80eb21f0d467d4c507adb3d53f79c9013778278816412db6135cf9777f"
     },
     {
       "locale": "de",
       "path": "/FoneClaw/ToolPolicy/tool-catalog.de.json",
-      "size": 66875,
-      "sha256": "47bed1fc15a46248c36430276de0529d6d15b73b281238f572fe619fa20c75fc"
+      "size": 67227,
+      "sha256": "74fe2b3ad54c5e6b5e8b103e028dea5fc4c2eac3c8496ad028784da01c3eba85"
     },
     {
       "locale": "ar",
       "path": "/FoneClaw/ToolPolicy/tool-catalog.ar.json",
-      "size": 76345,
-      "sha256": "e805ef900503cd70ce18efb43088bd9c3e0fb2b8ea0fb2e967956c9bceab15e7"
+      "size": 76547,
+      "sha256": "8643f63ae68259812c185a1d65bbe888021c2bc1cd44f6cd9c29133a17fd9e94"
     },
     {
       "locale": "in",
       "path": "/FoneClaw/ToolPolicy/tool-catalog.in.json",
-      "size": 60859,
-      "sha256": "f1ffe07430e7d718df6dc9a8f455fea8b5a3e917326c34bdbfd6f7044b2a9e0b"
+      "size": 61297,
+      "sha256": "46f38679a0b4a276e5a260fe631bf23de710c975f9689ebc0d9f48b44137fcd4"
     },
     {
       "locale": "th",
       "path": "/FoneClaw/ToolPolicy/tool-catalog.th.json",
-      "size": 103050,
-      "sha256": "51ac2a8caee7d3fabafda29c5c7438975fc50149fee54cc4f86bb1da8616cb2f"
+      "size": 103688,
+      "sha256": "2e45c0975a393439449503c3799b3f2f5adbc7004d63d00b1835c94e234b5a71"
     },
     {
       "locale": "vi",
       "path": "/FoneClaw/ToolPolicy/tool-catalog.vi.json",
-      "size": 69887,
-      "sha256": "4ee91751bc49c26bc023d977da1fb89a21e02970388962b77d92a0d9a3b3da14"
+      "size": 70251,
+      "sha256": "0c18e0f894d28ede016f5658ab3252e8cf66078548a31d4101adabc94f72e8b4"
     }
   ]
 }

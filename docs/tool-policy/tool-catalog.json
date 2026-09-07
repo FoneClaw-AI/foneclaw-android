@@ -649,7 +649,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "List configured mail accounts. Leave query empty to list all accounts. When query is provided, matching priority is account id, email, alias, then fuzzy alias or email. Exact matches can still return multiple accounts. If no FoneClaw mail account is configured and query is an email address, the result may include providerSetupGuide with a fixed provider credential URL."
+      "description": "List configured mail accounts. Leave query empty to list all accounts. When query is provided, matching priority is account id, email, alias, then fuzzy alias or email. Exact matches can still return multiple accounts. If an exact email query has no configured match, the result may include providerSetupGuide with a fixed provider credential URL. For Gmail addresses, providerSetupGuide.accountConfigPreset contains the complete non-secret IMAP, SMTP, and username fields to carry unchanged into saveAccount; ask the user only for the remaining app password. No server preset is returned for other domains."
     },
     {
       "name": "mail_account_save",
@@ -737,7 +737,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Query live SMS messages on this Android device. With no keyword, address, contact, or threadId, list recent messages. Set keyword/address/contact to search. Set threadId only from an earlier sms_list result to read that conversation. For a summary request, call once with box=all and then summarize the returned received and sent messages. Never use SysInfo history as a replacement for this live result."
+      "description": "Query live SMS messages on this Android device. With no keyword, address, contact, or threadId, list recent messages. Set keyword/address/contact to search. Set threadId only from an earlier sms_list result to read that conversation. For a summary request, call once with box=all and includeBody=true, then summarize only the returned received and sent messages. Use returnedBreakdown for counts and keep its byAddress rows separate. Never use SysInfo history as a replacement for this live result."
     },
     {
       "name": "calendar_create_event",
@@ -801,7 +801,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Create a user-visible local memo, note, or task record. Use when the user explicitly wants the content kept as a memo or actionable note. Do not use this tool to save or query assistant-managed user profile memory such as preferences, identity, relationships, or response style."
+      "description": "Create a user-visible local memo, note, or task record. Use when the user explicitly wants the content kept as a memo or actionable note. Do not use this tool to save or query assistant-managed user profile memory such as preferences, identity, relationships, or response style. Resolve memo dates directly from the Worker environment without calling Calendar or Alarm Tools."
     },
     {
       "name": "memo_delete",
@@ -841,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Update a local memo by id. Search/list memos first when the user describes the target in natural language, and pass known target details with the changed fields. Blank title/content/tags are ignored. reminderAtMillis=-2 keeps reminder, -1 clears reminder, and >0 sets reminder. endAtMillis follows the same keep/clear/set rules."
+      "description": "Update a local memo by id. Search/list memos first when the user describes the target in natural language, and pass known target details with the changed fields. Blank title/content/tags and date strings keep existing values. Use yyyy-MM-dd dates resolved from the current Worker environment; never calculate epoch milliseconds or call Calendar or Alarm Tools only to resolve a memo date."
     },
     {
       "name": "sysinfo_delete",

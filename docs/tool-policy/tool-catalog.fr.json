@@ -649,7 +649,7 @@
       "risk": "LOW",
       "approval": "Automatique",
       "approvalCode": "AUTO",
-      "description": "Répertoriez les comptes de messagerie configurés. Laissez la requête vide pour répertorier tous les comptes. Lorsque la requête est fournie, la priorité de correspondance est l'identifiant du compte, l'e-mail, l'alias, puis l'alias flou ou l'e-mail. Les correspondances exactes peuvent toujours renvoyer plusieurs comptes. Si aucun compte de messagerie FoneClaw n'est configuré et que la requête est une adresse e-mail, le résultat peut inclure supplierSetupGuide avec une URL d'identification de fournisseur fixe. Identifiants techniques: providerSetupGuide."
+      "description": "Répertorie les comptes de messagerie configurés. Une requête vide affiche tous les comptes ; sinon, la correspondance suit l’identifiant, l’adresse e-mail, l’alias, puis l’alias ou l’adresse approximative. Une correspondance exacte peut encore renvoyer plusieurs comptes. Si une adresse exacte ne correspond à aucun compte configuré, le résultat peut inclure providerSetupGuide avec une URL fixe d’identifiants du fournisseur. Pour Gmail, providerSetupGuide.accountConfigPreset contient tous les champs IMAP, SMTP et nom d’utilisateur non secrets ; transmettez-les sans modification à saveAccount et ne demandez que le mot de passe d’application manquant. Aucun préréglage serveur n’est renvoyé pour les autres domaines."
     },
     {
       "name": "mail_account_save",
@@ -737,7 +737,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Interrogez les messages SMS en direct sur cet appareil Android. Sans mot-clé, adresse, contact ou threadId, répertoriez les messages récents. Définissez le mot-clé/adresse/contact à rechercher. Définissez threadId uniquement à partir d’un résultat sms_list antérieur pour lire cette conversation. Pour une demande de résumé, appelez une fois avec box=all, puis résumez les messages reçus et envoyés renvoyés. N'utilisez jamais l'historique SysInfo en remplacement de ce résultat en direct."
+      "description": "Interroge les SMS en direct sur cet appareil Android. Sans mot-clé, adresse, contact ou threadId, affiche les messages récents ; utilisez ces champs pour rechercher. Définissez threadId uniquement depuis un résultat sms_list antérieur. Pour un résumé, appelez une fois avec box=all et includeBody=true, puis résumez seulement les messages reçus et envoyés renvoyés. Utilisez returnedBreakdown pour les nombres et gardez ses lignes byAddress séparées. Ne remplacez jamais ce résultat en direct par l’historique SysInfo."
     },
     {
       "name": "calendar_create_event",
@@ -801,7 +801,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Créez un mémo, une note ou un enregistrement de tâche local visible par l'utilisateur. À utiliser lorsque l'utilisateur souhaite explicitement que le contenu soit conservé sous forme de mémo ou de note exploitable. N'utilisez pas cet outil pour enregistrer ou interroger la mémoire de profil utilisateur gérée par l'assistant, telle que les préférences, l'identité, les relations ou le style de réponse."
+      "description": "Créez un mémo, une note ou un enregistrement de tâche local visible par l'utilisateur. À utiliser lorsque l'utilisateur souhaite explicitement que le contenu soit conservé sous forme de mémo ou de note exploitable. N'utilisez pas cet outil pour enregistrer ou interroger la mémoire de profil utilisateur gérée par l'assistant, telle que les préférences, l'identité, les relations ou le style de réponse. Résolvez les dates du mémo directement depuis l’environnement Worker sans appeler les outils Calendar ni Alarm."
     },
     {
       "name": "memo_delete",
@@ -841,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Mettre à jour un mémo local par identifiant. Recherchez/répertoriez d'abord les mémos lorsque l'utilisateur décrit la cible en langage naturel, et transmettez les détails de la cible connue avec les champs modifiés. Les titres/contenus/balises vides sont ignorés. rappelAtMillis=-2 conserve le rappel, -1 efface le rappel et >0 définit le rappel. Identifiants techniques: reminderAtMillis=-2. endAtMillis suit les mêmes règles de conservation, d’effacement et de définition."
+      "description": "Met à jour un mémo local par ID. Lorsque l’utilisateur décrit la cible en langage naturel, recherchez ou répertoriez d’abord les mémos, puis transmettez les détails connus avec les champs modifiés. Les titres, contenus, étiquettes et dates vides conservent leurs valeurs actuelles. Utilisez des dates yyyy-MM-dd résolues depuis l’environnement Worker actuel ; ne calculez jamais de millisecondes depuis l’époque et n’appelez pas les outils Calendar ou Alarm uniquement pour déterminer la date d’un mémo."
     },
     {
       "name": "sysinfo_delete",

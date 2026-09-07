@@ -649,7 +649,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "列出已配置的郵件帳號。將查詢留空以列出所有帳戶。提供查詢時，符合優先順序為帳戶 ID、電子郵件、別名，然後是模糊別名或電子郵件。精確匹配仍然可以回傳多個帳戶。如果未配置 FoneClaw 郵件帳戶且查詢是電子郵件地址，則結果可能包括帶有固定提供者憑證 URL 的 providerSetupGuide。"
+      "description": "列出已設定的郵件帳號。查詢留空時列出所有帳號；提供查詢時，依帳號 ID、電子郵件、別名及模糊別名或電子郵件的順序比對，完全相符仍可能回傳多個帳號。若完全相符的電子郵件查詢沒有已設定帳號，結果可能包含附有固定服務供應商憑證網址的 providerSetupGuide。對於 Gmail 位址，providerSetupGuide.accountConfigPreset 包含完整的非機密 IMAP、SMTP 與使用者名稱欄位；呼叫 saveAccount 時必須原樣傳遞，並只向使用者詢問尚缺的應用程式密碼。其他網域不會回傳伺服器預設。"
     },
     {
       "name": "mail_account_save",
@@ -737,7 +737,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "查詢此 Android 裝置上的即時 SMS 訊息。不包含關鍵字、地址、聯絡人或 threadId，列出最近的訊息。設定要搜尋的關鍵字/地址/聯絡人。僅從較早的 sms_list 結果設定 threadId 以讀取該對話。對於摘要請求，請使用 box=all 呼叫一次，然後匯總回傳的接收和傳送的訊息。切勿使用 SysInfo 歷史記錄來取代此即時結果。"
+      "description": "查詢此 Android 裝置上的即時 SMS 訊息。沒有關鍵字、地址、聯絡人或 threadId 時列出最近訊息；設定關鍵字、地址或聯絡人以搜尋。只能使用先前 sms_list 結果中的 threadId 讀取對應對話。摘要要求須以 box=all 和 includeBody=true 呼叫一次，並只摘要回傳的收發訊息。使用 returnedBreakdown 統計數量，並分開保留其中的 byAddress 各列。切勿以 SysInfo 歷史記錄取代此即時結果。"
     },
     {
       "name": "calendar_create_event",
@@ -801,7 +801,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "建立使用者可見的本機備忘錄、註解或工作記錄。當使用者明確希望將內容保留為備忘錄或可操作註釋時使用。請勿使用此工具儲存或查詢助理管理的使用者設定檔記憶體，例如首選項、身分、關係或回應方式。"
+      "description": "建立使用者可見的本機備忘錄、註解或工作記錄。當使用者明確希望將內容保留為備忘錄或可操作註釋時使用。請勿使用此工具儲存或查詢助理管理的使用者設定檔記憶體，例如首選項、身分、關係或回應方式。 直接根據 Worker 環境解析備忘錄日期，不要呼叫 Calendar 或 Alarm 工具。"
     },
     {
       "name": "memo_delete",
@@ -841,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "透過 id 更新本地備忘錄。當使用者用自然語言描述目標時，首先搜尋/列出備忘錄，並透過更改的欄位傳遞已知的目標詳細資訊。空白標題/內容/標籤將被忽略。 reminderAtMillis=-2 保持提醒，-1 清除提醒，>0 設定提醒。 endAtMillis 遵循相同的保留、清除與設定規則。"
+      "description": "透過 ID 更新本機備忘錄。使用者以自然語言描述目標時，先搜尋或列出備忘錄，並隨變更欄位傳遞已知目標詳情。空白的標題、內容、標籤與日期字串會保留現有值。使用從目前 Worker 環境解析的 yyyy-MM-dd 日期；切勿計算紀元毫秒，也不要只為解析備忘錄日期而呼叫 Calendar 或 Alarm 工具。"
     },
     {
       "name": "sysinfo_delete",
