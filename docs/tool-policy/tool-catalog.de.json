@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "de",
   "fallbackLocale": "en",
-  "toolCount": 125,
+  "toolCount": 127,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Tools oder Funktionen suchen",
@@ -69,7 +69,7 @@
     {
       "name": "Web and Shopping",
       "displayName": "Web und Einkaufen",
-      "toolCount": 3
+      "toolCount": 5
     },
     {
       "name": "Tasks, Workflows, and Shortcuts",
@@ -673,7 +673,7 @@
       "risk": "LOW",
       "approval": "Automatisch",
       "approvalCode": "AUTO",
-      "description": "Listet Nachrichtenzusammenfassungen auf, filtert oder durchsucht Betreff, Absender, Empfänger und Inhalt. Rufen Sie dieses Tool für jede neue Liste, Suche, Filterung, Zeitspanne, Zusammenfassung oder Neuformatierung erneut auf, auch wenn der Gesprächsverlauf bereits E-Mail-Ergebnisse enthält. Frühere messageRefs dürfen nur für eine Aktion an einer bereits eindeutig ausgewählten Nachricht wiederverwendet werden. Lassen Sie accountId leer, um das einzige Konto oder das eindeutig festgelegte Standardkonto zu verwenden."
+      "description": "Listet Nachrichtenzusammenfassungen auf, filtert oder durchsucht Betreff, Absender, Empfänger und Inhalt. Verwenden Sie folder ALL einmal, wenn der Benutzer empfangene und gesendete E-Mails anfordert oder die Richtung nicht einschränkt; INBOX oder SENT nur bei einer ausdrücklich genannten einzelnen Richtung. Erraten Sie keine anbieterspezifischen Ordnernamen und wiederholen Sie keine abgeschlossene Abfrage. Jedes Ergebnis enthält eine Vorschau mit bis zu 500 Zeichen für Listen und Sammelzusammenfassungen; lesen Sie nach einer abgeschlossenen Listenabfrage nicht jede vollständige Nachricht. Folgen Sie nextCursor nicht erneut im selben Worker-Lauf; melden Sie, dass weitere Ergebnisse verfügbar sind, und lassen Sie eine spätere Benutzeranfrage die Abfrage fortsetzen. Rufen Sie dieses Tool für jede neue Liste, Suche, Filterung, Zeitspanne, Zusammenfassung oder Neuformatierung erneut auf, auch wenn der Gesprächsverlauf bereits E-Mail-Ergebnisse enthält. Frühere messageRefs dürfen nur für eine Aktion an einer bereits eindeutig ausgewählten Nachricht wiederverwendet werden. Lassen Sie accountId leer, um das einzige Konto oder das eindeutig festgelegte Standardkonto zu verwenden."
     },
     {
       "name": "mail_read",
@@ -681,7 +681,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Liest eine Nachricht aus einer von mail_list zurückgegebenen messageRef und markiert sie auf dem Server als gelesen. Nachdem das Tool erfolgreich ausgeführt wurde, fassen Sie die Nachricht für den Benutzer in derselben Antwort zusammen."
+      "description": "Liest eine Nachricht über eine von mail_list zurückgegebene messageRef und markiert sie auf dem Server als gelesen. Verwenden Sie dies nur, wenn der Benutzer ausdrücklich den vollständigen Inhalt, Metadaten zu Anhängen oder genaue Details benötigt, die in der Vorschau von mail_list fehlen; verwenden Sie es nicht für jede Nachricht, nur um eine Liste oder Sammelzusammenfassung zu erstellen. Wiederholen Sie niemals dieselbe Kombination aus messageRef und bodyCursor. Fassen Sie die Nachricht nach erfolgreicher Ausführung des Tools in derselben Antwort für den Benutzer zusammen."
     },
     {
       "name": "mail_send",
@@ -801,7 +801,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Erstellen Sie ein für den Benutzer sichtbares lokales Memo, eine Notiz oder einen Aufgabendatensatz. Verwenden Sie diese Option, wenn der Benutzer ausdrücklich möchte, dass der Inhalt als Memo oder umsetzbare Notiz aufbewahrt wird. Verwenden Sie dieses Tool nicht zum Speichern oder Abfragen des vom Assistenten verwalteten Benutzerprofilspeichers wie Präferenzen, Identität, Beziehungen oder Antwortstil. Lösen Sie Memo-Daten direkt aus der Worker-Umgebung auf, ohne Calendar- oder Alarm-Tools aufzurufen."
+      "description": "Fügt dem To-do Center eine für den Benutzer sichtbare Aufgabe hinzu. Verwenden Sie dies zum Hinzufügen oder Erfassen einer Aufgabe, 添加待办, 记录待办 oder eines umsetzbaren, aufzubewahrenden Hinweises. Speichern Sie Benutzerinhalte, nicht den Profilspeicher des Assistenten oder den internen Ausführungsplan von Main. Bestimmen Sie Daten direkt aus der Worker-Umgebung, ohne Calendar- oder Alarm-Tools aufzurufen. Planen Sie nur, wenn die Anfrage oder eine ausdrücklich genannte Quelle ein festes Kalenderdatum, ein eindeutig auflösbares relatives Datum (heute, morgen, übermorgen, in genau zwei Tagen / 两天后) oder einen ausdrücklichen Datumsbereich enthält. current_date und Zeitzone sind nur Berechnungsgrundlage und nie ein vom Benutzer vorgegebener Termin. Fehlt ein Datum oder ist die Zeit vage (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), erstellen Sie eine undatierte Aufgabe in Unscheduled (时间待定) und lassen startDate und endDate weg oder leer. Setzen Sie nie standardmäßig heute, wählen Sie keinen bequemen Tag und machen Sie aus einem vagen Zeitraum kein mehrtägiges Ereignis; bewahren Sie die vage Zeitangabe im Inhalt. Wenn der Inhalt bekannt ist, fragen Sie nicht nur zur Erstellung nach einem Datum. Bestimmen Sie feste Daten aus dem aktuellen Laufzeitkontext; eine unbekannte Uhrzeit macht einen ausdrücklich genannten Tag nicht undatiert. Behalten Sie bei Aktualisierungen vorhandene Daten, wenn nur Inhalt geändert wird und keine Planungsabsicht besteht. Entfernt der Benutzer den Termin ausdrücklich, erklärt die Zeit für unbestimmt oder ersetzt sie durch eine vage Angabe, verwenden Sie clearStartDate=true mit leeren Datumszeichenfolgen, um beide Daten zu löschen und die Aufgabe nach Unscheduled zu verschieben. Melden Sie den gespeicherten Abschnitt Unscheduled oder das Datum aus dem Tool-Ergebnis, nicht aus Annahmen. Der interne Marker task_pool bezeichnet in Benutzerantworten den Abschnitt Unscheduled (时间待定). Diese Regeln gelten für Aufgaben, nicht für Kalenderereignisse oder Alarme."
     },
     {
       "name": "memo_delete",
@@ -809,7 +809,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Löschen Sie ein lokales Memo anhand der ID vorläufig. Suchen/listen Sie Memos zuerst auf, wenn der Benutzer das Ziel in natürlicher Sprache beschreibt, damit die Ziel-ID/der Zieltitel bekannt ist."
+      "description": "Löscht eine Benutzeraufgabe im To-do Center anhand der id logisch. Wenn der Benutzer das Ziel in natürlicher Sprache beschreibt, suchen Sie zuerst nach Aufgaben oder listen Sie sie auf, damit id/Titel bekannt sind. Löschen Sie mit diesem Tool weder den Profilspeicher des Assistenten noch den internen Ausführungsplan von Main."
     },
     {
       "name": "memo_list",
@@ -817,7 +817,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Listen Sie für den Benutzer sichtbare lokale Memo-Datensätze auf. Der Status kann „Aktiv“, „Fertig“, „Archiviert“ oder „Alle“ sein. Verwenden Sie dieses Tool nicht, um zu beantworten, was der Assistent über den Benutzer, Benutzerprofileinstellungen oder den Gesprächsverlauf erinnert. Ein leeres Ergebnis bedeutet nur, dass keine passenden lokalen Memos vorhanden sind; Dies bedeutet nicht, dass kein Benutzerprofilspeicher vorhanden ist."
+      "description": "Zeigt die Aufgabenliste des Benutzers im To-do Center (待办列表). status kann active, done, archived oder all sein. Abgefragt werden persönliche Aufgaben, nicht der interne Ausführungsplan von Main oder der Profilspeicher des Assistenten. Ein leeres Ergebnis gilt nur für diese Aufgabenliste."
     },
     {
       "name": "memo_mark_done",
@@ -825,7 +825,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Markieren Sie ein lokales Memo anhand der ID als erledigt oder aktiv."
+      "description": "Schließt eine Benutzeraufgabe (完成待办) ab oder öffnet sie anhand der id im To-do Center erneut. Geändert wird ein Benutzerdatensatz, nicht der interne Ausführungsplan von Main oder der Profilspeicher des Assistenten."
     },
     {
       "name": "memo_search",
@@ -833,7 +833,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Durchsuchen Sie für den Benutzer sichtbare lokale Memos nach Schlüsselwörtern in Titel, Inhalt oder Tags. Der Status kann „Aktiv“, „Fertig“, „Archiviert“ oder „Alle“ sein. Verwenden Sie dieses Tool nicht zum Durchsuchen des vom Assistenten verwalteten Benutzerprofilspeichers oder des Konversationsverlaufs. Ein leeres Ergebnis beschreibt nur den lokalen Memospeicher."
+      "description": "Sucht Benutzeraufgaben im To-do Center anhand von Schlüsselwörtern in Titel, Inhalt oder Tags. status kann active, done, archived oder all sein. Durchsucht werden nur Benutzeraufgaben, nicht der Profilspeicher des Assistenten, der Gesprächsverlauf oder der interne Ausführungsplan von Main."
     },
     {
       "name": "memo_update",
@@ -841,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Aktualisiert ein lokales Memo anhand der ID. Wenn der Benutzer das Ziel in natürlicher Sprache beschreibt, suchen Sie zuerst nach Memos oder listen Sie sie auf und übergeben Sie bekannte Zieldetails zusammen mit den geänderten Feldern. Leere Titel-, Inhalts-, Tag- und Datumsfelder behalten ihre aktuellen Werte. Verwenden Sie Datumswerte im Format yyyy-MM-dd aus der aktuellen Worker-Umgebung; berechnen Sie niemals Epochen-Millisekunden und rufen Sie Calendar- oder Alarm-Tools nicht nur zur Bestimmung eines Memo-Datums auf."
+      "description": "Bearbeitet eine Benutzeraufgabe im To-do Center anhand der id. Wird das Ziel natürlich beschrieben, suchen oder listen Sie zuerst Aufgaben und übergeben bekannte Details mit geänderten Feldern. Bearbeitet werden Benutzeraufgaben, nicht der Profilspeicher des Assistenten oder der interne Plan von Main. Leere title/content/tags und Datumszeichenfolgen behalten ihre Werte. Verwenden Sie yyyy-MM-dd aus der Worker-Umgebung; berechnen Sie keine Epochen-Millisekunden und rufen Calendar oder Alarm nicht nur für ein Datum auf. Planen Sie nur mit einem festen Datum, eindeutig auflösbaren relativen Datum (heute, morgen, übermorgen, in genau zwei Tagen / 两天后) oder ausdrücklichen Bereich aus Anfrage oder zitierter Quelle. current_date und Zeitzone sind nur Berechnungsgrundlage, kein Benutzerdatum. Ohne Datum oder bei vager Zeit (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days) lassen Sie startDate und endDate weg oder leer und legen die Aufgabe in Unscheduled (时间待定). Setzen Sie nicht heute als Standard, wählen keinen bequemen Tag und machen keinen mehrtägigen Termin daraus; bewahren Sie die Angabe im Inhalt. Ist der Inhalt bekannt, fragen Sie nicht nach einem Datum. Bestimmen Sie feste Daten aus dem aktuellen Kontext; eine unbekannte Uhrzeit hebt einen ausdrücklichen Tag nicht auf. Wenn nur Inhalt ohne Planungsabsicht geändert wird, behalten Sie die Daten. Wird die Planung entfernt, als unbestimmt bezeichnet oder durch eine vage Angabe ersetzt, verwenden Sie clearStartDate=true und leere Daten, um beide zu löschen und nach Unscheduled zu verschieben. Melden Sie Abschnitt Unscheduled oder gespeichertes Datum aus dem Tool-Ergebnis, nicht aus Annahmen. task_pool bezeichnet intern den Abschnitt Unscheduled (时间待定) in Antworten. Die Regeln gelten nicht für Kalenderereignisse oder Alarme."
     },
     {
       "name": "sysinfo_delete",
@@ -874,6 +874,22 @@
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Laden Sie einen lokalen SysInfo-Thread mit einem threadKey, der von sysinfo_query zurückgegeben wird. Technische Bezeichner: threadKey."
+    },
+    {
+      "name": "purchase_query",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Automatisch",
+      "approvalCode": "AUTO",
+      "description": "Liest echte Kontopunkte oder aktuelle Tarifpreise nur, wenn der Benutzer nach Nutzung, Guthaben, Preisen oder Upgrades fragt. Preise, Wiederherstellungsdaten oder Kauflinks dürfen nicht erfunden werden. Ein Ablaufdatum ist kein zugesagtes Auffülldatum. Das Tool kauft nichts und setzt keine Aufgaben fort."
+    },
+    {
+      "name": "purchase_recommendations",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Automatisch",
+      "approvalCode": "AUTO",
+      "description": "Ändert proaktive Kaufempfehlungen bei langen oder abgebrochenen Aufgaben nur, nachdem der Benutzer ausdrücklich um Beendigung oder Fortsetzung der Empfehlungen gebeten hat. Zustimmung darf nie unterstellt werden."
     },
     {
       "name": "shopping_compare",
@@ -921,7 +937,7 @@
       "risk": "LOW",
       "approval": "Automatisch",
       "approvalCode": "AUTO",
-      "description": "Erstellen Sie den kompletten bestellten TODO-Plan in einem Aufruf für die aktuelle Benutzeranfrage. Dies ist eine zwingende Voraussetzung für jedes Nicht-Aufgaben-Tool, wenn die Anfrage drei oder mehr Schritte erfordert. Übergeben Sie jeden begrenzten benutzerorientierten Schritt in Elementen. Der Plan kann genau einmal erstellt werden und ist später nicht erweiterbar. Schließen Sie niemals Aufgabenverwaltungs-, Bereinigungs-, Statusaktualisierungs- oder Endreaktionselemente ein."
+      "description": "Erstellt den vollständigen geordneten TODO-Plan für die aktuelle Anfrage in einem Aufruf. Dies ist vor jedem Nicht-Aufgaben-Tool zwingend, wenn das Routing mindestens zwei konkrete Main-Schritte erzeugt oder Profiles überschreitet. Jeder delegate- oder Plugin-Tool-Aufruf zählt als ein Schritt; ein delegate bleibt unabhängig von seinen internen Worker-Abläufen ein Schritt. Übergeben Sie alle abgegrenzten benutzerbezogenen Schritte in items. Der Plan kann genau einmal erstellt und später nicht erweitert werden. Nehmen Sie niemals Aufgabenverwaltung, Bereinigung, Statusaktualisierung oder Endantwort auf. Dieser interne Ausführungsplan ist nicht das dauerhafte To-do Center des Benutzers. Für das Erstellen, Suchen, Abschließen oder Löschen persönlicher Aufgaben delegieren Sie mit scopes=[memo] an Personal Organization und verwenden memo_* Tools."
     },
     {
       "name": "task_list",
@@ -929,7 +945,7 @@
       "risk": "LOW",
       "approval": "Automatisch",
       "approvalCode": "AUTO",
-      "description": "Interne TODO-Elemente für die aktuelle Benutzeranfrage auflisten. Standardmäßig werden offene, in Bearbeitung befindliche und blockierte Elemente zurückgegeben. Technische Bezeichner: in_progress."
+      "description": "Listet interne TODO-Einträge für die aktuelle Anfrage auf. Standardmäßig werden open, in_progress und blocked zurückgegeben. Dieser interne Ausführungsplan ist nicht das dauerhafte To-do Center des Benutzers. Für das Erstellen, Suchen, Abschließen oder Löschen persönlicher Aufgaben delegieren Sie mit scopes=[memo] an Personal Organization und verwenden memo_* Tools."
     },
     {
       "name": "task_update",
@@ -937,7 +953,7 @@
       "risk": "LOW",
       "approval": "Automatisch",
       "approvalCode": "AUTO",
-      "description": "Aktualisiert einen internen TODO-Eintrag. Zulässige Übergänge: open zu in_progress, blocked oder abandoned; in_progress zu blocked, done oder abandoned; blocked zu open oder abandoned. done und abandoned sind Endzustände. Es darf jeweils nur eine Aufgabe in_progress sein."
+      "description": "Aktualisiert einen internen TODO-Eintrag. Zulässige Übergänge: open zu in_progress, blocked oder abandoned; in_progress zu blocked, done oder abandoned; blocked zu open oder abandoned. done und abandoned sind Endzustände. Es darf jeweils nur eine Aufgabe in_progress sein. Dieser interne Ausführungsplan ist nicht das dauerhafte To-do Center des Benutzers. Für das Erstellen, Suchen, Abschließen oder Löschen persönlicher Aufgaben delegieren Sie mit scopes=[memo] an Personal Organization und verwenden memo_* Tools."
     },
     {
       "name": "workflow_delete",

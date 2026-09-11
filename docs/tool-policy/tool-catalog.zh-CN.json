@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "zh-CN",
   "fallbackLocale": "en",
-  "toolCount": 125,
+  "toolCount": 127,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "搜索工具或能力",
@@ -69,7 +69,7 @@
     {
       "name": "Web and Shopping",
       "displayName": "Web 与购物",
-      "toolCount": 3
+      "toolCount": 5
     },
     {
       "name": "Tasks, Workflows, and Shortcuts",
@@ -673,7 +673,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "列出、过滤或搜索邮件摘要。查询会搜索主题、发件人、收件人和正文。每次新的列表、搜索、筛选、日期范围、总结或重新排版请求都必须再次调用此工具，即使会话历史中已有邮件结果。历史 messageRefs 只能用于对已明确选中的同一封邮件执行操作。将 accountId 留空可使用唯一账户或唯一默认账户。"
+      "description": "列出、过滤或搜索邮件摘要。查询会搜索主题、发件人、收件人和正文。当用户同时请求已收和已发邮件，或未限定方向时，使用 folder ALL 一次；只有在明确指定单一方向时才使用 INBOX 或 SENT。切勿猜测服务商特定的文件夹名称，也不要重试已完成的查询。每条结果都包含最多 500 个字符的预览，可用于列表和批量摘要；列表查询完成后，不要逐封读取完整邮件。在同一次 Worker 运行中不要再次沿 nextCursor 翻页；应说明还有更多结果，并让后续用户请求继续查询。每次新的列表、搜索、筛选、日期范围、总结或重新排版请求都必须再次调用此工具，即使会话历史中已有邮件结果。历史 messageRefs 只能用于对已明确选中的同一封邮件执行操作。将 accountId 留空可使用唯一账户或唯一默认账户。"
     },
     {
       "name": "mail_read",
@@ -681,7 +681,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "从 mail_list 返回的 messageRef 中读取一条消息，并将其标记为在服务器上已读。该工具成功后，在同一响应中为用户总结消息。"
+      "description": "读取 mail_list 返回的 messageRef 所指向的一封邮件，并在服务器上将其标记为已读。仅当用户明确需要完整正文、附件元数据或 mail_list 预览中没有的确切细节时才使用；不要为了生成列表或批量摘要而对每封邮件都使用。切勿重复使用同一组 messageRef 和 bodyCursor。工具成功后，在同一响应中为用户总结该邮件。"
     },
     {
       "name": "mail_send",
@@ -801,7 +801,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "创建用户可见的本地备忘录、注释或任务记录。当用户明确希望将内容保留为备忘录或可操作注释时使用。请勿使用此工具保存或查询助理管理的用户配置文件内存，例如首选项、身份、关系或响应方式。 直接根据 Worker 环境解析备忘录日期，不要调用 Calendar 或 Alarm 工具。"
+      "description": "向 To-do Center 添加一条用户可见的待办。用于“添加待办”“记录待办”或用户希望保留的可执行提醒。保存用户内容，而不是助手的用户档案记忆或 Main 的内部执行计划。直接从 Worker 环境解析待办日期，不调用 Calendar 或 Alarm 工具。待办排期：只有当用户请求或明确引用的来源提供确定的日历日期、可唯一解析的相对日期（今天、明天、后天、恰好两天后 / 两天后）或明确的日期范围时才排期。current_date 和时区上下文仅是计算基准，绝不是用户提供的排期。未提日期或时间模糊（这两天、这个两天、过几天、近期、有空、改天、soon、sometime this week、in a couple of days）时，在 Unscheduled（时间待定）中创建无日期待办，省略 startDate 和 endDate 或将两者留空。绝不默认今天、任选方便的日期，或把模糊时间段变成多日排期；将模糊时间保留在待办内容中。内容已知时，不要仅为创建待办而追问日期。根据当前运行时上下文解析确定日期；未知具体小时不应使明确日期变成无日期。更新时，若用户只改内容且没有排期意图，保留现有日期。若用户明确移除排期、表示时间待定或改为模糊时间，使用 clearStartDate=true 和空日期字符串移到 Unscheduled，并清除两个日期。报告 Tool 结果中保存的 Unscheduled 分区或排期日期，不要依据假设。内部 task_pool 结果标记在面向用户的回复中表示 Unscheduled（时间待定）分区。这些规则适用于待办，不适用于日历事件或闹钟。"
     },
     {
       "name": "memo_delete",
@@ -809,7 +809,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "按 ID 软删除本地备忘录。当用户用自然语言描述目标时，首先搜索/列出备忘录，以便知道目标 ID/标题。"
+      "description": "按 id 软删除 To-do Center 中的一条用户待办。当用户用自然语言描述目标时，先搜索或列出待办，以确定其 id/标题。不要用此工具删除助手的用户档案记忆或 Main 的内部执行计划。"
     },
     {
       "name": "memo_list",
@@ -817,7 +817,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "列出用户可见的本地备忘录记录。状态可以是活动、完成、存档或全部。请勿使用此工具来回答助手对用户的记忆、用户配置文件首选项或对话历史记录。空结果仅意味着不存在匹配的本地备忘录；这并不意味着不存在用户配置文件内存。"
+      "description": "显示用户在 To-do Center 中的待办列表（待办列表）。status 可以是 active、done、archived 或 all。此查询仅针对个人待办，不是 Main 的内部执行计划或助手的用户档案记忆。空结果只表示此待办列表没有匹配项。"
     },
     {
       "name": "memo_mark_done",
@@ -825,7 +825,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "通过 ID 将本地备忘录标记为已完成或活动。"
+      "description": "按 id 完成用户待办（完成待办），或在 To-do Center 中将其重新打开。此操作修改的是用户记录，不是 Main 的内部执行计划或助手的用户档案记忆。"
     },
     {
       "name": "memo_search",
@@ -833,7 +833,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "通过标题、内容或标签中的关键字搜索用户可见的本地备忘录。状态可以是活动、完成、存档或全部。请勿使用此工具搜索助理管理的用户配置文件内存或对话历史记录。空结果仅描述本地备忘录存储。"
+      "description": "按标题、内容或标签中的关键字查找 To-do Center 中的用户待办。status 可以是 active、done、archived 或 all。只搜索用户待办，不搜索助手的用户档案记忆、对话历史或 Main 的内部执行计划。"
     },
     {
       "name": "memo_update",
@@ -841,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "通过 ID 更新本地备忘录。用户以自然语言描述目标时，先搜索或列出备忘录，并随变更字段传递已知目标详情。空白的标题、内容、标签和日期字符串保持现有值。使用从当前 Worker 环境解析的 yyyy-MM-dd 日期；绝不计算纪元毫秒，也不要仅为解析备忘录日期调用 Calendar 或 Alarm 工具。"
+      "description": "按 id 编辑 To-do Center 中的一条用户待办。当用户用自然语言描述目标时，先搜索或列出待办，并将已知目标详情与变更字段一起传入。此操作编辑用户待办，而不是助手的用户档案记忆或 Main 的内部执行计划。空白 title/content/tags 和日期字符串保留现有值。使用从当前 Worker 环境解析的 yyyy-MM-dd 日期；绝不计算纪元毫秒，也不要仅为解析待办日期而调用 Calendar 或 Alarm 工具。待办排期：只有当用户请求或明确引用的来源提供确定的日历日期、可唯一解析的相对日期（今天、明天、后天、恰好两天后 / 两天后）或明确的日期范围时才排期。current_date 和时区上下文仅是计算基准，绝不是用户提供的排期。未提日期或时间模糊（这两天、这个两天、过几天、近期、有空、改天、soon、sometime this week、in a couple of days）时，使用省略或留空的 startDate 和 endDate，将待办保留或移至 Unscheduled（时间待定）。绝不默认今天、任选方便的日期，或把模糊时间段变成多日排期；将模糊时间保留在待办内容中。内容已知时，不要仅为处理待办而追问日期。根据当前运行时上下文解析确定日期；未知具体小时不应使明确日期变成无日期。更新时，若用户只改内容且没有排期意图，保留现有日期。若用户明确移除排期、表示时间待定或改为模糊时间，使用 clearStartDate=true 和空日期字符串移到 Unscheduled，并清除两个日期。报告 Tool 结果中保存的 Unscheduled 分区或排期日期，不要依据假设。内部 task_pool 结果标记在面向用户的回复中表示 Unscheduled（时间待定）分区。这些规则适用于待办，不适用于日历事件或闹钟。"
     },
     {
       "name": "sysinfo_delete",
@@ -874,6 +874,22 @@
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "通过 sysinfo_query 返回的 threadKey 加载一个本地 SysInfo 线程。"
+    },
+    {
+      "name": "purchase_query",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "仅当用户询问使用量、余额、价格或升级时，读取真实账户点数或当前套餐价格。不得编造价格、恢复日期或购买链接。到期时间不代表承诺的补充日期。此工具不会购买任何内容或恢复任务。"
+    },
+    {
+      "name": "purchase_recommendations",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "自动通过",
+      "approvalCode": "AUTO",
+      "description": "仅在用户明确要求停止或恢复推荐后，修改长任务和取消场景中的主动购买推荐。不得推断用户同意。"
     },
     {
       "name": "shopping_compare",
@@ -921,7 +937,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "通过一次调用为当前用户请求创建完整的有序 TODO 计划。当请求需要三个或更多步骤时，这是任何非任务工具之前的强制性前提条件。传递项目中每个面向用户的有界步骤。该计划只能创建一次，以后不能扩展。切勿包含任务管理、清理、状态更新或最终响应项目。"
+      "description": "通过一次调用为当前用户请求创建完整的有序 TODO 计划。当路由产生两个或更多具体 Main 步骤或跨越 Profiles 时，这是调用任何非任务 Tool 前的强制前提。每次 delegate 或 Plugin Tool 调用计为一个步骤；无论 Worker 内部如何，一个 delegate 始终只算一步。将每个有明确边界、面向用户的步骤传入 items。计划只能创建一次，之后不能扩展。绝不包含任务管理、清理、状态更新或最终响应项。此内部执行计划不是用户的持久 To-do Center。创建、查找、完成或删除个人待办时，应使用 scopes=[memo] 委派给 Personal Organization，并改用 memo_* Tools。"
     },
     {
       "name": "task_list",
@@ -929,7 +945,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "列出当前用户请求的内部 TODO 项。默认情况下返回打开的、in_progress 和阻止的项目。"
+      "description": "列出当前用户请求的内部 TODO 项。默认返回 open、in_progress 和 blocked 项。此内部执行计划不是用户的持久 To-do Center。创建、查找、完成或删除个人待办时，应使用 scopes=[memo] 委派给 Personal Organization，并改用 memo_* Tools。"
     },
     {
       "name": "task_update",
@@ -937,7 +953,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "更新一个内部 TODO 项。允许的状态转换：open 可转为 in_progress、blocked 或 abandoned；in_progress 可转为 blocked、done 或 abandoned；blocked 可转为 open 或 abandoned。done 和 abandoned 是终态。同一时间只能有一个任务处于 in_progress。"
+      "description": "更新一个内部 TODO 项。允许的状态转换：open 可转为 in_progress、blocked 或 abandoned；in_progress 可转为 blocked、done 或 abandoned；blocked 可转为 open 或 abandoned。done 和 abandoned 是终态。同一时间只能有一个任务处于 in_progress。此内部执行计划不是用户的持久 To-do Center。创建、查找、完成或删除个人待办时，应使用 scopes=[memo] 委派给 Personal Organization，并改用 memo_* Tools。"
     },
     {
       "name": "workflow_delete",

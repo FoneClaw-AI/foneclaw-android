@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "en",
   "fallbackLocale": "en",
-  "toolCount": 125,
+  "toolCount": 127,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Search tools or capabilities",
@@ -69,7 +69,7 @@
     {
       "name": "Web and Shopping",
       "displayName": "Web and Shopping",
-      "toolCount": 3
+      "toolCount": 5
     },
     {
       "name": "Tasks, Workflows, and Shortcuts",
@@ -673,7 +673,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "List, filter, or search message summaries. Query searches subject, sender, recipients, and body. Call this Tool again for every new list, search, filter, date-range, summary, or reformat request even when conversation history contains earlier mail results. Historical messageRefs may be reused only for an operation on an exact already-selected message. Leave accountId empty to use the only account or the unique default account."
+      "description": "List, filter, or search message summaries. Query searches subject, sender, recipients, and body. Use folder ALL once when the user requests both received and sent mail or does not limit direction; use INBOX or SENT only for an explicit single direction. Never guess provider-specific folder names or retry a completed query. Each result includes a preview of up to 500 characters for list and batch summaries; do not read every full message after a completed list query. Do not follow nextCursor again in the same Worker run; report that more results are available and let a later user request continue the query. Call this Tool again for every new list, search, filter, date-range, summary, or reformat request even when conversation history contains earlier mail results. Historical messageRefs may be reused only for an operation on an exact already-selected message. Leave accountId empty to use the only account or the unique default account."
     },
     {
       "name": "mail_read",
@@ -681,7 +681,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Read one message from a messageRef returned by mail_list and mark it read on the server. After the tool succeeds, summarize the message for the user in the same response."
+      "description": "Read one message from a messageRef returned by mail_list and mark it read on the server. Use this only when the user explicitly needs the full body, attachment metadata, or exact details absent from the mail_list preview; do not use it for every message merely to produce a list or batch summary. Never repeat the same messageRef and bodyCursor. After the tool succeeds, summarize the message for the user in the same response."
     },
     {
       "name": "mail_send",
@@ -801,7 +801,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Create a user-visible local memo, note, or task record. Use when the user explicitly wants the content kept as a memo or actionable note. Do not use this tool to save or query assistant-managed user profile memory such as preferences, identity, relationships, or response style. Resolve memo dates directly from the Worker environment without calling Calendar or Alarm Tools."
+      "description": "Add a user-visible to-do to To-do Center. Use for add a to-do, record a to-do, 添加待办, or 记录待办, including an actionable reminder the user wants kept. Store user content, not assistant profile memory or Main's internal execution plan. Resolve to-do dates directly from the Worker environment without calling Calendar or Alarm Tools. To-do scheduling: Schedule a to-do only when the user's request or explicitly referenced source gives a definite calendar date, a uniquely resolvable relative date (today, tomorrow, the day after tomorrow, in exactly two days / 两天后), or an explicit date range. The current_date and timezone context is only a calculation base, never a user-supplied schedule. If no date is mentioned, or timing is vague (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), create an undated to-do in Unscheduled (时间待定) with both startDate and endDate omitted or empty. Never default to today, pick a convenient day, or turn a vague window into a multi-day scheduled event. Preserve vague timing in the to-do content. When the content is known, do not ask for a date just to create the to-do. Resolve definite dates from the current runtime context; an unknown hour does not make an explicit day undated. For updates, keep existing dates when the user only changes content and gives no scheduling intent. If the user explicitly removes the schedule, says time undecided, or replaces it with vague timing, use clearStartDate=true with empty date strings to move it to Unscheduled and clear both dates. Report the saved Unscheduled section or scheduled date from the Tool result, not from assumptions. The internal task_pool result marker names the Unscheduled (时间待定) section in user-facing replies. These rules apply to to-dos, not calendar events or alarms."
     },
     {
       "name": "memo_delete",
@@ -809,7 +809,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Soft-delete a local memo by id. Search/list memos first when the user describes the target in natural language so the target id/title is known."
+      "description": "Soft-delete a user to-do in To-do Center by id. Search/list to-dos first when the user describes the target in natural language so its id/title is known. Do not delete assistant profile memory or Main's internal execution plan with this tool."
     },
     {
       "name": "memo_list",
@@ -817,7 +817,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "List user-visible local memo records. status can be active, done, archived, or all. Do not use this tool to answer what the assistant remembers about the user, user profile preferences, or conversation history. An empty result means only that no matching local memos exist; it does not mean that no user profile memory exists."
+      "description": "Show the user's to-do list in To-do Center (待办列表). status can be active, done, archived, or all. This queries personal to-dos, not Main's internal execution plan or assistant profile memory. An empty result applies only to this to-do list."
     },
     {
       "name": "memo_mark_done",
@@ -825,7 +825,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Mark a local memo as done or active by id."
+      "description": "Complete a user to-do (完成待办) or reopen it in To-do Center by id. This changes a user record, not Main's internal execution plan or assistant profile memory."
     },
     {
       "name": "memo_search",
@@ -833,7 +833,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Search user-visible local memos by keyword in title, content, or tags. status can be active, done, archived, or all. Do not use this tool to search assistant-managed user profile memory or conversation history. An empty result describes only the local memo store."
+      "description": "Find user to-dos in To-do Center by keyword in title, content, or tags. status can be active, done, archived, or all. Search only user to-dos, not assistant profile memory, conversation history, or Main's internal execution plan."
     },
     {
       "name": "memo_update",
@@ -841,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Update a local memo by id. Search/list memos first when the user describes the target in natural language, and pass known target details with the changed fields. Blank title/content/tags and date strings keep existing values. Use yyyy-MM-dd dates resolved from the current Worker environment; never calculate epoch milliseconds or call Calendar or Alarm Tools only to resolve a memo date."
+      "description": "Edit a user to-do in To-do Center by id. Search/list to-dos first when the user describes the target in natural language, and pass known target details with changed fields. This edits user to-dos, not assistant profile memory or Main's internal execution plan. Blank title/content/tags and date strings keep existing values. Use yyyy-MM-dd dates resolved from the current Worker environment; never calculate epoch milliseconds or call Calendar or Alarm Tools only to resolve a to-do date. To-do scheduling: Schedule a to-do only when the user's request or explicitly referenced source gives a definite calendar date, a uniquely resolvable relative date (today, tomorrow, the day after tomorrow, in exactly two days / 两天后), or an explicit date range. The current_date and timezone context is only a calculation base, never a user-supplied schedule. If no date is mentioned, or timing is vague (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), create an undated to-do in Unscheduled (时间待定) with both startDate and endDate omitted or empty. Never default to today, pick a convenient day, or turn a vague window into a multi-day scheduled event. Preserve vague timing in the to-do content. When the content is known, do not ask for a date just to create the to-do. Resolve definite dates from the current runtime context; an unknown hour does not make an explicit day undated. For updates, keep existing dates when the user only changes content and gives no scheduling intent. If the user explicitly removes the schedule, says time undecided, or replaces it with vague timing, use clearStartDate=true with empty date strings to move it to Unscheduled and clear both dates. Report the saved Unscheduled section or scheduled date from the Tool result, not from assumptions. The internal task_pool result marker names the Unscheduled (时间待定) section in user-facing replies. These rules apply to to-dos, not calendar events or alarms."
     },
     {
       "name": "sysinfo_delete",
@@ -874,6 +874,22 @@
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Load one local SysInfo thread by a threadKey returned by sysinfo_query."
+    },
+    {
+      "name": "purchase_query",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Auto",
+      "approvalCode": "AUTO",
+      "description": "Read real account points or current plan prices ONLY when the user asks about usage, balance, pricing or upgrading. Never invent prices, recovery dates or purchase links. Expiry is not a promised refill date. This does not buy anything or resume tasks."
+    },
+    {
+      "name": "purchase_recommendations",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Auto",
+      "approvalCode": "AUTO",
+      "description": "Change proactive long-task and cancellation purchase recommendations ONLY after the user explicitly asks to stop or resume recommendations. Never infer consent."
     },
     {
       "name": "shopping_compare",
@@ -921,7 +937,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Create the complete ordered TODO plan in one call for the current user request. This is a mandatory precondition before any non-task Tool when routing produces two or more concrete Main steps or crosses Profiles. Count each delegate or Plugin Tool call as one step; one delegate remains one step regardless of its Worker internals. Pass every bounded user-facing step in items. The plan can be created exactly once and cannot be extended later. Never include task management, cleanup, status-update, or final-response items."
+      "description": "Create the complete ordered TODO plan in one call for the current user request. This is a mandatory precondition before any non-task Tool when routing produces two or more concrete Main steps or crosses Profiles. Count each delegate or Plugin Tool call as one step; one delegate remains one step regardless of its Worker internals. Pass every bounded user-facing step in items. The plan can be created exactly once and cannot be extended later. Never include task management, cleanup, status-update, or final-response items. This internal execution plan is not the user's persistent To-do Center. For personal to-do creation, lookup, completion, or deletion, delegate to Personal Organization with scopes=[memo] and use memo_* Tools instead."
     },
     {
       "name": "task_list",
@@ -929,7 +945,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "List internal TODO items for the current user request. By default returns open, in_progress, and blocked items."
+      "description": "List internal TODO items for the current user request. By default returns open, in_progress, and blocked items. This internal execution plan is not the user's persistent To-do Center. For personal to-do creation, lookup, completion, or deletion, delegate to Personal Organization with scopes=[memo] and use memo_* Tools instead."
     },
     {
       "name": "task_update",
@@ -937,7 +953,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Update one internal TODO item. Allowed transitions: open to in_progress, blocked, or abandoned; in_progress to blocked, done, or abandoned; blocked to open or abandoned. Done and abandoned are terminal. Only one task may be in_progress."
+      "description": "Update one internal TODO item. Allowed transitions: open to in_progress, blocked, or abandoned; in_progress to blocked, done, or abandoned; blocked to open or abandoned. Done and abandoned are terminal. Only one task may be in_progress. This internal execution plan is not the user's persistent To-do Center. For personal to-do creation, lookup, completion, or deletion, delegate to Personal Organization with scopes=[memo] and use memo_* Tools instead."
     },
     {
       "name": "workflow_delete",

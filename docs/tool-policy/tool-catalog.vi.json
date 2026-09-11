@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "vi",
   "fallbackLocale": "en",
-  "toolCount": 125,
+  "toolCount": 127,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Tìm kiếm công cụ hoặc khả năng",
@@ -69,7 +69,7 @@
     {
       "name": "Web and Shopping",
       "displayName": "Web và mua sắm",
-      "toolCount": 3
+      "toolCount": 5
     },
     {
       "name": "Tasks, Workflows, and Shortcuts",
@@ -673,7 +673,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Liệt kê, lọc hoặc tìm kiếm phần tóm tắt thư theo chủ đề, người gửi, người nhận và nội dung. Hãy gọi lại công cụ này cho mỗi yêu cầu danh sách, tìm kiếm, bộ lọc, khoảng ngày, tóm tắt hoặc định dạng lại mới, ngay cả khi lịch sử trò chuyện đã có kết quả thư trước đó. messageRefs cũ chỉ được dùng lại cho thao tác trên đúng thư đã được chọn rõ ràng. Để trống accountId để dùng tài khoản duy nhất hoặc tài khoản mặc định duy nhất."
+      "description": "Liệt kê, lọc hoặc tìm kiếm phần tóm tắt thư theo chủ đề, người gửi, người nhận và nội dung. Dùng folder ALL một lần khi người dùng yêu cầu cả thư đã nhận và đã gửi hoặc không giới hạn hướng; chỉ dùng INBOX hoặc SENT khi họ nêu rõ một hướng duy nhất. Không đoán tên thư mục riêng của nhà cung cấp hoặc thử lại truy vấn đã hoàn tất. Mỗi kết quả có bản xem trước tối đa 500 ký tự để lập danh sách và tóm tắt theo lô; không đọc toàn bộ nội dung của từng thư sau khi truy vấn danh sách đã hoàn tất. Không tiếp tục theo nextCursor trong cùng một lượt chạy Worker; hãy báo rằng còn kết quả và để yêu cầu sau của người dùng tiếp tục truy vấn. Hãy gọi lại Tool này cho mỗi yêu cầu danh sách, tìm kiếm, bộ lọc, khoảng ngày, tóm tắt hoặc định dạng lại mới, ngay cả khi lịch sử trò chuyện đã có kết quả thư trước đó. messageRefs cũ chỉ được dùng lại cho thao tác trên đúng thư đã được chọn rõ ràng. Để trống accountId để dùng tài khoản duy nhất hoặc tài khoản mặc định duy nhất."
     },
     {
       "name": "mail_read",
@@ -681,7 +681,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Đọc một tin nhắn từ một tin nhắnRef được trả về bởi mail_list và đánh dấu nó đã đọc trên máy chủ. Sau khi công cụ thành công, hãy tóm tắt thông báo cho người dùng trong cùng một phản hồi. Định danh kỹ thuật: messageRef."
+      "description": "Đọc một thư theo messageRef do mail_list trả về và đánh dấu là đã đọc trên máy chủ. Chỉ dùng khi người dùng nêu rõ cần toàn bộ nội dung, siêu dữ liệu tệp đính kèm hoặc chi tiết chính xác không có trong bản xem trước của mail_list; không dùng cho mọi thư chỉ để tạo danh sách hoặc bản tóm tắt theo lô. Không bao giờ lặp lại cùng một cặp messageRef và bodyCursor. Sau khi Tool thành công, hãy tóm tắt thư cho người dùng trong cùng một phản hồi."
     },
     {
       "name": "mail_send",
@@ -801,7 +801,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Tạo bản ghi nhớ, ghi chú hoặc bản ghi tác vụ cục bộ mà người dùng có thể nhìn thấy. Sử dụng khi người dùng rõ ràng muốn nội dung được lưu giữ dưới dạng bản ghi nhớ hoặc ghi chú có thể thực hiện được. Không sử dụng công cụ này để lưu hoặc truy vấn bộ nhớ hồ sơ người dùng do trợ lý quản lý chẳng hạn như tùy chọn, danh tính, mối quan hệ hoặc kiểu phản hồi. Xác định ngày của ghi chú trực tiếp từ môi trường Worker mà không gọi công cụ Calendar hoặc Alarm."
+      "description": "Thêm một việc cần làm hiển thị cho người dùng vào To-do Center. Dùng để thêm hoặc ghi lại việc cần làm, 添加待办, 记录待办, gồm cả lời nhắc có thể hành động mà người dùng muốn lưu. Lưu nội dung người dùng, không lưu bộ nhớ hồ sơ trợ lý hay kế hoạch thực thi nội bộ của Main. Xác định ngày trực tiếp từ môi trường Worker mà không gọi Tools Calendar hoặc Alarm. Chỉ lên lịch khi yêu cầu hoặc nguồn được dẫn chiếu rõ ràng đưa ra ngày lịch cụ thể, ngày tương đối có thể xác định duy nhất (hôm nay, ngày mai, ngày kia, đúng hai ngày nữa / 两天后), hoặc khoảng ngày rõ ràng. current_date và múi giờ chỉ là cơ sở tính toán, không phải lịch do người dùng cung cấp. Nếu không nêu ngày hoặc thời gian mơ hồ (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), hãy tạo việc không có ngày trong Unscheduled (时间待定), bỏ qua hoặc để trống startDate và endDate. Không mặc định hôm nay, chọn ngày thuận tiện hoặc biến khoảng thời gian mơ hồ thành sự kiện nhiều ngày; giữ cách nói thời gian mơ hồ trong nội dung. Khi đã biết nội dung, không hỏi ngày chỉ để tạo việc. Xác định ngày cụ thể từ ngữ cảnh thời gian chạy hiện tại; không biết giờ không làm một ngày rõ ràng thành không có ngày. Khi cập nhật, giữ ngày hiện có nếu người dùng chỉ đổi nội dung và không có ý định lên lịch. Nếu người dùng xóa lịch rõ ràng, nói thời gian chưa quyết định hoặc thay bằng thời gian mơ hồ, dùng clearStartDate=true với chuỗi ngày trống để xóa cả hai ngày và chuyển sang Unscheduled. Báo phần Unscheduled hoặc ngày đã lưu từ kết quả Tool, không từ giả định. Dấu kết quả nội bộ task_pool chỉ phần Unscheduled (时间待定) trong câu trả lời cho người dùng. Các quy tắc này áp dụng cho việc cần làm, không áp dụng cho sự kiện lịch hoặc báo thức."
     },
     {
       "name": "memo_delete",
@@ -809,7 +809,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Xóa mềm một bản ghi nhớ cục bộ theo id. Trước tiên hãy tìm kiếm/liệt kê các bản ghi nhớ khi người dùng mô tả mục tiêu bằng ngôn ngữ tự nhiên để biết id/tiêu đề mục tiêu."
+      "description": "Xóa mềm một việc cần làm của người dùng trong To-do Center theo id. Khi người dùng mô tả mục tiêu bằng ngôn ngữ tự nhiên, hãy tìm kiếm hoặc liệt kê việc cần làm trước để biết id/tiêu đề. Không dùng Tool này để xóa bộ nhớ hồ sơ của trợ lý hoặc kế hoạch thực thi nội bộ của Main."
     },
     {
       "name": "memo_list",
@@ -817,7 +817,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Liệt kê các bản ghi ghi nhớ cục bộ mà người dùng có thể nhìn thấy. trạng thái có thể là đang hoạt động, đã hoàn tất, đã lưu trữ hoặc tất cả. Không sử dụng công cụ này để trả lời những gì trợ lý nhớ về người dùng, tùy chọn hồ sơ người dùng hoặc lịch sử hội thoại. Kết quả trống chỉ có nghĩa là không tồn tại bản ghi nhớ cục bộ phù hợp; điều đó không có nghĩa là không có bộ nhớ hồ sơ người dùng nào tồn tại."
+      "description": "Hiển thị danh sách việc cần làm của người dùng trong To-do Center (待办列表). status có thể là active, done, archived hoặc all. Truy vấn này dành cho việc cần làm cá nhân, không phải kế hoạch thực thi nội bộ của Main hay bộ nhớ hồ sơ trợ lý. Kết quả trống chỉ áp dụng cho danh sách việc cần làm này."
     },
     {
       "name": "memo_mark_done",
@@ -825,7 +825,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Đánh dấu một bản ghi nhớ cục bộ là đã hoàn tất hoặc đang hoạt động theo id."
+      "description": "Hoàn thành một việc cần làm của người dùng (完成待办) hoặc mở lại việc đó trong To-do Center theo id. Thao tác này thay đổi bản ghi người dùng, không phải kế hoạch thực thi nội bộ của Main hay bộ nhớ hồ sơ trợ lý."
     },
     {
       "name": "memo_search",
@@ -833,7 +833,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Tìm kiếm các bản ghi nhớ cục bộ mà người dùng có thể nhìn thấy theo từ khóa trong tiêu đề, nội dung hoặc thẻ. trạng thái có thể là đang hoạt động, đã hoàn tất, đã lưu trữ hoặc tất cả. Không sử dụng công cụ này để tìm kiếm bộ nhớ hồ sơ người dùng hoặc lịch sử hội thoại do trợ lý quản lý. Kết quả trống chỉ mô tả kho lưu trữ ghi nhớ cục bộ."
+      "description": "Tìm việc cần làm của người dùng trong To-do Center theo từ khóa trong tiêu đề, nội dung hoặc thẻ. status có thể là active, done, archived hoặc all. Chỉ tìm việc cần làm của người dùng, không tìm bộ nhớ hồ sơ trợ lý, lịch sử trò chuyện hoặc kế hoạch thực thi nội bộ của Main."
     },
     {
       "name": "memo_update",
@@ -841,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Cập nhật ghi chú cục bộ theo ID. Khi người dùng mô tả mục tiêu bằng ngôn ngữ tự nhiên, trước tiên hãy tìm kiếm hoặc liệt kê ghi chú, rồi truyền các chi tiết mục tiêu đã biết cùng những trường cần thay đổi. Tiêu đề, nội dung, thẻ và chuỗi ngày để trống sẽ giữ nguyên giá trị hiện tại. Dùng ngày dạng yyyy-MM-dd được xác định từ môi trường Worker hiện tại; không tính mili giây epoch hoặc gọi công cụ Calendar hay Alarm chỉ để xác định ngày của ghi chú."
+      "description": "Chỉnh sửa việc cần làm của người dùng trong To-do Center theo id. Nếu mục tiêu được mô tả bằng ngôn ngữ tự nhiên, hãy tìm kiếm hoặc liệt kê trước rồi truyền chi tiết đã biết cùng trường thay đổi. Chỉnh sửa việc của người dùng, không phải bộ nhớ hồ sơ trợ lý hay kế hoạch nội bộ của Main. title/content/tags và chuỗi ngày trống giữ nguyên giá trị. Dùng yyyy-MM-dd từ môi trường Worker; không tính mili giây epoch hoặc gọi Calendar hay Alarm chỉ để xác định ngày. Chỉ lên lịch với ngày cụ thể, ngày tương đối rõ ràng (hôm nay, ngày mai, ngày kia, đúng hai ngày nữa / 两天后) hoặc khoảng rõ ràng từ yêu cầu hay nguồn dẫn chiếu. current_date và múi giờ chỉ là cơ sở tính toán, không phải ngày của người dùng. Không có ngày hoặc thời gian mơ hồ (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days) thì bỏ qua hoặc để trống startDate và endDate, đặt việc trong Unscheduled (时间待定). Không mặc định hôm nay, chọn ngày thuận tiện hoặc biến khoảng mơ hồ thành nhiều ngày; giữ cách nói đó trong nội dung. Nếu đã biết nội dung, không hỏi ngày. Xác định ngày cụ thể từ ngữ cảnh hiện tại; không biết giờ không hủy một ngày rõ ràng. Nếu chỉ đổi nội dung và không có ý định lên lịch, giữ ngày hiện có. Nếu người dùng xóa lịch, nói thời gian chưa quyết định hoặc thay bằng thời gian mơ hồ, dùng clearStartDate=true và ngày trống để xóa cả hai rồi chuyển sang Unscheduled. Báo phần Unscheduled hoặc ngày đã lưu từ kết quả Tool, không từ giả định. task_pool là tên nội bộ của phần Unscheduled (时间待定) trong câu trả lời. Quy tắc không áp dụng cho sự kiện lịch hoặc báo thức."
     },
     {
       "name": "sysinfo_delete",
@@ -874,6 +874,22 @@
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Tải một luồng SysInfo cục bộ bằng một threadKey được sysinfo_query trả về."
+    },
+    {
+      "name": "purchase_query",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Chỉ đọc điểm tài khoản thực hoặc giá gói hiện tại khi người dùng hỏi về mức sử dụng, số dư, giá hoặc nâng cấp. Không được tự tạo giá, ngày khôi phục hay liên kết mua. Ngày hết hạn không phải ngày bổ sung được cam kết. Công cụ này không mua gì và không tiếp tục tác vụ."
+    },
+    {
+      "name": "purchase_recommendations",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Chỉ thay đổi đề xuất mua chủ động cho tác vụ dài và trường hợp hủy sau khi người dùng yêu cầu rõ ràng dừng hoặc tiếp tục đề xuất. Không được suy diễn sự đồng ý."
     },
     {
       "name": "shopping_compare",
@@ -921,7 +937,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Tạo kế hoạch TODO được đặt hàng hoàn chỉnh trong một cuộc gọi cho yêu cầu hiện tại của người dùng. Đây là điều kiện tiên quyết bắt buộc trước bất kỳ công cụ không phải nhiệm vụ nào khi yêu cầu yêu cầu ba bước trở lên. Vượt qua mọi bước giới hạn mà người dùng phải đối mặt trong các mục. Kế hoạch có thể được tạo chính xác một lần và không thể gia hạn sau này. Không bao giờ bao gồm các mục quản lý tác vụ, dọn dẹp, cập nhật trạng thái hoặc phản hồi cuối cùng."
+      "description": "Tạo kế hoạch TODO đầy đủ, có thứ tự cho yêu cầu hiện tại trong một lần gọi. Đây là điều kiện bắt buộc trước mọi Tool không phải tác vụ khi định tuyến tạo ra từ hai bước Main cụ thể trở lên hoặc đi qua nhiều Profiles. Mỗi lần gọi delegate hoặc Plugin Tool được tính là một bước; một delegate vẫn là một bước bất kể xử lý nội bộ của Worker. Truyền mọi bước hướng đến người dùng có phạm vi rõ ràng trong items. Chỉ được tạo kế hoạch một lần và không thể mở rộng sau đó. Không bao gồm quản lý tác vụ, dọn dẹp, cập nhật trạng thái hoặc phản hồi cuối. Kế hoạch thực thi nội bộ này không phải To-do Center lâu dài của người dùng. Để tạo, tìm, hoàn thành hoặc xóa việc cần làm cá nhân, hãy ủy quyền cho Personal Organization với scopes=[memo] và dùng memo_* Tools."
     },
     {
       "name": "task_list",
@@ -929,7 +945,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Liệt kê các mục TODO nội bộ cho yêu cầu hiện tại của người dùng. Theo mặc định trả về các mục đang mở, đang tiến hành và bị chặn. Định danh kỹ thuật: in_progress."
+      "description": "Liệt kê các mục TODO nội bộ cho yêu cầu hiện tại. Theo mặc định trả về open, in_progress và blocked. Kế hoạch thực thi nội bộ này không phải To-do Center lâu dài của người dùng. Để tạo, tìm, hoàn thành hoặc xóa việc cần làm cá nhân, hãy ủy quyền cho Personal Organization với scopes=[memo] và dùng memo_* Tools."
     },
     {
       "name": "task_update",
@@ -937,7 +953,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Cập nhật một mục TODO nội bộ. Chuyển trạng thái được phép: open sang in_progress, blocked hoặc abandoned; in_progress sang blocked, done hoặc abandoned; blocked sang open hoặc abandoned. done và abandoned là trạng thái cuối. Chỉ một tác vụ có thể ở trạng thái in_progress."
+      "description": "Cập nhật một mục TODO nội bộ. Chuyển trạng thái được phép: open sang in_progress, blocked hoặc abandoned; in_progress sang blocked, done hoặc abandoned; blocked sang open hoặc abandoned. done và abandoned là trạng thái cuối. Chỉ một tác vụ có thể ở trạng thái in_progress. Kế hoạch thực thi nội bộ này không phải To-do Center lâu dài của người dùng. Để tạo, tìm, hoàn thành hoặc xóa việc cần làm cá nhân, hãy ủy quyền cho Personal Organization với scopes=[memo] và dùng memo_* Tools."
     },
     {
       "name": "workflow_delete",

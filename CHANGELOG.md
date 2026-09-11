@@ -8,6 +8,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.2.1] - 2026-09-11
+
+### Added
+- Redesigned To-do Center with an Unscheduled section and date-based organization
+- Clearer points, subscription-plan, and purchase-recovery guidance
+
+### Changed
+- More accurate email Inbox/Sent summaries with useful previews and fewer duplicate reads
+- Clearer waiting, cancellation, recovery, and completion handling for long-running cloud tasks
+- Improved entitlement synchronization and compatibility for existing guest and member accounts
+
+### Scope
+- Google APK/AAB remain submission candidates until Play review and rollout complete
+- Lebest APK remains an OEM re-signing candidate and is not a final OEM package
+
 ## [v0.2.0] - 2026-09-07
 
 ### Added

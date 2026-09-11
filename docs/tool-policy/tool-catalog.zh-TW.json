@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "zh-TW",
   "fallbackLocale": "en",
-  "toolCount": 125,
+  "toolCount": 127,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "搜尋工具或能力",
@@ -69,7 +69,7 @@
     {
       "name": "Web and Shopping",
       "displayName": "Web 與購物",
-      "toolCount": 3
+      "toolCount": 5
     },
     {
       "name": "Tasks, Workflows, and Shortcuts",
@@ -673,7 +673,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "列出、篩選或搜尋郵件摘要。查詢會搜尋主旨、寄件者、收件者與內文。每次新的列表、搜尋、篩選、日期範圍、摘要或重新排版要求都必須再次呼叫此工具，即使對話記錄中已有郵件結果。歷史 messageRefs 只能用於對已明確選取的同一封郵件執行操作。將 accountId 留空可使用唯一帳戶或唯一預設帳戶。"
+      "description": "列出、篩選或搜尋郵件摘要。查詢會搜尋主旨、寄件者、收件者與內文。當使用者同時要求已收和已寄郵件，或未限定方向時，使用 folder ALL 一次；只有明確指定單一方向時才使用 INBOX 或 SENT。切勿猜測服務供應商特定的資料夾名稱，也不要重試已完成的查詢。每筆結果都包含最多 500 個字元的預覽，可用於清單和批次摘要；清單查詢完成後，不要逐封讀取完整郵件。在同一次 Worker 執行中不要再次沿 nextCursor 翻頁；應說明還有更多結果，並讓後續使用者要求繼續查詢。每次新的清單、搜尋、篩選、日期範圍、摘要或重新排版要求都必須再次呼叫此工具，即使對話記錄中已有郵件結果。歷史 messageRefs 只能用於對已明確選取的同一封郵件執行操作。將 accountId 留空可使用唯一帳號或唯一預設帳號。"
     },
     {
       "name": "mail_read",
@@ -681,7 +681,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "從 mail_list 回傳的 messageRef 讀取一則訊息，並將其標記為在伺服器上已讀。該工具成功後，在同一回應中為用戶摘要訊息。"
+      "description": "讀取 mail_list 回傳的 messageRef 所指向的一封郵件，並在伺服器上將其標記為已讀。僅在使用者明確需要完整內文、附件中繼資料或 mail_list 預覽中沒有的確切細節時使用；不要為了產生清單或批次摘要而對每封郵件都使用。切勿重複使用同一組 messageRef 和 bodyCursor。工具成功後，在同一回應中為使用者摘要該郵件。"
     },
     {
       "name": "mail_send",
@@ -801,7 +801,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "建立使用者可見的本機備忘錄、註解或工作記錄。當使用者明確希望將內容保留為備忘錄或可操作註釋時使用。請勿使用此工具儲存或查詢助理管理的使用者設定檔記憶體，例如首選項、身分、關係或回應方式。 直接根據 Worker 環境解析備忘錄日期，不要呼叫 Calendar 或 Alarm 工具。"
+      "description": "向 To-do Center 新增一筆使用者可見的待辦。用於「新增待辦」「記錄待辦」或使用者希望保留的可執行提醒。儲存使用者內容，而不是助理的使用者設定檔記憶或 Main 的內部執行計畫。直接從 Worker 環境解析待辦日期，不呼叫 Calendar 或 Alarm 工具。待辦排程：只有當使用者要求或明確引用的來源提供確定的日曆日期、可唯一解析的相對日期（今天、明天、後天、恰好兩天後 / 两天后）或明確日期範圍時才排程。current_date 和時區內容只作計算基準，絕不是使用者提供的排程。未提日期或時間模糊（这两天、这个两天、过几天、近期、有空、改天、soon、sometime this week、in a couple of days）時，在 Unscheduled（时间待定）中建立無日期待辦，省略 startDate 和 endDate 或將兩者留空。切勿預設為今天、任選方便日期，或把模糊時段變成多日排程；把模糊時間保留在待辦內容中。內容已知時，不要只為建立待辦而追問日期。根據目前執行階段內容解析確定日期；未知具體小時不會使明確日期變成無日期。更新時，若使用者只修改內容且沒有排程意圖，保留現有日期。若使用者明確移除排程、表示時間待定或改成模糊時間，使用 clearStartDate=true 和空白日期字串移至 Unscheduled，並清除兩個日期。報告 Tool 結果中已儲存的 Unscheduled 分區或排程日期，不要依賴假設。內部 task_pool 結果標記在面向使用者的回覆中表示 Unscheduled（时间待定）分區。這些規則適用於待辦，不適用於日曆事件或鬧鐘。"
     },
     {
       "name": "memo_delete",
@@ -809,7 +809,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "按 ID 軟刪除本機備忘錄。當使用者用自然語言描述目標時，首先搜尋/列出備忘錄，以便知道目標 ID/標題。"
+      "description": "按 id 軟刪除 To-do Center 中的一筆使用者待辦。當使用者以自然語言描述目標時，先搜尋或列出待辦，以確定其 id/標題。不要使用此工具刪除助理的使用者設定檔記憶或 Main 的內部執行計畫。"
     },
     {
       "name": "memo_list",
@@ -817,7 +817,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "列出使用者可見的本地備忘錄記錄。狀態可以是活動、完成、存檔或全部。請勿使用此工具來回答助理對使用者的記憶、使用者設定檔首選項或對話記錄。空結果僅意味著不存在匹配的本地備忘錄；這並不意味著不存在使用者設定檔記憶體。"
+      "description": "顯示使用者在 To-do Center 中的待辦清單（待办列表）。status 可以是 active、done、archived 或 all。此查詢僅針對個人待辦，而不是 Main 的內部執行計畫或助理的使用者設定檔記憶。空白結果只適用於此待辦清單。"
     },
     {
       "name": "memo_mark_done",
@@ -825,7 +825,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "透過 ID 將本地備忘錄標記為已完成或活動。"
+      "description": "按 id 完成使用者待辦（完成待办），或在 To-do Center 中將其重新開啟。此操作修改的是使用者記錄，而不是 Main 的內部執行計畫或助理的使用者設定檔記憶。"
     },
     {
       "name": "memo_search",
@@ -833,7 +833,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "透過標題、內容或標籤中的關鍵字搜尋使用者可見的本地備忘錄。狀態可以是活動、完成、存檔或全部。請勿使用此工具搜尋助理管理的使用者設定檔記憶體或對話記錄。空結果僅描述本地備忘錄儲存。"
+      "description": "按標題、內容或標籤中的關鍵字尋找 To-do Center 中的使用者待辦。status 可以是 active、done、archived 或 all。僅搜尋使用者待辦，不搜尋助理的使用者設定檔記憶、對話記錄或 Main 的內部執行計畫。"
     },
     {
       "name": "memo_update",
@@ -841,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "透過 ID 更新本機備忘錄。使用者以自然語言描述目標時，先搜尋或列出備忘錄，並隨變更欄位傳遞已知目標詳情。空白的標題、內容、標籤與日期字串會保留現有值。使用從目前 Worker 環境解析的 yyyy-MM-dd 日期；切勿計算紀元毫秒，也不要只為解析備忘錄日期而呼叫 Calendar 或 Alarm 工具。"
+      "description": "按 id 編輯 To-do Center 中的一筆使用者待辦。當使用者以自然語言描述目標時，先搜尋或列出待辦，並將已知目標詳情與變更欄位一起傳入。此操作編輯使用者待辦，而不是助理的使用者設定檔記憶或 Main 的內部執行計畫。空白 title/content/tags 與日期字串會保留現有值。使用從目前 Worker 環境解析的 yyyy-MM-dd 日期；切勿計算紀元毫秒，也不要只為解析待辦日期而呼叫 Calendar 或 Alarm 工具。待辦排程：只有當使用者要求或明確引用的來源提供確定的日曆日期、可唯一解析的相對日期（今天、明天、後天、恰好兩天後 / 两天后）或明確日期範圍時才排程。current_date 和時區內容只作計算基準，絕不是使用者提供的排程。未提日期或時間模糊（这两天、这个两天、过几天、近期、有空、改天、soon、sometime this week、in a couple of days）時，以省略或留空的 startDate 和 endDate 將待辦保留或移至 Unscheduled（时间待定）。切勿預設為今天、任選方便日期，或把模糊時段變成多日排程；把模糊時間保留在待辦內容中。內容已知時，不要只為處理待辦而追問日期。根據目前執行階段內容解析確定日期；未知具體小時不會使明確日期變成無日期。更新時，若使用者只修改內容且沒有排程意圖，保留現有日期。若使用者明確移除排程、表示時間待定或改成模糊時間，使用 clearStartDate=true 和空白日期字串移至 Unscheduled，並清除兩個日期。報告 Tool 結果中已儲存的 Unscheduled 分區或排程日期，不要依賴假設。內部 task_pool 結果標記在面向使用者的回覆中表示 Unscheduled（时间待定）分區。這些規則適用於待辦，不適用於日曆事件或鬧鐘。"
     },
     {
       "name": "sysinfo_delete",
@@ -874,6 +874,22 @@
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "透過 sysinfo_query 回傳的 threadKey 載入一個本機 SysInfo 執行緒。"
+    },
+    {
+      "name": "purchase_query",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "自動通過",
+      "approvalCode": "AUTO",
+      "description": "僅在使用者詢問用量、餘額、價格或升級時，讀取真實帳號點數或目前方案價格。不得捏造價格、恢復日期或購買連結。到期時間不代表承諾的補充日期。此工具不會購買任何內容或恢復工作。"
+    },
+    {
+      "name": "purchase_recommendations",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "自動通過",
+      "approvalCode": "AUTO",
+      "description": "僅在使用者明確要求停止或恢復推薦後，變更長時間工作與取消情境中的主動購買建議。不得推定使用者同意。"
     },
     {
       "name": "shopping_compare",
@@ -921,7 +937,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "透過一次呼叫為目前使用者請求建立完整的有序 TODO 計劃。當請求需要三個或更多步驟時，這是任何非工作工具之前的強制性前提條件。傳遞專案中每個面向使用者的有界步驟。該計劃只能創建一次，以後不能擴展。切勿包含工作管理、清理、狀態更新或最終回應專案。"
+      "description": "透過一次呼叫為目前使用者要求建立完整的有序 TODO 計畫。當路由產生兩個或更多具體 Main 步驟或跨越 Profiles 時，這是呼叫任何非任務 Tool 前的強制前提。每次 delegate 或 Plugin Tool 呼叫計為一個步驟；無論 Worker 內部如何，一個 delegate 始終只算一步。將每個有明確邊界、面向使用者的步驟傳入 items。計畫只能建立一次，之後不能擴充。切勿包含任務管理、清理、狀態更新或最終回應項目。此內部執行計畫不是使用者的持久 To-do Center。建立、查找、完成或刪除個人待辦時，應使用 scopes=[memo] 委派給 Personal Organization，並改用 memo_* Tools。"
     },
     {
       "name": "task_list",
@@ -929,7 +945,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "列出目前使用者請求的內部 TODO 項。預設會回傳開啟的、in_progress 和封鎖的項目。"
+      "description": "列出目前使用者要求的內部 TODO 項目。預設回傳 open、in_progress 和 blocked 項目。此內部執行計畫不是使用者的持久 To-do Center。建立、查找、完成或刪除個人待辦時，應使用 scopes=[memo] 委派給 Personal Organization，並改用 memo_* Tools。"
     },
     {
       "name": "task_update",
@@ -937,7 +953,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "更新一個內部 TODO 項目。允許的狀態轉換：open 可轉為 in_progress、blocked 或 abandoned；in_progress 可轉為 blocked、done 或 abandoned；blocked 可轉為 open 或 abandoned。done 與 abandoned 是終態。同一時間只能有一個工作處於 in_progress。"
+      "description": "更新一個內部 TODO 項目。允許的狀態轉換：open 可轉為 in_progress、blocked 或 abandoned；in_progress 可轉為 blocked、done 或 abandoned；blocked 可轉為 open 或 abandoned。done 與 abandoned 是終態。同一時間只能有一個工作處於 in_progress。此內部執行計畫不是使用者的持久 To-do Center。建立、查找、完成或刪除個人待辦時，應使用 scopes=[memo] 委派給 Personal Organization，並改用 memo_* Tools。"
     },
     {
       "name": "workflow_delete",

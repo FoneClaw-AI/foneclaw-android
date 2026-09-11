@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "ja",
   "fallbackLocale": "en",
-  "toolCount": 125,
+  "toolCount": 127,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "ツールや機能を検索",
@@ -69,7 +69,7 @@
     {
       "name": "Web and Shopping",
       "displayName": "Web とショッピング",
-      "toolCount": 3
+      "toolCount": 5
     },
     {
       "name": "Tasks, Workflows, and Shortcuts",
@@ -673,7 +673,7 @@
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "メールの概要を一覧、絞り込み、または検索します。件名、送信者、受信者、本文が検索対象です。会話履歴に以前のメール結果があっても、新しい一覧、検索、フィルター、期間指定、要約、再整形の依頼ごとにこのツールを再度呼び出してください。過去の messageRefs は、すでに明確に選択された同一メールへの操作に限って再利用できます。アカウントが 1 つだけ、または既定のアカウントが一意の場合は accountId を空にできます。"
+      "description": "メールの概要を一覧表示、絞り込み、または検索します。件名、送信者、受信者、本文が検索対象です。ユーザーが受信メールと送信メールの両方を求める場合、または方向を限定していない場合は folder ALL を一度使用し、明示的に一方向だけを指定した場合に限り INBOX または SENT を使用します。プロバイダー固有のフォルダー名を推測したり、完了済みのクエリを再試行したりしないでください。各結果には最大 500 文字のプレビューが含まれ、一覧や一括要約に使用できます。一覧クエリの完了後に全メールの本文を個別に読まないでください。同じ Worker 実行内で nextCursor を再度たどらず、続きがあることを伝え、後のユーザー要求で検索を続行します。会話履歴に以前のメール結果があっても、新しい一覧、検索、フィルター、期間指定、要約、再整形の依頼ごとにこの Tool を再度呼び出してください。過去の messageRefs は、すでに明確に選択された同一メールへの操作に限って再利用できます。アカウントが 1 つだけ、または既定のアカウントが一意の場合は accountId を空にできます。"
     },
     {
       "name": "mail_read",
@@ -681,7 +681,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "mail_list によって返された messageRef から 1 つのメッセージを読み取り、サーバー上で既読のマークを付けます。ツールが成功したら、同じ応答でユーザーへのメッセージを要約します。"
+      "description": "mail_list が返した messageRef のメールを 1 件読み、サーバー上で既読にします。ユーザーが本文全体、添付ファイルのメタデータ、または mail_list のプレビューにない正確な詳細を明示的に必要とする場合にのみ使用してください。一覧や一括要約を作るだけのために全メールへ使用しないでください。同じ messageRef と bodyCursor の組み合わせを繰り返してはいけません。Tool が成功したら、同じ応答内でユーザー向けにメールを要約します。"
     },
     {
       "name": "mail_send",
@@ -801,7 +801,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "ユーザーに表示されるローカル メモ、メモ、またはタスク レコードを作成します。ユーザーがコンテンツをメモまたは実用的なメモとして明示的に保持したい場合に使用します。このツールを使用して、アシスタントが管理するユーザー プロファイル メモリ (設定、ID、関係、応答スタイルなど) を保存したりクエリしたりしないでください。 メモの日付は Worker 環境から直接解決し、Calendar または Alarm ツールを呼び出さないでください。"
+      "description": "ユーザーに表示される To-do を To-do Center に追加します。「To-do を追加」「To-do を記録」、添加待办、记录待办、またはユーザーが残したい実行可能なリマインダーに使用します。保存するのはユーザーの内容であり、アシスタントのプロファイルメモリや Main の内部実行計画ではありません。Calendar や Alarm Tool を呼ばず、Worker 環境から直接日付を解決します。To-do のスケジュールは、ユーザーの依頼または明示的に参照された情報源に、確定した日付、一意に解決できる相対日（今日、明日、明後日、ちょうど 2 日後 / 两天后）、または明示的な日付範囲がある場合に限ります。current_date とタイムゾーンは計算基準にすぎず、ユーザー指定の予定ではありません。日付がない、または時期が曖昧（这两天、这个两天、过几天、近期、有空、改天、soon、sometime this week、in a couple of days）なら、startDate と endDate を省略または空にして、日付なしの To-do を Unscheduled（时间待定）に作成します。今日を既定にしたり、都合のよい日を選んだり、曖昧な期間を複数日の予定に変えたりせず、曖昧な時期の表現は内容に残します。内容が分かっているなら、作成のためだけに日付を尋ねません。確定日は現在の実行コンテキストから解決し、時刻が不明でも明示された日付を未定にしません。更新で内容だけが変わり予定の意図がなければ既存の日付を保持します。予定の削除、時期未定、曖昧な時期への変更が明示された場合は、空の日付文字列と clearStartDate=true で両方の日付を消去し、Unscheduled に移します。推測ではなく Tool の結果にある保存先の Unscheduled セクションまたは日付を報告します。内部の task_pool 結果マーカーはユーザー向け応答で Unscheduled（时间待定）セクションを指します。この規則は To-do に適用し、カレンダーイベントやアラームには適用しません。"
     },
     {
       "name": "memo_delete",
@@ -809,7 +809,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "ID を使用してローカル メモをソフト削除します。ユーザーがターゲットを自然言語で説明するときは、最初にメモを検索/リストして、ターゲットの ID/タイトルがわかるようにします。"
+      "description": "To-do Center のユーザー To-do を id で論理削除します。ユーザーが対象を自然言語で説明した場合は、先に To-do を検索または一覧表示して id/タイトルを特定します。この Tool でアシスタントのプロファイルメモリや Main の内部実行計画を削除しないでください。"
     },
     {
       "name": "memo_list",
@@ -817,7 +817,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "ユーザーに表示されるローカル メモ レコードを一覧表示します。ステータスは、アクティブ、完了、アーカイブ、またはすべてのいずれかになります。このツールを使用して、アシスタントがユーザーについて覚えていること、ユーザー プロファイルの設定、または会話履歴に回答しないでください。空の結果は、一致するローカル メモが存在しないことを意味するだけです。ユーザー プロファイル メモリが存在しないという意味ではありません。"
+      "description": "To-do Center にあるユーザーの To-do リスト（待办列表）を表示します。status は active、done、archived、all のいずれかです。これは個人の To-do を照会するもので、Main の内部実行計画やアシスタントのプロファイルメモリではありません。空の結果はこの To-do リストだけに該当します。"
     },
     {
       "name": "memo_mark_done",
@@ -825,7 +825,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "ID によってローカルメモを完了またはアクティブとしてマークします。"
+      "description": "id を指定してユーザーの To-do を完了（完成待办）するか、To-do Center で再開します。変更されるのはユーザーの記録であり、Main の内部実行計画やアシスタントのプロファイルメモリではありません。"
     },
     {
       "name": "memo_search",
@@ -833,7 +833,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "ユーザーに表示されるローカル メモを、タイトル、コンテンツ、またはタグのキーワードで検索します。ステータスは、アクティブ、完了、アーカイブ、またはすべてのいずれかになります。このツールを、アシスタントが管理するユーザー プロファイル メモリや会話履歴の検索には使用しないでください。空の結果はローカル メモ ストアのみを表します。"
+      "description": "タイトル、内容、タグのキーワードで To-do Center のユーザー To-do を検索します。status は active、done、archived、all のいずれかです。検索対象はユーザーの To-do のみで、アシスタントのプロファイルメモリ、会話履歴、Main の内部実行計画は対象外です。"
     },
     {
       "name": "memo_update",
@@ -841,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "ローカルメモを ID で更新します。ユーザーが対象を自然言語で説明した場合は、最初にメモを検索または一覧表示し、変更するフィールドとともに既知の対象情報を渡します。空のタイトル、内容、タグ、日付文字列は既存の値を維持します。現在の Worker 環境から解決した yyyy-MM-dd 形式の日付を使用し、エポックミリ秒を計算したり、メモの日付を解決するためだけに Calendar または Alarm ツールを呼び出したりしないでください。"
+      "description": "To-do Center のユーザー To-do を id で編集します。対象が自然言語で説明された場合は、先に To-do を検索または一覧表示し、既知の対象情報と変更フィールドを渡します。編集対象はユーザーの To-do であり、アシスタントのプロファイルメモリや Main の内部実行計画ではありません。空の title/content/tags と日付文字列は既存値を維持します。現在の Worker 環境から解決した yyyy-MM-dd を使い、エポックミリ秒を計算したり、日付解決だけのために Calendar や Alarm Tool を呼んだりしません。スケジュールは、依頼または明示的な参照元に確定日、一意に解決できる相対日（今日、明日、明後日、ちょうど 2 日後 / 两天后）、または明示的な範囲がある場合だけ設定します。current_date とタイムゾーンは計算基準であり、ユーザー指定の予定ではありません。日付がない、または時期が曖昧（这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days）なら、startDate と endDate を省略または空にして Unscheduled（时间待定）にします。今日を既定にしたり、都合のよい日を選んだり、曖昧な期間を複数日の予定に変えたりせず、曖昧な時期は内容に残します。内容が分かっているなら日付だけを尋ねません。確定日は現在の実行コンテキストから解決し、時刻不明でも明示日を未定にしません。内容だけの更新で予定の意図がなければ既存日を保持します。予定の削除、時期未定、曖昧な時期への変更が明示されたら、空の日付文字列と clearStartDate=true で両方の日付を消去して Unscheduled に移します。推測ではなく Tool 結果の Unscheduled セクションまたは保存日を報告します。内部 task_pool マーカーはユーザー向け応答で Unscheduled（时间待定）セクションを指します。この規則は To-do に適用し、カレンダーイベントやアラームには適用しません。"
     },
     {
       "name": "sysinfo_delete",
@@ -874,6 +874,22 @@
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "sysinfo_query によって返された threadKey によって 1 つのローカル SysInfo スレッドをロードします。"
+    },
+    {
+      "name": "purchase_query",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "自動",
+      "approvalCode": "AUTO",
+      "description": "ユーザーが使用量、残高、料金、アップグレードについて尋ねた場合にのみ、実際のアカウントポイントまたは現在のプラン料金を読み取ります。料金、回復日、購入リンクを作り出してはいけません。有効期限は補充予定日を保証するものではありません。このツールは購入やタスク再開を行いません。"
+    },
+    {
+      "name": "purchase_recommendations",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "自動",
+      "approvalCode": "AUTO",
+      "description": "ユーザーが推奨の停止または再開を明示的に求めた場合にのみ、長時間タスクやキャンセル時の購入推奨を変更します。同意を推測してはいけません。"
     },
     {
       "name": "shopping_compare",
@@ -921,7 +937,7 @@
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "現在のユーザーリクエストに対する 1 回の呼び出しで、完全な順序付き TODO プランを作成します。これは、リクエストに 3 つ以上のステップが必要な場合、非タスク ツールの前に必須の前提条件です。アイテム内のすべての制限されたユーザー向けステップを渡します。プランは一度だけ作成でき、後で拡張することはできません。タスク管理、クリーンアップ、ステータス更新、最終対応の項目は決して含めないでください。"
+      "description": "現在のユーザー要求に対する完全な順序付き TODO 計画を 1 回の呼び出しで作成します。ルーティングによって 2 つ以上の具体的な Main ステップが生じるか Profiles をまたぐ場合、非タスク Tool より前に必須です。delegate または Plugin Tool の各呼び出しを 1 ステップとして数え、Worker 内部の処理数にかかわらず 1 delegate は 1 ステップのままです。境界が明確でユーザー向けの全ステップを items に渡します。計画は 1 回だけ作成でき、後から拡張できません。タスク管理、後片付け、状態更新、最終応答の項目を含めないでください。この内部実行計画はユーザーの永続的な To-do Center ではありません。個人 To-do の作成、検索、完了、削除は scopes=[memo] で Personal Organization に委任し、代わりに memo_* Tools を使用します。"
     },
     {
       "name": "task_list",
@@ -929,7 +945,7 @@
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "現在のユーザーリクエストの内部 TODO 項目をリストします。デフォルトでは、オープン、in_progress、およびブロックされたアイテムが返されます。"
+      "description": "現在のユーザー要求に対する内部 TODO 項目を一覧表示します。既定では open、in_progress、blocked の項目を返します。この内部実行計画はユーザーの永続的な To-do Center ではありません。個人 To-do の作成、検索、完了、削除は scopes=[memo] で Personal Organization に委任し、memo_* Tools を使用します。"
     },
     {
       "name": "task_update",
@@ -937,7 +953,7 @@
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "内部 TODO 項目を 1 件更新します。許可される状態遷移は、open から in_progress、blocked、abandoned、in_progress から blocked、done、abandoned、blocked から open または abandoned です。done と abandoned は最終状態です。in_progress にできるタスクは同時に 1 件だけです。"
+      "description": "内部 TODO 項目を 1 件更新します。許可される状態遷移は、open から in_progress、blocked、abandoned、in_progress から blocked、done、abandoned、blocked から open または abandoned です。done と abandoned は最終状態です。in_progress にできるタスクは同時に 1 件だけです。この内部実行計画はユーザーの永続的な To-do Center ではありません。個人 To-do の作成、検索、完了、削除は scopes=[memo] で Personal Organization に委任し、memo_* Tools を使用します。"
     },
     {
       "name": "workflow_delete",

@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "pt",
   "fallbackLocale": "en",
-  "toolCount": 125,
+  "toolCount": 127,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Pesquisar ferramentas ou recursos",
@@ -69,7 +69,7 @@
     {
       "name": "Web and Shopping",
       "displayName": "Web e compras",
-      "toolCount": 3
+      "toolCount": 5
     },
     {
       "name": "Tasks, Workflows, and Shortcuts",
@@ -673,7 +673,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Lista, filtra ou pesquisa resumos de mensagens. A consulta pesquisa assunto, remetente, destinatários e corpo. Chame esta ferramenta novamente para cada nova lista, pesquisa, filtro, intervalo de datas, resumo ou reformatação, mesmo que o histórico já contenha resultados de e-mail. messageRefs anteriores só podem ser reutilizados em uma operação sobre uma mensagem específica já selecionada. Deixe accountId vazio para usar a única conta ou a única conta padrão."
+      "description": "Lista, filtra ou pesquisa resumos de mensagens. A consulta pesquisa assunto, remetente, destinatários e corpo. Use folder ALL uma vez quando o usuário pedir mensagens recebidas e enviadas ou não limitar a direção; use INBOX ou SENT somente quando houver uma direção única explícita. Nunca adivinhe nomes de pastas específicos do provedor nem repita uma consulta concluída. Cada resultado inclui uma prévia de até 500 caracteres para listas e resumos em lote; não leia o conteúdo completo de todas as mensagens após concluir uma consulta de lista. Não siga nextCursor novamente na mesma execução do Worker; informe que há mais resultados e deixe uma solicitação posterior continuar a consulta. Chame este Tool novamente para cada nova lista, pesquisa, filtro, intervalo de datas, resumo ou reformatação, mesmo que o histórico já contenha resultados de e-mail. messageRefs anteriores só podem ser reutilizados em uma operação sobre uma mensagem específica já selecionada. Deixe accountId vazio para usar a única conta ou a única conta padrão."
     },
     {
       "name": "mail_read",
@@ -681,7 +681,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requer aprovação",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Leia uma mensagem de um messageRef retornado por mail_list e marque-a como lida no servidor. Depois que a ferramenta for bem-sucedida, resuma a mensagem para o usuário na mesma resposta."
+      "description": "Lê uma mensagem indicada por um messageRef retornado por mail_list e a marca como lida no servidor. Use somente quando o usuário precisar explicitamente do corpo completo, dos metadados dos anexos ou de detalhes exatos ausentes na prévia de mail_list; não use em todas as mensagens apenas para criar uma lista ou um resumo em lote. Nunca repita a mesma combinação de messageRef e bodyCursor. Após o sucesso do Tool, resuma a mensagem para o usuário na mesma resposta."
     },
     {
       "name": "mail_send",
@@ -801,7 +801,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requer aprovação",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Crie um memorando, nota ou registro de tarefa local visível ao usuário. Use quando o usuário desejar explicitamente que o conteúdo seja mantido como um memorando ou nota acionável. Não use esta ferramenta para salvar ou consultar a memória do perfil do usuário gerenciado pelo assistente, como preferências, identidade, relacionamentos ou estilo de resposta. Resolva as datas do memorando diretamente no ambiente Worker sem chamar as ferramentas Calendar ou Alarm."
+      "description": "Adiciona uma tarefa visível ao usuário ao To-do Center. Use para adicionar ou registrar uma tarefa, 添加待办, 记录待办 ou um lembrete acionável que o usuário queira guardar. Salve conteúdo do usuário, não a memória de perfil do assistente nem o plano de execução interno de Main. Resolva datas diretamente no ambiente Worker sem chamar os Tools Calendar ou Alarm. Agende apenas quando a solicitação ou uma fonte explicitamente citada trouxer uma data definida, uma data relativa de interpretação única (hoje, amanhã, depois de amanhã, exatamente daqui a dois dias / 两天后) ou um intervalo explícito. current_date e o fuso horário servem apenas como base de cálculo, nunca como agenda fornecida pelo usuário. Sem data, ou com tempo vago (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), crie uma tarefa sem data em Unscheduled (时间待定), omitindo ou esvaziando startDate e endDate. Nunca use hoje por padrão, escolha um dia conveniente ou transforme um período vago em evento de vários dias; preserve a expressão vaga no conteúdo. Se o conteúdo for conhecido, não pergunte uma data só para criar a tarefa. Resolva datas definidas pelo contexto atual; uma hora desconhecida não elimina um dia explícito. Em atualizações, mantenha as datas existentes quando só o conteúdo mudar e não houver intenção de agendamento. Se o usuário remover o agendamento, disser que o horário está indefinido ou trocar por um tempo vago, use clearStartDate=true com datas vazias para apagar as duas datas e mover para Unscheduled. Informe a seção Unscheduled ou a data salva a partir do resultado do Tool, não de suposições. O marcador interno task_pool nomeia a seção Unscheduled (时间待定) nas respostas ao usuário. Estas regras valem para tarefas, não para eventos de calendário ou alarmes."
     },
     {
       "name": "memo_delete",
@@ -809,7 +809,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Requer aprovação",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Exclua suavemente um memorando local por ID. Pesquise/liste memorandos primeiro quando o usuário descreve o alvo em linguagem natural para que o ID/título do alvo seja conhecido."
+      "description": "Exclui logicamente uma tarefa do usuário no To-do Center por id. Quando o usuário descrever o alvo em linguagem natural, primeiro pesquise ou liste as tarefas para identificar seu id/título. Não use este Tool para excluir a memória de perfil do assistente nem o plano de execução interno de Main."
     },
     {
       "name": "memo_list",
@@ -817,7 +817,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requer aprovação",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Lista registros de memorandos locais visíveis ao usuário. o status pode ser ativo, concluído, arquivado ou todos. Não use esta ferramenta para responder o que o assistente lembra sobre o usuário, preferências de perfil do usuário ou histórico de conversas. Um resultado vazio significa apenas que não existem memorandos locais correspondentes; isso não significa que não exista memória de perfil de usuário."
+      "description": "Mostra a lista de tarefas do usuário no To-do Center (待办列表). status pode ser active, done, archived ou all. Consulta tarefas pessoais, não o plano de execução interno de Main nem a memória de perfil do assistente. Um resultado vazio se aplica somente a esta lista de tarefas."
     },
     {
       "name": "memo_mark_done",
@@ -825,7 +825,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requer aprovação",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Marcar um memorando local como concluído ou ativo por ID."
+      "description": "Conclui uma tarefa do usuário (完成待办) ou a reabre no To-do Center por id. Isso altera um registro do usuário, não o plano de execução interno de Main nem a memória de perfil do assistente."
     },
     {
       "name": "memo_search",
@@ -833,7 +833,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requer aprovação",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Pesquise memorandos locais visíveis ao usuário por palavra-chave no título, conteúdo ou tags. o status pode ser ativo, concluído, arquivado ou todos. Não use esta ferramenta para pesquisar memória de perfil de usuário gerenciado pelo assistente ou histórico de conversas. Um resultado vazio descreve apenas o armazenamento de memorando local."
+      "description": "Pesquisa tarefas do usuário no To-do Center por palavra-chave no título, conteúdo ou tags. status pode ser active, done, archived ou all. Pesquise somente tarefas do usuário, não a memória de perfil do assistente, o histórico de conversas nem o plano de execução interno de Main."
     },
     {
       "name": "memo_update",
@@ -841,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requer aprovação",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Atualiza um memorando local por ID. Quando o usuário descrever o alvo em linguagem natural, primeiro pesquise ou liste os memorandos e envie os detalhes conhecidos do alvo junto com os campos alterados. Título, conteúdo, tags e datas em branco preservam os valores atuais. Use datas yyyy-MM-dd resolvidas no ambiente Worker atual; nunca calcule milissegundos desde a época nem chame as ferramentas Calendar ou Alarm apenas para resolver a data de um memorando."
+      "description": "Edita uma tarefa do usuário no To-do Center por id. Se o alvo for descrito em linguagem natural, primeiro pesquise ou liste tarefas e envie os detalhes conhecidos com os campos alterados. Edita tarefas do usuário, não a memória de perfil do assistente nem o plano interno de Main. title/content/tags e datas vazias preservam os valores. Use datas yyyy-MM-dd do ambiente Worker; não calcule milissegundos de época nem chame Calendar ou Alarm só para resolver uma data. Agende somente com data definida, data relativa inequívoca (hoje, amanhã, depois de amanhã, exatamente daqui a dois dias / 两天后) ou intervalo explícito fornecido pela solicitação ou fonte citada. current_date e fuso horário são apenas base de cálculo, não uma data do usuário. Sem data ou com tempo vago (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), omita ou esvazie startDate e endDate para deixar em Unscheduled (时间待定). Não use hoje por padrão, escolha um dia conveniente ou transforme período vago em vários dias; preserve a expressão no conteúdo. Se o conteúdo for conhecido, não pergunte data. Resolva datas definidas pelo contexto atual; hora desconhecida não elimina um dia explícito. Se só o conteúdo mudar sem intenção de agendamento, mantenha as datas. Se o usuário remover o agendamento, disser que está indefinido ou trocar por tempo vago, use clearStartDate=true com datas vazias para apagar ambas e mover para Unscheduled. Informe a seção Unscheduled ou data salva do resultado do Tool, não por suposição. task_pool nomeia internamente a seção Unscheduled (时间待定) nas respostas ao usuário. Estas regras não se aplicam a eventos de calendário ou alarmes."
     },
     {
       "name": "sysinfo_delete",
@@ -874,6 +874,22 @@
       "approval": "Requer aprovação",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Carregue um thread local SysInfo por um threadKey retornado por sysinfo_query."
+    },
+    {
+      "name": "purchase_query",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Automática",
+      "approvalCode": "AUTO",
+      "description": "Leia pontos reais da conta ou preços atuais somente quando o usuário perguntar sobre uso, saldo, preços ou upgrade. Nunca invente preços, datas de recuperação ou links de compra. A expiração não é uma data prometida de reposição. Isso não compra nada nem retoma tarefas."
+    },
+    {
+      "name": "purchase_recommendations",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Automática",
+      "approvalCode": "AUTO",
+      "description": "Altere recomendações proativas de compra em tarefas longas e cancelamentos somente após o usuário pedir explicitamente para parar ou retomar. Nunca presuma consentimento."
     },
     {
       "name": "shopping_compare",
@@ -921,7 +937,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Crie o plano TODO ordenado completo em uma chamada para a solicitação do usuário atual. Esta é uma pré-condição obrigatória antes de qualquer ferramenta não-tarefa quando a solicitação requer três ou mais etapas. Passe todas as etapas limitadas do usuário nos itens. O plano pode ser criado exatamente uma vez e não pode ser estendido posteriormente. Nunca inclua itens de gerenciamento de tarefas, limpeza, atualização de status ou resposta final."
+      "description": "Cria em uma chamada o plano TODO completo e ordenado para a solicitação atual. É obrigatório antes de qualquer Tool que não seja de tarefa quando o roteamento produz duas ou mais etapas concretas de Main ou cruza Profiles. Conte cada chamada de delegate ou Plugin Tool como uma etapa; um delegate continua sendo uma etapa independentemente do funcionamento interno do Worker. Passe em items todas as etapas delimitadas voltadas ao usuário. O plano só pode ser criado uma vez e não pode ser ampliado depois. Nunca inclua gerenciamento de tarefas, limpeza, atualização de status ou resposta final. Este plano de execução interno não é o To-do Center persistente do usuário. Para criar, consultar, concluir ou excluir tarefas pessoais, delegue a Personal Organization com scopes=[memo] e use memo_* Tools."
     },
     {
       "name": "task_list",
@@ -929,7 +945,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Lista itens TODO internos para a solicitação do usuário atual. Por padrão, retorna itens abertos, in_progress e bloqueados."
+      "description": "Lista os itens TODO internos da solicitação atual. Por padrão, retorna open, in_progress e blocked. Este plano de execução interno não é o To-do Center persistente do usuário. Para criar, consultar, concluir ou excluir tarefas pessoais, delegue a Personal Organization com scopes=[memo] e use memo_* Tools."
     },
     {
       "name": "task_update",
@@ -937,7 +953,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Atualiza um item TODO interno. Transições permitidas: open para in_progress, blocked ou abandoned; in_progress para blocked, done ou abandoned; blocked para open ou abandoned. done e abandoned são estados finais. Apenas uma tarefa pode estar em in_progress."
+      "description": "Atualiza um item TODO interno. Transições permitidas: open para in_progress, blocked ou abandoned; in_progress para blocked, done ou abandoned; blocked para open ou abandoned. done e abandoned são estados finais. Apenas uma tarefa pode estar em in_progress. Este plano de execução interno não é o To-do Center persistente do usuário. Para criar, consultar, concluir ou excluir tarefas pessoais, delegue a Personal Organization com scopes=[memo] e use memo_* Tools."
     },
     {
       "name": "workflow_delete",

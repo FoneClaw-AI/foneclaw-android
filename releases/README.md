@@ -4,14 +4,16 @@ FoneClaw APKs are distributed through **GitHub Releases**. Each release includes
 
 ## Latest Release
 
-**v0.1.9** — GitHub Release, September 1, 2026
+**v0.2.1** — GitHub Release, September 11, 2026
 
-[Download APK](https://github.com/FoneClaw-AI/foneclaw-android/releases/tag/v0.1.9) | [Release Notes](v0.1.9.md)
+[Download APK](https://github.com/FoneClaw-AI/foneclaw-android/releases/tag/v0.2.1) | [Release Notes](v0.2.1.md)
 
 ## All Versions
 
 | Version | Date | Status |
 |---------|------|--------|
+| [v0.2.1](v0.2.1.md) | 2026-09-11 | GitHub Release |
+| [v0.2.0](v0.2.0.md) | 2026-09-07 | GitHub Release |
 | [v0.1.9](v0.1.9.md) | 2026-09-01 | GitHub Release |
 | [v0.1.7](v0.1.7.md) | 2026-08-26 | GitHub Release |
 | [v0.1.6](v0.1.6.md) | 2026-08-21 | GitHub Release |

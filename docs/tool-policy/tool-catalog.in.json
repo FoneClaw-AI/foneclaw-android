@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "in",
   "fallbackLocale": "en",
-  "toolCount": 125,
+  "toolCount": 127,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Cari alat atau kemampuan",
@@ -69,7 +69,7 @@
     {
       "name": "Web and Shopping",
       "displayName": "Web dan belanja",
-      "toolCount": 3
+      "toolCount": 5
     },
     {
       "name": "Tasks, Workflows, and Shortcuts",
@@ -673,7 +673,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Mencantumkan, memfilter, atau mencari ringkasan pesan berdasarkan subjek, pengirim, penerima, dan isi. Panggil alat ini lagi untuk setiap permintaan daftar, pencarian, filter, rentang tanggal, rangkuman, atau pemformatan ulang yang baru, meskipun riwayat percakapan sudah memuat hasil email sebelumnya. messageRefs lama hanya boleh digunakan kembali untuk tindakan pada pesan tertentu yang sudah dipilih. Kosongkan accountId untuk memakai satu-satunya akun atau satu-satunya akun default."
+      "description": "Mencantumkan, memfilter, atau mencari ringkasan pesan berdasarkan subjek, pengirim, penerima, dan isi. Gunakan folder ALL satu kali saat pengguna meminta email masuk dan terkirim sekaligus atau tidak membatasi arah; gunakan INBOX atau SENT hanya untuk satu arah yang dinyatakan dengan jelas. Jangan menebak nama folder khusus penyedia atau mencoba ulang kueri yang sudah selesai. Setiap hasil berisi pratinjau hingga 500 karakter untuk daftar dan rangkuman massal; jangan membaca isi lengkap setiap pesan setelah kueri daftar selesai. Jangan ikuti nextCursor lagi dalam eksekusi Worker yang sama; sampaikan bahwa masih ada hasil dan biarkan permintaan pengguna berikutnya melanjutkan kueri. Panggil Tool ini lagi untuk setiap permintaan daftar, pencarian, filter, rentang tanggal, rangkuman, atau pemformatan ulang yang baru, meskipun riwayat percakapan sudah memuat hasil email sebelumnya. messageRefs lama hanya boleh digunakan kembali untuk tindakan pada pesan tertentu yang sudah dipilih. Kosongkan accountId untuk memakai satu-satunya akun atau satu-satunya akun default."
     },
     {
       "name": "mail_read",
@@ -681,7 +681,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Baca satu pesan dari messageRef yang dikembalikan oleh mail_list dan tandai sudah dibaca di server. Setelah alat tersebut berhasil, rangkum pesan untuk pengguna dalam respons yang sama."
+      "description": "Membaca satu pesan dari messageRef yang dikembalikan oleh mail_list dan menandainya sudah dibaca di server. Gunakan hanya saat pengguna secara jelas memerlukan isi lengkap, metadata lampiran, atau detail persis yang tidak ada dalam pratinjau mail_list; jangan gunakan untuk setiap pesan hanya demi membuat daftar atau rangkuman massal. Jangan pernah mengulang kombinasi messageRef dan bodyCursor yang sama. Setelah Tool berhasil, rangkum pesan untuk pengguna dalam respons yang sama."
     },
     {
       "name": "mail_send",
@@ -801,7 +801,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Buat memo, catatan, atau rekaman tugas lokal yang dapat dilihat pengguna. Gunakan ketika pengguna secara eksplisit ingin konten disimpan sebagai memo atau catatan yang dapat ditindaklanjuti. Jangan gunakan alat ini untuk menyimpan atau menanyakan memori profil pengguna yang dikelola asisten seperti preferensi, identitas, hubungan, atau gaya respons. Tentukan tanggal memo langsung dari lingkungan Worker tanpa memanggil alat Calendar atau Alarm."
+      "description": "Menambahkan tugas yang terlihat oleh pengguna ke To-do Center. Gunakan untuk menambah atau mencatat tugas, 添加待办, 记录待办, termasuk pengingat yang dapat ditindaklanjuti dan ingin disimpan pengguna. Simpan konten pengguna, bukan memori profil asisten atau rencana eksekusi internal Main. Tentukan tanggal langsung dari lingkungan Worker tanpa memanggil Tools Calendar atau Alarm. Jadwalkan hanya jika permintaan atau sumber yang dirujuk secara jelas memberikan tanggal kalender pasti, tanggal relatif yang dapat ditentukan secara unik (hari ini, besok, lusa, tepat dua hari lagi / 两天后), atau rentang tanggal eksplisit. current_date dan konteks zona waktu hanya dasar perhitungan, bukan jadwal dari pengguna. Jika tanggal tidak disebutkan atau waktunya samar (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), buat tugas tanpa tanggal di Unscheduled (时间待定), dengan startDate dan endDate dihilangkan atau dikosongkan. Jangan menetapkan hari ini, memilih hari yang nyaman, atau mengubah rentang samar menjadi acara beberapa hari; pertahankan keterangan waktu samar dalam konten. Jika konten sudah diketahui, jangan meminta tanggal hanya untuk membuat tugas. Tentukan tanggal pasti dari konteks runtime saat ini; jam yang tidak diketahui tidak membuat hari eksplisit menjadi tanpa tanggal. Saat memperbarui, pertahankan tanggal jika pengguna hanya mengubah konten tanpa niat penjadwalan. Jika pengguna menghapus jadwal, menyatakan waktu belum ditentukan, atau menggantinya dengan waktu samar, gunakan clearStartDate=true dengan string tanggal kosong untuk menghapus kedua tanggal dan memindahkan tugas ke Unscheduled. Laporkan bagian Unscheduled atau tanggal tersimpan dari hasil Tool, bukan asumsi. Penanda hasil internal task_pool menamai bagian Unscheduled (时间待定) dalam jawaban kepada pengguna. Aturan ini berlaku untuk tugas, bukan acara kalender atau alarm."
     },
     {
       "name": "memo_delete",
@@ -809,7 +809,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Hapus sementara memo lokal berdasarkan id. Pencarian/daftar memo terlebih dahulu ketika pengguna mendeskripsikan target dalam bahasa alami sehingga id/judul target diketahui."
+      "description": "Menghapus secara lunak tugas pengguna di To-do Center berdasarkan id. Saat pengguna menjelaskan target dengan bahasa alami, cari atau tampilkan daftar tugas terlebih dahulu agar id/judulnya diketahui. Jangan gunakan Tool ini untuk menghapus memori profil asisten atau rencana eksekusi internal Main."
     },
     {
       "name": "memo_list",
@@ -817,7 +817,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Daftar catatan memo lokal yang dapat dilihat pengguna. statusnya bisa aktif, selesai, diarsipkan, atau semuanya. Jangan gunakan alat ini untuk menjawab apa yang diingat asisten tentang pengguna, preferensi profil pengguna, atau riwayat percakapan. Hasil yang kosong berarti tidak ada memo lokal yang cocok; ini tidak berarti bahwa tidak ada memori profil pengguna."
+      "description": "Menampilkan daftar tugas pengguna di To-do Center (待办列表). status dapat berupa active, done, archived, atau all. Ini menanyakan tugas pribadi, bukan rencana eksekusi internal Main atau memori profil asisten. Hasil kosong hanya berlaku untuk daftar tugas ini."
     },
     {
       "name": "memo_mark_done",
@@ -825,7 +825,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Tandai memo lokal sebagai selesai atau aktif berdasarkan id."
+      "description": "Menyelesaikan tugas pengguna (完成待办) atau membukanya kembali di To-do Center berdasarkan id. Ini mengubah catatan pengguna, bukan rencana eksekusi internal Main atau memori profil asisten."
     },
     {
       "name": "memo_search",
@@ -833,7 +833,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Cari memo lokal yang dapat dilihat pengguna berdasarkan kata kunci dalam judul, konten, atau tag. statusnya bisa aktif, selesai, diarsipkan, atau semuanya. Jangan gunakan alat ini untuk mencari memori profil pengguna yang dikelola asisten atau riwayat percakapan. Hasil yang kosong hanya menjelaskan penyimpanan memo lokal."
+      "description": "Mencari tugas pengguna di To-do Center berdasarkan kata kunci dalam judul, isi, atau tag. status dapat berupa active, done, archived, atau all. Cari hanya tugas pengguna, bukan memori profil asisten, riwayat percakapan, atau rencana eksekusi internal Main."
     },
     {
       "name": "memo_update",
@@ -841,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Memperbarui memo lokal berdasarkan ID. Saat pengguna menjelaskan target dengan bahasa alami, cari atau cantumkan memo terlebih dahulu, lalu teruskan detail target yang diketahui bersama kolom yang diubah. Judul, isi, tag, dan tanggal kosong mempertahankan nilai yang ada. Gunakan tanggal yyyy-MM-dd yang ditentukan dari lingkungan Worker saat ini; jangan menghitung milidetik epoch atau memanggil alat Calendar atau Alarm hanya untuk menentukan tanggal memo."
+      "description": "Mengedit tugas pengguna di To-do Center berdasarkan id. Jika target dijelaskan dengan bahasa alami, cari atau tampilkan tugas terlebih dahulu dan teruskan detail yang diketahui bersama kolom yang diubah. Ini mengedit tugas pengguna, bukan memori profil asisten atau rencana internal Main. title/content/tags dan string tanggal kosong mempertahankan nilai. Gunakan yyyy-MM-dd dari lingkungan Worker; jangan hitung milidetik epoch atau panggil Calendar atau Alarm hanya untuk tanggal. Jadwalkan hanya dengan tanggal pasti, tanggal relatif yang jelas (hari ini, besok, lusa, tepat dua hari lagi / 两天后), atau rentang eksplisit dari permintaan atau sumber rujukan. current_date dan zona waktu hanya dasar perhitungan, bukan tanggal pengguna. Tanpa tanggal atau dengan waktu samar (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), hilangkan atau kosongkan startDate dan endDate lalu tempatkan tugas di Unscheduled (时间待定). Jangan tetapkan hari ini, pilih hari yang nyaman, atau ubah periode samar menjadi beberapa hari; pertahankan ungkapan dalam konten. Jika konten diketahui, jangan tanyakan tanggal. Tentukan tanggal pasti dari konteks saat ini; jam yang tidak diketahui tidak membatalkan hari eksplisit. Jika hanya konten berubah tanpa niat penjadwalan, pertahankan tanggal. Jika pengguna menghapus jadwal, menyatakan waktu belum ditentukan, atau menggantinya dengan waktu samar, gunakan clearStartDate=true dan tanggal kosong untuk menghapus keduanya serta pindah ke Unscheduled. Laporkan bagian Unscheduled atau tanggal tersimpan dari hasil Tool, bukan asumsi. task_pool secara internal menamai bagian Unscheduled (时间待定) dalam jawaban. Aturan tidak berlaku untuk acara kalender atau alarm."
     },
     {
       "name": "sysinfo_delete",
@@ -874,6 +874,22 @@
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Muat satu thread SysInfo lokal dengan threadKey yang dikembalikan oleh sysinfo_query."
+    },
+    {
+      "name": "purchase_query",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Baca poin akun nyata atau harga paket saat ini hanya saat pengguna bertanya tentang penggunaan, saldo, harga, atau peningkatan. Jangan mengarang harga, tanggal pemulihan, atau tautan pembelian. Kedaluwarsa bukan tanggal isi ulang yang dijanjikan. Alat ini tidak membeli apa pun atau melanjutkan tugas."
+    },
+    {
+      "name": "purchase_recommendations",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Ubah rekomendasi pembelian proaktif untuk tugas panjang dan pembatalan hanya setelah pengguna secara eksplisit meminta menghentikan atau melanjutkan rekomendasi. Jangan pernah menyimpulkan persetujuan."
     },
     {
       "name": "shopping_compare",
@@ -921,7 +937,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Buat rencana TODO lengkap yang dipesan dalam satu panggilan untuk permintaan pengguna saat ini. Ini adalah prasyarat wajib sebelum alat non-tugas apa pun ketika permintaan memerlukan tiga langkah atau lebih. Lewati setiap langkah terbatas yang dihadapi pengguna dalam item. Rencana tersebut dapat dibuat tepat satu kali dan tidak dapat diperpanjang lagi di kemudian hari. Jangan pernah menyertakan item manajemen tugas, pembersihan, pembaruan status, atau respons akhir."
+      "description": "Membuat rencana TODO lengkap dan berurutan dalam satu panggilan untuk permintaan saat ini. Ini wajib sebelum Tool non-tugas jika perutean menghasilkan dua atau lebih langkah Main yang konkret atau melintasi Profiles. Hitung setiap panggilan delegate atau Plugin Tool sebagai satu langkah; satu delegate tetap satu langkah terlepas dari proses internal Worker. Teruskan semua langkah terbatas yang menghadap pengguna dalam items. Rencana hanya dapat dibuat sekali dan tidak dapat diperluas nanti. Jangan sertakan pengelolaan tugas, pembersihan, pembaruan status, atau respons akhir. Rencana eksekusi internal ini bukan To-do Center permanen pengguna. Untuk membuat, mencari, menyelesaikan, atau menghapus tugas pribadi, delegasikan ke Personal Organization dengan scopes=[memo] dan gunakan memo_* Tools."
     },
     {
       "name": "task_list",
@@ -929,7 +945,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Cantumkan item TODO internal untuk permintaan pengguna saat ini. Secara default mengembalikan item yang terbuka, sedang_berkembang, dan diblokir. Pengenal teknis: in_progress."
+      "description": "Mencantumkan item TODO internal untuk permintaan saat ini. Secara default mengembalikan open, in_progress, dan blocked. Rencana eksekusi internal ini bukan To-do Center permanen pengguna. Untuk membuat, mencari, menyelesaikan, atau menghapus tugas pribadi, delegasikan ke Personal Organization dengan scopes=[memo] dan gunakan memo_* Tools."
     },
     {
       "name": "task_update",
@@ -937,7 +953,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Memperbarui satu item TODO internal. Transisi yang diizinkan: open ke in_progress, blocked, atau abandoned; in_progress ke blocked, done, atau abandoned; blocked ke open atau abandoned. done dan abandoned adalah status akhir. Hanya satu tugas yang boleh berstatus in_progress."
+      "description": "Memperbarui satu item TODO internal. Transisi yang diizinkan: open ke in_progress, blocked, atau abandoned; in_progress ke blocked, done, atau abandoned; blocked ke open atau abandoned. done dan abandoned adalah status akhir. Hanya satu tugas yang boleh berstatus in_progress. Rencana eksekusi internal ini bukan To-do Center permanen pengguna. Untuk membuat, mencari, menyelesaikan, atau menghapus tugas pribadi, delegasikan ke Personal Organization dengan scopes=[memo] dan gunakan memo_* Tools."
     },
     {
       "name": "workflow_delete",

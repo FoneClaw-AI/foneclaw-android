@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "fr",
   "fallbackLocale": "en",
-  "toolCount": 125,
+  "toolCount": 127,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Rechercher des outils ou des fonctionnalités",
@@ -69,7 +69,7 @@
     {
       "name": "Web and Shopping",
       "displayName": "Web et achats",
-      "toolCount": 3
+      "toolCount": 5
     },
     {
       "name": "Tasks, Workflows, and Shortcuts",
@@ -673,7 +673,7 @@
       "risk": "LOW",
       "approval": "Automatique",
       "approvalCode": "AUTO",
-      "description": "Répertorie, filtre ou recherche des résumés de messages dans l’objet, l’expéditeur, les destinataires et le corps. Appelez de nouveau cet outil pour chaque nouvelle liste, recherche, filtre, plage de dates, synthèse ou remise en forme, même si l’historique contient déjà des résultats de messagerie. D’anciens messageRefs ne peuvent être réutilisés que pour une opération sur un message précis déjà sélectionné. Laissez accountId vide pour utiliser le seul compte disponible ou l’unique compte par défaut."
+      "description": "Répertorie, filtre ou recherche des résumés de messages dans l’objet, l’expéditeur, les destinataires et le corps. Utilisez folder ALL une seule fois lorsque l’utilisateur demande les messages reçus et envoyés ou ne précise pas de direction ; utilisez INBOX ou SENT uniquement pour une direction explicitement indiquée. Ne devinez jamais les noms de dossiers propres au fournisseur et ne relancez pas une requête terminée. Chaque résultat comprend un aperçu de 500 caractères maximum pour les listes et les synthèses groupées ; ne lisez pas le corps intégral de chaque message après une requête de liste terminée. Ne suivez pas de nouveau nextCursor au cours de la même exécution du Worker ; signalez que d’autres résultats sont disponibles et laissez une demande ultérieure poursuivre la requête. Appelez de nouveau ce Tool pour chaque nouvelle liste, recherche, filtre, plage de dates, synthèse ou remise en forme, même si l’historique contient déjà des résultats de messagerie. D’anciens messageRefs ne peuvent être réutilisés que pour une opération sur un message précis déjà sélectionné. Laissez accountId vide pour utiliser le seul compte disponible ou l’unique compte par défaut."
     },
     {
       "name": "mail_read",
@@ -681,7 +681,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Lisez un message à partir d'un messageRef renvoyé par mail_list et marquez-le comme lu sur le serveur. Une fois l’outil réussi, résumez le message destiné à l’utilisateur dans la même réponse."
+      "description": "Lit un message désigné par un messageRef renvoyé par mail_list et le marque comme lu sur le serveur. Utilisez-le uniquement lorsque l’utilisateur a explicitement besoin du corps complet, des métadonnées des pièces jointes ou de détails précis absents de l’aperçu mail_list ; ne l’utilisez pas pour chaque message dans le seul but de produire une liste ou une synthèse groupée. Ne répétez jamais la même combinaison de messageRef et bodyCursor. Une fois le Tool terminé, résumez le message pour l’utilisateur dans la même réponse."
     },
     {
       "name": "mail_send",
@@ -801,7 +801,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Créez un mémo, une note ou un enregistrement de tâche local visible par l'utilisateur. À utiliser lorsque l'utilisateur souhaite explicitement que le contenu soit conservé sous forme de mémo ou de note exploitable. N'utilisez pas cet outil pour enregistrer ou interroger la mémoire de profil utilisateur gérée par l'assistant, telle que les préférences, l'identité, les relations ou le style de réponse. Résolvez les dates du mémo directement depuis l’environnement Worker sans appeler les outils Calendar ni Alarm."
+      "description": "Ajoute une tâche visible par l’utilisateur au To-do Center. Utilisez-le pour ajouter ou noter une tâche, 添加待办, 记录待办, ou conserver un rappel exploitable. Enregistrez le contenu utilisateur, pas la mémoire de profil de l’assistant ni le plan d’exécution interne de Main. Résolvez les dates depuis l’environnement Worker sans appeler les Tools Calendar ou Alarm. Ne planifiez que si la demande ou une source explicitement citée fournit une date précise, une date relative résolue sans ambiguïté (aujourd’hui, demain, après-demain, dans exactement deux jours / 两天后) ou une plage explicite. current_date et le fuseau horaire servent uniquement de base de calcul et ne constituent jamais une date fournie par l’utilisateur. Si aucune date n’est mentionnée ou si le moment est vague (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), créez une tâche sans date dans Unscheduled (时间待定), en omettant ou vidant startDate et endDate. Ne choisissez jamais aujourd’hui par défaut ou un jour pratique, et ne transformez pas une période vague en événement de plusieurs jours ; conservez l’indication vague dans le contenu. Si le contenu est connu, ne demandez pas une date uniquement pour créer la tâche. Résolvez les dates précises avec le contexte d’exécution actuel ; une heure inconnue n’annule pas un jour explicite. Lors d’une mise à jour, gardez les dates si seul le contenu change sans intention de planification. Si l’utilisateur retire explicitement la planification, indique que l’heure reste à définir ou la remplace par un moment vague, utilisez clearStartDate=true avec des chaînes de date vides pour effacer les deux dates et déplacer la tâche vers Unscheduled. Indiquez la section Unscheduled ou la date enregistrée d’après le résultat du Tool, jamais d’après une supposition. Le marqueur interne task_pool désigne la section Unscheduled (时间待定) dans les réponses utilisateur. Ces règles concernent les tâches, pas les événements de calendrier ni les alarmes."
     },
     {
       "name": "memo_delete",
@@ -809,7 +809,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Supprimez de manière logicielle un mémo local par identifiant. Recherchez/répertoriez d'abord les mémos lorsque l'utilisateur décrit la cible en langage naturel afin que l'identifiant/le titre de la cible soit connu."
+      "description": "Supprime logiquement une tâche utilisateur du To-do Center par id. Lorsque l’utilisateur décrit la cible en langage naturel, recherchez ou répertoriez d’abord les tâches afin de connaître son id/titre. N’utilisez pas ce Tool pour supprimer la mémoire de profil de l’assistant ni le plan d’exécution interne de Main."
     },
     {
       "name": "memo_list",
@@ -817,7 +817,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Répertoriez les enregistrements de mémos locaux visibles par l’utilisateur. le statut peut être actif, terminé, archivé ou tout. N'utilisez pas cet outil pour répondre à ce que l'assistant se souvient de l'utilisateur, des préférences du profil utilisateur ou de l'historique des conversations. Un résultat vide signifie uniquement qu'aucun mémo local correspondant n'existe ; cela ne signifie pas qu'il n'existe aucune mémoire de profil utilisateur."
+      "description": "Affiche la liste de tâches de l’utilisateur dans le To-do Center (待办列表). status peut valoir active, done, archived ou all. La requête porte sur les tâches personnelles, pas sur le plan d’exécution interne de Main ni sur la mémoire de profil de l’assistant. Un résultat vide ne concerne que cette liste de tâches."
     },
     {
       "name": "memo_mark_done",
@@ -825,7 +825,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Marquez un mémo local comme terminé ou actif par identifiant."
+      "description": "Termine une tâche utilisateur (完成待办) ou la rouvre dans le To-do Center par id. Cette action modifie un enregistrement utilisateur, pas le plan d’exécution interne de Main ni la mémoire de profil de l’assistant."
     },
     {
       "name": "memo_search",
@@ -833,7 +833,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Recherchez des mémos locaux visibles par l'utilisateur par mot-clé dans le titre, le contenu ou les balises. le statut peut être actif, terminé, archivé ou tout. N'utilisez pas cet outil pour rechercher dans la mémoire du profil utilisateur géré par l'assistant ou dans l'historique des conversations. Un résultat vide décrit uniquement le magasin de mémos local."
+      "description": "Recherche les tâches utilisateur dans le To-do Center par mot-clé dans le titre, le contenu ou les étiquettes. status peut valoir active, done, archived ou all. La recherche porte uniquement sur les tâches utilisateur, pas sur la mémoire de profil de l’assistant, l’historique des conversations ni le plan d’exécution interne de Main."
     },
     {
       "name": "memo_update",
@@ -841,7 +841,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Met à jour un mémo local par ID. Lorsque l’utilisateur décrit la cible en langage naturel, recherchez ou répertoriez d’abord les mémos, puis transmettez les détails connus avec les champs modifiés. Les titres, contenus, étiquettes et dates vides conservent leurs valeurs actuelles. Utilisez des dates yyyy-MM-dd résolues depuis l’environnement Worker actuel ; ne calculez jamais de millisecondes depuis l’époque et n’appelez pas les outils Calendar ou Alarm uniquement pour déterminer la date d’un mémo."
+      "description": "Modifie une tâche utilisateur du To-do Center par id. Si la cible est décrite en langage naturel, recherchez ou répertoriez d’abord les tâches et transmettez les détails connus avec les champs modifiés. Cela modifie les tâches utilisateur, pas la mémoire de profil de l’assistant ni le plan interne de Main. Les title/content/tags et dates vides conservent leurs valeurs. Utilisez des dates yyyy-MM-dd de l’environnement Worker ; ne calculez pas les millisecondes depuis l’époque et n’appelez pas Calendar ou Alarm uniquement pour une date. Planifiez seulement avec une date précise, une date relative sans ambiguïté (aujourd’hui, demain, après-demain, dans exactement deux jours / 两天后) ou une plage explicite fournie par la demande ou une source citée. current_date et le fuseau horaire ne sont qu’une base de calcul, pas une date utilisateur. Sans date ou avec un moment vague (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), omettez ou videz startDate et endDate pour placer la tâche dans Unscheduled (时间待定). Ne choisissez pas aujourd’hui par défaut ou un jour pratique et ne transformez pas une période vague en plusieurs jours ; conservez l’expression dans le contenu. Si le contenu est connu, ne demandez pas de date. Résolvez les dates précises avec le contexte actuel ; une heure inconnue n’annule pas un jour explicite. Si seul le contenu change sans intention de planification, conservez les dates. Si l’utilisateur retire la planification, dit que l’heure reste à définir ou la remplace par un moment vague, utilisez clearStartDate=true et des dates vides pour effacer les deux et déplacer vers Unscheduled. Indiquez la section Unscheduled ou la date enregistrée du résultat du Tool, sans supposition. task_pool désigne en interne la section Unscheduled (时间待定) dans les réponses. Ces règles ne concernent pas les événements de calendrier ni les alarmes."
     },
     {
       "name": "sysinfo_delete",
@@ -874,6 +874,22 @@
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Chargez un thread SysInfo local par un threadKey renvoyé par sysinfo_query."
+    },
+    {
+      "name": "purchase_query",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Consulte les points réels du compte ou les prix actuels uniquement si l’utilisateur demande l’utilisation, le solde, les prix ou une mise à niveau. N’inventez jamais de prix, de date de récupération ou de lien d’achat. L’expiration n’est pas une date de recharge promise. Cet outil n’achète rien et ne reprend aucune tâche."
+    },
+    {
+      "name": "purchase_recommendations",
+      "category": "Web and Shopping",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Modifie les recommandations d’achat proactives pour les tâches longues et les annulations uniquement après une demande explicite d’arrêt ou de reprise. Ne déduisez jamais le consentement."
     },
     {
       "name": "shopping_compare",
@@ -921,7 +937,7 @@
       "risk": "LOW",
       "approval": "Automatique",
       "approvalCode": "AUTO",
-      "description": "Créez le plan TODO commandé complet en un seul appel pour la demande actuelle de l'utilisateur. Il s'agit d'une condition préalable obligatoire avant tout outil non-tâche lorsque la demande nécessite trois étapes ou plus. Réussissez chaque étape limitée destinée à l'utilisateur dans les éléments. Le plan peut être créé une seule fois et ne peut pas être prolongé ultérieurement. N'incluez jamais d'éléments de gestion des tâches, de nettoyage, de mise à jour du statut ou de réponse finale."
+      "description": "Crée en un seul appel le plan TODO complet et ordonné pour la demande actuelle. C’est un préalable obligatoire avant tout Tool hors tâches lorsque le routage produit au moins deux étapes Main concrètes ou traverse des Profiles. Chaque appel delegate ou Plugin Tool compte pour une étape ; un delegate reste une étape quels que soient ses traitements internes dans le Worker. Transmettez dans items toutes les étapes délimitées destinées à l’utilisateur. Le plan ne peut être créé qu’une fois et ne peut pas être étendu ensuite. N’incluez jamais la gestion des tâches, le nettoyage, la mise à jour d’état ni la réponse finale. Ce plan d’exécution interne n’est pas le To-do Center persistant de l’utilisateur. Pour créer, rechercher, terminer ou supprimer une tâche personnelle, déléguez à Personal Organization avec scopes=[memo] et utilisez les memo_* Tools."
     },
     {
       "name": "task_list",
@@ -929,7 +945,7 @@
       "risk": "LOW",
       "approval": "Automatique",
       "approvalCode": "AUTO",
-      "description": "Répertoriez les éléments TODO internes pour la demande utilisateur actuelle. Par défaut, renvoie les éléments ouverts, in_progress et bloqués."
+      "description": "Répertorie les éléments TODO internes de la demande actuelle. Par défaut, renvoie open, in_progress et blocked. Ce plan d’exécution interne n’est pas le To-do Center persistant de l’utilisateur. Pour créer, rechercher, terminer ou supprimer une tâche personnelle, déléguez à Personal Organization avec scopes=[memo] et utilisez les memo_* Tools."
     },
     {
       "name": "task_update",
@@ -937,7 +953,7 @@
       "risk": "LOW",
       "approval": "Automatique",
       "approvalCode": "AUTO",
-      "description": "Met à jour un élément TODO interne. Transitions autorisées : open vers in_progress, blocked ou abandoned ; in_progress vers blocked, done ou abandoned ; blocked vers open ou abandoned. done et abandoned sont des états finaux. Une seule tâche peut être en in_progress."
+      "description": "Met à jour un élément TODO interne. Transitions autorisées : open vers in_progress, blocked ou abandoned ; in_progress vers blocked, done ou abandoned ; blocked vers open ou abandoned. done et abandoned sont des états finaux. Une seule tâche peut être en in_progress. Ce plan d’exécution interne n’est pas le To-do Center persistant de l’utilisateur. Pour créer, rechercher, terminer ou supprimer une tâche personnelle, déléguez à Personal Organization avec scopes=[memo] et utilisez les memo_* Tools."
     },
     {
       "name": "workflow_delete",
