@@ -8,6 +8,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.2.2] - 2026-09-16
+
+### Added
+- Redesigned getting-started guide with interactive examples
+- Plugin Marketplace and improved model-selection navigation
+- Telegram connection support for linked-bot conversations
+
+### Changed
+- Improved live response display, navigation, To-do Center, and calendar presentation
+- More reliable scheduled tasks with cloud recovery and missed-run notifications
+- Precise email searches preserve filters and no longer broaden failed queries
+
+### Scope
+- Google APK/AAB remain submission candidates until Play review and rollout complete
+- Lebest APK remains an OEM re-signing candidate and is not a final OEM package
+
 ## [v0.2.1] - 2026-09-11
 
 ### Added
