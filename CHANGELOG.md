@@ -8,6 +8,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.2.2-fix] - 2026-09-17
+
+### Fixed
+- Preserved reasoning context across multi-tool continuation requests
+- Shortened and normalized tool-call identifiers for stricter AI providers
+- Normalized legacy tool references across approvals, workflows, and shortcuts
+
+### Scope
+- Google APK/AAB remain submission candidates until Play review and rollout complete
+- Lebest APK remains an OEM re-signing candidate and is not a final OEM package
+
 ## [v0.2.2] - 2026-09-16
 
 ### Added
