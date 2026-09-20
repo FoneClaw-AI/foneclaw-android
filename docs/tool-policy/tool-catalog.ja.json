@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "ja",
   "fallbackLocale": "en",
-  "toolCount": 127,
+  "toolCount": 133,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "ツールや機能を検索",
@@ -74,7 +74,7 @@
     {
       "name": "Tasks, Workflows, and Shortcuts",
       "displayName": "タスク、ワークフロー、ショートカット",
-      "toolCount": 8
+      "toolCount": 14
     },
     {
       "name": "Skills and Plugins",
@@ -914,6 +914,54 @@
       "approval": "自動",
       "approvalCode": "AUTO",
       "description": "結果のタイトル、正確な参照元 URL、短いスニペットを返します。最終回答で各結果を要約するときは、正確な URL を保持してください。"
+    },
+    {
+      "name": "scheduled_task_create",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "承認が必要",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Create a local time-triggered automation, managed in the Automations sidebar page. The automation runs unattended on this device around the given local time; Android may delay execution. Results are delivered as system notifications. Only read-only web research is allowed during unattended runs. Parameters: title (short), prompt (the exact instruction to run), hour (0-23 local), minute (0-59 local), repeat (\"once\", \"everyday\", \"weekdays\", or \"custom\"), weekdays (required for custom; 1=Monday ... 7=Sunday). Returns the created task id."
+    },
+    {
+      "name": "scheduled_task_delete",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DESTRUCTIVE",
+      "approval": "承認が必要",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Permanently delete a local automation by id and cancel its triggers."
+    },
+    {
+      "name": "scheduled_task_list",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "LOW",
+      "approval": "自動",
+      "approvalCode": "AUTO",
+      "description": "List the user's local automations (time-triggered scheduled tasks). Use the product name Automations when guiding users to the sidebar. Returns each task id, title, local trigger time, repeat rule, and enabled state. Read-only."
+    },
+    {
+      "name": "scheduled_task_run_now",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "承認が必要",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Enqueue an immediate run of an existing automation. It is deduplicated against the same day's scheduled run, so running twice in one day executes at most once."
+    },
+    {
+      "name": "scheduled_task_set_enabled",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "DEVICE_CONTROL",
+      "approval": "承認が必要",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Enable or disable a local automation by id. Disabling cancels future system triggers but keeps the task and its run history."
+    },
+    {
+      "name": "scheduled_task_update",
+      "category": "Tasks, Workflows, and Shortcuts",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "承認が必要",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Update the instruction for future runs of an existing automation. First use scheduled_task_list to identify the existing task and preserve unrelated instructions. Does not create a task or run it now. Preserves title, schedule and enabled state. Ask which task if the target is ambiguous."
     },
     {
       "name": "shortcut_save_agent_prompt",

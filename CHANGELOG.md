@@ -8,6 +8,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.2.3] - 2026-09-20
+
+### Added
+- Redesigned Telegram connection experience with localized setup guidance
+- Scheduled Automations with local execution, cloud recovery, and notifications
+- Richer voice notes, transcription summaries, and Discord connectivity
+
+### Changed
+- Improved social-channel approval, progress, and delivery handling
+- Improved To-do Center, plugin workspace, model picker, subscriptions, and agent messaging
+
+### Scope
+- Google APK/AAB remain submission candidates until Play review and rollout complete
+- Lebest APK remains an OEM re-signing candidate and is not a final OEM package
+
 ## [v0.2.2-fix] - 2026-09-17
 
 ### Fixed
