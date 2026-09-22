@@ -36,10 +36,10 @@ This skill must fail fast. Do not, on failure, try other apps, other regional va
 ### 1. Open First For Open Intent
 
 1. For an open intent, call `launch_app` first, using the app name or package name from the user's current request.
-2. If it returns `OK: launch_app opened ...`, the task is complete.
-3. If it returns `ERROR: app_not_found ...`, assume the target app is not currently installed and proceed to package-name resolution and the Google Play lookup flow.
-4. If it returns `ERROR: ambiguous_app ...`, let the user choose one of the returned candidate package names. Do not install any app before the user confirms.
-5. If it returns `ERROR: no_launcher_entry ...`, `ERROR: launch_denied ...`, or `ERROR: launch_failed ...`, stop and report the failure reason. Do not treat Google Play as a universal fix.
+2. If `launch_app` completes normally, the task is complete. Do not infer success from a text prefix.
+3. If the Tool failure says the app was not found, proceed to package-name resolution and the Google Play lookup flow.
+4. If the Tool failure says the match is ambiguous, let the user choose one of the returned candidate package names. Do not install any app before the user confirms.
+5. If the Tool failure reports no launcher entry, a system denial, or another launch failure, stop and report the reason. Do not treat Google Play as a universal fix.
 6. Only skip this step when the user explicitly asks to "download only / install only."
 
 ### 2. Resolve Exact Package Name
@@ -70,21 +70,20 @@ This skill must fail fast. Do not, on failure, try other apps, other regional va
 
 ### 3. Check App In Google Play
 
-1. For an install intent, or after `launch_app` returns `ERROR: app_not_found ...` in an open intent, you must call `play_store_check_app`.
+1. For an install intent, or after `launch_app` reports that the app was not found, you must call `play_store_check_app`.
 2. `play_store_check_app` accepts only a single exact package name. Do not pass app names, search terms, or fuzzy candidates.
-3. If it returns `OK: play_store_app_available ...`, proceed to install.
-4. If it returns `OK: play_store_app_not_found ...`, stop and state that this exact package name is not listed on Google Play.
+3. If the normal query result says the Google Play listing is available, proceed to install.
+4. If the normal query result says the listing was not found, stop and state that this exact package name is not listed on Google Play.
 5. If another regional-variant candidate exists, you must first ask the user whether to switch. Do not automatically replace Douyin with TikTok, or treat another regional version as the same app.
-6. If it returns errors such as `ERROR: play_store_check_http_error ...`, `ERROR: play_store_check_network_error ...`, or `ERROR: invalid_package_name ...`, stop and report that the Google Play lookup could not be completed.
+6. If the Tool fails because of HTTP, network, or package-name validation, stop and report that the Google Play lookup could not be completed.
 
 ### 4. Install From Google Play
 
-1. Call `play_store_install` only after `play_store_check_app` confirms `OK: play_store_app_available ...`.
+1. Call `play_store_install` only after the normal `play_store_check_app` result confirms that the listing is available.
 2. `play_store_install` accepts only an exact package name. Do not pass app names, search terms, or URLs.
-3. If it returns `OK: play_store_install installed ...`, the installation succeeded.
-4. If it returns `ERROR: already_installed ...`, treat it as the app already being installed; if the original intent requires opening, continue with `launch_app`.
-5. If it returns `ERROR: paid_or_purchase_action ...`, `ERROR: install_timeout ...`, `ERROR: play_store_unavailable ...`, `ERROR: accessibility_unavailable ...`, or other errors, stop and report the failure reason.
-6. If it returns `TERMINAL_ERROR: install_interrupted ...`, stop immediately. Do not call any tool again unless the user explicitly asks to retry.
+3. If `play_store_install` completes normally, the installation succeeded.
+4. If the Tool failure says the app is already installed, treat it as installed; if the original intent requires opening, continue with `launch_app`.
+5. For any other Tool failure, stop and report the reason. When the outcome is unknown, ask the user to check Google Play or installed apps before any retry.
 
 ### 5. Open After Install When Needed
 

@@ -1,0 +1,799 @@
+{
+  "version": 1,
+  "sections": [
+    {
+      "id": "using_foneclaw",
+      "itemIds": ["phone_agent", "models", "workflows_skills"]
+    },
+    {
+      "id": "permissions_tasks",
+      "itemIds": ["permissions", "blocked_or_failed"]
+    },
+    {
+      "id": "plans_billing",
+      "itemIds": ["free_core", "paid_benefits", "renewal", "cancel_refund", "purchase_missing"]
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "FAQ",
+      "intro": "Learn how FoneClaw works, how it uses permissions, and how plans and payments work.",
+      "feedbackCta": "Still need help? Send feedback",
+      "sectionTitles": {
+        "using_foneclaw": "Using FoneClaw",
+        "permissions_tasks": "Permissions and tasks",
+        "plans_billing": "Plans and billing"
+      },
+      "items": {
+        "phone_agent": {
+          "question": "What is FoneClaw and what can it do?",
+          "answer": "FoneClaw is an Android phone agent. Speak or type a goal; it plans, uses built-in Android tools, asks for access only when required, and shows a clear result. Examples include daily briefs, phone health, email, and navigation."
+        },
+        "models": {
+          "question": "Which model handles my task?",
+          "answer": "FoneClaw starts with its free default model. In Settings, you can select a configured online model or a compatible local model. Model choice is separate from the phone actions that the agent can perform."
+        },
+        "workflows_skills": {
+          "question": "What are workflows, skills, and plugins?",
+          "answer": "Workflows save repeatable multi-step tasks. Skills teach the agent how to combine existing tools for a goal. Plugins add focused capabilities where they are available in your app distribution."
+        },
+        "permissions": {
+          "question": "Why does FoneClaw request permissions?",
+          "answer": "Android protects personal data and device controls. FoneClaw requests calendar, messages, notifications, accessibility, or other access only when the task needs it. You can review these permissions in Settings."
+        },
+        "blocked_or_failed": {
+          "question": "What should I do when a task is blocked or fails?",
+          "answer": "If permission is missing, enable the requested switch in system settings, return, and choose Continue. Other failures can come from a network, model, tool, timeout, cancellation, or unavailable service; read the final status before retrying."
+        },
+        "free_core": {
+          "question": "Which features are free?",
+          "answer": "FoneClaw's core phone-agent experience and supported built-in Android actions remain free. Paid plans add the capabilities and limits listed in the live purchase catalog; prices are shown before purchase."
+        },
+        "paid_benefits": {
+          "question": "What benefits can a paid plan include?",
+          "answer": "Depending on the current plan, benefits can include advanced AI model access, longer transcription and recording summaries, priority task execution, and priority support. The purchase page is the source of truth for the plan you select."
+        },
+        "renewal": {
+          "question": "How do payment and renewal work?",
+          "answer": "Recurring plans renew at the billing interval and price shown before checkout until cancelled. Use your Account page to view the active plan and its renewal or end date. A failed renewal payment can temporarily suspend paid benefits."
+        },
+        "cancel_refund": {
+          "question": "How do I cancel or request a refund?",
+          "answer": "Cancel auto-renewal from Account; current benefits usually remain until the current billing period ends. Eligible refund requests can be made within 30 days of the original purchase. Contact support@foneclaw.ai with your account email and order reference; never send a password or full card number."
+        },
+        "purchase_missing": {
+          "question": "Payment succeeded, but my benefits are missing. What now?",
+          "answer": "Sign in with the account used for the purchase, reopen Account to refresh the entitlement, and wait for the purchase result to finish. Do not purchase again. If access is still missing, contact support with the order reference."
+        }
+      }
+    },
+    "zh-CN": {
+      "title": "常见问题",
+      "intro": "了解 FoneClaw 的工作方式、权限使用，以及会员、购买和支付规则。",
+      "feedbackCta": "还有问题？提交反馈",
+      "sectionTitles": {
+        "using_foneclaw": "使用 FoneClaw",
+        "permissions_tasks": "权限与任务",
+        "plans_billing": "会员、购买与支付"
+      },
+      "items": {
+        "phone_agent": {
+          "question": "FoneClaw 是什么，可以做什么？",
+          "answer": "FoneClaw 是 Android 手机上的智能 Agent。你可以说出或输入目标，它会规划步骤、调用内置 Android 工具、仅在需要时请求权限，并给出清晰结果。例如每日简报、手机体检、邮件和导航。"
+        },
+        "models": {
+          "question": "任务使用哪个模型？",
+          "answer": "FoneClaw 默认使用免费的基础模型。你也可以在设置中选择已配置的在线模型或兼容的本地模型。模型选择与 Agent 能在手机上执行的操作相互独立。"
+        },
+        "workflows_skills": {
+          "question": "工作流、技能和插件有什么区别？",
+          "answer": "工作流会保存可重复执行的多步骤任务；技能教 Agent 如何组合现有工具完成一个目标；插件会在支持的发行版本中提供专门能力。"
+        },
+        "permissions": {
+          "question": "为什么 FoneClaw 会请求权限？",
+          "answer": "Android 会保护个人数据和设备控制能力。FoneClaw 只在任务确实需要时请求日历、消息、通知、无障碍等权限，你可以随时在设置中查看这些权限。"
+        },
+        "blocked_or_failed": {
+          "question": "任务被阻断或失败时应该怎么办？",
+          "answer": "若缺少权限，请在系统设置中打开所请求的开关，返回 FoneClaw 后点击继续。网络、模型、工具、超时、取消或服务不可用也可能导致失败，请先阅读最终状态再重试。"
+        },
+        "free_core": {
+          "question": "哪些能力是免费的？",
+          "answer": "FoneClaw 的核心手机 Agent 体验和已支持的内置 Android 操作保持免费。付费套餐会增加实时购买目录中列出的能力与额度限制，价格会在购买前展示。"
+        },
+        "paid_benefits": {
+          "question": "付费会员有哪些权益？",
+          "answer": "按当前套餐不同，会员权益可能包括高级 AI 模型访问、更长时长的转写与录音摘要、任务优先执行和优先客户支持。你所选择套餐的购买页是权益的唯一准确信息。"
+        },
+        "renewal": {
+          "question": "支付和自动续订如何运作？",
+          "answer": "订阅会按照结算前展示的周期和价格自动续订，直到你取消为止。可在账户页查看当前套餐以及续订或到期时间。续费支付失败时，付费权益可能暂时被暂停。"
+        },
+        "cancel_refund": {
+          "question": "如何取消订阅或申请退款？",
+          "answer": "可在账户页取消自动续订，当前权益通常会保留到本计费周期结束。符合条件的退款可在原始购买日起 30 天内申请。请将账户邮箱和订单参考号发送至 support@foneclaw.ai，切勿发送密码或完整银行卡号。"
+        },
+        "purchase_missing": {
+          "question": "支付成功但权益没有到账，怎么办？",
+          "answer": "请登录购买时使用的账户，重新打开账户页以刷新权益，并等待购买结果完成。请不要重复购买；若仍未恢复，请携带订单参考号联系支持团队。"
+        }
+      }
+    },
+    "zh-HK": {
+      "title": "常見問題",
+      "intro": "了解 FoneClaw 的運作方式、權限使用，以及會員、購買和付款規則。",
+      "feedbackCta": "仍有問題？提交反饋",
+      "sectionTitles": {
+        "using_foneclaw": "使用 FoneClaw",
+        "permissions_tasks": "權限與任務",
+        "plans_billing": "會員、購買與付款"
+      },
+      "items": {
+        "phone_agent": {
+          "question": "FoneClaw 是甚麼，可以做甚麼？",
+          "answer": "FoneClaw 是 Android 手機上的智能 Agent。你可以說出或輸入目標，它會規劃步驟、調用內置 Android 工具、只在需要時請求權限，並提供清晰結果。例如每日簡報、手機健康檢查、電郵和導航。"
+        },
+        "models": {
+          "question": "任務使用哪個模型？",
+          "answer": "FoneClaw 預設使用免費的基礎模型。你也可以在設定中選擇已設定的線上模型或相容的本地模型。模型選擇與 Agent 可在手機上執行的操作互相獨立。"
+        },
+        "workflows_skills": {
+          "question": "工作流程、技能和插件有甚麼分別？",
+          "answer": "工作流程會儲存可重複執行的多步驟任務；技能教 Agent 如何組合現有工具完成目標；插件會在支援的發行版本中提供專門能力。"
+        },
+        "permissions": {
+          "question": "為甚麼 FoneClaw 會請求權限？",
+          "answer": "Android 會保護個人資料和裝置控制能力。FoneClaw 只在任務確實需要時請求日曆、訊息、通知、無障礙等權限，你可以隨時在設定中查看這些權限。"
+        },
+        "blocked_or_failed": {
+          "question": "任務被阻斷或失敗時應該怎麼辦？",
+          "answer": "若缺少權限，請在系統設定中開啟所請求的開關，返回 FoneClaw 後點擊繼續。網絡、模型、工具、逾時、取消或服務不可用也可能導致失敗，請先閱讀最終狀態再重試。"
+        },
+        "free_core": {
+          "question": "哪些能力是免費的？",
+          "answer": "FoneClaw 的核心手機 Agent 體驗和已支援的內置 Android 操作保持免費。付費計劃會增加即時購買目錄中列出的能力與額度限制，價格會在購買前顯示。"
+        },
+        "paid_benefits": {
+          "question": "付費會員有哪些權益？",
+          "answer": "按目前計劃不同，會員權益可能包括進階 AI 模型存取、更長時長的轉寫與錄音摘要、任務優先執行和優先客戶支援。你所選計劃的購買頁是權益的唯一準確資訊。"
+        },
+        "renewal": {
+          "question": "付款和自動續訂如何運作？",
+          "answer": "訂閱會按照結帳前顯示的週期和價格自動續訂，直到你取消為止。可在帳戶頁查看目前計劃以及續訂或到期時間。續費付款失敗時，付費權益可能暫時被暫停。"
+        },
+        "cancel_refund": {
+          "question": "如何取消訂閱或申請退款？",
+          "answer": "可在帳戶頁取消自動續訂，目前權益通常會保留到本計費週期結束。符合條件的退款可在原始購買日起 30 天內申請。請將帳戶電郵和訂單參考號發送至 support@foneclaw.ai，切勿發送密碼或完整信用卡號。"
+        },
+        "purchase_missing": {
+          "question": "付款成功但權益沒有到帳，怎麼辦？",
+          "answer": "請登入購買時使用的帳戶，重新開啟帳戶頁以重新整理權益，並等候購買結果完成。請不要重複購買；若仍未恢復，請攜帶訂單參考號聯絡支援團隊。"
+        }
+      }
+    },
+    "zh-TW": {
+      "title": "常見問題",
+      "intro": "了解 FoneClaw 的運作方式、權限使用，以及會員、購買和付款規則。",
+      "feedbackCta": "還有問題？提交回饋",
+      "sectionTitles": {
+        "using_foneclaw": "使用 FoneClaw",
+        "permissions_tasks": "權限與任務",
+        "plans_billing": "會員、購買與付款"
+      },
+      "items": {
+        "phone_agent": {
+          "question": "FoneClaw 是什麼，可以做什麼？",
+          "answer": "FoneClaw 是 Android 手機上的智慧 Agent。你可以說出或輸入目標，它會規劃步驟、呼叫內建 Android 工具、只在需要時請求權限，並提供清楚結果。例如每日摘要、手機健康檢查、電子郵件和導航。"
+        },
+        "models": {
+          "question": "任務使用哪個模型？",
+          "answer": "FoneClaw 預設使用免費的基礎模型。你也可以在設定中選擇已設定的線上模型或相容的本機模型。模型選擇與 Agent 可在手機上執行的操作彼此獨立。"
+        },
+        "workflows_skills": {
+          "question": "工作流程、技能和外掛有什麼差別？",
+          "answer": "工作流程會儲存可重複執行的多步驟任務；技能教 Agent 如何組合現有工具完成目標；外掛會在支援的發行版本中提供專門能力。"
+        },
+        "permissions": {
+          "question": "為什麼 FoneClaw 會請求權限？",
+          "answer": "Android 會保護個人資料和裝置控制能力。FoneClaw 只在任務確實需要時請求行事曆、訊息、通知、無障礙等權限，你可以隨時在設定中查看這些權限。"
+        },
+        "blocked_or_failed": {
+          "question": "任務被阻斷或失敗時應該怎麼辦？",
+          "answer": "若缺少權限，請在系統設定中開啟所請求的開關，返回 FoneClaw 後點擊繼續。網路、模型、工具、逾時、取消或服務無法使用也可能導致失敗，請先閱讀最終狀態再重試。"
+        },
+        "free_core": {
+          "question": "哪些功能是免費的？",
+          "answer": "FoneClaw 的核心手機 Agent 體驗和已支援的內建 Android 操作保持免費。付費方案會增加即時購買目錄中列出的功能與額度限制，價格會在購買前顯示。"
+        },
+        "paid_benefits": {
+          "question": "付費會員有哪些權益？",
+          "answer": "依目前方案不同，會員權益可能包括進階 AI 模型存取、更長時間的轉寫與錄音摘要、任務優先執行和優先客戶支援。你所選方案的購買頁是權益的唯一準確資訊。"
+        },
+        "renewal": {
+          "question": "付款和自動續訂如何運作？",
+          "answer": "訂閱會按照結帳前顯示的週期和價格自動續訂，直到你取消為止。可在帳戶頁查看目前方案以及續訂或到期時間。續費付款失敗時，付費權益可能暫時被暫停。"
+        },
+        "cancel_refund": {
+          "question": "如何取消訂閱或申請退款？",
+          "answer": "可在帳戶頁取消自動續訂，目前權益通常會保留到本計費週期結束。符合條件的退款可在原始購買日起 30 天內申請。請將帳戶電子郵件和訂單參考號傳送至 support@foneclaw.ai，切勿傳送密碼或完整信用卡號。"
+        },
+        "purchase_missing": {
+          "question": "付款成功但權益沒有入帳，怎麼辦？",
+          "answer": "請登入購買時使用的帳戶，重新開啟帳戶頁以重新整理權益，並等候購買結果完成。請不要重複購買；若仍未恢復，請攜帶訂單參考號聯絡支援團隊。"
+        }
+      }
+    },
+    "ja": {
+      "title": "よくある質問",
+      "intro": "FoneClaw の仕組み、権限、プランと支払いについて確認できます。",
+      "feedbackCta": "解決しない場合はフィードバックを送信",
+      "sectionTitles": {
+        "using_foneclaw": "FoneClaw を使う",
+        "permissions_tasks": "権限とタスク",
+        "plans_billing": "プランと請求"
+      },
+      "items": {
+        "phone_agent": {
+          "question": "FoneClaw とは何ですか？何ができますか？",
+          "answer": "FoneClaw は Android スマートフォン用の AI エージェントです。目標を音声または入力で伝えると、手順を計画し、内蔵 Android ツールを使い、必要なときだけ権限を求め、結果を表示します。日次ブリーフ、端末状態、メール、ナビゲーションなどに使えます。"
+        },
+        "models": {
+          "question": "タスクにはどのモデルが使われますか？",
+          "answer": "FoneClaw は無料の標準モデルから開始します。設定で、構成済みのオンラインモデルまたは互換性のあるローカルモデルを選択できます。モデルの選択と電話上で実行できる操作は別です。"
+        },
+        "workflows_skills": {
+          "question": "ワークフロー、スキル、プラグインとは何ですか？",
+          "answer": "ワークフローは繰り返し使う複数手順のタスクを保存します。スキルは既存ツールを組み合わせて目的を達成する方法をエージェントに教えます。プラグインは、対応する配布版で特化機能を追加します。"
+        },
+        "permissions": {
+          "question": "なぜ FoneClaw は権限を求めるのですか？",
+          "answer": "Android は個人データと端末操作を保護します。FoneClaw はタスクに必要な場合にのみ、カレンダー、メッセージ、通知、ユーザー補助などへのアクセスを求めます。設定でいつでも確認できます。"
+        },
+        "blocked_or_failed": {
+          "question": "タスクがブロックまたは失敗した場合は？",
+          "answer": "権限が不足している場合は、システム設定で求められたスイッチを有効にして FoneClaw に戻り、続行を選びます。ネットワーク、モデル、ツール、タイムアウト、キャンセル、サービス停止も失敗の原因になるため、再試行前に最終状態を確認してください。"
+        },
+        "free_core": {
+          "question": "無料で使える機能は何ですか？",
+          "answer": "FoneClaw の基本的な電話エージェント体験と対応する内蔵 Android 操作は無料です。有料プランでは、最新の購入カタログに表示される機能と上限が追加され、価格は購入前に表示されます。"
+        },
+        "paid_benefits": {
+          "question": "有料プランにはどのような特典がありますか？",
+          "answer": "現在のプランにより、高度な AI モデルへのアクセス、より長い文字起こしと録音要約、タスクの優先実行、優先サポートが含まれる場合があります。選択したプランの購入画面が特典の正確な情報です。"
+        },
+        "renewal": {
+          "question": "支払いと自動更新はどのように機能しますか？",
+          "answer": "定期プランは、キャンセルするまで購入前に表示された請求間隔と価格で更新されます。アカウント画面で有効なプランと更新日または終了日を確認できます。更新支払いに失敗すると、有料特典が一時停止されることがあります。"
+        },
+        "cancel_refund": {
+          "question": "解約または返金の申請方法は？",
+          "answer": "アカウントから自動更新を解約できます。現在の特典は通常、現在の請求期間の終了まで利用できます。対象となる返金は、最初の購入日から 30 日以内に申請できます。アカウントのメールアドレスと注文番号を support@foneclaw.ai に送り、パスワードやカード番号全体は送らないでください。"
+        },
+        "purchase_missing": {
+          "question": "支払い後に特典が反映されない場合は？",
+          "answer": "購入に使用したアカウントでサインインし、アカウント画面を開き直して特典を更新し、購入処理の完了を待ちます。再購入はしないでください。解決しない場合は注文番号を添えてサポートに連絡してください。"
+        }
+      }
+    },
+    "ko": {
+      "title": "자주 묻는 질문",
+      "intro": "FoneClaw의 작동 방식, 권한, 요금제 및 결제를 알아보세요.",
+      "feedbackCta": "해결되지 않았나요? 피드백 보내기",
+      "sectionTitles": {
+        "using_foneclaw": "FoneClaw 사용",
+        "permissions_tasks": "권한 및 작업",
+        "plans_billing": "요금제 및 결제"
+      },
+      "items": {
+        "phone_agent": {
+          "question": "FoneClaw는 무엇이며 무엇을 할 수 있나요?",
+          "answer": "FoneClaw는 Android 휴대전화 에이전트입니다. 목표를 말하거나 입력하면 단계를 계획하고 내장 Android 도구를 사용하며 필요한 경우에만 권한을 요청하고 명확한 결과를 보여 줍니다. 일일 브리핑, 휴대전화 상태, 이메일, 내비게이션 등에 사용할 수 있습니다."
+        },
+        "models": {
+          "question": "어떤 모델이 작업을 처리하나요?",
+          "answer": "FoneClaw는 무료 기본 모델로 시작합니다. 설정에서 구성된 온라인 모델 또는 호환되는 로컬 모델을 선택할 수 있습니다. 모델 선택은 에이전트가 휴대전화에서 수행할 수 있는 작업과 별개입니다."
+        },
+        "workflows_skills": {
+          "question": "워크플로, 스킬, 플러그인이란 무엇인가요?",
+          "answer": "워크플로는 반복할 여러 단계 작업을 저장합니다. 스킬은 기존 도구를 조합해 목표를 달성하는 방법을 에이전트에 알려 줍니다. 플러그인은 지원되는 배포 버전에서 특화 기능을 추가합니다."
+        },
+        "permissions": {
+          "question": "FoneClaw가 권한을 요청하는 이유는 무엇인가요?",
+          "answer": "Android는 개인 데이터와 기기 제어를 보호합니다. FoneClaw는 작업에 필요한 경우에만 캘린더, 메시지, 알림, 접근성 등의 권한을 요청합니다. 설정에서 언제든지 확인할 수 있습니다."
+        },
+        "blocked_or_failed": {
+          "question": "작업이 차단되거나 실패하면 어떻게 하나요?",
+          "answer": "권한이 없으면 시스템 설정에서 요청된 스위치를 켠 뒤 FoneClaw로 돌아와 계속을 선택하세요. 네트워크, 모델, 도구, 시간 초과, 취소 또는 서비스 불가도 실패 원인이 될 수 있으므로 재시도 전 최종 상태를 확인하세요."
+        },
+        "free_core": {
+          "question": "무료 기능은 무엇인가요?",
+          "answer": "FoneClaw의 핵심 휴대전화 에이전트 경험과 지원되는 내장 Android 작업은 무료로 유지됩니다. 유료 요금제는 실시간 구매 카탈로그에 표시된 기능과 한도를 추가하며 가격은 구매 전에 표시됩니다."
+        },
+        "paid_benefits": {
+          "question": "유료 요금제에는 어떤 혜택이 있나요?",
+          "answer": "현재 요금제에 따라 고급 AI 모델 접근, 더 긴 전사 및 녹음 요약, 우선 작업 실행, 우선 지원이 포함될 수 있습니다. 선택한 요금제의 구매 페이지가 혜택에 대한 정확한 기준입니다."
+        },
+        "renewal": {
+          "question": "결제와 자동 갱신은 어떻게 작동하나요?",
+          "answer": "정기 요금제는 취소할 때까지 결제 전에 표시된 청구 주기와 가격으로 갱신됩니다. 계정 페이지에서 활성 요금제와 갱신일 또는 종료일을 확인할 수 있습니다. 갱신 결제에 실패하면 유료 혜택이 일시 중지될 수 있습니다."
+        },
+        "cancel_refund": {
+          "question": "취소 또는 환불 요청은 어떻게 하나요?",
+          "answer": "계정에서 자동 갱신을 취소할 수 있으며 현재 혜택은 보통 현재 청구 기간이 끝날 때까지 유지됩니다. 대상 환불은 최초 구매일로부터 30일 이내에 요청할 수 있습니다. 계정 이메일과 주문 참조 번호를 support@foneclaw.ai로 보내고 비밀번호나 전체 카드 번호는 보내지 마세요."
+        },
+        "purchase_missing": {
+          "question": "결제했지만 혜택이 보이지 않으면 어떻게 하나요?",
+          "answer": "구매에 사용한 계정으로 로그인하고 계정 페이지를 다시 열어 혜택을 새로고침한 뒤 구매 처리가 끝날 때까지 기다리세요. 다시 구매하지 마세요. 계속 해결되지 않으면 주문 참조 번호와 함께 지원팀에 문의하세요."
+        }
+      }
+    },
+    "es": {
+      "title": "Preguntas frecuentes",
+      "intro": "Conoce cómo funciona FoneClaw, cómo usa permisos y cómo funcionan los planes y pagos.",
+      "feedbackCta": "¿Aún necesitas ayuda? Enviar comentarios",
+      "sectionTitles": {
+        "using_foneclaw": "Usar FoneClaw",
+        "permissions_tasks": "Permisos y tareas",
+        "plans_billing": "Planes y facturación"
+      },
+      "items": {
+        "phone_agent": {
+          "question": "¿Qué es FoneClaw y qué puede hacer?",
+          "answer": "FoneClaw es un agente para teléfonos Android. Di o escribe un objetivo; planifica, usa herramientas Android integradas, solicita acceso solo cuando es necesario y muestra un resultado claro. Puede ayudar con resúmenes diarios, estado del teléfono, correo y navegación."
+        },
+        "models": {
+          "question": "¿Qué modelo gestiona mi tarea?",
+          "answer": "FoneClaw comienza con su modelo predeterminado gratuito. En Ajustes puedes elegir un modelo en línea configurado o un modelo local compatible. La elección del modelo es independiente de las acciones que el agente puede realizar en el teléfono."
+        },
+        "workflows_skills": {
+          "question": "¿Qué son los flujos, habilidades y complementos?",
+          "answer": "Los flujos guardan tareas repetibles de varios pasos. Las habilidades enseñan al agente a combinar herramientas existentes para un objetivo. Los complementos añaden capacidades específicas cuando están disponibles en tu distribución de la app."
+        },
+        "permissions": {
+          "question": "¿Por qué FoneClaw solicita permisos?",
+          "answer": "Android protege los datos personales y los controles del dispositivo. FoneClaw solicita acceso al calendario, mensajes, notificaciones, accesibilidad u otros datos solo cuando la tarea lo necesita. Puedes revisarlo en Ajustes."
+        },
+        "blocked_or_failed": {
+          "question": "¿Qué hago si una tarea se bloquea o falla?",
+          "answer": "Si falta un permiso, activa el interruptor solicitado en los ajustes del sistema, vuelve y elige Continuar. La red, el modelo, una herramienta, un tiempo de espera, una cancelación o un servicio no disponible también pueden causar fallos; revisa el estado final antes de reintentar."
+        },
+        "free_core": {
+          "question": "¿Qué funciones son gratuitas?",
+          "answer": "La experiencia principal de agente telefónico de FoneClaw y las acciones Android integradas compatibles siguen siendo gratuitas. Los planes de pago añaden las capacidades y límites del catálogo de compra en vivo; los precios se muestran antes de comprar."
+        },
+        "paid_benefits": {
+          "question": "¿Qué beneficios puede incluir un plan de pago?",
+          "answer": "Según el plan actual, puede incluir acceso a modelos de IA avanzados, transcripciones y resúmenes de grabaciones más largos, ejecución prioritaria de tareas y soporte prioritario. La página de compra es la fuente de verdad del plan elegido."
+        },
+        "renewal": {
+          "question": "¿Cómo funcionan el pago y la renovación?",
+          "answer": "Los planes recurrentes se renuevan con el intervalo y precio mostrados antes del pago hasta que los canceles. En Cuenta puedes ver el plan activo y su fecha de renovación o fin. Un pago de renovación fallido puede suspender temporalmente los beneficios de pago."
+        },
+        "cancel_refund": {
+          "question": "¿Cómo cancelo o solicito un reembolso?",
+          "answer": "Cancela la renovación automática desde Cuenta; los beneficios actuales normalmente continúan hasta el fin del período de facturación. Los reembolsos elegibles pueden solicitarse dentro de los 30 días de la compra original. Escribe a support@foneclaw.ai con el correo de tu cuenta y la referencia del pedido; nunca envíes una contraseña ni el número completo de tarjeta."
+        },
+        "purchase_missing": {
+          "question": "El pago se realizó, pero faltan mis beneficios. ¿Qué hago?",
+          "answer": "Inicia sesión con la cuenta usada para comprar, vuelve a abrir Cuenta para actualizar la suscripción y espera a que termine el resultado de la compra. No compres otra vez. Si sigue faltando acceso, contacta con soporte e indica la referencia del pedido."
+        }
+      }
+    },
+    "pt": {
+      "title": "Perguntas frequentes",
+      "intro": "Entenda como o FoneClaw funciona, usa permissões e como funcionam planos e pagamentos.",
+      "feedbackCta": "Ainda precisa de ajuda? Enviar feedback",
+      "sectionTitles": {
+        "using_foneclaw": "Usar o FoneClaw",
+        "permissions_tasks": "Permissões e tarefas",
+        "plans_billing": "Planos e cobrança"
+      },
+      "items": {
+        "phone_agent": {
+          "question": "O que é o FoneClaw e o que ele faz?",
+          "answer": "O FoneClaw é um agente para telefones Android. Diga ou digite um objetivo; ele planeja, usa ferramentas Android integradas, pede acesso apenas quando necessário e mostra um resultado claro. Pode ajudar com resumo diário, saúde do telefone, e-mail e navegação."
+        },
+        "models": {
+          "question": "Qual modelo executa minha tarefa?",
+          "answer": "O FoneClaw começa com seu modelo padrão gratuito. Em Configurações, você pode escolher um modelo online configurado ou um modelo local compatível. A escolha do modelo é separada das ações que o agente pode executar no telefone."
+        },
+        "workflows_skills": {
+          "question": "O que são fluxos, habilidades e plugins?",
+          "answer": "Os fluxos salvam tarefas repetíveis de várias etapas. As habilidades ensinam o agente a combinar ferramentas existentes para um objetivo. Os plugins adicionam recursos específicos quando disponíveis na distribuição do aplicativo."
+        },
+        "permissions": {
+          "question": "Por que o FoneClaw pede permissões?",
+          "answer": "O Android protege dados pessoais e controles do dispositivo. O FoneClaw pede acesso a calendário, mensagens, notificações, acessibilidade ou outros recursos apenas quando a tarefa precisa. Você pode revisar essas permissões em Configurações."
+        },
+        "blocked_or_failed": {
+          "question": "O que faço se uma tarefa for bloqueada ou falhar?",
+          "answer": "Se faltar permissão, ative a opção solicitada nas configurações do sistema, volte e escolha Continuar. Rede, modelo, ferramenta, tempo esgotado, cancelamento ou serviço indisponível também podem causar falha; leia o status final antes de tentar novamente."
+        },
+        "free_core": {
+          "question": "Quais recursos são gratuitos?",
+          "answer": "A experiência principal de agente telefônico do FoneClaw e as ações Android integradas compatíveis permanecem gratuitas. Os planos pagos adicionam os recursos e limites mostrados no catálogo de compra ao vivo; os preços são exibidos antes da compra."
+        },
+        "paid_benefits": {
+          "question": "Que benefícios um plano pago pode incluir?",
+          "answer": "Dependendo do plano atual, os benefícios podem incluir acesso a modelos avançados de IA, transcrições e resumos de gravações mais longos, execução prioritária de tarefas e suporte prioritário. A página de compra é a fonte correta para o plano selecionado."
+        },
+        "renewal": {
+          "question": "Como funcionam pagamento e renovação?",
+          "answer": "Planos recorrentes são renovados no intervalo e pelo preço exibidos antes do pagamento até serem cancelados. Use a página Conta para ver o plano ativo e a data de renovação ou término. Uma falha de pagamento na renovação pode suspender temporariamente os benefícios pagos."
+        },
+        "cancel_refund": {
+          "question": "Como cancelar ou pedir reembolso?",
+          "answer": "Cancele a renovação automática na Conta; os benefícios atuais normalmente permanecem até o fim do período de cobrança. Reembolsos elegíveis podem ser solicitados em até 30 dias da compra original. Contate support@foneclaw.ai com o e-mail da conta e a referência do pedido; nunca envie senha ou número completo do cartão."
+        },
+        "purchase_missing": {
+          "question": "O pagamento foi concluído, mas meus benefícios não aparecem. E agora?",
+          "answer": "Entre com a conta usada na compra, reabra a Conta para atualizar o direito e aguarde a conclusão do resultado da compra. Não compre novamente. Se o acesso continuar ausente, contate o suporte com a referência do pedido."
+        }
+      }
+    },
+    "ru": {
+      "title": "Часто задаваемые вопросы",
+      "intro": "Узнайте, как работает FoneClaw, использует разрешения и как устроены планы и платежи.",
+      "feedbackCta": "Нужна помощь? Отправить отзыв",
+      "sectionTitles": {
+        "using_foneclaw": "Использование FoneClaw",
+        "permissions_tasks": "Разрешения и задачи",
+        "plans_billing": "Планы и оплата"
+      },
+      "items": {
+        "phone_agent": {
+          "question": "Что такое FoneClaw и что он умеет?",
+          "answer": "FoneClaw — это агент для Android-телефона. Произнесите или введите цель: он спланирует шаги, использует встроенные инструменты Android, запросит доступ только при необходимости и покажет понятный результат. Он помогает с ежедневными сводками, состоянием телефона, почтой и навигацией."
+        },
+        "models": {
+          "question": "Какая модель обрабатывает мою задачу?",
+          "answer": "FoneClaw начинает с бесплатной модели по умолчанию. В настройках можно выбрать настроенную онлайн-модель или совместимую локальную модель. Выбор модели не зависит от действий, которые агент может выполнить на телефоне."
+        },
+        "workflows_skills": {
+          "question": "Что такое рабочие процессы, навыки и плагины?",
+          "answer": "Рабочие процессы сохраняют повторяемые многошаговые задачи. Навыки учат агента сочетать существующие инструменты для достижения цели. Плагины добавляют специализированные возможности там, где они доступны в вашей версии приложения."
+        },
+        "permissions": {
+          "question": "Почему FoneClaw запрашивает разрешения?",
+          "answer": "Android защищает личные данные и управление устройством. FoneClaw запрашивает доступ к календарю, сообщениям, уведомлениям, специальным возможностям и другим данным только когда это нужно для задачи. Просмотреть разрешения можно в настройках."
+        },
+        "blocked_or_failed": {
+          "question": "Что делать, если задача заблокирована или не выполнена?",
+          "answer": "Если не хватает разрешения, включите запрошенный переключатель в системных настройках, вернитесь и выберите Продолжить. Сеть, модель, инструмент, тайм-аут, отмена или недоступность сервиса тоже могут вызвать ошибку; перед повтором проверьте итоговый статус."
+        },
+        "free_core": {
+          "question": "Какие функции бесплатны?",
+          "answer": "Основной опыт телефонного агента FoneClaw и поддерживаемые встроенные действия Android остаются бесплатными. Платные планы добавляют возможности и лимиты из актуального каталога покупки; цена показывается до оплаты."
+        },
+        "paid_benefits": {
+          "question": "Что может включать платный план?",
+          "answer": "В зависимости от текущего плана преимущества могут включать доступ к продвинутым моделям ИИ, более длинные расшифровки и сводки записей, приоритетное выполнение задач и приоритетную поддержку. Страница покупки — точный источник информации о выбранном плане."
+        },
+        "renewal": {
+          "question": "Как работают оплата и продление?",
+          "answer": "Повторяющиеся планы продлеваются с периодичностью и по цене, показанным до оформления, пока вы их не отмените. На странице аккаунта можно увидеть активный план и дату продления или окончания. Неудачный платеж за продление может временно приостановить платные преимущества."
+        },
+        "cancel_refund": {
+          "question": "Как отменить подписку или запросить возврат?",
+          "answer": "Отмените автопродление в аккаунте; текущие преимущества обычно сохраняются до конца расчетного периода. Подходящий возврат можно запросить в течение 30 дней с даты покупки. Напишите на support@foneclaw.ai с почтой аккаунта и номером заказа; никогда не отправляйте пароль или полный номер карты."
+        },
+        "purchase_missing": {
+          "question": "Оплата прошла, но преимущества не появились. Что делать?",
+          "answer": "Войдите в аккаунт, использованный при покупке, снова откройте страницу аккаунта для обновления прав и дождитесь завершения покупки. Не покупайте повторно. Если доступа по-прежнему нет, обратитесь в поддержку с номером заказа."
+        }
+      }
+    },
+    "fr": {
+      "title": "Questions fréquentes",
+      "intro": "Découvrez le fonctionnement de FoneClaw, les autorisations et les plans et paiements.",
+      "feedbackCta": "Besoin d'aide ? Envoyer des commentaires",
+      "sectionTitles": {
+        "using_foneclaw": "Utiliser FoneClaw",
+        "permissions_tasks": "Autorisations et tâches",
+        "plans_billing": "Plans et facturation"
+      },
+      "items": {
+        "phone_agent": {
+          "question": "Qu'est-ce que FoneClaw et que peut-il faire ?",
+          "answer": "FoneClaw est un agent pour téléphone Android. Dites ou saisissez un objectif ; il planifie, utilise les outils Android intégrés, demande un accès seulement si nécessaire et affiche un résultat clair. Il peut aider avec les bilans quotidiens, l'état du téléphone, les e-mails et la navigation."
+        },
+        "models": {
+          "question": "Quel modèle traite ma tâche ?",
+          "answer": "FoneClaw démarre avec son modèle par défaut gratuit. Dans Paramètres, vous pouvez choisir un modèle en ligne configuré ou un modèle local compatible. Le choix du modèle est distinct des actions que l'agent peut effectuer sur le téléphone."
+        },
+        "workflows_skills": {
+          "question": "Que sont les flux de travail, les compétences et les plugins ?",
+          "answer": "Les flux de travail enregistrent des tâches répétables en plusieurs étapes. Les compétences apprennent à l'agent à combiner des outils existants pour un objectif. Les plugins ajoutent des fonctions ciblées lorsqu'ils sont disponibles dans votre distribution de l'application."
+        },
+        "permissions": {
+          "question": "Pourquoi FoneClaw demande-t-il des autorisations ?",
+          "answer": "Android protège les données personnelles et les commandes de l'appareil. FoneClaw demande l'accès au calendrier, aux messages, aux notifications, à l'accessibilité ou à d'autres éléments seulement lorsque la tâche l'exige. Vous pouvez les consulter dans Paramètres."
+        },
+        "blocked_or_failed": {
+          "question": "Que faire si une tâche est bloquée ou échoue ?",
+          "answer": "S'il manque une autorisation, activez le commutateur demandé dans les paramètres système, revenez puis choisissez Continuer. Le réseau, le modèle, un outil, un délai d'attente, une annulation ou un service indisponible peuvent aussi causer un échec ; consultez l'état final avant de réessayer."
+        },
+        "free_core": {
+          "question": "Quelles fonctions sont gratuites ?",
+          "answer": "L'expérience principale d'agent téléphonique de FoneClaw et les actions Android intégrées compatibles restent gratuites. Les plans payants ajoutent les capacités et limites affichées dans le catalogue d'achat en direct ; les prix sont affichés avant l'achat."
+        },
+        "paid_benefits": {
+          "question": "Quels avantages un plan payant peut-il inclure ?",
+          "answer": "Selon le plan actuel, les avantages peuvent inclure l'accès à des modèles d'IA avancés, des transcriptions et résumés d'enregistrements plus longs, une exécution prioritaire des tâches et une assistance prioritaire. La page d'achat est la source exacte pour le plan choisi."
+        },
+        "renewal": {
+          "question": "Comment fonctionnent le paiement et le renouvellement ?",
+          "answer": "Les plans récurrents se renouvellent selon l'intervalle et le prix affichés avant le paiement jusqu'à leur annulation. Utilisez la page Compte pour voir le plan actif et sa date de renouvellement ou de fin. Un échec de paiement du renouvellement peut suspendre temporairement les avantages payants."
+        },
+        "cancel_refund": {
+          "question": "Comment annuler ou demander un remboursement ?",
+          "answer": "Annulez le renouvellement automatique depuis Compte ; les avantages actuels restent généralement actifs jusqu'à la fin de la période de facturation. Les remboursements éligibles peuvent être demandés dans les 30 jours suivant l'achat initial. Contactez support@foneclaw.ai avec l'e-mail du compte et la référence de commande ; n'envoyez jamais de mot de passe ni le numéro complet de carte."
+        },
+        "purchase_missing": {
+          "question": "Le paiement a réussi, mais mes avantages sont absents. Que faire ?",
+          "answer": "Connectez-vous avec le compte utilisé pour l'achat, rouvrez Compte pour actualiser les droits et attendez la fin du résultat d'achat. N'achetez pas une seconde fois. Si l'accès manque toujours, contactez l'assistance avec la référence de commande."
+        }
+      }
+    },
+    "de": {
+      "title": "Häufige Fragen",
+      "intro": "Erfahren Sie, wie FoneClaw funktioniert, Berechtigungen nutzt sowie Pläne und Zahlungen funktionieren.",
+      "feedbackCta": "Noch Hilfe nötig? Feedback senden",
+      "sectionTitles": {
+        "using_foneclaw": "FoneClaw verwenden",
+        "permissions_tasks": "Berechtigungen und Aufgaben",
+        "plans_billing": "Pläne und Abrechnung"
+      },
+      "items": {
+        "phone_agent": {
+          "question": "Was ist FoneClaw und was kann es tun?",
+          "answer": "FoneClaw ist ein Agent für Android-Telefone. Sprechen oder schreiben Sie ein Ziel; er plant Schritte, nutzt integrierte Android-Werkzeuge, fordert Zugriff nur bei Bedarf an und zeigt ein klares Ergebnis. Er hilft etwa bei Tagesübersichten, Telefonstatus, E-Mails und Navigation."
+        },
+        "models": {
+          "question": "Welches Modell bearbeitet meine Aufgabe?",
+          "answer": "FoneClaw startet mit seinem kostenlosen Standardmodell. In Einstellungen können Sie ein konfiguriertes Online-Modell oder ein kompatibles lokales Modell wählen. Die Modellauswahl ist von den Aktionen getrennt, die der Agent auf dem Telefon ausführen kann."
+        },
+        "workflows_skills": {
+          "question": "Was sind Workflows, Skills und Plugins?",
+          "answer": "Workflows speichern wiederholbare Aufgaben mit mehreren Schritten. Skills zeigen dem Agenten, wie vorhandene Werkzeuge für ein Ziel kombiniert werden. Plugins ergänzen fokussierte Funktionen, wenn sie in Ihrer App-Distribution verfügbar sind."
+        },
+        "permissions": {
+          "question": "Warum fordert FoneClaw Berechtigungen an?",
+          "answer": "Android schützt persönliche Daten und Gerätesteuerungen. FoneClaw fordert Kalender-, Nachrichten-, Benachrichtigungs-, Bedienungshilfen- oder andere Zugriffe nur an, wenn eine Aufgabe sie benötigt. Sie können sie in Einstellungen prüfen."
+        },
+        "blocked_or_failed": {
+          "question": "Was tun, wenn eine Aufgabe blockiert wird oder fehlschlägt?",
+          "answer": "Fehlt eine Berechtigung, aktivieren Sie den angeforderten Schalter in den Systemeinstellungen, kehren zurück und wählen Sie Weiter. Netzwerk, Modell, Werkzeug, Zeitüberschreitung, Abbruch oder ein nicht verfügbarer Dienst können ebenfalls Fehler verursachen; prüfen Sie den Endstatus vor einem neuen Versuch."
+        },
+        "free_core": {
+          "question": "Welche Funktionen sind kostenlos?",
+          "answer": "Das grundlegende Telefon-Agent-Erlebnis von FoneClaw und unterstützte integrierte Android-Aktionen bleiben kostenlos. Bezahlte Pläne ergänzen die Funktionen und Grenzen im aktuellen Kaufkatalog; Preise werden vor dem Kauf angezeigt."
+        },
+        "paid_benefits": {
+          "question": "Welche Vorteile kann ein bezahlter Plan enthalten?",
+          "answer": "Je nach aktuellem Plan können Vorteile Zugriff auf erweiterte KI-Modelle, längere Transkriptionen und Aufnahmezusammenfassungen, vorrangige Aufgabenausführung und vorrangigen Support umfassen. Die Kaufseite ist die genaue Quelle für den gewählten Plan."
+        },
+        "renewal": {
+          "question": "Wie funktionieren Zahlung und Verlängerung?",
+          "answer": "Wiederkehrende Pläne verlängern sich zum vor dem Bezahlen angezeigten Intervall und Preis, bis sie gekündigt werden. Auf der Kontoseite sehen Sie den aktiven Plan und sein Verlängerungs- oder Enddatum. Eine fehlgeschlagene Verlängerungszahlung kann bezahlte Vorteile vorübergehend aussetzen."
+        },
+        "cancel_refund": {
+          "question": "Wie kündige ich oder beantrage eine Rückerstattung?",
+          "answer": "Kündigen Sie die automatische Verlängerung im Konto; aktuelle Vorteile bleiben normalerweise bis zum Ende des Abrechnungszeitraums bestehen. Berechtigte Rückerstattungen können innerhalb von 30 Tagen nach dem ursprünglichen Kauf beantragt werden. Kontaktieren Sie support@foneclaw.ai mit Konto-E-Mail und Bestellreferenz; senden Sie niemals ein Passwort oder die vollständige Kartennummer."
+        },
+        "purchase_missing": {
+          "question": "Die Zahlung war erfolgreich, aber meine Vorteile fehlen. Was nun?",
+          "answer": "Melden Sie sich mit dem beim Kauf verwendeten Konto an, öffnen Sie Konto erneut zum Aktualisieren der Berechtigung und warten Sie, bis das Kaufergebnis abgeschlossen ist. Kaufen Sie nicht erneut. Fehlt der Zugriff weiter, wenden Sie sich mit der Bestellreferenz an den Support."
+        }
+      }
+    },
+    "ar": {
+      "title": "الأسئلة الشائعة",
+      "intro": "تعرّف على طريقة عمل FoneClaw والأذونات والخطط والمدفوعات.",
+      "feedbackCta": "هل ما زلت بحاجة إلى مساعدة؟ أرسل ملاحظاتك",
+      "sectionTitles": {
+        "using_foneclaw": "استخدام FoneClaw",
+        "permissions_tasks": "الأذونات والمهام",
+        "plans_billing": "الخطط والفوترة"
+      },
+      "items": {
+        "phone_agent": {
+          "question": "ما هو FoneClaw وماذا يمكنه أن يفعل؟",
+          "answer": "FoneClaw هو وكيل لهواتف Android. تحدث أو اكتب هدفاً؛ سيخطط للخطوات ويستخدم أدوات Android المدمجة ويطلب الوصول عند الحاجة فقط ويعرض نتيجة واضحة. يمكنه المساعدة في الملخصات اليومية وحالة الهاتف والبريد الإلكتروني والملاحة."
+        },
+        "models": {
+          "question": "أي نموذج يعالج مهمتي؟",
+          "answer": "يبدأ FoneClaw بالنموذج المجاني الافتراضي. من الإعدادات يمكنك اختيار نموذج عبر الإنترنت تم إعداده أو نموذج محلي متوافق. اختيار النموذج منفصل عن الإجراءات التي يستطيع الوكيل تنفيذها على الهاتف."
+        },
+        "workflows_skills": {
+          "question": "ما هي مسارات العمل والمهارات والمكونات الإضافية؟",
+          "answer": "تحفظ مسارات العمل المهام المتكررة متعددة الخطوات. تعلّم المهارات الوكيل كيفية جمع الأدوات الموجودة لهدف ما. تضيف المكونات الإضافية قدرات مركزة عندما تكون متاحة في إصدار تطبيقك."
+        },
+        "permissions": {
+          "question": "لماذا يطلب FoneClaw أذونات؟",
+          "answer": "يحمي Android البيانات الشخصية والتحكم بالجهاز. يطلب FoneClaw الوصول إلى التقويم والرسائل والإشعارات وإمكانية الوصول أو غيرها فقط عندما تحتاج المهمة إلى ذلك. يمكنك مراجعة الأذونات في الإعدادات."
+        },
+        "blocked_or_failed": {
+          "question": "ماذا أفعل إذا تم حظر المهمة أو فشلت؟",
+          "answer": "إذا كان الإذن مفقوداً، فعّل المفتاح المطلوب في إعدادات النظام ثم ارجع واختر متابعة. قد تتسبب الشبكة أو النموذج أو الأداة أو انتهاء المهلة أو الإلغاء أو عدم توفر الخدمة في الفشل أيضاً؛ راجع الحالة النهائية قبل إعادة المحاولة."
+        },
+        "free_core": {
+          "question": "ما الميزات المجانية؟",
+          "answer": "تبقى تجربة وكيل الهاتف الأساسية في FoneClaw وإجراءات Android المدمجة المدعومة مجانية. تضيف الخطط المدفوعة القدرات والحدود الظاهرة في كتالوج الشراء المباشر، وتظهر الأسعار قبل الشراء."
+        },
+        "paid_benefits": {
+          "question": "ما المزايا التي قد تتضمنها الخطة المدفوعة؟",
+          "answer": "بحسب الخطة الحالية، قد تشمل المزايا الوصول إلى نماذج ذكاء اصطناعي متقدمة ونسخاً وملخصات تسجيل أطول وتنفيذ المهام بأولوية ودعماً بأولوية. صفحة الشراء هي المصدر الدقيق للخطة التي تختارها."
+        },
+        "renewal": {
+          "question": "كيف يعمل الدفع والتجديد؟",
+          "answer": "تتجدد الخطط المتكررة بفترة وسعر معروضين قبل إتمام الدفع حتى تلغيها. استخدم صفحة الحساب لرؤية الخطة النشطة وتاريخ التجديد أو الانتهاء. قد يؤدي فشل دفع التجديد إلى تعليق المزايا المدفوعة مؤقتاً."
+        },
+        "cancel_refund": {
+          "question": "كيف ألغي أو أطلب استرداداً؟",
+          "answer": "ألغ التجديد التلقائي من الحساب؛ تبقى المزايا الحالية عادة حتى نهاية فترة الفوترة. يمكن طلب الاسترداد المؤهل خلال 30 يوماً من الشراء الأصلي. تواصل مع support@foneclaw.ai باستخدام بريد الحساب ومرجع الطلب، ولا ترسل كلمة مرور أو رقم البطاقة كاملاً."
+        },
+        "purchase_missing": {
+          "question": "نجح الدفع لكن المزايا غير موجودة. ماذا أفعل؟",
+          "answer": "سجّل الدخول بالحساب المستخدم للشراء، وأعد فتح الحساب لتحديث الاستحقاق وانتظر اكتمال نتيجة الشراء. لا تشترِ مرة أخرى. إذا استمر غياب الوصول، تواصل مع الدعم مع مرجع الطلب."
+        }
+      }
+    },
+    "in": {
+      "title": "Pertanyaan umum",
+      "intro": "Pelajari cara kerja FoneClaw, penggunaan izin, serta paket dan pembayaran.",
+      "feedbackCta": "Masih perlu bantuan? Kirim masukan",
+      "sectionTitles": {
+        "using_foneclaw": "Menggunakan FoneClaw",
+        "permissions_tasks": "Izin dan tugas",
+        "plans_billing": "Paket dan penagihan"
+      },
+      "items": {
+        "phone_agent": {
+          "question": "Apa itu FoneClaw dan apa yang dapat dilakukannya?",
+          "answer": "FoneClaw adalah agen untuk ponsel Android. Ucapkan atau ketik tujuan; FoneClaw merencanakan langkah, menggunakan alat Android bawaan, meminta akses hanya saat diperlukan, dan menampilkan hasil yang jelas. FoneClaw dapat membantu ringkasan harian, kondisi ponsel, email, dan navigasi."
+        },
+        "models": {
+          "question": "Model mana yang menangani tugas saya?",
+          "answer": "FoneClaw dimulai dengan model bawaan gratis. Di Pengaturan, Anda dapat memilih model online yang dikonfigurasi atau model lokal yang kompatibel. Pilihan model terpisah dari tindakan yang dapat dilakukan agen di ponsel."
+        },
+        "workflows_skills": {
+          "question": "Apa itu alur kerja, keterampilan, dan plugin?",
+          "answer": "Alur kerja menyimpan tugas berulang dengan beberapa langkah. Keterampilan mengajarkan agen cara menggabungkan alat yang ada untuk mencapai tujuan. Plugin menambahkan kemampuan khusus saat tersedia di distribusi aplikasi Anda."
+        },
+        "permissions": {
+          "question": "Mengapa FoneClaw meminta izin?",
+          "answer": "Android melindungi data pribadi dan kontrol perangkat. FoneClaw meminta akses kalender, pesan, notifikasi, aksesibilitas, atau akses lain hanya ketika tugas memerlukannya. Anda dapat meninjaunya di Pengaturan."
+        },
+        "blocked_or_failed": {
+          "question": "Apa yang harus dilakukan jika tugas terblokir atau gagal?",
+          "answer": "Jika izin kurang, aktifkan sakelar yang diminta di pengaturan sistem, kembali lalu pilih Lanjutkan. Jaringan, model, alat, waktu habis, pembatalan, atau layanan yang tidak tersedia juga dapat menyebabkan kegagalan; baca status akhir sebelum mencoba lagi."
+        },
+        "free_core": {
+          "question": "Fitur apa yang gratis?",
+          "answer": "Pengalaman inti agen ponsel FoneClaw dan tindakan Android bawaan yang didukung tetap gratis. Paket berbayar menambahkan kemampuan dan batas yang tercantum dalam katalog pembelian langsung; harga ditampilkan sebelum membeli."
+        },
+        "paid_benefits": {
+          "question": "Manfaat apa yang dapat disertakan paket berbayar?",
+          "answer": "Bergantung pada paket saat ini, manfaat dapat mencakup akses model AI tingkat lanjut, transkripsi dan ringkasan rekaman yang lebih panjang, eksekusi tugas prioritas, dan dukungan prioritas. Halaman pembelian adalah sumber yang akurat untuk paket yang Anda pilih."
+        },
+        "renewal": {
+          "question": "Bagaimana pembayaran dan perpanjangan bekerja?",
+          "answer": "Paket berulang diperpanjang dengan periode tagihan dan harga yang ditampilkan sebelum checkout hingga dibatalkan. Gunakan halaman Akun untuk melihat paket aktif dan tanggal perpanjangan atau berakhirnya. Pembayaran perpanjangan yang gagal dapat menangguhkan manfaat berbayar sementara."
+        },
+        "cancel_refund": {
+          "question": "Bagaimana cara membatalkan atau meminta pengembalian dana?",
+          "answer": "Batalkan perpanjangan otomatis dari Akun; manfaat saat ini biasanya tetap tersedia hingga periode tagihan berakhir. Pengembalian dana yang memenuhi syarat dapat diminta dalam 30 hari dari pembelian awal. Hubungi support@foneclaw.ai dengan email akun dan referensi pesanan; jangan pernah kirim kata sandi atau nomor kartu lengkap."
+        },
+        "purchase_missing": {
+          "question": "Pembayaran berhasil, tetapi manfaat saya hilang. Apa sekarang?",
+          "answer": "Masuk dengan akun yang digunakan untuk membeli, buka kembali Akun untuk menyegarkan hak, dan tunggu hasil pembelian selesai. Jangan membeli lagi. Jika akses masih hilang, hubungi dukungan dengan referensi pesanan."
+        }
+      }
+    },
+    "th": {
+      "title": "คำถามที่พบบ่อย",
+      "intro": "เรียนรู้วิธีทำงานของ FoneClaw การใช้สิทธิ์ และแผนกับการชำระเงิน",
+      "feedbackCta": "ยังต้องการความช่วยเหลือใช่ไหม ส่งข้อเสนอแนะ",
+      "sectionTitles": {
+        "using_foneclaw": "การใช้ FoneClaw",
+        "permissions_tasks": "สิทธิ์และงาน",
+        "plans_billing": "แผนและการเรียกเก็บเงิน"
+      },
+      "items": {
+        "phone_agent": {
+          "question": "FoneClaw คืออะไร และทำอะไรได้บ้าง",
+          "answer": "FoneClaw คือเอเจนต์สำหรับโทรศัพท์ Android พูดหรือพิมพ์เป้าหมายของคุณ ระบบจะวางแผน ใช้เครื่องมือ Android ในตัว ขอสิทธิ์เมื่อจำเป็น และแสดงผลลัพธ์ที่ชัดเจน ช่วยได้กับสรุปรายวัน สถานะโทรศัพท์ อีเมล และการนำทาง"
+        },
+        "models": {
+          "question": "โมเดลใดจัดการงานของฉัน",
+          "answer": "FoneClaw เริ่มด้วยโมเดลเริ่มต้นฟรี ในการตั้งค่า คุณเลือกโมเดลออนไลน์ที่กำหนดไว้หรือโมเดลภายในเครื่องที่เข้ากันได้ การเลือกโมเดลแยกจากการทำงานบนโทรศัพท์ที่เอเจนต์ทำได้"
+        },
+        "workflows_skills": {
+          "question": "เวิร์กโฟลว์ ทักษะ และปลั๊กอินคืออะไร",
+          "answer": "เวิร์กโฟลว์บันทึกงานหลายขั้นตอนที่ใช้ซ้ำได้ ทักษะสอนเอเจนต์ให้รวมเครื่องมือที่มีอยู่เพื่อทำเป้าหมาย ปลั๊กอินเพิ่มความสามารถเฉพาะทางเมื่อมีให้ใช้ในรุ่นแอปของคุณ"
+        },
+        "permissions": {
+          "question": "ทำไม FoneClaw จึงขอสิทธิ์",
+          "answer": "Android ปกป้องข้อมูลส่วนบุคคลและการควบคุมอุปกรณ์ FoneClaw จะขอสิทธิ์ปฏิทิน ข้อความ การแจ้งเตือน การช่วยการเข้าถึง หรือสิทธิ์อื่นเฉพาะเมื่องานต้องใช้ คุณตรวจสอบได้ในการตั้งค่า"
+        },
+        "blocked_or_failed": {
+          "question": "ควรทำอย่างไรเมื่องานถูกบล็อกหรือล้มเหลว",
+          "answer": "หากไม่มีสิทธิ์ ให้เปิดสวิตช์ที่ร้องขอในการตั้งค่าระบบ กลับมาแล้วเลือกดำเนินการต่อ เครือข่าย โมเดล เครื่องมือ หมดเวลา การยกเลิก หรือบริการไม่พร้อมใช้งานก็ทำให้งานล้มเหลวได้ โปรดดูสถานะสุดท้ายก่อนลองใหม่"
+        },
+        "free_core": {
+          "question": "ฟีเจอร์ใดใช้ฟรี",
+          "answer": "ประสบการณ์เอเจนต์โทรศัพท์หลักของ FoneClaw และการทำงาน Android ในตัวที่รองรับยังคงใช้ฟรี แผนชำระเงินเพิ่มความสามารถและข้อจำกัดตามที่แสดงในแค็ตตาล็อกการซื้อแบบสด โดยจะแสดงราคาก่อนซื้อ"
+        },
+        "paid_benefits": {
+          "question": "แผนชำระเงินอาจมีสิทธิประโยชน์อะไรบ้าง",
+          "answer": "ขึ้นอยู่กับแผนปัจจุบัน สิทธิประโยชน์อาจรวมถึงการเข้าถึงโมเดล AI ขั้นสูง การถอดเสียงและสรุปการบันทึกที่ยาวขึ้น การดำเนินงานแบบลำดับความสำคัญ และการสนับสนุนแบบลำดับความสำคัญ หน้าซื้อคือข้อมูลที่ถูกต้องสำหรับแผนที่คุณเลือก"
+        },
+        "renewal": {
+          "question": "การชำระเงินและการต่ออายุทำงานอย่างไร",
+          "answer": "แผนแบบต่ออายุจะต่ออายุตามรอบการเรียกเก็บและราคาที่แสดงก่อนชำระเงินจนกว่าจะยกเลิก ใช้หน้าบัญชีเพื่อดูแผนที่ใช้งานและวันที่ต่ออายุหรือสิ้นสุด การชำระเงินต่ออายุที่ล้มเหลวอาจระงับสิทธิประโยชน์แบบชำระเงินชั่วคราว"
+        },
+        "cancel_refund": {
+          "question": "จะยกเลิกหรือขอคืนเงินได้อย่างไร",
+          "answer": "ยกเลิกการต่ออายุอัตโนมัติจากบัญชี สิทธิประโยชน์ปัจจุบันมักใช้ได้จนสิ้นสุดรอบเรียกเก็บเงิน การขอคืนเงินที่เข้าเกณฑ์ทำได้ภายใน 30 วันนับจากวันที่ซื้อครั้งแรก ติดต่อ support@foneclaw.ai พร้อมอีเมลบัญชีและเลขอ้างอิงคำสั่งซื้อ ห้ามส่งรหัสผ่านหรือหมายเลขบัตรเต็ม"
+        },
+        "purchase_missing": {
+          "question": "ชำระเงินสำเร็จแต่ไม่มีสิทธิประโยชน์ ต้องทำอย่างไร",
+          "answer": "เข้าสู่ระบบด้วยบัญชีที่ใช้ซื้อ เปิดหน้าบัญชีอีกครั้งเพื่อรีเฟรชสิทธิ์ และรอให้ผลการซื้อเสร็จสิ้น อย่าซื้อซ้ำ หากยังเข้าใช้ไม่ได้ ให้ติดต่อฝ่ายสนับสนุนพร้อมเลขอ้างอิงคำสั่งซื้อ"
+        }
+      }
+    },
+    "vi": {
+      "title": "Câu hỏi thường gặp",
+      "intro": "Tìm hiểu cách FoneClaw hoạt động, sử dụng quyền, cũng như gói và thanh toán.",
+      "feedbackCta": "Vẫn cần trợ giúp? Gửi phản hồi",
+      "sectionTitles": {
+        "using_foneclaw": "Sử dụng FoneClaw",
+        "permissions_tasks": "Quyền và tác vụ",
+        "plans_billing": "Gói và thanh toán"
+      },
+      "items": {
+        "phone_agent": {
+          "question": "FoneClaw là gì và có thể làm gì?",
+          "answer": "FoneClaw là trợ lý tác nhân cho điện thoại Android. Hãy nói hoặc nhập mục tiêu; ứng dụng lập kế hoạch, dùng công cụ Android tích hợp, chỉ yêu cầu quyền khi cần và hiển thị kết quả rõ ràng. Ứng dụng có thể hỗ trợ tóm tắt hằng ngày, tình trạng điện thoại, email và điều hướng."
+        },
+        "models": {
+          "question": "Mô hình nào xử lý tác vụ của tôi?",
+          "answer": "FoneClaw bắt đầu với mô hình mặc định miễn phí. Trong Cài đặt, bạn có thể chọn mô hình trực tuyến đã cấu hình hoặc mô hình cục bộ tương thích. Việc chọn mô hình tách biệt với các thao tác mà tác nhân có thể thực hiện trên điện thoại."
+        },
+        "workflows_skills": {
+          "question": "Quy trình, kỹ năng và plugin là gì?",
+          "answer": "Quy trình lưu các tác vụ nhiều bước có thể lặp lại. Kỹ năng dạy tác nhân cách kết hợp công cụ hiện có cho một mục tiêu. Plugin bổ sung khả năng chuyên biệt khi có trong bản phân phối ứng dụng của bạn."
+        },
+        "permissions": {
+          "question": "Tại sao FoneClaw yêu cầu quyền?",
+          "answer": "Android bảo vệ dữ liệu cá nhân và quyền điều khiển thiết bị. FoneClaw chỉ yêu cầu quyền lịch, tin nhắn, thông báo, trợ năng hoặc quyền khác khi tác vụ cần. Bạn có thể xem lại chúng trong Cài đặt."
+        },
+        "blocked_or_failed": {
+          "question": "Tôi nên làm gì khi tác vụ bị chặn hoặc thất bại?",
+          "answer": "Nếu thiếu quyền, hãy bật công tắc được yêu cầu trong cài đặt hệ thống, quay lại rồi chọn Tiếp tục. Mạng, mô hình, công cụ, hết thời gian, hủy hoặc dịch vụ không khả dụng cũng có thể gây lỗi; hãy đọc trạng thái cuối trước khi thử lại."
+        },
+        "free_core": {
+          "question": "Tính năng nào miễn phí?",
+          "answer": "Trải nghiệm tác nhân điện thoại cốt lõi của FoneClaw và các thao tác Android tích hợp được hỗ trợ vẫn miễn phí. Các gói trả phí bổ sung khả năng và giới hạn trong danh mục mua hàng trực tiếp; giá được hiển thị trước khi mua."
+        },
+        "paid_benefits": {
+          "question": "Gói trả phí có thể bao gồm những lợi ích gì?",
+          "answer": "Tùy gói hiện tại, lợi ích có thể gồm truy cập mô hình AI nâng cao, bản chép lời và tóm tắt bản ghi dài hơn, thực thi tác vụ ưu tiên và hỗ trợ ưu tiên. Trang mua hàng là nguồn thông tin chính xác cho gói bạn chọn."
+        },
+        "renewal": {
+          "question": "Thanh toán và gia hạn hoạt động như thế nào?",
+          "answer": "Gói định kỳ được gia hạn theo chu kỳ và giá hiển thị trước khi thanh toán cho đến khi bạn hủy. Dùng trang Tài khoản để xem gói đang hoạt động cùng ngày gia hạn hoặc kết thúc. Thanh toán gia hạn thất bại có thể tạm dừng lợi ích trả phí."
+        },
+        "cancel_refund": {
+          "question": "Làm cách nào để hủy hoặc yêu cầu hoàn tiền?",
+          "answer": "Hủy tự động gia hạn từ Tài khoản; lợi ích hiện tại thường duy trì đến hết kỳ thanh toán. Hoàn tiền đủ điều kiện có thể được yêu cầu trong vòng 30 ngày từ lần mua ban đầu. Liên hệ support@foneclaw.ai với email tài khoản và mã tham chiếu đơn hàng; không bao giờ gửi mật khẩu hoặc toàn bộ số thẻ."
+        },
+        "purchase_missing": {
+          "question": "Thanh toán thành công nhưng thiếu lợi ích. Tôi phải làm gì?",
+          "answer": "Đăng nhập bằng tài khoản đã mua, mở lại Tài khoản để làm mới quyền lợi và chờ kết quả mua hoàn tất. Đừng mua lại. Nếu vẫn thiếu quyền truy cập, hãy liên hệ hỗ trợ kèm mã tham chiếu đơn hàng."
+        }
+      }
+    }
+  }
+}

@@ -8,6 +8,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.2.4] - 2026-09-22
+
+### Added
+- Push notifications for background reminders and important updates
+- Quick Settings tile to start or stop voice-note recording
+- Agent behavior styles (Precise, Balanced, Creative) and an in-app FAQ
+
+### Changed
+- Redesigned Discord connection setup with clearer status and step-by-step guidance
+- Clearer transcription layouts for easier voice-note review and editing
+- Improved error messages and faster conversation switching
+
+### Scope
+- Google APK/AAB remain submission candidates until Play review and rollout complete
+- Lebest APK remains an OEM re-signing candidate and is not a final OEM package
+
 ## [v0.2.3] - 2026-09-20
 
 ### Added
