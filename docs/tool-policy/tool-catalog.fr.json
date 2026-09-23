@@ -257,7 +257,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Renvoie un instantané compact de l’activité récente de l’application à partir d’Android UsageStats. Nécessite un accès à l'utilisation ; ce n'est pas un moniteur de processus en arrière-plan en direct."
+      "description": "Renvoie un instantané compact de l’activité récente de l’application à partir d’Android UsageStats. Si l’accès à l’utilisation ou l’activité récente est indisponible, renvoie status=skipped afin que les autres vérifications d’état puissent continuer. Ce n’est pas un moniteur de processus en arrière-plan en direct."
     },
     {
       "name": "device_app_permission_audit",

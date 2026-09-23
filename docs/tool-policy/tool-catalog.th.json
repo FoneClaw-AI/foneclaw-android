@@ -257,7 +257,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "ต้องขออนุมัติ",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "ส่งคืนสแนปชอตกิจกรรมแอปล่าสุดแบบย่อจาก Android UsersStats ต้องมีการเข้าถึงการใช้งาน ไม่ใช่การตรวจสอบกระบวนการพื้นหลังแบบสด"
+      "description": "ส่งคืนสแนปชอตกิจกรรมแอปล่าสุดแบบย่อจาก Android UsageStats หากไม่มีสิทธิ์การใช้งานหรือกิจกรรมล่าสุด ให้ส่งคืน status=skipped เพื่อให้การตรวจสอบสถานะอื่นๆ ดำเนินการต่อได้ ไม่ใช่การตรวจสอบกระบวนการพื้นหลังแบบสด"
     },
     {
       "name": "device_app_permission_audit",

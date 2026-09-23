@@ -257,7 +257,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要審批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "從AndroidUsageStats傳回一個緊湊的最近應用程式活動快照。需要使用權限；它不是即時後台進程監視器。"
+      "description": "從 Android UsageStats 傳回緊湊的最近應用程式活動快照。如果使用權限或近期活動不可用，返回 status=skipped 以便其他健康檢查繼續。它不是即時後台進程監視器。"
     },
     {
       "name": "device_app_permission_audit",

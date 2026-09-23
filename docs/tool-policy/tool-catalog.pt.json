@@ -257,7 +257,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requer aprovação",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Retorne um instantâneo compacto da atividade do aplicativo recente de Android UsageStats. Requer acesso de uso; não é um monitor de processo em segundo plano ao vivo."
+      "description": "Retorna um instantâneo compacto da atividade recente do aplicativo do Android UsageStats. Se o acesso de uso ou a atividade recente estiver indisponível, retorna status=skipped para que outras verificações de estado possam continuar. Não é um monitor de processos em segundo plano ao vivo."
     },
     {
       "name": "device_app_permission_audit",

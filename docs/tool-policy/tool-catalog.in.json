@@ -257,7 +257,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Menampilkan cuplikan aktivitas aplikasi terkini yang ringkas dari Android UsageStats. Membutuhkan akses penggunaan; ini bukan monitor proses latar belakang langsung."
+      "description": "Mengembalikan cuplikan aktivitas aplikasi terkini yang ringkas dari Android UsageStats. Jika akses penggunaan atau aktivitas terkini tidak tersedia, kembalikan status=skipped agar pemeriksaan status lainnya dapat melanjutkan. Ini bukan monitor proses latar belakang langsung."
     },
     {
       "name": "device_app_permission_audit",

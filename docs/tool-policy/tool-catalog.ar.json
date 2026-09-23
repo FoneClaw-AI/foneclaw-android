@@ -257,7 +257,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "تتطلب موافقة",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "قم بإرجاع لقطة مدمجة لنشاط التطبيق الحديث من Android UsageStats. يتطلب الوصول إلى الاستخدام؛ إنها ليست شاشة عملية خلفية حية."
+      "description": "يعيد لقطة مدمجة لنشاط التطبيق الأخير من Android UsageStats. إذا كان الوصول إلى الاستخدام أو النشاط الأخير غير متاح، يتم إرجاع status=skipped حتى تتمكن عمليات فحص الحالة الأخرى من المتابعة. إنها ليست شاشة عمليات خلفية حية."
     },
     {
       "name": "device_app_permission_audit",

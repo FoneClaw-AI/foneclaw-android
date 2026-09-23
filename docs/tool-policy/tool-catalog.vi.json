@@ -257,7 +257,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Trả về ảnh chụp nhanh hoạt động ứng dụng gần đây nhỏ gọn từ Android UsageStats. Yêu cầu quyền truy cập sử dụng; nó không phải là một trình giám sát quá trình nền trực tiếp."
+      "description": "Trả về ảnh chụp nhanh hoạt động ứng dụng gần đây nhỏ gọn từ Android UsageStats. Nếu quyền truy cập sử dụng hoặc hoạt động gần đây không khả dụng, trả về status=skipped để các kiểm tra trạng thái khác có thể tiếp tục. Đây không phải là trình giám sát quá trình nền trực tiếp."
     },
     {
       "name": "device_app_permission_audit",

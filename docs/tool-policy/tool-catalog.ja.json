@@ -257,7 +257,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Android のUsageStatsから、最近のアプリアクティビティのコンパクトなスナップショットを返します。使用アクセスが必要です。これはライブ バックグラウンド プロセス モニターではありません。"
+      "description": "Android UsageStats から最近のアプリアクティビティのコンパクトなスナップショットを返します。使用アクセスや最近のアクティビティが利用できない場合は status=skipped を返し、他のヘルスチェックを続行できるようにします。これはライブのバックグラウンドプロセスモニターではありません。"
     },
     {
       "name": "device_app_permission_audit",

@@ -8,6 +8,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.2.5] - 2026-09-23
+
+### Improved
+
+- Improved dark mode contrast across the app for more comfortable viewing.
+- Unified sidebar highlighting so the current page is always clear, with clearer confirmation when saving recording edits.
+- Made error messages simpler and easier to understand when a task runs into problems.
+
+### Added
+
+- Added AI-assisted reply and navigation shortcuts for messages in the Information Inbox.
+
+### Fixed
+
+- Fixed an issue that could make model selection behave unexpectedly.
+
 ## [v0.2.4] - 2026-09-22
 
 ### Added

@@ -257,7 +257,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Return a compact recent app activity snapshot from Android UsageStats. Requires usage access; it is not a live background-process monitor."
+      "description": "Return a compact recent app activity snapshot from Android UsageStats. If usage access or recent activity is unavailable, return status=skipped so other health checks can continue. It is not a live background-process monitor."
     },
     {
       "name": "device_app_permission_audit",

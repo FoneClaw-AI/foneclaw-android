@@ -257,7 +257,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Android UsageStats에서 간단한 최근 앱 활동 스냅샷을 반환합니다. 사용 액세스가 필요합니다. 라이브 백그라운드 프로세스 모니터가 아닙니다."
+      "description": "Android UsageStats에서 간단한 최근 앱 활동 스냅샷을 반환합니다. 사용 액세스 또는 최근 활동을 사용할 수 없으면 status=skipped를 반환하여 다른 상태 확인이 계속 진행되게 합니다. 라이브 백그라운드 프로세스 모니터가 아닙니다."
     },
     {
       "name": "device_app_permission_audit",

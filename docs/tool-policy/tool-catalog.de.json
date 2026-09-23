@@ -257,7 +257,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Gibt einen kompakten Snapshot der letzten App-Aktivitäten von Android UsageStats zurück. Erfordert Nutzungszugriff; Es handelt sich nicht um einen Live-Hintergrundprozessmonitor."
+      "description": "Gibt einen kompakten Snapshot der letzten App-Aktivitäten von Android UsageStats zurück. Wenn der Nutzungszugriff oder die letzte Aktivität nicht verfügbar ist, wird status=skipped zurückgegeben, damit andere Gesundheitsprüfungen fortfahren können. Dies ist kein Live-Hintergrundprozessmonitor."
     },
     {
       "name": "device_app_permission_audit",
