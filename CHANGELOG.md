@@ -8,6 +8,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.2.6] - 2026-09-29
+
+### Improved
+
+- Improved tool approval flow with clearer permission prompts and more reliable callback handling
+- Improved voice recording interaction with better accessibility support
+- Fixed floating assistant permission name display and improved complex app operation planning
+
+### Fixed
+
+- Fixed agent failure reason display with proper multilingual messages
+- Hidden Google information inbox from settings
+
 ## [v0.2.5] - 2026-09-23
 
 ### Improved
