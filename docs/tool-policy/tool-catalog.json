@@ -105,7 +105,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Open or switch to a target Android app, wait until that app is stably in the foreground, and return the visible accessibility screen tree. Use this when one request asks to both open/switch to an app and read, inspect, describe, summarize, or tap an existing visible control, and no dedicated domain tool can complete the request. Do not split that task into launch_app and get_screen_info. This tool does not capture a screenshot or tap nodes itself; use fresh returned node IDs with tap_node only when the user requested a tap."
+      "description": "Open or switch to a target Android app, wait until that app is stably in the foreground, and return the visible accessibility screen tree. Use this when one request asks to both open/switch to an app and read, inspect, describe, summarize, search, type into, or tap an existing visible control, and no dedicated domain or capture tool can complete the request. GUI prerequisites are checked before opening. Do not split that task into a standalone app launch and a later screen read or screenshot, even across model rounds. A pure app-open request uses the launch tool without reading the screen. This tool does not capture a screenshot, type, or tap nodes itself; continue only the requested actions using fresh returned node IDs."
     },
     {
       "name": "get_installed_map_apps",
@@ -137,7 +137,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Open a launchable Android app by package name or installed app display name. This changes the foreground app and may expose that app's screen. Use an exact package name when possible. If the result is ambiguous, ask the user to choose one returned package."
+      "description": "Open a launchable Android app by package name or installed app display name. This changes the foreground app and may expose that app's screen. Use this when the requested outcome is only to open the app; stop after success without reading or verifying its screen. For a task that also requires reading, searching, typing, or tapping inside the target app, use the combined app-open-and-read tool instead so GUI prerequisites are checked before opening. Prefer a dedicated domain or capture tool when it can complete the requested outcome. Use an exact package name when possible. If the result is ambiguous, ask the user to choose one returned package."
     },
     {
       "name": "play_store_check_app",

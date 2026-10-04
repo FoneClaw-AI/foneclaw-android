@@ -8,6 +8,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.2.7] - 2026-10-05
+
+### Added
+
+- Provider presets and image/tool capability choices when configuring online AI models.
+- Update notes shown in the available language matching your device settings.
+
+### Improved
+
+- Large uploaded photos are resized, optimized and oriented correctly when needed.
+- Sidebar content scrolls together while key actions stay accessible at the bottom.
+
+### Scope
+
+- Google APK/AAB are Play submission candidates until the target version is live in Production.
+- Lebest APK remains a locally signed OEM candidate, not a final OEM package.
+
 ## [v0.2.6] - 2026-09-29
 
 ### Improved
