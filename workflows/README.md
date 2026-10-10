@@ -14,7 +14,7 @@ Workflows are recorded sequences of tool calls that can be replayed instantly â€
 | File | Trigger | Description |
 |------|---------|-------------|
 | [check-work-email.json](examples/check-work-email.json) | "check work mail" | List 10 most recent work emails |
-| [home-wifi-connect.json](examples/home-wifi-connect.json) | "connect home wifi" | Connect to home Wi-Fi network |
+| [list-mail-accounts.json](examples/list-mail-accounts.json) | "list my mail accounts" | List configured mail accounts |
 
 ## Create Your Own
 

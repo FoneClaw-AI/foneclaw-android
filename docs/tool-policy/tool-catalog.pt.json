@@ -329,7 +329,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Retorna o fuso horário atual do sistema Android e o carimbo de data/hora Unix para chamadas de ferramenta dependentes de tempo. Defina verifyWithNtp=true somente quando a hora do sistema for contestada ou uma referência on-line for necessária. A verificação NTP usa ntp1.aliyun.com e nunca altera o relógio do sistema."
+      "description": "Retorna o fuso horário atual do sistema Android e a data e hora locais formatadas para chamadas de ferramenta dependentes de tempo. Defina verifyWithNtp=true somente quando a hora do sistema for contestada ou uma referência on-line for necessária. A verificação NTP usa ntp1.aliyun.com e nunca altera o relógio do sistema."
     },
     {
       "name": "dnd_open_policy_access_settings",
@@ -745,7 +745,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Requer aprovação",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Crie um evento de calendário Android. Para um evento de dia inteiro, defina allDay=true e use a meia-noite local do dia inicial e a meia-noite local exclusiva do dia seguinte como fim.Colete detalhes do tempo faltante e do lembrete antes de ligar. Um nome de local fornecido pelo usuário é suficiente e deve ser passado diretamente como locationName. Não pesquise um endereço ou coordenadas exatas, a menos que o usuário solicite explicitamente para verificar, resolver, escolher ou navegar até o local. Prefira startLocalDateTime/endLocalDateTime em aaaa-MM-dd HH:mm para datas do usuário e datas relativas; a ferramenta irá analisá-los no fuso horário do dispositivo. Não crie eventos a partir de milissegundos de época calculados por modelo. Use calendarId=0 a menos que o usuário tenha selecionado explicitamente um ID de calendário. Após a criação, use o resultado da ferramenta actualStart/actualEnd como o horário de criação voltado para o usuário."
+      "description": "Crie um evento de calendário Android. Para um evento de dia inteiro, defina allDay=true e use a meia-noite local do dia inicial e a meia-noite local exclusiva do dia seguinte como fim.Colete detalhes do tempo faltante e do lembrete antes de ligar. Um nome de local fornecido pelo usuário é suficiente e deve ser passado diretamente como locationName. Não pesquise um endereço ou coordenadas exatas, a menos que o usuário solicite explicitamente para verificar, resolver, escolher ou navegar até o local. Prefira startLocalDateTime/endLocalDateTime em yyyy-MM-dd HH:mm para datas do usuário e datas relativas; a ferramenta irá analisá-los no fuso horário do dispositivo. Não crie eventos a partir de milissegundos de época calculados por modelo. Use calendarId=0 a menos que o usuário tenha selecionado explicitamente um ID de calendário. Após a criação, use o resultado da ferramenta actualStart/actualEnd como o horário de criação voltado para o usuário."
     },
     {
       "name": "calendar_delete_event",
@@ -753,7 +753,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Requer aprovação",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Exclua um evento de calendário Android por ID. Pesquise/liste eventos em todos os calendários com calendarId=0, a menos que o usuário tenha selecionado explicitamente um ID de calendário. Sempre passe o título conhecido, startMillis, endMillis e localização quando conhecido para que o alvo seja inequívoco."
+      "description": "Exclua um evento de calendário Android por ID. Pesquise/liste eventos em todos os calendários com calendarId=0, a menos que o usuário tenha selecionado explicitamente um ID de calendário. Sempre passe o título conhecido, e localização quando conhecido para que o alvo seja inequívoco."
     },
     {
       "name": "calendar_list_calendars",
@@ -769,7 +769,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requer aprovação",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Liste eventos de calendário Android em um intervalo de tempo concreto. Use para solicitações como programação de hoje, programação de amanhã, eventos existentes ou eventos desta semana. Prefira startLocalDateTime/endLocalDateTime em aaaa-MM-dd HH:mm; a ferramenta irá analisá-los no fuso horário do dispositivo. Use startMillis/endMillis apenas como um substituto obsoleto quando milissegundos de época exata vierem de um resultado de ferramenta confiável. Não adivinhe calendarId; use calendarId=0 para pesquisar todos os calendários, a menos que o usuário tenha selecionado explicitamente um ID de calendário."
+      "description": "Liste eventos de calendário Android em um intervalo de tempo concreto. Use para solicitações como programação de hoje, programação de amanhã, eventos existentes ou eventos desta semana. Prefira startLocalDateTime/endLocalDateTime em yyyy-MM-dd HH:mm:ss; a ferramenta irá analisá-los no fuso horário do dispositivo. Não adivinhe calendarId; use calendarId=0 para pesquisar todos os calendários, a menos que o usuário tenha selecionado explicitamente um ID de calendário."
     },
     {
       "name": "calendar_open_event",
@@ -785,7 +785,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requer aprovação",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Pesquise eventos de calendário Android por palavra-chave em um intervalo de tempo concreto. Use antes de abrir, atualizar ou excluir um evento quando o usuário descreve o evento por título ou conteúdo. Prefira startLocalDateTime/endLocalDateTime em aaaa-MM-dd HH:mm; a ferramenta irá analisá-los no fuso horário do dispositivo. Use startMillis/endMillis apenas como um substituto obsoleto quando milissegundos de época exata vierem de um resultado de ferramenta confiável. Não adivinhe calendarId; use calendarId=0 para pesquisar todos os calendários, a menos que o usuário tenha selecionado explicitamente um ID de calendário."
+      "description": "Pesquise eventos de calendário Android por palavra-chave em um intervalo de tempo concreto. Use antes de abrir, atualizar ou excluir um evento quando o usuário descreve o evento por título ou conteúdo. Prefira startLocalDateTime/endLocalDateTime em yyyy-MM-dd HH:mm; a ferramenta irá analisá-los no fuso horário do dispositivo. Não adivinhe calendarId; use calendarId=0 para pesquisar todos os calendários, a menos que o usuário tenha selecionado explicitamente um ID de calendário."
     },
     {
       "name": "calendar_update_event",
@@ -793,7 +793,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Requer aprovação",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Atualize um evento de calendário Android por ID. Pesquise/liste eventos primeiro quando o usuário descreve o destino em linguagem natural e passe detalhes de destino conhecidos com os campos alterados. Não adivinhe calendarId ou ID do evento; pesquise todos os calendários com calendarId=0, a menos que o usuário tenha selecionado explicitamente um ID de calendário. Os campos de texto em branco são ignorados. Use startMillis/endMillis=0 para manter os horários existentes. Use reminderMinutes=-2 para manter lembretes, -1 para remover lembretes e >=0 para substituir lembretes."
+      "description": "Atualize um evento de calendário Android por ID. Pesquise/liste eventos primeiro quando o usuário descreve o destino em linguagem natural e passe detalhes de destino conhecidos com os campos alterados. Não adivinhe calendarId ou ID do evento; pesquise todos os calendários com calendarId=0, a menos que o usuário tenha selecionado explicitamente um ID de calendário. Os campos de texto em branco são ignorados. Use blank startLocalDateTime/endLocalDateTime para manter os horários existentes. Use reminderMinutes=-2 para manter lembretes, -1 para remover lembretes e >=0 para substituir lembretes."
     },
     {
       "name": "memo_create",

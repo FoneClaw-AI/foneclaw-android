@@ -329,7 +329,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Mengembalikan zona waktu sistem Android saat ini dan stempel waktu Unix untuk panggilan alat yang bergantung pada waktu. Setel verifikasiWithNtp=true hanya ketika waktu sistem diperdebatkan atau referensi online diperlukan. Verifikasi NTP menggunakan ntp1.aliyun.com dan tidak pernah mengubah jam sistem. Pengenal teknis: verifyWithNtp=true."
+      "description": "Mengembalikan zona waktu sistem Android saat ini serta tanggal dan waktu lokal yang diformat untuk panggilan alat yang bergantung pada waktu. Setel verifyWithNtp=true hanya ketika waktu sistem diperdebatkan atau referensi online diperlukan. Verifikasi NTP menggunakan ntp1.aliyun.com dan tidak pernah mengubah jam sistem. Pengenal teknis: verifyWithNtp=true."
     },
     {
       "name": "dnd_open_policy_access_settings",
@@ -753,7 +753,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Hapus acara kalender Android berdasarkan id. Telusuri/daftar acara di semua kalender dengan calendarId=0 kecuali pengguna secara eksplisit memilih id kalender. Selalu berikan judul, startMillis, endMillis, dan lokasi yang diketahui jika diketahui sehingga targetnya tidak ambigu. Pengenal teknis: calendarId=0."
+      "description": "Hapus acara kalender Android berdasarkan id. Telusuri/daftar acara di semua kalender dengan calendarId=0 kecuali pengguna secara eksplisit memilih id kalender. Selalu berikan judul, , dan lokasi yang diketahui jika diketahui sehingga targetnya tidak ambigu. Pengenal teknis: calendarId=0."
     },
     {
       "name": "calendar_list_calendars",
@@ -769,7 +769,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Cantumkan acara kalender Android dalam rentang waktu yang konkret. Gunakan untuk permintaan seperti jadwal hari ini, jadwal besok, acara yang ada, atau acara minggu ini. Lebih suka startLocalDateTime/endLocalDateTime di yyyy-MM-dd HH:mm; alat ini akan menguraikannya dalam zona waktu perangkat. Gunakan startMillis/endMillis hanya sebagai pengganti yang tidak digunakan lagi ketika milidetik jangka waktu yang tepat berasal dari hasil alat yang tepercaya. Jangan menebak Id kalender; gunakan kalenderId=0 untuk mencari semua kalender kecuali pengguna secara eksplisit memilih id kalender. Pengenal teknis: calendarId, calendarId=0."
+      "description": "Cantumkan acara kalender Android dalam rentang waktu yang konkret. Gunakan untuk permintaan seperti jadwal hari ini, jadwal besok, acara yang ada, atau acara minggu ini. Lebih suka startLocalDateTime/endLocalDateTime di yyyy-MM-dd HH:mm:ss; alat ini akan menguraikannya dalam zona waktu perangkat. Jangan menebak Id kalender; gunakan kalenderId=0 untuk mencari semua kalender kecuali pengguna secara eksplisit memilih id kalender. Pengenal teknis: calendarId, calendarId=0."
     },
     {
       "name": "calendar_open_event",
@@ -785,7 +785,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Cari acara kalender Android berdasarkan kata kunci dalam rentang waktu tertentu. Gunakan sebelum membuka, memperbarui, atau menghapus acara ketika pengguna mendeskripsikan acara berdasarkan judul atau konten. Lebih suka startLocalDateTime/endLocalDateTime di yyyy-MM-dd HH:mm; alat ini akan menguraikannya dalam zona waktu perangkat. Gunakan startMillis/endMillis hanya sebagai pengganti yang tidak digunakan lagi ketika milidetik jangka waktu yang tepat berasal dari hasil alat yang tepercaya. Jangan menebak Id kalender; gunakan kalenderId=0 untuk mencari semua kalender kecuali pengguna secara eksplisit memilih id kalender. Pengenal teknis: calendarId, calendarId=0."
+      "description": "Cari acara kalender Android berdasarkan kata kunci dalam rentang waktu tertentu. Gunakan sebelum membuka, memperbarui, atau menghapus acara ketika pengguna mendeskripsikan acara berdasarkan judul atau konten. Lebih suka startLocalDateTime/endLocalDateTime di yyyy-MM-dd HH:mm; alat ini akan menguraikannya dalam zona waktu perangkat. Jangan menebak Id kalender; gunakan kalenderId=0 untuk mencari semua kalender kecuali pengguna secara eksplisit memilih id kalender. Pengenal teknis: calendarId, calendarId=0."
     },
     {
       "name": "calendar_update_event",
@@ -793,7 +793,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Perbarui acara kalender Android berdasarkan id. Cari/daftar peristiwa terlebih dahulu ketika pengguna mendeskripsikan target dalam bahasa alami, dan meneruskan detail target yang diketahui dengan bidang yang diubah. Jangan menebak Id kalender atau id acara; telusuri semua kalender dengan calendarId=0 kecuali pengguna secara eksplisit memilih id kalender. Bidang teks kosong diabaikan. Gunakan startMillis/endMillis=0 untuk menyimpan waktu yang ada. Gunakan reminderMinutes=-2 untuk menyimpan pengingat, -1 untuk menghapus pengingat, dan >=0 untuk mengganti pengingat. Pengenal teknis: calendarId, calendarId=0, reminderMinutes=-2."
+      "description": "Perbarui acara kalender Android berdasarkan id. Cari/daftar peristiwa terlebih dahulu ketika pengguna mendeskripsikan target dalam bahasa alami, dan meneruskan detail target yang diketahui dengan bidang yang diubah. Jangan menebak Id kalender atau id acara; telusuri semua kalender dengan calendarId=0 kecuali pengguna secara eksplisit memilih id kalender. Bidang teks kosong diabaikan. Gunakan blank startLocalDateTime/endLocalDateTime untuk menyimpan waktu yang ada. Gunakan reminderMinutes=-2 untuk menyimpan pengingat, -1 untuk menghapus pengingat, dan >=0 untuk mengganti pengingat. Pengenal teknis: calendarId, calendarId=0, reminderMinutes=-2."
     },
     {
       "name": "memo_create",

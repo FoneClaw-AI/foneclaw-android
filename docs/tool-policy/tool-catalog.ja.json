@@ -329,7 +329,7 @@
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "時間に依存するツール呼び出しの現在の Android システム タイム ゾーンと Unix タイムスタンプを返します。 verifyWithNtp=true は、システム時刻に異議がある場合、またはオンライン参照が必要な場合にのみ設定してください。 NTP 検証では ntp1.aliyun.com を使用し、システム クロックを変更することはありません。"
+      "description": "時間に依存するツール呼び出しの現在の Android システム タイムゾーンと、書式化された現地日時を返します。verifyWithNtp=true は、システム時刻に異議がある場合、またはオンライン参照が必要な場合にのみ設定してください。NTP 検証では ntp1.aliyun.com を使用し、システム クロックを変更することはありません。"
     },
     {
       "name": "dnd_open_policy_access_settings",
@@ -753,7 +753,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Android カレンダー イベントを ID で削除します。ユーザーがカレンダー ID を明示的に選択しない限り、calendarId=0 を使用してすべてのカレンダーのイベントを検索/一覧表示します。ターゲットが明確になるように、既知のタイトル、startMillis、endMillis、および既知の場所を常に渡します。"
+      "description": "Android カレンダー イベントを ID で削除します。ユーザーがカレンダー ID を明示的に選択しない限り、calendarId=0 を使用してすべてのカレンダーのイベントを検索/一覧表示します。ターゲットが明確になるように、既知のタイトル、および既知の場所を常に渡します。"
     },
     {
       "name": "calendar_list_calendars",
@@ -769,7 +769,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "具体的な時間範囲内の Android カレンダー イベントをリストします。今日のスケジュール、明日のスケジュール、既存のイベント、または今週のイベントなどのリクエストに使用します。 yyyy-MM-dd HH:mm では startLocalDateTime/endLocalDateTime を優先します。ツールはデバイスのタイムゾーンでそれらを解析します。 startMillis/endMillis は、正確なエポックミリ秒が信頼できるツールの結果から得られる場合に、非推奨のフォールバックとしてのみ使用してください。 calendarId を推測しないでください。ユーザーがカレンダー ID を明示的に選択しない限り、すべてのカレンダーを検索するには calendarId=0 を使用します。"
+      "description": "具体的な時間範囲内の Android カレンダー イベントをリストします。今日のスケジュール、明日のスケジュール、既存のイベント、または今週のイベントなどのリクエストに使用します。 yyyy-MM-dd HH:mm:ss では startLocalDateTime/endLocalDateTime を優先します。ツールはデバイスのタイムゾーンでそれらを解析します。 calendarId を推測しないでください。ユーザーがカレンダー ID を明示的に選択しない限り、すべてのカレンダーを検索するには calendarId=0 を使用します。"
     },
     {
       "name": "calendar_open_event",
@@ -785,7 +785,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Android のカレンダー イベントを、具体的な時間範囲内のキーワードで検索します。ユーザーがタイトルまたは内容でイベントを説明する場合、イベントを開く、更新、または削除する前に使用します。 yyyy-MM-dd HH:mm では startLocalDateTime/endLocalDateTime を優先します。ツールはデバイスのタイムゾーンでそれらを解析します。 startMillis/endMillis は、正確なエポックミリ秒が信頼できるツールの結果から得られる場合に、非推奨のフォールバックとしてのみ使用してください。 calendarId を推測しないでください。ユーザーがカレンダー ID を明示的に選択しない限り、すべてのカレンダーを検索するには calendarId=0 を使用します。"
+      "description": "Android のカレンダー イベントを、具体的な時間範囲内のキーワードで検索します。ユーザーがタイトルまたは内容でイベントを説明する場合、イベントを開く、更新、または削除する前に使用します。 yyyy-MM-dd HH:mm では startLocalDateTime/endLocalDateTime を優先します。ツールはデバイスのタイムゾーンでそれらを解析します。 calendarId を推測しないでください。ユーザーがカレンダー ID を明示的に選択しない限り、すべてのカレンダーを検索するには calendarId=0 を使用します。"
     },
     {
       "name": "calendar_update_event",
@@ -793,7 +793,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Android カレンダー イベントを ID で更新します。ユーザーが自然言語でターゲットを説明するときに最初にイベントを検索/リストし、変更されたフィールドで既知のターゲットの詳細を渡します。 calendarId やイベント ID を推測しないでください。ユーザーがカレンダー ID を明示的に選択しない限り、calendarId=0 を使用してすべてのカレンダーを検索します。空白のテキストフィールドは無視されます。既存の時間を維持するには、startMillis/endMillis=0 を使用します。リマインダーを保持するには reminderMinutes=-2 を使用し、リマインダーを削除するには -1 を使用します。リマインダーを置き換えるには >=0 を使用します。"
+      "description": "Android カレンダー イベントを ID で更新します。ユーザーが自然言語でターゲットを説明するときに最初にイベントを検索/リストし、変更されたフィールドで既知のターゲットの詳細を渡します。 calendarId やイベント ID を推測しないでください。ユーザーがカレンダー ID を明示的に選択しない限り、calendarId=0 を使用してすべてのカレンダーを検索します。空白のテキストフィールドは無視されます。既存の時間を維持するには、blank startLocalDateTime/endLocalDateTime を使用します。リマインダーを保持するには reminderMinutes=-2 を使用し、リマインダーを削除するには -1 を使用します。リマインダーを置き換えるには >=0 を使用します。"
     },
     {
       "name": "memo_create",

@@ -329,7 +329,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Devuelve la zona horaria actual del sistema Android y la marca de tiempo Unix para llamadas a herramientas que dependen del tiempo. Establezca verifyWithNtp=true solo cuando la hora del sistema esté en disputa o se requiera una referencia en línea. La verificación NTP utiliza ntp1.aliyun.com y nunca cambia el reloj del sistema."
+      "description": "Devuelve la zona horaria actual del sistema Android y la fecha y hora local formateadas para llamadas a herramientas que dependen del tiempo. Establezca verifyWithNtp=true solo cuando la hora del sistema esté en disputa o se requiera una referencia en línea. La verificación NTP utiliza ntp1.aliyun.com y nunca cambia el reloj del sistema."
     },
     {
       "name": "dnd_open_policy_access_settings",
@@ -745,7 +745,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Crea un evento de calendario Android. Para un evento de todo el día, configure allDay=true y use la medianoche local del día de inicio y la medianoche local exclusiva del día siguiente como fin.Recopile el tiempo faltante y los detalles de los recordatorios antes de llamar. Un nombre de lugar proporcionado por el usuario es suficiente y debe pasarse directamente como locationName. No buscar una dirección exacta o coordenadas a menos que el usuario pida explícitamente verificar, resolver, elegir o navegar hasta el lugar. Prefiera startLocalDateTime/endLocalDateTime en aaaa-MM-dd HH:mm para fechas de usuario y fechas relativas; la herramienta los analizará en la zona horaria del dispositivo. No cree eventos a partir de milisegundos de época calculados por el modelo. Utilice calendarId=0 a menos que el usuario haya seleccionado explícitamente una identificación de calendario. Después de la creación, utilice el resultado de la herramienta actualStart/actualEnd como el momento de creación de cara al usuario."
+      "description": "Crea un evento de calendario Android. Para un evento de todo el día, configure allDay=true y use la medianoche local del día de inicio y la medianoche local exclusiva del día siguiente como fin.Recopile el tiempo faltante y los detalles de los recordatorios antes de llamar. Un nombre de lugar proporcionado por el usuario es suficiente y debe pasarse directamente como locationName. No buscar una dirección exacta o coordenadas a menos que el usuario pida explícitamente verificar, resolver, elegir o navegar hasta el lugar. Prefiera startLocalDateTime/endLocalDateTime en yyyy-MM-dd HH:mm para fechas de usuario y fechas relativas; la herramienta los analizará en la zona horaria del dispositivo. No cree eventos a partir de milisegundos de época calculados por el modelo. Utilice calendarId=0 a menos que el usuario haya seleccionado explícitamente una identificación de calendario. Después de la creación, utilice el resultado de la herramienta actualStart/actualEnd como el momento de creación de cara al usuario."
     },
     {
       "name": "calendar_delete_event",
@@ -753,7 +753,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Eliminar un evento de calendario Android por ID. Busque/enumere eventos en todos los calendarios con calendarId=0 a menos que el usuario haya seleccionado explícitamente una identificación de calendario. Pase siempre el título conocido, startMillis, endMillis y la ubicación cuando se conozca para que el objetivo no sea ambiguo."
+      "description": "Eliminar un evento de calendario Android por ID. Busque/enumere eventos en todos los calendarios con calendarId=0 a menos que el usuario haya seleccionado explícitamente una identificación de calendario. Pase siempre el título conocido, y la ubicación cuando se conozca para que el objetivo no sea ambiguo."
     },
     {
       "name": "calendar_list_calendars",
@@ -769,7 +769,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Enumere Android eventos del calendario en un rango de tiempo concreto. Úselo para solicitudes como el programa de hoy, el programa de mañana, eventos existentes o los eventos de esta semana. Prefiere startLocalDateTime/endLocalDateTime en aaaa-MM-dd HH:mm; la herramienta los analizará en la zona horaria del dispositivo. Utilice startMillis/endMillis solo como alternativa obsoleta cuando los milisegundos de época exactos procedan de un resultado de herramienta confiable. No adivines calendarId; use calendarId=0 para buscar todos los calendarios a menos que el usuario haya seleccionado explícitamente una identificación de calendario."
+      "description": "Enumere Android eventos del calendario en un rango de tiempo concreto. Úselo para solicitudes como el programa de hoy, el programa de mañana, eventos existentes o los eventos de esta semana. Prefiere startLocalDateTime/endLocalDateTime en yyyy-MM-dd HH:mm:ss; la herramienta los analizará en la zona horaria del dispositivo. No adivines calendarId; use calendarId=0 para buscar todos los calendarios a menos que el usuario haya seleccionado explícitamente una identificación de calendario."
     },
     {
       "name": "calendar_open_event",
@@ -785,7 +785,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Busque Android eventos del calendario por palabra clave en un rango de tiempo concreto. Úselo antes de abrir, actualizar o eliminar un evento cuando el usuario describe el evento por título o contenido. Prefiere startLocalDateTime/endLocalDateTime en aaaa-MM-dd HH:mm; la herramienta los analizará en la zona horaria del dispositivo. Utilice startMillis/endMillis solo como alternativa obsoleta cuando los milisegundos de época exactos procedan de un resultado de herramienta confiable. No adivines calendarId; use calendarId=0 para buscar todos los calendarios a menos que el usuario haya seleccionado explícitamente una identificación de calendario."
+      "description": "Busque Android eventos del calendario por palabra clave en un rango de tiempo concreto. Úselo antes de abrir, actualizar o eliminar un evento cuando el usuario describe el evento por título o contenido. Prefiere startLocalDateTime/endLocalDateTime en yyyy-MM-dd HH:mm; la herramienta los analizará en la zona horaria del dispositivo. No adivines calendarId; use calendarId=0 para buscar todos los calendarios a menos que el usuario haya seleccionado explícitamente una identificación de calendario."
     },
     {
       "name": "calendar_update_event",
@@ -793,7 +793,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Actualiza un evento de calendario Android por ID. Busque/enumere eventos primero cuando el usuario describa el objetivo en lenguaje natural y pase los detalles conocidos del objetivo con los campos modificados. No adivines calendarId o el ID del evento; busque todos los calendarios con calendarId=0 a menos que el usuario haya seleccionado explícitamente una identificación de calendario. Los campos de texto en blanco se ignoran. Utilice startMillis/endMillis=0 para mantener los tiempos existentes. Utilice reminderMinutes=-2 para conservar recordatorios, -1 para eliminar recordatorios y >=0 para reemplazar recordatorios."
+      "description": "Actualiza un evento de calendario Android por ID. Busque/enumere eventos primero cuando el usuario describa el objetivo en lenguaje natural y pase los detalles conocidos del objetivo con los campos modificados. No adivines calendarId o el ID del evento; busque todos los calendarios con calendarId=0 a menos que el usuario haya seleccionado explícitamente una identificación de calendario. Los campos de texto en blanco se ignoran. Utilice blank startLocalDateTime/endLocalDateTime para mantener los tiempos existentes. Utilice reminderMinutes=-2 para conservar recordatorios, -1 para eliminar recordatorios y >=0 para reemplazar recordatorios."
     },
     {
       "name": "memo_create",

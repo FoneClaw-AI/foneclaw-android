@@ -329,7 +329,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Trả về múi giờ hệ thống Android hiện tại và dấu thời gian Unix cho các lệnh gọi công cụ phụ thuộc vào thời gian. Chỉ đặt verifyWithNtp=true khi thời gian hệ thống bị tranh chấp hoặc cần có tham chiếu trực tuyến. Xác minh NTP sử dụng ntp1.aliyun.com và không bao giờ thay đổi đồng hồ hệ thống."
+      "description": "Trả về múi giờ hệ thống Android hiện tại cùng ngày và giờ địa phương đã định dạng cho các lệnh gọi công cụ phụ thuộc vào thời gian. Chỉ đặt verifyWithNtp=true khi thời gian hệ thống bị tranh chấp hoặc cần có tham chiếu trực tuyến. Xác minh NTP sử dụng ntp1.aliyun.com và không bao giờ thay đổi đồng hồ hệ thống."
     },
     {
       "name": "dnd_open_policy_access_settings",
@@ -753,7 +753,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Xóa sự kiện lịch Android theo id. Tìm kiếm/liệt kê các sự kiện trên tất cả các lịch với calendarId=0 trừ khi người dùng chọn id lịch một cách rõ ràng. Luôn chuyển tiêu đề đã biết, startMillis, endMillis và vị trí khi đã biết để mục tiêu không rõ ràng. Định danh kỹ thuật: calendarId=0."
+      "description": "Xóa sự kiện lịch Android theo id. Tìm kiếm/liệt kê các sự kiện trên tất cả các lịch với calendarId=0 trừ khi người dùng chọn id lịch một cách rõ ràng. Luôn chuyển tiêu đề đã biết, và vị trí khi đã biết để mục tiêu không rõ ràng. Định danh kỹ thuật: calendarId=0."
     },
     {
       "name": "calendar_list_calendars",
@@ -769,7 +769,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Liệt kê các sự kiện trên lịch của Android trong một khoảng thời gian cụ thể. Sử dụng cho các yêu cầu như lịch trình hôm nay, lịch trình ngày mai, sự kiện hiện có hoặc sự kiện trong tuần này. Ưu tiên startLocalDateTime/endLocalDateTime tính bằng yyyy-MM-dd HH:mm; công cụ sẽ phân tích chúng theo múi giờ của thiết bị. Chỉ sử dụng startMillis/endMillis làm dự phòng không được dùng nữa khi mili giây kỷ nguyên chính xác đến từ kết quả công cụ đáng tin cậy. Đừng đoán calendarId; sử dụng calendarId=0 để tìm kiếm tất cả các lịch trừ khi người dùng chọn id lịch một cách rõ ràng. Định danh kỹ thuật: calendarId, calendarId=0."
+      "description": "Liệt kê các sự kiện trên lịch của Android trong một khoảng thời gian cụ thể. Sử dụng cho các yêu cầu như lịch trình hôm nay, lịch trình ngày mai, sự kiện hiện có hoặc sự kiện trong tuần này. Ưu tiên startLocalDateTime/endLocalDateTime tính bằng yyyy-MM-dd HH:mm:ss; công cụ sẽ phân tích chúng theo múi giờ của thiết bị. Đừng đoán calendarId; sử dụng calendarId=0 để tìm kiếm tất cả các lịch trừ khi người dùng chọn id lịch một cách rõ ràng. Định danh kỹ thuật: calendarId, calendarId=0."
     },
     {
       "name": "calendar_open_event",
@@ -785,7 +785,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Tìm kiếm các sự kiện trên lịch Android theo từ khóa trong khoảng thời gian cụ thể. Sử dụng trước khi mở, cập nhật hoặc xóa sự kiện khi người dùng mô tả sự kiện theo tiêu đề hoặc nội dung. Ưu tiên startLocalDateTime/endLocalDateTime tính bằng yyyy-MM-dd HH:mm; công cụ sẽ phân tích chúng theo múi giờ của thiết bị. Chỉ sử dụng startMillis/endMillis làm dự phòng không được dùng nữa khi mili giây kỷ nguyên chính xác đến từ kết quả công cụ đáng tin cậy. Đừng đoán calendarId; sử dụng calendarId=0 để tìm kiếm tất cả các lịch trừ khi người dùng chọn id lịch một cách rõ ràng. Định danh kỹ thuật: calendarId, calendarId=0."
+      "description": "Tìm kiếm các sự kiện trên lịch Android theo từ khóa trong khoảng thời gian cụ thể. Sử dụng trước khi mở, cập nhật hoặc xóa sự kiện khi người dùng mô tả sự kiện theo tiêu đề hoặc nội dung. Ưu tiên startLocalDateTime/endLocalDateTime tính bằng yyyy-MM-dd HH:mm; công cụ sẽ phân tích chúng theo múi giờ của thiết bị. Đừng đoán calendarId; sử dụng calendarId=0 để tìm kiếm tất cả các lịch trừ khi người dùng chọn id lịch một cách rõ ràng. Định danh kỹ thuật: calendarId, calendarId=0."
     },
     {
       "name": "calendar_update_event",
@@ -793,7 +793,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Cập nhật sự kiện lịch Android theo id. Trước tiên, hãy tìm kiếm/liệt kê các sự kiện khi người dùng mô tả mục tiêu bằng ngôn ngữ tự nhiên và chuyển các chi tiết mục tiêu đã biết với các trường đã thay đổi. Đừng đoán Id lịch hoặc id sự kiện; tìm kiếm tất cả các lịch với calendarId=0 trừ khi người dùng chọn id lịch một cách rõ ràng. Các trường văn bản trống sẽ bị bỏ qua. Sử dụng startMillis/endMillis=0 để giữ thời gian hiện có. Sử dụng lời nhắcMinutes=-2 để giữ lời nhắc, -1 để xóa lời nhắc và >=0 để thay thế lời nhắc. Định danh kỹ thuật: calendarId, calendarId=0, reminderMinutes=-2."
+      "description": "Cập nhật sự kiện lịch Android theo id. Trước tiên, hãy tìm kiếm/liệt kê các sự kiện khi người dùng mô tả mục tiêu bằng ngôn ngữ tự nhiên và chuyển các chi tiết mục tiêu đã biết với các trường đã thay đổi. Đừng đoán Id lịch hoặc id sự kiện; tìm kiếm tất cả các lịch với calendarId=0 trừ khi người dùng chọn id lịch một cách rõ ràng. Các trường văn bản trống sẽ bị bỏ qua. Sử dụng blank startLocalDateTime/endLocalDateTime để giữ thời gian hiện có. Sử dụng lời nhắcMinutes=-2 để giữ lời nhắc, -1 để xóa lời nhắc và >=0 để thay thế lời nhắc. Định danh kỹ thuật: calendarId, calendarId=0, reminderMinutes=-2."
     },
     {
       "name": "memo_create",

@@ -329,7 +329,7 @@
       "risk": "LOW",
       "approval": "Automatisch",
       "approvalCode": "AUTO",
-      "description": "Gibt die aktuelle Zeitzone des Android-Systems und den Unix-Zeitstempel für zeitabhängige Toolaufrufe zurück. Legen Sie „verifyWithNtp=true“ nur fest, wenn die Systemzeit umstritten ist oder eine Online-Referenz erforderlich ist. Die NTP-Verifizierung verwendet ntp1.aliyun.com und ändert nie die Systemuhr."
+      "description": "Gibt die aktuelle Zeitzone des Android-Systems sowie das formatierte lokale Datum und die Uhrzeit für zeitabhängige Toolaufrufe zurück. Legen Sie verifyWithNtp=true nur fest, wenn die Systemzeit umstritten ist oder eine Online-Referenz erforderlich ist. Die NTP-Verifizierung verwendet ntp1.aliyun.com und ändert nie die Systemuhr."
     },
     {
       "name": "dnd_open_policy_access_settings",
@@ -745,7 +745,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Erstellen Sie ein Android-Kalenderereignis. Setzen Sie für einen ganztägigen Termin allDay=true, den Beginn auf die lokale Mitternacht des Tages und das exklusive Ende auf die lokale Mitternacht des Folgetags.Sammeln Sie vor dem Aufruf dieses Tools fehlende Zeit- und Erinnerungsdetails. Ein vom Benutzer bereitgestellter Ortsname ist ausreichend und sollte direkt als locationName übergeben werden. Suchen Sie nicht nach einer genauen Adresse oder Koordinaten, es sei denn, der Benutzer fordert ausdrücklich dazu auf, den Ort zu überprüfen, aufzulösen, auszuwählen oder dorthin zu navigieren. Bevorzugen Sie startLocalDateTime/endLocalDateTime in jjjj-MM-tt HH:mm für Benutzerdaten und relative Daten; Das Tool analysiert sie in der Zeitzone des Geräts. Erstellen Sie keine Ereignisse aus modellberechneten Epochen-Millisekunden. Verwenden Sie „calendarId=0“, es sei denn, der Benutzer hat explizit eine Kalender-ID ausgewählt. Verwenden Sie nach der Erstellung das Tool-Ergebnis „actualStart/actualEnd“ als benutzerseitige Erstellungszeit."
+      "description": "Erstellen Sie ein Android-Kalenderereignis. Setzen Sie für einen ganztägigen Termin allDay=true, den Beginn auf die lokale Mitternacht des Tages und das exklusive Ende auf die lokale Mitternacht des Folgetags.Sammeln Sie vor dem Aufruf dieses Tools fehlende Zeit- und Erinnerungsdetails. Ein vom Benutzer bereitgestellter Ortsname ist ausreichend und sollte direkt als locationName übergeben werden. Suchen Sie nicht nach einer genauen Adresse oder Koordinaten, es sei denn, der Benutzer fordert ausdrücklich dazu auf, den Ort zu überprüfen, aufzulösen, auszuwählen oder dorthin zu navigieren. Bevorzugen Sie startLocalDateTime/endLocalDateTime in yyyy-MM-dd HH:mm für Benutzerdaten und relative Daten; Das Tool analysiert sie in der Zeitzone des Geräts. Erstellen Sie keine Ereignisse aus modellberechneten Epochen-Millisekunden. Verwenden Sie „calendarId=0“, es sei denn, der Benutzer hat explizit eine Kalender-ID ausgewählt. Verwenden Sie nach der Erstellung das Tool-Ergebnis „actualStart/actualEnd“ als benutzerseitige Erstellungszeit."
     },
     {
       "name": "calendar_delete_event",
@@ -753,7 +753,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Löschen Sie ein Android-Kalenderereignis anhand der ID. Suchen/listen Sie Ereignisse in allen Kalendern mit calendarId=0, es sei denn, der Benutzer hat explizit eine Kalender-ID ausgewählt. Übergeben Sie immer den bekannten Titel, startMillis, endMillis und den Ort, sofern bekannt, damit das Ziel eindeutig ist. Technische Bezeichner: calendarId=0."
+      "description": "Löschen Sie ein Android-Kalenderereignis anhand der ID. Suchen/listen Sie Ereignisse in allen Kalendern mit calendarId=0, es sei denn, der Benutzer hat explizit eine Kalender-ID ausgewählt. Übergeben Sie immer den bekannten Titel, und den Ort, sofern bekannt, damit das Ziel eindeutig ist. Technische Bezeichner: calendarId=0."
     },
     {
       "name": "calendar_list_calendars",
@@ -769,7 +769,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Listen Sie Android-Kalenderereignisse in einem konkreten Zeitraum auf. Verwenden Sie diese Option für Anfragen wie den heutigen Zeitplan, den morgigen Zeitplan, bestehende Veranstaltungen oder die Veranstaltungen dieser Woche. Bevorzugen Sie startLocalDateTime/endLocalDateTime in jjjj-MM-tt HH:mm; Das Tool analysiert sie in der Zeitzone des Geräts. Verwenden Sie startMillis/endMillis nur als veralteten Fallback, wenn genaue Epochenmillisekunden von einem vertrauenswürdigen Toolergebnis stammen. Kalender-ID nicht erraten; Verwenden Sie calendarId=0, um alle Kalender zu durchsuchen, es sei denn, der Benutzer hat explizit eine Kalender-ID ausgewählt. Technische Bezeichner: calendarId, calendarId=0."
+      "description": "Listen Sie Android-Kalenderereignisse in einem konkreten Zeitraum auf. Verwenden Sie diese Option für Anfragen wie den heutigen Zeitplan, den morgigen Zeitplan, bestehende Veranstaltungen oder die Veranstaltungen dieser Woche. Bevorzugen Sie startLocalDateTime/endLocalDateTime in yyyy-MM-dd HH:mm:ss; Das Tool analysiert sie in der Zeitzone des Geräts. Kalender-ID nicht erraten; Verwenden Sie calendarId=0, um alle Kalender zu durchsuchen, es sei denn, der Benutzer hat explizit eine Kalender-ID ausgewählt. Technische Bezeichner: calendarId, calendarId=0."
     },
     {
       "name": "calendar_open_event",
@@ -785,7 +785,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Durchsuchen Sie Android-Kalenderereignisse nach Schlüsselwörtern in einem bestimmten Zeitraum. Verwenden Sie diese Option vor dem Öffnen, Aktualisieren oder Löschen eines Ereignisses, wenn der Benutzer das Ereignis anhand des Titels oder Inhalts beschreibt. Bevorzugen Sie startLocalDateTime/endLocalDateTime in jjjj-MM-tt HH:mm; Das Tool analysiert sie in der Zeitzone des Geräts. Verwenden Sie startMillis/endMillis nur als veralteten Fallback, wenn genaue Epochenmillisekunden von einem vertrauenswürdigen Toolergebnis stammen. Kalender-ID nicht erraten; Verwenden Sie calendarId=0, um alle Kalender zu durchsuchen, es sei denn, der Benutzer hat explizit eine Kalender-ID ausgewählt. Technische Bezeichner: calendarId, calendarId=0."
+      "description": "Durchsuchen Sie Android-Kalenderereignisse nach Schlüsselwörtern in einem bestimmten Zeitraum. Verwenden Sie diese Option vor dem Öffnen, Aktualisieren oder Löschen eines Ereignisses, wenn der Benutzer das Ereignis anhand des Titels oder Inhalts beschreibt. Bevorzugen Sie startLocalDateTime/endLocalDateTime in yyyy-MM-dd HH:mm; Das Tool analysiert sie in der Zeitzone des Geräts. Kalender-ID nicht erraten; Verwenden Sie calendarId=0, um alle Kalender zu durchsuchen, es sei denn, der Benutzer hat explizit eine Kalender-ID ausgewählt. Technische Bezeichner: calendarId, calendarId=0."
     },
     {
       "name": "calendar_update_event",
@@ -793,7 +793,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Aktualisieren Sie ein Android-Kalenderereignis anhand der ID. Suchen/listen Sie Ereignisse zuerst auf, wenn der Benutzer das Ziel in natürlicher Sprache beschreibt, und übergeben Sie bekannte Zieldetails mit den geänderten Feldern. Erraten Sie nicht die Kalender-ID oder die Ereignis-ID. Alle Kalender mit calendarId=0 durchsuchen, es sei denn, der Benutzer hat explizit eine Kalender-ID ausgewählt. Leere Textfelder werden ignoriert. Verwenden Sie startMillis/endMillis=0, um bestehende Zeiten beizubehalten. Verwenden Sie „reminderMinutes=-2“, um Erinnerungen beizubehalten, „-1“, um Erinnerungen zu entfernen, und „>=0“, um Erinnerungen zu ersetzen. Technische Bezeichner: calendarId, calendarId=0."
+      "description": "Aktualisieren Sie ein Android-Kalenderereignis anhand der ID. Suchen/listen Sie Ereignisse zuerst auf, wenn der Benutzer das Ziel in natürlicher Sprache beschreibt, und übergeben Sie bekannte Zieldetails mit den geänderten Feldern. Erraten Sie nicht die Kalender-ID oder die Ereignis-ID. Alle Kalender mit calendarId=0 durchsuchen, es sei denn, der Benutzer hat explizit eine Kalender-ID ausgewählt. Leere Textfelder werden ignoriert. Verwenden Sie blank startLocalDateTime/endLocalDateTime, um bestehende Zeiten beizubehalten. Verwenden Sie „reminderMinutes=-2“, um Erinnerungen beizubehalten, „-1“, um Erinnerungen zu entfernen, und „>=0“, um Erinnerungen zu ersetzen. Technische Bezeichner: calendarId, calendarId=0."
     },
     {
       "name": "memo_create",

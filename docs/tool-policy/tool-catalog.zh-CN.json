@@ -329,7 +329,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "返回当前 Android 系统时区和 Unix 时间戳，以进行与时间相关的工具调用。仅当系统时间有争议或需要在线参考时才设置verifyWithNtp=true。 NTP验证使用ntp1.aliyun.com，不会改变系统时钟。"
+      "description": "返回当前 Android 系统时区和格式化的本地日期时间，以进行与时间相关的工具调用。仅当系统时间有争议或需要在线参考时才设置verifyWithNtp=true。NTP验证使用ntp1.aliyun.com，不会改变系统时钟。"
     },
     {
       "name": "dnd_open_policy_access_settings",
@@ -745,7 +745,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "创建 Android 日历事件。对于全天事件，请设置 allDay=true，并将开始时间设为本地当天零点、结束时间设为下一天零点（不含）。在调用此工具前收集缺少的时间信息和提醒详细信息。用户提供的地名就足够了，应该直接作为 locationName 传递。除非用户明确要求验证、解决、选择或导航到该地点，否则不要搜索确切的地址或坐标。对于用户日期和相对日期，首选 yyyy-MM-dd HH:mm 中的 startLocalDateTime/endLocalDateTime；该工具将在设备时区中解析它们。不要根据模型计算的纪元毫秒创建事件。除非用户明确选择了日历 ID，否则请使用 calendarId=0。创建完成后，使用工具结果actualStart/actualEnd作为面向用户的创建时间。"
+      "description": "创建 Android 日历事件。对于全天事件，请设置 allDay=true，并将开始时间设为本地当天零点、结束时间设为下一天零点（不含）。在调用此工具前收集缺少的时间信息和提醒详细信息。用户提供的地名就足够了，应该直接作为 locationName 传递。除非用户明确要求验证、解决、选择或导航到该地点，否则不要搜索确切的地址或坐标。对于用户日期和相对日期，使用 yyyy-MM-dd HH:mm 中的 startLocalDateTime/endLocalDateTime；该工具将在设备时区中解析它们。不要根据模型计算的纪元毫秒创建事件。除非用户明确选择了日历 ID，否则请使用 calendarId=0。创建完成后，使用工具结果actualStart/actualEnd作为面向用户的创建时间。"
     },
     {
       "name": "calendar_delete_event",
@@ -753,7 +753,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "按 ID 删除 Android 日历事件。除非用户明确选择了日历 ID，否则使用 calendarId=0 搜索/列出所有日历中的事件。始终传递已知的标题、startMillis、endMillis 和已知的位置，以便目标明确。"
+      "description": "按 ID 删除 Android 日历事件。除非用户明确选择了日历 ID，否则使用 calendarId=0 搜索/列出所有日历中的事件。始终传递已知的标题和已知的位置，以便目标明确。"
     },
     {
       "name": "calendar_list_calendars",
@@ -769,7 +769,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "列出具体时间范围内的Android日历事件。用于今天的日程安排、明天的日程安排、现有活动或本周的活动等请求。首选 yyyy-MM-dd HH:mm 中的 startLocalDateTime/endLocalDateTime；该工具将在设备时区中解析它们。仅当精确纪元毫秒来自可信工具结果时，才使用 startMillis/endMillis 作为已弃用的后备。不要猜测calendarId；使用 calendarId=0 搜索所有日历，除非用户明确选择了日历 ID。"
+      "description": "列出具体时间范围内的Android日历事件。用于今天的日程安排、明天的日程安排、现有活动或本周的活动等请求。使用 yyyy-MM-dd HH:mm:ss 中的 startLocalDateTime/endLocalDateTime；该工具将在设备时区中解析它们。不要猜测calendarId；使用 calendarId=0 搜索所有日历，除非用户明确选择了日历 ID。"
     },
     {
       "name": "calendar_open_event",
@@ -785,7 +785,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "在具体时间范围内通过关键字搜索Android日历事件。当用户按标题或内容描述事件时，在打开、更新或删除事件之前使用。首选 yyyy-MM-dd HH:mm 中的 startLocalDateTime/endLocalDateTime；该工具将在设备时区中解析它们。仅当精确纪元毫秒来自可信工具结果时，才使用 startMillis/endMillis 作为已弃用的后备。不要猜测calendarId；使用 calendarId=0 搜索所有日历，除非用户明确选择了日历 ID。"
+      "description": "在具体时间范围内通过关键字搜索Android日历事件。当用户按标题或内容描述事件时，在打开、更新或删除事件之前使用。使用 yyyy-MM-dd HH:mm 中的 startLocalDateTime/endLocalDateTime；该工具将在设备时区中解析它们。不要猜测calendarId；使用 calendarId=0 搜索所有日历，除非用户明确选择了日历 ID。"
     },
     {
       "name": "calendar_update_event",
@@ -793,7 +793,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "按 ID 更新 Android 日历事件。当用户用自然语言描述目标时，首先搜索/列出事件，并通过更改的字段传递已知的目标详细信息。不要猜测 calendarId 或事件 id；搜索所有带有 calendarId=0 的日历，除非用户明确选择了日历 ID。空白文本字段将被忽略。使用 startMillis/endMillis=0 保留现有时间。使用 reminderMinutes=-2 保留提醒，-1 删除提醒，>=0 替换提醒。"
+      "description": "按 ID 更新 Android 日历事件。当用户用自然语言描述目标时，首先搜索/列出事件，并通过更改的字段传递已知的目标详细信息。不要猜测 calendarId 或事件 id；搜索所有带有 calendarId=0 的日历，除非用户明确选择了日历 ID。空白文本字段将被忽略。使用 blank startLocalDateTime/endLocalDateTime 保留现有时间。使用 reminderMinutes=-2 保留提醒，-1 删除提醒，>=0 替换提醒。"
     },
     {
       "name": "memo_create",

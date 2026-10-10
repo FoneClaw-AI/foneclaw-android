@@ -169,7 +169,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Capture an Android screen with the FoneClaw accessibility service. The captured image is kept in app-private cache for Agent use and is not added to the system Gallery. Use targetType=current for the current screen, targetType=app with targetApp for opening an app and capturing it, or targetType=notification_shade only for an explicit screenshot or image-capture request involving the visible notification shade. Never use targetType=notification_shade to read, list, query, or summarize notification data; use a SysInfo notification tool instead. Never use this tool merely to locate or verify a control, recover a stale GUI node, or compensate for missing accessibility labels during cross-app GUI automation. Do not call launch_app or system_panel_open before this tool for app or notification-shade capture. Do not use this when the user wants to view an already saved screenshot; use screenshot_open for viewing saved screenshots."
+      "description": "Capture an Android screen with the FoneClaw accessibility service. The captured image is kept in app-private cache for Agent use and is not added to the system Gallery. Use only when the requested outcome includes a screenshot or screen-image analysis. Reading a screen for GUI search, typing, tapping, or confirming results is not an image-capture request; use the accessibility screen-reading tools. A loading page or an uncertain action result does not change that boundary. Use targetType=current for the current screen, targetType=app with targetApp for opening an app and capturing it, or targetType=notification_shade only for an explicit screenshot or image-capture request involving the visible notification shade. Never use targetType=notification_shade to read, list, query, or summarize notification data; use a SysInfo notification tool instead. Never use this tool merely to locate or verify a control, recover a stale GUI node, or compensate for missing accessibility labels during cross-app GUI automation. Do not call launch_app or system_panel_open before this tool for app or notification-shade capture. A successful capture already returns the image attachment for delivery. Do not open the gallery to find or verify it. Do not use this when the user wants to view an already saved screenshot; use screenshot_open for viewing saved screenshots."
     },
     {
       "name": "scroll",
@@ -257,7 +257,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Return a compact recent app activity snapshot from Android UsageStats. If usage access or recent activity is unavailable, return status=skipped so other health checks can continue. It is not a live background-process monitor."
+      "description": "Return a compact recent app activity snapshot from Android UsageStats. Requires usage access. If no recent activity is available, return status=skipped so other health checks can continue. It is not a live background-process monitor."
     },
     {
       "name": "device_app_permission_audit",
@@ -329,7 +329,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Return the current Android system time zone and Unix timestamp for time-dependent tool calls. Set verifyWithNtp=true only when the system time is disputed or an online reference is required. NTP verification uses ntp1.aliyun.com and never changes the system clock."
+      "description": "Return the current Android system time zone and formatted local date-time for time-dependent tool calls. Set verifyWithNtp=true only when the system time is disputed or an online reference is required. NTP verification uses ntp1.aliyun.com and never changes the system clock."
     },
     {
       "name": "dnd_open_policy_access_settings",
@@ -745,7 +745,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Create an Android calendar event. Collect missing time and reminder details before calling. For an all-day event, set allDay=true and use local midnight for the start and the exclusive next-day local midnight for the end. A user-provided place name is sufficient and should be passed directly as locationName. Do not search for an exact address or coordinates unless the user explicitly asks to verify, resolve, choose, or navigate to the place. Prefer startLocalDateTime/endLocalDateTime in yyyy-MM-dd HH:mm for user dates and relative dates; the tool will parse them in the device timezone. Do not create events from model-calculated epoch milliseconds. Use calendarId=0 unless the user explicitly selected a calendar id. After creation, use the tool result actualStart/actualEnd as the user-facing created time."
+      "description": "Create an Android calendar event. Collect missing time and reminder details before calling. For an all-day event, set allDay=true and use local midnight for the start and the exclusive next-day local midnight for the end. A user-provided place name is sufficient and should be passed directly as locationName. Do not search for an exact address or coordinates unless the user explicitly asks to verify, resolve, choose, or navigate to the place. Use startLocalDateTime/endLocalDateTime in yyyy-MM-dd HH:mm for user dates and relative dates; the tool will parse them in the device timezone. Do not create events from model-calculated epoch milliseconds. Use calendarId=0 unless the user explicitly selected a calendar id. After creation, use the tool result actualStart/actualEnd as the user-facing created time."
     },
     {
       "name": "calendar_delete_event",
@@ -753,7 +753,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Delete an Android calendar event by id. Search/list events across all calendars with calendarId=0 unless the user explicitly selected a calendar id. Always pass the known title, startMillis, endMillis and location when known so the target is unambiguous."
+      "description": "Delete an Android calendar event by id. Search/list events across all calendars with calendarId=0 unless the user explicitly selected a calendar id. Always pass the known title and location when known so the target is unambiguous."
     },
     {
       "name": "calendar_list_calendars",
@@ -769,7 +769,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "List Android calendar events in a concrete time range. Use for requests like today's schedule, tomorrow's schedule, existing events, or this week's events. Prefer startLocalDateTime/endLocalDateTime in yyyy-MM-dd HH:mm; the tool will parse them in the device timezone. Use startMillis/endMillis only as a deprecated fallback when exact epoch milliseconds came from a trusted tool result. Do not guess calendarId; use calendarId=0 to search all calendars unless the user explicitly selected a calendar id."
+      "description": "List Android calendar events in a concrete time range. Use for requests like today's schedule, tomorrow's schedule, existing events, or this week's events. Use startLocalDateTime/endLocalDateTime in yyyy-MM-dd HH:mm:ss; the tool will parse them in the device timezone. Do not guess calendarId; use calendarId=0 to search all calendars unless the user explicitly selected a calendar id."
     },
     {
       "name": "calendar_open_event",
@@ -785,7 +785,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Search Android calendar events by keyword in a concrete time range. Use before opening, updating, or deleting an event when the user describes the event by title or content. Prefer startLocalDateTime/endLocalDateTime in yyyy-MM-dd HH:mm; the tool will parse them in the device timezone. Use startMillis/endMillis only as a deprecated fallback when exact epoch milliseconds came from a trusted tool result. Do not guess calendarId; use calendarId=0 to search all calendars unless the user explicitly selected a calendar id."
+      "description": "Search Android calendar events by keyword in a concrete time range. Use before opening, updating, or deleting an event when the user describes the event by title or content. Use startLocalDateTime/endLocalDateTime in yyyy-MM-dd HH:mm; the tool will parse them in the device timezone. Do not guess calendarId; use calendarId=0 to search all calendars unless the user explicitly selected a calendar id."
     },
     {
       "name": "calendar_update_event",
@@ -793,7 +793,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Update an Android calendar event by id. Search/list events first when the user describes the target in natural language, and pass known target details with the changed fields. Do not guess calendarId or event id; search all calendars with calendarId=0 unless the user explicitly selected a calendar id. Blank text fields are ignored. Use startMillis/endMillis=0 to keep existing times. Use reminderMinutes=-2 to keep reminders, -1 to remove reminders, and >=0 to replace reminders."
+      "description": "Update an Android calendar event by id. Search/list events first when the user describes the target in natural language, and pass known target details with the changed fields. Do not guess calendarId or event id; search all calendars with calendarId=0 unless the user explicitly selected a calendar id. Blank text fields are ignored. Use blank startLocalDateTime/endLocalDateTime to keep existing times. Use yyyy-MM-dd HH:mm:ss for changed times. Use reminderMinutes=-2 to keep reminders, -1 to remove reminders, and >=0 to replace reminders."
     },
     {
       "name": "memo_create",

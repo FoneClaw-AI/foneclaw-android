@@ -46,12 +46,6 @@ Workflows are stored as individual JSON files:
         "folder": "INBOX",
         "limit": "10"
       }
-    },
-    {
-      "toolName": "mail_read",
-      "arguments": {
-        "messageId": "${first.id}"
-      }
     }
   ],
   "createdAtMillis": 1719000000000,
@@ -75,7 +69,7 @@ Workflows are stored as individual JSON files:
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `toolName` | string | Yes | Exact tool name (e.g., `mail_list`, `wifi_status`) |
+| `toolName` | string | Yes | Exact supported mail tool name (for example, `mail_list`) |
 | `arguments` | Map\<string, string\> | Yes | Tool arguments as key-value pairs. All values are strings. |
 
 Use the [Built-in Tool Catalog](../tool-policy/tool-catalog.md) to choose exact
@@ -96,14 +90,15 @@ The highest-scoring workflow wins. If two workflows tie for the top score, the m
 
 ## Currently Supported Tools in Workflows
 
-The WorkflowStepExecutor currently supports mail-related tools:
+The WorkflowStepExecutor currently supports this explicit mail-only set:
 
-- `mail_list`, `mail_read`, `mail_send`, `mail_delete`
-- `mail_account_list`, `mail_account_delete`, `mail_account_rename`
+- `mail_list`, `mail_read`, `mail_send`, `mail_delete`, `mail_account_list`
 
-Existing workflows that already contain `mail_mark_read` can still replay that step for
-compatibility, but new workflows should not use it because the Main Agent no longer exposes
-that Function Schema.
+Workflow definitions are checked against the current Tool descriptor before candidate matching.
+Missing required parameters, wrong JSON types, and unknown argument names make the workflow
+non-executable instead of waiting until a side effect starts. Values in the persisted
+`arguments` map remain strings because the file format is backward compatible; JSON arrays or
+numbers must be encoded as JSON strings and are converted using the current descriptor.
 
 Support for additional tool categories will be added in future releases.
 

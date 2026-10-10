@@ -8,6 +8,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.2.8] - 2026-10-10
+
+### Added
+
+- Review and update saved shortcuts when their underlying actions change.
+- A recording guide for adding the Quick Settings button and checking permissions.
+- Account deletion requests with email verification and eligibility checks.
+
+### Improved
+
+- Search and manage scheduled tasks with clearer Run now status.
+- Control spoken responses from Home and start a new conversation from its top bar.
+- Improved online speech playback and more reliable handling of service responses.
+
+### Scope
+
+- Google APK/AAB are Play submission candidates; purchasing is not claimed live in Production.
+- Lebest APK remains a locally signed OEM candidate.
+
 ## [v0.2.7] - 2026-10-05
 
 ### Added

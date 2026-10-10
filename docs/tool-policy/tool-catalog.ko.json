@@ -329,7 +329,7 @@
       "risk": "LOW",
       "approval": "자동",
       "approvalCode": "AUTO",
-      "description": "시간 종속 도구 호출에 대해 현재 Android 시스템 시간대와 Unix 타임스탬프를 반환합니다. 시스템 시간에 대해 논쟁이 있거나 온라인 참조가 필요한 경우에만 verifyWithNtp=true을 설정하십시오. NTP 확인은 ntp1.aliyun.com을 사용하며 시스템 시계를 변경하지 않습니다."
+      "description": "시간 종속 도구 호출에 대해 현재 Android 시스템 시간대와 형식화된 현지 날짜 및 시간을 반환합니다. 시스템 시간에 대해 논쟁이 있거나 온라인 참조가 필요한 경우에만 verifyWithNtp=true를 설정하십시오. NTP 확인은 ntp1.aliyun.com을 사용하며 시스템 시계를 변경하지 않습니다."
     },
     {
       "name": "dnd_open_policy_access_settings",
@@ -753,7 +753,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "ID별로 Android 캘린더 이벤트를 삭제합니다. 사용자가 캘린더 ID를 명시적으로 선택하지 않는 한 calendarId=0을 사용하여 모든 캘린더에서 이벤트를 검색/나열합니다. 대상이 명확하도록 알려진 제목, startMillis, endMillis 및 알려진 경우 위치를 항상 전달합니다."
+      "description": "ID별로 Android 캘린더 이벤트를 삭제합니다. 사용자가 캘린더 ID를 명시적으로 선택하지 않는 한 calendarId=0을 사용하여 모든 캘린더에서 이벤트를 검색/나열합니다. 대상이 명확하도록 알려진 제목, 및 알려진 경우 위치를 항상 전달합니다."
     },
     {
       "name": "calendar_list_calendars",
@@ -769,7 +769,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "구체적인 시간 범위의 Android 캘린더 이벤트를 나열합니다. 오늘 일정, 내일 일정, 기존 일정, 이번주 일정 등의 요청에 사용하세요. yyyy-MM-dd HH:mm에서 startLocalDateTime/endLocalDateTime를 선호합니다. 도구는 장치 시간대로 구문 분석합니다. 신뢰할 수 있는 도구 결과에서 정확한 에포크 밀리초가 나온 경우 더 이상 사용되지 않는 대체 수단으로만 startMillis/endMillis를 사용하세요. 추측하지 마세요. calendarId; 사용자가 캘린더 ID를 명시적으로 선택하지 않는 한 모든 캘린더를 검색하려면 calendarId=0을 사용하세요."
+      "description": "구체적인 시간 범위의 Android 캘린더 이벤트를 나열합니다. 오늘 일정, 내일 일정, 기존 일정, 이번주 일정 등의 요청에 사용하세요. yyyy-MM-dd HH:mm:ss에서 startLocalDateTime/endLocalDateTime를 선호합니다. 도구는 장치 시간대로 구문 분석합니다. 추측하지 마세요. calendarId; 사용자가 캘린더 ID를 명시적으로 선택하지 않는 한 모든 캘린더를 검색하려면 calendarId=0을 사용하세요."
     },
     {
       "name": "calendar_open_event",
@@ -785,7 +785,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "구체적인 시간 범위에서 키워드로 Android 캘린더 이벤트를 검색하세요. 사용자가 이벤트를 제목이나 내용으로 설명하는 경우 이벤트를 열거나 업데이트하거나 삭제하기 전에 사용합니다. yyyy-MM-dd HH:mm에서 startLocalDateTime/endLocalDateTime를 선호합니다. 도구는 장치 시간대로 구문 분석합니다. 신뢰할 수 있는 도구 결과에서 정확한 에포크 밀리초가 나온 경우 더 이상 사용되지 않는 대체 수단으로만 startMillis/endMillis를 사용하세요. 추측하지 마세요. calendarId; 사용자가 캘린더 ID를 명시적으로 선택하지 않는 한 모든 캘린더를 검색하려면 calendarId=0을 사용하세요."
+      "description": "구체적인 시간 범위에서 키워드로 Android 캘린더 이벤트를 검색하세요. 사용자가 이벤트를 제목이나 내용으로 설명하는 경우 이벤트를 열거나 업데이트하거나 삭제하기 전에 사용합니다. yyyy-MM-dd HH:mm에서 startLocalDateTime/endLocalDateTime를 선호합니다. 도구는 장치 시간대로 구문 분석합니다. 추측하지 마세요. calendarId; 사용자가 캘린더 ID를 명시적으로 선택하지 않는 한 모든 캘린더를 검색하려면 calendarId=0을 사용하세요."
     },
     {
       "name": "calendar_update_event",
@@ -793,7 +793,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "ID별로 Android 캘린더 이벤트를 업데이트합니다. 사용자가 자연어로 대상을 설명할 때 먼저 이벤트를 검색/나열하고 변경된 필드와 함께 알려진 대상 세부 정보를 전달합니다. calendarId 또는 이벤트 ID를 추측하지 마세요. 사용자가 명시적으로 달력 ID를 선택하지 않는 한 calendarId=0로 모든 달력을 검색합니다. 빈 텍스트 필드는 무시됩니다. 기존 시간을 유지하려면 startMillis/endMillis=0를 사용하세요. 알림을 유지하려면 reminderMinutes=-2를 사용하고, 알림을 제거하려면 -1을, 알림을 교체하려면 >=0을 사용하세요."
+      "description": "ID별로 Android 캘린더 이벤트를 업데이트합니다. 사용자가 자연어로 대상을 설명할 때 먼저 이벤트를 검색/나열하고 변경된 필드와 함께 알려진 대상 세부 정보를 전달합니다. calendarId 또는 이벤트 ID를 추측하지 마세요. 사용자가 명시적으로 달력 ID를 선택하지 않는 한 calendarId=0로 모든 달력을 검색합니다. 빈 텍스트 필드는 무시됩니다. 기존 시간을 유지하려면 blank startLocalDateTime/endLocalDateTime를 사용하세요. 알림을 유지하려면 reminderMinutes=-2를 사용하고, 알림을 제거하려면 -1을, 알림을 교체하려면 >=0을 사용하세요."
     },
     {
       "name": "memo_create",

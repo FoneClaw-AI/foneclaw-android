@@ -1,0 +1,20 @@
+{
+  "id": "list_mail_accounts",
+  "name": "List Mail Accounts",
+  "description": "List configured mail accounts and show which account is the default.",
+  "matchPhrases": [
+    "list my mail accounts",
+    "show configured email accounts",
+    "which mail accounts are configured"
+  ],
+  "steps": [
+    {
+      "toolName": "mail_account_list",
+      "arguments": {
+        "query": ""
+      }
+    }
+  ],
+  "createdAtMillis": 0,
+  "updatedAtMillis": 0
+}
