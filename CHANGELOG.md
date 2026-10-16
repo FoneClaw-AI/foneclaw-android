@@ -8,6 +8,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.2.9] - 2026-10-16
+
+### Added
+
+- Toolbox with curated scenario samples for daily briefings, travel plans, and more
+- Full travel-planning workflow with unified editing, recording, and public page interaction
+- Content moderation and memory safeguards for safer agent interactions
+- Model source presets loaded from backend for easier setup
+
+### Improved
+
+- Scheduled task execution for news and RSS with clearer result presentation
+- Todo and email generation language constraints
+
+### Fixed
+
+- Session jump positioning to first line of body
+- Home page icons and toolbox icon loading style
+
 ## [v0.2.8] - 2026-10-10
 
 ### Added
