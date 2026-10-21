@@ -8,6 +8,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.3.0-fix] - 2026-10-21
+
+### Changed
+
+- Unified the home-screen brand slogan as “Say it. Done.” across all languages.
+
+### Improved
+
+- Built-in tool compatibility.
+
+### Scope
+
+- Scope is limited to the brand slogan and built-in tool compatibility; no broader fault resolution or full device regression is claimed.
+- Google APK/AAB remain Play submission candidates; Lebest remains a locally signed OEM candidate.
+- The Domestic channel has not officially launched and its distribution bucket remains unconfirmed.
+- VirusTotal snapshot for the FoneClaw Online APK only: 0/68 flagged engines. This is not a safety guarantee and does not cover other artifacts.
+
 ## [v0.3.0] - 2026-10-21
 
 ### Added
