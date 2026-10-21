@@ -8,6 +8,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.3.0] - 2026-10-21
+
+### Added
+
+- Conversation-title search in the redesigned sidebar.
+- Categories, favorites, and recently used entries in the refreshed Plugin Marketplace.
+- Modify saved travel plans through chat, with clearer generation progress and retries.
+
+### Improved
+
+- Fallback handling for unavailable web search and page retrieval, with corrected source-link presentation.
+- Text highlighting during speech playback and smoother continuous playback of long responses.
+- Scheduled-task exception reminder synchronization when the supporting service is available.
+- Clearer insufficient-points prompts and recording-transcription failure messages.
+
+### Scope
+
+- Prepared locally, not published; production deployment of service changes is unverified.
+- Google APK/AAB remain Play submission candidates; Lebest remains a locally signed OEM candidate.
+- New Domestic channel has not officially launched, has no Firebase or Gmail integration, and has no confirmed distribution bucket.
+- Security assessment is pending; no clean scan result is claimed.
+
 ## [v0.2.9] - 2026-10-16
 
 ### Added

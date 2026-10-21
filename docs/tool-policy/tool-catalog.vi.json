@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "vi",
   "fallbackLocale": "en",
-  "toolCount": 133,
+  "toolCount": 136,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Tìm kiếm công cụ hoặc khả năng",
@@ -39,7 +39,7 @@
     {
       "name": "Location and Navigation",
       "displayName": "Vị trí và điều hướng",
-      "toolCount": 3
+      "toolCount": 6
     },
     {
       "name": "Mail",
@@ -89,7 +89,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Mở một bức ảnh hiển thị cụ thể từ thư viện hệ thống. Chỉ sử dụng tùy chọn này khi người dùng yêu cầu xem hoặc mở một ảnh cụ thể một cách rõ ràng. Không sử dụng tùy chọn này để theo dõi sau camera_take_photo trừ khi người dùng yêu cầu xem hoặc mở ảnh đã chụp một cách rõ ràng. indexFromLatest dựa trên 1 theo thứ tự mới nhất: 1 mở ảnh mới nhất, 2 mở ảnh mới nhất thứ hai, 3 mở ảnh mới nhất thứ ba."
+      "description": "Mở một bức ảnh hiển thị cụ thể từ thư viện hệ thống. Chỉ sử dụng tùy chọn này khi người dùng yêu cầu xem hoặc mở một ảnh cụ thể một cách rõ ràng. Không sử dụng tùy chọn này để theo dõi sau camera(command=take_photo) trừ khi người dùng yêu cầu xem hoặc mở ảnh đã chụp một cách rõ ràng. indexFromLatest dựa trên 1 theo thứ tự mới nhất: 1 mở ảnh mới nhất, 2 mở ảnh mới nhất thứ hai, 3 mở ảnh mới nhất thứ ba."
     },
     {
       "name": "camera_take_photo",
@@ -97,7 +97,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Chụp ảnh mới và trả lại URI ảnh đã lưu khi có sẵn. Sử dụng tính năng này khi mục đích của người dùng là chụp một bức ảnh mới. Không đặt lensFacing hoặc tự động để chụp ảnh bình thường. Chỉ chọn lensFacing=front cho mục đích quay mặt trước hoặc chụp ảnh selfie; chỉ chọn quay lại khi người dùng yêu cầu rõ ràng về camera sau. Giữ cho ClearLensSelection sai để chụp ảnh đơn giản/mặc định, ngay cả khi ống kính vật lý mặc định hoạt động trở lại. Chỉ đặt clearLensSelection đúng khi người dùng yêu cầu chụp ảnh mặt trước, mặt sau, mặt sau hoặc ảnh selfie một cách rõ ràng. Không gọi camera_open_photo sau công cụ này trừ khi người dùng yêu cầu xem hoặc mở ảnh một cách rõ ràng. Gọi trực tiếp công cụ này. Capture sử dụng máy ảnh hệ thống gốc trước tiên. Chụp trước/sau rõ ràng chỉ có thể sử dụng phụ trợ trực tiếp nếu máy ảnh gốc không thể đáp ứng ống kính được yêu cầu. Không yêu cầu người dùng cấp quyền trước khi gọi công cụ này. Định danh kỹ thuật: explicitLensSelection."
+      "description": "Chụp ảnh mới và trả dưới dạng tệp ảnh đính kèm khi mô hình hỗ trợ thị giác. Sử dụng tính năng này khi mục đích của người dùng là chụp một bức ảnh mới. Không đặt lensFacing hoặc tự động để chụp ảnh bình thường. Chỉ chọn lensFacing=front cho mục đích quay mặt trước hoặc chụp ảnh selfie; chỉ chọn quay lại khi người dùng yêu cầu rõ ràng về camera sau. Giữ cho ClearLensSelection sai để chụp ảnh đơn giản/mặc định, ngay cả khi ống kính vật lý mặc định hoạt động trở lại. Chỉ đặt clearLensSelection đúng khi người dùng yêu cầu chụp ảnh mặt trước, mặt sau, mặt sau hoặc ảnh selfie một cách rõ ràng. Không gọi camera(command=open_photo) sau công cụ này trừ khi người dùng yêu cầu xem hoặc mở ảnh một cách rõ ràng. Gọi trực tiếp công cụ này. Capture sử dụng máy ảnh hệ thống gốc trước tiên. Chụp trước/sau rõ ràng chỉ có thể sử dụng phụ trợ trực tiếp nếu máy ảnh gốc không thể đáp ứng ống kính được yêu cầu. Không yêu cầu người dùng cấp quyền trước khi gọi công cụ này. Định danh kỹ thuật: explicitLensSelection."
     },
     {
       "name": "cross_app_read_screen",
@@ -121,7 +121,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Lấy các thành phần UI từ màn hình ứng dụng đang hiển thị. Mỗi thành phần có một ID nút, ví dụ [n3], có thể dùng với tap_node hoặc input_text. Không dùng công cụ này để đọc, liệt kê, tìm kiếm hoặc tóm tắt thông báo Android; hãy dùng các công cụ sysinfo. Không lưu kết quả vào bộ nhớ đệm vì ID nút thay đổi sau mỗi lần gọi."
+      "description": "Lấy các thành phần UI từ màn hình ứng dụng đang hiển thị. Mỗi thành phần có một ID nút, ví dụ [n3], có thể dùng với screen(command=tap), screen(command=scroll) hoặc screen(command=input_text). Không dùng công cụ này để đọc, liệt kê, tìm kiếm hoặc tóm tắt thông báo Android; hãy dùng các công cụ sysinfo. Không lưu kết quả vào bộ nhớ đệm vì ID nút thay đổi sau mỗi lần gọi."
     },
     {
       "name": "input_text",
@@ -129,7 +129,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Thay thế văn bản trong một trường có thể chỉnh sửa đang hiển thị trong ứng dụng Android hiện tại. Trước tiên, hãy gọi get_screen_info và truyền một nút hiện tại được đánh dấu edit. Thao tác này chỉ nhập văn bản; không gửi biểu mẫu, nhấn Gửi hoặc nhấn Enter. Không sử dụng lại ID nút."
+      "description": "Thay thế văn bản trong một trường có thể chỉnh sửa đang hiển thị trong ứng dụng Android hiện tại. Trước tiên, hãy gọi screen(command=read) và truyền một nút hiện tại được đánh dấu edit. Thao tác này chỉ nhập văn bản; không gửi biểu mẫu, nhấn Gửi hoặc nhấn Enter. Không sử dụng lại ID nút."
     },
     {
       "name": "launch_app",
@@ -145,7 +145,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Kiểm tra xem tên gói Android chính xác có được liệt kê trên Google Play hay không bằng cách yêu cầu https://play.google.com/store/apps/details?id=<packageName>. Đây là kiểm tra mạng chỉ đọc. Sử dụng nó trước play_store_install."
+      "description": "Kiểm tra xem tên gói Android chính xác có được liệt kê trên Google Play hay không bằng cách yêu cầu https://play.google.com/store/apps/details?id=<packageName>. Đây là kiểm tra mạng chỉ đọc. Sử dụng nó trước app(command=install_store_app)."
     },
     {
       "name": "play_store_install",
@@ -169,7 +169,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Chụp màn hình Android bằng dịch vụ trợ năng FoneClaw. Ảnh được giữ trong bộ nhớ đệm riêng của ứng dụng để Agent sử dụng và không được thêm vào thư viện hệ thống. Sử dụng targetType=current cho màn hình hiện tại, targetType=app với targetApp để mở và chụp ứng dụng hoặc targetType=notification_shade chỉ dành cho yêu cầu chụp ảnh màn hình hoặc ảnh chụp màn hình rõ ràng liên quan đến ngăn thông báo hiển thị. Không bao giờ sử dụng targetType=notification_shade để đọc, liệt kê, truy vấn hoặc tóm tắt dữ liệu thông báo; thay vào đó hãy sử dụng công cụ thông báo SysInfo. Không gọi launch_app hoặc system_panel_open trước công cụ này để chụp ứng dụng hoặc bóng thông báo. Không sử dụng tính năng này khi người dùng muốn xem ảnh chụp màn hình đã lưu; sử dụng screenshot_open để xem ảnh chụp màn hình đã lưu. Định danh kỹ thuật: screenshot_open."
+      "description": "Chụp màn hình Android bằng dịch vụ trợ năng FoneClaw. Ảnh được giữ trong bộ nhớ đệm riêng của ứng dụng để Agent sử dụng và không được thêm vào thư viện hệ thống. Sử dụng targetType=current cho màn hình hiện tại, targetType=app với targetApp để mở và chụp ứng dụng hoặc targetType=notification_shade chỉ dành cho yêu cầu chụp ảnh màn hình hoặc ảnh chụp màn hình rõ ràng liên quan đến ngăn thông báo hiển thị. Không bao giờ sử dụng targetType=notification_shade để đọc, liệt kê, truy vấn hoặc tóm tắt dữ liệu thông báo; thay vào đó hãy sử dụng công cụ thông báo SysInfo. Không gọi app(command=launch) hoặc system_panel(command=open) trước công cụ này để chụp ứng dụng hoặc bóng thông báo. Không sử dụng tính năng này khi người dùng muốn xem ảnh chụp màn hình đã lưu; sử dụng screenshot(command=open) để xem ảnh chụp màn hình đã lưu. Định danh kỹ thuật: screenshot(command=open). Chỉ dùng khi kết quả yêu cầu có ảnh chụp hoặc phân tích hình màn hình. Tìm GUI, nhập, nhấn hay xác nhận kết quả không phải yêu cầu ảnh; dùng đọc trợ năng. Trang đang tải hay kết quả không chắc không đổi giới hạn. Không chụp chỉ để tìm/kiểm tra điều khiển, khôi phục nút cũ hay bù nhãn thiếu. Thành công đã trả ảnh đính kèm để giao; không mở thư viện tìm hay kiểm tra."
     },
     {
       "name": "scroll",
@@ -177,7 +177,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Cuộn ứng dụng hiện tại theo hướng được yêu cầu. Ưu tiên dùng nút có thể cuộn từ thông tin màn hình mới nhất hoặc dùng vùng hiển thị khi không có vùng chứa có thể cuộn. Kiểm tra lại màn hình sau khi cuộn get_screen_info."
+      "description": "Cuộn ứng dụng bằng thao tác trợ năng tương thích hoặc vuốt có giới hạn. Ưu tiên ID nút mới đánh dấu scroll từ screen(command=read). Chỉ dùng viewport khi không có vùng cuộn dùng được. Hướng là đích: down dưới, up trên, right phải, left trái. Thành công không chứng minh nội dung đổi; gọi screen(command=read) sau mỗi lần thành công trước thao tác tiếp."
     },
     {
       "name": "tap_node",
@@ -185,7 +185,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Nhấn vào một thành phần UI trên màn hình. Phần tử được xác định bằng ID nút của nó, có thể lấy được từ công cụ screen_info get_screen_info."
+      "description": "Nhấn vào một thành phần UI trên màn hình. Phần tử được xác định bằng ID nút của nó, có thể lấy được từ công cụ screen(command=read) screen(command=read)."
     },
     {
       "name": "alarm_modify_alarm",
@@ -201,7 +201,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Đặt báo thức Đồng hồ Android. Thu thập thông tin chi tiết về thời gian/lặp lại/nhãn bị thiếu trước khi gọi công cụ này."
+      "description": "Yêu cầu báo thức trong Đồng hồ Android. Chỉ hỏi thời gian bắt buộc còn thiếu; dùng mặc định cho tùy chọn. Không hỗ trợ tham số ngày lịch."
     },
     {
       "name": "bluetooth_connected_devices",
@@ -337,7 +337,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Mở cài đặt Android nơi người dùng có thể cấp quyền truy cập Chính sách thông báo / không làm phiền cho FoneClaw. Đừng gọi nó ngay sau khi dnd_set_mode báo cáo rằng nó đã mở trang cài đặt."
+      "description": "Mở cài đặt Android nơi người dùng có thể cấp quyền truy cập Chính sách thông báo / không làm phiền cho FoneClaw. Đừng gọi nó ngay sau khi dnd(command=set_mode) báo cáo rằng nó đã mở trang cài đặt."
     },
     {
       "name": "dnd_set_mode",
@@ -425,7 +425,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Mở trực tiếp trang cài đặt Ngày và giờ của Android. Sử dụng tùy chọn này cho cài đặt ngày, giờ, giờ tự động, múi giờ hoặc múi giờ tự động. Thao tác này sẽ khởi chạy Ý định cài đặt hệ thống và không yêu cầu khả năng truy cập, đọc màn hình hoặc nhấn. Sau khi thành công, không gọi launch_app, get_screen_info hoặc tap_node."
+      "description": "Mở trực tiếp trang cài đặt Ngày và giờ của Android. Sử dụng tùy chọn này cho cài đặt ngày, giờ, giờ tự động, múi giờ hoặc múi giờ tự động. Thao tác này sẽ khởi chạy Ý định cài đặt hệ thống và không yêu cầu khả năng truy cập, đọc màn hình hoặc nhấn. Sau khi thành công, không gọi app(command=launch), screen(command=read) hoặc screen(command=tap)."
     },
     {
       "name": "system_settings_open_hotspot_entry",
@@ -644,12 +644,36 @@
       "description": "Mở tuyến đường hoặc màn hình điều hướng trong ứng dụng bản đồ để biết điểm đến và chế độ di chuyển. Thao tác này sẽ khởi chạy ứng dụng bản đồ bên ngoài, chỉ sử dụng các đối số được cung cấp và không đọc dữ liệu thiết bị."
     },
     {
+      "name": "travel_plan_append_days",
+      "category": "Location and Navigation",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Thêm các ngày liên tiếp sau ngày cuối của chuyến đi đã lưu. Giữ nguyên mọi ngày, việc chuẩn bị và hành lý hiện có. Đọc kế hoạch trước và dùng revision hiện tại. Tiếp tục từ điểm đến và chỗ ở cuối, nhóm điểm gần nhau và sắp vùng qua các ngày để tránh quay lại không cần thiết. Tôn trọng lịch hẹn cố định và thứ tự người dùng; chừa thời gian di chuyển, nghỉ ngơi hợp lý, không khẳng định tuyến đường trực tiếp hay bịa thời lượng chính xác. Không lặp điểm thăm trừ khi được yêu cầu hoặc cần thiết. Nếu xung đột revision, đọc lại; không ghi đè sửa đổi đồng thời. Không tạo sự kiện lịch hay việc cần làm."
+    },
+    {
+      "name": "travel_plan_read",
+      "category": "Location and Navigation",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Đọc kế hoạch du lịch riêng tư đã lưu cùng revision hiện tại trước khi sửa hoặc kéo dài. Không thay đổi gì."
+    },
+    {
+      "name": "travel_plan_update",
+      "category": "Location and Navigation",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Thay thế nội dung chỉnh sửa được của chuyến đi đã lưu sau khi đọc JSON mới nhất. Có thể sửa điểm đến, điểm xuất phát, địa điểm, múi giờ, nhịp độ, ngày, tiêu đề ngày, tên điểm dừng, giờ bắt đầu, thời lượng, ghi chú, việc chuẩn bị, nhóm và món hành lý cùng trạng thái đánh dấu. Giữ nguyên id chính xác của kế hoạch, revision hiện tại và id điểm dừng/mục danh sách có sẵn từ travel_plan_read; chỉ tạo id cho mục mới. Giữ nội dung không được yêu cầu sửa. updatedPlanJson phải là đối tượng TravelPlan JSON đầy đủ, không phải bản vá. Khi xung đột revision, đọc lại và hợp nhất yêu cầu vào kế hoạch mới nhất; không ghi đè sửa đổi đồng thời. Chỉ thông báo đã cập nhật sau thành công. Không tạo sự kiện lịch hay việc cần làm."
+    },
+    {
       "name": "mail_account_list",
       "category": "Mail",
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Liệt kê các tài khoản thư đã cấu hình. Để trống truy vấn để xem tất cả; nếu có truy vấn, hệ thống khớp theo ID tài khoản, email, bí danh, rồi bí danh hoặc email gần đúng. Khớp chính xác vẫn có thể trả về nhiều tài khoản. Nếu truy vấn email chính xác không khớp tài khoản đã cấu hình, kết quả có thể gồm providerSetupGuide với URL thông tin xác thực cố định của nhà cung cấp. Với địa chỉ Gmail, providerSetupGuide.accountConfigPreset chứa đầy đủ các trường IMAP, SMTP và tên người dùng không bí mật; chuyển nguyên trạng sang saveAccount và chỉ hỏi người dùng mật khẩu ứng dụng còn thiếu. Không trả về thiết lập máy chủ sẵn cho miền khác."
+      "description": "Liệt kê các tài khoản thư đã cấu hình. Để trống truy vấn để xem tất cả; nếu có truy vấn, hệ thống khớp theo ID tài khoản, email, bí danh, rồi bí danh hoặc email gần đúng. Khớp chính xác vẫn có thể trả về nhiều tài khoản. Nếu truy vấn email chính xác không khớp tài khoản đã cấu hình, kết quả có thể gồm providerSetupGuide với URL thông tin xác thực cố định của nhà cung cấp. Với địa chỉ Gmail, providerSetupGuide.accountConfigPreset chứa đầy đủ các trường IMAP, SMTP và tên người dùng không bí mật; chuyển nguyên trạng sang mail_account(command=save) và chỉ hỏi người dùng mật khẩu ứng dụng còn thiếu. Không trả về thiết lập máy chủ sẵn cho miền khác."
     },
     {
       "name": "mail_account_save",
@@ -657,7 +681,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Kiểm tra cả kết nối IMAP và SMTP và chỉ lưu tài khoản thư khi cả hai đều thành công. Hãy gọi điều này ngay khi mọi trường cấu hình bắt buộc đều có sẵn. Hoạt động này yêu cầu sự chấp thuận của người dùng."
+      "description": "Kiểm tra máy chủ nhận (IMAP hoặc POP3) và SMTP, chỉ lưu khi cả hai thành công. Gọi ngay khi có đủ cấu hình bắt buộc. Cần người dùng phê duyệt."
     },
     {
       "name": "mail_delete",
@@ -673,7 +697,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Liệt kê, lọc hoặc tìm kiếm phần tóm tắt thư theo chủ đề, người gửi, người nhận và nội dung. Dùng folder ALL một lần khi người dùng yêu cầu cả thư đã nhận và đã gửi hoặc không giới hạn hướng; chỉ dùng INBOX hoặc SENT khi họ nêu rõ một hướng duy nhất. Không đoán tên thư mục riêng của nhà cung cấp hoặc thử lại truy vấn đã hoàn tất. Mỗi kết quả có bản xem trước tối đa 500 ký tự để lập danh sách và tóm tắt theo lô; không đọc toàn bộ nội dung của từng thư sau khi truy vấn danh sách đã hoàn tất. Không tiếp tục theo nextCursor trong cùng một lượt chạy Worker; hãy báo rằng còn kết quả và để yêu cầu sau của người dùng tiếp tục truy vấn. Hãy gọi lại Tool này cho mỗi yêu cầu danh sách, tìm kiếm, bộ lọc, khoảng ngày, tóm tắt hoặc định dạng lại mới, ngay cả khi lịch sử trò chuyện đã có kết quả thư trước đó. messageRefs cũ chỉ được dùng lại cho thao tác trên đúng thư đã được chọn rõ ràng. Để trống accountId để dùng tài khoản duy nhất hoặc tài khoản mặc định duy nhất. Nếu truy vấn có ràng buộc thất bại, hãy báo lỗi mà không xóa hoặc thay đổi truy vấn, người gửi hay bộ lọc thời gian để tạo ra kết quả rộng hơn."
+      "description": "Liệt kê, lọc hoặc tìm kiếm phần tóm tắt thư theo chủ đề, người gửi, người nhận và nội dung. Dùng folder ALL một lần khi người dùng yêu cầu cả thư đã nhận và đã gửi hoặc không giới hạn hướng; chỉ dùng INBOX hoặc SENT khi họ nêu rõ một hướng duy nhất. Không đoán tên thư mục riêng của nhà cung cấp hoặc thử lại truy vấn đã hoàn tất. Mỗi kết quả có bản xem trước tối đa 500 ký tự để lập danh sách và tóm tắt theo lô; không đọc toàn bộ nội dung của từng thư sau khi truy vấn danh sách đã hoàn tất. Không tiếp tục theo nextCursor trong cùng một lượt chạy; hãy báo rằng còn kết quả và để yêu cầu sau của người dùng tiếp tục truy vấn. Hãy gọi lại Tool này cho mỗi yêu cầu danh sách, tìm kiếm, bộ lọc, khoảng ngày, tóm tắt hoặc định dạng lại mới, ngay cả khi lịch sử trò chuyện đã có kết quả thư trước đó. messageRefs cũ chỉ được dùng lại cho thao tác trên đúng thư đã được chọn rõ ràng. Để trống accountId để dùng tài khoản duy nhất hoặc tài khoản mặc định duy nhất. Nếu truy vấn có ràng buộc thất bại, hãy báo lỗi mà không xóa hoặc thay đổi truy vấn, người gửi hay bộ lọc thời gian để tạo ra kết quả rộng hơn. POP3 chỉ có INBOX, không lọc trạng thái đọc; NEWEST_FIRST/OLDEST_FIRST dùng thứ tự thư máy chủ chứ không bảo đảm theo ngày. Lọc ngày dùng tiêu đề Date của người gửi; isRead là null khi không hỗ trợ trạng thái đọc."
     },
     {
       "name": "mail_read",
@@ -681,7 +705,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Đọc một thư theo messageRef do mail_list trả về và đánh dấu là đã đọc trên máy chủ. Chỉ dùng khi người dùng nêu rõ cần toàn bộ nội dung, siêu dữ liệu tệp đính kèm hoặc chi tiết chính xác không có trong bản xem trước của mail_list; không dùng cho mọi thư chỉ để tạo danh sách hoặc bản tóm tắt theo lô. Không bao giờ lặp lại cùng một cặp messageRef và bodyCursor. Sau khi Tool thành công, hãy tóm tắt thư cho người dùng trong cùng một phản hồi."
+      "description": "Đọc một thư theo messageRef từ mail(command=list). IMAP đánh dấu đã đọc; Gmail và POP3 chỉ đọc. Chỉ dùng khi người dùng nêu rõ cần toàn bộ nội dung, siêu dữ liệu tệp đính kèm hoặc chi tiết chính xác không có trong bản xem trước của mail(command=list); không dùng cho mọi thư chỉ để tạo danh sách hoặc bản tóm tắt theo lô. Không bao giờ lặp lại cùng một cặp messageRef và bodyCursor. Sau khi Tool thành công, hãy tóm tắt thư cho người dùng trong cùng một phản hồi."
     },
     {
       "name": "mail_send",
@@ -697,7 +721,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Liệt kê các mục nhật ký cuộc gọi Android gần đây, được lọc tùy ý theo loại cuộc gọi. Yêu cầu quyền READ_CALL_LOG. Sử dụng type=missed cho các câu hỏi về cuộc gọi nhỡ và trước khi chọn cuộc gọi nhỡ để gọi lại. Sau khi chọn số, hãy gọi phone_dial."
+      "description": "Liệt kê các mục nhật ký cuộc gọi Android gần đây, được lọc tùy ý theo loại cuộc gọi. Yêu cầu quyền READ_CALL_LOG. Sử dụng type=missed cho các câu hỏi về cuộc gọi nhỡ và trước khi chọn cuộc gọi nhỡ để gọi lại. Sau khi chọn số, hãy gọi phone(command=dial)."
     },
     {
       "name": "contacts_create",
@@ -721,7 +745,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Mở trình quay số hệ thống để tìm chính xác một số điện thoại hoặc liên hệ được đặt tên. Đặt chính xác một trong số điện thoại và tên liên lạc. Người liên hệ được đặt tên phải phân giải thành một kết quả phù hợp; nếu nhiều liên hệ trùng khớp thì dừng lại và yêu cầu người dùng lựa chọn. Sau khi trình quay số mở ra, hãy gọi get_screen_info, xác định nút gọi hiển thị, sau đó gọi tap_node. Định danh kỹ thuật: phoneNumber, contactName."
+      "description": "Mở trình quay số cho đúng một số hoặc liên hệ. Đặt đúng một trong phoneNumber và contactName. Liên hệ phải khớp duy nhất; nhiều kết quả thì dừng và hỏi lựa chọn. Chỉ điền sẵn; nếu chỉ yêu cầu mở thì kết thúc. Chỉ khi yêu cầu gọi mới dùng thao tác màn hình tìm và nhấn nút Gọi. Mở hay nhấn thành công không chứng minh đã kết nối."
     },
     {
       "name": "send_to_sms_message",
@@ -729,7 +753,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Sau khi được phê duyệt, hãy mở bản nháp SMS/MMS hiển thị. Đối với tin nhắn SMS có người nhận, hãy tự động nhấn Chỉ gửi khi khả năng truy cập FoneClaw được kết nối và ứng dụng tin nhắn mặc định, người nhận, nội dung tin nhắn đầy đủ và một điều khiển Gửi ổn định đều được xác minh. Tệp đính kèm, lời nhắc hai SIM, giao diện người dùng mơ hồ hoặc khả năng truy cập không khả dụng yêu cầu thao tác thủ công. Sau bất kỳ kết quả cuối cùng nào, hãy dừng lập kế hoạch công cụ và không bao giờ gọi get_screen_info hoặc tap_node."
+      "description": "Sau khi được phê duyệt, hãy mở bản nháp SMS/MMS hiển thị. Đối với tin nhắn SMS có người nhận, hãy tự động nhấn Chỉ gửi khi khả năng truy cập FoneClaw được kết nối và ứng dụng tin nhắn mặc định, người nhận, nội dung tin nhắn đầy đủ và một điều khiển Gửi ổn định đều được xác minh. Tệp đính kèm, lời nhắc hai SIM, giao diện người dùng mơ hồ hoặc khả năng truy cập không khả dụng yêu cầu thao tác thủ công. Sau bất kỳ kết quả cuối cùng nào, hãy dừng lập kế hoạch công cụ và không bao giờ gọi screen(command=read) hoặc screen(command=tap)."
     },
     {
       "name": "sms_list",
@@ -737,7 +761,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Truy vấn SMS trực tiếp trên thiết bị Android này. Khi không có từ khóa, địa chỉ, liên hệ hoặc threadId, công cụ liệt kê tin gần đây; dùng các trường đó để tìm kiếm. Chỉ đặt threadId từ kết quả sms_list trước đó. Với yêu cầu tóm tắt, gọi một lần bằng box=all và includeBody=true rồi chỉ tóm tắt các tin đã nhận và gửi được trả về. Dùng returnedBreakdown để lấy số lượng và giữ riêng từng hàng byAddress. Không bao giờ thay kết quả trực tiếp này bằng lịch sử SysInfo."
+      "description": "Truy vấn SMS trực tiếp trên thiết bị Android này. Khi không có từ khóa, địa chỉ, liên hệ hoặc threadId, công cụ liệt kê tin gần đây; dùng các trường đó để tìm kiếm. Chỉ đặt threadId từ kết quả sms(command=list) trước đó. Với yêu cầu tóm tắt, gọi một lần bằng box=all và includeBody=true rồi chỉ tóm tắt các tin đã nhận và gửi được trả về. Dùng returnedBreakdown để lấy số lượng và giữ riêng từng hàng byAddress. Không bao giờ thay kết quả trực tiếp này bằng lịch sử SysInfo."
     },
     {
       "name": "calendar_create_event",
@@ -745,7 +769,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Tạo sự kiện lịch Android. Đối với sự kiện cả ngày, hãy đặt allDay=true, dùng nửa đêm theo giờ địa phương của ngày bắt đầu và nửa đêm đầu ngày hôm sau làm mốc kết thúc không bao gồm.Thu thập thông tin chi tiết về thời gian còn thiếu và lời nhắc trước khi gọi công cụ này. Tên địa điểm do người dùng cung cấp là đủ và phải được chuyển trực tiếp dưới dạng locationName. Không tìm kiếm địa chỉ hoặc tọa độ chính xác trừ khi người dùng yêu cầu xác minh, giải quyết, chọn hoặc điều hướng đến địa điểm một cách rõ ràng. Ưu tiên startLocalDateTime/endLocalDateTime trong yyyy-MM-dd HH:mm cho ngày của người dùng và ngày tương đối; công cụ sẽ phân tích chúng theo múi giờ của thiết bị. Không tạo sự kiện từ mili giây kỷ nguyên được tính toán theo mô hình. Sử dụng calendarId=0 trừ khi người dùng chọn id lịch một cách rõ ràng. Sau khi tạo, hãy sử dụng kết quả của công cụ actualStart/actualEnd làm thời gian tạo mà người dùng phải đối mặt. Định danh kỹ thuật: calendarId=0, actualStart."
+      "description": "Tạo sự kiện lịch Android. Đối với sự kiện cả ngày, hãy đặt allDay=true, dùng nửa đêm theo giờ địa phương của ngày bắt đầu và nửa đêm đầu ngày hôm sau làm mốc kết thúc không bao gồm.Bắt buộc có bắt đầu và kết thúc. Nếu yêu cầu không xác định được giờ kết thúc hay thời lượng thì hỏi, không bịa thời lượng. Nhắc tùy chọn mặc định trước 30 phút. Tên địa điểm do người dùng cung cấp là đủ và phải được chuyển trực tiếp dưới dạng locationName. Không tìm kiếm địa chỉ hoặc tọa độ chính xác trừ khi người dùng yêu cầu xác minh, giải quyết, chọn hoặc điều hướng đến địa điểm một cách rõ ràng. Ưu tiên startLocalDateTime/endLocalDateTime trong yyyy-MM-dd HH:mm[:ss] cho ngày của người dùng và ngày tương đối; công cụ sẽ phân tích chúng theo múi giờ của thiết bị. Không tạo sự kiện từ mili giây kỷ nguyên được tính toán theo mô hình. Sử dụng calendarId=0 trừ khi người dùng chọn id lịch một cách rõ ràng. Sau khi tạo, hãy sử dụng kết quả của công cụ actualStart/actualEnd làm thời gian tạo mà người dùng phải đối mặt. Định danh kỹ thuật: calendarId=0, actualStart."
     },
     {
       "name": "calendar_delete_event",
@@ -753,7 +777,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Xóa sự kiện lịch Android theo id. Tìm kiếm/liệt kê các sự kiện trên tất cả các lịch với calendarId=0 trừ khi người dùng chọn id lịch một cách rõ ràng. Luôn chuyển tiêu đề đã biết, và vị trí khi đã biết để mục tiêu không rõ ràng. Định danh kỹ thuật: calendarId=0."
+      "description": "Xóa một sự kiện Android bằng eventId chính xác từ calendar(command=list_events) hoặc calendar(command=search_events). Xác định theo tiêu đề, giờ và địa điểm trả về; nếu mơ hồ hãy hỏi lựa chọn. Chỉ truyền eventId cho thao tác này."
     },
     {
       "name": "calendar_list_calendars",
@@ -769,7 +793,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Liệt kê các sự kiện trên lịch của Android trong một khoảng thời gian cụ thể. Sử dụng cho các yêu cầu như lịch trình hôm nay, lịch trình ngày mai, sự kiện hiện có hoặc sự kiện trong tuần này. Ưu tiên startLocalDateTime/endLocalDateTime tính bằng yyyy-MM-dd HH:mm:ss; công cụ sẽ phân tích chúng theo múi giờ của thiết bị. Đừng đoán calendarId; sử dụng calendarId=0 để tìm kiếm tất cả các lịch trừ khi người dùng chọn id lịch một cách rõ ràng. Định danh kỹ thuật: calendarId, calendarId=0."
+      "description": "Liệt kê các sự kiện trên lịch của Android trong một khoảng thời gian cụ thể. Sử dụng cho các yêu cầu như lịch trình hôm nay, lịch trình ngày mai, sự kiện hiện có hoặc sự kiện trong tuần này. Ưu tiên startLocalDateTime/endLocalDateTime tính bằng yyyy-MM-dd HH:mm[:ss]; công cụ sẽ phân tích chúng theo múi giờ của thiết bị. Đừng đoán calendarId; sử dụng calendarId=0 để tìm kiếm tất cả các lịch trừ khi người dùng chọn id lịch một cách rõ ràng. Định danh kỹ thuật: calendarId, calendarId=0."
     },
     {
       "name": "calendar_open_event",
@@ -785,7 +809,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Tìm kiếm các sự kiện trên lịch Android theo từ khóa trong khoảng thời gian cụ thể. Sử dụng trước khi mở, cập nhật hoặc xóa sự kiện khi người dùng mô tả sự kiện theo tiêu đề hoặc nội dung. Ưu tiên startLocalDateTime/endLocalDateTime tính bằng yyyy-MM-dd HH:mm; công cụ sẽ phân tích chúng theo múi giờ của thiết bị. Đừng đoán calendarId; sử dụng calendarId=0 để tìm kiếm tất cả các lịch trừ khi người dùng chọn id lịch một cách rõ ràng. Định danh kỹ thuật: calendarId, calendarId=0."
+      "description": "Tìm kiếm các sự kiện trên lịch Android theo từ khóa trong khoảng thời gian cụ thể. Sử dụng trước khi mở, cập nhật hoặc xóa sự kiện khi người dùng mô tả sự kiện theo tiêu đề hoặc nội dung. Ưu tiên startLocalDateTime/endLocalDateTime tính bằng yyyy-MM-dd HH:mm[:ss]; công cụ sẽ phân tích chúng theo múi giờ của thiết bị. Đừng đoán calendarId; sử dụng calendarId=0 để tìm kiếm tất cả các lịch trừ khi người dùng chọn id lịch một cách rõ ràng. Định danh kỹ thuật: calendarId, calendarId=0."
     },
     {
       "name": "calendar_update_event",
@@ -793,7 +817,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Cập nhật sự kiện lịch Android theo id. Trước tiên, hãy tìm kiếm/liệt kê các sự kiện khi người dùng mô tả mục tiêu bằng ngôn ngữ tự nhiên và chuyển các chi tiết mục tiêu đã biết với các trường đã thay đổi. Đừng đoán Id lịch hoặc id sự kiện; tìm kiếm tất cả các lịch với calendarId=0 trừ khi người dùng chọn id lịch một cách rõ ràng. Các trường văn bản trống sẽ bị bỏ qua. Sử dụng blank startLocalDateTime/endLocalDateTime để giữ thời gian hiện có. Sử dụng lời nhắcMinutes=-2 để giữ lời nhắc, -1 để xóa lời nhắc và >=0 để thay thế lời nhắc. Định danh kỹ thuật: calendarId, calendarId=0, reminderMinutes=-2."
+      "description": "Cập nhật sự kiện lịch Android theo id. Trước tiên, hãy tìm kiếm/liệt kê các sự kiện khi người dùng mô tả mục tiêu bằng ngôn ngữ tự nhiên và chuyển các chi tiết mục tiêu đã biết với các trường đã thay đổi. Đừng đoán Id lịch hoặc id sự kiện; tìm kiếm tất cả các lịch với calendarId=0 trừ khi người dùng chọn id lịch một cách rõ ràng. Các trường văn bản trống sẽ bị bỏ qua. Sử dụng blank startLocalDateTime/endLocalDateTime để giữ thời gian hiện có. Sử dụng lời nhắcMinutes=-2 để giữ lời nhắc, -1 để xóa lời nhắc và >=0 để thay thế lời nhắc. Định danh kỹ thuật: calendarId, calendarId=0, reminderMinutes=-2. yyyy-MM-dd HH:mm[:ss]."
     },
     {
       "name": "memo_create",
@@ -801,7 +825,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Thêm một việc cần làm hiển thị cho người dùng vào To-do Center. Dùng để thêm hoặc ghi lại việc cần làm, 添加待办, 记录待办, gồm cả lời nhắc có thể hành động mà người dùng muốn lưu. Lưu nội dung người dùng, không lưu bộ nhớ hồ sơ trợ lý hay kế hoạch thực thi nội bộ của Main. Xác định ngày trực tiếp từ môi trường Worker mà không gọi Tools Calendar hoặc Alarm. Chỉ lên lịch khi yêu cầu hoặc nguồn được dẫn chiếu rõ ràng đưa ra ngày lịch cụ thể, ngày tương đối có thể xác định duy nhất (hôm nay, ngày mai, ngày kia, đúng hai ngày nữa / 两天后), hoặc khoảng ngày rõ ràng. current_date và múi giờ chỉ là cơ sở tính toán, không phải lịch do người dùng cung cấp. Nếu không nêu ngày hoặc thời gian mơ hồ (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), hãy tạo việc không có ngày trong Unscheduled (时间待定), bỏ qua hoặc để trống startDate và endDate. Không mặc định hôm nay, chọn ngày thuận tiện hoặc biến khoảng thời gian mơ hồ thành sự kiện nhiều ngày; giữ cách nói thời gian mơ hồ trong nội dung. Khi đã biết nội dung, không hỏi ngày chỉ để tạo việc. Xác định ngày cụ thể từ ngữ cảnh thời gian chạy hiện tại; không biết giờ không làm một ngày rõ ràng thành không có ngày. Khi cập nhật, giữ ngày hiện có nếu người dùng chỉ đổi nội dung và không có ý định lên lịch. Nếu người dùng xóa lịch rõ ràng, nói thời gian chưa quyết định hoặc thay bằng thời gian mơ hồ, dùng clearStartDate=true với chuỗi ngày trống để xóa cả hai ngày và chuyển sang Unscheduled. Báo phần Unscheduled hoặc ngày đã lưu từ kết quả Tool, không từ giả định. Dấu kết quả nội bộ task_pool chỉ phần Unscheduled (时间待定) trong câu trả lời cho người dùng. Các quy tắc này áp dụng cho việc cần làm, không áp dụng cho sự kiện lịch hoặc báo thức."
+      "description": "Thêm một việc cần làm hiển thị cho người dùng vào To-do Center. Dùng để thêm hoặc ghi lại việc cần làm, 添加待办, 记录待办, gồm cả lời nhắc có thể hành động mà người dùng muốn lưu. Lưu nội dung người dùng, không lưu bộ nhớ hồ sơ trợ lý hay kế hoạch thực thi nội bộ của Main. Xác định ngày trực tiếp từ môi trường thời gian chạy mà không gọi Tools Calendar hoặc Alarm. Chỉ lên lịch khi yêu cầu hoặc nguồn được dẫn chiếu rõ ràng đưa ra ngày lịch cụ thể, ngày tương đối có thể xác định duy nhất (hôm nay, ngày mai, ngày kia, đúng hai ngày nữa / 两天后), hoặc khoảng ngày rõ ràng. thời điểm yêu cầu gốc do môi trường chạy cung cấp và múi giờ chỉ là cơ sở tính toán, không phải lịch do người dùng cung cấp. Nếu không nêu ngày hoặc thời gian mơ hồ (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), hãy tạo việc không có ngày trong Unscheduled, bỏ qua hoặc để trống startDate và endDate. Không mặc định hôm nay, chọn ngày thuận tiện hoặc biến khoảng thời gian mơ hồ thành sự kiện nhiều ngày; giữ cách nói thời gian mơ hồ trong nội dung. Khi đã biết nội dung, không hỏi ngày chỉ để tạo việc. Xác định ngày cụ thể từ thời điểm và múi giờ yêu cầu gốc do môi trường chạy cung cấp; không biết giờ không làm một ngày rõ ràng thành không có ngày. Khi cập nhật, giữ ngày hiện có nếu người dùng chỉ đổi nội dung và không có ý định lên lịch. Nếu người dùng xóa lịch rõ ràng, nói thời gian chưa quyết định hoặc thay bằng thời gian mơ hồ, dùng clearStartDate=true với chuỗi ngày trống để xóa cả hai ngày và chuyển sang Unscheduled. Báo phần Unscheduled hoặc ngày đã lưu từ kết quả Tool, không từ giả định. Dấu nội bộ task_pool chỉ phần chưa có ngày; diễn đạt bằng ngôn ngữ trả lời, không lặp dấu hay thêm bản dịch ngôn ngữ khác. Các quy tắc này áp dụng cho việc cần làm, không áp dụng cho sự kiện lịch hoặc báo thức."
     },
     {
       "name": "memo_delete",
@@ -817,7 +841,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Hiển thị danh sách việc cần làm của người dùng trong To-do Center (待办列表). status có thể là active, done, archived hoặc all. Truy vấn này dành cho việc cần làm cá nhân, không phải kế hoạch thực thi nội bộ của Main hay bộ nhớ hồ sơ trợ lý. Kết quả trống chỉ áp dụng cho danh sách việc cần làm này."
+      "description": "Hiển thị danh sách việc cần làm của người dùng trong To-do Center. status có thể là active, done, archived hoặc all. Truy vấn này dành cho việc cần làm cá nhân, không phải kế hoạch thực thi nội bộ của Main hay bộ nhớ hồ sơ trợ lý. Kết quả trống chỉ áp dụng cho danh sách việc cần làm này."
     },
     {
       "name": "memo_mark_done",
@@ -841,7 +865,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Chỉnh sửa việc cần làm của người dùng trong To-do Center theo id. Nếu mục tiêu được mô tả bằng ngôn ngữ tự nhiên, hãy tìm kiếm hoặc liệt kê trước rồi truyền chi tiết đã biết cùng trường thay đổi. Chỉnh sửa việc của người dùng, không phải bộ nhớ hồ sơ trợ lý hay kế hoạch nội bộ của Main. title/content/tags và chuỗi ngày trống giữ nguyên giá trị. Dùng yyyy-MM-dd từ môi trường Worker; không tính mili giây epoch hoặc gọi Calendar hay Alarm chỉ để xác định ngày. Chỉ lên lịch với ngày cụ thể, ngày tương đối rõ ràng (hôm nay, ngày mai, ngày kia, đúng hai ngày nữa / 两天后) hoặc khoảng rõ ràng từ yêu cầu hay nguồn dẫn chiếu. current_date và múi giờ chỉ là cơ sở tính toán, không phải ngày của người dùng. Không có ngày hoặc thời gian mơ hồ (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days) thì bỏ qua hoặc để trống startDate và endDate, đặt việc trong Unscheduled (时间待定). Không mặc định hôm nay, chọn ngày thuận tiện hoặc biến khoảng mơ hồ thành nhiều ngày; giữ cách nói đó trong nội dung. Nếu đã biết nội dung, không hỏi ngày. Xác định ngày cụ thể từ ngữ cảnh hiện tại; không biết giờ không hủy một ngày rõ ràng. Nếu chỉ đổi nội dung và không có ý định lên lịch, giữ ngày hiện có. Nếu người dùng xóa lịch, nói thời gian chưa quyết định hoặc thay bằng thời gian mơ hồ, dùng clearStartDate=true và ngày trống để xóa cả hai rồi chuyển sang Unscheduled. Báo phần Unscheduled hoặc ngày đã lưu từ kết quả Tool, không từ giả định. task_pool là tên nội bộ của phần Unscheduled (时间待定) trong câu trả lời. Quy tắc không áp dụng cho sự kiện lịch hoặc báo thức."
+      "description": "Chỉnh sửa việc cần làm của người dùng trong To-do Center theo id. Nếu mục tiêu được mô tả bằng ngôn ngữ tự nhiên, hãy tìm kiếm hoặc liệt kê trước rồi truyền chi tiết đã biết cùng trường thay đổi. Chỉnh sửa việc của người dùng, không phải bộ nhớ hồ sơ trợ lý hay kế hoạch nội bộ của Main. title/content/tags và chuỗi ngày trống giữ nguyên giá trị. Dùng yyyy-MM-dd từ môi trường thời gian chạy; không tính mili giây epoch hoặc gọi Calendar hay Alarm chỉ để xác định ngày. Chỉ lên lịch với ngày cụ thể, ngày tương đối rõ ràng (hôm nay, ngày mai, ngày kia, đúng hai ngày nữa / 两天后) hoặc khoảng rõ ràng từ yêu cầu hay nguồn dẫn chiếu. thời điểm yêu cầu gốc do môi trường chạy cung cấp và múi giờ chỉ là cơ sở tính toán, không phải ngày của người dùng. Không có ngày hoặc thời gian mơ hồ (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days) thì bỏ qua hoặc để trống startDate và endDate, đặt việc trong Unscheduled. Không mặc định hôm nay, chọn ngày thuận tiện hoặc biến khoảng mơ hồ thành nhiều ngày; giữ cách nói đó trong nội dung. Nếu đã biết nội dung, không hỏi ngày. Xác định ngày cụ thể từ ngữ cảnh hiện tại; không biết giờ không hủy một ngày rõ ràng. Nếu chỉ đổi nội dung và không có ý định lên lịch, giữ ngày hiện có. Nếu người dùng xóa lịch, nói thời gian chưa quyết định hoặc thay bằng thời gian mơ hồ, dùng clearStartDate=true và ngày trống để xóa cả hai rồi chuyển sang Unscheduled. Báo phần Unscheduled hoặc ngày đã lưu từ kết quả Tool, không từ giả định. Dấu nội bộ task_pool chỉ phần chưa có ngày; diễn đạt bằng ngôn ngữ trả lời, không lặp dấu hay thêm bản dịch ngôn ngữ khác. Quy tắc không áp dụng cho sự kiện lịch hoặc báo thức."
     },
     {
       "name": "sysinfo_delete",
@@ -865,7 +889,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Truy vấn các thông báo cục bộ, SMS, nhật ký cuộc gọi, sự kiện lịch và đầu vào trợ năng đã được ghi lại. Sử dụng công cụ duy nhất này để tóm tắt hàng ngày, truy vấn thông báo, truy vấn trong khoảng thời gian và tìm kiếm từ khóa. Nó không bao giờ mở bảng hệ thống hoặc quét các nguồn hệ thống trực tiếp. Mỗi hàng có thể bao gồm sourceRef để loại bỏ trùng lặp so với kết quả của nhà cung cấp trực tiếp. Tóm tắt JSON trả về cho người dùng."
+      "description": "Truy vấn thông báo, SMS, tóm tắt thư, cuộc gọi, sự kiện lịch và đầu vào trợ năng cục bộ đã thu thập theo nguồn, khoảng thời gian hoặc từ khóa. Có thể thu thập thiếu và dữ liệu cũ, không xác nhận trạng thái hiện tại. Không mở bảng hệ thống hay quét nguồn trực tiếp. Mỗi dòng có thể chứa sourceRef để khử trùng với nguồn trực tiếp. Tóm tắt JSON trả về cho người dùng."
     },
     {
       "name": "sysinfo_thread",
@@ -873,7 +897,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Tải một luồng SysInfo cục bộ bằng một threadKey được sysinfo_query trả về."
+      "description": "Tải một luồng SysInfo cục bộ bằng một threadKey được sysinfo(command=query) trả về."
     },
     {
       "name": "purchase_query",
@@ -897,7 +921,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Tìm kiếm kết quả web công khai cho một sản phẩm trên nền tảng mua sắm và trả về bằng chứng so sánh. Hãy sử dụng điều này trước khi đưa ra lời khuyên về giá mua sắm."
+      "description": "Tìm kết quả web công khai trên Shopee Đài Loan (shopee.tw) và momo (momo.com.tw), trả bằng chứng so sánh chỉ đọc. Vùng chỉ là gợi ý tìm kiếm, không chọn trang quốc gia. Giá trích xuất là ứng viên, không phải giá thanh toán, tồn kho, phí giao hay phiếu giảm đã xác nhận. Dùng trước khi tư vấn giá."
     },
     {
       "name": "web_fetch",
@@ -905,7 +929,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Tìm nạp một trang web cụ thể theo URL và trả về văn bản trang có thể đọc được."
+      "description": "Lấy một trang HTTP/HTTPS theo URL và trả văn bản dễ đọc tối đa maxChars ký tự. Đây là lấy HTTP chỉ đọc, không phải trình duyệt tương tác hay bộ kết xuất JavaScript; văn bản rỗng hoặc bị cắt không chứng minh đã đọc toàn trang."
     },
     {
       "name": "web_search",
@@ -921,7 +945,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Create a local time-triggered automation, managed in the Automations sidebar page. The automation runs unattended on this device around the given local time; Android may delay execution. Results are delivered as system notifications. Only read-only web research is allowed during unattended runs. Parameters: title (short), prompt (the exact instruction to run), hour (0-23 local), minute (0-59 local), repeat (\"once\", \"everyday\", \"weekdays\", or \"custom\"), weekdays (required for custom; 1=Monday ... 7=Sunday). Returns the created task id."
+      "description": "Tạo tự động hóa theo giờ cục bộ, quản lý ở trang Tự động hóa trên thanh bên. Chạy không giám sát gần giờ đã định; Android có thể trì hoãn. Kết quả qua thông báo hệ thống. Khi không giám sát chỉ cho phép nghiên cứu web chỉ đọc. Không có ngày đích: once là lần hour/minute tiếp theo sau tạo, không phải ngày tương lai tùy ý. Ngày trong prompt không đổi lịch. Trả id tác vụ."
     },
     {
       "name": "scheduled_task_delete",
@@ -945,7 +969,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Enqueue an immediate run of an existing automation. It is deduplicated against the same day's scheduled run, so running twice in one day executes at most once."
+      "description": "Xếp hàng chạy thủ công ngay cho tự động hóa hiện có. Chỉ xác nhận vào hàng, không phải hoàn tất. Bộ lập lịch gộp các lần thủ công đang chờ. Lần thủ công sau có thể chạy lại, độc lập với lần theo lịch; không hứa chỉ chạy một lần mỗi ngày."
     },
     {
       "name": "scheduled_task_set_enabled",
@@ -961,7 +985,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Update the instruction for future runs of an existing automation. First use scheduled_task_list to identify the existing task and preserve unrelated instructions. Does not create a task or run it now. Preserves title, schedule and enabled state. Ask which task if the target is ambiguous."
+      "description": "Sửa chỉ dẫn cho các lần chạy sau của tự động hóa hiện có. Dùng scheduled_task(command=list) trước để xác định và giữ chỉ dẫn không liên quan. Không tạo hay chạy ngay. Giữ tiêu đề, lịch và trạng thái bật. Hỏi tác vụ nào nếu không rõ."
     },
     {
       "name": "shortcut_save_agent_prompt",
@@ -969,7 +993,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Lưu lối tắt do người dùng tạo để gửi lời nhắc đến tổng đài viên. Chỉ gọi lệnh này sau khi người dùng xác nhận tiêu đề, mô tả và hành vi."
+      "description": "Lưu phím tắt người dùng gửi lời nhắc cho tác nhân khi mở; lưu không chạy. Chỉ gọi sau khi xác nhận tiêu đề, mô tả và hành vi."
     },
     {
       "name": "shortcut_save_direct_tool",
@@ -977,7 +1001,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Lưu lối tắt công cụ trực tiếp do người dùng tạo. Chỉ gọi lệnh này khi mọi hành động được yêu cầu có thể được ánh xạ đầy đủ tới các bước công cụ đã biết với các tham số đầy đủ."
+      "description": "Lưu phím tắt công cụ trực tiếp chỉ khi mọi hành động ánh xạ đầy đủ tới bước nguyên tử đã biết với tham số đủ. Lưu không chạy. Dùng hợp đồng cố định từng thao tác, không bọc command miền Main. Tham số là giá trị trực tiếp, không có biểu thức lúc chạy; không đóng băng khoảng ngày di động thành ngày cố định."
     },
     {
       "name": "task_create",
@@ -985,7 +1009,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Tạo kế hoạch TODO đầy đủ, có thứ tự cho yêu cầu hiện tại trong một lần gọi. Đây là điều kiện bắt buộc trước mọi Tool không phải tác vụ khi định tuyến tạo ra từ hai bước Main cụ thể trở lên hoặc đi qua nhiều Profiles. Mỗi lần gọi delegate hoặc Plugin Tool được tính là một bước; một delegate vẫn là một bước bất kể xử lý nội bộ của Worker. Truyền mọi bước hướng đến người dùng có phạm vi rõ ràng trong items. Chỉ được tạo kế hoạch một lần và không thể mở rộng sau đó. Không bao gồm quản lý tác vụ, dọn dẹp, cập nhật trạng thái hoặc phản hồi cuối. Kế hoạch thực thi nội bộ này không phải To-do Center lâu dài của người dùng. Để tạo, tìm, hoàn thành hoặc xóa việc cần làm cá nhân, hãy ủy quyền cho Personal Organization với scopes=[memo] và dùng memo_* Tools."
+      "description": "Tạo kế hoạch TODO đầy đủ theo thứ tự cho yêu cầu bằng một lần gọi. Bắt buộc trước Tool không quản lý tác vụ khi có ít nhất hai bước Main cụ thể. Mỗi bước nghiệp vụ hoặc Plugin Tool thực thi trực tiếp tính một bước. Đưa mọi bước có giới hạn cho người dùng vào items. Chỉ tạo một lần, không mở rộng. Không gồm quản lý tác vụ, dọn dẹp, trạng thái hay trả lời cuối. Không phải To-do Center lâu dài; dùng memo cho việc cá nhân."
     },
     {
       "name": "task_list",
@@ -993,7 +1017,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Liệt kê các mục TODO nội bộ cho yêu cầu hiện tại. Theo mặc định trả về open, in_progress và blocked. Kế hoạch thực thi nội bộ này không phải To-do Center lâu dài của người dùng. Để tạo, tìm, hoàn thành hoặc xóa việc cần làm cá nhân, hãy ủy quyền cho Personal Organization với scopes=[memo] và dùng memo_* Tools."
+      "description": "Liệt kê các mục TODO nội bộ cho yêu cầu hiện tại. Theo mặc định trả về open, in_progress và blocked. Kế hoạch thực thi nội bộ này không phải To-do Center lâu dài của người dùng. Để tạo, tìm, hoàn thành hoặc xóa việc cần làm cá nhân, dùng công cụ memo."
     },
     {
       "name": "task_update",
@@ -1001,7 +1025,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Cập nhật một mục TODO nội bộ. Chuyển trạng thái được phép: open sang in_progress, blocked hoặc abandoned; in_progress sang blocked, done hoặc abandoned; blocked sang open hoặc abandoned. done và abandoned là trạng thái cuối. Chỉ một tác vụ có thể ở trạng thái in_progress. Kế hoạch thực thi nội bộ này không phải To-do Center lâu dài của người dùng. Để tạo, tìm, hoàn thành hoặc xóa việc cần làm cá nhân, hãy ủy quyền cho Personal Organization với scopes=[memo] và dùng memo_* Tools."
+      "description": "Cập nhật một mục TODO nội bộ. Chuyển trạng thái được phép: open sang in_progress, blocked hoặc abandoned; in_progress sang blocked, done hoặc abandoned; blocked sang open hoặc abandoned. done và abandoned là trạng thái cuối. Chỉ một tác vụ có thể ở trạng thái in_progress. Kế hoạch thực thi nội bộ này không phải To-do Center lâu dài của người dùng. Để tạo, tìm, hoàn thành hoặc xóa việc cần làm cá nhân, dùng công cụ memo."
     },
     {
       "name": "workflow_delete",
@@ -1009,7 +1033,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Xóa quy trình làm việc đã lưu theo id."
+      "description": "Xóa định nghĩa quy trình đã lưu bằng id chính xác. Không hoàn tác hành động đã thực hiện."
     },
     {
       "name": "workflow_list",
@@ -1025,7 +1049,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Lưu quy trình làm việc có thể sử dụng lại. stepsJson phải là một mảng JSON gồm {toolName, argument}. Định danh kỹ thuật: stepsJson."
+      "description": "Lưu định nghĩa quy trình tái sử dụng, không chạy hay lập lịch. stepsJson phải là chuỗi mảng JSON không rỗng gồm {toolName, arguments}. toolName nguyên tử hỗ trợ: mail_list, mail_read, mail_send, mail_delete, mail_account_list. Dùng tham số nghiệp vụ chính xác không bọc command miền. Đối số lưu là giá trị trực tiếp, không phải biểu thức tính lại khi chạy."
     },
     {
       "name": "accept_skill_proposal",
@@ -1041,7 +1065,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Thêm tài liệu kỹ năng mới vào sổ đăng ký kỹ năng."
+      "description": "Tạo hoặc thay Skill người dùng với id chính xác này sau khi xác thực rồi bật. Với nhập không đáng tin cậy, dùng preview_import và save_draft."
     },
     {
       "name": "disable_skill",
@@ -1049,7 +1073,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Vô hiệu hóa Kỹ năng của người dùng để nó bị ẩn khỏi lời nhắc của nhân viên."
+      "description": "Tắt Skill người dùng khỏi lần khám phá sau. Nội dung đã đọc vẫn ở cuộc trò chuyện hiện tại."
     },
     {
       "name": "enable_skill",
@@ -1057,7 +1081,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Kích hoạt Kỹ năng người dùng hợp lệ để đại lý có thể sử dụng nó."
+      "description": "Bật Skill người dùng hợp lệ để có thể tìm thấy."
     },
     {
       "name": "list_skill_proposals",
@@ -1081,7 +1105,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Tải một kỹ năng chuyên biệt khi nhiệm vụ hiện tại khớp với một trong các kỹ năng được liệt kê trong lời nhắc hệ thống. Sử dụng công cụ này để đưa các hướng dẫn và tài nguyên của kỹ năng vào cuộc trò chuyện hiện tại. Đầu ra có thể chứa hướng dẫn chi tiết về quy trình làm việc cũng như các tham chiếu đến tập lệnh, tệp, v.v. trong cùng thư mục với kỹ năng. Tên kỹ năng phải khớp với một trong các kỹ năng được liệt kê trong lời nhắc hệ thống của bạn."
+      "description": "Đọc toàn văn Skill liên quan bằng id đầy đủ chính xác trong danh mục hiện có. Chỉ trả văn bản, không tải tài nguyên hay tập lệnh được tham chiếu."
     },
     {
       "name": "plugin_request_install",
@@ -1089,7 +1113,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Tạo đề xuất cài đặt có cấu trúc cho một plugin chính thức. Việc này không tải xuống hoặc cài đặt plugin; HomeScreen phải hỏi người dùng."
+      "description": "Tạo đề xuất cài đặt có cấu trúc cho một plugin chính thức. Không tải hay cài; ứng dụng chủ xử lý đề xuất và xác nhận. Không khẳng định đã cài hay dùng khả năng mới cài trong lần chạy đóng băng này."
     },
     {
       "name": "plugin_search",
@@ -1121,7 +1145,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Loại bỏ kỹ năng."
+      "description": "Xóa Skill người dùng có id chính xác này."
     },
     {
       "name": "rollback_skill",
@@ -1129,7 +1153,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Khôi phục Skill người dùng về bản sửa đổi nội dung được lưu trữ gần nhất."
+      "description": "Khôi phục Skill người dùng về bản nội dung được lưu trữ gần nhất. Phải có cả Skill và một bản lưu trữ."
     },
     {
       "name": "save_skill_draft",
@@ -1145,7 +1169,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Cập nhật tài liệu kỹ năng hiện có trong sổ đăng ký kỹ năng."
+      "description": "Cập nhật Skill người dùng hiện có và giữ nguyên trạng thái bật."
     }
   ]
 }

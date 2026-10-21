@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "zh-CN",
   "fallbackLocale": "en",
-  "toolCount": 133,
+  "toolCount": 136,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "搜索工具或能力",
@@ -39,7 +39,7 @@
     {
       "name": "Location and Navigation",
       "displayName": "位置与导航",
-      "toolCount": 3
+      "toolCount": 6
     },
     {
       "name": "Mail",
@@ -89,7 +89,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "从系统图库中打开特定的可见照片。仅当用户明确要求查看或打开特定照片时才使用此选项。除非用户明确要求查看或打开捕获的照片，否则请勿将其用作 camera_take_photo 之后的后续操作。 indexFromLatest 从 1 开始，按最新到第一的顺序：1 打开最新的照片，2 打开第二个最新的照片，3 打开第三个最新的照片。"
+      "description": "从系统图库中打开特定的可见照片。仅当用户明确要求查看或打开特定照片时才使用此选项。除非用户明确要求查看或打开捕获的照片，否则请勿将其用作 camera(command=take_photo) 之后的后续操作。 indexFromLatest 从 1 开始，按最新到第一的顺序：1 打开最新的照片，2 打开第二个最新的照片，3 打开第三个最新的照片。"
     },
     {
       "name": "camera_take_photo",
@@ -97,7 +97,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "拍摄新照片，并在可用时返回已保存照片的 URI。用户要拍摄新照片时使用。常规拍摄时将 lensFacing 留空或设为 auto。只有用户明确要求前置镜头或自拍时才选择 lensFacing=front；明确要求后置镜头时才选择 back。普通或默认拍摄时，即使默认物理镜头是后置镜头，也应将 explicitLensSelection 保持为 false。只有用户明确要求前置、后置或自拍时才设为 true。除非用户明确要求查看或打开照片，否则不要随后调用 camera_open_photo。直接调用本工具。优先使用系统原生相机；只有原生相机无法满足指定镜头时，明确指定前置或后置镜头的拍摄才可使用直接后端。调用前不要要求用户先授予权限。"
+      "description": "拍摄新照片，在模型视觉可用时以图片附件返回。 用户要拍摄新照片时使用。常规拍摄时将 lensFacing 留空或设为 auto。只有用户明确要求前置镜头或自拍时才选择 lensFacing=front；明确要求后置镜头时才选择 back。普通或默认拍摄时，即使默认物理镜头是后置镜头，也应将 explicitLensSelection 保持为 false。只有用户明确要求前置、后置或自拍时才设为 true。除非用户明确要求查看或打开照片，否则不要随后调用 camera(command=open_photo)。直接调用本工具。优先使用系统原生相机；只有原生相机无法满足指定镜头时，明确指定前置或后置镜头的拍摄才可使用直接后端。调用前不要要求用户先授予权限。"
     },
     {
       "name": "cross_app_read_screen",
@@ -121,7 +121,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "获取当前可见应用屏幕上的 UI 元素。每个元素都有一个节点 ID（例如 [n3]），可供 tap_node 或 input_text 使用。不要用此工具读取、列出、搜索或总结 Android 通知；应改用 sysinfo 工具。不要缓存结果，因为节点 ID 每次调用都会变化。"
+      "description": "获取当前可见应用屏幕上的 UI 元素。每个元素都有一个节点 ID（例如 [n3]），可供 screen(command=tap), screen(command=scroll) 或 screen(command=input_text) 使用。不要用此工具读取、列出、搜索或总结 Android 通知；应改用 sysinfo 工具。不要缓存结果，因为节点 ID 每次调用都会变化。"
     },
     {
       "name": "input_text",
@@ -129,7 +129,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "替换当前 Android 应用中一个可见可编辑输入框里的文字。先调用 get_screen_info，并传入一个当前标记为 edit 的节点。此操作只输入文字；不会提交表单、点击发送或按回车键。不要重复使用节点 ID。"
+      "description": "替换当前 Android 应用中一个可见可编辑输入框里的文字。先调用 screen(command=read)，并传入一个当前标记为 edit 的节点。此操作只输入文字；不会提交表单、点击发送或按回车键。不要重复使用节点 ID。"
     },
     {
       "name": "launch_app",
@@ -145,7 +145,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "通过请求 https://play.google.com/store/apps/details?id=<packageName>. 检查 Google Play 上是否列出了确切的 Android 包名称。这是只读网络检查。在 play_store_install 之前使用它。"
+      "description": "通过请求 https://play.google.com/store/apps/details?id=<packageName>. 检查 Google Play 上是否列出了确切的 Android 包名称。这是只读网络检查。在 app(command=install_store_app) 之前使用它。"
     },
     {
       "name": "play_store_install",
@@ -169,7 +169,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "使用 FoneClaw 辅助服务捕获 Android 屏幕。截取的图片保存在应用私有缓存中供 Agent 使用，不会添加到系统图库 对当前屏幕使用 targetType=current，将 targetType=app 与 targetApp 用于打开应用程序并捕获它，或仅将 targetType=notification_shade 用于涉及可见通知栏的显式屏幕截图或图像捕获请求。切勿使用 targetType=notification_shade 读取、列出、查询或汇总通知数据；请改用 SysInfo 通知工具。请勿在此工具之前调用 launch_app 或 system_panel_open 来捕获应用程序或通知栏。当用户想要查看已保存的屏幕截图时，请勿使用此选项；使用 screenshot_open 查看保存的屏幕截图。"
+      "description": "使用 FoneClaw 辅助服务捕获 Android 屏幕。截取的图片保存在应用私有缓存中供 Agent 使用，不会添加到系统图库 对当前屏幕使用 targetType=current，将 targetType=app 与 targetApp 用于打开应用程序并捕获它，或仅将 targetType=notification_shade 用于涉及可见通知栏的显式屏幕截图或图像捕获请求。切勿使用 targetType=notification_shade 读取、列出、查询或汇总通知数据；请改用 SysInfo 通知工具。请勿在此工具之前调用 app(command=launch) 或 system_panel(command=open) 来捕获应用程序或通知栏。当用户想要查看已保存的屏幕截图时，请勿使用此选项；使用 screenshot(command=open) 查看保存的屏幕截图。 仅当请求结果包含截图或屏幕图像分析时使用。GUI 搜索、输入、点击或确认结果不是图像捕获请求，应用无障碍屏幕读取工具；加载页面或不确定结果不改变边界。切勿仅为定位或验证控件、恢复过期节点或弥补缺失标签而截图。成功截图已返回用于交付的图片附件，不要打开图库查找或验证。"
     },
     {
       "name": "scroll",
@@ -177,7 +177,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "按指定方向滚动当前应用。优先使用最新屏幕信息中的可滚动节点；没有可用的滚动容器时使用当前视口。滚动后请重新检查屏幕。 get_screen_info."
+      "description": "滚动当前应用：支持时使用兼容的无障碍滚动动作，否则使用有界滑动手势。优先使用 screen(command=read) 最新返回且标记 scroll 的节点 ID。仅在屏幕没有可用滚动容器时用 viewport。方向表示视口目标：down 显示下方，up 显示上方，right 显示右侧，left 显示左侧。成功不代表内容已变化，每次成功后、下一动作前都要调用 screen(command=read)。"
     },
     {
       "name": "tap_node",
@@ -185,7 +185,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "点击屏幕上的 UI 元素。该元素通过其节点 ID 进行标识，该节点 ID 可以从 screen_info 工具获取。 get_screen_info."
+      "description": "点击屏幕上的 UI 元素。该元素通过其节点 ID 进行标识，该节点 ID 可以从 screen(command=read) 工具获取。 screen(command=read)."
     },
     {
       "name": "alarm_modify_alarm",
@@ -201,7 +201,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "设置Android时钟闹钟。在调用此工具前收集缺少的时间信息/重复/标签详细信息。"
+      "description": "在 Android 时钟中请求设置闹钟。只询问缺失的必需时间；可选设置使用默认值。不支持日历日期参数。"
     },
     {
       "name": "bluetooth_connected_devices",
@@ -337,7 +337,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "打开 Android 设置，用户可以在其中授予 FoneClaw 请勿打扰/通知策略访问权限。在 dnd_set_mode 报告已打开设置页面后，请勿立即调用此方法。"
+      "description": "打开 Android 设置，用户可以在其中授予 FoneClaw 请勿打扰/通知策略访问权限。在 dnd(command=set_mode) 报告已打开设置页面后，请勿立即调用此方法。"
     },
     {
       "name": "dnd_set_mode",
@@ -425,7 +425,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "直接打开Android日期和时间设置页面。将此用于日期、时间、自动时间、时区或自动时区设置。这将启动系统设置 Intent，并且不需要辅助功能、屏幕阅读或点击。成功后，请勿调用launch_app、get_screen_info或tap_node。"
+      "description": "直接打开Android日期和时间设置页面。将此用于日期、时间、自动时间、时区或自动时区设置。这将启动系统设置 Intent，并且不需要辅助功能、屏幕阅读或点击。成功后，请勿调用app(command=launch)、screen(command=read)或screen(command=tap)。"
     },
     {
       "name": "system_settings_open_hotspot_entry",
@@ -644,12 +644,36 @@
       "description": "在地图应用程序中打开路线或导航屏幕以获取目的地和出行模式。这将启动外部地图应用程序，仅使用提供的参数，并且不读取设备数据。"
     },
     {
+      "name": "travel_plan_append_days",
+      "category": "Location and Navigation",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "在已保存行程的最后日期后追加连续的新日期。保留所有现有日期、准备事项和行李清单。先读取计划，使用当前 revision。从最后终点和住宿处继续，集中邻近游览并安排跨日区域顺序以避免无谓折返。遵守固定预约和用户指定顺序，留出合理交通及休息时间，不声称掌握实时路线或编造精确耗时。不重复已有游览，除非用户要求或确有必要。revision 冲突时重新读取，绝不覆盖并发编辑。不创建日历事件或待办。"
+    },
+    {
+      "name": "travel_plan_read",
+      "category": "Location and Navigation",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "修改或延长之前，读取私有保存的旅行计划及其当前 revision。不做任何更改。"
+    },
+    {
+      "name": "travel_plan_update",
+      "category": "Location and Navigation",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "读取最新 JSON 后替换已有保存旅行计划的可编辑内容。可改目的地、出发地、地点、时区、节奏、日期、每日标题、停靠点名称、开始时间、时长、备注、准备事项、行李分类、行李项及勾选状态。保留 travel_plan_read 返回的精确计划 id、当前 revision 及现有停靠点/清单项 id；只为新增项生成 id。保留用户未要求修改的内容。完整 updatedPlanJson 必须是完整的 TravelPlan JSON 对象，而非补丁。revision 冲突时重新读取并将用户要求合并到最新计划，绝不覆盖并发编辑。工具成功后才能声称已更新。不创建日历事件或待办。"
+    },
+    {
       "name": "mail_account_list",
       "category": "Mail",
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "列出已配置的邮件帐户。查询为空时列出全部帐户；提供查询时，按帐户 ID、电子邮件、别名及模糊别名或邮件地址依次匹配，精确匹配仍可能返回多个帐户。若精确邮箱查询没有已配置的匹配项，结果可能包含带固定服务商凭据网址的 providerSetupGuide。对于 Gmail 地址，providerSetupGuide.accountConfigPreset 包含完整的非秘密 IMAP、SMTP 和用户名字段；调用 saveAccount 时须原样传递，并且只向用户询问剩余的应用专用密码。其他域名不会返回服务器预设。"
+      "description": "列出已配置的邮件帐户。查询为空时列出全部帐户；提供查询时，按帐户 ID、电子邮件、别名及模糊别名或邮件地址依次匹配，精确匹配仍可能返回多个帐户。若精确邮箱查询没有已配置的匹配项，结果可能包含带固定服务商凭据网址的 providerSetupGuide。对于 Gmail 地址，providerSetupGuide.accountConfigPreset 包含完整的非秘密 IMAP、SMTP 和用户名字段；调用 mail_account(command=save) 时须原样传递，并且只向用户询问剩余的应用专用密码。其他域名不会返回服务器预设。"
     },
     {
       "name": "mail_account_save",
@@ -657,7 +681,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "测试 IMAP 和 SMTP 连接，并仅在两者都成功时才保存邮件帐户。当每个必需的配置字段可用时立即调用此函数。此操作需要用户批准。"
+      "description": "测试收信服务器（IMAP 或 POP3）和 SMTP，仅在两者都成功时保存。必需配置齐备后立即调用。此操作需要用户批准。"
     },
     {
       "name": "mail_delete",
@@ -673,7 +697,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "列出、过滤或搜索邮件摘要。查询会搜索主题、发件人、收件人和正文。当用户同时请求已收和已发邮件，或未限定方向时，使用 folder ALL 一次；只有在明确指定单一方向时才使用 INBOX 或 SENT。切勿猜测服务商特定的文件夹名称，也不要重试已完成的查询。每条结果都包含最多 500 个字符的预览，可用于列表和批量摘要；列表查询完成后，不要逐封读取完整邮件。在同一次 Worker 运行中不要再次沿 nextCursor 翻页；应说明还有更多结果，并让后续用户请求继续查询。每次新的列表、搜索、筛选、日期范围、总结或重新排版请求都必须再次调用此工具，即使会话历史中已有邮件结果。历史 messageRefs 只能用于对已明确选中的同一封邮件执行操作。将 accountId 留空可使用唯一账户或唯一默认账户。 如果受限查询失败，应报告失败，不得清除或更改其查询、发件人或时间筛选条件来制造更宽泛的结果。"
+      "description": "列出、过滤或搜索邮件摘要。查询会搜索主题、发件人、收件人和正文。当用户同时请求已收和已发邮件，或未限定方向时，使用 folder ALL 一次；只有在明确指定单一方向时才使用 INBOX 或 SENT。切勿猜测服务商特定的文件夹名称，也不要重试已完成的查询。每条结果都包含最多 500 个字符的预览，可用于列表和批量摘要；列表查询完成后，不要逐封读取完整邮件。在同一次 运行中不要再次沿 nextCursor 翻页；应说明还有更多结果，并让后续用户请求继续查询。每次新的列表、搜索、筛选、日期范围、总结或重新排版请求都必须再次调用此工具，即使会话历史中已有邮件结果。历史 messageRefs 只能用于对已明确选中的同一封邮件执行操作。将 accountId 留空可使用唯一账户或唯一默认账户。 如果受限查询失败，应报告失败，不得清除或更改其查询、发件人或时间筛选条件来制造更宽泛的结果。 POP3 只提供 INBOX，不能按已读状态筛选，NEWEST_FIRST/OLDEST_FIRST 使用服务器消息序号而非保证日期排序。POP3 日期筛选使用发件人的 Date 标头；不支持已读状态时 isRead 为 null。"
     },
     {
       "name": "mail_read",
@@ -681,7 +705,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "读取 mail_list 返回的 messageRef 所指向的一封邮件，并在服务器上将其标记为已读。仅当用户明确需要完整正文、附件元数据或 mail_list 预览中没有的确切细节时才使用；不要为了生成列表或批量摘要而对每封邮件都使用。切勿重复使用同一组 messageRef 和 bodyCursor。工具成功后，在同一响应中为用户总结该邮件。"
+      "description": "读取 mail(command=list) 返回的 messageRef 对应的一封邮件。IMAP 会标为已读；Gmail 和 POP3 保持只读。 仅当用户明确需要完整正文、附件元数据或 mail(command=list) 预览中没有的确切细节时才使用；不要为了生成列表或批量摘要而对每封邮件都使用。切勿重复使用同一组 messageRef 和 bodyCursor。工具成功后，在同一响应中为用户总结该邮件。"
     },
     {
       "name": "mail_send",
@@ -697,7 +721,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "列出最近的 Android 呼叫日志条目，可以选择按呼叫类型进行过滤。需要 READ_CALL_LOG 权限。对于未接来电问题以及选择未接来电进行回拨之前，请使用 type=missed。选择号码后，拨打phone_dial。"
+      "description": "列出最近的 Android 呼叫日志条目，可以选择按呼叫类型进行过滤。需要 READ_CALL_LOG 权限。对于未接来电问题以及选择未接来电进行回拨之前，请使用 type=missed。选择号码后，拨打phone(command=dial)。"
     },
     {
       "name": "contacts_create",
@@ -721,7 +745,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "打开系统拨号器仅针对一个电话号码或指定联系人。准确设置 phoneNumber 和 contactName 之一。指定联系人必须仅匹配一个结果；如果多个联系人匹配，则停止并要求用户选择。拨号器打开后，呼叫 get_screen_info，识别可见的呼叫按钮，然后呼叫 tap_node。"
+      "description": "为一个电话号码或指定联系人打开系统拨号器。phoneNumber 与 contactName 必须且只能设置一个。具名联系人须唯一匹配；多个匹配时停止并让用户选择。只预填拨号器；如果只要求打开，到此结束。只有用户要求拨打电话时，才继续用可用屏幕操作识别并点击可见的呼叫按钮。仅凭打开拨号器或点击成功不能声称电话已接通。"
     },
     {
       "name": "send_to_sms_message",
@@ -729,7 +753,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "批准后，打开可见的 SMS/MMS 草稿。对于带有收件人的文本 SMS，仅当连接 FoneClaw 辅助功能且默认消息应用程序、收件人、完整消息正文和一个稳定的发送控件均已验证时，才会自动点击“发送”。附件、双 SIM 卡提示、不明确的 UI 或不可用的辅助功能需要手动操作。在任何最终结果之后，停止工具规划并且永远不要调用get_screen_info或tap_node。"
+      "description": "批准后，打开可见的 SMS/MMS 草稿。对于带有收件人的文本 SMS，仅当连接 FoneClaw 辅助功能且默认消息应用程序、收件人、完整消息正文和一个稳定的发送控件均已验证时，才会自动点击“发送”。附件、双 SIM 卡提示、不明确的 UI 或不可用的辅助功能需要手动操作。在任何最终结果之后，停止工具规划并且永远不要调用screen(command=read)或screen(command=tap)。"
     },
     {
       "name": "sms_list",
@@ -737,7 +761,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "查询此 Android 设备上的实时 SMS 消息。不包含关键字、地址、联系人或 threadId 时列出最近消息；设置关键字、地址或联系人以搜索。仅使用先前 sms_list 结果中的 threadId 读取对应会话。对于摘要请求，使用 box=all 和 includeBody=true 调用一次，并且只汇总返回的收发消息。使用 returnedBreakdown 统计数量，并分别保留其中的 byAddress 各行。切勿用 SysInfo 历史记录替代此实时结果。"
+      "description": "查询此 Android 设备上的实时 SMS 消息。不包含关键字、地址、联系人或 threadId 时列出最近消息；设置关键字、地址或联系人以搜索。仅使用先前 sms(command=list) 结果中的 threadId 读取对应会话。对于摘要请求，使用 box=all 和 includeBody=true 调用一次，并且只汇总返回的收发消息。使用 returnedBreakdown 统计数量，并分别保留其中的 byAddress 各行。切勿用 SysInfo 历史记录替代此实时结果。"
     },
     {
       "name": "calendar_create_event",
@@ -745,7 +769,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "创建 Android 日历事件。对于全天事件，请设置 allDay=true，并将开始时间设为本地当天零点、结束时间设为下一天零点（不含）。在调用此工具前收集缺少的时间信息和提醒详细信息。用户提供的地名就足够了，应该直接作为 locationName 传递。除非用户明确要求验证、解决、选择或导航到该地点，否则不要搜索确切的地址或坐标。对于用户日期和相对日期，使用 yyyy-MM-dd HH:mm 中的 startLocalDateTime/endLocalDateTime；该工具将在设备时区中解析它们。不要根据模型计算的纪元毫秒创建事件。除非用户明确选择了日历 ID，否则请使用 calendarId=0。创建完成后，使用工具结果actualStart/actualEnd作为面向用户的创建时间。"
+      "description": "创建 Android 日历事件。对于全天事件，请设置 allDay=true，并将开始时间设为本地当天零点、结束时间设为下一天零点（不含）。开始和结束时间均为必填。若请求无法确定结束时间或时长，必须询问，切勿编造时长。可选提醒默认提前 30 分钟。用户提供的地名就足够了，应该直接作为 locationName 传递。除非用户明确要求验证、解决、选择或导航到该地点，否则不要搜索确切的地址或坐标。对于用户日期和相对日期，使用 yyyy-MM-dd HH:mm[:ss] 中的 startLocalDateTime/endLocalDateTime；该工具将在设备时区中解析它们。不要根据模型计算的纪元毫秒创建事件。除非用户明确选择了日历 ID，否则请使用 calendarId=0。创建完成后，使用工具结果actualStart/actualEnd作为面向用户的创建时间。"
     },
     {
       "name": "calendar_delete_event",
@@ -753,7 +777,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "按 ID 删除 Android 日历事件。除非用户明确选择了日历 ID，否则使用 calendarId=0 搜索/列出所有日历中的事件。始终传递已知的标题和已知的位置，以便目标明确。"
+      "description": "使用 calendar(command=list_events) 或 calendar(command=search_events) 返回的精确 eventId 删除一个 Android 日历事件。按返回的标题、时间和地点识别目标；不明确时请用户选择。此操作只传 eventId。"
     },
     {
       "name": "calendar_list_calendars",
@@ -769,7 +793,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "列出具体时间范围内的Android日历事件。用于今天的日程安排、明天的日程安排、现有活动或本周的活动等请求。使用 yyyy-MM-dd HH:mm:ss 中的 startLocalDateTime/endLocalDateTime；该工具将在设备时区中解析它们。不要猜测calendarId；使用 calendarId=0 搜索所有日历，除非用户明确选择了日历 ID。"
+      "description": "列出具体时间范围内的Android日历事件。用于今天的日程安排、明天的日程安排、现有活动或本周的活动等请求。使用 yyyy-MM-dd HH:mm[:ss] 中的 startLocalDateTime/endLocalDateTime；该工具将在设备时区中解析它们。不要猜测calendarId；使用 calendarId=0 搜索所有日历，除非用户明确选择了日历 ID。"
     },
     {
       "name": "calendar_open_event",
@@ -785,7 +809,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "在具体时间范围内通过关键字搜索Android日历事件。当用户按标题或内容描述事件时，在打开、更新或删除事件之前使用。使用 yyyy-MM-dd HH:mm 中的 startLocalDateTime/endLocalDateTime；该工具将在设备时区中解析它们。不要猜测calendarId；使用 calendarId=0 搜索所有日历，除非用户明确选择了日历 ID。"
+      "description": "在具体时间范围内通过关键字搜索Android日历事件。当用户按标题或内容描述事件时，在打开、更新或删除事件之前使用。使用 yyyy-MM-dd HH:mm[:ss] 中的 startLocalDateTime/endLocalDateTime；该工具将在设备时区中解析它们。不要猜测calendarId；使用 calendarId=0 搜索所有日历，除非用户明确选择了日历 ID。"
     },
     {
       "name": "calendar_update_event",
@@ -793,7 +817,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "按 ID 更新 Android 日历事件。当用户用自然语言描述目标时，首先搜索/列出事件，并通过更改的字段传递已知的目标详细信息。不要猜测 calendarId 或事件 id；搜索所有带有 calendarId=0 的日历，除非用户明确选择了日历 ID。空白文本字段将被忽略。使用 blank startLocalDateTime/endLocalDateTime 保留现有时间。使用 reminderMinutes=-2 保留提醒，-1 删除提醒，>=0 替换提醒。"
+      "description": "按 ID 更新 Android 日历事件。当用户用自然语言描述目标时，首先搜索/列出事件，并通过更改的字段传递已知的目标详细信息。不要猜测 calendarId 或事件 id；搜索所有带有 calendarId=0 的日历，除非用户明确选择了日历 ID。空白文本字段将被忽略。使用 blank startLocalDateTime/endLocalDateTime 保留现有时间。使用 reminderMinutes=-2 保留提醒，-1 删除提醒，>=0 替换提醒。 yyyy-MM-dd HH:mm[:ss]."
     },
     {
       "name": "memo_create",
@@ -801,7 +825,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "向 To-do Center 添加一条用户可见的待办。用于“添加待办”“记录待办”或用户希望保留的可执行提醒。保存用户内容，而不是助手的用户档案记忆或 Main 的内部执行计划。直接从 Worker 环境解析待办日期，不调用 Calendar 或 Alarm 工具。待办排期：只有当用户请求或明确引用的来源提供确定的日历日期、可唯一解析的相对日期（今天、明天、后天、恰好两天后 / 两天后）或明确的日期范围时才排期。current_date 和时区上下文仅是计算基准，绝不是用户提供的排期。未提日期或时间模糊（这两天、这个两天、过几天、近期、有空、改天、soon、sometime this week、in a couple of days）时，在 Unscheduled（时间待定）中创建无日期待办，省略 startDate 和 endDate 或将两者留空。绝不默认今天、任选方便的日期，或把模糊时间段变成多日排期；将模糊时间保留在待办内容中。内容已知时，不要仅为创建待办而追问日期。根据当前运行时上下文解析确定日期；未知具体小时不应使明确日期变成无日期。更新时，若用户只改内容且没有排期意图，保留现有日期。若用户明确移除排期、表示时间待定或改为模糊时间，使用 clearStartDate=true 和空日期字符串移到 Unscheduled，并清除两个日期。报告 Tool 结果中保存的 Unscheduled 分区或排期日期，不要依据假设。内部 task_pool 结果标记在面向用户的回复中表示 Unscheduled（时间待定）分区。这些规则适用于待办，不适用于日历事件或闹钟。"
+      "description": "向 To-do Center 添加一条用户可见的待办。用于“添加待办”“记录待办”或用户希望保留的可执行提醒。保存用户内容，而不是助手的用户档案记忆或 Main 的内部执行计划。直接从 运行时 环境解析待办日期，不调用 Calendar 或 Alarm 工具。待办排期：只有当用户请求或明确引用的来源提供确定的日历日期、可唯一解析的相对日期（今天、明天、后天、恰好两天后 / 两天后）或明确的日期范围时才排期。运行时提供的原始请求时间 和时区上下文仅是计算基准，绝不是用户提供的排期。未提日期或时间模糊（这两天、这个两天、过几天、近期、有空、改天、soon、sometime this week、in a couple of days）时，在 Unscheduled中创建无日期待办，省略 startDate 和 endDate 或将两者留空。绝不默认今天、任选方便的日期，或把模糊时间段变成多日排期；将模糊时间保留在待办内容中。内容已知时，不要仅为创建待办而追问日期。根据运行时提供的原始请求时间和时区解析确定日期；未知具体小时不应使明确日期变成无日期。更新时，若用户只改内容且没有排期意图，保留现有日期。若用户明确移除排期、表示时间待定或改为模糊时间，使用 clearStartDate=true 和空日期字符串移到 Unscheduled，并清除两个日期。报告 Tool 结果中保存的 Unscheduled 分区或排期日期，不要依据假设。 内部 task_pool 标记表示无日期分区；回复时用当前回复语言表达该分区，不要复述标记，也不要添加其他语言的翻译。 这些规则适用于待办，不适用于日历事件或闹钟。"
     },
     {
       "name": "memo_delete",
@@ -817,7 +841,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "显示用户在 To-do Center 中的待办列表（待办列表）。status 可以是 active、done、archived 或 all。此查询仅针对个人待办，不是 Main 的内部执行计划或助手的用户档案记忆。空结果只表示此待办列表没有匹配项。"
+      "description": "显示用户在 To-do Center 中的待办列表。status 可以是 active、done、archived 或 all。此查询仅针对个人待办，不是 Main 的内部执行计划或助手的用户档案记忆。空结果只表示此待办列表没有匹配项。"
     },
     {
       "name": "memo_mark_done",
@@ -841,7 +865,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "按 id 编辑 To-do Center 中的一条用户待办。当用户用自然语言描述目标时，先搜索或列出待办，并将已知目标详情与变更字段一起传入。此操作编辑用户待办，而不是助手的用户档案记忆或 Main 的内部执行计划。空白 title/content/tags 和日期字符串保留现有值。使用从当前 Worker 环境解析的 yyyy-MM-dd 日期；绝不计算纪元毫秒，也不要仅为解析待办日期而调用 Calendar 或 Alarm 工具。待办排期：只有当用户请求或明确引用的来源提供确定的日历日期、可唯一解析的相对日期（今天、明天、后天、恰好两天后 / 两天后）或明确的日期范围时才排期。current_date 和时区上下文仅是计算基准，绝不是用户提供的排期。未提日期或时间模糊（这两天、这个两天、过几天、近期、有空、改天、soon、sometime this week、in a couple of days）时，使用省略或留空的 startDate 和 endDate，将待办保留或移至 Unscheduled（时间待定）。绝不默认今天、任选方便的日期，或把模糊时间段变成多日排期；将模糊时间保留在待办内容中。内容已知时，不要仅为处理待办而追问日期。根据当前运行时上下文解析确定日期；未知具体小时不应使明确日期变成无日期。更新时，若用户只改内容且没有排期意图，保留现有日期。若用户明确移除排期、表示时间待定或改为模糊时间，使用 clearStartDate=true 和空日期字符串移到 Unscheduled，并清除两个日期。报告 Tool 结果中保存的 Unscheduled 分区或排期日期，不要依据假设。内部 task_pool 结果标记在面向用户的回复中表示 Unscheduled（时间待定）分区。这些规则适用于待办，不适用于日历事件或闹钟。"
+      "description": "按 id 编辑 To-do Center 中的一条用户待办。当用户用自然语言描述目标时，先搜索或列出待办，并将已知目标详情与变更字段一起传入。此操作编辑用户待办，而不是助手的用户档案记忆或 Main 的内部执行计划。空白 title/content/tags 和日期字符串保留现有值。使用从当前 运行时 环境解析的 yyyy-MM-dd 日期；绝不计算纪元毫秒，也不要仅为解析待办日期而调用 Calendar 或 Alarm 工具。待办排期：只有当用户请求或明确引用的来源提供确定的日历日期、可唯一解析的相对日期（今天、明天、后天、恰好两天后 / 两天后）或明确的日期范围时才排期。运行时提供的原始请求时间 和时区上下文仅是计算基准，绝不是用户提供的排期。未提日期或时间模糊（这两天、这个两天、过几天、近期、有空、改天、soon、sometime this week、in a couple of days）时，使用省略或留空的 startDate 和 endDate，将待办保留或移至 Unscheduled。绝不默认今天、任选方便的日期，或把模糊时间段变成多日排期；将模糊时间保留在待办内容中。内容已知时，不要仅为处理待办而追问日期。根据运行时提供的原始请求时间和时区解析确定日期；未知具体小时不应使明确日期变成无日期。更新时，若用户只改内容且没有排期意图，保留现有日期。若用户明确移除排期、表示时间待定或改为模糊时间，使用 clearStartDate=true 和空日期字符串移到 Unscheduled，并清除两个日期。报告 Tool 结果中保存的 Unscheduled 分区或排期日期，不要依据假设。 内部 task_pool 标记表示无日期分区；回复时用当前回复语言表达该分区，不要复述标记，也不要添加其他语言的翻译。 这些规则适用于待办，不适用于日历事件或闹钟。"
     },
     {
       "name": "sysinfo_delete",
@@ -865,7 +889,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "查询已捕获的本地通知、SMS、通话日志、日历事件和辅助功能输入。使用这个单一工具进行每日简报、通知查询、时间窗口查询和关键字搜索。它从不打开系统面板或扫描实时系统源。每行可能包含 sourceRef，用于针对实时提供程序结果进行重复数据删除。总结为用户返回的JSON。"
+      "description": "按来源、时间窗口或关键词查询已采集的本地通知、短信、邮件摘要、通话记录、日历事件和无障碍输入。采集可能不完整且记录可能过时，不能证明当前实时状态。不打开系统面板，也不扫描实时系统来源。每行可含 sourceRef，以便与实时提供方结果去重。向用户总结返回的 JSON。"
     },
     {
       "name": "sysinfo_thread",
@@ -873,7 +897,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "通过 sysinfo_query 返回的 threadKey 加载一个本地 SysInfo 线程。"
+      "description": "通过 sysinfo(command=query) 返回的 threadKey 加载一个本地 SysInfo 线程。"
     },
     {
       "name": "purchase_query",
@@ -897,7 +921,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "在购物平台上搜索产品的公共网络结果并返回比较证据。在提供购物价格建议之前使用此信息。"
+      "description": "搜索 Shopee 台湾（shopee.tw）和 momo（momo.com.tw）的公开网页结果，返回只读商品比较证据。地区只是搜索提示，不是国家站点选择器。提取价格是候选值，不代表已确认的结账价、库存、运费或优惠券。提供购物价格建议前使用。"
     },
     {
       "name": "web_fetch",
@@ -905,7 +929,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "通过URL获取特定网页并返回可读的页面文本。"
+      "description": "按 URL 抓取一个 HTTP/HTTPS 页面，返回最多 maxChars 字符的可读文本。这是只读 HTTP 抓取，不是交互式浏览器或 JavaScript 渲染器；空白或截断文本不能证明已读完整页面。"
     },
     {
       "name": "web_search",
@@ -921,7 +945,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Create a local time-triggered automation, managed in the Automations sidebar page. The automation runs unattended on this device around the given local time; Android may delay execution. Results are delivered as system notifications. Only read-only web research is allowed during unattended runs. Parameters: title (short), prompt (the exact instruction to run), hour (0-23 local), minute (0-59 local), repeat (\"once\", \"everyday\", \"weekdays\", or \"custom\"), weekdays (required for custom; 1=Monday ... 7=Sunday). Returns the created task id."
+      "description": "创建本地按时间触发的自动化，由侧栏“自动化”页面管理。在指定本地时间附近无人值守运行，Android 可能延迟执行。结果通过系统通知送达。无人值守运行只允许只读网络研究。没有目标日期参数：once 表示创建后 hour/minute 的下一次出现，而非任意未来日期。不要声称在 prompt 中写日期会改变计划。返回创建的任务 id。"
     },
     {
       "name": "scheduled_task_delete",
@@ -945,7 +969,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Enqueue an immediate run of an existing automation. It is deduplicated against the same day's scheduled run, so running twice in one day executes at most once."
+      "description": "将已有自动化的即时手动运行加入队列。只确认入队，不代表完成。调度器会合并尚在等待的手动运行。后续手动运行可再次执行，与定时执行相互独立；不要承诺每天最多一次。"
     },
     {
       "name": "scheduled_task_set_enabled",
@@ -961,7 +985,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Update the instruction for future runs of an existing automation. First use scheduled_task_list to identify the existing task and preserve unrelated instructions. Does not create a task or run it now. Preserves title, schedule and enabled state. Ask which task if the target is ambiguous."
+      "description": "更新已有自动化后续运行的指令。先使用 scheduled_task(command=list) 识别任务，保留不相关的指令。不创建任务也不立即运行。保留标题、计划和启用状态。目标不明确时询问是哪项任务。"
     },
     {
       "name": "shortcut_save_agent_prompt",
@@ -969,7 +993,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "保存用户创建的向代理发送提示的快捷方式。仅在用户确认标题、描述和行为后才调用此方法。"
+      "description": "保存用户创建的快捷方式，启动时向 Agent 发送提示；保存不执行。仅在用户确认标题、描述和行为后调用。"
     },
     {
       "name": "shortcut_save_direct_tool",
@@ -977,7 +1001,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "保存用户创建的直接工具快捷方式。仅当每个请求的操作都可以完全映射到具有完整参数的已知工具步骤时才调用此方法。"
+      "description": "保存用户创建的直接工具快捷方式。仅当每项请求动作均可完整映射到已知原子工具步骤且参数完整时调用。保存不执行步骤。使用每个原子操作的固定合同，不用 Main 领域 command 包装。参数为字面保存值，不含执行时表达式；切勿把滚动日期范围冻结成固定日期。"
     },
     {
       "name": "task_create",
@@ -985,7 +1009,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "通过一次调用为当前用户请求创建完整的有序 TODO 计划。当路由产生两个或更多具体 Main 步骤或跨越 Profiles 时，这是调用任何非任务 Tool 前的强制前提。每次 delegate 或 Plugin Tool 调用计为一个步骤；无论 Worker 内部如何，一个 delegate 始终只算一步。将每个有明确边界、面向用户的步骤传入 items。计划只能创建一次，之后不能扩展。绝不包含任务管理、清理、状态更新或最终响应项。此内部执行计划不是用户的持久 To-do Center。创建、查找、完成或删除个人待办时，应使用 scopes=[memo] 委派给 Personal Organization，并改用 memo_* Tools。"
+      "description": "一次调用为当前用户请求创建完整有序 TODO 计划。路由产生至少两个具体 Main 步骤时，这是任何非任务 Tool 的强制前提。每个可直接执行的业务或 Plugin Tool 步骤算一步。items 包含所有有界的面向用户步骤。只能创建一次，之后不能扩展。不包含任务管理、清理、状态更新或最终回复项。这不是用户的持久 To-do Center。个人待办的创建、查找、完成或删除应使用 memo 工具。"
     },
     {
       "name": "task_list",
@@ -993,7 +1017,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "列出当前用户请求的内部 TODO 项。默认返回 open、in_progress 和 blocked 项。此内部执行计划不是用户的持久 To-do Center。创建、查找、完成或删除个人待办时，应使用 scopes=[memo] 委派给 Personal Organization，并改用 memo_* Tools。"
+      "description": "列出当前用户请求的内部 TODO 项。默认返回 open、in_progress 和 blocked 项。此内部执行计划不是用户的持久 To-do Center。创建、查找、完成或删除个人待办时，改用 memo 工具。"
     },
     {
       "name": "task_update",
@@ -1001,7 +1025,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "更新一个内部 TODO 项。允许的状态转换：open 可转为 in_progress、blocked 或 abandoned；in_progress 可转为 blocked、done 或 abandoned；blocked 可转为 open 或 abandoned。done 和 abandoned 是终态。同一时间只能有一个任务处于 in_progress。此内部执行计划不是用户的持久 To-do Center。创建、查找、完成或删除个人待办时，应使用 scopes=[memo] 委派给 Personal Organization，并改用 memo_* Tools。"
+      "description": "更新一个内部 TODO 项。允许的状态转换：open 可转为 in_progress、blocked 或 abandoned；in_progress 可转为 blocked、done 或 abandoned；blocked 可转为 open 或 abandoned。done 和 abandoned 是终态。同一时间只能有一个任务处于 in_progress。此内部执行计划不是用户的持久 To-do Center。创建、查找、完成或删除个人待办时，改用 memo 工具。"
     },
     {
       "name": "workflow_delete",
@@ -1009,7 +1033,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "按 ID 删除已保存的工作流程。"
+      "description": "按精确 id 删除已保存的工作流定义。这不会撤销该工作流已执行的动作。"
     },
     {
       "name": "workflow_list",
@@ -1025,7 +1049,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "保存可重复使用的工作流程。 stepsJson 必须是 {toolName, argument} 的 JSON 数组。"
+      "description": "保存可复用工作流定义，不执行也不调度。stepsJson 必须是非空 JSON 数组字符串，元素为 {toolName, arguments}。支持的原子 toolName 值为 mail_list、mail_read、mail_send、mail_delete、mail_account_list。使用每个原子操作的精确业务参数，不加领域 command 包装。保存参数是字面值，不是在执行时重新计算的表达式。"
     },
     {
       "name": "accept_skill_proposal",
@@ -1041,7 +1065,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "将新的技能文档添加到技能注册表中。"
+      "description": "校验后，按精确 id 创建或替换用户 Skill 并启用。不可信导入应使用 preview_import 和 save_draft。"
     },
     {
       "name": "disable_skill",
@@ -1049,7 +1073,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "禁用用户 Skill，使其不再出现在 Agent 提示中。"
+      "description": "禁用用户 Skill，使后续发现不再包含它。已读取内容仍保留在当前会话。"
     },
     {
       "name": "enable_skill",
@@ -1057,7 +1081,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "启用有效的用户 Skill，让 Agent 可以使用。"
+      "description": "启用有效的用户 Skill，以供发现。"
     },
     {
       "name": "list_skill_proposals",
@@ -1081,7 +1105,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "当手头的任务与系统提示中列出的技能之一匹配时，加载专门技能。使用此工具将技能的说明和资源注入当前对话中。输出可能包含详细的工作流程指南以及对与技能位于同一目录中的脚本、文件等的引用。技能名称必须与系统提示中列出的技能之一匹配。"
+      "description": "使用可用目录中的精确完整 id 读取相关 Skill 全文。只返回文档文本，不加载引用的资源或脚本。"
     },
     {
       "name": "plugin_request_install",
@@ -1089,7 +1113,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "为一个官方插件创建结构化安装建议。这不会下载或安装插件； HomeScreen 必须询问用户。"
+      "description": "为一个官方插件创建结构化安装提议。不下载或安装；由宿主处理提议和用户确认。不要声称已安装，也不要在此冻结运行中使用新安装能力。"
     },
     {
       "name": "plugin_search",
@@ -1121,7 +1145,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "移除技能。"
+      "description": "移除具有此精确 id 的用户 Skill。"
     },
     {
       "name": "rollback_skill",
@@ -1129,7 +1153,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "将用户 Skill 恢复到最近归档的内容版本。"
+      "description": "将用户 Skill 恢复到最近归档的内容版本。要求用户 Skill 及归档版本均存在。"
     },
     {
       "name": "save_skill_draft",
@@ -1145,7 +1169,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "更新技能注册表中的现有技能文档。"
+      "description": "更新已有用户 Skill，并保留其启用状态。"
     }
   ]
 }

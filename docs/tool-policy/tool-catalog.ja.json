@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "ja",
   "fallbackLocale": "en",
-  "toolCount": 133,
+  "toolCount": 136,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "ツールや機能を検索",
@@ -39,7 +39,7 @@
     {
       "name": "Location and Navigation",
       "displayName": "位置情報とナビゲーション",
-      "toolCount": 3
+      "toolCount": 6
     },
     {
       "name": "Mail",
@@ -89,7 +89,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "システム ギャラリーから特定の表示可能な写真を開きます。これは、ユーザーが特定の写真を表示または開くことを明示的に要求した場合にのみ使用します。ユーザーがキャプチャした写真を表示するか開くことを明示的に要求しない限り、これを camera_take_photo の後のフォローアップとして使用しないでください。 indexFromLatest は 1 から始まり、新しいものから順に並べられます。1 は最新の写真を開き、2 は 2 番目に新しい写真を開き、3 は 3 番目に新しい写真を開きます。"
+      "description": "システム ギャラリーから特定の表示可能な写真を開きます。これは、ユーザーが特定の写真を表示または開くことを明示的に要求した場合にのみ使用します。ユーザーがキャプチャした写真を表示するか開くことを明示的に要求しない限り、これを camera(command=take_photo) の後のフォローアップとして使用しないでください。 indexFromLatest は 1 から始まり、新しいものから順に並べられます。1 は最新の写真を開き、2 は 2 番目に新しい写真を開き、3 は 3 番目に新しい写真を開きます。"
     },
     {
       "name": "camera_take_photo",
@@ -97,7 +97,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "新しい写真を撮影し、利用可能な場合は保存した写真の URI を返します。ユーザーが新しい写真の撮影を求めている場合に使用します。通常の撮影では lensFacing を未指定または auto にします。前面カメラまたは自撮りを明示的に求められた場合だけ lensFacing=front を選び、背面カメラを明示的に求められた場合だけ back を選びます。通常またはデフォルトの撮影では、デフォルトの物理レンズが背面でも explicitLensSelection は false のままにします。前面、背面、または自撮りを明示的に求められた場合だけ true にします。写真の表示やオープンを明示的に求められない限り、続けて camera_open_photo を呼び出さないでください。このツールを直接呼び出します。まずシステム標準カメラを使用し、指定レンズに対応できない場合に限り、前面または背面を明示した撮影で直接バックエンドを使用できます。呼び出す前に権限付与を求めないでください。"
+      "description": "新しい写真を撮影し、モデルの画像認識が利用できる場合は画像添付として返します。 ユーザーが新しい写真の撮影を求めている場合に使用します。通常の撮影では lensFacing を未指定または auto にします。前面カメラまたは自撮りを明示的に求められた場合だけ lensFacing=front を選び、背面カメラを明示的に求められた場合だけ back を選びます。通常またはデフォルトの撮影では、デフォルトの物理レンズが背面でも explicitLensSelection は false のままにします。前面、背面、または自撮りを明示的に求められた場合だけ true にします。写真の表示やオープンを明示的に求められない限り、続けて camera(command=open_photo) を呼び出さないでください。このツールを直接呼び出します。まずシステム標準カメラを使用し、指定レンズに対応できない場合に限り、前面または背面を明示した撮影で直接バックエンドを使用できます。呼び出す前に権限付与を求めないでください。"
     },
     {
       "name": "cross_app_read_screen",
@@ -121,7 +121,7 @@
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "現在表示されているアプリ画面から UI 要素を取得します。各要素にはノード ID（例：[n3]）があり、tap_node または input_text で使用できます。Android 通知の読み取り、一覧表示、検索、要約には使用せず、代わりに sysinfo ツールを使用してください。ノード ID は呼び出すたびに変わるため、この結果をキャッシュしないでください。"
+      "description": "現在表示されているアプリ画面から UI 要素を取得します。各要素にはノード ID（例：[n3]）があり、screen(command=tap), screen(command=scroll) または screen(command=input_text) で使用できます。Android 通知の読み取り、一覧表示、検索、要約には使用せず、代わりに sysinfo ツールを使用してください。ノード ID は呼び出すたびに変わるため、この結果をキャッシュしないでください。"
     },
     {
       "name": "input_text",
@@ -129,7 +129,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "現在の Android アプリで表示されている編集可能なフィールドのテキストを置き換えます。まず get_screen_info を呼び出し、edit とマークされた現在のノードを渡してください。この操作はテキストを入力するだけで、フォームの送信、送信ボタンのタップ、Enter キーの押下は行いません。ノード ID を再利用しないでください。"
+      "description": "現在の Android アプリで表示されている編集可能なフィールドのテキストを置き換えます。まず screen(command=read) を呼び出し、edit とマークされた現在のノードを渡してください。この操作はテキストを入力するだけで、フォームの送信、送信ボタンのタップ、Enter キーの押下は行いません。ノード ID を再利用しないでください。"
     },
     {
       "name": "launch_app",
@@ -145,7 +145,7 @@
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "https://play.google.com/store/apps/details?id=<packageName>. を要求して、正確な Android パッケージ名が Google Play にリストされているかどうかを確認します。これは読み取り専用のネットワーク チェックです。 play_store_install の前に使用してください。"
+      "description": "https://play.google.com/store/apps/details?id=<packageName>. を要求して、正確な Android パッケージ名が Google Play にリストされているかどうかを確認します。これは読み取り専用のネットワーク チェックです。 app(command=install_store_app) の前に使用してください。"
     },
     {
       "name": "play_store_install",
@@ -169,7 +169,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "FoneClaw アクセシビリティ サービスを使用して Android 画面をキャプチャします。キャプチャ画像は Agent が使用するアプリ専用キャッシュに保持され、システムのギャラリーには追加されません。現在の画面には targetType=current を使用し、アプリを開いてキャプチャするには targetType=app と targetApp を使用します。または、表示される通知シェードを含む明示的なスクリーンショットまたは画像キャプチャ リクエストの場合にのみ targetType=notification_shade を使用します。通知データの読み取り、リスト、クエリ、または要約には targetType=notification_shade を決して使用しないでください。代わりに SysInfo 通知ツールを使用してください。アプリまたは通知シェードのキャプチャのために、このツールの前に launch_app または system_panel_open を呼び出さないでください。ユーザーが既に保存されているスクリーンショットを表示したい場合には、これを使用しないでください。保存されたスクリーンショットを表示するには、screenshot_open を使用します。"
+      "description": "FoneClaw アクセシビリティ サービスを使用して Android 画面をキャプチャします。キャプチャ画像は Agent が使用するアプリ専用キャッシュに保持され、システムのギャラリーには追加されません。現在の画面には targetType=current を使用し、アプリを開いてキャプチャするには targetType=app と targetApp を使用します。または、表示される通知シェードを含む明示的なスクリーンショットまたは画像キャプチャ リクエストの場合にのみ targetType=notification_shade を使用します。通知データの読み取り、リスト、クエリ、または要約には targetType=notification_shade を決して使用しないでください。代わりに SysInfo 通知ツールを使用してください。アプリまたは通知シェードのキャプチャのために、このツールの前に app(command=launch) または system_panel(command=open) を呼び出さないでください。ユーザーが既に保存されているスクリーンショットを表示したい場合には、これを使用しないでください。保存されたスクリーンショットを表示するには、screenshot(command=open) を使用します。 スクリーンショットまたは画面画像分析が依頼結果に含まれる場合のみ使用。GUI の検索・入力・タップ・確認は画像撮影依頼ではなくアクセシビリティ読取を使います。読み込み中や結果不明でも境界は同じです。操作部品の特定・確認、古いノードの復旧、ラベル不足の補完だけに使用しません。成功時は配信用画像添付を返しているため、ギャラリーで探したり確認したりしません。"
     },
     {
       "name": "scroll",
@@ -177,7 +177,7 @@
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "現在のアプリを指定した方向にスクロールします。最新の画面情報にあるスクロール可能なノードを優先し、利用できない場合は表示中の画面領域を使用します。スクロール後に画面をもう一度確認してください。 get_screen_info."
+      "description": "対応時はアクセシビリティのスクロール操作、非対応時は範囲を限定したスワイプで現在のアプリをスクロールします。screen(command=read) の最新の scroll 付きノード ID を優先。使用可能なコンテナがない時のみ viewport を使います。方向は移動先で down は下、up は上、right は右、left は左を表示します。成功は内容変更の確認ではないため、成功後は次の操作前に必ず screen(command=read) を呼びます。"
     },
     {
       "name": "tap_node",
@@ -185,7 +185,7 @@
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "画面上の UI 要素をタップします。要素はノード ID によって識別されます。ノード ID は screen_info ツールから取得できます。 get_screen_info."
+      "description": "画面上の UI 要素をタップします。要素はノード ID によって識別されます。ノード ID は screen(command=read) ツールから取得できます。 screen(command=read)."
     },
     {
       "name": "alarm_modify_alarm",
@@ -201,7 +201,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Android 時計アラームを設定します。このツールを呼び出す前に、不足している時間/リピート/ラベルの詳細を収集します。"
+      "description": "Android 時計にアラームを要求します。必須の時刻が不明な場合のみ質問し、任意設定は既定値を使います。暦日パラメータは非対応です。"
     },
     {
       "name": "bluetooth_connected_devices",
@@ -337,7 +337,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "ユーザーが FoneClaw のサイレント / 通知ポリシーへのアクセスを許可できる Android 設定を開きます。 dnd_set_mode が設定ページをすでに開いたことを報告した直後にこれを呼び出さないでください。"
+      "description": "ユーザーが FoneClaw のサイレント / 通知ポリシーへのアクセスを許可できる Android 設定を開きます。 dnd(command=set_mode) が設定ページをすでに開いたことを報告した直後にこれを呼び出さないでください。"
     },
     {
       "name": "dnd_set_mode",
@@ -425,7 +425,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Android 日付と時刻の設定ページを直接開きます。これは、日付、時刻、自動時刻、タイムゾーン、または自動タイムゾーンの設定に使用します。これによりシステム設定インテントが起動され、アクセシビリティ、画面の読み取り、またはタップは必要ありません。成功した後は、launch_app、get_screen_info、または tap_node を呼び出さないでください。"
+      "description": "Android 日付と時刻の設定ページを直接開きます。これは、日付、時刻、自動時刻、タイムゾーン、または自動タイムゾーンの設定に使用します。これによりシステム設定インテントが起動され、アクセシビリティ、画面の読み取り、またはタップは必要ありません。成功した後は、app(command=launch)、screen(command=read)、または screen(command=tap) を呼び出さないでください。"
     },
     {
       "name": "system_settings_open_hotspot_entry",
@@ -644,12 +644,36 @@
       "description": "地図アプリで目的地と旅行モードのルートまたはナビゲーション画面を開きます。これにより、外部マップ アプリが起動され、指定された引数のみが使用され、デバイス データは読み取られません。"
     },
     {
+      "name": "travel_plan_append_days",
+      "category": "Location and Navigation",
+      "risk": "DEVICE_CONTROL",
+      "approval": "承認が必要",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "保存済み旅行の最終日の後に連続した日程を追加します。既存の日程・準備・荷物をすべて保持します。まず計画を読み、現在の revision を使います。最後の到着地と宿泊先から続け、近い訪問先をまとめ、日をまたぐ地域順序で無駄な往復を避けます。予約と指定順を守り、移動・休憩に現実的な余裕を設けます。リアルタイム経路を把握したと主張したり、正確な所要時間を創作したりしません。要求または必要性がなければ既訪問先を繰り返しません。revision 競合時は再読込し、同時編集を上書きしません。カレンダー予定や To-do は作成しません。"
+    },
+    {
+      "name": "travel_plan_read",
+      "category": "Location and Navigation",
+      "risk": "SENSITIVE_READ",
+      "approval": "承認が必要",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "変更・延長の前に、非公開の保存済み旅行計画と現在の revision を読み取ります。変更は行いません。"
+    },
+    {
+      "name": "travel_plan_update",
+      "category": "Location and Navigation",
+      "risk": "DEVICE_CONTROL",
+      "approval": "承認が必要",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "最新 JSON を読んでから保存済み旅行計画の編集可能な内容を置き換えます。目的地、出発地、場所、タイムゾーン、ペース、日付、日別タイトル、立寄先名、開始時刻、所要時間、メモ、準備項目、荷物の分類・項目・チェック状態を変更できます。travel_plan_read の正確な計画 id、現在の revision、既存の立寄先・チェックリスト項目 id を保持し、新規項目のみ id を生成します。依頼されていない内容は保持します。updatedPlanJson は差分でなく完全な TravelPlan JSON オブジェクトが必要です。revision 競合時は再読込して依頼を最新計画へ統合し、同時編集を上書きしません。成功後にのみ更新済みと伝えます。カレンダー予定や To-do は作成しません。"
+    },
+    {
       "name": "mail_account_list",
       "category": "Mail",
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "設定済みのメールアカウントを一覧表示します。クエリが空の場合はすべてを表示し、指定された場合はアカウント ID、メールアドレス、エイリアス、あいまいなエイリアスまたはメールアドレスの順で照合します。完全一致でも複数件を返すことがあります。メールアドレスの完全一致がない場合、固定されたプロバイダー認証情報 URL を持つ providerSetupGuide が含まれることがあります。Gmail アドレスでは、providerSetupGuide.accountConfigPreset に非機密の IMAP、SMTP、ユーザー名フィールドがすべて含まれます。saveAccount へ変更せず渡し、不足しているアプリパスワードだけをユーザーに尋ねてください。他のドメインではサーバープリセットを返しません。"
+      "description": "設定済みのメールアカウントを一覧表示します。クエリが空の場合はすべてを表示し、指定された場合はアカウント ID、メールアドレス、エイリアス、あいまいなエイリアスまたはメールアドレスの順で照合します。完全一致でも複数件を返すことがあります。メールアドレスの完全一致がない場合、固定されたプロバイダー認証情報 URL を持つ providerSetupGuide が含まれることがあります。Gmail アドレスでは、providerSetupGuide.accountConfigPreset に非機密の IMAP、SMTP、ユーザー名フィールドがすべて含まれます。mail_account(command=save) へ変更せず渡し、不足しているアプリパスワードだけをユーザーに尋ねてください。他のドメインではサーバープリセットを返しません。"
     },
     {
       "name": "mail_account_save",
@@ -657,7 +681,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "IMAP と SMTP の両方の接続をテストし、両方が成功した場合にのみメール アカウントを保存します。必要な構成フィールドがすべて利用可能になったらすぐにこれを呼び出します。この操作にはユーザーの承認が必要です。"
+      "description": "受信サーバー（IMAP または POP3）と SMTP をテストし、両方成功した場合のみ保存します。必須設定が揃い次第呼び出します。ユーザー承認が必要です。"
     },
     {
       "name": "mail_delete",
@@ -673,7 +697,7 @@
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "メールの概要を一覧表示、絞り込み、または検索します。件名、送信者、受信者、本文が検索対象です。ユーザーが受信メールと送信メールの両方を求める場合、または方向を限定していない場合は folder ALL を一度使用し、明示的に一方向だけを指定した場合に限り INBOX または SENT を使用します。プロバイダー固有のフォルダー名を推測したり、完了済みのクエリを再試行したりしないでください。各結果には最大 500 文字のプレビューが含まれ、一覧や一括要約に使用できます。一覧クエリの完了後に全メールの本文を個別に読まないでください。同じ Worker 実行内で nextCursor を再度たどらず、続きがあることを伝え、後のユーザー要求で検索を続行します。会話履歴に以前のメール結果があっても、新しい一覧、検索、フィルター、期間指定、要約、再整形の依頼ごとにこの Tool を再度呼び出してください。過去の messageRefs は、すでに明確に選択された同一メールへの操作に限って再利用できます。アカウントが 1 つだけ、または既定のアカウントが一意の場合は accountId を空にできます。 条件付きクエリが失敗した場合は、より広い結果を作るためにクエリ、送信者、時間フィルターを削除または変更せず、失敗を報告してください。"
+      "description": "メールの概要を一覧表示、絞り込み、または検索します。件名、送信者、受信者、本文が検索対象です。ユーザーが受信メールと送信メールの両方を求める場合、または方向を限定していない場合は folder ALL を一度使用し、明示的に一方向だけを指定した場合に限り INBOX または SENT を使用します。プロバイダー固有のフォルダー名を推測したり、完了済みのクエリを再試行したりしないでください。各結果には最大 500 文字のプレビューが含まれ、一覧や一括要約に使用できます。一覧クエリの完了後に全メールの本文を個別に読まないでください。同じ 実行内で nextCursor を再度たどらず、続きがあることを伝え、後のユーザー要求で検索を続行します。会話履歴に以前のメール結果があっても、新しい一覧、検索、フィルター、期間指定、要約、再整形の依頼ごとにこの Tool を再度呼び出してください。過去の messageRefs は、すでに明確に選択された同一メールへの操作に限って再利用できます。アカウントが 1 つだけ、または既定のアカウントが一意の場合は accountId を空にできます。 条件付きクエリが失敗した場合は、より広い結果を作るためにクエリ、送信者、時間フィルターを削除または変更せず、失敗を報告してください。 POP3 は INBOX のみで既読絞込不可。NEWEST_FIRST/OLDEST_FIRST はサーバーの通番順で日付順を保証しません。日付絞込は送信者の Date ヘッダーを使い、既読非対応時の isRead は null です。"
     },
     {
       "name": "mail_read",
@@ -681,7 +705,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "mail_list が返した messageRef のメールを 1 件読み、サーバー上で既読にします。ユーザーが本文全体、添付ファイルのメタデータ、または mail_list のプレビューにない正確な詳細を明示的に必要とする場合にのみ使用してください。一覧や一括要約を作るだけのために全メールへ使用しないでください。同じ messageRef と bodyCursor の組み合わせを繰り返してはいけません。Tool が成功したら、同じ応答内でユーザー向けにメールを要約します。"
+      "description": "mail(command=list) の messageRef からメールを 1 件読みます。IMAP は既読にし、Gmail と POP3 は読み取り専用です。 ユーザーが本文全体、添付ファイルのメタデータ、または mail(command=list) のプレビューにない正確な詳細を明示的に必要とする場合にのみ使用してください。一覧や一括要約を作るだけのために全メールへ使用しないでください。同じ messageRef と bodyCursor の組み合わせを繰り返してはいけません。Tool が成功したら、同じ応答内でユーザー向けにメールを要約します。"
     },
     {
       "name": "mail_send",
@@ -697,7 +721,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "最近の Android 通話ログ エントリを一覧表示します。オプションで通話タイプ別にフィルタリングできます。 READ_CALL_LOG 権限が必要です。不在着信に関する質問や、不在着信を選択して折り返し電話する前に、type=missed を使用します。番号を選択したら、phone_dial に電話します。"
+      "description": "最近の Android 通話ログ エントリを一覧表示します。オプションで通話タイプ別にフィルタリングできます。 READ_CALL_LOG 権限が必要です。不在着信に関する質問や、不在着信を選択して折り返し電話する前に、type=missed を使用します。番号を選択したら、phone(command=dial) に電話します。"
     },
     {
       "name": "contacts_create",
@@ -721,7 +745,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "1 つの電話番号または名前付き連絡先に対してシステム ダイヤラを開きます。 phoneNumber と contactName のいずれかを正確に設定します。名前付き連絡先は 1 つの一致に解決される必要があります。複数の連絡先が一致する場合は、停止してユーザーに選択を求めます。ダイヤラが開いたら、get_screen_info を呼び出し、表示されている通話ボタンを確認して、tap_node を呼び出します。"
+      "description": "1 つの番号または連絡先でシステムダイヤラーを開きます。phoneNumber と contactName は片方だけ必須です。連絡先は一意に特定し、複数候補なら停止して選択を求めます。番号を入力するだけなので、開く依頼のみなら終了します。発信を頼まれた場合のみ画面操作で通話ボタンを特定しタップします。開く・タップの結果だけで接続済みとは言いません。"
     },
     {
       "name": "send_to_sms_message",
@@ -729,7 +753,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "承認後、表示されている SMS/MMS ドラフトを開きます。受信者を含むテキスト SMS の場合、FoneClaw アクセシビリティが接続されており、デフォルトのメッセージ アプリ、受信者、メッセージ本文全体、および 1 つの安定した送信コントロールがすべて検証されている場合にのみ、自動的に [送信] をタップします。添付ファイル、デュアル SIM プロンプト、あいまいな UI、または利用できないアクセシビリティについては、手動での対処が必要です。最終的な結果が得られた後は、ツールの計画を停止し、get_screen_info または tap_node を決して呼び出さないでください。"
+      "description": "承認後、表示されている SMS/MMS ドラフトを開きます。受信者を含むテキスト SMS の場合、FoneClaw アクセシビリティが接続されており、デフォルトのメッセージ アプリ、受信者、メッセージ本文全体、および 1 つの安定した送信コントロールがすべて検証されている場合にのみ、自動的に [送信] をタップします。添付ファイル、デュアル SIM プロンプト、あいまいな UI、または利用できないアクセシビリティについては、手動での対処が必要です。最終的な結果が得られた後は、ツールの計画を停止し、screen(command=read) または screen(command=tap) を決して呼び出さないでください。"
     },
     {
       "name": "sms_list",
@@ -737,7 +761,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "この Android デバイスのライブ SMS を照会します。キーワード、アドレス、連絡先、threadId がなければ最近のメッセージを表示し、指定された条件で検索します。会話を読む threadId は以前の sms_list 結果だけから設定してください。要約では box=all と includeBody=true で一度だけ呼び出し、返された送受信メッセージだけを要約します。件数には returnedBreakdown を使用し、その byAddress 行は分けたままにします。SysInfo 履歴でこのライブ結果を代用しないでください。"
+      "description": "この Android デバイスのライブ SMS を照会します。キーワード、アドレス、連絡先、threadId がなければ最近のメッセージを表示し、指定された条件で検索します。会話を読む threadId は以前の sms(command=list) 結果だけから設定してください。要約では box=all と includeBody=true で一度だけ呼び出し、返された送受信メッセージだけを要約します。件数には returnedBreakdown を使用し、その byAddress 行は分けたままにします。SysInfo 履歴でこのライブ結果を代用しないでください。"
     },
     {
       "name": "calendar_create_event",
@@ -745,7 +769,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Android カレンダー イベントを作成します。終日イベントでは allDay=true を設定し、開始を当日の現地午前0時、終了を翌日の現地午前0時（排他的）にしてください。このツールを呼び出す前に、不足している時刻情報とリマインダーの詳細を収集します。ユーザーが指定した場所名で十分なので、locationName として直接渡す必要があります。ユーザーがその場所を確認、解決、選択、または移動することを明示的に要求しない限り、正確な住所や座標を検索しないでください。ユーザー日付と相対日付には、yyyy-MM-dd HH:mm の startLocalDateTime/endLocalDateTime を優先します。ツールはデバイスのタイムゾーンでそれらを解析します。モデルが計算したエポックミリ秒からイベントを作成しないでください。ユーザーがカレンダー ID を明示的に選択しない限り、calendarId=0 を使用します。作成後、ツールの結果 actualStart/actualEnd をユーザー側の作成時刻として使用します。"
+      "description": "Android カレンダー イベントを作成します。終日イベントでは allDay=true を設定し、開始を当日の現地午前0時、終了を翌日の現地午前0時（排他的）にしてください。開始と終了は両方必須です。依頼から終了時刻や長さが分からなければ質問し、長さを創作しません。任意の通知は既定で 30 分前です。ユーザーが指定した場所名で十分なので、locationName として直接渡す必要があります。ユーザーがその場所を確認、解決、選択、または移動することを明示的に要求しない限り、正確な住所や座標を検索しないでください。ユーザー日付と相対日付には、yyyy-MM-dd HH:mm[:ss] の startLocalDateTime/endLocalDateTime を優先します。ツールはデバイスのタイムゾーンでそれらを解析します。モデルが計算したエポックミリ秒からイベントを作成しないでください。ユーザーがカレンダー ID を明示的に選択しない限り、calendarId=0 を使用します。作成後、ツールの結果 actualStart/actualEnd をユーザー側の作成時刻として使用します。"
     },
     {
       "name": "calendar_delete_event",
@@ -753,7 +777,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Android カレンダー イベントを ID で削除します。ユーザーがカレンダー ID を明示的に選択しない限り、calendarId=0 を使用してすべてのカレンダーのイベントを検索/一覧表示します。ターゲットが明確になるように、既知のタイトル、および既知の場所を常に渡します。"
+      "description": "calendar(command=list_events) または calendar(command=search_events) の正確な eventId で予定を 1 件削除します。返されたタイトル・時刻・場所で特定し、曖昧なら選択を求めます。この操作には eventId だけ渡します。"
     },
     {
       "name": "calendar_list_calendars",
@@ -769,7 +793,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "具体的な時間範囲内の Android カレンダー イベントをリストします。今日のスケジュール、明日のスケジュール、既存のイベント、または今週のイベントなどのリクエストに使用します。 yyyy-MM-dd HH:mm:ss では startLocalDateTime/endLocalDateTime を優先します。ツールはデバイスのタイムゾーンでそれらを解析します。 calendarId を推測しないでください。ユーザーがカレンダー ID を明示的に選択しない限り、すべてのカレンダーを検索するには calendarId=0 を使用します。"
+      "description": "具体的な時間範囲内の Android カレンダー イベントをリストします。今日のスケジュール、明日のスケジュール、既存のイベント、または今週のイベントなどのリクエストに使用します。 yyyy-MM-dd HH:mm[:ss] では startLocalDateTime/endLocalDateTime を優先します。ツールはデバイスのタイムゾーンでそれらを解析します。 calendarId を推測しないでください。ユーザーがカレンダー ID を明示的に選択しない限り、すべてのカレンダーを検索するには calendarId=0 を使用します。"
     },
     {
       "name": "calendar_open_event",
@@ -785,7 +809,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Android のカレンダー イベントを、具体的な時間範囲内のキーワードで検索します。ユーザーがタイトルまたは内容でイベントを説明する場合、イベントを開く、更新、または削除する前に使用します。 yyyy-MM-dd HH:mm では startLocalDateTime/endLocalDateTime を優先します。ツールはデバイスのタイムゾーンでそれらを解析します。 calendarId を推測しないでください。ユーザーがカレンダー ID を明示的に選択しない限り、すべてのカレンダーを検索するには calendarId=0 を使用します。"
+      "description": "Android のカレンダー イベントを、具体的な時間範囲内のキーワードで検索します。ユーザーがタイトルまたは内容でイベントを説明する場合、イベントを開く、更新、または削除する前に使用します。 yyyy-MM-dd HH:mm[:ss] では startLocalDateTime/endLocalDateTime を優先します。ツールはデバイスのタイムゾーンでそれらを解析します。 calendarId を推測しないでください。ユーザーがカレンダー ID を明示的に選択しない限り、すべてのカレンダーを検索するには calendarId=0 を使用します。"
     },
     {
       "name": "calendar_update_event",
@@ -793,7 +817,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Android カレンダー イベントを ID で更新します。ユーザーが自然言語でターゲットを説明するときに最初にイベントを検索/リストし、変更されたフィールドで既知のターゲットの詳細を渡します。 calendarId やイベント ID を推測しないでください。ユーザーがカレンダー ID を明示的に選択しない限り、calendarId=0 を使用してすべてのカレンダーを検索します。空白のテキストフィールドは無視されます。既存の時間を維持するには、blank startLocalDateTime/endLocalDateTime を使用します。リマインダーを保持するには reminderMinutes=-2 を使用し、リマインダーを削除するには -1 を使用します。リマインダーを置き換えるには >=0 を使用します。"
+      "description": "Android カレンダー イベントを ID で更新します。ユーザーが自然言語でターゲットを説明するときに最初にイベントを検索/リストし、変更されたフィールドで既知のターゲットの詳細を渡します。 calendarId やイベント ID を推測しないでください。ユーザーがカレンダー ID を明示的に選択しない限り、calendarId=0 を使用してすべてのカレンダーを検索します。空白のテキストフィールドは無視されます。既存の時間を維持するには、blank startLocalDateTime/endLocalDateTime を使用します。リマインダーを保持するには reminderMinutes=-2 を使用し、リマインダーを削除するには -1 を使用します。リマインダーを置き換えるには >=0 を使用します。 yyyy-MM-dd HH:mm[:ss]."
     },
     {
       "name": "memo_create",
@@ -801,7 +825,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "ユーザーに表示される To-do を To-do Center に追加します。「To-do を追加」「To-do を記録」、添加待办、记录待办、またはユーザーが残したい実行可能なリマインダーに使用します。保存するのはユーザーの内容であり、アシスタントのプロファイルメモリや Main の内部実行計画ではありません。Calendar や Alarm Tool を呼ばず、Worker 環境から直接日付を解決します。To-do のスケジュールは、ユーザーの依頼または明示的に参照された情報源に、確定した日付、一意に解決できる相対日（今日、明日、明後日、ちょうど 2 日後 / 两天后）、または明示的な日付範囲がある場合に限ります。current_date とタイムゾーンは計算基準にすぎず、ユーザー指定の予定ではありません。日付がない、または時期が曖昧（这两天、这个两天、过几天、近期、有空、改天、soon、sometime this week、in a couple of days）なら、startDate と endDate を省略または空にして、日付なしの To-do を Unscheduled（时间待定）に作成します。今日を既定にしたり、都合のよい日を選んだり、曖昧な期間を複数日の予定に変えたりせず、曖昧な時期の表現は内容に残します。内容が分かっているなら、作成のためだけに日付を尋ねません。確定日は現在の実行コンテキストから解決し、時刻が不明でも明示された日付を未定にしません。更新で内容だけが変わり予定の意図がなければ既存の日付を保持します。予定の削除、時期未定、曖昧な時期への変更が明示された場合は、空の日付文字列と clearStartDate=true で両方の日付を消去し、Unscheduled に移します。推測ではなく Tool の結果にある保存先の Unscheduled セクションまたは日付を報告します。内部の task_pool 結果マーカーはユーザー向け応答で Unscheduled（时间待定）セクションを指します。この規則は To-do に適用し、カレンダーイベントやアラームには適用しません。"
+      "description": "ユーザーに表示される To-do を To-do Center に追加します。「To-do を追加」「To-do を記録」、添加待办、记录待办、またはユーザーが残したい実行可能なリマインダーに使用します。保存するのはユーザーの内容であり、アシスタントのプロファイルメモリや Main の内部実行計画ではありません。Calendar や Alarm Tool を呼ばず、ランタイム 環境から直接日付を解決します。To-do のスケジュールは、ユーザーの依頼または明示的に参照された情報源に、確定した日付、一意に解決できる相対日（今日、明日、明後日、ちょうど 2 日後 / 两天后）、または明示的な日付範囲がある場合に限ります。ランタイムが提供した元の依頼時刻 とタイムゾーンは計算基準にすぎず、ユーザー指定の予定ではありません。日付がない、または時期が曖昧（这两天、这个两天、过几天、近期、有空、改天、soon、sometime this week、in a couple of days）なら、startDate と endDate を省略または空にして、日付なしの To-do を Unscheduledに作成します。今日を既定にしたり、都合のよい日を選んだり、曖昧な期間を複数日の予定に変えたりせず、曖昧な時期の表現は内容に残します。内容が分かっているなら、作成のためだけに日付を尋ねません。確定日はランタイム提供の元の依頼時刻とタイムゾーンから解決し、時刻が不明でも明示された日付を未定にしません。更新で内容だけが変わり予定の意図がなければ既存の日付を保持します。予定の削除、時期未定、曖昧な時期への変更が明示された場合は、空の日付文字列と clearStartDate=true で両方の日付を消去し、Unscheduled に移します。推測ではなく Tool の結果にある保存先の Unscheduled セクションまたは日付を報告します。 内部 task_pool は日付未定のセクションを示します。応答言語で表現し、マーカーや別言語の訳を付けません。 この規則は To-do に適用し、カレンダーイベントやアラームには適用しません。"
     },
     {
       "name": "memo_delete",
@@ -817,7 +841,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "To-do Center にあるユーザーの To-do リスト（待办列表）を表示します。status は active、done、archived、all のいずれかです。これは個人の To-do を照会するもので、Main の内部実行計画やアシスタントのプロファイルメモリではありません。空の結果はこの To-do リストだけに該当します。"
+      "description": "To-do Center にあるユーザーの To-do リストを表示します。status は active、done、archived、all のいずれかです。これは個人の To-do を照会するもので、Main の内部実行計画やアシスタントのプロファイルメモリではありません。空の結果はこの To-do リストだけに該当します。"
     },
     {
       "name": "memo_mark_done",
@@ -841,7 +865,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "To-do Center のユーザー To-do を id で編集します。対象が自然言語で説明された場合は、先に To-do を検索または一覧表示し、既知の対象情報と変更フィールドを渡します。編集対象はユーザーの To-do であり、アシスタントのプロファイルメモリや Main の内部実行計画ではありません。空の title/content/tags と日付文字列は既存値を維持します。現在の Worker 環境から解決した yyyy-MM-dd を使い、エポックミリ秒を計算したり、日付解決だけのために Calendar や Alarm Tool を呼んだりしません。スケジュールは、依頼または明示的な参照元に確定日、一意に解決できる相対日（今日、明日、明後日、ちょうど 2 日後 / 两天后）、または明示的な範囲がある場合だけ設定します。current_date とタイムゾーンは計算基準であり、ユーザー指定の予定ではありません。日付がない、または時期が曖昧（这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days）なら、startDate と endDate を省略または空にして Unscheduled（时间待定）にします。今日を既定にしたり、都合のよい日を選んだり、曖昧な期間を複数日の予定に変えたりせず、曖昧な時期は内容に残します。内容が分かっているなら日付だけを尋ねません。確定日は現在の実行コンテキストから解決し、時刻不明でも明示日を未定にしません。内容だけの更新で予定の意図がなければ既存日を保持します。予定の削除、時期未定、曖昧な時期への変更が明示されたら、空の日付文字列と clearStartDate=true で両方の日付を消去して Unscheduled に移します。推測ではなく Tool 結果の Unscheduled セクションまたは保存日を報告します。内部 task_pool マーカーはユーザー向け応答で Unscheduled（时间待定）セクションを指します。この規則は To-do に適用し、カレンダーイベントやアラームには適用しません。"
+      "description": "To-do Center のユーザー To-do を id で編集します。対象が自然言語で説明された場合は、先に To-do を検索または一覧表示し、既知の対象情報と変更フィールドを渡します。編集対象はユーザーの To-do であり、アシスタントのプロファイルメモリや Main の内部実行計画ではありません。空の title/content/tags と日付文字列は既存値を維持します。現在の ランタイム 環境から解決した yyyy-MM-dd を使い、エポックミリ秒を計算したり、日付解決だけのために Calendar や Alarm Tool を呼んだりしません。スケジュールは、依頼または明示的な参照元に確定日、一意に解決できる相対日（今日、明日、明後日、ちょうど 2 日後 / 两天后）、または明示的な範囲がある場合だけ設定します。ランタイムが提供した元の依頼時刻 とタイムゾーンは計算基準であり、ユーザー指定の予定ではありません。日付がない、または時期が曖昧（这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days）なら、startDate と endDate を省略または空にして Unscheduledにします。今日を既定にしたり、都合のよい日を選んだり、曖昧な期間を複数日の予定に変えたりせず、曖昧な時期は内容に残します。内容が分かっているなら日付だけを尋ねません。確定日はランタイム提供の元の依頼時刻とタイムゾーンから解決し、時刻不明でも明示日を未定にしません。内容だけの更新で予定の意図がなければ既存日を保持します。予定の削除、時期未定、曖昧な時期への変更が明示されたら、空の日付文字列と clearStartDate=true で両方の日付を消去して Unscheduled に移します。推測ではなく Tool 結果の Unscheduled セクションまたは保存日を報告します。 内部 task_pool は日付未定のセクションを示します。応答言語で表現し、マーカーや別言語の訳を付けません。 この規則は To-do に適用し、カレンダーイベントやアラームには適用しません。"
     },
     {
       "name": "sysinfo_delete",
@@ -865,7 +889,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "すでに取得されているローカル通知、SMS、通話ログ、カレンダー イベント、およびアクセシビリティ入力をクエリします。この 1 つのツールを使用して、毎日の概要、通知クエリ、時間枠クエリ、キーワード検索を実行します。システム パネルを開いたり、ライブ システム ソースをスキャンしたりすることはありません。各行には、ライブプロバイダーの結果に対する重複排除のための sourceRef が含まれる場合があります。ユーザーに対して返された JSON を要約します。"
+      "description": "収集済みのローカル通知、SMS、メール概要、通話履歴、予定、アクセシビリティ入力を情報源・期間・キーワードで検索します。収集漏れや古い記録があり、現在の状態を示すものではありません。システムパネルを開かずライブ情報源を走査しません。各行の sourceRef でライブ提供元の結果と重複排除できます。返された JSON をユーザーに要約します。"
     },
     {
       "name": "sysinfo_thread",
@@ -873,7 +897,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "sysinfo_query によって返された threadKey によって 1 つのローカル SysInfo スレッドをロードします。"
+      "description": "sysinfo(command=query) によって返された threadKey によって 1 つのローカル SysInfo スレッドをロードします。"
     },
     {
       "name": "purchase_query",
@@ -897,7 +921,7 @@
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "ショッピング プラットフォーム上の製品の公開 Web 結果を検索し、比較証拠を返します。買い物の価格についてアドバイスする前にこれを使用してください。"
+      "description": "Shopee 台湾（shopee.tw）と momo（momo.com.tw）の公開ウェブを検索し、読み取り専用の商品比較根拠を返します。地域は検索ヒントで国別サイト指定ではありません。抽出価格は候補で、確定購入価格・在庫・送料・クーポンではありません。価格助言前に使います。"
     },
     {
       "name": "web_fetch",
@@ -905,7 +929,7 @@
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "URL によって特定の Web ページを取得し、読み取り可能なページ テキストを返します。"
+      "description": "URL で HTTP/HTTPS ページを取得し、最大 maxChars 文字の可読テキストを返します。読み取り専用 HTTP 取得で、対話型ブラウザや JavaScript レンダラーではありません。空または切り詰めたテキストは全文を読んだ証拠になりません。"
     },
     {
       "name": "web_search",
@@ -921,7 +945,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Create a local time-triggered automation, managed in the Automations sidebar page. The automation runs unattended on this device around the given local time; Android may delay execution. Results are delivered as system notifications. Only read-only web research is allowed during unattended runs. Parameters: title (short), prompt (the exact instruction to run), hour (0-23 local), minute (0-59 local), repeat (\"once\", \"everyday\", \"weekdays\", or \"custom\"), weekdays (required for custom; 1=Monday ... 7=Sunday). Returns the created task id."
+      "description": "サイドバーの自動化ページで管理するローカル時刻トリガーを作成します。指定時刻付近に無人実行され、Android が遅延させる場合があります。結果はシステム通知。無人実行では読み取り専用ウェブ調査のみ許可されます。対象日付パラメータはなく、once は作成後の次の hour/minute で任意の将来日ではありません。prompt 内の日付が予定を変えると説明しません。作成したタスク id を返します。"
     },
     {
       "name": "scheduled_task_delete",
@@ -945,7 +969,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Enqueue an immediate run of an existing automation. It is deduplicated against the same day's scheduled run, so running twice in one day executes at most once."
+      "description": "既存自動化の即時手動実行をキューに入れます。確認は投入のみで完了ではありません。待機中の手動実行は統合されます。後の手動実行は再実行でき、定時実行とは独立です。1 日 1 回とは約束しません。"
     },
     {
       "name": "scheduled_task_set_enabled",
@@ -961,7 +985,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Update the instruction for future runs of an existing automation. First use scheduled_task_list to identify the existing task and preserve unrelated instructions. Does not create a task or run it now. Preserves title, schedule and enabled state. Ask which task if the target is ambiguous."
+      "description": "既存自動化の今後の実行指示を更新します。まず scheduled_task(command=list) で特定し、無関係な指示を保持します。新規作成や即時実行はしません。タイトル・予定・有効状態を保持し、曖昧なら対象を質問します。"
     },
     {
       "name": "shortcut_save_agent_prompt",
@@ -969,7 +993,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "エージェントにプロンプトを送信するユーザー作成のショートカットを保存します。ユーザーがタイトル、説明、動作を確認した後にのみこれを呼び出してください。"
+      "description": "起動時に Agent へプロンプトを送るユーザー作成ショートカットを保存します。保存時には実行しません。タイトル・説明・動作の確認後のみ呼び出します。"
     },
     {
       "name": "shortcut_save_direct_tool",
@@ -977,7 +1001,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "ユーザーが作成したダイレクト ツールのショートカットを保存します。これは、要求されたすべてのアクションを完全なパラメーターを持つ既知のツール ステップに完全にマッピングできる場合にのみ呼び出します。"
+      "description": "すべての依頼操作を既知の原子ツールと完全な引数に対応できる場合のみ、直接ツールのユーザーショートカットを保存します。保存は実行しません。Main ドメイン command でなく各原子操作の固定契約を使います。引数は実行時式を含まないリテラルです。相対的な期間を固定日付として保存しません。"
     },
     {
       "name": "task_create",
@@ -985,7 +1009,7 @@
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "現在のユーザー要求に対する完全な順序付き TODO 計画を 1 回の呼び出しで作成します。ルーティングによって 2 つ以上の具体的な Main ステップが生じるか Profiles をまたぐ場合、非タスク Tool より前に必須です。delegate または Plugin Tool の各呼び出しを 1 ステップとして数え、Worker 内部の処理数にかかわらず 1 delegate は 1 ステップのままです。境界が明確でユーザー向けの全ステップを items に渡します。計画は 1 回だけ作成でき、後から拡張できません。タスク管理、後片付け、状態更新、最終応答の項目を含めないでください。この内部実行計画はユーザーの永続的な To-do Center ではありません。個人 To-do の作成、検索、完了、削除は scopes=[memo] で Personal Organization に委任し、代わりに memo_* Tools を使用します。"
+      "description": "現在の依頼の完全な順序付き TODO 計画を一度に作成します。具体的な Main 手順が 2 つ以上なら、非タスク Tool 前の必須条件です。直接実行できる業務または Plugin Tool 手順を各 1 件と数え、すべての有界なユーザー向け手順を items に渡します。作成は一度だけで拡張不可。タスク管理・清掃・状態更新・最終応答は含めません。ユーザーの永続 To-do Center とは異なります。個人 To-do は memo ツールを使います。"
     },
     {
       "name": "task_list",
@@ -993,7 +1017,7 @@
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "現在のユーザー要求に対する内部 TODO 項目を一覧表示します。既定では open、in_progress、blocked の項目を返します。この内部実行計画はユーザーの永続的な To-do Center ではありません。個人 To-do の作成、検索、完了、削除は scopes=[memo] で Personal Organization に委任し、memo_* Tools を使用します。"
+      "description": "現在のユーザー要求に対する内部 TODO 項目を一覧表示します。既定では open、in_progress、blocked の項目を返します。この内部実行計画はユーザーの永続的な To-do Center ではありません。個人 To-do の作成、検索、完了、削除には memo ツールを使います。"
     },
     {
       "name": "task_update",
@@ -1001,7 +1025,7 @@
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "内部 TODO 項目を 1 件更新します。許可される状態遷移は、open から in_progress、blocked、abandoned、in_progress から blocked、done、abandoned、blocked から open または abandoned です。done と abandoned は最終状態です。in_progress にできるタスクは同時に 1 件だけです。この内部実行計画はユーザーの永続的な To-do Center ではありません。個人 To-do の作成、検索、完了、削除は scopes=[memo] で Personal Organization に委任し、memo_* Tools を使用します。"
+      "description": "内部 TODO 項目を 1 件更新します。許可される状態遷移は、open から in_progress、blocked、abandoned、in_progress から blocked、done、abandoned、blocked から open または abandoned です。done と abandoned は最終状態です。in_progress にできるタスクは同時に 1 件だけです。この内部実行計画はユーザーの永続的な To-do Center ではありません。個人 To-do の作成、検索、完了、削除には memo ツールを使います。"
     },
     {
       "name": "workflow_delete",
@@ -1009,7 +1033,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "保存されたワークフローを ID で削除します。"
+      "description": "正確な id で保存済みワークフロー定義を削除します。実行済みの操作は取り消しません。"
     },
     {
       "name": "workflow_list",
@@ -1025,7 +1049,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "再利用可能なワークフローを保存します。 stepsJson は、{toolName, argument} の JSON 配列である必要があります。"
+      "description": "再利用可能なワークフロー定義を保存します。実行・予約はしません。stepsJson は {toolName, arguments} の空でない JSON 配列文字列です。原子 toolName は mail_list、mail_read、mail_send、mail_delete、mail_account_list をサポート。各操作の正確な業務引数を使い、ドメイン command で包みません。保存引数はリテラルで、実行時再計算式ではありません。"
     },
     {
       "name": "accept_skill_proposal",
@@ -1041,7 +1065,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "新しいスキルドキュメントをスキルレジストリに追加します。"
+      "description": "検証後、この正確な id のユーザー Skill を作成または置換し有効化します。信頼できないインポートには preview_import と save_draft を使います。"
     },
     {
       "name": "disable_skill",
@@ -1049,7 +1073,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "ユーザーのスキルを無効にして、エージェントのプロンプトから非表示にします。"
+      "description": "以後の検索対象からユーザー Skill を除外します。既読内容は現在の会話に残ります。"
     },
     {
       "name": "enable_skill",
@@ -1057,7 +1081,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "有効なユーザー スキルを有効にして、エージェントが使用できるようにします。"
+      "description": "有効なユーザー Skill を検索可能にします。"
     },
     {
       "name": "list_skill_proposals",
@@ -1081,7 +1105,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "現在のタスクがシステム プロンプトにリストされているスキルの 1 つと一致する場合、特殊なスキルをロードします。このツールを使用して、スキルの指示とリソースを現在の会話に挿入します。出力には、詳細なワークフロー ガイダンスのほか、スキルと同じディレクトリにあるスクリプト、ファイルなどへの参照が含まれる場合があります。スキル名は、システム プロンプトにリストされているスキルの 1 つと一致する必要があります。"
+      "description": "利用可能なカタログの正確な完全 id で関連 Skill の全文を読みます。文書のみ返し、参照リソースやスクリプトは読み込みません。"
     },
     {
       "name": "plugin_request_install",
@@ -1089,7 +1113,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "1 つの公式プラグインに対して構造化されたインストール提案を作成します。これではプラグインのダウンロードやインストールは行われません。 HomeScreen はユーザーに尋ねる必要があります。"
+      "description": "公式プラグイン 1 件の構造化インストール提案を作ります。ダウンロード・インストールはせず、ホストが提案と確認を扱います。導入済みと主張せず、凍結された今回の実行で新しい機能を使いません。"
     },
     {
       "name": "plugin_search",
@@ -1121,7 +1145,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "スキルを削除する。"
+      "description": "この正確な id のユーザー Skill を削除します。"
     },
     {
       "name": "rollback_skill",
@@ -1129,7 +1153,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "ユーザー Skill を直近にアーカイブされた内容リビジョンへ復元します。"
+      "description": "ユーザー Skill を直近の保存済み内容リビジョンへ戻します。ユーザー Skill とアーカイブ版の両方が必要です。"
     },
     {
       "name": "save_skill_draft",
@@ -1145,7 +1169,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "スキル レジストリ内の既存のスキル ドキュメントを更新します。"
+      "description": "有効状態を維持して既存のユーザー Skill を更新します。"
     }
   ]
 }

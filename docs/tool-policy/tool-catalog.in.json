@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "in",
   "fallbackLocale": "en",
-  "toolCount": 133,
+  "toolCount": 136,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Cari alat atau kemampuan",
@@ -39,7 +39,7 @@
     {
       "name": "Location and Navigation",
       "displayName": "Lokasi dan navigasi",
-      "toolCount": 3
+      "toolCount": 6
     },
     {
       "name": "Mail",
@@ -89,7 +89,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Open a specific visible photo from the system gallery. Gunakan ini hanya ketika pengguna secara eksplisit meminta untuk melihat atau membuka foto tertentu. Do not use this as a follow-up after camera_take_photo unless the user explicitly asks to view or open the captured photo. indexFromLatest berbasis 1 pada urutan terbaru-pertama: 1 membuka foto terbaru, 2 membuka foto terbaru kedua, 3 membuka foto terbaru ketiga."
+      "description": "Open a specific visible photo from the system gallery. Gunakan ini hanya ketika pengguna secara eksplisit meminta untuk melihat atau membuka foto tertentu. Do not use this as a follow-up after camera(command=take_photo) unless the user explicitly asks to view or open the captured photo. indexFromLatest berbasis 1 pada urutan terbaru-pertama: 1 membuka foto terbaru, 2 membuka foto terbaru kedua, 3 membuka foto terbaru ketiga."
     },
     {
       "name": "camera_take_photo",
@@ -97,7 +97,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Ambil foto baru dan kembalikan URI foto yang disimpan bila tersedia. Gunakan ini saat pengguna ingin mengambil foto baru. Biarkan lensFacing tidak disetel atau otomatis untuk pengambilan foto normal. Pilih lensFacing=front only untuk menghadap ke depan atau selfie; pilih kembali hanya ketika pengguna secara eksplisit meminta kamera belakang. Pertahankan eksplisitLensSelection false untuk pengambilan foto biasa/default, meskipun lensa fisik default kembali. Setel eksplisitLensSelection ke benar hanya ketika pengguna secara eksplisit meminta pengambilan gambar depan, belakang, belakang, atau selfie. Jangan panggil camera_open_photo setelah alat ini kecuali pengguna secara eksplisit meminta untuk melihat atau membuka foto. Hubungi alat ini secara langsung. Capture uses the native system camera first. Pengambilan gambar depan/belakang secara eksplisit dapat menggunakan backend langsung hanya jika kamera asli tidak dapat memenuhi lensa yang diminta. Jangan meminta pengguna untuk memberikan izin sebelum memanggil alat ini. Pengenal teknis: explicitLensSelection."
+      "description": "Ambil foto baru dan kembalikan sebagai lampiran gambar jika visi model tersedia. Gunakan ini saat pengguna ingin mengambil foto baru. Biarkan lensFacing tidak disetel atau otomatis untuk pengambilan foto normal. Pilih lensFacing=front only untuk menghadap ke depan atau selfie; pilih kembali hanya ketika pengguna secara eksplisit meminta kamera belakang. Pertahankan eksplisitLensSelection false untuk pengambilan foto biasa/default, meskipun lensa fisik default kembali. Setel eksplisitLensSelection ke benar hanya ketika pengguna secara eksplisit meminta pengambilan gambar depan, belakang, belakang, atau selfie. Jangan panggil camera(command=open_photo) setelah alat ini kecuali pengguna secara eksplisit meminta untuk melihat atau membuka foto. Hubungi alat ini secara langsung. Capture uses the native system camera first. Pengambilan gambar depan/belakang secara eksplisit dapat menggunakan backend langsung hanya jika kamera asli tidak dapat memenuhi lensa yang diminta. Jangan meminta pengguna untuk memberikan izin sebelum memanggil alat ini. Pengenal teknis: explicitLensSelection."
     },
     {
       "name": "cross_app_read_screen",
@@ -121,7 +121,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Dapatkan elemen UI dari layar aplikasi yang sedang terlihat. Setiap elemen memiliki ID node, misalnya [n3], yang dapat digunakan dengan tap_node atau input_text. Jangan gunakan alat ini untuk membaca, mencantumkan, mencari, atau meringkas notifikasi Android; gunakan alat sysinfo. Jangan simpan hasil dalam cache karena ID node berubah pada setiap panggilan."
+      "description": "Dapatkan elemen UI dari layar aplikasi yang sedang terlihat. Setiap elemen memiliki ID node, misalnya [n3], yang dapat digunakan dengan screen(command=tap), screen(command=scroll) atau screen(command=input_text). Jangan gunakan alat ini untuk membaca, mencantumkan, mencari, atau meringkas notifikasi Android; gunakan alat sysinfo. Jangan simpan hasil dalam cache karena ID node berubah pada setiap panggilan."
     },
     {
       "name": "input_text",
@@ -129,7 +129,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Ganti teks dalam satu kolom yang terlihat dan dapat diedit di aplikasi Android saat ini. Panggil get_screen_info terlebih dahulu dan teruskan node saat ini yang ditandai edit. Tindakan ini hanya memasukkan teks; tidak mengirim formulir, mengetuk Kirim, atau menekan Enter. Jangan gunakan ulang ID node."
+      "description": "Ganti teks dalam satu kolom yang terlihat dan dapat diedit di aplikasi Android saat ini. Panggil screen(command=read) terlebih dahulu dan teruskan node saat ini yang ditandai edit. Tindakan ini hanya memasukkan teks; tidak mengirim formulir, mengetuk Kirim, atau menekan Enter. Jangan gunakan ulang ID node."
     },
     {
       "name": "launch_app",
@@ -145,7 +145,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Periksa apakah nama paket Android yang tepat tercantum di Google Play dengan meminta https://play.google.com/store/apps/details?id=<packageName>. Ini adalah pemeriksaan jaringan hanya-baca. Gunakan sebelum play_store_install."
+      "description": "Periksa apakah nama paket Android yang tepat tercantum di Google Play dengan meminta https://play.google.com/store/apps/details?id=<packageName>. Ini adalah pemeriksaan jaringan hanya-baca. Gunakan sebelum app(command=install_store_app)."
     },
     {
       "name": "play_store_install",
@@ -169,7 +169,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Tangkap layar Android dengan layanan aksesibilitas FoneClaw. Gambar disimpan dalam cache privat aplikasi untuk digunakan Agent dan tidak ditambahkan ke galeri sistem. Gunakan targetType=current untuk layar saat ini, targetType=app dengan targetApp untuk membuka aplikasi dan menangkapnya, atau targetType=notification_shade hanya untuk tangkapan layar eksplisit atau permintaan pengambilan gambar yang melibatkan bayangan notifikasi yang terlihat. Jangan pernah menggunakan targetType=notification_shade untuk membaca, membuat daftar, menanyakan, atau meringkas data notifikasi; gunakan alat notifikasi SysInfo sebagai gantinya. Jangan panggil launch_app atau system_panel_open sebelum alat ini untuk menangkap bayangan aplikasi atau notifikasi. Jangan gunakan ini ketika pengguna ingin melihat tangkapan layar yang sudah disimpan; gunakan screenshot_open untuk melihat tangkapan layar yang disimpan."
+      "description": "Tangkap layar Android dengan layanan aksesibilitas FoneClaw. Gambar disimpan dalam cache privat aplikasi untuk digunakan Agent dan tidak ditambahkan ke galeri sistem. Gunakan targetType=current untuk layar saat ini, targetType=app dengan targetApp untuk membuka aplikasi dan menangkapnya, atau targetType=notification_shade hanya untuk tangkapan layar eksplisit atau permintaan pengambilan gambar yang melibatkan bayangan notifikasi yang terlihat. Jangan pernah menggunakan targetType=notification_shade untuk membaca, membuat daftar, menanyakan, atau meringkas data notifikasi; gunakan alat notifikasi SysInfo sebagai gantinya. Jangan panggil app(command=launch) atau system_panel(command=open) sebelum alat ini untuk menangkap bayangan aplikasi atau notifikasi. Jangan gunakan ini ketika pengguna ingin melihat tangkapan layar yang sudah disimpan; gunakan screenshot(command=open) untuk melihat tangkapan layar yang disimpan. Gunakan hanya jika hasil yang diminta mencakup tangkapan atau analisis gambar layar. Cari, ketik, ketuk atau konfirmasi GUI bukan permintaan gambar; gunakan pembacaan aksesibilitas. Halaman memuat atau hasil tak pasti tidak mengubah batas. Jangan tangkap hanya untuk mencari/memverifikasi kontrol, memulihkan node usang atau mengganti label hilang. Sukses sudah mengembalikan lampiran gambar; jangan buka galeri untuk mencari atau memverifikasi."
     },
     {
       "name": "scroll",
@@ -177,7 +177,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Menggulir aplikasi saat ini ke arah yang diminta. Utamakan node yang dapat digulir dari informasi layar terbaru, atau gunakan area layar yang terlihat jika tidak ada kontainer yang dapat digulir. Periksa kembali layar setelah menggulir get_screen_info."
+      "description": "Gulir aplikasi dengan tindakan aksesibilitas kompatibel atau gestur geser terbatas. Utamakan ID node terbaru bertanda scroll dari screen(command=read). Gunakan viewport hanya tanpa kontainer layak. Arah adalah tujuan: down bawah, up atas, right kanan, left kiri. Berhasil tidak memastikan isi berubah; panggil screen(command=read) setelah tiap keberhasilan sebelum tindakan berikutnya."
     },
     {
       "name": "tap_node",
@@ -185,7 +185,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Ketuk elemen UI di layar. Elemen diidentifikasi berdasarkan ID simpulnya, yang dapat diperoleh dari alat screen_info get_screen_info."
+      "description": "Ketuk elemen UI di layar. Elemen diidentifikasi berdasarkan ID simpulnya, yang dapat diperoleh dari alat screen(command=read) screen(command=read)."
     },
     {
       "name": "alarm_modify_alarm",
@@ -201,7 +201,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Setel alarm Jam Android. Kumpulkan detail waktu/pengulangan/label yang hilang sebelum memanggil alat ini."
+      "description": "Minta alarm di Jam Android. Tanyakan hanya waktu wajib yang belum ada; gunakan nilai bawaan untuk opsi. Tidak mendukung parameter tanggal kalender."
     },
     {
       "name": "bluetooth_connected_devices",
@@ -337,7 +337,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Buka pengaturan Android di mana pengguna dapat memberikan akses Jangan Ganggu / Kebijakan Pemberitahuan kepada FoneClaw. Jangan langsung memanggil ini setelah dnd_set_mode melaporkan bahwa halaman pengaturan telah dibuka."
+      "description": "Buka pengaturan Android di mana pengguna dapat memberikan akses Jangan Ganggu / Kebijakan Pemberitahuan kepada FoneClaw. Jangan langsung memanggil ini setelah dnd(command=set_mode) melaporkan bahwa halaman pengaturan telah dibuka."
     },
     {
       "name": "dnd_set_mode",
@@ -425,7 +425,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Buka halaman pengaturan Tanggal & waktu Android secara langsung. Gunakan ini untuk pengaturan tanggal, waktu, waktu otomatis, zona waktu, atau zona waktu otomatis. Ini meluncurkan Intent pengaturan sistem dan tidak memerlukan aksesibilitas, pembacaan layar, atau ketukan. Setelah berhasil, jangan panggil launch_app, get_screen_info, atau tap_node."
+      "description": "Buka halaman pengaturan Tanggal & waktu Android secara langsung. Gunakan ini untuk pengaturan tanggal, waktu, waktu otomatis, zona waktu, atau zona waktu otomatis. Ini meluncurkan Intent pengaturan sistem dan tidak memerlukan aksesibilitas, pembacaan layar, atau ketukan. Setelah berhasil, jangan panggil app(command=launch), screen(command=read), atau screen(command=tap)."
     },
     {
       "name": "system_settings_open_hotspot_entry",
@@ -644,12 +644,36 @@
       "description": "Buka layar rute atau navigasi di aplikasi peta untuk tujuan dan mode perjalanan. Tindakan ini meluncurkan aplikasi peta eksternal, hanya menggunakan argumen yang disediakan, dan tidak membaca data perangkat."
     },
     {
+      "name": "travel_plan_append_days",
+      "category": "Location and Navigation",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Tambahkan hari berurutan setelah tanggal terakhir perjalanan tersimpan. Pertahankan semua hari, persiapan, dan daftar barang yang ada. Baca rencana dahulu dan gunakan revision saat ini. Lanjutkan dari tujuan dan penginapan terakhir, kelompokkan kunjungan dekat dan urutkan wilayah antarhari agar tidak bolak-balik. Patuhi janji tetap dan urutan pengguna; sediakan waktu perjalanan dan istirahat realistis tanpa mengklaim rute langsung atau mengarang durasi tepat. Jangan ulangi kunjungan kecuali diminta atau perlu. Jika revision konflik, baca lagi; jangan timpa suntingan bersamaan. Tidak membuat acara kalender atau tugas."
+    },
+    {
+      "name": "travel_plan_read",
+      "category": "Location and Navigation",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Baca rencana perjalanan privat tersimpan dan revision saat ini sebelum mengubah atau memperpanjangnya. Tidak mengubah apa pun."
+    },
+    {
+      "name": "travel_plan_update",
+      "category": "Location and Navigation",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Ganti isi rencana perjalanan tersimpan yang dapat diedit setelah membaca JSON terbarunya. Dapat mengubah tujuan, keberangkatan, tempat, zona waktu, tempo, tanggal, judul hari, nama perhentian, waktu mulai, durasi, catatan, persiapan, kategori dan barang bawaan serta centangnya. Pertahankan id rencana persis, revision saat ini, serta id perhentian/daftar yang ada dari travel_plan_read; buat id hanya untuk item baru. Pertahankan isi yang tidak diminta diubah. updatedPlanJson harus objek TravelPlan JSON lengkap, bukan patch. Jika revision konflik, baca lagi dan gabungkan permintaan ke rencana terbaru; jangan timpa suntingan bersamaan. Nyatakan diperbarui hanya setelah berhasil. Tidak membuat acara kalender atau tugas."
+    },
+    {
       "name": "mail_account_list",
       "category": "Mail",
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Mencantumkan akun email yang dikonfigurasi. Kueri kosong menampilkan semua akun; jika diisi, pencocokan dilakukan berdasarkan ID akun, email, alias, lalu alias atau email secara samar. Kecocokan persis tetap dapat menghasilkan beberapa akun. Jika kueri email persis tidak cocok dengan akun yang dikonfigurasi, hasilnya dapat menyertakan providerSetupGuide dengan URL kredensial penyedia tetap. Untuk alamat Gmail, providerSetupGuide.accountConfigPreset berisi semua kolom IMAP, SMTP, dan nama pengguna yang tidak rahasia; teruskan tanpa perubahan ke saveAccount dan tanyakan hanya kata sandi aplikasi yang masih diperlukan. Preset server tidak dikembalikan untuk domain lain."
+      "description": "Mencantumkan akun email yang dikonfigurasi. Kueri kosong menampilkan semua akun; jika diisi, pencocokan dilakukan berdasarkan ID akun, email, alias, lalu alias atau email secara samar. Kecocokan persis tetap dapat menghasilkan beberapa akun. Jika kueri email persis tidak cocok dengan akun yang dikonfigurasi, hasilnya dapat menyertakan providerSetupGuide dengan URL kredensial penyedia tetap. Untuk alamat Gmail, providerSetupGuide.accountConfigPreset berisi semua kolom IMAP, SMTP, dan nama pengguna yang tidak rahasia; teruskan tanpa perubahan ke mail_account(command=save) dan tanyakan hanya kata sandi aplikasi yang masih diperlukan. Preset server tidak dikembalikan untuk domain lain."
     },
     {
       "name": "mail_account_save",
@@ -657,7 +681,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Uji koneksi IMAP dan SMTP dan simpan akun email hanya jika keduanya berhasil. Hubungi ini segera setelah semua bidang konfigurasi yang diperlukan tersedia. Operasi ini memerlukan persetujuan pengguna."
+      "description": "Uji server penerima (IMAP atau POP3) dan SMTP, simpan hanya jika keduanya berhasil. Panggil begitu semua konfigurasi wajib tersedia. Memerlukan persetujuan pengguna."
     },
     {
       "name": "mail_delete",
@@ -673,7 +697,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Mencantumkan, memfilter, atau mencari ringkasan pesan berdasarkan subjek, pengirim, penerima, dan isi. Gunakan folder ALL satu kali saat pengguna meminta email masuk dan terkirim sekaligus atau tidak membatasi arah; gunakan INBOX atau SENT hanya untuk satu arah yang dinyatakan dengan jelas. Jangan menebak nama folder khusus penyedia atau mencoba ulang kueri yang sudah selesai. Setiap hasil berisi pratinjau hingga 500 karakter untuk daftar dan rangkuman massal; jangan membaca isi lengkap setiap pesan setelah kueri daftar selesai. Jangan ikuti nextCursor lagi dalam eksekusi Worker yang sama; sampaikan bahwa masih ada hasil dan biarkan permintaan pengguna berikutnya melanjutkan kueri. Panggil Tool ini lagi untuk setiap permintaan daftar, pencarian, filter, rentang tanggal, rangkuman, atau pemformatan ulang yang baru, meskipun riwayat percakapan sudah memuat hasil email sebelumnya. messageRefs lama hanya boleh digunakan kembali untuk tindakan pada pesan tertentu yang sudah dipilih. Kosongkan accountId untuk memakai satu-satunya akun atau satu-satunya akun default. Jika kueri terbatas gagal, laporkan kegagalan tanpa menghapus atau mengubah kueri, pengirim, atau filter waktunya untuk menghasilkan hasil yang lebih luas."
+      "description": "Mencantumkan, memfilter, atau mencari ringkasan pesan berdasarkan subjek, pengirim, penerima, dan isi. Gunakan folder ALL satu kali saat pengguna meminta email masuk dan terkirim sekaligus atau tidak membatasi arah; gunakan INBOX atau SENT hanya untuk satu arah yang dinyatakan dengan jelas. Jangan menebak nama folder khusus penyedia atau mencoba ulang kueri yang sudah selesai. Setiap hasil berisi pratinjau hingga 500 karakter untuk daftar dan rangkuman massal; jangan membaca isi lengkap setiap pesan setelah kueri daftar selesai. Jangan ikuti nextCursor lagi dalam eksekusi yang sama; sampaikan bahwa masih ada hasil dan biarkan permintaan pengguna berikutnya melanjutkan kueri. Panggil Tool ini lagi untuk setiap permintaan daftar, pencarian, filter, rentang tanggal, rangkuman, atau pemformatan ulang yang baru, meskipun riwayat percakapan sudah memuat hasil email sebelumnya. messageRefs lama hanya boleh digunakan kembali untuk tindakan pada pesan tertentu yang sudah dipilih. Kosongkan accountId untuk memakai satu-satunya akun atau satu-satunya akun default. Jika kueri terbatas gagal, laporkan kegagalan tanpa menghapus atau mengubah kueri, pengirim, atau filter waktunya untuk menghasilkan hasil yang lebih luas. POP3 hanya menyediakan INBOX, tanpa filter status baca. NEWEST_FIRST/OLDEST_FIRST memakai urutan pesan server, bukan jaminan urutan tanggal. Filter tanggal memakai header Date pengirim; isRead adalah null jika status baca tak didukung."
     },
     {
       "name": "mail_read",
@@ -681,7 +705,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Membaca satu pesan dari messageRef yang dikembalikan oleh mail_list dan menandainya sudah dibaca di server. Gunakan hanya saat pengguna secara jelas memerlukan isi lengkap, metadata lampiran, atau detail persis yang tidak ada dalam pratinjau mail_list; jangan gunakan untuk setiap pesan hanya demi membuat daftar atau rangkuman massal. Jangan pernah mengulang kombinasi messageRef dan bodyCursor yang sama. Setelah Tool berhasil, rangkum pesan untuk pengguna dalam respons yang sama."
+      "description": "Baca satu pesan dari messageRef hasil mail(command=list). IMAP menandai dibaca; Gmail dan POP3 tetap hanya-baca. Gunakan hanya saat pengguna secara jelas memerlukan isi lengkap, metadata lampiran, atau detail persis yang tidak ada dalam pratinjau mail(command=list); jangan gunakan untuk setiap pesan hanya demi membuat daftar atau rangkuman massal. Jangan pernah mengulang kombinasi messageRef dan bodyCursor yang sama. Setelah Tool berhasil, rangkum pesan untuk pengguna dalam respons yang sama."
     },
     {
       "name": "mail_send",
@@ -697,7 +721,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Cantumkan entri log panggilan Android terbaru, yang dapat difilter berdasarkan jenis panggilan. Membutuhkan izin READ_CALL_LOG. Gunakan type=missed untuk pertanyaan panggilan tidak terjawab dan sebelum memilih panggilan tidak terjawab untuk dihubungi kembali. Setelah memilih nomor, hubungi phone_dial."
+      "description": "Cantumkan entri log panggilan Android terbaru, yang dapat difilter berdasarkan jenis panggilan. Membutuhkan izin READ_CALL_LOG. Gunakan type=missed untuk pertanyaan panggilan tidak terjawab dan sebelum memilih panggilan tidak terjawab untuk dihubungi kembali. Setelah memilih nomor, hubungi phone(command=dial)."
     },
     {
       "name": "contacts_create",
@@ -721,7 +745,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Buka dialer sistem untuk satu nomor telepon atau kontak bernama. Tetapkan tepat salah satu Nomor Telepon dan NamaKontak. Kontak yang disebutkan harus menyelesaikan satu kecocokan; jika beberapa kontak cocok, berhenti dan minta pengguna untuk memilih. Setelah dialer terbuka, panggil get_screen_info, identifikasi tombol panggilan yang terlihat, lalu panggil tap_node. Pengenal teknis: phoneNumber, contactName."
+      "description": "Buka dialer untuk satu nomor atau kontak bernama. Tetapkan tepat satu dari phoneNumber dan contactName. Kontak harus cocok tunggal; jika beberapa, berhenti dan minta pilihan. Hanya mengisi dialer; jika hanya diminta membuka, selesai. Jika diminta menelepon, gunakan operasi layar untuk mengenali dan mengetuk tombol Panggil. Hasil buka atau ketuk tidak membuktikan panggilan tersambung."
     },
     {
       "name": "send_to_sms_message",
@@ -729,7 +753,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Setelah disetujui, buka draf SMS/MMS yang terlihat. Untuk SMS teks dengan penerima, secara otomatis ketuk Kirim hanya ketika aksesibilitas FoneClaw terhubung dan aplikasi pesan default, penerima, isi pesan lengkap, dan satu kontrol Kirim yang stabil semuanya diverifikasi. Lampiran, perintah dual-SIM, UI ambigu, atau aksesibilitas tidak tersedia memerlukan tindakan manual. Setelah hasil terminal apa pun, hentikan perencanaan alat dan jangan pernah memanggil get_screen_info atau tap_node."
+      "description": "Setelah disetujui, buka draf SMS/MMS yang terlihat. Untuk SMS teks dengan penerima, secara otomatis ketuk Kirim hanya ketika aksesibilitas FoneClaw terhubung dan aplikasi pesan default, penerima, isi pesan lengkap, dan satu kontrol Kirim yang stabil semuanya diverifikasi. Lampiran, perintah dual-SIM, UI ambigu, atau aksesibilitas tidak tersedia memerlukan tindakan manual. Setelah hasil terminal apa pun, hentikan perencanaan alat dan jangan pernah memanggil screen(command=read) atau screen(command=tap)."
     },
     {
       "name": "sms_list",
@@ -737,7 +761,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Mengueri SMS langsung di perangkat Android ini. Tanpa kata kunci, alamat, kontak, atau threadId, tampilkan pesan terbaru; gunakan kolom tersebut untuk mencari. Tetapkan threadId hanya dari hasil sms_list sebelumnya. Untuk ringkasan, panggil sekali dengan box=all dan includeBody=true, lalu rangkum hanya pesan masuk dan keluar yang dikembalikan. Gunakan returnedBreakdown untuk jumlah dan pertahankan baris byAddress secara terpisah. Jangan pernah mengganti hasil langsung ini dengan riwayat SysInfo."
+      "description": "Mengueri SMS langsung di perangkat Android ini. Tanpa kata kunci, alamat, kontak, atau threadId, tampilkan pesan terbaru; gunakan kolom tersebut untuk mencari. Tetapkan threadId hanya dari hasil sms(command=list) sebelumnya. Untuk ringkasan, panggil sekali dengan box=all dan includeBody=true, lalu rangkum hanya pesan masuk dan keluar yang dikembalikan. Gunakan returnedBreakdown untuk jumlah dan pertahankan baris byAddress secara terpisah. Jangan pernah mengganti hasil langsung ini dengan riwayat SysInfo."
     },
     {
       "name": "calendar_create_event",
@@ -745,7 +769,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Buat acara kalender Android. Untuk acara sepanjang hari, tetapkan allDay=true, gunakan tengah malam lokal pada hari mulai dan tengah malam lokal hari berikutnya secara eksklusif sebagai akhir.Kumpulkan detail waktu yang belum ada dan detail pengingat sebelum memanggil alat ini. Nama tempat yang disediakan pengguna sudah cukup dan harus diteruskan langsung sebagai locationName. Jangan menelusuri alamat atau koordinat yang tepat kecuali pengguna secara eksplisit meminta untuk memverifikasi, menyelesaikan, memilih, atau menavigasi ke tempat tersebut. Lebih suka startLocalDateTime/endLocalDateTime dalam yyyy-MM-dd HH:mm untuk tanggal pengguna dan tanggal relatif; alat ini akan menguraikannya dalam zona waktu perangkat. Jangan membuat peristiwa dari epoch milidetik yang dihitung model. Gunakan kalenderId=0 kecuali pengguna secara eksplisit memilih id kalender. Setelah pembuatan, gunakan hasil alat aktualStart/actualEnd sebagai waktu pembuatan yang dapat dilihat pengguna. Pengenal teknis: calendarId=0, actualStart."
+      "description": "Buat acara kalender Android. Untuk acara sepanjang hari, tetapkan allDay=true, gunakan tengah malam lokal pada hari mulai dan tengah malam lokal hari berikutnya secara eksklusif sebagai akhir.Awal dan akhir wajib. Jika akhir atau durasi tidak dapat ditentukan dari permintaan, tanyakan; jangan mengarang durasi. Pengingat opsional bawaan 30 menit. Nama tempat yang disediakan pengguna sudah cukup dan harus diteruskan langsung sebagai locationName. Jangan menelusuri alamat atau koordinat yang tepat kecuali pengguna secara eksplisit meminta untuk memverifikasi, menyelesaikan, memilih, atau menavigasi ke tempat tersebut. Lebih suka startLocalDateTime/endLocalDateTime dalam yyyy-MM-dd HH:mm[:ss] untuk tanggal pengguna dan tanggal relatif; alat ini akan menguraikannya dalam zona waktu perangkat. Jangan membuat peristiwa dari epoch milidetik yang dihitung model. Gunakan kalenderId=0 kecuali pengguna secara eksplisit memilih id kalender. Setelah pembuatan, gunakan hasil alat aktualStart/actualEnd sebagai waktu pembuatan yang dapat dilihat pengguna. Pengenal teknis: calendarId=0, actualStart."
     },
     {
       "name": "calendar_delete_event",
@@ -753,7 +777,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Hapus acara kalender Android berdasarkan id. Telusuri/daftar acara di semua kalender dengan calendarId=0 kecuali pengguna secara eksplisit memilih id kalender. Selalu berikan judul, , dan lokasi yang diketahui jika diketahui sehingga targetnya tidak ambigu. Pengenal teknis: calendarId=0."
+      "description": "Hapus satu acara Android dengan eventId persis dari calendar(command=list_events) atau calendar(command=search_events). Identifikasi dari judul, waktu dan lokasi hasil; minta pilihan jika ambigu. Teruskan hanya eventId ke operasi ini."
     },
     {
       "name": "calendar_list_calendars",
@@ -769,7 +793,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Cantumkan acara kalender Android dalam rentang waktu yang konkret. Gunakan untuk permintaan seperti jadwal hari ini, jadwal besok, acara yang ada, atau acara minggu ini. Lebih suka startLocalDateTime/endLocalDateTime di yyyy-MM-dd HH:mm:ss; alat ini akan menguraikannya dalam zona waktu perangkat. Jangan menebak Id kalender; gunakan kalenderId=0 untuk mencari semua kalender kecuali pengguna secara eksplisit memilih id kalender. Pengenal teknis: calendarId, calendarId=0."
+      "description": "Cantumkan acara kalender Android dalam rentang waktu yang konkret. Gunakan untuk permintaan seperti jadwal hari ini, jadwal besok, acara yang ada, atau acara minggu ini. Lebih suka startLocalDateTime/endLocalDateTime di yyyy-MM-dd HH:mm[:ss]; alat ini akan menguraikannya dalam zona waktu perangkat. Jangan menebak Id kalender; gunakan kalenderId=0 untuk mencari semua kalender kecuali pengguna secara eksplisit memilih id kalender. Pengenal teknis: calendarId, calendarId=0."
     },
     {
       "name": "calendar_open_event",
@@ -785,7 +809,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Cari acara kalender Android berdasarkan kata kunci dalam rentang waktu tertentu. Gunakan sebelum membuka, memperbarui, atau menghapus acara ketika pengguna mendeskripsikan acara berdasarkan judul atau konten. Lebih suka startLocalDateTime/endLocalDateTime di yyyy-MM-dd HH:mm; alat ini akan menguraikannya dalam zona waktu perangkat. Jangan menebak Id kalender; gunakan kalenderId=0 untuk mencari semua kalender kecuali pengguna secara eksplisit memilih id kalender. Pengenal teknis: calendarId, calendarId=0."
+      "description": "Cari acara kalender Android berdasarkan kata kunci dalam rentang waktu tertentu. Gunakan sebelum membuka, memperbarui, atau menghapus acara ketika pengguna mendeskripsikan acara berdasarkan judul atau konten. Lebih suka startLocalDateTime/endLocalDateTime di yyyy-MM-dd HH:mm[:ss]; alat ini akan menguraikannya dalam zona waktu perangkat. Jangan menebak Id kalender; gunakan kalenderId=0 untuk mencari semua kalender kecuali pengguna secara eksplisit memilih id kalender. Pengenal teknis: calendarId, calendarId=0."
     },
     {
       "name": "calendar_update_event",
@@ -793,7 +817,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Perbarui acara kalender Android berdasarkan id. Cari/daftar peristiwa terlebih dahulu ketika pengguna mendeskripsikan target dalam bahasa alami, dan meneruskan detail target yang diketahui dengan bidang yang diubah. Jangan menebak Id kalender atau id acara; telusuri semua kalender dengan calendarId=0 kecuali pengguna secara eksplisit memilih id kalender. Bidang teks kosong diabaikan. Gunakan blank startLocalDateTime/endLocalDateTime untuk menyimpan waktu yang ada. Gunakan reminderMinutes=-2 untuk menyimpan pengingat, -1 untuk menghapus pengingat, dan >=0 untuk mengganti pengingat. Pengenal teknis: calendarId, calendarId=0, reminderMinutes=-2."
+      "description": "Perbarui acara kalender Android berdasarkan id. Cari/daftar peristiwa terlebih dahulu ketika pengguna mendeskripsikan target dalam bahasa alami, dan meneruskan detail target yang diketahui dengan bidang yang diubah. Jangan menebak Id kalender atau id acara; telusuri semua kalender dengan calendarId=0 kecuali pengguna secara eksplisit memilih id kalender. Bidang teks kosong diabaikan. Gunakan blank startLocalDateTime/endLocalDateTime untuk menyimpan waktu yang ada. Gunakan reminderMinutes=-2 untuk menyimpan pengingat, -1 untuk menghapus pengingat, dan >=0 untuk mengganti pengingat. Pengenal teknis: calendarId, calendarId=0, reminderMinutes=-2. yyyy-MM-dd HH:mm[:ss]."
     },
     {
       "name": "memo_create",
@@ -801,7 +825,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Menambahkan tugas yang terlihat oleh pengguna ke To-do Center. Gunakan untuk menambah atau mencatat tugas, 添加待办, 记录待办, termasuk pengingat yang dapat ditindaklanjuti dan ingin disimpan pengguna. Simpan konten pengguna, bukan memori profil asisten atau rencana eksekusi internal Main. Tentukan tanggal langsung dari lingkungan Worker tanpa memanggil Tools Calendar atau Alarm. Jadwalkan hanya jika permintaan atau sumber yang dirujuk secara jelas memberikan tanggal kalender pasti, tanggal relatif yang dapat ditentukan secara unik (hari ini, besok, lusa, tepat dua hari lagi / 两天后), atau rentang tanggal eksplisit. current_date dan konteks zona waktu hanya dasar perhitungan, bukan jadwal dari pengguna. Jika tanggal tidak disebutkan atau waktunya samar (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), buat tugas tanpa tanggal di Unscheduled (时间待定), dengan startDate dan endDate dihilangkan atau dikosongkan. Jangan menetapkan hari ini, memilih hari yang nyaman, atau mengubah rentang samar menjadi acara beberapa hari; pertahankan keterangan waktu samar dalam konten. Jika konten sudah diketahui, jangan meminta tanggal hanya untuk membuat tugas. Tentukan tanggal pasti dari konteks runtime saat ini; jam yang tidak diketahui tidak membuat hari eksplisit menjadi tanpa tanggal. Saat memperbarui, pertahankan tanggal jika pengguna hanya mengubah konten tanpa niat penjadwalan. Jika pengguna menghapus jadwal, menyatakan waktu belum ditentukan, atau menggantinya dengan waktu samar, gunakan clearStartDate=true dengan string tanggal kosong untuk menghapus kedua tanggal dan memindahkan tugas ke Unscheduled. Laporkan bagian Unscheduled atau tanggal tersimpan dari hasil Tool, bukan asumsi. Penanda hasil internal task_pool menamai bagian Unscheduled (时间待定) dalam jawaban kepada pengguna. Aturan ini berlaku untuk tugas, bukan acara kalender atau alarm."
+      "description": "Menambahkan tugas yang terlihat oleh pengguna ke To-do Center. Gunakan untuk menambah atau mencatat tugas, 添加待办, 记录待办, termasuk pengingat yang dapat ditindaklanjuti dan ingin disimpan pengguna. Simpan konten pengguna, bukan memori profil asisten atau rencana eksekusi internal Main. Tentukan tanggal langsung dari lingkungan runtime tanpa memanggil Tools Calendar atau Alarm. Jadwalkan hanya jika permintaan atau sumber yang dirujuk secara jelas memberikan tanggal kalender pasti, tanggal relatif yang dapat ditentukan secara unik (hari ini, besok, lusa, tepat dua hari lagi / 两天后), atau rentang tanggal eksplisit. waktu permintaan asli yang disediakan runtime dan konteks zona waktu hanya dasar perhitungan, bukan jadwal dari pengguna. Jika tanggal tidak disebutkan atau waktunya samar (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), buat tugas tanpa tanggal di Unscheduled, dengan startDate dan endDate dihilangkan atau dikosongkan. Jangan menetapkan hari ini, memilih hari yang nyaman, atau mengubah rentang samar menjadi acara beberapa hari; pertahankan keterangan waktu samar dalam konten. Jika konten sudah diketahui, jangan meminta tanggal hanya untuk membuat tugas. Tentukan tanggal pasti dari waktu dan zona waktu permintaan asli yang disediakan runtime; jam yang tidak diketahui tidak membuat hari eksplisit menjadi tanpa tanggal. Saat memperbarui, pertahankan tanggal jika pengguna hanya mengubah konten tanpa niat penjadwalan. Jika pengguna menghapus jadwal, menyatakan waktu belum ditentukan, atau menggantinya dengan waktu samar, gunakan clearStartDate=true dengan string tanggal kosong untuk menghapus kedua tanggal dan memindahkan tugas ke Unscheduled. Laporkan bagian Unscheduled atau tanggal tersimpan dari hasil Tool, bukan asumsi. Penanda internal task_pool menunjukkan bagian tanpa tanggal; sebutkan dalam bahasa jawaban tanpa mengulang penanda atau menambahkan terjemahan bahasa lain. Aturan ini berlaku untuk tugas, bukan acara kalender atau alarm."
     },
     {
       "name": "memo_delete",
@@ -817,7 +841,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Menampilkan daftar tugas pengguna di To-do Center (待办列表). status dapat berupa active, done, archived, atau all. Ini menanyakan tugas pribadi, bukan rencana eksekusi internal Main atau memori profil asisten. Hasil kosong hanya berlaku untuk daftar tugas ini."
+      "description": "Menampilkan daftar tugas pengguna di To-do Center. status dapat berupa active, done, archived, atau all. Ini menanyakan tugas pribadi, bukan rencana eksekusi internal Main atau memori profil asisten. Hasil kosong hanya berlaku untuk daftar tugas ini."
     },
     {
       "name": "memo_mark_done",
@@ -841,7 +865,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Mengedit tugas pengguna di To-do Center berdasarkan id. Jika target dijelaskan dengan bahasa alami, cari atau tampilkan tugas terlebih dahulu dan teruskan detail yang diketahui bersama kolom yang diubah. Ini mengedit tugas pengguna, bukan memori profil asisten atau rencana internal Main. title/content/tags dan string tanggal kosong mempertahankan nilai. Gunakan yyyy-MM-dd dari lingkungan Worker; jangan hitung milidetik epoch atau panggil Calendar atau Alarm hanya untuk tanggal. Jadwalkan hanya dengan tanggal pasti, tanggal relatif yang jelas (hari ini, besok, lusa, tepat dua hari lagi / 两天后), atau rentang eksplisit dari permintaan atau sumber rujukan. current_date dan zona waktu hanya dasar perhitungan, bukan tanggal pengguna. Tanpa tanggal atau dengan waktu samar (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), hilangkan atau kosongkan startDate dan endDate lalu tempatkan tugas di Unscheduled (时间待定). Jangan tetapkan hari ini, pilih hari yang nyaman, atau ubah periode samar menjadi beberapa hari; pertahankan ungkapan dalam konten. Jika konten diketahui, jangan tanyakan tanggal. Tentukan tanggal pasti dari konteks saat ini; jam yang tidak diketahui tidak membatalkan hari eksplisit. Jika hanya konten berubah tanpa niat penjadwalan, pertahankan tanggal. Jika pengguna menghapus jadwal, menyatakan waktu belum ditentukan, atau menggantinya dengan waktu samar, gunakan clearStartDate=true dan tanggal kosong untuk menghapus keduanya serta pindah ke Unscheduled. Laporkan bagian Unscheduled atau tanggal tersimpan dari hasil Tool, bukan asumsi. task_pool secara internal menamai bagian Unscheduled (时间待定) dalam jawaban. Aturan tidak berlaku untuk acara kalender atau alarm."
+      "description": "Mengedit tugas pengguna di To-do Center berdasarkan id. Jika target dijelaskan dengan bahasa alami, cari atau tampilkan tugas terlebih dahulu dan teruskan detail yang diketahui bersama kolom yang diubah. Ini mengedit tugas pengguna, bukan memori profil asisten atau rencana internal Main. title/content/tags dan string tanggal kosong mempertahankan nilai. Gunakan yyyy-MM-dd dari lingkungan runtime; jangan hitung milidetik epoch atau panggil Calendar atau Alarm hanya untuk tanggal. Jadwalkan hanya dengan tanggal pasti, tanggal relatif yang jelas (hari ini, besok, lusa, tepat dua hari lagi / 两天后), atau rentang eksplisit dari permintaan atau sumber rujukan. waktu permintaan asli yang disediakan runtime dan zona waktu hanya dasar perhitungan, bukan tanggal pengguna. Tanpa tanggal atau dengan waktu samar (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), hilangkan atau kosongkan startDate dan endDate lalu tempatkan tugas di Unscheduled. Jangan tetapkan hari ini, pilih hari yang nyaman, atau ubah periode samar menjadi beberapa hari; pertahankan ungkapan dalam konten. Jika konten diketahui, jangan tanyakan tanggal. Tentukan tanggal pasti dari konteks saat ini; jam yang tidak diketahui tidak membatalkan hari eksplisit. Jika hanya konten berubah tanpa niat penjadwalan, pertahankan tanggal. Jika pengguna menghapus jadwal, menyatakan waktu belum ditentukan, atau menggantinya dengan waktu samar, gunakan clearStartDate=true dan tanggal kosong untuk menghapus keduanya serta pindah ke Unscheduled. Laporkan bagian Unscheduled atau tanggal tersimpan dari hasil Tool, bukan asumsi. Penanda internal task_pool menunjukkan bagian tanpa tanggal; sebutkan dalam bahasa jawaban tanpa mengulang penanda atau menambahkan terjemahan bahasa lain. Aturan tidak berlaku untuk acara kalender atau alarm."
     },
     {
       "name": "sysinfo_delete",
@@ -865,7 +889,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Kueri notifikasi lokal, SMS, log panggilan, acara kalender, dan masukan aksesibilitas yang sudah diambil. Gunakan alat tunggal ini untuk ringkasan harian, kueri pemberitahuan, kueri jangka waktu, dan penelusuran kata kunci. Itu tidak pernah membuka panel sistem atau memindai sumber sistem langsung. Setiap baris dapat menyertakan sourceRef untuk deduplikasi terhadap hasil penyedia langsung. Ringkaslah JSON yang dikembalikan untuk pengguna."
+      "description": "Kueri notifikasi lokal, SMS, ringkasan surat, panggilan, acara kalender dan input aksesibilitas yang sudah dikumpulkan berdasarkan sumber, waktu atau kata kunci. Cakupan mungkin tidak lengkap dan catatan usang, bukan bukti keadaan terkini. Tidak membuka panel atau memindai sumber langsung. Tiap baris dapat memuat sourceRef untuk deduplikasi dengan hasil penyedia langsung. Rangkum JSON hasil untuk pengguna."
     },
     {
       "name": "sysinfo_thread",
@@ -873,7 +897,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Muat satu thread SysInfo lokal dengan threadKey yang dikembalikan oleh sysinfo_query."
+      "description": "Muat satu thread SysInfo lokal dengan threadKey yang dikembalikan oleh sysinfo(command=query)."
     },
     {
       "name": "purchase_query",
@@ -897,7 +921,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Telusuri hasil web publik untuk suatu produk di platform belanja dan kembalikan bukti perbandingan. Gunakan ini sebelum memberikan saran harga belanja."
+      "description": "Cari hasil web publik Shopee Taiwan (shopee.tw) dan momo (momo.com.tw), lalu kembalikan bukti perbandingan hanya-baca. Wilayah adalah petunjuk pencarian, bukan pemilih situs negara. Harga hasil ekstraksi hanya kandidat, bukan harga pembayaran, stok, ongkir atau kupon terkonfirmasi. Gunakan sebelum memberi saran harga."
     },
     {
       "name": "web_fetch",
@@ -905,7 +929,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Ambil halaman web tertentu berdasarkan URL dan kembalikan teks halaman yang dapat dibaca."
+      "description": "Ambil satu halaman HTTP/HTTPS lewat URL dan kembalikan teks terbaca hingga maxChars karakter. Ini pengambilan HTTP hanya-baca, bukan peramban interaktif atau perender JavaScript; teks kosong atau terpotong tidak membuktikan halaman dibaca penuh."
     },
     {
       "name": "web_search",
@@ -921,7 +945,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Create a local time-triggered automation, managed in the Automations sidebar page. The automation runs unattended on this device around the given local time; Android may delay execution. Results are delivered as system notifications. Only read-only web research is allowed during unattended runs. Parameters: title (short), prompt (the exact instruction to run), hour (0-23 local), minute (0-59 local), repeat (\"once\", \"everyday\", \"weekdays\", or \"custom\"), weekdays (required for custom; 1=Monday ... 7=Sunday). Returns the created task id."
+      "description": "Buat otomasi lokal berbasis waktu di halaman Otomasi bilah samping. Berjalan tanpa pengawasan sekitar waktu lokal yang ditentukan; Android dapat menunda. Hasil lewat notifikasi sistem. Hanya riset web baca-saja saat tanpa pengawasan. Tidak ada tanggal target: once berarti hour/minute berikutnya setelah dibuat, bukan tanggal masa depan sembarang. Tanggal dalam prompt tidak mengubah jadwal. Mengembalikan id tugas."
     },
     {
       "name": "scheduled_task_delete",
@@ -945,7 +969,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Enqueue an immediate run of an existing automation. It is deduplicated against the same day's scheduled run, so running twice in one day executes at most once."
+      "description": "Antrekan eksekusi manual langsung dari otomasi yang ada. Ini mengonfirmasi antrean, bukan selesai. Penjadwal menggabungkan eksekusi manual tertunda. Eksekusi manual berikutnya dapat berjalan lagi terpisah dari jadwal; jangan janjikan sekali sehari."
     },
     {
       "name": "scheduled_task_set_enabled",
@@ -961,7 +985,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Update the instruction for future runs of an existing automation. First use scheduled_task_list to identify the existing task and preserve unrelated instructions. Does not create a task or run it now. Preserves title, schedule and enabled state. Ask which task if the target is ambiguous."
+      "description": "Perbarui instruksi eksekusi mendatang dari otomasi yang ada. Gunakan scheduled_task(command=list) dahulu untuk identifikasi dan pertahankan instruksi lain. Tidak membuat tugas atau menjalankannya sekarang. Pertahankan judul, jadwal, dan status aktif. Tanyakan tugas mana jika ambigu."
     },
     {
       "name": "shortcut_save_agent_prompt",
@@ -969,7 +993,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Simpan pintasan yang dibuat pengguna yang mengirimkan perintah ke agen. Hanya panggil ini setelah pengguna mengonfirmasi judul, deskripsi, dan perilaku."
+      "description": "Simpan pintasan pengguna yang mengirim prompt ke agen saat dijalankan; menyimpan tidak mengeksekusi. Panggil hanya setelah judul, deskripsi, dan perilaku dikonfirmasi."
     },
     {
       "name": "shortcut_save_direct_tool",
@@ -977,7 +1001,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Simpan pintasan alat langsung yang dibuat pengguna. Hanya panggil ini ketika setiap tindakan yang diminta dapat sepenuhnya dipetakan ke langkah-langkah alat yang diketahui dengan parameter lengkap."
+      "description": "Simpan pintasan alat langsung hanya jika setiap tindakan sepenuhnya dipetakan ke langkah atomik dikenal dengan parameter lengkap. Menyimpan tidak menjalankan. Gunakan kontrak tetap tiap operasi, bukan wrapper command domain Main. Argumen literal tanpa ekspresi saat eksekusi; jangan bekukan rentang tanggal bergulir menjadi tanggal tetap."
     },
     {
       "name": "task_create",
@@ -985,7 +1009,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Membuat rencana TODO lengkap dan berurutan dalam satu panggilan untuk permintaan saat ini. Ini wajib sebelum Tool non-tugas jika perutean menghasilkan dua atau lebih langkah Main yang konkret atau melintasi Profiles. Hitung setiap panggilan delegate atau Plugin Tool sebagai satu langkah; satu delegate tetap satu langkah terlepas dari proses internal Worker. Teruskan semua langkah terbatas yang menghadap pengguna dalam items. Rencana hanya dapat dibuat sekali dan tidak dapat diperluas nanti. Jangan sertakan pengelolaan tugas, pembersihan, pembaruan status, atau respons akhir. Rencana eksekusi internal ini bukan To-do Center permanen pengguna. Untuk membuat, mencari, menyelesaikan, atau menghapus tugas pribadi, delegasikan ke Personal Organization dengan scopes=[memo] dan gunakan memo_* Tools."
+      "description": "Buat rencana TODO lengkap berurutan untuk permintaan dalam satu panggilan. Wajib sebelum Tool non-tugas bila ada dua atau lebih langkah konkret Main. Setiap langkah bisnis atau Plugin Tool yang langsung dapat dijalankan dihitung satu. Masukkan semua langkah terbatas bagi pengguna ke items. Hanya dibuat sekali tanpa perluasan. Jangan sertakan manajemen tugas, pembersihan, status, atau jawaban akhir. Bukan To-do Center permanen; gunakan memo untuk tugas pribadi."
     },
     {
       "name": "task_list",
@@ -993,7 +1017,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Mencantumkan item TODO internal untuk permintaan saat ini. Secara default mengembalikan open, in_progress, dan blocked. Rencana eksekusi internal ini bukan To-do Center permanen pengguna. Untuk membuat, mencari, menyelesaikan, atau menghapus tugas pribadi, delegasikan ke Personal Organization dengan scopes=[memo] dan gunakan memo_* Tools."
+      "description": "Mencantumkan item TODO internal untuk permintaan saat ini. Secara default mengembalikan open, in_progress, dan blocked. Rencana eksekusi internal ini bukan To-do Center permanen pengguna. Untuk membuat, mencari, menyelesaikan, atau menghapus tugas pribadi, gunakan alat memo."
     },
     {
       "name": "task_update",
@@ -1001,7 +1025,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Memperbarui satu item TODO internal. Transisi yang diizinkan: open ke in_progress, blocked, atau abandoned; in_progress ke blocked, done, atau abandoned; blocked ke open atau abandoned. done dan abandoned adalah status akhir. Hanya satu tugas yang boleh berstatus in_progress. Rencana eksekusi internal ini bukan To-do Center permanen pengguna. Untuk membuat, mencari, menyelesaikan, atau menghapus tugas pribadi, delegasikan ke Personal Organization dengan scopes=[memo] dan gunakan memo_* Tools."
+      "description": "Memperbarui satu item TODO internal. Transisi yang diizinkan: open ke in_progress, blocked, atau abandoned; in_progress ke blocked, done, atau abandoned; blocked ke open atau abandoned. done dan abandoned adalah status akhir. Hanya satu tugas yang boleh berstatus in_progress. Rencana eksekusi internal ini bukan To-do Center permanen pengguna. Untuk membuat, mencari, menyelesaikan, atau menghapus tugas pribadi, gunakan alat memo."
     },
     {
       "name": "workflow_delete",
@@ -1009,7 +1033,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Hapus alur kerja yang disimpan berdasarkan id."
+      "description": "Hapus definisi alur kerja tersimpan dengan id persis. Tidak membatalkan tindakan yang telah dijalankan."
     },
     {
       "name": "workflow_list",
@@ -1025,7 +1049,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Simpan alur kerja yang dapat digunakan kembali. stepsJson harus berupa array JSON dari {toolName, argument}."
+      "description": "Simpan definisi alur yang dapat dipakai ulang tanpa menjalankan atau menjadwalkan. stepsJson harus string array JSON tidak kosong berisi {toolName, arguments}. toolName atomik didukung: mail_list, mail_read, mail_send, mail_delete, mail_account_list. Gunakan parameter bisnis tepat tanpa pembungkus command domain. Argumen tersimpan bersifat literal, bukan ekspresi dihitung ulang saat eksekusi."
     },
     {
       "name": "accept_skill_proposal",
@@ -1041,7 +1065,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Tambahkan dokumen keterampilan baru ke registri keterampilan."
+      "description": "Buat atau ganti Skill pengguna dengan id persis ini setelah validasi dan aktifkan. Untuk impor tidak tepercaya, gunakan preview_import dan save_draft."
     },
     {
       "name": "disable_skill",
@@ -1049,7 +1073,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Nonaktifkan Keterampilan pengguna sehingga disembunyikan dari perintah agen."
+      "description": "Nonaktifkan Skill pengguna untuk penemuan berikutnya. Isi yang telah dibaca tetap dalam percakapan saat ini."
     },
     {
       "name": "enable_skill",
@@ -1057,7 +1081,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Aktifkan Skill pengguna yang valid sehingga dapat digunakan oleh agen."
+      "description": "Aktifkan Skill pengguna yang valid agar dapat ditemukan."
     },
     {
       "name": "list_skill_proposals",
@@ -1081,7 +1105,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Muat keterampilan khusus ketika tugas yang ada cocok dengan salah satu keterampilan yang tercantum dalam prompt sistem. Gunakan alat ini untuk memasukkan instruksi dan sumber daya keterampilan ke dalam percakapan saat ini. Outputnya mungkin berisi panduan alur kerja terperinci serta referensi ke skrip, file, dll dalam direktori yang sama dengan keterampilan. Nama keterampilan harus sesuai dengan salah satu keterampilan yang tercantum dalam prompt sistem Anda."
+      "description": "Baca teks lengkap Skill yang relevan memakai id lengkap persis dari katalog tersedia. Hanya mengembalikan teks dokumen, tidak memuat sumber daya atau skrip rujukan."
     },
     {
       "name": "plugin_request_install",
@@ -1089,7 +1113,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Buat proposal instalasi terstruktur untuk satu plugin resmi. Ini tidak mengunduh atau menginstal plugin; HomeScreen harus bertanya kepada pengguna."
+      "description": "Buat usulan pemasangan terstruktur untuk satu plugin resmi. Tidak mengunduh atau memasang; host menangani usulan dan konfirmasi. Jangan klaim terpasang atau memakai kemampuan baru dalam eksekusi beku ini."
     },
     {
       "name": "plugin_search",
@@ -1121,7 +1145,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Hapus keterampilannya."
+      "description": "Hapus Skill pengguna dengan id persis ini."
     },
     {
       "name": "rollback_skill",
@@ -1129,7 +1153,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Pulihkan Skill pengguna ke revisi konten yang terakhir diarsipkan."
+      "description": "Pulihkan Skill pengguna ke revisi isi arsip terbaru. Skill pengguna dan revisi arsip harus ada."
     },
     {
       "name": "save_skill_draft",
@@ -1145,7 +1169,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Perbarui dokumen keterampilan yang ada di registri keterampilan."
+      "description": "Perbarui Skill pengguna yang ada dengan mempertahankan status aktifnya."
     }
   ]
 }

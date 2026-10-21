@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "en",
   "fallbackLocale": "en",
-  "toolCount": 133,
+  "toolCount": 136,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Search tools or capabilities",
@@ -39,7 +39,7 @@
     {
       "name": "Location and Navigation",
       "displayName": "Location and Navigation",
-      "toolCount": 3
+      "toolCount": 6
     },
     {
       "name": "Mail",
@@ -89,7 +89,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Open a specific visible photo from the system gallery. Use this only when the user explicitly asks to view or open a specific photo. Do not use this as a follow-up after camera_take_photo unless the user explicitly asks to view or open the captured photo. indexFromLatest is 1-based in newest-first order: 1 opens the latest photo, 2 opens the second latest photo, 3 opens the third latest photo."
+      "description": "Open a specific visible photo from the system gallery. Use this only when the user explicitly asks to view or open a specific photo. Do not use this as a follow-up after camera(command=take_photo) unless the user explicitly asks to view or open the captured photo. indexFromLatest is 1-based in newest-first order: 1 opens the latest photo, 2 opens the second latest photo, 3 opens the third latest photo."
     },
     {
       "name": "camera_take_photo",
@@ -97,7 +97,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Capture a new photo and return it as an image attachment when model vision is available. Use this when the user's intent is to capture a new photo. Leave lensFacing unset or auto for normal photo capture. Choose lensFacing=front only for front-facing or selfie intent; choose back only when the user explicitly asks for the back camera. Keep explicitLensSelection false for plain/default photo capture, even if the default physical lens is back. Set explicitLensSelection true only when the user explicitly asks for front, back, rear, or selfie capture. Do not call camera_open_photo after this tool unless the user explicitly asks to view or open the photo. Call this tool directly. Capture uses the native system camera first. Explicit front/back capture may use the direct backend only if the native camera cannot honor the requested lens. Do not ask the user to grant permission before calling this tool."
+      "description": "Capture a new photo and return it as an image attachment when model vision is available. Use this when the user's intent is to capture a new photo. Leave lensFacing unset or auto for normal photo capture. Choose lensFacing=front only for front-facing or selfie intent; choose back only when the user explicitly asks for the back camera. Keep explicitLensSelection false for plain/default photo capture, even if the default physical lens is back. Set explicitLensSelection true only when the user explicitly asks for front, back, rear, or selfie capture. Do not call camera(command=open_photo) after this tool unless the user explicitly asks to view or open the photo. Call this tool directly. Capture uses the native system camera first. Explicit front/back capture may use the direct backend only if the native camera cannot honor the requested lens. Do not ask the user to grant permission before calling this tool."
     },
     {
       "name": "cross_app_read_screen",
@@ -121,7 +121,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Get UI elements from the currently visible app screen. Each element has a node ID (for example [n3]) that can be used with tap_node, scroll, or input_text. Do not use this to read, list, search, or summarize Android notifications; use sysinfo tools instead. Do not cache this result because node IDs change on each call."
+      "description": "Get UI elements from the currently visible app screen. Each element has a node ID (for example [n3]) that can be used with screen(command=tap), screen(command=scroll), or screen(command=input_text). Do not use this to read, list, search, or summarize Android notifications; use sysinfo tools instead. Do not cache this result because node IDs change on each call."
     },
     {
       "name": "input_text",
@@ -129,7 +129,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Replace the text in one visible editable field in the current Android app. Call get_screen_info first and pass a current node marked edit. This action only enters text; it does not submit the form, tap Send, or press Enter. Do not reuse node IDs."
+      "description": "Replace the text in one visible editable field in the current Android app. Call screen(command=read) first and pass a current node marked edit. This action only enters text; it does not submit the form, tap Send, or press Enter. Do not reuse node IDs."
     },
     {
       "name": "launch_app",
@@ -145,7 +145,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Check whether an exact Android package name is listed on Google Play by requesting https://play.google.com/store/apps/details?id=<packageName>. This is a read-only network check. Use it before play_store_install."
+      "description": "Check whether an exact Android package name is listed on Google Play by requesting https://play.google.com/store/apps/details?id=<packageName>. This is a read-only network check. Use it before app(command=install_store_app)."
     },
     {
       "name": "play_store_install",
@@ -169,7 +169,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Capture an Android screen with the FoneClaw accessibility service. The captured image is kept in app-private cache for Agent use and is not added to the system Gallery. Use only when the requested outcome includes a screenshot or screen-image analysis. Reading a screen for GUI search, typing, tapping, or confirming results is not an image-capture request; use the accessibility screen-reading tools. A loading page or an uncertain action result does not change that boundary. Use targetType=current for the current screen, targetType=app with targetApp for opening an app and capturing it, or targetType=notification_shade only for an explicit screenshot or image-capture request involving the visible notification shade. Never use targetType=notification_shade to read, list, query, or summarize notification data; use a SysInfo notification tool instead. Never use this tool merely to locate or verify a control, recover a stale GUI node, or compensate for missing accessibility labels during cross-app GUI automation. Do not call launch_app or system_panel_open before this tool for app or notification-shade capture. A successful capture already returns the image attachment for delivery. Do not open the gallery to find or verify it. Do not use this when the user wants to view an already saved screenshot; use screenshot_open for viewing saved screenshots."
+      "description": "Capture an Android screen with the FoneClaw accessibility service. The captured image is kept in app-private cache for Agent use and is not added to the system Gallery. Use only when the requested outcome includes a screenshot or screen-image analysis. Reading a screen for GUI search, typing, tapping, or confirming results is not an image-capture request; use the accessibility screen-reading tools. A loading page or an uncertain action result does not change that boundary. Use targetType=current for the current screen, targetType=app with targetApp for opening an app and capturing it, or targetType=notification_shade only for an explicit screenshot or image-capture request involving the visible notification shade. Never use targetType=notification_shade to read, list, query, or summarize notification data; use a SysInfo notification tool instead. Never use this tool merely to locate or verify a control, recover a stale GUI node, or compensate for missing accessibility labels during cross-app GUI automation. Do not call app(command=launch) or system_panel(command=open) before this tool for app or notification-shade capture. A successful capture already returns the image attachment for delivery. Do not open the gallery to find or verify it. Do not use this when the user wants to view an already saved screenshot; use screenshot(command=open) for viewing saved screenshots."
     },
     {
       "name": "scroll",
@@ -177,7 +177,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Scroll the current app by using a compatible accessibility scroll action when supported, otherwise perform a bounded swipe gesture. Prefer a fresh node ID marked scroll by get_screen_info. Use viewport only when the screen exposes no usable scroll container. Direction is the viewport destination: down reveals content below, up reveals content above, right reveals content to the right, and left reveals content to the left. This does not confirm that content changed, so call get_screen_info after every successful call before another action."
+      "description": "Scroll the current app by using a compatible accessibility scroll action when supported, otherwise perform a bounded swipe gesture. Prefer a fresh node ID marked scroll by screen(command=read). Use viewport only when the screen exposes no usable scroll container. Direction is the viewport destination: down reveals content below, up reveals content above, right reveals content to the right, and left reveals content to the left. This does not confirm that content changed, so call screen(command=read) after every successful call before another action."
     },
     {
       "name": "tap_node",
@@ -185,7 +185,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Tap a UI element on the screen. The element is identified by its node ID, which can be obtained from get_screen_info."
+      "description": "Tap a UI element on the screen. The element is identified by its node ID, which can be obtained from screen(command=read)."
     },
     {
       "name": "alarm_modify_alarm",
@@ -201,7 +201,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Set an Android Clock alarm. Collect missing time/repeat/label details before calling."
+      "description": "Request an alarm in Android Clock. Ask only for missing required time; use defaults for optional settings. No calendar-date parameter is supported."
     },
     {
       "name": "bluetooth_connected_devices",
@@ -337,7 +337,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Open Android settings where the user can grant FoneClaw Do Not Disturb / Notification Policy access. Do not call this immediately after dnd_set_mode reports that it already opened the settings page."
+      "description": "Open Android settings where the user can grant FoneClaw Do Not Disturb / Notification Policy access. Do not call this immediately after dnd(command=set_mode) reports that it already opened the settings page."
     },
     {
       "name": "dnd_set_mode",
@@ -425,7 +425,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Open the Android Date & time settings page directly. Use this for date, time, automatic time, time zone, or automatic time-zone settings. This launches a system settings Intent and does not require accessibility, screen reading, or tapping. After it succeeds, do not call launch_app, get_screen_info, or tap_node."
+      "description": "Open the Android Date & time settings page directly. Use this for date, time, automatic time, time zone, or automatic time-zone settings. This launches a system settings Intent and does not require accessibility, screen reading, or tapping. After it succeeds, do not call app(command=launch), screen(command=read), or screen(command=tap)."
     },
     {
       "name": "system_settings_open_hotspot_entry",
@@ -644,12 +644,36 @@
       "description": "Open a route or navigation screen in a map app for a destination and travel mode. This launches an external map app, uses only the provided arguments, and does not read device data."
     },
     {
+      "name": "travel_plan_append_days",
+      "category": "Location and Navigation",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Append new consecutive days after a saved trip's last date. Preserves all existing days, preparation and packing. Read the plan first; use its current revision. Continue from its last endpoint and accommodation, group nearby visits and order regions to avoid unnecessary backtracking across days. Respect fixed appointments and user-specified order; leave realistic transfer and rest time without claiming live routing or inventing precise travel times. Do not repeat existing visits unless requested or necessary. On revision conflict read again; never overwrite concurrent edits. Does not create calendar events or todos."
+    },
+    {
+      "name": "travel_plan_read",
+      "category": "Location and Navigation",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Read a private saved travel plan and its current revision before modifying or extending it. Does not change anything."
+    },
+    {
+      "name": "travel_plan_update",
+      "category": "Location and Navigation",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Replace the editable content of an existing saved travel plan after reading its latest JSON. This can modify destination, departure, places, timezone, pace, dates, day titles, stop names, start times, durations, notes, preparation items, packing categories, packing items, and their checked state. Preserve the exact plan id, current revision, and existing stop/checklist item ids from travel_plan_read; generate ids only for newly added items. Keep existing content that the user did not ask to change. The complete updatedPlanJson must be a full TravelPlan JSON object, not a patch. On revision conflict read again and merge the user's requested change into the latest plan; never overwrite concurrent edits. Only claim the plan was updated after this tool succeeds. Does not create calendar events or todos."
+    },
+    {
       "name": "mail_account_list",
       "category": "Mail",
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "List configured mail accounts. Leave query empty to list all accounts. When query is provided, matching priority is account id, email, alias, then fuzzy alias or email. Exact matches can still return multiple accounts. If an exact email query has no configured match, the result may include providerSetupGuide with a fixed provider credential URL. For Gmail addresses, providerSetupGuide.accountConfigPreset contains the complete non-secret IMAP, SMTP, and username fields to carry unchanged into saveAccount; ask the user only for the remaining app password. No server preset is returned for other domains."
+      "description": "List configured mail accounts. Leave query empty to list all accounts. When query is provided, matching priority is account id, email, alias, then fuzzy alias or email. Exact matches can still return multiple accounts. If an exact email query has no configured match, the result may include providerSetupGuide with a fixed provider credential URL. For Gmail addresses, providerSetupGuide.accountConfigPreset contains the complete non-secret IMAP, SMTP, and username fields to carry unchanged into mail_account(command=save); ask the user only for the remaining app password. No server preset is returned for other domains."
     },
     {
       "name": "mail_account_save",
@@ -657,7 +681,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Test both IMAP and SMTP connections and save the mail account only when both succeed. Call this as soon as every required configuration field is available. This operation requires user approval."
+      "description": "Test both the receiving server (IMAP or POP3) and SMTP, and save only when both succeed. Call this as soon as every required configuration field is available. This operation requires user approval."
     },
     {
       "name": "mail_delete",
@@ -673,7 +697,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "List, filter, or search message summaries. Query searches subject, sender, recipients, and body. Use folder ALL once when the user requests both received and sent mail or does not limit direction; use INBOX or SENT only for an explicit single direction. Never guess provider-specific folder names or retry a completed query. If a constrained query fails, report the failure without clearing or changing its query, sender, or time filters to manufacture a broader result. Each result includes a preview of up to 500 characters for list and batch summaries; do not read every full message after a completed list query. Do not follow nextCursor again in the same Worker run; report that more results are available and let a later user request continue the query. Call this Tool again for every new list, search, filter, date-range, summary, or reformat request even when conversation history contains earlier mail results. Historical messageRefs may be reused only for an operation on an exact already-selected message. Leave accountId empty to use the only account or the unique default account."
+      "description": "List, filter, or search message summaries. Query searches subject, sender, recipients, and body. Use folder ALL once when the user requests both received and sent mail or does not limit direction; use INBOX or SENT only for an explicit single direction. Never guess provider-specific folder names or retry a completed query. If a constrained query fails, report the failure without clearing or changing its query, sender, or time filters to manufacture a broader result. Each result includes a preview of up to 500 characters for list and batch summaries; do not read every full message after a completed list query. Do not follow nextCursor again in the same run; report that more results are available and let a later user request continue the query. Call this Tool again for every new list, search, filter, date-range, summary, or reformat request even when conversation history contains earlier mail results. Historical messageRefs may be reused only for an operation on an exact already-selected message. Leave accountId empty to use the only account or the unique default account. POP3 exposes only INBOX, cannot filter read status, and uses server message sequence for NEWEST_FIRST/OLDEST_FIRST rather than a guaranteed date order. POP3 date filters use the sender's Date header; isRead is null when read status is unsupported."
     },
     {
       "name": "mail_read",
@@ -681,7 +705,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Read one message from a messageRef returned by mail_list and mark it read on the server. Use this only when the user explicitly needs the full body, attachment metadata, or exact details absent from the mail_list preview; do not use it for every message merely to produce a list or batch summary. Never repeat the same messageRef and bodyCursor. After the tool succeeds, summarize the message for the user in the same response."
+      "description": "Read one message from a messageRef returned by mail(command=list). IMAP marks it read; Gmail and POP3 remain read-only. Use this only when the user explicitly needs the full body, attachment metadata, or exact details absent from the mail(command=list) preview; do not use it for every message merely to produce a list or batch summary. Never repeat the same messageRef and bodyCursor. After the tool succeeds, summarize the message for the user in the same response."
     },
     {
       "name": "mail_send",
@@ -697,7 +721,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "List recent Android call log entries, optionally filtered by call type. Requires READ_CALL_LOG permission. Use type=missed for missed-call questions and before selecting a missed call to call back. After selecting a number, call phone_dial."
+      "description": "List recent Android call log entries, optionally filtered by call type. Requires READ_CALL_LOG permission. Use type=missed for missed-call questions and before selecting a missed call to call back. After selecting a number, call phone(command=dial)."
     },
     {
       "name": "contacts_create",
@@ -721,7 +745,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Open the system dialer for exactly one phone number or named contact. Set exactly one of phoneNumber and contactName. A named contact must resolve to one match; if multiple contacts match, stop and ask the user to choose. After the dialer opens, call get_screen_info, identify the visible call button, then call tap_node."
+      "description": "Open the system dialer for exactly one phone number or named contact. Set exactly one of phoneNumber and contactName. A named contact must resolve to one match; if multiple contacts match, stop and ask the user to choose. This operation only prefills the dialer. For a dialer-open-only request, stop there. Only if the user asked to place the call, continue with available screen operations to identify and tap the visible Call button. Do not claim the call connected from a dialer-open or tap result alone."
     },
     {
       "name": "send_to_sms_message",
@@ -729,7 +753,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "After approval, open a visible SMS/MMS draft. For a text SMS with a recipient, automatically tap Send only when FoneClaw accessibility is connected and the default message app, recipient, full message body, and one stable Send control are all verified. Attachments, dual-SIM prompts, ambiguous UI, or unavailable accessibility require manual action. After any terminal result, stop tool planning and never call get_screen_info or tap_node."
+      "description": "After approval, open a visible SMS/MMS draft. For a text SMS with a recipient, automatically tap Send only when FoneClaw accessibility is connected and the default message app, recipient, full message body, and one stable Send control are all verified. Attachments, dual-SIM prompts, ambiguous UI, or unavailable accessibility require manual action. After any terminal result, stop tool planning and never call screen(command=read) or screen(command=tap)."
     },
     {
       "name": "sms_list",
@@ -737,7 +761,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Query live SMS messages on this Android device. With no keyword, address, contact, or threadId, list recent messages. Set keyword/address/contact to search. Set threadId only from an earlier sms_list result to read that conversation. For a summary request, call once with box=all and includeBody=true, then summarize only the returned received and sent messages. Use returnedBreakdown for counts and keep its byAddress rows separate. Never use SysInfo history as a replacement for this live result."
+      "description": "Query live SMS messages on this Android device. With no keyword, address, contact, or threadId, list recent messages. Set keyword/address/contact to search. Set threadId only from an earlier sms(command=list) result to read that conversation. For a summary request, call once with box=all and includeBody=true, then summarize only the returned received and sent messages. Use returnedBreakdown for counts and keep its byAddress rows separate. Never use SysInfo history as a replacement for this live result."
     },
     {
       "name": "calendar_create_event",
@@ -745,7 +769,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Create an Android calendar event. Collect missing time and reminder details before calling. For an all-day event, set allDay=true and use local midnight for the start and the exclusive next-day local midnight for the end. A user-provided place name is sufficient and should be passed directly as locationName. Do not search for an exact address or coordinates unless the user explicitly asks to verify, resolve, choose, or navigate to the place. Use startLocalDateTime/endLocalDateTime in yyyy-MM-dd HH:mm for user dates and relative dates; the tool will parse them in the device timezone. Do not create events from model-calculated epoch milliseconds. Use calendarId=0 unless the user explicitly selected a calendar id. After creation, use the tool result actualStart/actualEnd as the user-facing created time."
+      "description": "Create an Android calendar event. Both start and end are required. If no end time or duration can be determined from the request, ask for it; never invent a duration. Optional reminders default to 30 minutes. For an all-day event, set allDay=true and use local midnight for the start and the exclusive next-day local midnight for the end. A user-provided place name is sufficient and should be passed directly as locationName. Do not search for an exact address or coordinates unless the user explicitly asks to verify, resolve, choose, or navigate to the place. Use startLocalDateTime/endLocalDateTime in yyyy-MM-dd HH:mm[:ss] for user dates and relative dates; the tool will parse them in the device timezone. Do not create events from model-calculated epoch milliseconds. Use calendarId=0 unless the user explicitly selected a calendar id. After creation, use the tool result actualStart/actualEnd as the user-facing created time."
     },
     {
       "name": "calendar_delete_event",
@@ -753,7 +777,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Delete an Android calendar event by id. Search/list events across all calendars with calendarId=0 unless the user explicitly selected a calendar id. Always pass the known title and location when known so the target is unambiguous."
+      "description": "Delete one Android calendar event using an exact eventId from calendar(command=list_events) or calendar(command=search_events). Identify the target by its returned title, time and location; ask the user to choose if ambiguous. Pass only eventId to this operation."
     },
     {
       "name": "calendar_list_calendars",
@@ -769,7 +793,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "List Android calendar events in a concrete time range. Use for requests like today's schedule, tomorrow's schedule, existing events, or this week's events. Use startLocalDateTime/endLocalDateTime in yyyy-MM-dd HH:mm:ss; the tool will parse them in the device timezone. Do not guess calendarId; use calendarId=0 to search all calendars unless the user explicitly selected a calendar id."
+      "description": "List Android calendar events in a concrete time range. Use for requests like today's schedule, tomorrow's schedule, existing events, or this week's events. Use startLocalDateTime/endLocalDateTime in yyyy-MM-dd HH:mm[:ss]; the tool will parse them in the device timezone. Do not guess calendarId; use calendarId=0 to search all calendars unless the user explicitly selected a calendar id."
     },
     {
       "name": "calendar_open_event",
@@ -785,7 +809,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Search Android calendar events by keyword in a concrete time range. Use before opening, updating, or deleting an event when the user describes the event by title or content. Use startLocalDateTime/endLocalDateTime in yyyy-MM-dd HH:mm; the tool will parse them in the device timezone. Do not guess calendarId; use calendarId=0 to search all calendars unless the user explicitly selected a calendar id."
+      "description": "Search Android calendar events by keyword in a concrete time range. Use before opening, updating, or deleting an event when the user describes the event by title or content. Use startLocalDateTime/endLocalDateTime in yyyy-MM-dd HH:mm[:ss]; the tool will parse them in the device timezone. Do not guess calendarId; use calendarId=0 to search all calendars unless the user explicitly selected a calendar id."
     },
     {
       "name": "calendar_update_event",
@@ -793,7 +817,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Update an Android calendar event by id. Search/list events first when the user describes the target in natural language, and pass known target details with the changed fields. Do not guess calendarId or event id; search all calendars with calendarId=0 unless the user explicitly selected a calendar id. Blank text fields are ignored. Use blank startLocalDateTime/endLocalDateTime to keep existing times. Use yyyy-MM-dd HH:mm:ss for changed times. Use reminderMinutes=-2 to keep reminders, -1 to remove reminders, and >=0 to replace reminders."
+      "description": "Update an Android calendar event by id. Search/list events first when the user describes the target in natural language, and pass known target details with the changed fields. Do not guess calendarId or event id; search all calendars with calendarId=0 unless the user explicitly selected a calendar id. Blank text fields are ignored. Use blank startLocalDateTime/endLocalDateTime to keep existing times. Use yyyy-MM-dd HH:mm[:ss] for changed times. Use reminderMinutes=-2 to keep reminders, -1 to remove reminders, and >=0 to replace reminders."
     },
     {
       "name": "memo_create",
@@ -801,7 +825,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Add a user-visible to-do to To-do Center. Use for add a to-do, record a to-do, 添加待办, or 记录待办, including an actionable reminder the user wants kept. Store user content, not assistant profile memory or Main's internal execution plan. Resolve to-do dates directly from the Worker environment without calling Calendar or Alarm Tools. To-do scheduling: Schedule a to-do only when the user's request or explicitly referenced source gives a definite calendar date, a uniquely resolvable relative date (today, tomorrow, the day after tomorrow, in exactly two days / 两天后), or an explicit date range. The current_date and timezone context is only a calculation base, never a user-supplied schedule. If no date is mentioned, or timing is vague (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), create an undated to-do in Unscheduled (时间待定) with both startDate and endDate omitted or empty. Never default to today, pick a convenient day, or turn a vague window into a multi-day scheduled event. Preserve vague timing in the to-do content. When the content is known, do not ask for a date just to create the to-do. Resolve definite dates from the current runtime context; an unknown hour does not make an explicit day undated. For updates, keep existing dates when the user only changes content and gives no scheduling intent. If the user explicitly removes the schedule, says time undecided, or replaces it with vague timing, use clearStartDate=true with empty date strings to move it to Unscheduled and clear both dates. Report the saved Unscheduled section or scheduled date from the Tool result, not from assumptions. The internal task_pool result marker names the Unscheduled (时间待定) section in user-facing replies. These rules apply to to-dos, not calendar events or alarms."
+      "description": "Add a user-visible to-do to To-do Center. Use for add a to-do, record a to-do, 添加待办, or 记录待办, including an actionable reminder the user wants kept. Store user content, not assistant profile memory or Main's internal execution plan. Resolve to-do dates directly from the runtime environment without calling Calendar or Alarm Tools. To-do scheduling: Schedule a to-do only when the user's request or explicitly referenced source gives a definite calendar date, a uniquely resolvable relative date (today, tomorrow, the day after tomorrow, in exactly two days / 两天后), or an explicit date range. The runtime-provided original request time and timezone are only a calculation base, never a user-supplied schedule. If no date is mentioned, or timing is vague (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), create an undated to-do in Unscheduled with both startDate and endDate omitted or empty. Never default to today, pick a convenient day, or turn a vague window into a multi-day scheduled event. Preserve vague timing in the to-do content. When the content is known, do not ask for a date just to create the to-do. Resolve definite dates from the original request time and timezone supplied by runtime; an unknown hour does not make an explicit day undated. For updates, keep existing dates when the user only changes content and gives no scheduling intent. If the user explicitly removes the schedule, says time undecided, or replaces it with vague timing, use clearStartDate=true with empty date strings to move it to Unscheduled and clear both dates. Report the saved Unscheduled section or scheduled date from the Tool result, not from assumptions. The internal task_pool result marker identifies the undated section; express that section in the response language without echoing the marker or adding a translation in another language. These rules apply to to-dos, not calendar events or alarms."
     },
     {
       "name": "memo_delete",
@@ -817,7 +841,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Show the user's to-do list in To-do Center (待办列表). status can be active, done, archived, or all. This queries personal to-dos, not Main's internal execution plan or assistant profile memory. An empty result applies only to this to-do list."
+      "description": "Show the user's to-do list in To-do Center. Use for 待办列表 requests. status can be active, done, archived, or all. This queries personal to-dos, not Main's internal execution plan or assistant profile memory. An empty result applies only to this to-do list."
     },
     {
       "name": "memo_mark_done",
@@ -841,7 +865,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Edit a user to-do in To-do Center by id. Search/list to-dos first when the user describes the target in natural language, and pass known target details with changed fields. This edits user to-dos, not assistant profile memory or Main's internal execution plan. Blank title/content/tags and date strings keep existing values. Use yyyy-MM-dd dates resolved from the current Worker environment; never calculate epoch milliseconds or call Calendar or Alarm Tools only to resolve a to-do date. To-do scheduling: Schedule a to-do only when the user's request or explicitly referenced source gives a definite calendar date, a uniquely resolvable relative date (today, tomorrow, the day after tomorrow, in exactly two days / 两天后), or an explicit date range. The current_date and timezone context is only a calculation base, never a user-supplied schedule. If no date is mentioned, or timing is vague (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), create an undated to-do in Unscheduled (时间待定) with both startDate and endDate omitted or empty. Never default to today, pick a convenient day, or turn a vague window into a multi-day scheduled event. Preserve vague timing in the to-do content. When the content is known, do not ask for a date just to create the to-do. Resolve definite dates from the current runtime context; an unknown hour does not make an explicit day undated. For updates, keep existing dates when the user only changes content and gives no scheduling intent. If the user explicitly removes the schedule, says time undecided, or replaces it with vague timing, use clearStartDate=true with empty date strings to move it to Unscheduled and clear both dates. Report the saved Unscheduled section or scheduled date from the Tool result, not from assumptions. The internal task_pool result marker names the Unscheduled (时间待定) section in user-facing replies. These rules apply to to-dos, not calendar events or alarms."
+      "description": "Edit a user to-do in To-do Center by id. Search/list to-dos first when the user describes the target in natural language, and pass known target details with changed fields. This edits user to-dos, not assistant profile memory or Main's internal execution plan. Blank title/content/tags and date strings keep existing values. Use yyyy-MM-dd dates resolved from the original request time and timezone supplied by runtime; never calculate epoch milliseconds or call Calendar or Alarm Tools only to resolve a to-do date. To-do scheduling: Schedule a to-do only when the user's request or explicitly referenced source gives a definite calendar date, a uniquely resolvable relative date (today, tomorrow, the day after tomorrow, in exactly two days / 两天后), or an explicit date range. The runtime-provided original request time and timezone are only a calculation base, never a user-supplied schedule. If no date is mentioned, or timing is vague (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), create an undated to-do in Unscheduled with both startDate and endDate omitted or empty. Never default to today, pick a convenient day, or turn a vague window into a multi-day scheduled event. Preserve vague timing in the to-do content. When the content is known, do not ask for a date just to create the to-do. Resolve definite dates from the original request time and timezone supplied by runtime; an unknown hour does not make an explicit day undated. For updates, keep existing dates when the user only changes content and gives no scheduling intent. If the user explicitly removes the schedule, says time undecided, or replaces it with vague timing, use clearStartDate=true with empty date strings to move it to Unscheduled and clear both dates. Report the saved Unscheduled section or scheduled date from the Tool result, not from assumptions. The internal task_pool result marker identifies the undated section; express that section in the response language without echoing the marker or adding a translation in another language. These rules apply to to-dos, not calendar events or alarms."
     },
     {
       "name": "sysinfo_delete",
@@ -865,7 +889,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Query already-captured local notifications, SMS, mail summaries, call logs, calendar events, and accessibility input. Use this single tool for daily briefs, queries, time-window queries, and keyword searches. It never opens a system panel or scans live system sources. Each row may include sourceRef for deduplication against a live provider result. Summarize the returned JSON for the user."
+      "description": "Query already-captured local notifications, SMS, mail summaries, call logs, calendar events, and accessibility input by source, time window, or keyword. Collection coverage may be incomplete and captured records may be stale; they do not establish current live state. It never opens a system panel or scans live system sources. Each row may include sourceRef for deduplication against a live provider result. Summarize the returned JSON for the user."
     },
     {
       "name": "sysinfo_thread",
@@ -873,7 +897,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Load one local SysInfo thread by a threadKey returned by sysinfo_query."
+      "description": "Load one local SysInfo thread by a threadKey returned by sysinfo(command=query)."
     },
     {
       "name": "purchase_query",
@@ -897,7 +921,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Search public web results for a product on shopping platforms and return comparison evidence. Use this before giving shopping price advice."
+      "description": "Search public web results on Shopee Taiwan (shopee.tw) and momo (momo.com.tw) and return read-only product comparison evidence. Region is a search hint, not a country-site selector. Extracted prices are candidates, not confirmed checkout prices, stock, shipping or coupons. Use this before giving shopping price advice."
     },
     {
       "name": "web_fetch",
@@ -905,7 +929,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Fetch a specific web page by URL and return readable page text."
+      "description": "Fetch one HTTP/HTTPS page by URL and return readable text up to maxChars. This is a read-only HTTP fetch, not an interactive browser or JavaScript renderer; empty or truncated text does not establish that the full page was read."
     },
     {
       "name": "web_search",
@@ -921,7 +945,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Create a local time-triggered automation, managed in the Automations sidebar page. The automation runs unattended on this device around the given local time; Android may delay execution. Results are delivered as system notifications. Only read-only web research is allowed during unattended runs. Parameters: title (short), prompt (the exact instruction to run), hour (0-23 local), minute (0-59 local), repeat (\"once\", \"everyday\", \"weekdays\", or \"custom\"), weekdays (required for custom; 1=Monday ... 7=Sunday). Returns the created task id."
+      "description": "Create a local time-triggered automation, managed in the Automations sidebar page. The automation runs unattended on this device around the given local time; Android may delay execution. Results are delivered as system notifications. Only read-only web research is allowed during unattended runs. There is no target-date parameter: once means the next occurrence of hour/minute after creation, not an arbitrary future date. Do not claim a date embedded in prompt changes the schedule. Returns the created task id."
     },
     {
       "name": "scheduled_task_delete",
@@ -945,7 +969,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Enqueue an immediate run of an existing automation. It is deduplicated against the same day's scheduled run, so running twice in one day executes at most once."
+      "description": "Queue an immediate manual run of an existing automation. This confirms enqueueing, not completion. A pending manual run is coalesced by the scheduler. A later manual run can execute again and is separate from the scheduled occurrence; do not promise once-per-day execution."
     },
     {
       "name": "scheduled_task_set_enabled",
@@ -961,7 +985,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Update the instruction for future runs of an existing automation. First use scheduled_task_list to identify the existing task and preserve unrelated instructions. Does not create a task or run it now. Preserves title, schedule and enabled state. Ask which task if the target is ambiguous."
+      "description": "Update the instruction for future runs of an existing automation. First use scheduled_task(command=list) to identify the existing task and preserve unrelated instructions. Does not create a task or run it now. Preserves title, schedule and enabled state. Ask which task if the target is ambiguous."
     },
     {
       "name": "shortcut_save_agent_prompt",
@@ -969,7 +993,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Save a user-created shortcut that sends a prompt to the agent. Only call this after the user confirms the title, description, and behavior."
+      "description": "Save a user-created shortcut that sends a prompt to the agent when launched; saving does not execute it. Only call this after the user confirms the title, description, and behavior."
     },
     {
       "name": "shortcut_save_direct_tool",
@@ -977,7 +1001,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Save a user-created direct tool shortcut. Only call this when every requested action can be fully mapped to known tool steps with complete parameters."
+      "description": "Save a user-created direct tool shortcut. Only call this when every requested action can be fully mapped to known atomic tool steps with complete parameters. Saving does not execute the steps. Use each atomic operation's fixed contract, not the Main domain command wrapper. Parameters are literal saved values with no execution-time expressions; never freeze a rolling date range into fixed dates."
     },
     {
       "name": "task_create",
@@ -985,7 +1009,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Create the complete ordered TODO plan in one call for the current user request. This is a mandatory precondition before any non-task Tool when routing produces two or more concrete Main steps or crosses Profiles. Count each delegate or Plugin Tool call as one step; one delegate remains one step regardless of its Worker internals. Pass every bounded user-facing step in items. The plan can be created exactly once and cannot be extended later. Never include task management, cleanup, status-update, or final-response items. This internal execution plan is not the user's persistent To-do Center. For personal to-do creation, lookup, completion, or deletion, delegate to Personal Organization with scopes=[memo] and use memo_* Tools instead."
+      "description": "Create the complete ordered TODO plan in one call for the current user request. This is a mandatory precondition before any non-task Tool when routing produces two or more concrete Main steps. Count each directly executable business or Plugin Tool step as one step. Pass every bounded user-facing step in items. The plan can be created exactly once and cannot be extended later. Never include task management, cleanup, status-update, or final-response items. This internal execution plan is not the user's persistent To-do Center. For personal to-do creation, lookup, completion, or deletion, use the memo Tool instead."
     },
     {
       "name": "task_list",
@@ -993,7 +1017,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "List internal TODO items for the current user request. By default returns open, in_progress, and blocked items. This internal execution plan is not the user's persistent To-do Center. For personal to-do creation, lookup, completion, or deletion, delegate to Personal Organization with scopes=[memo] and use memo_* Tools instead."
+      "description": "List internal TODO items for the current user request. By default returns open, in_progress, and blocked items. This internal execution plan is not the user's persistent To-do Center. For personal to-do creation, lookup, completion, or deletion, use the memo Tool instead."
     },
     {
       "name": "task_update",
@@ -1001,7 +1025,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Update one internal TODO item. Allowed transitions: open to in_progress, blocked, or abandoned; in_progress to blocked, done, or abandoned; blocked to open or abandoned. Done and abandoned are terminal. Only one task may be in_progress. This internal execution plan is not the user's persistent To-do Center. For personal to-do creation, lookup, completion, or deletion, delegate to Personal Organization with scopes=[memo] and use memo_* Tools instead."
+      "description": "Update one internal TODO item. Allowed transitions: open to in_progress, blocked, or abandoned; in_progress to blocked, done, or abandoned; blocked to open or abandoned. Done and abandoned are terminal. Only one task may be in_progress. This internal execution plan is not the user's persistent To-do Center. For personal to-do creation, lookup, completion, or deletion, use the memo Tool instead."
     },
     {
       "name": "workflow_delete",
@@ -1009,7 +1033,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Delete a saved workflow by id."
+      "description": "Delete a saved workflow definition by its exact id. This does not undo actions already executed by that workflow."
     },
     {
       "name": "workflow_list",
@@ -1025,7 +1049,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Save a reusable workflow. stepsJson must be a JSON array of {toolName, arguments}."
+      "description": "Save a reusable workflow definition; this does not execute or schedule it. stepsJson must be a non-empty JSON array string of {toolName, arguments}. Supported atomic toolName values: mail_list, mail_read, mail_send, mail_delete, mail_account_list. Use each atomic operation's exact business parameters without a domain command wrapper. Saved arguments are literals, not expressions recalculated at execution time."
     },
     {
       "name": "accept_skill_proposal",
@@ -1041,7 +1065,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Add a new skill document to the skill registry."
+      "description": "Create or replace a user Skill with this exact id after validation and enable it. For untrusted imports, use preview_import and save_draft."
     },
     {
       "name": "disable_skill",
@@ -1049,7 +1073,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Disable a user Skill so it is hidden from the agent prompt."
+      "description": "Disable a user Skill for future discovery. Content already read remains in the current conversation."
     },
     {
       "name": "enable_skill",
@@ -1057,7 +1081,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Enable a valid user Skill so it can be used by the agent."
+      "description": "Enable a valid user Skill for discovery."
     },
     {
       "name": "list_skill_proposals",
@@ -1081,7 +1105,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Load a specialized skill when the task at hand matches one of the skills listed in the system prompt. Use this tool to inject the skill's instructions and resources into current conversation. The output may contain detailed workflow guidance as well as references to scripts, files, etc in the same directory as the skill. The skill name must match one of the skills listed in your system prompt."
+      "description": "Read the full text of a relevant Skill using its exact full id from the available catalog. Returns document text only; referenced resources and scripts are not loaded."
     },
     {
       "name": "plugin_request_install",
@@ -1089,7 +1113,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Create a structured install proposal for one official plugin. This does not download or install the plugin; HomeScreen must ask the user."
+      "description": "Create a structured install proposal for one official plugin. This does not download or install the plugin; the host handles the install proposal and user confirmation. Do not claim installation or use a newly installed capability in this frozen run."
     },
     {
       "name": "plugin_search",
@@ -1121,7 +1145,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Remove the skill"
+      "description": "Remove the user Skill with this exact id."
     },
     {
       "name": "rollback_skill",
@@ -1129,7 +1153,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Restore a user Skill to its most recently archived content revision."
+      "description": "Restore a user Skill to its most recently archived content revision. Requires that the user Skill and an archived revision exist."
     },
     {
       "name": "save_skill_draft",
@@ -1145,7 +1169,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Update an existing skill document in the skill registry."
+      "description": "Update an existing user Skill while preserving its enabled state."
     }
   ]
 }

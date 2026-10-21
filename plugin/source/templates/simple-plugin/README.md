@@ -20,3 +20,5 @@ After copying:
 This template is not included by default in Gradle and is not published by
 `publishAllPlugins`.
 
+
+模型可见的 `foneclaw_extension.json` description 只描述插件实际能力。开发时将示例 Echo 替换为真实工具，并同步修改工具名、参数 Schema、Service 分发和 Skill；不要把“替换此模板”等开发说明放进模型描述。

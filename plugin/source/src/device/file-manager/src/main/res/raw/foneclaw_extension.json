@@ -35,7 +35,7 @@
     {
       "name": "plugin_file_manager_list",
       "displayName": "List Files",
-      "description": "List files or folders under the external storage root after all files access is granted.",
+      "description": "List files or folders in one directory under the managed external storage root after all files access is granted. Results may be limited; this does not recursively list the whole tree.",
       "risk": "SENSITIVE_READ",
       "approvalMode": "REQUIRE_APPROVAL",
       "inputSchema": {
@@ -47,7 +47,7 @@
           },
           "limit": {
             "type": "integer",
-            "description": "Maximum number of entries to return."
+            "description": "Maximum entries, default 50, clamped to 1..500."
           }
         },
         "required": []
@@ -57,7 +57,7 @@
     {
       "name": "plugin_file_manager_search",
       "displayName": "Search Files",
-      "description": "Search file and folder names under a relative directory in external storage.",
+      "description": "Recursively search file and folder names under a relative external-storage directory. This does not search file contents.",
       "risk": "SENSITIVE_READ",
       "approvalMode": "REQUIRE_APPROVAL",
       "inputSchema": {
@@ -73,7 +73,7 @@
           },
           "limit": {
             "type": "integer",
-            "description": "Maximum number of matches to return."
+            "description": "Maximum matches, default 50, clamped to 1..500."
           }
         },
         "required": ["query"]
@@ -83,7 +83,7 @@
     {
       "name": "plugin_file_manager_read_text",
       "displayName": "Read Text File",
-      "description": "Read a text file under external storage up to maxBytes.",
+      "description": "Read a complete text file under the managed external storage root only if its size does not exceed maxBytes. Oversized files are rejected, not partially read.",
       "risk": "SENSITIVE_READ",
       "approvalMode": "REQUIRE_APPROVAL",
       "inputSchema": {
@@ -95,7 +95,7 @@
           },
           "maxBytes": {
             "type": "integer",
-            "description": "Maximum bytes to read."
+            "description": "Whole-file size limit in bytes. Default and hard maximum: 1048576 (1 MiB)."
           }
         },
         "required": ["path"]
@@ -117,11 +117,11 @@
           },
           "content": {
             "type": "string",
-            "description": "Initial text content."
+            "description": "Initial text content, default empty string."
           },
           "createParents": {
             "type": "boolean",
-            "description": "Whether missing parent folders should be created."
+            "description": "Whether to create missing parent folders. Default true."
           }
         },
         "required": ["path"]
@@ -131,7 +131,7 @@
     {
       "name": "plugin_file_manager_write_text",
       "displayName": "Write Text File",
-      "description": "Create or update a text file under external storage.",
+      "description": "Create or replace the complete text content of a file under external storage. Existing files require overwrite=true; this does not append.",
       "risk": "EXTERNAL_EFFECT",
       "approvalMode": "REQUIRE_APPROVAL",
       "inputSchema": {
@@ -147,11 +147,11 @@
           },
           "overwrite": {
             "type": "boolean",
-            "description": "Whether an existing file can be overwritten."
+            "description": "Allow replacing an existing file. Default false."
           },
           "createParents": {
             "type": "boolean",
-            "description": "Whether missing parent folders should be created."
+            "description": "Whether to create missing parent folders. Default true."
           }
         },
         "required": ["path", "content"]
@@ -195,7 +195,7 @@
           },
           "overwrite": {
             "type": "boolean",
-            "description": "Whether an existing target can be overwritten."
+            "description": "Allow replacing an existing target. Default false."
           }
         },
         "required": ["path", "newName"]
@@ -221,19 +221,19 @@
           },
           "startIndex": {
             "type": "integer",
-            "description": "First index value."
+            "description": "First index value. Default 1."
           },
           "padding": {
             "type": "integer",
-            "description": "Zero padding width for {index}."
+            "description": "Zero padding width for {index}. Default 2."
           },
           "includeDirectories": {
             "type": "boolean",
-            "description": "Whether folders should also be renamed."
+            "description": "Whether folders should also be renamed. Default false."
           },
           "limit": {
             "type": "integer",
-            "description": "Maximum number of entries to preview."
+            "description": "Maximum entries to preview, default 50, clamped to 1..500."
           }
         },
         "required": ["directory", "namePattern"]
@@ -285,7 +285,7 @@
     {
       "name": "plugin_file_manager_delete",
       "displayName": "Delete File",
-      "description": "Delete one file or folder under external storage. Direct deletion is permanent for this MVP.",
+      "description": "Permanently delete one file or folder under external storage. Direct deletion has no recycle bin. Folders require recursive=true; the storage root cannot be deleted.",
       "risk": "DESTRUCTIVE",
       "approvalMode": "REQUIRE_APPROVAL",
       "inputSchema": {
@@ -297,7 +297,7 @@
           },
           "recursive": {
             "type": "boolean",
-            "description": "Required to delete folders."
+            "description": "Must be true to delete a folder. Default false."
           }
         },
         "required": ["path"]
@@ -323,11 +323,11 @@
           },
           "overwrite": {
             "type": "boolean",
-            "description": "Whether an existing destination file can be overwritten."
+            "description": "Allow replacing an existing destination file. Default false."
           },
           "maxBytes": {
             "type": "integer",
-            "description": "Maximum download size."
+            "description": "Maximum download bytes. Default and hard maximum: 104857600 (100 MiB)."
           }
         },
         "required": ["url", "path"]

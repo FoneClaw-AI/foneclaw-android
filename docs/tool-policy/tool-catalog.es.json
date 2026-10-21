@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "es",
   "fallbackLocale": "en",
-  "toolCount": 133,
+  "toolCount": 136,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Buscar herramientas o funciones",
@@ -39,7 +39,7 @@
     {
       "name": "Location and Navigation",
       "displayName": "Ubicación y navegación",
-      "toolCount": 3
+      "toolCount": 6
     },
     {
       "name": "Mail",
@@ -89,7 +89,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Abra una foto visible específica de la galería del sistema. Úselo solo cuando el usuario solicite explícitamente ver o abrir una foto específica. No utilice esto como seguimiento después de camera_take_photo a menos que el usuario solicite explícitamente ver o abrir la foto capturada. indexFromLatest está basado en 1 en el orden más nuevo: primero: 1 abre la foto más reciente, 2 abre la segunda foto más reciente, 3 abre la tercera foto más reciente."
+      "description": "Abra una foto visible específica de la galería del sistema. Úselo solo cuando el usuario solicite explícitamente ver o abrir una foto específica. No utilice esto como seguimiento después de camera(command=take_photo) a menos que el usuario solicite explícitamente ver o abrir la foto capturada. indexFromLatest está basado en 1 en el orden más nuevo: primero: 1 abre la foto más reciente, 2 abre la segunda foto más reciente, 3 abre la tercera foto más reciente."
     },
     {
       "name": "camera_take_photo",
@@ -97,7 +97,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Captura una nueva foto y devuelve la foto guardada URI cuando esté disponible. Úselo cuando la intención del usuario sea capturar una nueva foto. Deje lensFacing sin configurar o en automático para la captura de fotografías normal. Elija lensFacing=front solo para mirar de frente o tomar selfies; elija volver solo cuando el usuario solicite explícitamente la cámara trasera. Mantenga explicitLensSelection falso para la captura de fotografías simples/predeterminadas, incluso si la lente física predeterminada ha vuelto. Establezca explicitLensSelection como verdadero solo cuando el usuario solicite explícitamente una captura frontal, trasera, trasera o selfie. No llame a camera_open_photo después de esta herramienta a menos que el usuario solicite explícitamente ver o abrir la foto. Llame a esta herramienta directamente. Capture utiliza primero la cámara del sistema nativo. La captura frontal/posterior explícita puede utilizar el backend directo solo si la cámara nativa no puede respetar la lente solicitada. No solicite al usuario que otorgue permiso antes de llamar a esta herramienta."
+      "description": "Captura una foto nueva y la devuelve como imagen adjunta cuando hay visión del modelo disponible. Úselo cuando la intención del usuario sea capturar una nueva foto. Deje lensFacing sin configurar o en automático para la captura de fotografías normal. Elija lensFacing=front solo para mirar de frente o tomar selfies; elija volver solo cuando el usuario solicite explícitamente la cámara trasera. Mantenga explicitLensSelection falso para la captura de fotografías simples/predeterminadas, incluso si la lente física predeterminada ha vuelto. Establezca explicitLensSelection como verdadero solo cuando el usuario solicite explícitamente una captura frontal, trasera, trasera o selfie. No llame a camera(command=open_photo) después de esta herramienta a menos que el usuario solicite explícitamente ver o abrir la foto. Llame a esta herramienta directamente. Capture utiliza primero la cámara del sistema nativo. La captura frontal/posterior explícita puede utilizar el backend directo solo si la cámara nativa no puede respetar la lente solicitada. No solicite al usuario que otorgue permiso antes de llamar a esta herramienta."
     },
     {
       "name": "cross_app_read_screen",
@@ -121,7 +121,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Obtiene los elementos de la interfaz de la pantalla de la aplicación visible. Cada elemento tiene un ID de nodo, por ejemplo [n3], que puede usarse con tap_node o input_text. No uses esta herramienta para leer, enumerar, buscar o resumir notificaciones de Android; usa las herramientas sysinfo. No almacenes el resultado en caché porque los ID de nodo cambian en cada llamada."
+      "description": "Obtiene los elementos de la interfaz de la pantalla de la aplicación visible. Cada elemento tiene un ID de nodo, por ejemplo [n3], que puede usarse con screen(command=tap), screen(command=scroll) o screen(command=input_text). No uses esta herramienta para leer, enumerar, buscar o resumir notificaciones de Android; usa las herramientas sysinfo. No almacenes el resultado en caché porque los ID de nodo cambian en cada llamada."
     },
     {
       "name": "input_text",
@@ -129,7 +129,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Reemplaza el texto de un campo editable visible en la aplicación Android actual. Llama primero a get_screen_info y pasa un nodo actual marcado como edit. Esta acción solo introduce texto; no envía el formulario, no toca Enviar ni pulsa Enter. No reutilices los ID de nodo."
+      "description": "Reemplaza el texto de un campo editable visible en la aplicación Android actual. Llama primero a screen(command=read) y pasa un nodo actual marcado como edit. Esta acción solo introduce texto; no envía el formulario, no toca Enviar ni pulsa Enter. No reutilices los ID de nodo."
     },
     {
       "name": "launch_app",
@@ -145,7 +145,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Compruebe si un nombre de paquete Android exacto aparece en Google Play solicitando https://play.google.com/store/apps/details?id=<packageName>.. Esta es una comprobación de red de solo lectura. Úselo antes de play_store_install."
+      "description": "Compruebe si un nombre de paquete Android exacto aparece en Google Play solicitando https://play.google.com/store/apps/details?id=<packageName>.. Esta es una comprobación de red de solo lectura. Úselo antes de app(command=install_store_app)."
     },
     {
       "name": "play_store_install",
@@ -169,7 +169,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Capture una pantalla Android con el servicio de accesibilidad FoneClaw. La imagen se conserva en la caché privada de la aplicación para que la use el Agent y no se añade a la galería del sistema. Utilice targetType=current para la pantalla actual, targetType=app con targetApp para abrir una aplicación y capturarla, o targetType=notification_shade solo para una captura de pantalla explícita o una solicitud de captura de imagen que involucre el tono de notificación visible. Nunca utilice targetType=notification_shade para leer, enumerar, consultar o resumir datos de notificaciones; utilice una herramienta de notificación SysInfo en su lugar. No llame a launch_app o system_panel_open antes de esta herramienta para la captura de aplicaciones o tonos de notificación. No utilice esto cuando el usuario quiera ver una captura de pantalla ya guardada; use screenshot_open para ver capturas de pantalla guardadas."
+      "description": "Capture una pantalla Android con el servicio de accesibilidad FoneClaw. La imagen se conserva en la caché privada de la aplicación para que la use el Agent y no se añade a la galería del sistema. Utilice targetType=current para la pantalla actual, targetType=app con targetApp para abrir una aplicación y capturarla, o targetType=notification_shade solo para una captura de pantalla explícita o una solicitud de captura de imagen que involucre el tono de notificación visible. Nunca utilice targetType=notification_shade para leer, enumerar, consultar o resumir datos de notificaciones; utilice una herramienta de notificación SysInfo en su lugar. No llame a app(command=launch) o system_panel(command=open) antes de esta herramienta para la captura de aplicaciones o tonos de notificación. No utilice esto cuando el usuario quiera ver una captura de pantalla ya guardada; use screenshot(command=open) para ver capturas de pantalla guardadas. Úsalo solo si se pide captura o análisis de imagen. Buscar, escribir, tocar o confirmar GUI no lo es: usa lectura de accesibilidad. Una página cargando o resultado incierto no cambia el límite. No captures solo para localizar/verificar controles, recuperar nodos obsoletos o compensar etiquetas ausentes. El éxito ya devuelve imagen adjunta para entrega; no abras la galería para buscar o verificarla."
     },
     {
       "name": "scroll",
@@ -177,7 +177,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Desplaza la aplicación actual en la dirección solicitada. Usa preferentemente un nodo desplazable de la información de pantalla más reciente o el área visible si no hay ningún contenedor desplazable disponible. Vuelve a comprobar la pantalla después get_screen_info."
+      "description": "Desplaza la app con una acción de accesibilidad compatible o, si no, un gesto acotado. Prefiere un ID reciente marcado scroll de screen(command=read). Usa viewport solo sin contenedor utilizable. La dirección indica destino: down muestra abajo, up arriba, right derecha, left izquierda. Éxito no confirma cambio: llama a screen(command=read) tras cada éxito antes de otra acción."
     },
     {
       "name": "tap_node",
@@ -185,7 +185,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Toca un elemento UI en la pantalla. El elemento se identifica por su ID de nodo, que se puede obtener de la herramienta screen_info get_screen_info."
+      "description": "Toca un elemento UI en la pantalla. El elemento se identifica por su ID de nodo, que se puede obtener de la herramienta screen(command=read) screen(command=read)."
     },
     {
       "name": "alarm_modify_alarm",
@@ -201,7 +201,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Establece una alarma de reloj Android. Recopile los detalles de tiempo/repetición/etiqueta faltantes antes de llamar."
+      "description": "Solicita una alarma en Reloj de Android. Pregunta solo la hora obligatoria que falte; usa valores predeterminados para lo opcional. No admite un parámetro de fecha."
     },
     {
       "name": "bluetooth_connected_devices",
@@ -337,7 +337,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Abra la configuración de Android donde el usuario puede otorgar acceso a FoneClaw No molestar / Política de notificación. No llame a esto inmediatamente después de que dnd_set_mode informe que ya abrió la página de configuración."
+      "description": "Abra la configuración de Android donde el usuario puede otorgar acceso a FoneClaw No molestar / Política de notificación. No llame a esto inmediatamente después de que dnd(command=set_mode) informe que ya abrió la página de configuración."
     },
     {
       "name": "dnd_set_mode",
@@ -425,7 +425,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Abra la página de configuración de fecha y hora Android directamente. Utilícelo para la configuración de fecha, hora, hora automática, zona horaria o zona horaria automática. Esto inicia una intención de configuración del sistema y no requiere accesibilidad, lectura de pantalla ni toques. Después de que tenga éxito, no llame a launch_app, get_screen_info o tap_node."
+      "description": "Abra la página de configuración de fecha y hora Android directamente. Utilícelo para la configuración de fecha, hora, hora automática, zona horaria o zona horaria automática. Esto inicia una intención de configuración del sistema y no requiere accesibilidad, lectura de pantalla ni toques. Después de que tenga éxito, no llame a app(command=launch), screen(command=read) o screen(command=tap)."
     },
     {
       "name": "system_settings_open_hotspot_entry",
@@ -644,12 +644,36 @@
       "description": "Abra una ruta o pantalla de navegación en una aplicación de mapas para un destino y modo de viaje. Esto inicia una aplicación de mapas externa, utiliza solo los argumentos proporcionados y no lee los datos del dispositivo."
     },
     {
+      "name": "travel_plan_append_days",
+      "category": "Location and Navigation",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Requiere aprobación",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Añade días consecutivos tras la última fecha del viaje guardado. Conserva todos los días, preparativos y equipaje existentes. Lee primero el plan y usa su revision actual. Continúa desde el último destino y alojamiento, agrupa visitas próximas y ordena las regiones entre días para evitar retrocesos innecesarios. Respeta citas fijas y el orden pedido; deja tiempos realistas de traslado y descanso sin afirmar rutas en vivo ni inventar duraciones exactas. No repitas visitas salvo petición o necesidad. Ante conflicto de revision, vuelve a leer; nunca sobrescribas cambios concurrentes. No crea eventos de calendario ni tareas."
+    },
+    {
+      "name": "travel_plan_read",
+      "category": "Location and Navigation",
+      "risk": "SENSITIVE_READ",
+      "approval": "Requiere aprobación",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Lee un plan de viaje privado guardado y su revision actual antes de modificarlo o ampliarlo. No realiza cambios."
+    },
+    {
+      "name": "travel_plan_update",
+      "category": "Location and Navigation",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Requiere aprobación",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Reemplaza el contenido editable de un viaje guardado tras leer su JSON más reciente. Puede modificar destino, salida, lugares, zona horaria, ritmo, fechas, títulos de días, nombres de paradas, horas de inicio, duraciones, notas, preparativos, categorías y elementos de equipaje y sus marcas. Conserva el id exacto del plan, la revision actual y los id de paradas/listas existentes de travel_plan_read; genera id solo para elementos nuevos. Conserva lo no solicitado. updatedPlanJson debe ser un objeto TravelPlan JSON completo, no un parche. Ante conflicto de revision, relee y combina la petición con el plan más reciente; no sobrescribas cambios concurrentes. Afirma que se actualizó solo tras el éxito. No crea eventos de calendario ni tareas."
+    },
+    {
       "name": "mail_account_list",
       "category": "Mail",
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Enumera las cuentas de correo configuradas. Deja la consulta vacía para verlas todas. Si se proporciona una consulta, busca por ID de cuenta, correo, alias y después alias o correo aproximado. Una coincidencia exacta aún puede devolver varias cuentas. Si un correo exacto no coincide con una cuenta configurada, el resultado puede incluir providerSetupGuide con una URL fija de credenciales del proveedor. Para direcciones de Gmail, providerSetupGuide.accountConfigPreset contiene todos los campos no secretos de IMAP, SMTP y nombre de usuario; pásalos sin cambios a saveAccount y solicita al usuario solo la contraseña de aplicación pendiente. No se devuelve un ajuste de servidor para otros dominios."
+      "description": "Enumera las cuentas de correo configuradas. Deja la consulta vacía para verlas todas. Si se proporciona una consulta, busca por ID de cuenta, correo, alias y después alias o correo aproximado. Una coincidencia exacta aún puede devolver varias cuentas. Si un correo exacto no coincide con una cuenta configurada, el resultado puede incluir providerSetupGuide con una URL fija de credenciales del proveedor. Para direcciones de Gmail, providerSetupGuide.accountConfigPreset contiene todos los campos no secretos de IMAP, SMTP y nombre de usuario; pásalos sin cambios a mail_account(command=save) y solicita al usuario solo la contraseña de aplicación pendiente. No se devuelve un ajuste de servidor para otros dominios."
     },
     {
       "name": "mail_account_save",
@@ -657,7 +681,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Pruebe las conexiones IMAP y SMTP y guarde la cuenta de correo solo cuando ambas tengan éxito. Llame a esto tan pronto como todos los campos de configuración requeridos estén disponibles. Esta operación requiere la aprobación del usuario."
+      "description": "Prueba el servidor receptor (IMAP o POP3) y SMTP, y guarda solo si ambos funcionan. Llama en cuanto estén todos los campos obligatorios. Requiere aprobación del usuario."
     },
     {
       "name": "mail_delete",
@@ -673,7 +697,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Enumera, filtra o busca resúmenes de mensajes. La consulta busca en el asunto, el remitente, los destinatarios y el cuerpo. Usa folder ALL una vez cuando el usuario pida correo recibido y enviado o no limite la dirección; usa INBOX o SENT solo si indica explícitamente una única dirección. Nunca adivines nombres de carpetas propios del proveedor ni repitas una consulta ya completada. Cada resultado incluye una vista previa de hasta 500 caracteres para listas y resúmenes por lotes; no leas el cuerpo completo de cada mensaje tras completar una consulta de lista. No vuelvas a seguir nextCursor en la misma ejecución del Worker; informa de que hay más resultados y deja que una solicitud posterior continúe la consulta. Vuelve a llamar a este Tool para cada nueva lista, búsqueda, filtro, intervalo de fechas, resumen o cambio de formato, aunque el historial ya contenga resultados de correo. Los messageRefs anteriores solo pueden reutilizarse para operar sobre un mensaje concreto ya seleccionado. Deja accountId vacío para usar la única cuenta o la única cuenta predeterminada. Si falla una consulta restringida, informa del fallo sin borrar ni cambiar la consulta, el remitente o los filtros de tiempo para obtener un resultado más amplio."
+      "description": "Enumera, filtra o busca resúmenes de mensajes. La consulta busca en el asunto, el remitente, los destinatarios y el cuerpo. Usa folder ALL una vez cuando el usuario pida correo recibido y enviado o no limite la dirección; usa INBOX o SENT solo si indica explícitamente una única dirección. Nunca adivines nombres de carpetas propios del proveedor ni repitas una consulta ya completada. Cada resultado incluye una vista previa de hasta 500 caracteres para listas y resúmenes por lotes; no leas el cuerpo completo de cada mensaje tras completar una consulta de lista. No vuelvas a seguir nextCursor en la misma ejecución del; informa de que hay más resultados y deja que una solicitud posterior continúe la consulta. Vuelve a llamar a este Tool para cada nueva lista, búsqueda, filtro, intervalo de fechas, resumen o cambio de formato, aunque el historial ya contenga resultados de correo. Los messageRefs anteriores solo pueden reutilizarse para operar sobre un mensaje concreto ya seleccionado. Deja accountId vacío para usar la única cuenta o la única cuenta predeterminada. Si falla una consulta restringida, informa del fallo sin borrar ni cambiar la consulta, el remitente o los filtros de tiempo para obtener un resultado más amplio. POP3 solo ofrece INBOX, no filtra por leído y NEWEST_FIRST/OLDEST_FIRST usa la secuencia del servidor, no garantiza orden por fecha. Los filtros de fecha usan la cabecera Date del remitente; isRead es null si no se admite estado de lectura."
     },
     {
       "name": "mail_read",
@@ -681,7 +705,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Lee un mensaje indicado por un messageRef devuelto por mail_list y lo marca como leído en el servidor. Úsalo solo cuando el usuario necesite explícitamente el cuerpo completo, los metadatos de los adjuntos o detalles exactos que no figuren en la vista previa de mail_list; no lo uses con todos los mensajes solo para crear una lista o un resumen por lotes. Nunca repitas la misma combinación de messageRef y bodyCursor. Cuando el Tool termine correctamente, resume el mensaje para el usuario en la misma respuesta."
+      "description": "Lee un mensaje de un messageRef de mail(command=list). IMAP lo marca leído; Gmail y POP3 permanecen en solo lectura. Úsalo solo cuando el usuario necesite explícitamente el cuerpo completo, los metadatos de los adjuntos o detalles exactos que no figuren en la vista previa de mail(command=list); no lo uses con todos los mensajes solo para crear una lista o un resumen por lotes. Nunca repitas la misma combinación de messageRef y bodyCursor. Cuando el Tool termine correctamente, resume el mensaje para el usuario en la misma respuesta."
     },
     {
       "name": "mail_send",
@@ -697,7 +721,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Muestra las entradas recientes del registro de llamadas Android, opcionalmente filtradas por tipo de llamada. Requiere permiso READ_CALL_LOG. Utilice type=missed para preguntas sobre llamadas perdidas y antes de seleccionar una llamada perdida para devolver la llamada. Después de seleccionar un número, llama a phone_dial."
+      "description": "Muestra las entradas recientes del registro de llamadas Android, opcionalmente filtradas por tipo de llamada. Requiere permiso READ_CALL_LOG. Utilice type=missed para preguntas sobre llamadas perdidas y antes de seleccionar una llamada perdida para devolver la llamada. Después de seleccionar un número, llama a phone(command=dial)."
     },
     {
       "name": "contacts_create",
@@ -721,7 +745,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Abra el marcador del sistema para exactamente un número de teléfono o contacto con nombre. Establezca exactamente uno de phoneNumber y contactName. Un contacto designado debe resolverse en una coincidencia; Si varios contactos coinciden, deténgase y pídale al usuario que elija. Después de que se abra el marcador, llame a get_screen_info, identifique el botón de llamada visible y luego llame a tap_node."
+      "description": "Abre el marcador para un único número o contacto. Define exactamente uno de phoneNumber y contactName. El contacto debe tener una sola coincidencia; si hay varias, detente y pide elegir. Solo rellena el marcador: si solo se pidió abrir, termina ahí. Solo si se pidió llamar, usa operaciones de pantalla para identificar y pulsar Llamar. Abrir o tocar no demuestra conexión."
     },
     {
       "name": "send_to_sms_message",
@@ -729,7 +753,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Después de la aprobación, abra un borrador SMS/MMS visible. Para un mensaje de texto SMS con un destinatario, toque automáticamente Enviar solo cuando la accesibilidad FoneClaw esté conectada y la aplicación de mensajes predeterminada, el destinatario, el cuerpo completo del mensaje y un control de envío estable estén verificados. Los archivos adjuntos, los mensajes de doble SIM, UI ambiguo o la accesibilidad no disponible requieren una acción manual. Después de cualquier resultado terminal, detenga la planificación de herramientas y nunca llame a get_screen_info o tap_node."
+      "description": "Después de la aprobación, abra un borrador SMS/MMS visible. Para un mensaje de texto SMS con un destinatario, toque automáticamente Enviar solo cuando la accesibilidad FoneClaw esté conectada y la aplicación de mensajes predeterminada, el destinatario, el cuerpo completo del mensaje y un control de envío estable estén verificados. Los archivos adjuntos, los mensajes de doble SIM, UI ambiguo o la accesibilidad no disponible requieren una acción manual. Después de cualquier resultado terminal, detenga la planificación de herramientas y nunca llame a screen(command=read) o screen(command=tap)."
     },
     {
       "name": "sms_list",
@@ -737,7 +761,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Consulta SMS en vivo en este dispositivo Android. Sin palabra clave, dirección, contacto o threadId, muestra los mensajes recientes; usa esos campos para buscar. Define threadId solo a partir de un resultado anterior de sms_list. Para un resumen, llama una vez con box=all e includeBody=true y resume únicamente los mensajes recibidos y enviados devueltos. Usa returnedBreakdown para los recuentos y mantén separadas sus filas byAddress. Nunca sustituyas este resultado en vivo por el historial de SysInfo."
+      "description": "Consulta SMS en vivo en este dispositivo Android. Sin palabra clave, dirección, contacto o threadId, muestra los mensajes recientes; usa esos campos para buscar. Define threadId solo a partir de un resultado anterior de sms(command=list). Para un resumen, llama una vez con box=all e includeBody=true y resume únicamente los mensajes recibidos y enviados devueltos. Usa returnedBreakdown para los recuentos y mantén separadas sus filas byAddress. Nunca sustituyas este resultado en vivo por el historial de SysInfo."
     },
     {
       "name": "calendar_create_event",
@@ -745,7 +769,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Crea un evento de calendario Android. Para un evento de todo el día, configure allDay=true y use la medianoche local del día de inicio y la medianoche local exclusiva del día siguiente como fin.Recopile el tiempo faltante y los detalles de los recordatorios antes de llamar. Un nombre de lugar proporcionado por el usuario es suficiente y debe pasarse directamente como locationName. No buscar una dirección exacta o coordenadas a menos que el usuario pida explícitamente verificar, resolver, elegir o navegar hasta el lugar. Prefiera startLocalDateTime/endLocalDateTime en yyyy-MM-dd HH:mm para fechas de usuario y fechas relativas; la herramienta los analizará en la zona horaria del dispositivo. No cree eventos a partir de milisegundos de época calculados por el modelo. Utilice calendarId=0 a menos que el usuario haya seleccionado explícitamente una identificación de calendario. Después de la creación, utilice el resultado de la herramienta actualStart/actualEnd como el momento de creación de cara al usuario."
+      "description": "Crea un evento de calendario Android. Para un evento de todo el día, configure allDay=true y use la medianoche local del día de inicio y la medianoche local exclusiva del día siguiente como fin.Inicio y fin son obligatorios. Si no se deduce hora de fin ni duración de la solicitud, pregunta; nunca inventes duración. El recordatorio opcional es de 30 minutos por defecto. Un nombre de lugar proporcionado por el usuario es suficiente y debe pasarse directamente como locationName. No buscar una dirección exacta o coordenadas a menos que el usuario pida explícitamente verificar, resolver, elegir o navegar hasta el lugar. Prefiera startLocalDateTime/endLocalDateTime en yyyy-MM-dd HH:mm[:ss] para fechas de usuario y fechas relativas; la herramienta los analizará en la zona horaria del dispositivo. No cree eventos a partir de milisegundos de época calculados por el modelo. Utilice calendarId=0 a menos que el usuario haya seleccionado explícitamente una identificación de calendario. Después de la creación, utilice el resultado de la herramienta actualStart/actualEnd como el momento de creación de cara al usuario."
     },
     {
       "name": "calendar_delete_event",
@@ -753,7 +777,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Eliminar un evento de calendario Android por ID. Busque/enumere eventos en todos los calendarios con calendarId=0 a menos que el usuario haya seleccionado explícitamente una identificación de calendario. Pase siempre el título conocido, y la ubicación cuando se conozca para que el objetivo no sea ambiguo."
+      "description": "Elimina un evento Android con el eventId exacto de calendar(command=list_events) o calendar(command=search_events). Identifica por título, hora y lugar devueltos; pide elegir si es ambiguo. Pasa solo eventId a esta operación."
     },
     {
       "name": "calendar_list_calendars",
@@ -769,7 +793,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Enumere Android eventos del calendario en un rango de tiempo concreto. Úselo para solicitudes como el programa de hoy, el programa de mañana, eventos existentes o los eventos de esta semana. Prefiere startLocalDateTime/endLocalDateTime en yyyy-MM-dd HH:mm:ss; la herramienta los analizará en la zona horaria del dispositivo. No adivines calendarId; use calendarId=0 para buscar todos los calendarios a menos que el usuario haya seleccionado explícitamente una identificación de calendario."
+      "description": "Enumere Android eventos del calendario en un rango de tiempo concreto. Úselo para solicitudes como el programa de hoy, el programa de mañana, eventos existentes o los eventos de esta semana. Prefiere startLocalDateTime/endLocalDateTime en yyyy-MM-dd HH:mm[:ss]; la herramienta los analizará en la zona horaria del dispositivo. No adivines calendarId; use calendarId=0 para buscar todos los calendarios a menos que el usuario haya seleccionado explícitamente una identificación de calendario."
     },
     {
       "name": "calendar_open_event",
@@ -785,7 +809,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Busque Android eventos del calendario por palabra clave en un rango de tiempo concreto. Úselo antes de abrir, actualizar o eliminar un evento cuando el usuario describe el evento por título o contenido. Prefiere startLocalDateTime/endLocalDateTime en yyyy-MM-dd HH:mm; la herramienta los analizará en la zona horaria del dispositivo. No adivines calendarId; use calendarId=0 para buscar todos los calendarios a menos que el usuario haya seleccionado explícitamente una identificación de calendario."
+      "description": "Busque Android eventos del calendario por palabra clave en un rango de tiempo concreto. Úselo antes de abrir, actualizar o eliminar un evento cuando el usuario describe el evento por título o contenido. Prefiere startLocalDateTime/endLocalDateTime en yyyy-MM-dd HH:mm[:ss]; la herramienta los analizará en la zona horaria del dispositivo. No adivines calendarId; use calendarId=0 para buscar todos los calendarios a menos que el usuario haya seleccionado explícitamente una identificación de calendario."
     },
     {
       "name": "calendar_update_event",
@@ -793,7 +817,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Actualiza un evento de calendario Android por ID. Busque/enumere eventos primero cuando el usuario describa el objetivo en lenguaje natural y pase los detalles conocidos del objetivo con los campos modificados. No adivines calendarId o el ID del evento; busque todos los calendarios con calendarId=0 a menos que el usuario haya seleccionado explícitamente una identificación de calendario. Los campos de texto en blanco se ignoran. Utilice blank startLocalDateTime/endLocalDateTime para mantener los tiempos existentes. Utilice reminderMinutes=-2 para conservar recordatorios, -1 para eliminar recordatorios y >=0 para reemplazar recordatorios."
+      "description": "Actualiza un evento de calendario Android por ID. Busque/enumere eventos primero cuando el usuario describa el objetivo en lenguaje natural y pase los detalles conocidos del objetivo con los campos modificados. No adivines calendarId o el ID del evento; busque todos los calendarios con calendarId=0 a menos que el usuario haya seleccionado explícitamente una identificación de calendario. Los campos de texto en blanco se ignoran. Utilice blank startLocalDateTime/endLocalDateTime para mantener los tiempos existentes. Utilice reminderMinutes=-2 para conservar recordatorios, -1 para eliminar recordatorios y >=0 para reemplazar recordatorios. yyyy-MM-dd HH:mm[:ss]."
     },
     {
       "name": "memo_create",
@@ -801,7 +825,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Añade una tarea visible para el usuario a To-do Center. Úsalo para añadir o registrar una tarea, 添加待办, 记录待办 o un recordatorio accionable que el usuario quiera conservar. Guarda contenido del usuario, no la memoria de perfil del asistente ni el plan de ejecución interno de Main. Resuelve las fechas directamente desde el entorno Worker sin llamar a los Tools Calendar o Alarm. Programa una tarea solo si la solicitud o una fuente citada explícitamente contiene una fecha concreta, una fecha relativa con una única interpretación (hoy, mañana, pasado mañana, dentro de exactamente dos días / 两天后) o un intervalo explícito. current_date y la zona horaria solo sirven para calcular, nunca constituyen una fecha indicada por el usuario. Si no se menciona fecha o el momento es impreciso (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), crea una tarea sin fecha en Unscheduled (时间待定), omitiendo o dejando vacíos startDate y endDate. No uses hoy por defecto, no elijas un día conveniente ni conviertas un periodo impreciso en un evento de varios días; conserva esa indicación temporal en el contenido. Si se conoce el contenido, no preguntes una fecha solo para crear la tarea. Resuelve las fechas concretas con el contexto de ejecución actual; desconocer la hora no elimina una fecha explícita. En actualizaciones, conserva las fechas si solo cambia el contenido y no hay intención de reprogramar. Si el usuario elimina la programación, dice que la hora está por decidir o la sustituye por un momento impreciso, usa clearStartDate=true con cadenas de fecha vacías para borrar ambas fechas y moverla a Unscheduled. Informa de la sección Unscheduled o la fecha guardada según el resultado del Tool, no según suposiciones. El marcador interno task_pool denomina la sección Unscheduled (时间待定) en respuestas al usuario. Estas reglas son para tareas, no para eventos de calendario ni alarmas."
+      "description": "Añade una tarea visible para el usuario a To-do Center. Úsalo para añadir o registrar una tarea, 添加待办, 记录待办 o un recordatorio accionable que el usuario quiera conservar. Guarda contenido del usuario, no la memoria de perfil del asistente ni el plan de ejecución interno de Main. Resuelve las fechas directamente desde el entorno entorno de ejecución sin llamar a los Tools Calendar o Alarm. Programa una tarea solo si la solicitud o una fuente citada explícitamente contiene una fecha concreta, una fecha relativa con una única interpretación (hoy, mañana, pasado mañana, dentro de exactamente dos días / 两天后) o un intervalo explícito. la hora original de la solicitud proporcionada por el entorno de ejecución y la zona horaria solo sirven para calcular, nunca constituyen una fecha indicada por el usuario. Si no se menciona fecha o el momento es impreciso (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), crea una tarea sin fecha en Unscheduled, omitiendo o dejando vacíos startDate y endDate. No uses hoy por defecto, no elijas un día conveniente ni conviertas un periodo impreciso en un evento de varios días; conserva esa indicación temporal en el contenido. Si se conoce el contenido, no preguntes una fecha solo para crear la tarea. Resuelve las fechas concretas con la hora y zona horaria originales de la solicitud proporcionadas por el runtime; desconocer la hora no elimina una fecha explícita. En actualizaciones, conserva las fechas si solo cambia el contenido y no hay intención de reprogramar. Si el usuario elimina la programación, dice que la hora está por decidir o la sustituye por un momento impreciso, usa clearStartDate=true con cadenas de fecha vacías para borrar ambas fechas y moverla a Unscheduled. Informa de la sección Unscheduled o la fecha guardada según el resultado del Tool, no según suposiciones. El marcador interno task_pool identifica la sección sin fecha; exprésala en el idioma de respuesta sin repetir el marcador ni añadir traducciones a otro idioma. Estas reglas son para tareas, no para eventos de calendario ni alarmas."
     },
     {
       "name": "memo_delete",
@@ -817,7 +841,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Muestra la lista de tareas del usuario en To-do Center (待办列表). status puede ser active, done, archived o all. Consulta tareas personales, no el plan de ejecución interno de Main ni la memoria del perfil del asistente. Un resultado vacío solo se aplica a esta lista de tareas."
+      "description": "Muestra la lista de tareas del usuario en To-do Center. status puede ser active, done, archived o all. Consulta tareas personales, no el plan de ejecución interno de Main ni la memoria del perfil del asistente. Un resultado vacío solo se aplica a esta lista de tareas."
     },
     {
       "name": "memo_mark_done",
@@ -841,7 +865,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Edita una tarea del usuario en To-do Center por id. Si el objetivo se describe en lenguaje natural, busca o enumera primero las tareas y envía los datos conocidos con los campos modificados. Edita tareas del usuario, no la memoria de perfil del asistente ni el plan interno de Main. title/content/tags y fechas en blanco conservan sus valores. Usa fechas yyyy-MM-dd del entorno Worker; no calcules milisegundos de época ni llames a Calendar o Alarm solo para resolver una fecha. Programa únicamente con una fecha concreta, una fecha relativa inequívoca (hoy, mañana, pasado mañana, exactamente dentro de dos días / 两天后) o un intervalo explícito aportado por la solicitud o fuente citada. current_date y la zona horaria solo sirven para calcular, no son una fecha del usuario. Sin fecha o con tiempo impreciso (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), omite o vacía startDate y endDate para dejar la tarea en Unscheduled (时间待定). No uses hoy por defecto, elijas un día conveniente ni conviertas un periodo impreciso en varios días; conserva la expresión en el contenido. Si se conoce el contenido, no preguntes una fecha. Resuelve fechas concretas con el contexto actual; una hora desconocida no elimina un día explícito. Si solo cambia el contenido y no hay intención de programación, conserva las fechas. Si el usuario elimina la programación, dice que está por decidir o la sustituye por un momento impreciso, usa clearStartDate=true con fechas vacías para borrar ambas y mover a Unscheduled. Informa según la sección Unscheduled o fecha guardada del resultado del Tool, no por suposición. task_pool denomina internamente la sección Unscheduled (时间待定) en respuestas al usuario. Estas reglas no se aplican a eventos de calendario ni alarmas."
+      "description": "Edita una tarea del usuario en To-do Center por id. Si el objetivo se describe en lenguaje natural, busca o enumera primero las tareas y envía los datos conocidos con los campos modificados. Edita tareas del usuario, no la memoria de perfil del asistente ni el plan interno de Main. title/content/tags y fechas en blanco conservan sus valores. Usa fechas yyyy-MM-dd del entorno entorno de ejecución; no calcules milisegundos de época ni llames a Calendar o Alarm solo para resolver una fecha. Programa únicamente con una fecha concreta, una fecha relativa inequívoca (hoy, mañana, pasado mañana, exactamente dentro de dos días / 两天后) o un intervalo explícito aportado por la solicitud o fuente citada. la hora original de la solicitud proporcionada por el entorno de ejecución y la zona horaria solo sirven para calcular, no son una fecha del usuario. Sin fecha o con tiempo impreciso (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), omite o vacía startDate y endDate para dejar la tarea en Unscheduled. No uses hoy por defecto, elijas un día conveniente ni conviertas un periodo impreciso en varios días; conserva la expresión en el contenido. Si se conoce el contenido, no preguntes una fecha. Resuelve fechas concretas con el contexto actual; una hora desconocida no elimina un día explícito. Si solo cambia el contenido y no hay intención de programación, conserva las fechas. Si el usuario elimina la programación, dice que está por decidir o la sustituye por un momento impreciso, usa clearStartDate=true con fechas vacías para borrar ambas y mover a Unscheduled. Informa según la sección Unscheduled o fecha guardada del resultado del Tool, no por suposición. El marcador interno task_pool identifica la sección sin fecha; exprésala en el idioma de respuesta sin repetir el marcador ni añadir traducciones a otro idioma. Estas reglas no se aplican a eventos de calendario ni alarmas."
     },
     {
       "name": "sysinfo_delete",
@@ -865,7 +889,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Consulta notificaciones locales ya capturadas, SMS, registros de llamadas, eventos del calendario y entradas de accesibilidad. Utilice esta herramienta única para resúmenes diarios, consultas de notificaciones, consultas de ventana de tiempo y búsquedas de palabras clave. Nunca abre un panel del sistema ni escanea fuentes del sistema en vivo. Cada fila puede incluir sourceRef para la deduplicación frente a un resultado de proveedor en vivo. Resuma el JSON devuelto para el usuario."
+      "description": "Consulta notificaciones, SMS, resúmenes de correo, llamadas, eventos e input de accesibilidad locales ya capturados por fuente, intervalo o palabra clave. La cobertura puede ser incompleta y los registros antiguos; no establecen el estado actual. No abre paneles ni escanea fuentes en vivo. Cada fila puede incluir sourceRef para deduplicar con resultados de un proveedor en vivo. Resume el JSON devuelto."
     },
     {
       "name": "sysinfo_thread",
@@ -873,7 +897,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Cargue un subproceso local SysInfo mediante un threadKey devuelto por sysinfo_query."
+      "description": "Cargue un subproceso local SysInfo mediante un threadKey devuelto por sysinfo(command=query)."
     },
     {
       "name": "purchase_query",
@@ -897,7 +921,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Busque resultados web públicos para un producto en plataformas de compras y obtenga pruebas comparativas. Utilice esto antes de dar consejos sobre precios de compra."
+      "description": "Busca resultados públicos de Shopee Taiwán (shopee.tw) y momo (momo.com.tw) y devuelve evidencia comparativa de solo lectura. La región es una pista de búsqueda, no un selector de sitio nacional. Los precios extraídos son candidatos, no precios finales, existencias, envíos ni cupones confirmados. Úsalo antes de aconsejar precios."
     },
     {
       "name": "web_fetch",
@@ -905,7 +929,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Obtenga una página web específica mediante URL y devuelva texto de página legible."
+      "description": "Obtiene una página HTTP/HTTPS por URL y devuelve texto legible de hasta maxChars caracteres. Es una consulta HTTP de solo lectura, no un navegador interactivo ni un renderizador JavaScript; el texto vacío o truncado no demuestra una lectura completa."
     },
     {
       "name": "web_search",
@@ -921,7 +945,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Create a local time-triggered automation, managed in the Automations sidebar page. The automation runs unattended on this device around the given local time; Android may delay execution. Results are delivered as system notifications. Only read-only web research is allowed during unattended runs. Parameters: title (short), prompt (the exact instruction to run), hour (0-23 local), minute (0-59 local), repeat (\"once\", \"everyday\", \"weekdays\", or \"custom\"), weekdays (required for custom; 1=Monday ... 7=Sunday). Returns the created task id."
+      "description": "Crea automatización local por hora, gestionada en la página lateral de Automatizaciones. Se ejecuta sin supervisión cerca de la hora local indicada; Android puede retrasarla. Resultados por notificaciones del sistema. Solo permite investigación web de lectura en ejecuciones desatendidas. No hay fecha objetivo: once es la próxima hora/minuto tras crearla, no una fecha futura arbitraria. Una fecha en prompt no cambia el horario. Devuelve el id creado."
     },
     {
       "name": "scheduled_task_delete",
@@ -945,7 +969,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Enqueue an immediate run of an existing automation. It is deduplicated against the same day's scheduled run, so running twice in one day executes at most once."
+      "description": "Encola una ejecución manual inmediata de una automatización existente. Confirma el encolado, no la finalización. El planificador agrupa ejecuciones manuales pendientes. Una ejecución manual posterior puede repetirse y es independiente de la programada; no prometas una sola ejecución diaria."
     },
     {
       "name": "scheduled_task_set_enabled",
@@ -961,7 +985,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Update the instruction for future runs of an existing automation. First use scheduled_task_list to identify the existing task and preserve unrelated instructions. Does not create a task or run it now. Preserves title, schedule and enabled state. Ask which task if the target is ambiguous."
+      "description": "Actualiza las instrucciones futuras de una automatización existente. Usa primero scheduled_task(command=list) para identificarla y conserva instrucciones no relacionadas. No crea ni ejecuta tareas. Mantiene título, horario y estado habilitado. Pregunta cuál si es ambiguo."
     },
     {
       "name": "shortcut_save_agent_prompt",
@@ -969,7 +993,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Guarde un acceso directo creado por el usuario que envíe un mensaje al agente. Llame a esto solo después de que el usuario confirme el título, la descripción y el comportamiento."
+      "description": "Guarda un acceso directo del usuario que envía un prompt al agente al iniciarlo; guardar no lo ejecuta. Llama solo tras confirmar título, descripción y comportamiento."
     },
     {
       "name": "shortcut_save_direct_tool",
@@ -977,7 +1001,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Guarde un acceso directo a una herramienta directa creado por el usuario. Llame a esto solo cuando cada acción solicitada pueda asignarse completamente a pasos de herramientas conocidos con parámetros completos."
+      "description": "Guarda un acceso directo de herramientas solo si cada acción se mapea por completo a pasos atómicos conocidos con parámetros completos. Guardar no ejecuta. Usa el contrato fijo de cada operación, no el envoltorio command de dominio de Main. Argumentos literales sin expresiones de ejecución; no congeles un rango móvil en fechas fijas."
     },
     {
       "name": "task_create",
@@ -985,7 +1009,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Crea en una sola llamada el plan TODO completo y ordenado para la solicitud actual. Es obligatorio antes de cualquier Tool que no sea de tareas cuando el enrutamiento produce dos o más pasos concretos de Main o cruza Profiles. Cuenta cada llamada a delegate o Plugin Tool como un paso; un delegate sigue siendo un paso con independencia de su funcionamiento interno en Worker. Pasa en items todos los pasos acotados de cara al usuario. El plan solo puede crearse una vez y no ampliarse después. Nunca incluyas gestión de tareas, limpieza, actualización de estado ni respuesta final. Este plan de ejecución interno no es el To-do Center persistente del usuario. Para crear, buscar, completar o eliminar tareas personales, delega en Personal Organization con scopes=[memo] y usa memo_* Tools."
+      "description": "Crea en una llamada el plan TODO completo y ordenado de la solicitud. Es obligatorio antes de cualquier Tool no de tareas si hay dos o más pasos concretos de Main. Cada paso de negocio o Plugin Tool directamente ejecutable cuenta uno. Pasa todos los pasos acotados para el usuario en items. Solo se crea una vez y no se amplía. Excluye gestión, limpieza, cambios de estado y respuesta final. No es el To-do Center persistente del usuario; para tareas personales usa memo."
     },
     {
       "name": "task_list",
@@ -993,7 +1017,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Enumera los elementos TODO internos de la solicitud actual. De forma predeterminada devuelve open, in_progress y blocked. Este plan de ejecución interno no es el To-do Center persistente del usuario. Para crear, buscar, completar o eliminar tareas personales, delega en Personal Organization con scopes=[memo] y usa memo_* Tools."
+      "description": "Enumera los elementos TODO internos de la solicitud actual. De forma predeterminada devuelve open, in_progress y blocked. Este plan de ejecución interno no es el To-do Center persistente del usuario. Para crear, buscar, completar o eliminar tareas personales, usa la herramienta memo."
     },
     {
       "name": "task_update",
@@ -1001,7 +1025,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Actualiza un elemento TODO interno. Transiciones permitidas: open a in_progress, blocked o abandoned; in_progress a blocked, done o abandoned; blocked a open o abandoned. done y abandoned son estados terminales. Solo una tarea puede estar en in_progress. Este plan de ejecución interno no es el To-do Center persistente del usuario. Para crear, buscar, completar o eliminar tareas personales, delega en Personal Organization con scopes=[memo] y usa memo_* Tools."
+      "description": "Actualiza un elemento TODO interno. Transiciones permitidas: open a in_progress, blocked o abandoned; in_progress a blocked, done o abandoned; blocked a open o abandoned. done y abandoned son estados terminales. Solo una tarea puede estar en in_progress. Este plan de ejecución interno no es el To-do Center persistente del usuario. Para crear, buscar, completar o eliminar tareas personales, usa la herramienta memo."
     },
     {
       "name": "workflow_delete",
@@ -1009,7 +1033,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Eliminar un flujo de trabajo guardado por identificación."
+      "description": "Elimina una definición de flujo guardada por su id exacto. No deshace acciones ya ejecutadas."
     },
     {
       "name": "workflow_list",
@@ -1025,7 +1049,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Guarde un flujo de trabajo reutilizable. stepsJson debe ser una matriz JSON de {toolName, argument}."
+      "description": "Guarda una definición reutilizable; no la ejecuta ni programa. stepsJson debe ser una cadena de matriz JSON no vacía de {toolName, arguments}. Admite toolName atómicos mail_list, mail_read, mail_send, mail_delete, mail_account_list. Usa parámetros de negocio exactos sin envoltorio command de dominio. Los argumentos guardados son literales, no expresiones recalculadas al ejecutar."
     },
     {
       "name": "accept_skill_proposal",
@@ -1041,7 +1065,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Agregue un nuevo documento de habilidades al registro de habilidades."
+      "description": "Crea o reemplaza una Skill de usuario con este id exacto tras validarla y la habilita. Para importaciones no fiables, usa preview_import y save_draft."
     },
     {
       "name": "disable_skill",
@@ -1049,7 +1073,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Deshabilite una habilidad de usuario para que quede oculta del indicador del agente."
+      "description": "Deshabilita una Skill de usuario para futuras búsquedas. El contenido ya leído permanece en la conversación actual."
     },
     {
       "name": "enable_skill",
@@ -1057,7 +1081,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Habilite una habilidad de usuario válida para que pueda ser utilizada por el agente."
+      "description": "Habilita una Skill de usuario válida para su descubrimiento."
     },
     {
       "name": "list_skill_proposals",
@@ -1081,7 +1105,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Cargue una habilidad especializada cuando la tarea en cuestión coincida con una de las habilidades enumeradas en el mensaje del sistema. Utilice esta herramienta para inyectar las instrucciones y recursos de la habilidad en la conversación actual. El resultado puede contener una guía detallada del flujo de trabajo, así como referencias a scripts, archivos, etc. en el mismo directorio que la habilidad. El nombre de la habilidad debe coincidir con una de las habilidades enumeradas en el indicador del sistema."
+      "description": "Lee el texto completo de una Skill pertinente con su id completo exacto del catálogo disponible. Solo devuelve texto; no carga recursos ni scripts referenciados."
     },
     {
       "name": "plugin_request_install",
@@ -1089,7 +1113,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Cree una propuesta de instalación estructurada para un complemento oficial. Esto no descarga ni instala el complemento; HomeScreen debe preguntarle al usuario."
+      "description": "Crea una propuesta estructurada de instalación para un complemento oficial. No descarga ni instala; el anfitrión gestiona la propuesta y confirmación. No afirmes instalación ni uses capacidades recién instaladas en esta ejecución congelada."
     },
     {
       "name": "plugin_search",
@@ -1121,7 +1145,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Quitar la habilidad."
+      "description": "Elimina la Skill de usuario con este id exacto."
     },
     {
       "name": "rollback_skill",
@@ -1129,7 +1153,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Restaura una Skill de usuario a la revisión de contenido archivada más reciente."
+      "description": "Restaura una Skill de usuario a la revisión de contenido archivada más reciente. Deben existir la Skill y una revisión archivada."
     },
     {
       "name": "save_skill_draft",
@@ -1145,7 +1169,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Actualice un documento de habilidades existente en el registro de habilidades."
+      "description": "Actualiza una Skill de usuario existente conservando su estado de habilitación."
     }
   ]
 }

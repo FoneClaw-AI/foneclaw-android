@@ -9,7 +9,7 @@
     {
       "name": "plugin_template_echo",
       "displayName": "Template Echo",
-      "description": "Echo a user provided message. Replace this tool with the real plugin capability.",
+      "description": "Echo a user provided message through the template plugin APK. This performs no other action.",
       "risk": "LOW",
       "approvalMode": "AUTO",
       "inputSchema": {
