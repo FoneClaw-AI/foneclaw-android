@@ -8,6 +8,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.3.1] - 2026-10-23
+
+### Added and improved
+
+- Customize news briefings with AI, sports and economy presets, all disabled by default.
+- Configure news tasks manually or with AI assistance, and delete multiple tasks at once.
+- Continue follow-up questions in dedicated news conversations, with model selection and spoken-reply controls.
+- Share answers as readable plain text with clearer headings, lists, tables and source links.
+- Long-press conversation history entries to rename or delete them.
+- See clearer task execution status and error messages.
+
+### Scope
+
+- Prepared locally, not published. Device, upstream-provider and database migration acceptance remain unverified.
+- Server-dependent capabilities require deployment and configuration; availability is not guaranteed by this preparation.
+- Google APK/AAB remain Play submission candidates; Lebest remains a locally signed OEM candidate.
+- Domestic distribution bucket is unconfirmed; no domestic upload is planned until resolved.
+- VirusTotal snapshot covers only the FoneClaw Online APK: 0/67 flagged engines, not a safety guarantee.
+
 ## [v0.3.0-fix] - 2026-10-21
 
 ### Changed
