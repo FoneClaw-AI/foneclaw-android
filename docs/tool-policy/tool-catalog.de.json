@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "de",
   "fallbackLocale": "en",
-  "toolCount": 136,
+  "toolCount": 140,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Tools oder Funktionen suchen",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "Bildschirm, Apps und Medien",
-      "toolCount": 13
+      "toolCount": 15
     },
     {
       "name": "Device Status and System Control",
@@ -59,7 +59,7 @@
     {
       "name": "Memo",
       "displayName": "Notizen",
-      "toolCount": 6
+      "toolCount": 8
     },
     {
       "name": "System Information",
@@ -105,7 +105,7 @@
       "risk": "LOW",
       "approval": "Automatisch",
       "approvalCode": "AUTO",
-      "description": "Öffnen Sie eine Android-Ziel-App oder wechseln Sie zu ihr, warten Sie, bis sie stabil im Vordergrund angezeigt wird, und geben Sie den sichtbaren Bedienungshilfen-Baum zurück. Verwenden Sie dieses Tool, wenn eine Anfrage sowohl das Öffnen oder Wechseln einer App als auch das Lesen, Prüfen, Beschreiben, Zusammenfassen oder Antippen eines vorhandenen sichtbaren Steuerelements verlangt und kein spezielles Domänen-Tool die Anfrage abschließen kann. Teilen Sie die Aufgabe nicht in launch_app und get_screen_info auf. Dieses Tool erstellt selbst keinen Screenshot und tippt keine Knoten an; verwenden Sie neu zurückgegebene Knoten-IDs nur dann mit tap_node, wenn der Benutzer ein Antippen verlangt hat."
+      "description": "Öffnen Sie die Android-Ziel-App oder wechseln Sie zu ihr und geben Sie nach einer begrenzten Stabilitätsprüfung den neuesten sichtbaren Bedienungshilfebaum zurück. Verwenden Sie dies, wenn dieselbe Anfrage Öffnen/Wechseln sowie Lesen, Prüfen, Beschreiben, Zusammenfassen, Suchen, Eingeben oder Antippen eines vorhandenen sichtbaren Steuerelements verlangt und kein spezielles Fach- oder Aufnahmewerkzeug sie erledigen kann. GUI-Voraussetzungen werden vor dem Öffnen geprüft. Nicht in separaten Start und späteres Bildschirmlesen oder Screenshot aufteilen, auch nicht über Modellrunden. Reines Öffnen nutzt das Startwerkzeug ohne Bildschirmlesen. Dieses Werkzeug erstellt keine Screenshots, tippt keinen Text und keine Knoten an. Nutzen Sie den zurückgegebenen Bildschirm und die IDs für die nächste angeforderte Aktion. Nur bei fehlenden Informationen, veraltetem Bildschirm oder externer Änderung erneut lesen. Baumstabilität garantiert kein abgeschlossenes Laden."
     },
     {
       "name": "get_installed_map_apps",
@@ -121,7 +121,7 @@
       "risk": "LOW",
       "approval": "Automatisch",
       "approvalCode": "AUTO",
-      "description": "Ruft UI-Elemente vom derzeit sichtbaren App-Bildschirm ab. Jedes Element besitzt eine Knoten-ID, zum Beispiel [n3], die mit screen(command=tap), screen(command=scroll) oder screen(command=input_text) verwendet werden kann. Verwenden Sie dieses Tool nicht zum Lesen, Auflisten, Suchen oder Zusammenfassen von Android-Benachrichtigungen, sondern die sysinfo-Tools. Speichern Sie das Ergebnis nicht zwischen, da sich die Knoten-IDs bei jedem Aufruf ändern."
+      "description": "Ermittelt UI-Elemente der aktiven App und offengelegter Eingabemethodenfenster. keyboard-Knoten gehören zur Eingabemethode; wenn ime_enter fehlt, auch auf Android 9/10, nutzen Sie tap für eine echte Such-/Senden-Taste. Ein bearbeitbares focused-Feld hat Eingabefokus; vor Tastaturaktionen mit dem angeforderten Feld abgleichen. Verwenden Sie input_text für vorbereiteten Text statt einzelner Tasten. Jedes Element hat eine ID wie [n3] für screen(command=tap), screen(command=scroll) oder screen(command=input_text). Android-Benachrichtigungen nicht damit lesen, auflisten, durchsuchen oder zusammenfassen; dafür sysinfo-Werkzeuge nutzen. Ein ime_enter-Knoten unterstützt seine fokussierte Tastaturaktion. Erfolgreiche tap, scroll, input_text oder ime_enter liefern bereits einen neuen Bildschirm; direkt nutzen. Nur bei veraltetem Bildschirm, externer Änderung oder fehlenden Informationen erneut lesen. IDs gehören nur zum zuletzt zurückgegebenen Bildschirm."
     },
     {
       "name": "input_text",
@@ -129,7 +129,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Ersetzt den Text in einem sichtbaren, bearbeitbaren Feld der aktuellen Android-App. Rufen Sie zuerst screen(command=read) auf und übergeben Sie einen aktuellen, mit edit markierten Knoten. Diese Aktion gibt nur Text ein; sie sendet das Formular nicht, tippt nicht auf Senden und drückt nicht die Eingabetaste. Verwenden Sie Knoten-IDs nicht erneut."
+      "description": "Ersetzt Text in einem sichtbaren bearbeitbaren Feld der aktuellen Android-App. Übergeben Sie einen edit-Knoten aus dem letzten Lesen oder Aktionsergebnis. Gibt nur Text ein, sendet kein Formular, tippt nicht Senden und drückt nicht Enter. Nutzen Sie ime_enter separat, wenn das fokussierte Feld die angeforderte Übermittlung unterstützt. Liefert Aktionszusammenfassung und neuen Bedienungshilfebaum ohne Screenshot. Nutzen Sie Bildschirm und IDs für die nächste angeforderte Aktion. Nur bei fehlenden Informationen, veraltetem Bildschirm oder externer Änderung erneut lesen. Dies muss der einzige Bildschirmaufruf in dieser Modellantwort sein."
     },
     {
       "name": "launch_app",
@@ -156,6 +156,22 @@
       "description": "Öffnen Sie eine bestimmte Google Play-App-Detailseite mit dem genauen Paketnamen, tippen Sie auf „Installieren“ und warten Sie, bis die Installation abgeschlossen ist. Dieses Tool öffnet die installierte App nicht. Nur verwenden, wenn ein genauer Android-Paketname bekannt ist. Verwenden Sie dies niemals für unscharfe Suchergebnisse oder um die erste App zu erraten. Wenn packageName unbekannt ist, fragen Sie den Benutzer zuerst nach dem genauen App-Paket. Stoppt, wenn Google Play „Bezahlt“, „Kauf“, „Abonnement“, „Update“ oder „mehrdeutige Benutzeroberfläche“ anzeigt oder wenn die Installation nicht vor Ablauf der Zeit abgeschlossen wird."
     },
     {
+      "name": "screen_ime_enter",
+      "category": "Screen and App",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Genehmigung erforderlich",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Lösen Sie die Tastaturaktion eines sichtbaren, fokussierten bearbeitbaren Feldes aus, das auf dem neuesten Bildschirm mit ime_enter markiert ist. Erfordert Android 11 oder höher und einen Editor, der ACTION_IME_ENTER bereitstellt. Je nach Feld kann dies eine Suche, das Absenden eines Formulars oder das Senden einer Nachricht auslösen; verwenden Sie es nur für die angeforderte Übermittlung. Der Text wird nicht geändert und kein Zeilenumbruch eingefügt. Die Aktionszusammenfassung und ein neuer Bedienungshilfebildschirm werden zurückgegeben; prüfen Sie das tatsächliche Ergebnis. Wiederholen Sie niemals eine unbekannte Übermittlung. Dies muss der einzige Bildschirmaufruf in dieser Modellantwort sein."
+    },
+    {
+      "name": "screen_run_segment",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Genehmigung erforderlich",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Bringt ein lokales GUI-Ziel mit mehreren abhängigen Aktionen und neuen Bedienungshilfebildschirmen voran. Liest den Anfangsbildschirm selbst. Geben Sie klare Stoppbedingung, erlaubte Aktionen und exakt vorbereitete Texte an. Bevorzugen Sie IME_ENTER, wenn der fokussierte Editor es bereitstellt. Auf älterem Android oder ohne ime_enter erlauben Sie TAP für eine sichtbare Such-/Senden-Taste. Für eine Aktion atomare Werkzeuge bevorzugen. Das Segment wird einmal autorisiert; interne Aktionen gehören zu diesem Aufruf. Gibt ausgeführte Aktionen und neuesten Bildschirm an Main zum Prüfen/Fortsetzen zurück; Abschluss ist nur ein Vorschlag. Auch lokale Warte- oder Ausführungsgrenzen geben an Main zurück, um ab bestätigten Aktionen fortzufahren. Pro Schritt höchstens zwei Wiederholungen mit neuen Beobachtungen; Erfolg setzt den Zähler zurück. Erschöpfte Wiederholungen beenden nur dieses Segment; Main setzt den restlichen Turn mit atomaren Bildschirmwerkzeugen fort. Nie Aktionen mit unbekanntem Ergebnis wiederholen. Den zurückgegebenen Bildschirm wiederverwenden statt sofort neu zu lesen. Keine abgeschlossenen oder unbekannten Aktionen wiederholen. Dies muss der einzige Bildschirmaufruf in dieser Antwort sein."
+    },
+    {
       "name": "screenshot_open",
       "category": "Screen and App",
       "risk": "SENSITIVE_READ",
@@ -177,7 +193,7 @@
       "risk": "LOW",
       "approval": "Automatisch",
       "approvalCode": "AUTO",
-      "description": "Scrollt die App mit kompatibler Barrierefreiheitsaktion, sonst mit begrenzter Wischgeste. Frische, mit scroll markierte Knoten-ID aus screen(command=read) bevorzugen. viewport nur ohne nutzbaren Container. Richtung ist das Ziel: down unten, up oben, right rechts, left links. Erfolg bestätigt keine Inhaltsänderung; nach jedem Erfolg vor der nächsten Aktion screen(command=read) aufrufen."
+      "description": "Scrollt die aktuelle App mit einer kompatiblen Bedienungshilfeaktion, falls möglich, sonst mit begrenzter Wischgeste. Einen scroll-Knoten aus letztem Lesen oder Aktionsergebnis bevorzugen. viewport nur ohne nutzbaren Scrollcontainer verwenden. Richtung ist das Sichtfensterziel: down zeigt unten, up oben, right rechts und left links. Liefert Zusammenfassung und neuen Baum ohne Screenshot. Bildschirm und IDs für die nächste Aktion nutzen. Nur bei fehlenden Informationen, veraltetem Bildschirm oder externer Änderung neu lesen. Der Baum beweist keine Inhaltsänderung. Dies muss der einzige Bildschirmaufruf in dieser Antwort sein."
     },
     {
       "name": "tap_node",
@@ -185,7 +201,7 @@
       "risk": "LOW",
       "approval": "Automatisch",
       "approvalCode": "AUTO",
-      "description": "Tippen Sie auf ein UI-Element auf dem Bildschirm. Das Element wird durch seine Knoten-ID identifiziert, die über das Tool screen(command=read) abgerufen werden kann screen(command=read)."
+      "description": "Tippt ein UI-Element anhand seiner Knoten-ID aus letztem Lesen oder Aktionsergebnis an. Liefert nach begrenzter Stabilitätsprüfung Zusammenfassung und neuen Bedienungshilfebaum. Kein Screenshot. Bildschirm und IDs für die nächste Aktion nutzen. Nur bei fehlenden Informationen, veraltetem Bildschirm oder externer Änderung neu lesen. Baumstabilität garantiert kein abgeschlossenes Laden. Dies muss der einzige Bildschirmaufruf in dieser Modellantwort sein."
     },
     {
       "name": "alarm_modify_alarm",
@@ -866,6 +882,22 @@
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Bearbeitet eine Benutzeraufgabe im To-do Center anhand der id. Wird das Ziel natürlich beschrieben, suchen oder listen Sie zuerst Aufgaben und übergeben bekannte Details mit geänderten Feldern. Bearbeitet werden Benutzeraufgaben, nicht der Profilspeicher des Assistenten oder der interne Plan von Main. Leere title/content/tags und Datumszeichenfolgen behalten ihre Werte. Verwenden Sie yyyy-MM-dd aus der ausführende Laufzeit-Umgebung; berechnen Sie keine Epochen-Millisekunden und rufen Calendar oder Alarm nicht nur für ein Datum auf. Planen Sie nur mit einem festen Datum, eindeutig auflösbaren relativen Datum (heute, morgen, übermorgen, in genau zwei Tagen / 两天后) oder ausdrücklichen Bereich aus Anfrage oder zitierter Quelle. die von der Laufzeit bereitgestellte ursprüngliche Anfragezeit und Zeitzone sind nur Berechnungsgrundlage, kein Benutzerdatum. Ohne Datum oder bei vager Zeit (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days) lassen Sie startDate und endDate weg oder leer und legen die Aufgabe in Unscheduled. Setzen Sie nicht heute als Standard, wählen keinen bequemen Tag und machen keinen mehrtägigen Termin daraus; bewahren Sie die Angabe im Inhalt. Ist der Inhalt bekannt, fragen Sie nicht nach einem Datum. Bestimmen Sie feste Daten aus dem aktuellen Kontext; eine unbekannte Uhrzeit hebt einen ausdrücklichen Tag nicht auf. Wenn nur Inhalt ohne Planungsabsicht geändert wird, behalten Sie die Daten. Wird die Planung entfernt, als unbestimmt bezeichnet oder durch eine vage Angabe ersetzt, verwenden Sie clearStartDate=true und leere Daten, um beide zu löschen und nach Unscheduled zu verschieben. Melden Sie Abschnitt Unscheduled oder gespeichertes Datum aus dem Tool-Ergebnis, nicht aus Annahmen. Der interne Marker task_pool bezeichnet den undatierten Abschnitt; in der Antwortsprache ausdrücken, ohne Marker oder zusätzliche Übersetzung in eine andere Sprache. Die Regeln gelten nicht für Kalenderereignisse oder Alarme."
+    },
+    {
+      "name": "voice_memo_read",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "Genehmigung erforderlich",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Lesen Sie vor der Änderung die zuletzt gespeicherte Aufnahme oder Sammlung, den bearbeitbaren Inhalt und die undurchsichtige Revision. Das Ergebnis enthält IDs der Quellaufnahmen, indizierte Sätze, Sprecher-IDs, indizierte Kapitel, Indizes von Kernpunkten und Aktions-IDs. Zeiten, Identitäten, Quellenzitate und Aufgabenverknüpfungen sind schreibgeschützt. Die Zusammenfassung gehört zur Sammlung; Quelltranskripte und Kapitel werden mit der Originalaufnahme und anderen Sammlungen geteilt."
+    },
+    {
+      "name": "voice_memo_update",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Genehmigung erforderlich",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Speichern Sie angeforderte Änderungen an einer Aufnahme oder Sammlung nach voice_memo(command=read). Übergeben Sie die exakte undurchsichtige Revision. Bei einem Konflikt lesen Sie erneut und führen nur die Änderungen des Benutzers zusammen; überschreiben Sie niemals parallele Änderungen. Ausgelassene Felder bleiben unverändert. Angegebene Listen summary keyPoints/actionItems/navigationPlaces ersetzen die jeweilige Liste: Fügen Sie vorhandene Kernpunkt-Indizes und Aktions-IDs ein, um Quellen und Aufgabenverknüpfungen zu behalten; lassen Sie index/id nur bei neuen Elementen weg. Quellsätze, Sprecher und Kapitel sind Teiländerungen anhand der exakten index/id. Satz-/Kapitelzeiten bleiben unverändert. Übergeben Sie nicht audio, state, source membership, todo ids oder association fields. Quellenänderungen einer Sammlung aktualisieren auch Originalaufnahmen und andere gemeinsam genutzte Sammlungen. Eine Sammlungszusammenfassung ist unabhängig. Melden Sie das Speichern erst nach Erfolg. Eine Vorschauanfrage für eine Neufassung erlaubt kein Speichern."
     },
     {
       "name": "sysinfo_delete",

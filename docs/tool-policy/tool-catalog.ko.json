@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "ko",
   "fallbackLocale": "en",
-  "toolCount": 136,
+  "toolCount": 140,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "도구 또는 기능 검색",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "화면, 앱 및 미디어",
-      "toolCount": 13
+      "toolCount": 15
     },
     {
       "name": "Device Status and System Control",
@@ -59,7 +59,7 @@
     {
       "name": "Memo",
       "displayName": "메모",
-      "toolCount": 6
+      "toolCount": 8
     },
     {
       "name": "System Information",
@@ -105,7 +105,7 @@
       "risk": "LOW",
       "approval": "자동",
       "approvalCode": "AUTO",
-      "description": "대상 Android 앱을 열거나 전환하고 앱이 안정적으로 포그라운드에 표시될 때까지 기다린 다음 보이는 접근성 화면 트리를 반환합니다. 하나의 요청에서 앱 열기 또는 전환과 기존의 보이는 컨트롤 읽기, 검사, 설명, 요약 또는 탭을 함께 요구하고 전용 도메인 도구로 완료할 수 없을 때 사용하세요. 이 작업을 launch_app과 get_screen_info로 나누지 마세요. 이 도구 자체는 스크린샷을 캡처하거나 노드를 탭하지 않습니다. 사용자가 탭을 요청한 경우에만 새로 반환된 노드 ID를 tap_node와 함께 사용하세요."
+      "description": "대상 Android 앱을 열거나 전환하고 제한된 안정성 확인 후 최신 표시 접근성 트리를 반환합니다. 한 요청에서 앱 열기/전환과 기존 보이는 컨트롤 읽기, 검사, 설명, 요약, 검색, 입력 또는 탭을 함께 요구하며 전용 도메인/캡처 도구로 완료할 수 없을 때 사용합니다. 열기 전에 GUI 전제 조건을 확인합니다. 모델 라운드가 달라도 별도 앱 실행 후 화면 읽기/스크린샷으로 나누지 마세요. 앱 열기만 요청하면 화면을 읽지 않는 실행 도구를 사용하세요. 이 도구 자체는 캡처, 입력, 탭을 하지 않습니다. 반환 화면과 노드 ID로 다음 요청 동작을 수행하세요. 필요한 정보가 없거나 화면이 오래되었거나 외부에서 바뀐 경우에만 다시 읽으세요. 트리 안정성은 로딩 완료를 보장하지 않습니다."
     },
     {
       "name": "get_installed_map_apps",
@@ -121,7 +121,7 @@
       "risk": "LOW",
       "approval": "자동",
       "approvalCode": "AUTO",
-      "description": "현재 표시된 앱 화면에서 UI 요소를 가져옵니다. 각 요소에는 screen(command=tap), screen(command=scroll) 또는 screen(command=input_text)에 사용할 수 있는 노드 ID(예: [n3])가 있습니다. Android 알림을 읽거나 나열, 검색, 요약하는 데 사용하지 말고 대신 sysinfo 도구를 사용하세요. 호출할 때마다 노드 ID가 바뀌므로 결과를 캐시하지 마세요."
+      "description": "활성 앱과 노출된 입력기 창의 UI 요소를 가져옵니다. keyboard 노드는 입력기에 속합니다. Android 9/10을 포함해 ime_enter를 사용할 수 없으면 tap으로 실제 키보드 검색/제출 키를 누르세요. focused인 편집 필드는 입력 포커스가 있으므로 키보드 동작 전에 요청 필드와 일치하는지 확인하세요. 준비된 텍스트는 개별 키 입력 대신 input_text를 사용하세요. 각 요소는 [n3] 같은 노드 ID가 있으며 screen(command=tap), screen(command=scroll), screen(command=input_text)에 사용할 수 있습니다. Android 알림 읽기, 목록, 검색, 요약에는 사용하지 말고 sysinfo 도구를 쓰세요. ime_enter 노드는 포커스된 키보드 동작을 지원합니다. 성공한 tap, scroll, input_text, ime_enter는 이미 새 화면을 반환하므로 직접 사용하세요. 화면이 오래되었거나 외부 변경 또는 정보 부족일 때만 다시 읽으세요. 노드 ID는 최신 반환 화면에만 속합니다."
     },
     {
       "name": "input_text",
@@ -129,7 +129,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "현재 Android 앱에 표시된 편집 가능한 입력란 하나의 텍스트를 바꿉니다. 먼저 screen(command=read)를 호출하고 edit로 표시된 현재 노드를 전달하세요. 이 작업은 텍스트만 입력하며 양식 제출, 보내기 탭 또는 Enter 키 입력은 하지 않습니다. 노드 ID를 재사용하지 마세요."
+      "description": "현재 Android 앱에서 보이는 편집 필드 하나의 텍스트를 교체합니다. 최신 읽기 또는 동작 결과에서 edit인 노드를 전달하세요. 텍스트만 입력하며 양식 제출, 보내기 탭 또는 Enter 누르기를 하지 않습니다. 포커스된 필드가 요청된 제출을 지원하면 ime_enter를 별도로 사용하세요. 스크린샷 없이 동작 요약과 새 접근성 트리를 반환합니다. 반환 화면과 노드 ID로 다음 요청 동작을 수행하세요. 필요한 정보가 없거나 화면이 오래되었거나 외부 변경이 있을 때만 다시 읽으세요. 이 모델 응답에서 유일한 화면 호출이어야 합니다."
     },
     {
       "name": "launch_app",
@@ -156,6 +156,22 @@
       "description": "정확한 패키지 이름으로 특정 Google Play 앱 세부정보 페이지를 열고 설치를 탭한 후 설치가 완료될 때까지 기다립니다. 이 도구는 설치된 앱을 열지 않습니다. 정확한 Android packageName를 알고 있는 경우에만 사용하세요. 퍼지 검색 결과나 첫 번째 앱을 추측하는 데 이 기능을 사용하지 마세요. packageName을 알 수 없는 경우 먼저 사용자에게 정확한 앱 패키지를 물어보세요. Google Play에 유료, 구매, 구독, 업데이트, 모호한 UI가 표시되거나 시간 초과 전에 설치가 완료되지 않는 경우 중지됩니다."
     },
     {
+      "name": "screen_ime_enter",
+      "category": "Screen and App",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "최신 화면에서 ime_enter로 표시되고 보이며 포커스된 편집 가능 필드의 키보드 동작을 실행합니다. Android 11 이상과 ACTION_IME_ENTER를 노출하는 편집기가 필요합니다. 해당 필드에 따라 검색, 양식 제출 또는 메시지 전송이 될 수 있으므로 요청된 제출에만 사용하세요. 텍스트를 변경하거나 줄바꿈을 삽입하지 않습니다. 동작 요약과 새 접근성 화면을 반환하므로 실제 결과를 확인하세요. 알 수 없는 제출을 절대 재실행하지 마세요. 이 모델 응답에서는 화면 호출을 이것 하나만 수행해야 합니다."
+    },
+    {
+      "name": "screen_run_segment",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "새 접근성 화면을 사용한 여러 종속 동작으로 로컬 GUI 목표를 진행합니다. 초기 화면은 직접 읽습니다. 명확한 중지 조건, 허용 동작과 정확히 준비된 입력 텍스트를 지정하세요. 포커스 편집기가 지원하면 IME_ENTER를 우선합니다. 구형 Android 또는 ime_enter 미지원 시 노출된 키보드 검색/제출 키를 TAP으로 선택하도록 허용하세요. 단일 동작은 원자 도구를 우선합니다. 세그먼트는 한 번 승인되며 내부 동작은 그 호출의 일부입니다. 수행 동작과 최신 화면을 Main에 반환해 검증/계속하도록 하며 완료는 제안일 뿐입니다. 로컬 대기나 실행 제한도 Main으로 돌아가 확인된 동작에서 계속합니다. 각 단계는 새 관측으로 최대 두 번 재시도하며 성공 시 재시도 수가 초기화됩니다. 소진 시 이 세그먼트만 끝나고 Main은 남은 턴에 원자 화면 도구로 계속합니다. 결과 불명 동작은 절대 재실행하지 마세요. 반환 화면을 재사용하고 즉시 다시 읽지 마세요. 완료되거나 불명인 동작을 반복하지 마세요. 이 모델 응답에서 유일한 화면 호출이어야 합니다."
+    },
+    {
       "name": "screenshot_open",
       "category": "Screen and App",
       "risk": "SENSITIVE_READ",
@@ -177,7 +193,7 @@
       "risk": "LOW",
       "approval": "자동",
       "approvalCode": "AUTO",
-      "description": "지원 시 접근성 스크롤 동작, 아니면 제한된 스와이프로 현재 앱을 스크롤합니다. screen(command=read)의 최신 scroll 표시 노드 ID를 우선합니다. 사용 가능한 스크롤 컨테이너가 없을 때만 viewport를 씁니다. 방향은 목적지로 down은 아래, up은 위, right는 오른쪽, left는 왼쪽을 표시합니다. 성공이 내용 변경을 보장하지 않으므로 매번 성공 후 다음 동작 전에 screen(command=read)를 호출합니다."
+      "description": "지원되면 호환 접근성 스크롤 동작, 아니면 제한된 스와이프로 현재 앱을 스크롤합니다. 최신 읽기/동작 결과에서 scroll인 노드를 우선하세요. 사용 가능한 스크롤 컨테이너가 없을 때만 viewport를 사용하세요. 방향은 뷰포트 목적지입니다. down은 아래, up은 위, right는 오른쪽, left는 왼쪽 내용을 보여줍니다. 스크린샷 없이 동작 요약과 새 접근성 트리를 반환합니다. 반환 화면과 노드 ID로 다음 요청 동작을 수행하세요. 필요한 정보가 없거나 화면이 오래되었거나 외부 변경이 있을 때만 다시 읽으세요. 반환 트리는 내용 변경을 증명하지 않습니다. 이 모델 응답에서 유일한 화면 호출이어야 합니다."
     },
     {
       "name": "tap_node",
@@ -185,7 +201,7 @@
       "risk": "LOW",
       "approval": "자동",
       "approvalCode": "AUTO",
-      "description": "화면에서 UI 요소를 탭하세요. 요소는 screen(command=read) 도구에서 얻을 수 있는 노드 ID로 식별됩니다 screen(command=read)."
+      "description": "화면의 UI 요소를 탭합니다. 최신 읽기 또는 동작 결과의 노드 ID로 식별합니다. 제한된 안정성 확인 후 동작 요약과 새 접근성 트리를 반환합니다. 스크린샷을 찍지 않습니다. 반환 화면과 노드 ID로 다음 요청 동작을 수행하세요. 필요한 정보가 없거나 화면이 오래되었거나 외부 변경이 있을 때만 다시 읽으세요. 트리 안정성은 로딩 완료를 보장하지 않습니다. 이 모델 응답에서 유일한 화면 호출이어야 합니다."
     },
     {
       "name": "alarm_modify_alarm",
@@ -866,6 +882,22 @@
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "To-do Center의 사용자 할 일을 id로 편집합니다. 사용자가 대상을 자연어로 설명하면 먼저 할 일을 검색하거나 나열하고 알려진 대상 정보와 변경 필드를 전달합니다. 사용자 할 일을 편집하며 어시스턴트 프로필 메모리나 Main의 내부 실행 계획은 편집하지 않습니다. 빈 title/content/tags와 날짜 문자열은 기존 값을 유지합니다. 런타임이 제공한 원래 요청 시간과 시간대 환경에서 확인한 yyyy-MM-dd를 사용하고 날짜 확인만을 위해 에포크 밀리초를 계산하거나 Calendar 또는 Alarm Tool을 호출하지 않습니다. 일정은 요청이나 명시적 참조 출처에 확정 날짜, 하나로 해석되는 상대 날짜(오늘, 내일, 모레, 정확히 이틀 뒤 / 两天后) 또는 명시적 범위가 있을 때만 지정합니다. 런타임이 제공한 원래 요청 시간와 시간대는 계산 기준일 뿐 사용자 지정 일정이 아닙니다. 날짜가 없거나 시간이 모호하면(这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days) startDate와 endDate를 생략하거나 비워 Unscheduled에 둡니다. 오늘을 기본값으로 삼거나 편한 날을 고르거나 모호한 기간을 여러 날 일정으로 바꾸지 말고, 모호한 표현은 내용에 보존합니다. 내용을 알면 날짜만을 묻지 않습니다. 확정 날짜는 런타임이 제공한 원래 요청 시간과 시간대에서 해석하며 시간 불명확은 명시된 날짜를 미정으로 만들지 않습니다. 내용만 바꾸고 일정 의도가 없으면 기존 날짜를 유지합니다. 일정을 제거하거나 시간 미정을 말하거나 모호한 시간으로 바꾸면 빈 날짜 문자열과 clearStartDate=true로 두 날짜를 지우고 Unscheduled로 이동합니다. 추측이 아니라 Tool 결과의 Unscheduled 섹션이나 저장 날짜를 보고합니다. 내부 task_pool은 날짜 미정 섹션을 나타냅니다. 응답 언어로 표현하고 마커를 그대로 쓰거나 다른 언어 번역을 추가하지 않습니다. 이 규칙은 할 일에만 적용되며 캘린더 일정이나 알람에는 적용되지 않습니다."
+    },
+    {
+      "name": "voice_memo_read",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "수정하기 전에 최신 저장 녹음 또는 컬렉션, 편집 가능한 내용과 불투명 리비전을 읽습니다. 결과에는 원본 녹음 ID, 색인된 문장, 화자 ID, 색인된 장, 핵심 요점 색인과 작업 ID가 포함됩니다. 해당 항목의 시간, 신원, 출처 인용과 todo 연결은 읽기 전용입니다. 컬렉션 요약은 해당 컬렉션에 속하며, 원본 전사와 장은 원본 녹음 및 다른 컬렉션과 공유됩니다."
+    },
+    {
+      "name": "voice_memo_update",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "voice_memo(command=read) 후 녹음 또는 컬렉션에 요청된 편집을 저장합니다. 정확한 불투명 리비전을 전달하세요. 충돌이 발생하면 다시 읽고 사용자의 변경 사항만 병합하며 동시 편집을 절대 덮어쓰지 마세요. 생략된 필드는 그대로 둡니다. summary keyPoints/actionItems/navigationPlaces 목록을 제공하면 해당 목록을 대체합니다. 기존 핵심 요점 색인과 작업 ID를 포함해 출처와 todo 링크를 유지하고, 새 항목에만 index/id를 생략하세요. 원본 문장, 화자와 장은 정확한 index/id에 따른 부분 편집입니다. 문장/장의 시간은 유지하세요. audio, state, source membership, todo ids 또는 association fields를 전달하지 마세요. 컬렉션 원본 편집은 원본 녹음과 이를 공유하는 다른 컬렉션도 업데이트합니다. 컬렉션 요약은 독립적입니다. 성공한 후에만 저장되었다고 보고하세요. 다시 쓰기 미리보기 요청은 저장을 승인하지 않습니다."
     },
     {
       "name": "sysinfo_delete",

@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "in",
   "fallbackLocale": "en",
-  "toolCount": 136,
+  "toolCount": 140,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Cari alat atau kemampuan",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "Layar, aplikasi, dan media",
-      "toolCount": 13
+      "toolCount": 15
     },
     {
       "name": "Device Status and System Control",
@@ -59,7 +59,7 @@
     {
       "name": "Memo",
       "displayName": "Memo",
-      "toolCount": 6
+      "toolCount": 8
     },
     {
       "name": "System Information",
@@ -105,7 +105,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Buka atau alihkan ke aplikasi Android target, tunggu hingga aplikasi stabil di latar depan, lalu kembalikan hierarki aksesibilitas yang terlihat. Gunakan saat satu permintaan meminta membuka atau beralih aplikasi sekaligus membaca, memeriksa, menjelaskan, meringkas, atau mengetuk kontrol yang sudah terlihat, dan tidak ada alat domain khusus yang dapat menyelesaikannya. Jangan pisahkan tugas menjadi launch_app dan get_screen_info. Alat ini tidak mengambil tangkapan layar atau mengetuk node sendiri; gunakan ID node yang baru dikembalikan dengan tap_node hanya jika pengguna meminta ketukan."
+      "description": "Buka atau beralih ke aplikasi Android tujuan dan kembalikan pohon aksesibilitas terlihat terbaru setelah pemeriksaan kestabilan terbatas. Gunakan ketika satu permintaan meminta membuka/beralih sekaligus membaca, memeriksa, menjelaskan, merangkum, mencari, mengetik, atau mengetuk kontrol terlihat yang ada, dan tidak ada alat domain atau tangkapan khusus yang dapat menyelesaikannya. Prasyarat GUI diperiksa sebelum membuka. Jangan pisahkan menjadi peluncuran tersendiri lalu pembacaan/tangkapan layar, bahkan antarputaran model. Permintaan membuka saja memakai alat peluncuran tanpa membaca layar. Alat ini tidak menangkap gambar, mengetik, atau mengetuk simpul. Gunakan layar dan ID yang dikembalikan untuk aksi berikutnya yang diminta. Baca ulang hanya jika informasi kurang, layar usang, atau berubah secara eksternal. Pohon stabil tidak menjamin pemuatan selesai."
     },
     {
       "name": "get_installed_map_apps",
@@ -121,7 +121,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Dapatkan elemen UI dari layar aplikasi yang sedang terlihat. Setiap elemen memiliki ID node, misalnya [n3], yang dapat digunakan dengan screen(command=tap), screen(command=scroll) atau screen(command=input_text). Jangan gunakan alat ini untuk membaca, mencantumkan, mencari, atau meringkas notifikasi Android; gunakan alat sysinfo. Jangan simpan hasil dalam cache karena ID node berubah pada setiap panggilan."
+      "description": "Ambil elemen UI dari aplikasi aktif dan jendela metode input yang diekspos. Simpul keyboard milik metode input; jika ime_enter tidak tersedia, termasuk pada Android 9/10, gunakan tap pada tombol pencarian/kirim keyboard yang sebenarnya. Bidang yang dapat diedit bertanda focused memiliki fokus input; cocokkan dengan bidang yang diminta sebelum aksi keyboard. Gunakan input_text untuk teks siap pakai, bukan tombol satu per satu. Tiap elemen memiliki ID seperti [n3] untuk screen(command=tap), screen(command=scroll), atau screen(command=input_text). Jangan gunakan untuk membaca, mendaftar, mencari, atau merangkum notifikasi Android; gunakan alat sysinfo. Simpul ime_enter mendukung aksi keyboard saat fokus. tap, scroll, input_text, atau ime_enter yang berhasil sudah mengembalikan layar baru; gunakan langsung. Baca ulang hanya bila usang, berubah eksternal, atau kurang informasi. ID hanya milik layar terakhir yang dikembalikan."
     },
     {
       "name": "input_text",
@@ -129,7 +129,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Ganti teks dalam satu kolom yang terlihat dan dapat diedit di aplikasi Android saat ini. Panggil screen(command=read) terlebih dahulu dan teruskan node saat ini yang ditandai edit. Tindakan ini hanya memasukkan teks; tidak mengirim formulir, mengetuk Kirim, atau menekan Enter. Jangan gunakan ulang ID node."
+      "description": "Ganti teks satu bidang yang dapat diedit dan terlihat di aplikasi Android saat ini. Kirim simpul edit dari pembacaan atau hasil aksi terbaru. Hanya memasukkan teks; tidak mengirim formulir, mengetuk Kirim, atau menekan Enter. Gunakan ime_enter secara terpisah jika bidang fokus mendukung pengiriman yang diminta. Mengembalikan ringkasan aksi dan pohon aksesibilitas baru tanpa tangkapan layar. Gunakan layar dan ID untuk aksi berikutnya. Baca ulang hanya jika informasi kurang, layar usang, atau berubah eksternal. Ini harus menjadi satu-satunya panggilan layar dalam respons model ini."
     },
     {
       "name": "launch_app",
@@ -156,6 +156,22 @@
       "description": "Buka halaman detail aplikasi Google Play tertentu berdasarkan nama paket persisnya, ketuk Instal, dan tunggu hingga instalasi selesai. Alat ini tidak membuka aplikasi yang diinstal. Gunakan hanya ketika nama paket Android yang tepat diketahui. Jangan pernah menggunakan ini untuk hasil pencarian yang tidak jelas atau untuk menebak aplikasi pertama. Jika nama paket tidak diketahui, tanyakan terlebih dahulu paket aplikasi yang sebenarnya kepada pengguna. Berhenti jika Google Play menampilkan UI berbayar, pembelian, langganan, pembaruan, ambigu, atau jika pemasangan tidak selesai sebelum waktu habis. Pengenal teknis: packageName."
     },
     {
+      "name": "screen_ime_enter",
+      "category": "Screen and App",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Jalankan aksi keyboard pada bidang yang dapat diedit, terlihat, dan fokus, yang ditandai ime_enter di layar terbaru. Memerlukan Android 11 atau lebih baru serta editor yang mengekspos ACTION_IME_ENTER. Bergantung pada bidangnya, tindakan ini dapat mencari, mengirim formulir, atau mengirim pesan; gunakan hanya untuk pengiriman yang diminta. Tidak mengubah teks atau menyisipkan baris baru. Mengembalikan ringkasan aksi dan layar aksesibilitas baru; verifikasi hasil sebenarnya. Jangan pernah mengulangi pengiriman yang tidak diketahui. Ini harus menjadi satu-satunya panggilan layar dalam respons model ini."
+    },
+    {
+      "name": "screen_run_segment",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Majukan tujuan GUI lokal dengan beberapa aksi bergantung memakai layar aksesibilitas baru. Membaca layar awal sendiri. Tentukan kondisi berhenti yang jelas, operasi yang diizinkan, dan teks siap pakai yang tepat. Utamakan IME_ENTER jika editor fokus mengeksposnya. Pada Android lama atau tanpa ime_enter, izinkan TAP memilih tombol pencarian/kirim yang diekspos. Utamakan alat atomik untuk satu aksi. Segmen diotorisasi sekali; aksi internal adalah bagian dari pemanggilan itu. Mengembalikan aksi yang dilakukan dan layar terbaru agar Main memverifikasi atau melanjutkan; selesai hanyalah saran. Batas tunggu atau eksekusi lokal juga mengembalikan ke Main untuk melanjutkan dari aksi terkonfirmasi. Tiap langkah mendapat paling banyak dua percobaan ulang dengan pengamatan baru; keberhasilan mereset penghitung. Kehabisan percobaan hanya mengakhiri segmen ini; Main melanjutkan dengan alat layar atomik selama sisa giliran. Jangan ulangi aksi dengan hasil tidak diketahui. Gunakan layar yang dikembalikan tanpa segera membaca ulang. Jangan ulangi aksi selesai atau tidak diketahui. Ini harus menjadi satu-satunya panggilan layar dalam respons ini."
+    },
+    {
       "name": "screenshot_open",
       "category": "Screen and App",
       "risk": "SENSITIVE_READ",
@@ -177,7 +193,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Gulir aplikasi dengan tindakan aksesibilitas kompatibel atau gestur geser terbatas. Utamakan ID node terbaru bertanda scroll dari screen(command=read). Gunakan viewport hanya tanpa kontainer layak. Arah adalah tujuan: down bawah, up atas, right kanan, left kiri. Berhasil tidak memastikan isi berubah; panggil screen(command=read) setelah tiap keberhasilan sebelum tindakan berikutnya."
+      "description": "Gulir aplikasi saat ini memakai aksi aksesibilitas kompatibel jika didukung, jika tidak gunakan gestur geser terbatas. Utamakan simpul scroll dari pembacaan/hasil aksi terbaru. Gunakan viewport hanya tanpa wadah gulir yang dapat dipakai. Arah adalah tujuan viewport: down menampilkan bawah, up atas, right kanan, left kiri. Mengembalikan ringkasan dan pohon baru tanpa tangkapan layar. Gunakan layar dan ID untuk aksi berikutnya. Baca ulang hanya jika informasi kurang, layar usang, atau berubah eksternal. Pohon tidak membuktikan perubahan konten. Ini harus menjadi satu-satunya panggilan layar dalam respons ini."
     },
     {
       "name": "tap_node",
@@ -185,7 +201,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Ketuk elemen UI di layar. Elemen diidentifikasi berdasarkan ID simpulnya, yang dapat diperoleh dari alat screen(command=read) screen(command=read)."
+      "description": "Ketuk elemen UI berdasarkan ID simpul dari pembacaan atau hasil aksi terbaru. Mengembalikan ringkasan dan pohon aksesibilitas baru setelah pemeriksaan kestabilan terbatas. Tidak menangkap layar. Gunakan layar dan ID untuk aksi berikutnya. Baca ulang hanya jika informasi kurang, layar usang, atau berubah eksternal. Kestabilan pohon tidak menjamin pemuatan selesai. Ini harus menjadi satu-satunya panggilan layar dalam respons model ini."
     },
     {
       "name": "alarm_modify_alarm",
@@ -866,6 +882,22 @@
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Mengedit tugas pengguna di To-do Center berdasarkan id. Jika target dijelaskan dengan bahasa alami, cari atau tampilkan tugas terlebih dahulu dan teruskan detail yang diketahui bersama kolom yang diubah. Ini mengedit tugas pengguna, bukan memori profil asisten atau rencana internal Main. title/content/tags dan string tanggal kosong mempertahankan nilai. Gunakan yyyy-MM-dd dari lingkungan runtime; jangan hitung milidetik epoch atau panggil Calendar atau Alarm hanya untuk tanggal. Jadwalkan hanya dengan tanggal pasti, tanggal relatif yang jelas (hari ini, besok, lusa, tepat dua hari lagi / 两天后), atau rentang eksplisit dari permintaan atau sumber rujukan. waktu permintaan asli yang disediakan runtime dan zona waktu hanya dasar perhitungan, bukan tanggal pengguna. Tanpa tanggal atau dengan waktu samar (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), hilangkan atau kosongkan startDate dan endDate lalu tempatkan tugas di Unscheduled. Jangan tetapkan hari ini, pilih hari yang nyaman, atau ubah periode samar menjadi beberapa hari; pertahankan ungkapan dalam konten. Jika konten diketahui, jangan tanyakan tanggal. Tentukan tanggal pasti dari konteks saat ini; jam yang tidak diketahui tidak membatalkan hari eksplisit. Jika hanya konten berubah tanpa niat penjadwalan, pertahankan tanggal. Jika pengguna menghapus jadwal, menyatakan waktu belum ditentukan, atau menggantinya dengan waktu samar, gunakan clearStartDate=true dan tanggal kosong untuk menghapus keduanya serta pindah ke Unscheduled. Laporkan bagian Unscheduled atau tanggal tersimpan dari hasil Tool, bukan asumsi. Penanda internal task_pool menunjukkan bagian tanpa tanggal; sebutkan dalam bahasa jawaban tanpa mengulang penanda atau menambahkan terjemahan bahasa lain. Aturan tidak berlaku untuk acara kalender atau alarm."
+    },
+    {
+      "name": "voice_memo_read",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Baca rekaman atau koleksi tersimpan terbaru, konten yang dapat diedit, dan revisi buram sebelum mengubahnya. Hasilnya berisi ID rekaman sumber, kalimat terindeks, ID pembicara, bab terindeks, indeks poin penting, dan ID tindakan. Waktu, identitas, kutipan sumber, dan kaitan tugasnya hanya dapat dibaca. Ringkasan koleksi menjadi milik koleksi tersebut; transkrip dan bab sumber dibagikan dengan rekaman asli serta koleksi lain."
+    },
+    {
+      "name": "voice_memo_update",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Simpan perubahan yang diminta pada rekaman atau koleksi setelah voice_memo(command=read). Kirim revisi buram yang tepat. Jika terjadi konflik, baca kembali dan gabungkan hanya perubahan pengguna; jangan pernah menimpa perubahan bersamaan. Bidang yang dihilangkan tetap tidak berubah. Jika daftar summary keyPoints/actionItems/navigationPlaces diberikan, daftar tersebut akan menggantikan daftar terkait: sertakan indeks poin penting dan ID tindakan yang ada untuk mempertahankan sumber serta tautan tugas; hilangkan index/id hanya untuk item baru. Kalimat, pembicara, dan bab sumber adalah perubahan sebagian berdasarkan index/id tepatnya. Pertahankan waktu kalimat/bab. Jangan kirim audio, state, source membership, todo ids, atau association fields. Perubahan sumber koleksi juga memperbarui rekaman asli dan koleksi lain yang membagikannya. Ringkasan koleksi berdiri sendiri. Nyatakan tersimpan hanya setelah berhasil. Permintaan pratinjau penulisan ulang tidak mengizinkan penyimpanan."
     },
     {
       "name": "sysinfo_delete",

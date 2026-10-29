@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "zh-CN",
   "fallbackLocale": "en",
-  "toolCount": 136,
+  "toolCount": 140,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "搜索工具或能力",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "屏幕、应用与影像",
-      "toolCount": 13
+      "toolCount": 15
     },
     {
       "name": "Device Status and System Control",
@@ -59,7 +59,7 @@
     {
       "name": "Memo",
       "displayName": "备忘",
-      "toolCount": 6
+      "toolCount": 8
     },
     {
       "name": "System Information",
@@ -105,7 +105,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "打开或切换到目标 Android 应用，等待其稳定处于前台，然后返回可见的无障碍屏幕树。当一个请求既要求打开或切换应用，又要求读取、检查、描述、总结或点击现有可见控件，并且没有专用领域工具可以完成请求时，使用此工具。不要把该任务拆成 launch_app 和 get_screen_info。此工具本身不会截图或点击节点；只有用户要求点击时，才使用新返回的节点 ID 调用 tap_node。"
+      "description": "打开或切换到目标 Android 应用，经过有界的稳定性检查后返回其最新可见无障碍树。当同一请求既要求打开/切换应用，又要求读取、检查、描述、总结、搜索、输入或点击已有可见控件，且没有专用领域或捕获工具能完成请求时使用。打开前检查 GUI 前置条件。不要将此任务拆成单独启动应用再读取屏幕或截图，即使跨模型轮次也不行。纯粹打开应用的请求使用启动工具，不读取屏幕。本工具不截图、不输入、不点击节点。使用返回的屏幕和节点 ID 执行下一项请求操作。仅在所需信息缺失、屏幕过期或发生外部变化时重读。树稳定并不保证加载完成。"
     },
     {
       "name": "get_installed_map_apps",
@@ -121,7 +121,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "获取当前可见应用屏幕上的 UI 元素。每个元素都有一个节点 ID（例如 [n3]），可供 screen(command=tap), screen(command=scroll) 或 screen(command=input_text) 使用。不要用此工具读取、列出、搜索或总结 Android 通知；应改用 sysinfo 工具。不要缓存结果，因为节点 ID 每次调用都会变化。"
+      "description": "获取当前活动应用及暴露的输入法窗口中的 UI 元素。标记为 keyboard 的节点属于输入法；当 ime_enter 不可用时（包括 Android 9/10），用 tap 点击真实的键盘搜索/提交键。标记为 focused 的可编辑字段拥有输入焦点；执行键盘操作前应确认它是请求的字段。准备好的文字使用 input_text，不要逐个点击键盘按键输入。每个元素有节点 ID（例如 [n3]），可供 screen(command=tap)、screen(command=scroll) 或 screen(command=input_text) 使用。不要用此工具读取、列出、搜索或总结 Android 通知，应使用 sysinfo 工具。标记为 ime_enter 的节点支持其获得焦点时的键盘操作。成功的 tap、scroll、input_text 或 ime_enter 已返回新屏幕，直接使用即可。仅在屏幕过期、发生外部变化或缺少所需信息时重读。节点 ID 仅属于最新返回的屏幕。"
     },
     {
       "name": "input_text",
@@ -129,7 +129,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "替换当前 Android 应用中一个可见可编辑输入框里的文字。先调用 screen(command=read)，并传入一个当前标记为 edit 的节点。此操作只输入文字；不会提交表单、点击发送或按回车键。不要重复使用节点 ID。"
+      "description": "替换当前 Android 应用中一个可见可编辑字段的文字。传入最新读取或操作结果中标记为 edit 的节点。本操作只输入文字，不提交表单、不点击发送、不按 Enter。当获得焦点的字段支持用户请求的提交时，单独使用 ime_enter。返回操作摘要及新的无障碍树，不截图。使用返回的屏幕和节点 ID 执行下一项请求操作。仅在所需信息缺失、屏幕过期或发生外部变化时重读。本次模型响应中只能进行这一次屏幕调用。"
     },
     {
       "name": "launch_app",
@@ -156,6 +156,22 @@
       "description": "按确切的包名称打开特定的 Google Play 应用程序详细信息页面，点击“安装”，然后等待安装完成。此工具不会打开已安装的应用程序。仅当确切的 Android packageName 已知时才使用。切勿将其用于模糊搜索结果或猜测第一个应用程序。如果 packageName 未知，请先向用户询问确切的应用程序包。如果 Google Play 显示已付费、购买、订阅、更新、不明确的 UI，或者安装在超时之前未完成，则停止。"
     },
     {
+      "name": "screen_ime_enter",
+      "category": "Screen and App",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "触发最新屏幕中标记为 ime_enter 且可见并获得焦点的可编辑字段的键盘操作。需要 Android 11 或更高版本，以及暴露 ACTION_IME_ENTER 的编辑器。具体字段可能执行搜索、提交表单或发送消息；仅用于用户请求的提交操作。不会修改文本或插入换行符。返回操作摘要和新的无障碍屏幕；请核实实际结果。绝不要重放未知的提交操作。本次模型响应中必须只能进行这一次屏幕调用。"
+    },
+    {
+      "name": "screen_run_segment",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "使用新的无障碍屏幕，通过多个相互依赖的操作推进本地 GUI 目标。自行读取初始屏幕。指定清晰的停止条件、允许的操作及精确准备好的输入文字。获得焦点的编辑器支持时优先使用 IME_ENTER。旧版 Android 或 ime_enter 不可用时，允许 TAP 点击暴露的键盘搜索/提交键。单步操作优先使用原子工具。整个片段只授权一次；内部操作属于该次调用。返回已执行操作及最新屏幕，供 Main 核实或继续；完成仅是建议。达到局部等待或执行限制时也会交回 Main，从已确认操作继续。每步最多基于新观察重试两次；成功后重置重试计数。重试耗尽只结束本片段，Main 在本轮剩余部分使用原子屏幕工具继续。绝不重放结果未知的操作。复用返回屏幕，不要立即重读。不要重放已完成或未知的操作。本次模型响应中只能进行这一次屏幕调用。"
+    },
+    {
       "name": "screenshot_open",
       "category": "Screen and App",
       "risk": "SENSITIVE_READ",
@@ -177,7 +193,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "滚动当前应用：支持时使用兼容的无障碍滚动动作，否则使用有界滑动手势。优先使用 screen(command=read) 最新返回且标记 scroll 的节点 ID。仅在屏幕没有可用滚动容器时用 viewport。方向表示视口目标：down 显示下方，up 显示上方，right 显示右侧，left 显示左侧。成功不代表内容已变化，每次成功后、下一动作前都要调用 screen(command=read)。"
+      "description": "滚动当前应用：支持时使用兼容的无障碍滚动操作，否则执行有界滑动手势。优先使用最新读取或操作结果中标记为 scroll 的节点。只有屏幕没有可用滚动容器时才使用 viewport。方向表示视口目的地：down 显示下方，up 显示上方，right 显示右方，left 显示左方内容。返回操作摘要及新的无障碍树，不截图。使用返回的屏幕和节点 ID 执行下一项请求操作。仅在所需信息缺失、屏幕过期或发生外部变化时重读。返回的树不能证明内容已改变。本次模型响应中只能进行这一次屏幕调用。"
     },
     {
       "name": "tap_node",
@@ -185,7 +201,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "点击屏幕上的 UI 元素。该元素通过其节点 ID 进行标识，该节点 ID 可以从 screen(command=read) 工具获取。 screen(command=read)."
+      "description": "点击屏幕上的 UI 元素。使用最新读取或操作结果中的节点 ID 标识元素。经过有界的稳定性检查后返回操作摘要及新的无障碍树。不截图。使用返回的屏幕和节点 ID 执行下一项请求操作。仅在所需信息缺失、屏幕过期或发生外部变化时重读。树稳定并不保证加载完成。本次模型响应中只能进行这一次屏幕调用。"
     },
     {
       "name": "alarm_modify_alarm",
@@ -866,6 +882,22 @@
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "按 id 编辑 To-do Center 中的一条用户待办。当用户用自然语言描述目标时，先搜索或列出待办，并将已知目标详情与变更字段一起传入。此操作编辑用户待办，而不是助手的用户档案记忆或 Main 的内部执行计划。空白 title/content/tags 和日期字符串保留现有值。使用从当前 运行时 环境解析的 yyyy-MM-dd 日期；绝不计算纪元毫秒，也不要仅为解析待办日期而调用 Calendar 或 Alarm 工具。待办排期：只有当用户请求或明确引用的来源提供确定的日历日期、可唯一解析的相对日期（今天、明天、后天、恰好两天后 / 两天后）或明确的日期范围时才排期。运行时提供的原始请求时间 和时区上下文仅是计算基准，绝不是用户提供的排期。未提日期或时间模糊（这两天、这个两天、过几天、近期、有空、改天、soon、sometime this week、in a couple of days）时，使用省略或留空的 startDate 和 endDate，将待办保留或移至 Unscheduled。绝不默认今天、任选方便的日期，或把模糊时间段变成多日排期；将模糊时间保留在待办内容中。内容已知时，不要仅为处理待办而追问日期。根据运行时提供的原始请求时间和时区解析确定日期；未知具体小时不应使明确日期变成无日期。更新时，若用户只改内容且没有排期意图，保留现有日期。若用户明确移除排期、表示时间待定或改为模糊时间，使用 clearStartDate=true 和空日期字符串移到 Unscheduled，并清除两个日期。报告 Tool 结果中保存的 Unscheduled 分区或排期日期，不要依据假设。 内部 task_pool 标记表示无日期分区；回复时用当前回复语言表达该分区，不要复述标记，也不要添加其他语言的翻译。 这些规则适用于待办，不适用于日历事件或闹钟。"
+    },
+    {
+      "name": "voice_memo_read",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "在修改前读取最新保存的录音或合集、可编辑内容及不透明版本号。结果包含源录音 ID、带索引的句子、说话人 ID、带索引的章节、要点索引和行动 ID。这些项目的时间、身份、来源引用和待办关联均为只读。合集摘要属于该合集；源转写和章节与原录音及其他合集共享。"
+    },
+    {
+      "name": "voice_memo_update",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要审批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "在 voice_memo(command=read) 之后保存对录音或合集的请求修改。传入其精确的不透明版本号。发生冲突时重新读取，只合并用户的修改，绝不要覆盖并发编辑。省略的字段保持不变。提供 summary keyPoints/actionItems/navigationPlaces 列表时会替换该列表：包含已有的要点索引和行动 ID 以保留其来源及待办链接；只有新项目才省略索引/ID。源句子、说话人和章节按精确索引/ID 进行局部修改。保持句子/章节时间不变。不要传入音频、状态、来源成员关系、待办 ID 或关联字段。合集来源修改也会更新原录音及共享它们的其他合集。合集摘要彼此独立。仅在成功后报告已保存。预览改写的请求不授权保存。"
     },
     {
       "name": "sysinfo_delete",

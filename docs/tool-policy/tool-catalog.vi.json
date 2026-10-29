@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "vi",
   "fallbackLocale": "en",
-  "toolCount": 136,
+  "toolCount": 140,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Tìm kiếm công cụ hoặc khả năng",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "Màn hình, ứng dụng và nội dung đa phương tiện",
-      "toolCount": 13
+      "toolCount": 15
     },
     {
       "name": "Device Status and System Control",
@@ -59,7 +59,7 @@
     {
       "name": "Memo",
       "displayName": "Ghi chú",
-      "toolCount": 6
+      "toolCount": 8
     },
     {
       "name": "System Information",
@@ -105,7 +105,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Mở hoặc chuyển sang ứng dụng Android đích, chờ ứng dụng ổn định ở nền trước rồi trả về cây trợ năng đang hiển thị. Dùng công cụ này khi một yêu cầu vừa cần mở hoặc chuyển ứng dụng, vừa cần đọc, kiểm tra, mô tả, tóm tắt hoặc nhấn vào một điều khiển đang hiển thị, và không có công cụ chuyên biệt nào hoàn thành được yêu cầu. Không tách tác vụ thành launch_app và get_screen_info. Công cụ này không tự chụp màn hình hoặc nhấn vào nút; chỉ dùng ID nút mới trả về với tap_node khi người dùng yêu cầu nhấn."
+      "description": "Mở hoặc chuyển sang ứng dụng Android đích và trả về cây trợ năng hiển thị mới nhất sau lần kiểm tra ổn định có giới hạn. Dùng khi cùng một yêu cầu đòi mở/chuyển ứng dụng và đọc, kiểm tra, mô tả, tóm tắt, tìm kiếm, nhập hoặc chạm điều khiển đang hiển thị, mà không có công cụ miền hay chụp chuyên dụng hoàn thành được. Kiểm tra điều kiện GUI trước khi mở. Không tách thành khởi chạy riêng rồi đọc/chụp màn hình sau, kể cả qua các vòng mô hình. Yêu cầu chỉ mở ứng dụng dùng công cụ khởi chạy mà không đọc màn hình. Công cụ này không chụp ảnh, nhập hay chạm nút. Dùng màn hình và ID trả về cho thao tác được yêu cầu tiếp theo. Chỉ đọc lại khi thiếu thông tin, màn hình cũ hoặc thay đổi từ bên ngoài. Cây ổn định không bảo đảm đã tải xong."
     },
     {
       "name": "get_installed_map_apps",
@@ -121,7 +121,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Lấy các thành phần UI từ màn hình ứng dụng đang hiển thị. Mỗi thành phần có một ID nút, ví dụ [n3], có thể dùng với screen(command=tap), screen(command=scroll) hoặc screen(command=input_text). Không dùng công cụ này để đọc, liệt kê, tìm kiếm hoặc tóm tắt thông báo Android; hãy dùng các công cụ sysinfo. Không lưu kết quả vào bộ nhớ đệm vì ID nút thay đổi sau mỗi lần gọi."
+      "description": "Lấy phần tử UI từ ứng dụng đang hoạt động và cửa sổ phương thức nhập được cung cấp. Nút keyboard thuộc phương thức nhập; nếu ime_enter không khả dụng, kể cả Android 9/10, dùng tap với phím tìm kiếm/gửi thực trên bàn phím. Trường có thể sửa được đánh dấu focused có tiêu điểm nhập; đối chiếu với trường yêu cầu trước thao tác bàn phím. Dùng input_text cho văn bản chuẩn bị sẵn thay vì gõ từng phím. Mỗi phần tử có ID như [n3] cho screen(command=tap), screen(command=scroll) hoặc screen(command=input_text). Không dùng để đọc, liệt kê, tìm hay tóm tắt thông báo Android; dùng công cụ sysinfo. Nút ime_enter hỗ trợ thao tác bàn phím khi có tiêu điểm. tap, scroll, input_text hoặc ime_enter thành công đã trả màn hình mới; dùng trực tiếp. Chỉ đọc lại khi cũ, thay đổi bên ngoài hoặc thiếu thông tin. ID chỉ thuộc màn hình trả về mới nhất."
     },
     {
       "name": "input_text",
@@ -129,7 +129,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Thay thế văn bản trong một trường có thể chỉnh sửa đang hiển thị trong ứng dụng Android hiện tại. Trước tiên, hãy gọi screen(command=read) và truyền một nút hiện tại được đánh dấu edit. Thao tác này chỉ nhập văn bản; không gửi biểu mẫu, nhấn Gửi hoặc nhấn Enter. Không sử dụng lại ID nút."
+      "description": "Thay văn bản một trường có thể sửa đang hiển thị trong ứng dụng Android hiện tại. Truyền nút edit từ lần đọc hay kết quả thao tác mới nhất. Chỉ nhập văn bản, không gửi biểu mẫu, chạm Gửi hay nhấn Enter. Dùng ime_enter riêng khi trường có tiêu điểm hỗ trợ lần gửi được yêu cầu. Trả tóm tắt và cây trợ năng mới, không chụp ảnh. Dùng màn hình và ID cho thao tác tiếp theo. Chỉ đọc lại khi thiếu thông tin, màn hình cũ hoặc thay đổi bên ngoài. Đây phải là lần gọi màn hình duy nhất trong phản hồi mô hình này."
     },
     {
       "name": "launch_app",
@@ -156,6 +156,22 @@
       "description": "Mở trang chi tiết ứng dụng Google Play cụ thể theo tên gói chính xác, nhấn Cài đặt và đợi quá trình cài đặt hoàn tất. Công cụ này không mở ứng dụng đã cài đặt. Chỉ sử dụng khi biết Tên gói Android chính xác. Không bao giờ sử dụng điều này cho kết quả tìm kiếm mờ hoặc đoán ứng dụng đầu tiên. Nếu không xác định được packageName, trước tiên hãy hỏi người dùng gói ứng dụng chính xác. Dừng nếu Google Play hiển thị trả phí, mua hàng, đăng ký, cập nhật, giao diện người dùng không rõ ràng hoặc nếu quá trình cài đặt không hoàn tất trước khi hết thời gian chờ."
     },
     {
+      "name": "screen_ime_enter",
+      "category": "Screen and App",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Kích hoạt thao tác bàn phím của trường có thể chỉnh sửa, đang hiển thị và được chọn, được đánh dấu ime_enter trên màn hình mới nhất. Yêu cầu Android 11 trở lên và trình soạn thảo cung cấp ACTION_IME_ENTER. Tùy trường, thao tác có thể tìm kiếm, gửi biểu mẫu hoặc gửi tin nhắn; chỉ dùng cho lần gửi được yêu cầu. Không thay đổi văn bản và không chèn dòng mới. Trả về tóm tắt thao tác cùng màn hình trợ năng mới; hãy kiểm tra kết quả thực tế. Không bao giờ phát lại lần gửi không rõ. Đây phải là lệnh gọi màn hình duy nhất trong phản hồi này của mô hình."
+    },
+    {
+      "name": "screen_run_segment",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Tiến tới mục tiêu GUI cục bộ qua nhiều thao tác phụ thuộc với màn hình trợ năng mới. Tự đọc màn hình đầu tiên. Chỉ định điều kiện dừng rõ ràng, thao tác cho phép và văn bản chuẩn bị chính xác. Ưu tiên IME_ENTER nếu trình sửa có tiêu điểm cung cấp. Trên Android cũ hoặc khi ime_enter không khả dụng, cho phép TAP chọn phím tìm kiếm/gửi được cung cấp. Ưu tiên công cụ nguyên tử cho một thao tác. Đoạn được cấp phép một lần; thao tác nội bộ là phần của lần gọi đó. Trả thao tác đã thực hiện và màn hình mới nhất cho Main kiểm tra/tiếp tục; hoàn thành chỉ là gợi ý. Giới hạn chờ hoặc thực thi cục bộ cũng trả về Main để tiếp tục từ thao tác đã xác nhận. Mỗi bước tối đa hai lần thử lại với quan sát mới; thành công đặt lại bộ đếm. Hết lần thử chỉ kết thúc đoạn này; Main tiếp tục bằng công cụ màn hình nguyên tử trong phần còn lại của lượt. Không bao giờ lặp thao tác có kết quả chưa biết. Dùng lại màn hình trả về thay vì đọc lại ngay. Không lặp thao tác đã xong hoặc chưa biết. Đây phải là lần gọi màn hình duy nhất trong phản hồi này."
+    },
+    {
       "name": "screenshot_open",
       "category": "Screen and App",
       "risk": "SENSITIVE_READ",
@@ -177,7 +193,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Cuộn ứng dụng bằng thao tác trợ năng tương thích hoặc vuốt có giới hạn. Ưu tiên ID nút mới đánh dấu scroll từ screen(command=read). Chỉ dùng viewport khi không có vùng cuộn dùng được. Hướng là đích: down dưới, up trên, right phải, left trái. Thành công không chứng minh nội dung đổi; gọi screen(command=read) sau mỗi lần thành công trước thao tác tiếp."
+      "description": "Cuộn ứng dụng hiện tại bằng thao tác trợ năng tương thích nếu hỗ trợ, nếu không dùng cử chỉ vuốt có giới hạn. Ưu tiên nút scroll từ lần đọc/kết quả mới nhất. Chỉ dùng viewport khi không có vùng cuộn dùng được. Hướng là đích khung nhìn: down hiện bên dưới, up trên, right phải, left trái. Trả tóm tắt và cây mới, không chụp ảnh. Dùng màn hình và ID cho thao tác tiếp theo. Chỉ đọc lại khi thiếu thông tin, màn hình cũ hoặc thay đổi bên ngoài. Cây không chứng minh nội dung đã đổi. Đây phải là lần gọi màn hình duy nhất trong phản hồi này."
     },
     {
       "name": "tap_node",
@@ -185,7 +201,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Nhấn vào một thành phần UI trên màn hình. Phần tử được xác định bằng ID nút của nó, có thể lấy được từ công cụ screen(command=read) screen(command=read)."
+      "description": "Chạm phần tử UI theo ID nút từ lần đọc hoặc kết quả thao tác mới nhất. Trả tóm tắt và cây trợ năng mới sau kiểm tra ổn định có giới hạn. Không chụp ảnh. Dùng màn hình và ID cho thao tác tiếp theo. Chỉ đọc lại khi thiếu thông tin, màn hình cũ hoặc thay đổi bên ngoài. Cây ổn định không bảo đảm đã tải xong. Đây phải là lần gọi màn hình duy nhất trong phản hồi mô hình này."
     },
     {
       "name": "alarm_modify_alarm",
@@ -866,6 +882,22 @@
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Chỉnh sửa việc cần làm của người dùng trong To-do Center theo id. Nếu mục tiêu được mô tả bằng ngôn ngữ tự nhiên, hãy tìm kiếm hoặc liệt kê trước rồi truyền chi tiết đã biết cùng trường thay đổi. Chỉnh sửa việc của người dùng, không phải bộ nhớ hồ sơ trợ lý hay kế hoạch nội bộ của Main. title/content/tags và chuỗi ngày trống giữ nguyên giá trị. Dùng yyyy-MM-dd từ môi trường thời gian chạy; không tính mili giây epoch hoặc gọi Calendar hay Alarm chỉ để xác định ngày. Chỉ lên lịch với ngày cụ thể, ngày tương đối rõ ràng (hôm nay, ngày mai, ngày kia, đúng hai ngày nữa / 两天后) hoặc khoảng rõ ràng từ yêu cầu hay nguồn dẫn chiếu. thời điểm yêu cầu gốc do môi trường chạy cung cấp và múi giờ chỉ là cơ sở tính toán, không phải ngày của người dùng. Không có ngày hoặc thời gian mơ hồ (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days) thì bỏ qua hoặc để trống startDate và endDate, đặt việc trong Unscheduled. Không mặc định hôm nay, chọn ngày thuận tiện hoặc biến khoảng mơ hồ thành nhiều ngày; giữ cách nói đó trong nội dung. Nếu đã biết nội dung, không hỏi ngày. Xác định ngày cụ thể từ ngữ cảnh hiện tại; không biết giờ không hủy một ngày rõ ràng. Nếu chỉ đổi nội dung và không có ý định lên lịch, giữ ngày hiện có. Nếu người dùng xóa lịch, nói thời gian chưa quyết định hoặc thay bằng thời gian mơ hồ, dùng clearStartDate=true và ngày trống để xóa cả hai rồi chuyển sang Unscheduled. Báo phần Unscheduled hoặc ngày đã lưu từ kết quả Tool, không từ giả định. Dấu nội bộ task_pool chỉ phần chưa có ngày; diễn đạt bằng ngôn ngữ trả lời, không lặp dấu hay thêm bản dịch ngôn ngữ khác. Quy tắc không áp dụng cho sự kiện lịch hoặc báo thức."
+    },
+    {
+      "name": "voice_memo_read",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Đọc bản ghi hoặc bộ sưu tập đã lưu mới nhất, nội dung có thể chỉnh sửa và phiên bản mờ trước khi thay đổi. Kết quả gồm ID bản ghi nguồn, các câu được lập chỉ mục, ID người nói, các chương được lập chỉ mục, chỉ mục điểm chính và ID hành động. Thời gian, danh tính, trích dẫn nguồn và liên kết việc cần làm của chúng chỉ được đọc. Tóm tắt thuộc về bộ sưu tập; bản chép lời và chương nguồn được chia sẻ với bản ghi gốc và các bộ sưu tập khác."
+    },
+    {
+      "name": "voice_memo_update",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Lưu các chỉnh sửa được yêu cầu vào bản ghi hoặc bộ sưu tập sau voice_memo(command=read). Truyền đúng phiên bản mờ của nó. Khi có xung đột, hãy đọc lại và chỉ hợp nhất thay đổi của người dùng; không bao giờ ghi đè chỉnh sửa đồng thời. Các trường bị bỏ qua giữ nguyên. Khi được cung cấp, các danh sách summary keyPoints/actionItems/navigationPlaces sẽ thay thế danh sách đó: bao gồm chỉ mục điểm chính và ID hành động hiện có để giữ nguồn cùng liên kết việc cần làm; chỉ bỏ index/id với mục mới. Câu, người nói và chương nguồn là các chỉnh sửa một phần theo index/id chính xác. Giữ nguyên thời gian của câu/chương. Không truyền audio, state, source membership, todo ids hoặc association fields. Chỉnh sửa nguồn của bộ sưu tập cũng cập nhật bản ghi gốc và các bộ sưu tập khác dùng chung chúng. Tóm tắt bộ sưu tập độc lập. Chỉ báo đã lưu sau khi thành công. Yêu cầu xem trước bản viết lại không cho phép lưu."
     },
     {
       "name": "sysinfo_delete",

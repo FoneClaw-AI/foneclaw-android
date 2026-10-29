@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "fr",
   "fallbackLocale": "en",
-  "toolCount": 136,
+  "toolCount": 140,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Rechercher des outils ou des fonctionnalités",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "Écran, applications et médias",
-      "toolCount": 13
+      "toolCount": 15
     },
     {
       "name": "Device Status and System Control",
@@ -59,7 +59,7 @@
     {
       "name": "Memo",
       "displayName": "Notes",
-      "toolCount": 6
+      "toolCount": 8
     },
     {
       "name": "System Information",
@@ -105,7 +105,7 @@
       "risk": "LOW",
       "approval": "Automatique",
       "approvalCode": "AUTO",
-      "description": "Ouvrez l’application Android cible ou passez-y, attendez qu’elle soit stable au premier plan, puis renvoyez l’arborescence d’accessibilité visible. Utilisez cet outil lorsqu’une même demande exige d’ouvrir ou de changer d’application et de lire, inspecter, décrire, résumer ou toucher un contrôle visible existant, et qu’aucun outil métier dédié ne peut l’exécuter. Ne divisez pas la tâche entre launch_app et get_screen_info. Cet outil ne capture pas l’écran et ne touche pas les nœuds lui-même ; utilisez les ID de nœud nouvellement renvoyés avec tap_node uniquement si l’utilisateur a demandé un toucher."
+      "description": "Ouvrez ou activez l’application Android cible et renvoyez son dernier arbre d’accessibilité visible après une vérification de stabilité bornée. À utiliser lorsqu’une même demande vise à ouvrir/activer une application et à lire, inspecter, décrire, résumer, rechercher, saisir ou toucher un contrôle visible existant, sans outil spécialisé de domaine ou de capture capable de la réaliser. Les prérequis GUI sont vérifiés avant l’ouverture. Ne séparez pas en lancement puis lecture/capture ultérieure, même entre tours du modèle. Pour une simple ouverture, utilisez le lancement sans lecture d’écran. Cet outil ne capture, ne saisit ni ne touche les nœuds. Utilisez l’écran et les ID renvoyés pour l’action suivante demandée. Relisez seulement si des informations manquent, si l’écran est périmé ou a changé extérieurement. Un arbre stable ne garantit pas la fin du chargement."
     },
     {
       "name": "get_installed_map_apps",
@@ -121,7 +121,7 @@
       "risk": "LOW",
       "approval": "Automatique",
       "approvalCode": "AUTO",
-      "description": "Récupère les éléments d’interface de l’écran d’application visible. Chaque élément possède un ID de nœud, par exemple [n3], utilisable avec screen(command=tap), screen(command=scroll) ou screen(command=input_text). N’utilisez pas cet outil pour lire, répertorier, rechercher ou résumer les notifications Android ; utilisez plutôt les outils sysinfo. Ne mettez pas le résultat en cache, car les ID de nœud changent à chaque appel."
+      "description": "Obtient les éléments UI de l’application active et des fenêtres exposées de la méthode de saisie. Les nœuds keyboard appartiennent à celle-ci ; si ime_enter est indisponible, y compris sur Android 9/10, utilisez tap sur une véritable touche recherche/envoi. Un champ éditable focused a le focus ; associez-le au champ demandé avant une action clavier. Utilisez input_text pour un texte préparé, pas les touches individuelles. Chaque élément possède un ID, par exemple [n3], pour screen(command=tap), screen(command=scroll) ou screen(command=input_text). Ne lisez, ne listez, ne recherchez ni ne résumez les notifications Android ; utilisez les outils sysinfo. Un nœud ime_enter accepte son action clavier focalisée. Un tap, scroll, input_text ou ime_enter réussi renvoie déjà un écran frais ; utilisez-le directement. Relisez seulement en cas d’écran périmé, de changement externe ou d’informations manquantes. Les ID appartiennent uniquement au dernier écran renvoyé."
     },
     {
       "name": "input_text",
@@ -129,7 +129,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Remplacez le texte d’un champ modifiable visible dans l’application Android actuelle. Appelez d’abord screen(command=read) et transmettez un nœud actuel marqué edit. Cette action saisit uniquement le texte ; elle n’envoie pas le formulaire, ne touche pas Envoyer et n’appuie pas sur Entrée. Ne réutilisez pas les ID de nœud."
+      "description": "Remplace le texte d’un champ éditable visible dans l’application Android actuelle. Transmettez un nœud edit de la dernière lecture ou du résultat d’action. Saisit seulement le texte : ne soumet pas de formulaire, ne touche pas Envoyer et n’appuie pas sur Enter. Utilisez ime_enter séparément si le champ focalisé permet l’envoi demandé. Renvoie un résumé et un arbre d’accessibilité frais, sans capture. Utilisez l’écran et les ID renvoyés pour l’action suivante. Relisez seulement si des informations manquent, si l’écran est périmé ou a changé extérieurement. Cet appel doit être le seul appel d’écran dans cette réponse du modèle."
     },
     {
       "name": "launch_app",
@@ -156,6 +156,22 @@
       "description": "Ouvrez une page de détails d'application Google Play spécifique par nom exact du package, appuyez sur Installer et attendez la fin de l'installation. Cet outil n'ouvre pas l'application installée. À utiliser uniquement lorsqu'un nom de package Android exact est connu. Ne l'utilisez jamais pour obtenir des résultats de recherche flous ou pour deviner la première application. Si packageName est inconnu, demandez d’abord à l’utilisateur le package d’application exact. S'arrête si Google Play affiche un paiement, un achat, un abonnement, une mise à jour, une interface utilisateur ambiguë ou si l'installation ne se termine pas avant l'expiration du délai."
     },
     {
+      "name": "screen_ime_enter",
+      "category": "Screen and App",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Déclenchez l'action du clavier d'un champ éditable visible et ciblé, marqué ime_enter, dans l'écran le plus récent. Android 11 ou une version ultérieure et un éditeur exposant ACTION_IME_ENTER sont requis. Selon le champ, cela peut effectuer une recherche, envoyer un formulaire ou un message ; utilisez-le uniquement pour l'envoi demandé. Le texte n'est pas modifié et aucun saut de ligne n'est inséré. Un résumé de l'action et un nouvel écran d'accessibilité sont renvoyés ; vérifiez le résultat réel. Ne rejouez jamais un envoi inconnu. Cet appel doit être le seul appel d'écran dans cette réponse du modèle."
+    },
+    {
+      "name": "screen_run_segment",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Fait avancer un objectif GUI local par plusieurs actions dépendantes sur des écrans d’accessibilité frais. Lit lui-même l’écran initial. Précisez une condition d’arrêt claire, les opérations autorisées et les textes préparés exacts. Préférez IME_ENTER si l’éditeur focalisé l’expose. Sur un ancien Android ou sans ime_enter, autorisez TAP sur une touche clavier recherche/envoi exposée. Préférez les outils atomiques pour une seule action. Le segment est autorisé une fois ; les actions internes font partie de cet appel. Renvoie les actions effectuées et le dernier écran à Main pour vérification ou suite ; l’achèvement n’est qu’une suggestion. Une limite locale d’attente ou d’exécution rend aussi la main à Main pour reprendre après les actions confirmées. Chaque étape permet au plus deux nouvelles tentatives avec observations fraîches ; le succès remet le compteur à zéro. L’épuisement termine uniquement ce segment ; Main continue avec des outils écran atomiques pour le reste du tour. Ne rejouez jamais une action au résultat inconnu. Réutilisez l’écran sans le relire immédiatement. Ne rejouez pas les actions terminées ou inconnues. Cet appel doit être le seul appel d’écran dans cette réponse."
+    },
+    {
       "name": "screenshot_open",
       "category": "Screen and App",
       "risk": "SENSITIVE_READ",
@@ -177,7 +193,7 @@
       "risk": "LOW",
       "approval": "Automatique",
       "approvalCode": "AUTO",
-      "description": "Fait défiler l’app par une action d’accessibilité compatible, sinon un balayage borné. Préférez un ID récent marqué scroll de screen(command=read). Utilisez viewport seulement sans conteneur utilisable. La direction est la destination : down en bas, up en haut, right à droite, left à gauche. Le succès ne confirme pas de changement ; appelez screen(command=read) après chaque succès avant l’action suivante."
+      "description": "Fait défiler l’application actuelle par une action d’accessibilité compatible si possible, sinon par un geste borné. Préférez un nœud scroll de la dernière lecture ou action. Utilisez viewport uniquement sans conteneur utilisable. La direction est la destination de la fenêtre : down révèle en bas, up en haut, right à droite et left à gauche. Renvoie un résumé et un arbre frais, sans capture. Utilisez l’écran et les ID pour l’action suivante. Relisez seulement si des informations manquent, si l’écran est périmé ou a changé extérieurement. L’arbre ne prouve pas que le contenu a changé. Cet appel doit être le seul appel d’écran dans cette réponse."
     },
     {
       "name": "tap_node",
@@ -185,7 +201,7 @@
       "risk": "LOW",
       "approval": "Automatique",
       "approvalCode": "AUTO",
-      "description": "Appuyez sur un élément de l'interface utilisateur sur l'écran. L'élément est identifié par son ID de nœud, qui peut être obtenu à partir de l'outil screen(command=read) screen(command=read)."
+      "description": "Touche un élément UI identifié par son ID de nœud de la dernière lecture ou du résultat d’action. Renvoie un résumé et un arbre d’accessibilité frais après une vérification de stabilité bornée. Aucune capture n’est effectuée. Utilisez l’écran et les ID pour l’action suivante. Relisez seulement si des informations manquent, si l’écran est périmé ou a changé extérieurement. Un arbre stable ne garantit pas la fin du chargement. Cet appel doit être le seul appel d’écran dans cette réponse du modèle."
     },
     {
       "name": "alarm_modify_alarm",
@@ -866,6 +882,22 @@
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Modifie une tâche utilisateur du To-do Center par id. Si la cible est décrite en langage naturel, recherchez ou répertoriez d’abord les tâches et transmettez les détails connus avec les champs modifiés. Cela modifie les tâches utilisateur, pas la mémoire de profil de l’assistant ni le plan interne de Main. Les title/content/tags et dates vides conservent leurs valeurs. Utilisez des dates yyyy-MM-dd de l’environnement exécution ; ne calculez pas les millisecondes depuis l’époque et n’appelez pas Calendar ou Alarm uniquement pour une date. Planifiez seulement avec une date précise, une date relative sans ambiguïté (aujourd’hui, demain, après-demain, dans exactement deux jours / 两天后) ou une plage explicite fournie par la demande ou une source citée. l’heure de la demande d’origine fournie à l’exécution et le fuseau horaire ne sont qu’une base de calcul, pas une date utilisateur. Sans date ou avec un moment vague (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), omettez ou videz startDate et endDate pour placer la tâche dans Unscheduled. Ne choisissez pas aujourd’hui par défaut ou un jour pratique et ne transformez pas une période vague en plusieurs jours ; conservez l’expression dans le contenu. Si le contenu est connu, ne demandez pas de date. Résolvez les dates précises avec le contexte actuel ; une heure inconnue n’annule pas un jour explicite. Si seul le contenu change sans intention de planification, conservez les dates. Si l’utilisateur retire la planification, dit que l’heure reste à définir ou la remplace par un moment vague, utilisez clearStartDate=true et des dates vides pour effacer les deux et déplacer vers Unscheduled. Indiquez la section Unscheduled ou la date enregistrée du résultat du Tool, sans supposition. Le marqueur interne task_pool identifie la section sans date ; exprimez-la dans la langue de réponse sans répéter le marqueur ni ajouter une traduction dans une autre langue. Ces règles ne concernent pas les événements de calendrier ni les alarmes."
+    },
+    {
+      "name": "voice_memo_read",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Lisez le dernier enregistrement ou la dernière collection sauvegardé(e), son contenu modifiable et sa révision opaque avant toute modification. Le résultat contient les identifiants des enregistrements sources, les phrases indexées, les identifiants des intervenants, les chapitres indexés, les index des points clés et les identifiants d’action. Leurs horaires, identités, citations de sources et associations de tâches sont en lecture seule. Le résumé appartient à la collection ; les transcriptions et chapitres sources sont partagés avec l’enregistrement d’origine et les autres collections."
+    },
+    {
+      "name": "voice_memo_update",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Enregistrez les modifications demandées sur un enregistrement ou une collection après voice_memo(command=read). Transmettez sa révision opaque exacte. En cas de conflit, relisez et fusionnez uniquement les modifications de l’utilisateur ; n’écrasez jamais les modifications concurrentes. Les champs omis restent inchangés. Les listes summary keyPoints/actionItems/navigationPlaces fournies remplacent la liste correspondante : incluez les index de points clés et les identifiants d’actions existants pour conserver leurs sources et liens de tâches ; omettez index/id uniquement pour les nouveaux éléments. Les phrases, intervenants et chapitres sources sont des modifications partielles via leurs index/id exacts. Gardez les horaires des phrases/chapitres inchangés. Ne transmettez pas audio, state, source membership, todo ids ou association fields. Les modifications de source d’une collection mettent aussi à jour les enregistrements originaux et les autres collections qui les partagent. Le résumé d’une collection est indépendant. Ne signalez l’enregistrement qu’après réussite. Une demande d’aperçu d’une réécriture n’autorise pas l’enregistrement."
     },
     {
       "name": "sysinfo_delete",

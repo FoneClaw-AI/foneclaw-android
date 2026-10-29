@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "es",
   "fallbackLocale": "en",
-  "toolCount": 136,
+  "toolCount": 140,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Buscar herramientas o funciones",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "Pantalla, aplicaciones y contenido multimedia",
-      "toolCount": 13
+      "toolCount": 15
     },
     {
       "name": "Device Status and System Control",
@@ -59,7 +59,7 @@
     {
       "name": "Memo",
       "displayName": "Notas",
-      "toolCount": 6
+      "toolCount": 8
     },
     {
       "name": "System Information",
@@ -105,7 +105,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Abre o cambia a una aplicación Android de destino, espera a que permanezca estable en primer plano y devuelve el árbol de accesibilidad visible. Úsala cuando una misma solicitud pida abrir o cambiar de aplicación y también leer, inspeccionar, describir, resumir o tocar un control visible existente, y ninguna herramienta específica del dominio pueda completar la solicitud. No dividas la tarea entre launch_app y get_screen_info. Esta herramienta no toma capturas ni toca nodos por sí sola; usa con tap_node los ID de nodo recién devueltos únicamente cuando el usuario haya pedido tocar un control."
+      "description": "Abre o cambia a la aplicación Android de destino y devuelve su árbol de accesibilidad visible más reciente tras una comprobación de estabilidad acotada. Úsalo cuando una misma solicitud pida abrir/cambiar de aplicación y leer, inspeccionar, describir, resumir, buscar, escribir o tocar un control visible existente, y ninguna herramienta de dominio o captura específica pueda completarla. Se comprueban los requisitos GUI antes de abrir. No dividas la tarea en un inicio independiente y una lectura o captura posterior, ni siquiera entre rondas del modelo. Para solo abrir, usa la herramienta de inicio sin leer la pantalla. Esta herramienta no captura, escribe ni toca nodos. Usa la pantalla y los ID devueltos para la siguiente acción solicitada. Relee solo si falta información, la pantalla está obsoleta o cambió externamente. Un árbol estable no garantiza que la carga haya terminado."
     },
     {
       "name": "get_installed_map_apps",
@@ -121,7 +121,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Obtiene los elementos de la interfaz de la pantalla de la aplicación visible. Cada elemento tiene un ID de nodo, por ejemplo [n3], que puede usarse con screen(command=tap), screen(command=scroll) o screen(command=input_text). No uses esta herramienta para leer, enumerar, buscar o resumir notificaciones de Android; usa las herramientas sysinfo. No almacenes el resultado en caché porque los ID de nodo cambian en cada llamada."
+      "description": "Obtiene elementos UI de la aplicación activa y ventanas del método de entrada expuestas. Los nodos keyboard pertenecen al método de entrada; si ime_enter no está disponible, incluso en Android 9/10, usa tap en una tecla real de búsqueda/envío. Un campo editable focused tiene el foco; comprueba que sea el solicitado antes de una acción del teclado. Usa input_text para texto preparado, no teclas individuales. Cada elemento tiene un ID, como [n3], para screen(command=tap), screen(command=scroll) o screen(command=input_text). No lo uses para leer, listar, buscar o resumir notificaciones Android; usa herramientas sysinfo. Un nodo ime_enter admite su acción de teclado enfocada. Un tap, scroll, input_text o ime_enter exitoso ya devuelve una pantalla nueva; úsala directamente. Relee solo si está obsoleta, cambió externamente o falta información. Los ID pertenecen únicamente a la última pantalla devuelta."
     },
     {
       "name": "input_text",
@@ -129,7 +129,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Reemplaza el texto de un campo editable visible en la aplicación Android actual. Llama primero a screen(command=read) y pasa un nodo actual marcado como edit. Esta acción solo introduce texto; no envía el formulario, no toca Enviar ni pulsa Enter. No reutilices los ID de nodo."
+      "description": "Reemplaza el texto de un campo editable visible en la aplicación Android actual. Pasa un nodo edit de la última lectura o resultado de acción. Solo introduce texto; no envía formularios, toca Enviar ni pulsa Enter. Usa ime_enter por separado si el campo enfocado admite el envío solicitado. Devuelve un resumen y un árbol de accesibilidad nuevo, sin captura. Usa la pantalla y los ID devueltos para la siguiente acción solicitada. Relee solo si falta información, la pantalla está obsoleta o cambió externamente. Debe ser la única llamada de pantalla en esta respuesta del modelo."
     },
     {
       "name": "launch_app",
@@ -156,6 +156,22 @@
       "description": "Abra una página de detalles de una aplicación Google Play específica por el nombre exacto del paquete, toque Instalar y espere a que se complete la instalación. Esta herramienta no abre la aplicación instalada. Úselo solo cuando se conozca un Android packageName exacto. Nunca uses esto para resultados de búsqueda borrosos o para adivinar la primera aplicación. Si se desconoce packageName, primero solicite al usuario el paquete de aplicación exacto. Se detiene si Google Play muestra pago, compra, suscripción, actualización, UI ambiguo o si la instalación no se completa antes del tiempo de espera."
     },
     {
+      "name": "screen_ime_enter",
+      "category": "Screen and App",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Requiere aprobación",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Activa la acción del teclado de un campo editable visible y enfocado, marcado como ime_enter, en la pantalla más reciente. Requiere Android 11 o posterior y un editor que exponga ACTION_IME_ENTER. Según el campo, puede buscar, enviar un formulario o enviar un mensaje; úsalo solo para el envío solicitado. No cambia el texto ni inserta un salto de línea. Devuelve el resumen de la acción y una pantalla de accesibilidad nueva; verifica el resultado real. Nunca repitas un envío desconocido. Esta debe ser la única llamada de pantalla en esta respuesta del modelo."
+    },
+    {
+      "name": "screen_run_segment",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Requiere aprobación",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Avanza hacia un objetivo GUI local con varias acciones dependientes y pantallas de accesibilidad nuevas. Lee la pantalla inicial. Especifica una condición de parada clara, operaciones permitidas y textos preparados exactos. Prefiere IME_ENTER si el editor enfocado lo expone. En Android antiguo o sin ime_enter, permite TAP para elegir una tecla de búsqueda/envío expuesta. Prefiere herramientas atómicas para una sola acción. El segmento se autoriza una vez; sus acciones internas son parte de esa invocación. Devuelve acciones realizadas y pantalla más reciente para que Main verifique o continúe; la finalización es solo una sugerencia. Un límite local de espera o ejecución también devuelve el control a Main para continuar desde acciones confirmadas. Cada paso tiene como máximo dos reintentos con observaciones nuevas; el éxito reinicia el contador. Agotarlos termina solo este segmento; Main continúa con herramientas atómicas de pantalla durante el resto del turno. Nunca repitas una acción de resultado desconocido. Reutiliza la pantalla devuelta sin releer inmediatamente. No repitas acciones completadas o desconocidas. Debe ser la única llamada de pantalla en esta respuesta."
+    },
+    {
       "name": "screenshot_open",
       "category": "Screen and App",
       "risk": "SENSITIVE_READ",
@@ -177,7 +193,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Desplaza la app con una acción de accesibilidad compatible o, si no, un gesto acotado. Prefiere un ID reciente marcado scroll de screen(command=read). Usa viewport solo sin contenedor utilizable. La dirección indica destino: down muestra abajo, up arriba, right derecha, left izquierda. Éxito no confirma cambio: llama a screen(command=read) tras cada éxito antes de otra acción."
+      "description": "Desplaza la aplicación actual con una acción de accesibilidad compatible si se admite; si no, realiza un gesto acotado. Prefiere un nodo scroll de la última lectura o resultado. Usa viewport solo si no hay un contenedor utilizable. La dirección es el destino de la ventana: down muestra abajo, up arriba, right a la derecha y left a la izquierda. Devuelve resumen y árbol de accesibilidad nuevo, sin captura. Usa la pantalla y los ID devueltos para la siguiente acción solicitada. Relee solo si falta información, la pantalla está obsoleta o cambió externamente. El árbol no demuestra que el contenido cambió. Debe ser la única llamada de pantalla en esta respuesta."
     },
     {
       "name": "tap_node",
@@ -185,7 +201,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Toca un elemento UI en la pantalla. El elemento se identifica por su ID de nodo, que se puede obtener de la herramienta screen(command=read) screen(command=read)."
+      "description": "Toca un elemento UI identificado por su ID de nodo de la última lectura o resultado de acción. Devuelve resumen y un árbol de accesibilidad nuevo tras una comprobación de estabilidad acotada. No toma capturas. Usa la pantalla y los ID devueltos para la siguiente acción solicitada. Relee solo si falta información, la pantalla está obsoleta o cambió externamente. Un árbol estable no garantiza que la carga haya terminado. Debe ser la única llamada de pantalla en esta respuesta del modelo."
     },
     {
       "name": "alarm_modify_alarm",
@@ -866,6 +882,22 @@
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Edita una tarea del usuario en To-do Center por id. Si el objetivo se describe en lenguaje natural, busca o enumera primero las tareas y envía los datos conocidos con los campos modificados. Edita tareas del usuario, no la memoria de perfil del asistente ni el plan interno de Main. title/content/tags y fechas en blanco conservan sus valores. Usa fechas yyyy-MM-dd del entorno entorno de ejecución; no calcules milisegundos de época ni llames a Calendar o Alarm solo para resolver una fecha. Programa únicamente con una fecha concreta, una fecha relativa inequívoca (hoy, mañana, pasado mañana, exactamente dentro de dos días / 两天后) o un intervalo explícito aportado por la solicitud o fuente citada. la hora original de la solicitud proporcionada por el entorno de ejecución y la zona horaria solo sirven para calcular, no son una fecha del usuario. Sin fecha o con tiempo impreciso (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), omite o vacía startDate y endDate para dejar la tarea en Unscheduled. No uses hoy por defecto, elijas un día conveniente ni conviertas un periodo impreciso en varios días; conserva la expresión en el contenido. Si se conoce el contenido, no preguntes una fecha. Resuelve fechas concretas con el contexto actual; una hora desconocida no elimina un día explícito. Si solo cambia el contenido y no hay intención de programación, conserva las fechas. Si el usuario elimina la programación, dice que está por decidir o la sustituye por un momento impreciso, usa clearStartDate=true con fechas vacías para borrar ambas y mover a Unscheduled. Informa según la sección Unscheduled o fecha guardada del resultado del Tool, no por suposición. El marcador interno task_pool identifica la sección sin fecha; exprésala en el idioma de respuesta sin repetir el marcador ni añadir traducciones a otro idioma. Estas reglas no se aplican a eventos de calendario ni alarmas."
+    },
+    {
+      "name": "voice_memo_read",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "Requiere aprobación",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Lee la grabación o colección guardada más reciente, su contenido editable y la revisión opaca antes de modificarla. El resultado contiene identificadores de grabaciones de origen, frases indexadas, identificadores de hablantes, capítulos indexados, índices de puntos clave e identificadores de acciones. Sus tiempos, identidades, citas de origen y asociaciones de tareas son de solo lectura. El resumen de la colección pertenece a la colección; las transcripciones y capítulos de origen se comparten con la grabación original y otras colecciones."
+    },
+    {
+      "name": "voice_memo_update",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Requiere aprobación",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Guarda las ediciones solicitadas en una grabación o colección después de voice_memo(command=read). Pasa su revisión opaca exacta. Si hay un conflicto, vuelve a leer y combina solo los cambios del usuario; nunca sobrescribas ediciones simultáneas. Los campos omitidos no cambian. Cuando se proporcionan listas summary keyPoints/actionItems/navigationPlaces, reemplazan esa lista: incluye los índices de puntos clave y los identificadores de acciones existentes para conservar sus fuentes y enlaces de tareas; omite index/id solo para elementos nuevos. Las frases, hablantes y capítulos de origen son ediciones parciales mediante sus index/id exactos. Mantén sin cambios los tiempos de frases/capítulos. No pases audio, state, source membership, todo ids ni association fields. Las ediciones de origen de una colección también actualizan las grabaciones originales y otras colecciones que las comparten. El resumen de una colección es independiente. Declara que se guardó solo después del éxito. Una solicitud para previsualizar una reescritura no autoriza a guardar."
     },
     {
       "name": "sysinfo_delete",

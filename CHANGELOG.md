@@ -8,6 +8,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.3.2] - 2026-10-29
+
+### Added and improved
+
+- Voice memo collections can be reviewed by chapter, with chapter action items, background transcript-file notifications, and detail-page export.
+- Voice selection recommends voices for the device language, adds more voices and filters, and supports independent previews and volume control.
+- New plugin and scheduled-task results can show lightweight red-dot reminders and be marked read item by item.
+- FoneClaw confirmed GUI action segments support keyboard input and submit/send actions within the existing approval boundary.
+- News reading and streaming chat presentation are smoother.
+- Flash chat runs without tools, while standard model roles expose only capabilities supported by the selected model.
+
+### Scope
+
+- Google Play notes intentionally exclude FoneClaw-only GUI actions and recording features; the Play candidate remains subject to source-set and Play review gates.
+- Backend-dependent routing, reminders, and model capability data require matching service configuration and deployment; production deployment is not claimed here.
+- Seamless lock-screen playback and uninterrupted resume after process/system termination are not promised.
+
+
 ## [v0.3.1] - 2026-10-23
 
 ### Added and improved

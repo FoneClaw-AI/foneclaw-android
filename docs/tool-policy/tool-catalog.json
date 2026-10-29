@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "en",
   "fallbackLocale": "en",
-  "toolCount": 136,
+  "toolCount": 140,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Search tools or capabilities",
@@ -29,7 +29,7 @@
     {
       "name": "Screen and App",
       "displayName": "Screen and App",
-      "toolCount": 13
+      "toolCount": 15
     },
     {
       "name": "Device Status and System Control",
@@ -59,7 +59,7 @@
     {
       "name": "Memo",
       "displayName": "Memo",
-      "toolCount": 6
+      "toolCount": 8
     },
     {
       "name": "System Information",
@@ -105,7 +105,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Open or switch to a target Android app, wait until that app is stably in the foreground, and return the visible accessibility screen tree. Use this when one request asks to both open/switch to an app and read, inspect, describe, summarize, search, type into, or tap an existing visible control, and no dedicated domain or capture tool can complete the request. GUI prerequisites are checked before opening. Do not split that task into a standalone app launch and a later screen read or screenshot, even across model rounds. A pure app-open request uses the launch tool without reading the screen. This tool does not capture a screenshot, type, or tap nodes itself; continue only the requested actions using fresh returned node IDs."
+      "description": "Open or switch to a target Android app and return its latest visible accessibility tree after a bounded stability check. Use this when one request asks to both open/switch to an app and read, inspect, describe, summarize, search, type into, or tap an existing visible control, and no dedicated domain or capture tool can complete the request. GUI prerequisites are checked before opening. Do not split that task into a standalone app launch and a later screen read or screenshot, even across model rounds. A pure app-open request uses the launch tool without reading the screen. This tool does not capture a screenshot, type, or tap nodes itself. Use the returned screen and node IDs for the next requested action. Read again only if required information is missing, the screen is stale, or it changed externally. Tree stability does not guarantee that loading has finished."
     },
     {
       "name": "get_installed_map_apps",
@@ -121,7 +121,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Get UI elements from the currently visible app screen. Each element has a node ID (for example [n3]) that can be used with screen(command=tap), screen(command=scroll), or screen(command=input_text). Do not use this to read, list, search, or summarize Android notifications; use sysinfo tools instead. Do not cache this result because node IDs change on each call."
+      "description": "Get UI elements from the active app and exposed input-method windows. Nodes marked keyboard belong to the input method; use a real keyboard search/submit key with tap when ime_enter is unavailable, including on Android 9/10. An editable field marked focused has input focus; match it to the requested field before a keyboard action. Use input_text for prepared text instead of typing through individual keyboard keys. Each element has a node ID (for example [n3]) that can be used with screen(command=tap), screen(command=scroll), or screen(command=input_text). Do not use this to read, list, search, or summarize Android notifications; use sysinfo tools instead. A node marked ime_enter supports its focused keyboard action. A successful tap, scroll, input_text or ime_enter already returns a fresh screen; use it directly. Read again only if it is stale, changed externally or lacks needed information. Node IDs belong only to the latest returned screen."
     },
     {
       "name": "input_text",
@@ -129,7 +129,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Replace the text in one visible editable field in the current Android app. Call screen(command=read) first and pass a current node marked edit. This action only enters text; it does not submit the form, tap Send, or press Enter. Do not reuse node IDs."
+      "description": "Replace the text in one visible editable field in the current Android app. Pass a node marked edit from the latest read or action result. This action only enters text; it does not submit the form, tap Send, or press Enter. Use ime_enter separately when a requested submission is supported by the focused field. Returns the action summary and a fresh accessibility tree, without a screenshot. Use the returned screen and node IDs for the next requested action. Read again only if required information is missing, the screen is stale, or it changed externally. This must be the only screen call in this model response."
     },
     {
       "name": "launch_app",
@@ -156,6 +156,22 @@
       "description": "Open a specific Google Play app details page by exact package name, tap Install, and wait for installation to complete. This tool does not open the installed app. Use only when an exact Android packageName is known. Never use this for fuzzy search results or to guess the first app. If packageName is unknown, ask the user for the exact app package first. Stops if Google Play shows paid, purchase, subscription, update, ambiguous UI, or if installation does not complete before timeout."
     },
     {
+      "name": "screen_ime_enter",
+      "category": "Screen and App",
+      "risk": "EXTERNAL_EFFECT",
+      "approval": "Require approval",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Trigger the keyboard action of a visible, focused editable field marked ime_enter in the latest screen. Requires Android 11 or newer and an editor exposing ACTION_IME_ENTER. This may search, submit a form or send a message depending on that field; use only for the requested submission. Does not change text or inject a newline. Returns the action summary and a fresh accessibility screen; verify the actual result. Never replay an unknown submission. This must be the only screen call in this model response."
+    },
+    {
+      "name": "screen_run_segment",
+      "category": "Screen and App",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Advance a local GUI goal with several dependent actions using fresh accessibility screens. Reads the initial screen itself. Specify a clear stop condition, allowed operations and exact prepared input texts. Prefer IME_ENTER when the focused editor exposes it. On older Android or when ime_enter is unavailable, allow TAP to choose an exposed keyboard search/submit key. Prefer atomic Tools for one action. The segment is authorized once; its internal actions are part of that invocation. Returns performed actions and the latest screen for Main to verify or continue; completion is only a suggestion. A local wait or execution limit also returns for Main to review and continue from the confirmed actions. A step gets at most two retries using fresh observations; success resets the retry count. Exhausted retries end only this segment; Main continues with atomic screen Tools for the rest of this turn. Never replay an action with an unknown outcome. Reuse the returned screen instead of immediately reading again. Do not replay completed or unknown actions. This must be the only screen call in this model response."
+    },
+    {
       "name": "screenshot_open",
       "category": "Screen and App",
       "risk": "SENSITIVE_READ",
@@ -177,7 +193,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Scroll the current app by using a compatible accessibility scroll action when supported, otherwise perform a bounded swipe gesture. Prefer a fresh node ID marked scroll by screen(command=read). Use viewport only when the screen exposes no usable scroll container. Direction is the viewport destination: down reveals content below, up reveals content above, right reveals content to the right, and left reveals content to the left. This does not confirm that content changed, so call screen(command=read) after every successful call before another action."
+      "description": "Scroll the current app by using a compatible accessibility scroll action when supported, otherwise perform a bounded swipe gesture. Prefer a node marked scroll from the latest read or action result. Use viewport only when the screen exposes no usable scroll container. Direction is the viewport destination: down reveals content below, up reveals content above, right reveals content to the right, and left reveals content to the left. Returns the action summary and a fresh accessibility tree, without a screenshot. Use the returned screen and node IDs for the next requested action. Read again only if required information is missing, the screen is stale, or it changed externally. The returned tree does not prove content changed. This must be the only screen call in this model response."
     },
     {
       "name": "tap_node",
@@ -185,7 +201,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Tap a UI element on the screen. The element is identified by its node ID, which can be obtained from screen(command=read)."
+      "description": "Tap a UI element on the screen. The element is identified by its node ID, which can be obtained from the latest read or action result. Returns the action summary and a fresh accessibility tree after a bounded stability check. No screenshot is captured. Use the returned screen and node IDs for the next requested action. Read again only if required information is missing, the screen is stale, or it changed externally. Tree stability does not guarantee that loading has finished. This must be the only screen call in this model response."
     },
     {
       "name": "alarm_modify_alarm",
@@ -866,6 +882,22 @@
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Edit a user to-do in To-do Center by id. Search/list to-dos first when the user describes the target in natural language, and pass known target details with changed fields. This edits user to-dos, not assistant profile memory or Main's internal execution plan. Blank title/content/tags and date strings keep existing values. Use yyyy-MM-dd dates resolved from the original request time and timezone supplied by runtime; never calculate epoch milliseconds or call Calendar or Alarm Tools only to resolve a to-do date. To-do scheduling: Schedule a to-do only when the user's request or explicitly referenced source gives a definite calendar date, a uniquely resolvable relative date (today, tomorrow, the day after tomorrow, in exactly two days / 两天后), or an explicit date range. The runtime-provided original request time and timezone are only a calculation base, never a user-supplied schedule. If no date is mentioned, or timing is vague (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), create an undated to-do in Unscheduled with both startDate and endDate omitted or empty. Never default to today, pick a convenient day, or turn a vague window into a multi-day scheduled event. Preserve vague timing in the to-do content. When the content is known, do not ask for a date just to create the to-do. Resolve definite dates from the original request time and timezone supplied by runtime; an unknown hour does not make an explicit day undated. For updates, keep existing dates when the user only changes content and gives no scheduling intent. If the user explicitly removes the schedule, says time undecided, or replaces it with vague timing, use clearStartDate=true with empty date strings to move it to Unscheduled and clear both dates. Report the saved Unscheduled section or scheduled date from the Tool result, not from assumptions. The internal task_pool result marker identifies the undated section; express that section in the response language without echoing the marker or adding a translation in another language. These rules apply to to-dos, not calendar events or alarms."
+    },
+    {
+      "name": "voice_memo_read",
+      "category": "Memo",
+      "risk": "SENSITIVE_READ",
+      "approval": "Require approval",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Read the latest saved recording or collection, editable content and opaque revision before modifying it. The result contains source recording ids, indexed sentences, speaker ids, indexed chapters, key-point indexes and action ids. Their times, identities, source citations and todo associations are read-only. Collection summary belongs to the collection; source transcripts and chapters are shared with the original recording and other collections."
+    },
+    {
+      "name": "voice_memo_update",
+      "category": "Memo",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Save requested edits to a recording or collection after voice_memo(command=read). Pass its exact opaque revision. On conflict read again and merge only the user's changes; never overwrite concurrent edits. Omitted fields stay unchanged. Summary keyPoints/actionItems/navigationPlaces lists, when provided, replace that list: include existing key-point indexes and action ids to retain their sources and todo links; omit index/id only for new items. Source sentences, speakers and chapters are partial edits by their exact indexes/ids. Keep sentence/chapter times unchanged. Do not pass audio, state, source membership, todo ids or association fields. Collection source edits also update original recordings and any other collections sharing them. A collection summary is independent. Only claim saved after success. A request to preview a rewrite does not authorize saving."
     },
     {
       "name": "sysinfo_delete",
