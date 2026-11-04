@@ -1041,7 +1041,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Crea en una llamada el plan TODO completo y ordenado de la solicitud. Es obligatorio antes de cualquier Tool no de tareas si hay dos o más pasos concretos de Main. Cada paso de negocio o Plugin Tool directamente ejecutable cuenta uno. Pasa todos los pasos acotados para el usuario en items. Solo se crea una vez y no se amplía. Excluye gestión, limpieza, cambios de estado y respuesta final. No es el To-do Center persistente del usuario; para tareas personales usa memo."
+      "description": "Crea o añade elementos de progreso para esta solicitud. El trabajo complejo o de varias fases conviene planificarlo antes de ejecutarlo; el trabajo simple puede ejecutarse directamente. Las llamadas posteriores añaden nuevos ID conservando los elementos existentes. Evita pasos duplicados innecesarios. Nunca incluyas elementos de gestión de tareas, limpieza, cambios de estado ni respuesta final. Este plan de ejecución interno no es el To-do Center persistente del usuario. Para crear, buscar, completar o eliminar tareas personales, usa la herramienta memo."
     },
     {
       "name": "task_list",
@@ -1057,7 +1057,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Actualiza un elemento TODO interno. Transiciones permitidas: open a in_progress, blocked o abandoned; in_progress a blocked, done o abandoned; blocked a open o abandoned. done y abandoned son estados terminales. Solo una tarea puede estar en in_progress. Este plan de ejecución interno no es el To-do Center persistente del usuario. Para crear, buscar, completar o eliminar tareas personales, usa la herramienta memo."
+      "description": "Actualiza una tarea a partir de la evidencia real. Empieza el trabajo con in_progress y márcalo como done tras la verificación; el trabajo ya verificado puede pasar directamente de open a done. Cualquier estado no terminal puede moverse a cualquiera de los cinco estados. done y abandoned son terminales; repetir el estado actual no tiene efecto. Conviene mantener solo un elemento in_progress cuando sea posible. El estado de la tarea nunca autoriza acciones adicionales. Este plan de ejecución interno no es el To-do Center persistente del usuario. Para crear, buscar, completar o eliminar tareas personales, usa la herramienta memo."
     },
     {
       "name": "workflow_delete",

@@ -1041,7 +1041,7 @@
       "risk": "LOW",
       "approval": "Automatisch",
       "approvalCode": "AUTO",
-      "description": "Erstellt den vollständigen geordneten TODO-Plan einer Anfrage in einem Aufruf. Bei mindestens zwei konkreten Main-Schritten Pflicht vor jedem Nicht-Aufgaben-Tool. Jeder direkt ausführbare Geschäfts- oder Plugin Tool-Schritt zählt einmal. Alle begrenzten nutzersichtbaren Schritte in items übergeben. Nur einmal erstellbar, nicht erweiterbar. Keine Aufgabenverwaltung, Bereinigung, Statusupdates oder Abschlussantwort aufnehmen. Kein dauerhaftes To-do Center; für persönliche Aufgaben memo nutzen."
+      "description": "Erstellt oder ergänzt Fortschrittseinträge für diese Anfrage. Komplexe oder mehrstufige Arbeit sollte möglichst vor der Ausführung geplant werden; einfache Arbeit kann direkt ausgeführt werden. Spätere Aufrufe fügen neue IDs hinzu und behalten bestehende Einträge. Vermeiden Sie unnötige doppelte Schritte. Keine Einträge für Aufgabenverwaltung, Bereinigung, Statusupdates oder Abschlussantwort aufnehmen. Dieser interne Ausführungsplan ist nicht das dauerhafte To-do Center des Benutzers. Zum Erstellen, Suchen, Abschließen oder Löschen persönlicher Aufgaben das memo-Werkzeug verwenden."
     },
     {
       "name": "task_list",
@@ -1057,7 +1057,7 @@
       "risk": "LOW",
       "approval": "Automatisch",
       "approvalCode": "AUTO",
-      "description": "Aktualisiert einen internen TODO-Eintrag. Zulässige Übergänge: open zu in_progress, blocked oder abandoned; in_progress zu blocked, done oder abandoned; blocked zu open oder abandoned. done und abandoned sind Endzustände. Es darf jeweils nur eine Aufgabe in_progress sein. Dieser interne Ausführungsplan ist nicht das dauerhafte To-do Center des Benutzers. Zum Erstellen, Suchen, Abschließen oder Löschen persönlicher Aufgaben das memo-Werkzeug verwenden."
+      "description": "Aktualisiert eine Aufgabe anhand tatsächlicher Erkenntnisse. Beginnen Sie die Arbeit mit in_progress und markieren Sie done nach der Verifizierung; bereits verifizierte Arbeit kann direkt von open zu done wechseln. Jeder nicht terminale Zustand kann zu einem der fünf Zustände wechseln. done und abandoned sind terminal; das Wiederholen des aktuellen Zustands ist ein No-op. Nach Möglichkeit nur einen Eintrag in_progress halten. Der Aufgabenstatus erlaubt niemals zusätzliche Aktionen. Dieser interne Ausführungsplan ist nicht das dauerhafte To-do Center des Benutzers. Zum Erstellen, Suchen, Abschließen oder Löschen persönlicher Aufgaben das memo-Werkzeug verwenden."
     },
     {
       "name": "workflow_delete",

@@ -8,6 +8,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.3.3] - 2026-11-04
+
+### Added and improved
+
+- A new Assistant page in the sidebar centralizes the avatar, name, personality, floating assistant, voice output and model choice.
+- What the assistant remembers is organized as basic info, daily habits and communication style, with add, edit, delete and on/off controls.
+- Voice memo details are easier to read: unified spacing and link styles, crossed-out completed action items, and cleaner editing; re-summarizing refreshes action items while keeping real to-dos.
+- Adding and completing to-dos no longer causes layout flicker, and a failed navigation save keeps the draft for retry.
+- Task lists show a clear "finished · not completed" state and remind you of unfinished tasks before a new run.
+- Manual voice playback no longer depends on the auto-play setting.
+- Switching models keeps conversations compatible automatically; notifications and managed speech playback are more reliable.
+
+### Scope
+
+- Service-dependent conversation-history adaptation, moderation and member-gifting behavior require matching backend configuration and deployment; production deployment is not claimed here.
+- Floating-assistant controls are contributed by the FoneClaw and domestic distribution slots and are not part of the Google Play source set.
+- Google Play notes intentionally exclude recording features; the Play candidate remains subject to source-set and Play review gates.
+
 ## [v0.3.2] - 2026-10-29
 
 ### Added and improved

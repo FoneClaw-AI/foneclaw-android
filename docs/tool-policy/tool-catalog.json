@@ -1041,7 +1041,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Create the complete ordered TODO plan in one call for the current user request. This is a mandatory precondition before any non-task Tool when routing produces two or more concrete Main steps. Count each directly executable business or Plugin Tool step as one step. Pass every bounded user-facing step in items. The plan can be created exactly once and cannot be extended later. Never include task management, cleanup, status-update, or final-response items. This internal execution plan is not the user's persistent To-do Center. For personal to-do creation, lookup, completion, or deletion, use the memo Tool instead."
+      "description": "Create or append progress items for this request. Plan complex or multi-stage work preferably before execution; simple work can execute directly. Later calls append new IDs while preserving existing items. Avoid unnecessary duplicate steps. Never include task management, cleanup, status-update, or final-response items. This internal execution plan is not the user's persistent To-do Center. For personal to-do creation, lookup, completion, or deletion, use the memo Tool instead."
     },
     {
       "name": "task_list",
@@ -1057,7 +1057,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Update one internal TODO item. Allowed transitions: open to in_progress, blocked, or abandoned; in_progress to blocked, done, or abandoned; blocked to open or abandoned. Done and abandoned are terminal. Only one task may be in_progress. This internal execution plan is not the user's persistent To-do Center. For personal to-do creation, lookup, completion, or deletion, use the memo Tool instead."
+      "description": "Update a task from actual evidence. Start work with in_progress and mark done after verification; already verified work may move directly from open to done. Any nonterminal state can move to any of the five statuses. Done and abandoned are terminal; repeating the current status is a no-op. Prefer one in_progress item when practical. Task status never authorizes additional actions. This internal execution plan is not the user's persistent To-do Center. For personal to-do creation, lookup, completion, or deletion, use the memo Tool instead."
     },
     {
       "name": "workflow_delete",

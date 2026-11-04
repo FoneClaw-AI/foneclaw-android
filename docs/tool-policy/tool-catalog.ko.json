@@ -1041,7 +1041,7 @@
       "risk": "LOW",
       "approval": "자동",
       "approvalCode": "AUTO",
-      "description": "현재 요청의 완전한 순서형 TODO 계획을 한 번에 만듭니다. 구체적 Main 단계가 둘 이상이면 비작업 Tool 호출 전 필수입니다. 직접 실행 가능한 업무 또는 Plugin Tool 단계를 각각 하나로 세고 사용자용 한정 단계를 모두 items에 넣습니다. 한 번만 만들 수 있고 확장 불가입니다. 작업 관리, 정리, 상태 갱신, 최종 응답은 제외합니다. 사용자의 영구 To-do Center가 아닙니다. 개인 할 일은 memo 도구를 사용합니다."
+      "description": "현재 요청에 대한 진행 항목을 만들거나 추가합니다. 복잡하거나 여러 단계인 작업은 실행 전에 계획하는 것이 좋고, 단순 작업은 바로 실행할 수 있습니다. 이후 호출은 기존 항목을 유지하면서 새 ID를 추가합니다. 불필요한 중복 단계는 피합니다. 작업 관리, 정리, 상태 갱신, 최종 응답 항목은 포함하지 않습니다. 이 내부 실행 계획은 사용자의 영구 To-do Center가 아닙니다. 개인 할 일 생성, 조회, 완료, 삭제는 memo 도구를 사용합니다."
     },
     {
       "name": "task_list",
@@ -1057,7 +1057,7 @@
       "risk": "LOW",
       "approval": "자동",
       "approvalCode": "AUTO",
-      "description": "내부 TODO 항목 하나를 업데이트합니다. 허용되는 상태 전환은 open에서 in_progress, blocked 또는 abandoned로, in_progress에서 blocked, done 또는 abandoned로, blocked에서 open 또는 abandoned로입니다. done과 abandoned는 최종 상태입니다. 동시에 in_progress 상태인 작업은 하나만 가능합니다. 이 내부 실행 계획은 사용자의 영구 To-do Center가 아닙니다. 개인 할 일 생성, 조회, 완료, 삭제는 memo 도구를 사용합니다."
+      "description": "실제 근거에 따라 작업을 업데이트합니다. 작업을 시작할 때는 in_progress로 두고 검증 후 done으로 표시합니다. 이미 검증된 작업은 open에서 바로 done으로 이동할 수 있습니다. 비최종 상태는 다섯 가지 상태 중 어느로든 이동할 수 있습니다. done과 abandoned는 최종 상태이며 현재 상태를 반복 설정하면 아무 동작도 하지 않습니다. 가능하면 in_progress 항목은 하나만 둡니다. 작업 상태는 추가 작업을 승인하지 않습니다. 이 내부 실행 계획은 사용자의 영구 To-do Center가 아닙니다. 개인 할 일 생성, 조회, 완료, 삭제는 memo 도구를 사용합니다."
     },
     {
       "name": "workflow_delete",

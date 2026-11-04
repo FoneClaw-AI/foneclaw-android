@@ -1041,7 +1041,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "一次调用为当前用户请求创建完整有序 TODO 计划。路由产生至少两个具体 Main 步骤时，这是任何非任务 Tool 的强制前提。每个可直接执行的业务或 Plugin Tool 步骤算一步。items 包含所有有界的面向用户步骤。只能创建一次，之后不能扩展。不包含任务管理、清理、状态更新或最终回复项。这不是用户的持久 To-do Center。个人待办的创建、查找、完成或删除应使用 memo 工具。"
+      "description": "为当前请求创建或追加进度项。复杂或多阶段工作最好在执行前先规划，简单工作可直接执行。后续调用会追加新的 ID 并保留已有项。避免不必要的重复步骤。不包含任务管理、清理、状态更新或最终回复项。此内部执行计划不是用户的持久 To-do Center。个人待办的创建、查找、完成或删除应使用 memo 工具。"
     },
     {
       "name": "task_list",
@@ -1057,7 +1057,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "更新一个内部 TODO 项。允许的状态转换：open 可转为 in_progress、blocked 或 abandoned；in_progress 可转为 blocked、done 或 abandoned；blocked 可转为 open 或 abandoned。done 和 abandoned 是终态。同一时间只能有一个任务处于 in_progress。此内部执行计划不是用户的持久 To-do Center。创建、查找、完成或删除个人待办时，改用 memo 工具。"
+      "description": "根据实际证据更新任务。开始工作时置为 in_progress，验证完成后标记为 done；已经验证过的工作可直接从 open 转为 done。任何非终态都可以转为五种状态之一。done 和 abandoned 是终态；重复设置当前状态为空操作。实际可行时优先只保留一个 in_progress 项。任务状态不授权任何额外操作。此内部执行计划不是用户的持久 To-do Center。个人待办的创建、查找、完成或删除应使用 memo 工具。"
     },
     {
       "name": "workflow_delete",

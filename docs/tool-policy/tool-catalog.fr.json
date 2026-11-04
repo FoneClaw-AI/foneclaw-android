@@ -1041,7 +1041,7 @@
       "risk": "LOW",
       "approval": "Automatique",
       "approvalCode": "AUTO",
-      "description": "Crée en un appel le plan TODO complet et ordonné de la demande. Obligatoire avant tout Tool hors tâches si le routage produit au moins deux étapes concrètes de Main. Chaque étape métier ou Plugin Tool directement exécutable compte pour une. Passez toutes les étapes utilisateur délimitées dans items. Une seule création, sans extension. Excluez gestion, nettoyage, statut et réponse finale. Ce n’est pas le To-do Center persistant ; utilisez memo pour les tâches personnelles."
+      "description": "Crée ou ajoute des éléments de progression pour cette demande. Le travail complexe ou en plusieurs phases doit de préférence être planifié avant exécution ; le travail simple peut être exécuté directement. Les appels ultérieurs ajoutent de nouveaux ID tout en conservant les éléments existants. Évitez les étapes dupliquées inutiles. N’incluez jamais d’éléments de gestion des tâches, de nettoyage, de statut ou de réponse finale. Ce plan d’exécution interne n’est pas le To-do Center persistant de l’utilisateur. Pour créer, rechercher, terminer ou supprimer une tâche personnelle, utilisez l’outil memo."
     },
     {
       "name": "task_list",
@@ -1057,7 +1057,7 @@
       "risk": "LOW",
       "approval": "Automatique",
       "approvalCode": "AUTO",
-      "description": "Met à jour un élément TODO interne. Transitions autorisées : open vers in_progress, blocked ou abandoned ; in_progress vers blocked, done ou abandoned ; blocked vers open ou abandoned. done et abandoned sont des états finaux. Une seule tâche peut être en in_progress. Ce plan d’exécution interne n’est pas le To-do Center persistant de l’utilisateur. Pour créer, rechercher, terminer ou supprimer une tâche personnelle, utilisez l’outil memo."
+      "description": "Met à jour une tâche selon les faits réels. Commencez le travail avec in_progress et marquez done après vérification ; un travail déjà vérifié peut passer directement de open à done. Tout état non final peut passer à n’importe lequel des cinq états. done et abandoned sont finaux ; répéter l’état courant est sans effet. Gardez de préférence un seul élément in_progress lorsque c’est possible. Le statut d’une tâche n’autorise jamais d’actions supplémentaires. Ce plan d’exécution interne n’est pas le To-do Center persistant de l’utilisateur. Pour créer, rechercher, terminer ou supprimer une tâche personnelle, utilisez l’outil memo."
     },
     {
       "name": "workflow_delete",

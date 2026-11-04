@@ -1041,7 +1041,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "一次呼叫為目前使用者要求建立完整有序 TODO 計畫。路由產生至少兩個具體 Main 步驟時，這是任何非任務 Tool 的必要前提。每個可直接執行的業務或 Plugin Tool 步驟算一步。items 包含所有有界面向使用者步驟。只能建立一次，之後不能擴展。不含任務管理、清理、狀態更新或最終回覆項。這不是使用者的持久 To-do Center。個人待辦的建立、查找、完成或刪除應使用 memo 工具。"
+      "description": "為目前使用者要求建立或新增進度項目。複雜或多階段工作最好在執行前先規劃，簡單工作可直接執行。後續呼叫會新增新的 ID 並保留現有項目。避免不必要的重複步驟。不含任務管理、清理、狀態更新或最終回覆項。此內部執行計畫不是使用者的持久 To-do Center。個人待辦的建立、查找、完成或刪除應使用 memo 工具。"
     },
     {
       "name": "task_list",
@@ -1057,7 +1057,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "更新一個內部 TODO 項目。允許的狀態轉換：open 可轉為 in_progress、blocked 或 abandoned；in_progress 可轉為 blocked、done 或 abandoned；blocked 可轉為 open 或 abandoned。done 與 abandoned 是終態。同一時間只能有一個工作處於 in_progress。此內部執行計畫不是使用者的持久 To-do Center。建立、查找、完成或刪除個人待辦時，改用 memo 工具。"
+      "description": "依據實際證據更新任務。開始工作時設為 in_progress，驗證完成後標記為 done；已經驗證過的工作可直接由 open 轉為 done。任何非終態都可以轉為五種狀態之一。done 與 abandoned 是終態；重複設定目前狀態為無操作。實際可行時優先只保留一個 in_progress 項目。任務狀態不授權任何額外操作。此內部執行計畫不是使用者的持久 To-do Center。個人待辦的建立、查找、完成或刪除應使用 memo 工具。"
     },
     {
       "name": "workflow_delete",

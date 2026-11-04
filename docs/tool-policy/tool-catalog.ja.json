@@ -1041,7 +1041,7 @@
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "現在の依頼の完全な順序付き TODO 計画を一度に作成します。具体的な Main 手順が 2 つ以上なら、非タスク Tool 前の必須条件です。直接実行できる業務または Plugin Tool 手順を各 1 件と数え、すべての有界なユーザー向け手順を items に渡します。作成は一度だけで拡張不可。タスク管理・清掃・状態更新・最終応答は含めません。ユーザーの永続 To-do Center とは異なります。個人 To-do は memo ツールを使います。"
+      "description": "この依頼の進捗項目を作成または追加します。複雑または複数段階の作業は実行前に計画するのが望ましく、単純な作業はそのまま実行できます。後続の呼び出しでは既存の項目を保持したまま新しい ID を追加します。不必要な重複手順は避けてください。タスク管理・清掃・状態更新・最終応答の項目は含めません。この内部実行計画はユーザーの永続的な To-do Center ではありません。個人 To-do の作成、検索、完了、削除には memo ツールを使います。"
     },
     {
       "name": "task_list",
@@ -1057,7 +1057,7 @@
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "内部 TODO 項目を 1 件更新します。許可される状態遷移は、open から in_progress、blocked、abandoned、in_progress から blocked、done、abandoned、blocked から open または abandoned です。done と abandoned は最終状態です。in_progress にできるタスクは同時に 1 件だけです。この内部実行計画はユーザーの永続的な To-do Center ではありません。個人 To-do の作成、検索、完了、削除には memo ツールを使います。"
+      "description": "実際の根拠に基づいてタスクを更新します。作業開始時は in_progress にし、検証完了後に done にします。すでに検証済みの作業は open から直接 done に移行できます。非最終状態は 5 つの状態のいずれへも移行できます。done と abandoned は最終状態で、現在の状態の繰り返しは何も行いません。可能であれば in_progress の項目は 1 件にします。タスクの状態が追加の操作を許可することはありません。この内部実行計画はユーザーの永続的な To-do Center ではありません。個人 To-do の作成、検索、完了、削除には memo ツールを使います。"
     },
     {
       "name": "workflow_delete",

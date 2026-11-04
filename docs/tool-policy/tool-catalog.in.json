@@ -1041,7 +1041,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Buat rencana TODO lengkap berurutan untuk permintaan dalam satu panggilan. Wajib sebelum Tool non-tugas bila ada dua atau lebih langkah konkret Main. Setiap langkah bisnis atau Plugin Tool yang langsung dapat dijalankan dihitung satu. Masukkan semua langkah terbatas bagi pengguna ke items. Hanya dibuat sekali tanpa perluasan. Jangan sertakan manajemen tugas, pembersihan, status, atau jawaban akhir. Bukan To-do Center permanen; gunakan memo untuk tugas pribadi."
+      "description": "Buat atau tambahkan item kemajuan untuk permintaan ini. Pekerjaan kompleks atau multi-tahap sebaiknya direncanakan sebelum dieksekusi; pekerjaan sederhana dapat langsung dijalankan. Panggilan berikutnya menambahkan ID baru sambil mempertahankan item yang ada. Hindari langkah duplikat yang tidak perlu. Jangan sertakan manajemen tugas, pembersihan, pembaruan status, atau jawaban akhir. Rencana eksekusi internal ini bukan To-do Center permanen pengguna. Untuk membuat, mencari, menyelesaikan, atau menghapus tugas pribadi, gunakan alat memo."
     },
     {
       "name": "task_list",
@@ -1057,7 +1057,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Memperbarui satu item TODO internal. Transisi yang diizinkan: open ke in_progress, blocked, atau abandoned; in_progress ke blocked, done, atau abandoned; blocked ke open atau abandoned. done dan abandoned adalah status akhir. Hanya satu tugas yang boleh berstatus in_progress. Rencana eksekusi internal ini bukan To-do Center permanen pengguna. Untuk membuat, mencari, menyelesaikan, atau menghapus tugas pribadi, gunakan alat memo."
+      "description": "Perbarui tugas berdasarkan bukti nyata. Mulai pekerjaan dengan in_progress dan tandai done setelah diverifikasi; pekerjaan yang sudah diverifikasi dapat langsung berpindah dari open ke done. Status nonterminal apa pun dapat berpindah ke salah satu dari lima status. done dan abandoned adalah status akhir; mengulang status saat ini tidak melakukan apa pun. Sebisa mungkin pertahankan hanya satu item in_progress. Status tugas tidak pernah mengizinkan tindakan tambahan. Rencana eksekusi internal ini bukan To-do Center permanen pengguna. Untuk membuat, mencari, menyelesaikan, atau menghapus tugas pribadi, gunakan alat memo."
     },
     {
       "name": "workflow_delete",

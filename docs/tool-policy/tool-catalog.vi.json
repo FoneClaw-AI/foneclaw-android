@@ -1041,7 +1041,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Tạo kế hoạch TODO đầy đủ theo thứ tự cho yêu cầu bằng một lần gọi. Bắt buộc trước Tool không quản lý tác vụ khi có ít nhất hai bước Main cụ thể. Mỗi bước nghiệp vụ hoặc Plugin Tool thực thi trực tiếp tính một bước. Đưa mọi bước có giới hạn cho người dùng vào items. Chỉ tạo một lần, không mở rộng. Không gồm quản lý tác vụ, dọn dẹp, trạng thái hay trả lời cuối. Không phải To-do Center lâu dài; dùng memo cho việc cá nhân."
+      "description": "Tạo hoặc thêm mục tiến độ cho yêu cầu này. Công việc phức tạp hoặc nhiều giai đoạn nên lên kế hoạch trước khi thực thi; công việc đơn giản có thể thực thi trực tiếp. Các lần gọi sau sẽ thêm ID mới đồng thời giữ nguyên các mục hiện có. Tránh các bước trùng lặp không cần thiết. Không gồm mục quản lý tác vụ, dọn dẹp, cập nhật trạng thái hay trả lời cuối. Kế hoạch thực thi nội bộ này không phải To-do Center lâu dài của người dùng. Để tạo, tìm, hoàn thành hoặc xóa việc cần làm cá nhân, dùng công cụ memo."
     },
     {
       "name": "task_list",
@@ -1057,7 +1057,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Cập nhật một mục TODO nội bộ. Chuyển trạng thái được phép: open sang in_progress, blocked hoặc abandoned; in_progress sang blocked, done hoặc abandoned; blocked sang open hoặc abandoned. done và abandoned là trạng thái cuối. Chỉ một tác vụ có thể ở trạng thái in_progress. Kế hoạch thực thi nội bộ này không phải To-do Center lâu dài của người dùng. Để tạo, tìm, hoàn thành hoặc xóa việc cần làm cá nhân, dùng công cụ memo."
+      "description": "Cập nhật tác vụ dựa trên bằng chứng thực tế. Bắt đầu công việc với in_progress và đánh dấu done sau khi xác minh; công việc đã xác minh có thể chuyển thẳng từ open sang done. Bất kỳ trạng thái không cuối nào cũng có thể chuyển sang một trong năm trạng thái. done và abandoned là trạng thái cuối; lặp lại trạng thái hiện tại là thao tác rỗng. Nên chỉ giữ một mục in_progress khi có thể. Trạng thái tác vụ không bao giờ cho phép các hành động bổ sung. Kế hoạch thực thi nội bộ này không phải To-do Center lâu dài của người dùng. Để tạo, tìm, hoàn thành hoặc xóa việc cần làm cá nhân, dùng công cụ memo."
     },
     {
       "name": "workflow_delete",
