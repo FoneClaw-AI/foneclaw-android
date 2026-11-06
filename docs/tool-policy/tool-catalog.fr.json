@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "fr",
   "fallbackLocale": "en",
-  "toolCount": 140,
+  "toolCount": 141,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Rechercher des outils ou des fonctionnalités",
@@ -39,7 +39,7 @@
     {
       "name": "Location and Navigation",
       "displayName": "Localisation et navigation",
-      "toolCount": 6
+      "toolCount": 7
     },
     {
       "name": "Mail",
@@ -665,7 +665,15 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Ajoute des jours consécutifs après la dernière date du voyage enregistré. Préserve tous les jours, préparatifs et bagages existants. Lisez d’abord le plan et utilisez sa revision actuelle. Reprenez depuis la dernière étape et l’hébergement, regroupez les visites proches et ordonnez les régions entre les jours pour éviter les retours inutiles. Respectez les rendez-vous fixes et l’ordre demandé ; prévoyez des temps réalistes de trajet et de repos sans prétendre connaître les itinéraires en direct ni inventer des durées précises. Ne répétez pas les visites sauf demande ou nécessité. En cas de conflit de revision, relisez ; n’écrasez jamais les modifications concurrentes. Ne crée ni événements de calendrier ni tâches."
+      "description": "Ajoute des jours consécutifs après la dernière date du voyage enregistré. Archive la version précédente. Préserve tous les jours, informations du voyage, préparatifs et bagages existants. Utilisez update si l’utilisateur modifie aussi l’un de ces champs. Lisez d’abord le plan et utilisez sa revision actuelle. Reprenez depuis la dernière étape et l’hébergement, regroupez les visites proches et ordonnez les régions entre les jours pour éviter les retours inutiles. Respectez les rendez-vous fixes et l’ordre demandé ; prévoyez des temps réalistes de trajet et de repos sans prétendre connaître les itinéraires en direct ni inventer des durées précises. Ne répétez pas les visites sauf demande ou nécessité. En cas de conflit de revision, relisez ; n’écrasez jamais les modifications concurrentes. Ne crée ni événements de calendrier ni tâches."
+    },
+    {
+      "name": "travel_plan_create",
+      "category": "Location and Navigation",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Enregistre un nouveau voyage complet demandé par l’utilisateur. Utilisez l’id exact du nouveau plan fourni par le contexte de l’hôte, sinon un id explicite et stable. Fournissez revision 0, destination, fuseau horaire, jours sélectionnés, activités, préparatifs et bagages. L’appartenance au plugin est définie par le contexte du tour actuel de l’hôte ; templateId dans le JSON du modèle ne peut pas la modifier. Incluez les voyageurs, le budget total et departureTime lorsqu’ils sont fournis. Ne substituez jamais un itinéraire d’exemple fixe. Réessayer avec le même id et exactement le même contenu renvoie le plan existant ; un contenu différent pour un id existant est refusé, sans écrasement. Ne crée ni événements de calendrier, ni tâches, ni réservations, ni membres partagés, ni photos."
     },
     {
       "name": "travel_plan_read",
@@ -681,7 +689,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Remplace le contenu modifiable d’un voyage enregistré après lecture de son dernier JSON. Peut modifier destination, départ, lieux, fuseau, rythme, dates, titres des jours, noms des étapes, heures, durées, notes, préparatifs, catégories et articles de bagages et leurs coches. Conservez l’id exact du plan, la revision actuelle et les id des étapes/listes existantes de travel_plan_read ; créez des id uniquement pour les nouveaux éléments. Préservez le contenu non visé. updatedPlanJson doit être un objet TravelPlan JSON complet, pas un correctif partiel. En cas de conflit de revision, relisez et fusionnez la demande avec le dernier plan ; n’écrasez jamais les modifications concurrentes. N’annoncez la mise à jour qu’après réussite. Ne crée ni événements de calendrier ni tâches."
+      "description": "Met à jour un voyage enregistré après lecture de son dernier JSON. Enregistrez les informations du voyage dans les champs du plan, pas seulement dans les notes d’activité ou la réponse. Pour les modifications ciblées, utilisez changeScope=EDIT et envoyez uniquement les champs modifiés, dont stopEdits indexé par les id exacts des étapes existantes. Une modification ciblée réussie renvoie un reçu avec planId, revision et currentVersion. Pour remplacer des jours ou replanifier, utilisez un TravelPlan JSON complet avec id et revision correspondants ; préservez les id des étapes et listes existantes et créez des id uniquement pour les nouveaux éléments. L’hôte archive une version seulement si l’itinéraire quotidien change réellement ; les informations partagées, préparatifs et bagages sont aussi enregistrés. Utilisez changeScope=REPLAN uniquement pour une refonte globale demandée. En cas de conflit de revision, relisez et fusionnez avec le dernier plan. N’annoncez la mise à jour qu’après réussite de l’outil. Ne crée ni événements de calendrier ni tâches."
     },
     {
       "name": "mail_account_list",
@@ -969,7 +977,7 @@
       "risk": "LOW",
       "approval": "Automatique",
       "approvalCode": "AUTO",
-      "description": "Renvoie les titres, les URL sources exactes et de courts extraits. Conservez l’URL exacte après chaque résultat résumé dans la réponse finale."
+      "description": "Recherche des pages web pertinentes. Renvoie les titres, URL sources exactes, courts extraits et dates du fournisseur de recherche si disponibles. Ces dates sont des métadonnées de source, non des dates de publication vérifiées indépendamment. Une date absente reste inconnue. Utilisez directement les preuves de recherche suffisantes ; ne récupérez une page que pour combler une lacune importante dans la réponse demandée. Conservez l’URL exacte après chaque résultat résumé dans la réponse finale."
     },
     {
       "name": "scheduled_task_create",

@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "en",
   "fallbackLocale": "en",
-  "toolCount": 140,
+  "toolCount": 141,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Search tools or capabilities",
@@ -39,7 +39,7 @@
     {
       "name": "Location and Navigation",
       "displayName": "Location and Navigation",
-      "toolCount": 6
+      "toolCount": 7
     },
     {
       "name": "Mail",
@@ -665,7 +665,15 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Append new consecutive days after a saved trip's last date. Preserves all existing days, preparation and packing. Read the plan first; use its current revision. Continue from its last endpoint and accommodation, group nearby visits and order regions to avoid unnecessary backtracking across days. Respect fixed appointments and user-specified order; leave realistic transfer and rest time without claiming live routing or inventing precise travel times. Do not repeat existing visits unless requested or necessary. On revision conflict read again; never overwrite concurrent edits. Does not create calendar events or todos."
+      "description": "Append new consecutive days after a saved trip's last date and archive the prior version. Preserves all existing days, trip information, preparation and packing. Use update instead if the user also changes any of those fields. Read the plan first; use its current revision. Continue from its last endpoint and accommodation, group nearby visits and order regions to avoid unnecessary backtracking across days. Respect fixed appointments and user-specified order; leave realistic transfer and rest time without claiming live routing or inventing precise travel times. Do not repeat existing visits unless requested or necessary. On revision conflict read again; never overwrite concurrent edits. Does not create calendar events or todos."
+    },
+    {
+      "name": "travel_plan_create",
+      "category": "Location and Navigation",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Require approval",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Save one complete new travel plan requested by the user. Supply the exact new plan id from the host context when provided, otherwise a stable explicit plan id, revision 0, destination, timezone, selected days, activities, preparation and packing. Plugin ownership is bound by the host's current turn context; templateId in model JSON cannot change it. Include travelers, total budget and departureTime when supplied. Never substitute a fixed sample itinerary. Retrying the same exact content with the same plan id returns the existing plan; different content for an existing id is rejected, never overwritten. This does not create calendar events, todos, bookings, shared membership or photos."
     },
     {
       "name": "travel_plan_read",
@@ -681,7 +689,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Replace the editable content of an existing saved travel plan after reading its latest JSON. This can modify destination, departure, places, timezone, pace, dates, day titles, stop names, start times, durations, notes, preparation items, packing categories, packing items, and their checked state. Preserve the exact plan id, current revision, and existing stop/checklist item ids from travel_plan_read; generate ids only for newly added items. Keep existing content that the user did not ask to change. The complete updatedPlanJson must be a full TravelPlan JSON object, not a patch. On revision conflict read again and merge the user's requested change into the latest plan; never overwrite concurrent edits. Only claim the plan was updated after this tool succeeds. Does not create calendar events or todos."
+      "description": "Update a saved travel plan after reading its latest JSON. Save trip information in its plan fields, not only in activity notes or the reply. For targeted edits use changeScope=EDIT and send only changed fields, including stopEdits keyed by the exact existing stop ids. Successful targeted edits return a receipt with planId, revision and currentVersion. To replace days or replan use a complete TravelPlan JSON with matching id and revision; preserve existing stop and checklist ids and generate ids only for new items. The host archives a version only when the daily itinerary actually changes; updates to shared trip information, preparation and packing still save. Use changeScope=REPLAN only for a requested overall itinerary replan. On revision conflict read again and merge into the latest plan. Only claim the plan was updated after this tool succeeds. Does not create calendar events or todos."
     },
     {
       "name": "mail_account_list",
@@ -969,7 +977,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Search the web for relevant pages. Returns result titles, exact source URLs, and short snippets. Preserve the exact URL after each result summarized in the final answer."
+      "description": "Search the web for relevant pages. Returns result titles, exact source URLs, and short snippets, and search-provider dates when available. Dates are source metadata, not independently verified publication times. Missing dates remain unknown. Use sufficient search evidence directly; fetch only to resolve a material gap in the requested answer. Preserve the exact URL after each result summarized in the final answer."
     },
     {
       "name": "scheduled_task_create",

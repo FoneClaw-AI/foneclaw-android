@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "de",
   "fallbackLocale": "en",
-  "toolCount": 140,
+  "toolCount": 141,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Tools oder Funktionen suchen",
@@ -39,7 +39,7 @@
     {
       "name": "Location and Navigation",
       "displayName": "Standort und Navigation",
-      "toolCount": 6
+      "toolCount": 7
     },
     {
       "name": "Mail",
@@ -665,7 +665,15 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Fügt nach dem letzten Datum einer gespeicherten Reise aufeinanderfolgende Tage hinzu. Bewahrt alle vorhandenen Tage, Vorbereitungen und Packlisten. Zuerst den Plan lesen und die aktuelle revision verwenden. Vom letzten Ziel und der Unterkunft fortsetzen, nahe Besuche bündeln und Regionen tageübergreifend ohne unnötige Rückwege ordnen. Feste Termine und Nutzerreihenfolge beachten; realistische Transfer- und Ruhezeiten vorsehen, ohne Echtzeitrouten zu behaupten oder genaue Fahrzeiten zu erfinden. Besuche nur auf Wunsch oder bei Bedarf wiederholen. Bei revision-Konflikten erneut lesen; gleichzeitige Änderungen nie überschreiben. Erstellt keine Kalendertermine oder Aufgaben."
+      "description": "Fügt nach dem letzten Datum einer gespeicherten Reise aufeinanderfolgende Tage hinzu. Archiviert die vorherige Version. Bewahrt alle vorhandenen Tage, Reiseinformationen, Vorbereitungen und Packlisten. Wenn der Nutzer auch eines dieser Felder ändert, stattdessen update verwenden. Zuerst den Plan lesen und die aktuelle revision verwenden. Vom letzten Ziel und der Unterkunft fortsetzen, nahe Besuche bündeln und Regionen tageübergreifend ohne unnötige Rückwege ordnen. Feste Termine und Nutzerreihenfolge beachten; realistische Transfer- und Ruhezeiten vorsehen, ohne Echtzeitrouten zu behaupten oder genaue Fahrzeiten zu erfinden. Besuche nur auf Wunsch oder bei Bedarf wiederholen. Bei revision-Konflikten erneut lesen; gleichzeitige Änderungen nie überschreiben. Erstellt keine Kalendertermine oder Aufgaben."
+    },
+    {
+      "name": "travel_plan_create",
+      "category": "Location and Navigation",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Genehmigung erforderlich",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Speichert einen vom Nutzer angeforderten vollständigen neuen Reiseplan. Falls der Host-Kontext eine neue Plan-id vorgibt, exakt diese verwenden, sonst eine explizite stabile Plan-id. revision 0, Ziel, Zeitzone, ausgewählte Tage, Aktivitäten, Vorbereitung und Packliste angeben. Die Plugin-Zugehörigkeit bestimmt der Host-Kontext des aktuellen Turns; templateId im Modell-JSON kann sie nicht ändern. Angegebene Reisende, Gesamtbudget und departureTime einbeziehen. Niemals eine feste Beispielreise einsetzen. Ein erneuter Aufruf mit gleicher Plan-id und exakt gleichem Inhalt gibt den vorhandenen Plan zurück; abweichender Inhalt für eine vorhandene id wird abgelehnt und nie überschrieben. Erstellt keine Kalendertermine, Aufgaben, Buchungen, gemeinsamen Mitglieder oder Fotos."
     },
     {
       "name": "travel_plan_read",
@@ -681,7 +689,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Ersetzt nach Lesen des neuesten JSON den bearbeitbaren Inhalt einer gespeicherten Reise. Änderbar sind Ziel, Abreise, Orte, Zeitzone, Tempo, Daten, Tagestitel, Haltestellennamen, Startzeiten, Dauern, Notizen, Vorbereitung, Packkategorien, Packeinträge und Häkchen. Exakte Plan-id, aktuelle revision und vorhandene Haltestellen-/Checklisten-id aus travel_plan_read bewahren; id nur für neue Einträge erzeugen. Nicht angeforderte Inhalte bewahren. updatedPlanJson muss ein vollständiges TravelPlan JSON-Objekt sein, kein Patch. Bei revision-Konflikt erneut lesen und den Wunsch in den neuesten Plan einarbeiten; parallele Änderungen nie überschreiben. Erst nach Erfolg als aktualisiert melden. Erstellt keine Kalendertermine oder Aufgaben."
+      "description": "Aktualisiert nach Lesen des neuesten JSON einen gespeicherten Reiseplan. Reiseinformationen in den Planfeldern speichern, nicht nur in Aktivitätsnotizen oder der Antwort. Für gezielte Änderungen changeScope=EDIT nutzen und nur geänderte Felder senden, einschließlich stopEdits mit den exakten vorhandenen Stopp-id als Schlüssel. Erfolgreiche gezielte Änderungen liefern eine Bestätigung mit planId, revision und currentVersion. Zum Ersetzen von Tagen oder Neuplanen ein vollständiges TravelPlan JSON mit passender id und revision verwenden; vorhandene Stopp- und Checklisten-id bewahren und id nur für neue Einträge erzeugen. Der Host archiviert nur bei tatsächlichen Änderungen des Tagesreiseverlaufs eine Version; gemeinsame Reiseinformationen, Vorbereitung und Packliste werden trotzdem gespeichert. changeScope=REPLAN nur bei angeforderter Gesamtneuplanung nutzen. Bei revision-Konflikt erneut lesen und in den neuesten Plan einarbeiten. Erst nach Erfolg des Tools als aktualisiert melden. Erstellt keine Kalendertermine oder Aufgaben."
     },
     {
       "name": "mail_account_list",
@@ -969,7 +977,7 @@
       "risk": "LOW",
       "approval": "Automatisch",
       "approvalCode": "AUTO",
-      "description": "Gibt Ergebnistitel, exakte Quell-URLs und kurze Auszüge zurück. Behalten Sie im endgültigen Ergebnis nach jeder Zusammenfassung die exakte URL bei."
+      "description": "Sucht relevante Webseiten. Liefert Titel, exakte Quell-URLs, kurze Auszüge und, falls verfügbar, Datumsangaben des Suchanbieters. Diese sind Quellmetadaten, keine unabhängig bestätigten Veröffentlichungszeiten. Fehlende Daten bleiben unbekannt. Ausreichende Suchbelege direkt verwenden; Seiten nur abrufen, um eine wesentliche Lücke in der angeforderten Antwort zu schließen. Nach jedem zusammengefassten Ergebnis in der endgültigen Antwort die exakte URL beibehalten."
     },
     {
       "name": "scheduled_task_create",

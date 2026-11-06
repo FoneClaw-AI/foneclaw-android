@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "vi",
   "fallbackLocale": "en",
-  "toolCount": 140,
+  "toolCount": 141,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Tìm kiếm công cụ hoặc khả năng",
@@ -39,7 +39,7 @@
     {
       "name": "Location and Navigation",
       "displayName": "Vị trí và điều hướng",
-      "toolCount": 6
+      "toolCount": 7
     },
     {
       "name": "Mail",
@@ -665,7 +665,15 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Thêm các ngày liên tiếp sau ngày cuối của chuyến đi đã lưu. Giữ nguyên mọi ngày, việc chuẩn bị và hành lý hiện có. Đọc kế hoạch trước và dùng revision hiện tại. Tiếp tục từ điểm đến và chỗ ở cuối, nhóm điểm gần nhau và sắp vùng qua các ngày để tránh quay lại không cần thiết. Tôn trọng lịch hẹn cố định và thứ tự người dùng; chừa thời gian di chuyển, nghỉ ngơi hợp lý, không khẳng định tuyến đường trực tiếp hay bịa thời lượng chính xác. Không lặp điểm thăm trừ khi được yêu cầu hoặc cần thiết. Nếu xung đột revision, đọc lại; không ghi đè sửa đổi đồng thời. Không tạo sự kiện lịch hay việc cần làm."
+      "description": "Thêm các ngày liên tiếp sau ngày cuối của chuyến đi đã lưu. Lưu trữ phiên bản trước. Giữ nguyên mọi ngày, thông tin chuyến đi, việc chuẩn bị và hành lý hiện có. Dùng update nếu người dùng cũng thay đổi bất kỳ trường nào trong số đó. Đọc kế hoạch trước và dùng revision hiện tại. Tiếp tục từ điểm đến và chỗ ở cuối, nhóm điểm gần nhau và sắp vùng qua các ngày để tránh quay lại không cần thiết. Tôn trọng lịch hẹn cố định và thứ tự người dùng; chừa thời gian di chuyển, nghỉ ngơi hợp lý, không khẳng định tuyến đường trực tiếp hay bịa thời lượng chính xác. Không lặp điểm thăm trừ khi được yêu cầu hoặc cần thiết. Nếu xung đột revision, đọc lại; không ghi đè sửa đổi đồng thời. Không tạo sự kiện lịch hay việc cần làm."
+    },
+    {
+      "name": "travel_plan_create",
+      "category": "Location and Navigation",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Lưu một kế hoạch du lịch mới hoàn chỉnh theo yêu cầu của người dùng. Dùng đúng id kế hoạch mới từ ngữ cảnh ứng dụng chủ nếu có, nếu không thì cung cấp id rõ ràng và ổn định. Cung cấp revision 0, điểm đến, múi giờ, các ngày đã chọn, hoạt động, việc chuẩn bị và hành lý. Quyền sở hữu plugin do ngữ cảnh lượt hiện tại của ứng dụng chủ quyết định; templateId trong JSON của mô hình không thể thay đổi quyền này. Bao gồm số người, tổng ngân sách và departureTime nếu được cung cấp. Không thay bằng lịch trình mẫu cố định. Thử lại nội dung giống hệt với cùng id sẽ trả về kế hoạch hiện có; nội dung khác cho id đã tồn tại bị từ chối, không ghi đè. Không tạo sự kiện lịch, việc cần làm, đặt chỗ, thành viên chia sẻ hay ảnh."
     },
     {
       "name": "travel_plan_read",
@@ -681,7 +689,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Thay thế nội dung chỉnh sửa được của chuyến đi đã lưu sau khi đọc JSON mới nhất. Có thể sửa điểm đến, điểm xuất phát, địa điểm, múi giờ, nhịp độ, ngày, tiêu đề ngày, tên điểm dừng, giờ bắt đầu, thời lượng, ghi chú, việc chuẩn bị, nhóm và món hành lý cùng trạng thái đánh dấu. Giữ nguyên id chính xác của kế hoạch, revision hiện tại và id điểm dừng/mục danh sách có sẵn từ travel_plan_read; chỉ tạo id cho mục mới. Giữ nội dung không được yêu cầu sửa. updatedPlanJson phải là đối tượng TravelPlan JSON đầy đủ, không phải bản vá. Khi xung đột revision, đọc lại và hợp nhất yêu cầu vào kế hoạch mới nhất; không ghi đè sửa đổi đồng thời. Chỉ thông báo đã cập nhật sau thành công. Không tạo sự kiện lịch hay việc cần làm."
+      "description": "Cập nhật kế hoạch đã lưu sau khi đọc JSON mới nhất. Lưu thông tin chuyến đi vào các trường kế hoạch, không chỉ trong ghi chú hoạt động hay câu trả lời. Với sửa đổi có mục tiêu, dùng changeScope=EDIT và chỉ gửi các trường thay đổi, gồm stopEdits có khóa là đúng id điểm dừng hiện có. Sửa đổi có mục tiêu thành công trả biên nhận chứa planId, revision và currentVersion. Để thay ngày hoặc lập lại lịch trình, dùng TravelPlan JSON đầy đủ với id và revision khớp; giữ id điểm dừng và mục danh sách hiện có, chỉ tạo id cho mục mới. Ứng dụng chủ chỉ lưu trữ phiên bản khi lịch trình từng ngày thực sự thay đổi; thông tin chung, chuẩn bị và hành lý vẫn được lưu. Chỉ dùng changeScope=REPLAN khi có yêu cầu lập lại toàn bộ lịch trình. Nếu xung đột revision, đọc lại và hợp nhất vào kế hoạch mới nhất. Chỉ nói đã cập nhật sau khi công cụ thành công. Không tạo sự kiện lịch hay việc cần làm."
     },
     {
       "name": "mail_account_list",
@@ -969,7 +977,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Trả về tiêu đề kết quả, URL nguồn chính xác và đoạn trích ngắn. Giữ nguyên URL chính xác sau mỗi kết quả được tóm tắt trong câu trả lời cuối cùng."
+      "description": "Tìm các trang web liên quan. Trả tiêu đề, URL nguồn chính xác, đoạn trích ngắn và ngày do nhà cung cấp tìm kiếm cung cấp nếu có. Ngày là siêu dữ liệu nguồn, không phải thời điểm xuất bản đã được kiểm chứng độc lập. Không có ngày thì vẫn để chưa biết. Dùng trực tiếp bằng chứng tìm kiếm khi đủ; chỉ tải trang để giải quyết thiếu sót quan trọng trong câu trả lời được yêu cầu. Giữ URL chính xác sau mỗi kết quả được tóm tắt trong câu trả lời cuối."
     },
     {
       "name": "scheduled_task_create",

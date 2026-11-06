@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "ko",
   "fallbackLocale": "en",
-  "toolCount": 140,
+  "toolCount": 141,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "도구 또는 기능 검색",
@@ -39,7 +39,7 @@
     {
       "name": "Location and Navigation",
       "displayName": "위치 및 내비게이션",
-      "toolCount": 6
+      "toolCount": 7
     },
     {
       "name": "Mail",
@@ -665,7 +665,15 @@
       "risk": "DEVICE_CONTROL",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "저장된 여행의 마지막 날짜 뒤에 연속된 새 날짜를 추가합니다. 기존 날짜, 준비 및 짐 목록을 모두 유지합니다. 먼저 계획을 읽고 현재 revision을 사용합니다. 마지막 도착점과 숙소에서 이어가며 가까운 방문지를 묶고 날짜별 지역 순서를 정해 불필요한 왕복을 피합니다. 고정 예약과 사용자 지정 순서를 지키고 합리적인 이동·휴식 시간을 둡니다. 실시간 경로를 안다고 주장하거나 정확한 소요 시간을 꾸며내지 않습니다. 요청이나 필요가 없으면 기존 방문을 반복하지 않습니다. revision 충돌 시 다시 읽고 동시 편집을 덮어쓰지 않습니다. 캘린더 일정이나 할 일을 생성하지 않습니다."
+      "description": "저장된 여행의 마지막 날짜 뒤에 연속된 새 날짜를 추가합니다. 이전 버전을 보관합니다. 기존 날짜, 여행 정보, 준비 및 짐 목록을 모두 유지합니다. 사용자가 이 필드 중 하나라도 함께 변경하면 대신 update를 사용합니다. 먼저 계획을 읽고 현재 revision을 사용합니다. 마지막 도착점과 숙소에서 이어가며 가까운 방문지를 묶고 날짜별 지역 순서를 정해 불필요한 왕복을 피합니다. 고정 예약과 사용자 지정 순서를 지키고 합리적인 이동·휴식 시간을 둡니다. 실시간 경로를 안다고 주장하거나 정확한 소요 시간을 꾸며내지 않습니다. 요청이나 필요가 없으면 기존 방문을 반복하지 않습니다. revision 충돌 시 다시 읽고 동시 편집을 덮어쓰지 않습니다. 캘린더 일정이나 할 일을 생성하지 않습니다."
+    },
+    {
+      "name": "travel_plan_create",
+      "category": "Location and Navigation",
+      "risk": "DEVICE_CONTROL",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "사용자가 요청한 완전한 새 여행 계획 한 건을 저장합니다. 호스트 컨텍스트에 새 계획 id가 있으면 그 정확한 id를 사용하고, 없으면 명시적이고 안정적인 계획 id를 제공하세요. revision 0, 목적지, 시간대, 선택한 날짜, 활동, 사전 준비 및 짐 목록도 제공하세요. 플러그인 소유권은 호스트의 현재 턴 컨텍스트에 의해 결정되며 모델 JSON의 templateId로 바꿀 수 없습니다. 사용자가 제공한 인원, 총예산 및 departureTime을 포함하세요. 고정 예시 일정으로 대체하지 마세요. 같은 계획 id와 완전히 같은 내용으로 재시도하면 기존 계획을 반환합니다. 기존 id에 다른 내용을 지정하면 거부하며 덮어쓰지 않습니다. 캘린더 일정, 할 일, 예약, 공유 멤버 또는 사진은 만들지 않습니다."
     },
     {
       "name": "travel_plan_read",
@@ -681,7 +689,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "최신 JSON을 읽은 뒤 저장된 여행 계획의 편집 가능한 내용을 교체합니다. 목적지, 출발지, 장소, 시간대, 속도, 날짜, 일별 제목, 방문지 이름, 시작 시간, 기간, 메모, 준비 항목, 짐 분류·항목·체크 상태를 바꿀 수 있습니다. travel_plan_read의 정확한 계획 id, 현재 revision, 기존 방문지·체크리스트 항목 id를 유지하고 새 항목에만 id를 생성합니다. 요청하지 않은 내용은 유지합니다. updatedPlanJson은 패치가 아닌 완전한 TravelPlan JSON 객체여야 합니다. revision 충돌 시 다시 읽고 최신 계획에 요청을 병합하며 동시 편집을 덮어쓰지 않습니다. 성공 후에만 수정되었다고 알립니다. 캘린더 일정이나 할 일을 생성하지 않습니다."
+      "description": "최신 JSON을 읽은 뒤 저장된 여행 계획을 수정합니다. 여행 정보는 활동 메모나 답변에만 쓰지 말고 계획 필드에 저장하세요. 특정 수정에는 changeScope=EDIT를 사용하고 정확한 기존 방문지 id를 키로 하는 stopEdits를 포함해 변경된 필드만 보내세요. 성공하면 planId, revision, currentVersion을 포함한 확인서를 반환합니다. 날짜를 교체하거나 재계획할 때는 id와 revision이 일치하는 완전한 TravelPlan JSON을 사용하며 기존 방문지·체크리스트 항목 id를 유지하고 새 항목에만 id를 생성하세요. 호스트는 일별 일정이 실제로 바뀔 때만 버전을 보관하며 공유 여행 정보, 준비, 짐 변경도 저장합니다. 사용자가 전체 일정 재계획을 요청할 때만 changeScope=REPLAN을 사용하세요. revision 충돌 시 다시 읽고 최신 계획에 병합하세요. 도구가 성공한 뒤에만 수정 완료를 알리세요. 캘린더 일정이나 할 일을 생성하지 않습니다."
     },
     {
       "name": "mail_account_list",
@@ -969,7 +977,7 @@
       "risk": "LOW",
       "approval": "자동",
       "approvalCode": "AUTO",
-      "description": "결과 제목, 정확한 출처 URL 및 짧은 요약을 반환합니다. 최종 답변에서 각 결과를 요약할 때 정확한 URL을 유지하세요."
+      "description": "관련 웹페이지를 검색합니다. 결과 제목, 정확한 출처 URL, 짧은 발췌문과 검색 제공자가 제공하는 날짜가 있으면 반환합니다. 날짜는 출처 메타데이터이며 독립적으로 확인된 게시 시각이 아닙니다. 날짜가 없으면 알 수 없음으로 유지합니다. 검색 근거가 충분하면 바로 사용하고 요청된 답변에 중요한 정보 공백이 있을 때만 페이지를 가져오세요. 최종 답변에서 요약한 각 결과 뒤에 정확한 URL을 유지하세요."
     },
     {
       "name": "scheduled_task_create",

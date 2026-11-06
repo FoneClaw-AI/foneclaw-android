@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "pt",
   "fallbackLocale": "en",
-  "toolCount": 140,
+  "toolCount": 141,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Pesquisar ferramentas ou recursos",
@@ -39,7 +39,7 @@
     {
       "name": "Location and Navigation",
       "displayName": "Localização e navegação",
-      "toolCount": 6
+      "toolCount": 7
     },
     {
       "name": "Mail",
@@ -665,7 +665,15 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requer aprovação",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Acrescenta dias consecutivos após a última data da viagem salva. Preserva todos os dias, preparativos e bagagem existentes. Leia primeiro o plano e use a revision atual. Continue do último destino e alojamento, agrupe visitas próximas e ordene regiões entre dias para evitar retornos desnecessários. Respeite compromissos fixos e a ordem solicitada; reserve tempos realistas de deslocamento e descanso sem alegar rotas ao vivo nem inventar tempos exatos. Não repita visitas salvo pedido ou necessidade. Em conflito de revision, leia novamente; nunca sobrescreva edições simultâneas. Não cria eventos de calendário nem tarefas."
+      "description": "Acrescenta dias consecutivos após a última data da viagem salva. Arquiva a versão anterior. Preserva todos os dias, informações da viagem, preparativos e bagagem existentes. Use update se o usuário também alterar qualquer um desses campos. Leia primeiro o plano e use a revision atual. Continue do último destino e alojamento, agrupe visitas próximas e ordene regiões entre dias para evitar retornos desnecessários. Respeite compromissos fixos e a ordem solicitada; reserve tempos realistas de deslocamento e descanso sem alegar rotas ao vivo nem inventar tempos exatos. Não repita visitas salvo pedido ou necessidade. Em conflito de revision, leia novamente; nunca sobrescreva edições simultâneas. Não cria eventos de calendário nem tarefas."
+    },
+    {
+      "name": "travel_plan_create",
+      "category": "Location and Navigation",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Requer aprovação",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Salva um novo plano de viagem completo solicitado pelo usuário. Use o id exato do novo plano do contexto do host quando fornecido; caso contrário, um id explícito e estável. Forneça revision 0, destino, fuso horário, dias selecionados, atividades, preparativos e bagagem. A vinculação ao plugin é determinada pelo contexto do turno atual do host; templateId no JSON do modelo não pode alterá-la. Inclua viajantes, orçamento total e departureTime quando informados. Nunca substitua por um itinerário de exemplo fixo. Repetir exatamente o mesmo conteúdo com o mesmo id retorna o plano existente; conteúdo diferente para um id existente é rejeitado e nunca sobrescrito. Não cria eventos de calendário, tarefas, reservas, membros compartilhados ou fotos."
     },
     {
       "name": "travel_plan_read",
@@ -681,7 +689,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requer aprovação",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Substitui o conteúdo editável de uma viagem salva após ler seu JSON mais recente. Pode alterar destino, partida, lugares, fuso, ritmo, datas, títulos dos dias, nomes de paradas, horários, durações, notas, preparativos, categorias e itens de bagagem e suas marcações. Preserve o id exato do plano, a revision atual e os id de paradas/listas existentes de travel_plan_read; gere id apenas para novos itens. Preserve o que não foi solicitado. updatedPlanJson deve ser um objeto TravelPlan JSON completo, não um patch. Em conflito de revision, releia e mescle o pedido no plano mais recente; não sobrescreva edições simultâneas. Só afirme a atualização após sucesso. Não cria eventos de calendário nem tarefas."
+      "description": "Atualiza uma viagem salva após ler seu JSON mais recente. Salve informações da viagem nos campos do plano, não apenas nas notas das atividades ou na resposta. Para edições pontuais use changeScope=EDIT e envie só os campos alterados, incluindo stopEdits com os id exatos das paradas existentes como chaves. Edições pontuais bem-sucedidas retornam um recibo com planId, revision e currentVersion. Para substituir dias ou replanejar use um TravelPlan JSON completo com id e revision correspondentes; preserve os id existentes de paradas e listas e gere id apenas para novos itens. O host arquiva uma versão apenas quando o itinerário diário realmente muda; alterações nas informações compartilhadas, preparativos e bagagem também são salvas. Use changeScope=REPLAN apenas para um replanejamento geral solicitado. Em conflito de revision, releia e mescle no plano mais recente. Só afirme a atualização após a ferramenta ter sucesso. Não cria eventos de calendário nem tarefas."
     },
     {
       "name": "mail_account_list",
@@ -969,7 +977,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Retorna títulos, URLs exatas das fontes e trechos curtos. Preserve a URL exata após cada resultado resumido na resposta final."
+      "description": "Pesquisa páginas relevantes na web. Retorna títulos, URLs exatas, trechos curtos e datas do provedor de busca quando disponíveis. As datas são metadados da fonte, não horários de publicação verificados de forma independente. Datas ausentes permanecem desconhecidas. Use diretamente evidências suficientes da busca; busque páginas só para resolver uma lacuna relevante na resposta solicitada. Preserve a URL exata após cada resultado resumido na resposta final."
     },
     {
       "name": "scheduled_task_create",

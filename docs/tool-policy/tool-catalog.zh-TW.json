@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "zh-TW",
   "fallbackLocale": "en",
-  "toolCount": 140,
+  "toolCount": 141,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "搜尋工具或能力",
@@ -39,7 +39,7 @@
     {
       "name": "Location and Navigation",
       "displayName": "位置與導航",
-      "toolCount": 6
+      "toolCount": 7
     },
     {
       "name": "Mail",
@@ -665,7 +665,15 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "在已儲存行程的最後日期後追加連續的新日期。保留所有現有日期、準備事項及行李清單。先讀取計畫並使用目前 revision。從最後終點及住宿處繼續，集中鄰近景點並安排跨日區域順序，避免不必要的折返。遵守固定預約及使用者指定順序，預留合理交通和休息時間，不聲稱掌握即時路線或捏造精確耗時。除非有要求或必要，否則不重複遊覽。revision 衝突時重新讀取，絕不覆蓋並行編輯。不建立日曆活動或待辦。"
+      "description": "在已儲存行程的最後日期後追加連續的新日期。封存先前版本。保留所有現有日期、旅行資訊、準備事項及行李清單。如使用者亦修改其中任何欄位，應改用 update。先讀取計畫並使用目前 revision。從最後終點及住宿處繼續，集中鄰近景點並安排跨日區域順序，避免不必要的折返。遵守固定預約及使用者指定順序，預留合理交通和休息時間，不聲稱掌握即時路線或捏造精確耗時。除非有要求或必要，否則不重複遊覽。revision 衝突時重新讀取，絕不覆蓋並行編輯。不建立日曆活動或待辦。"
+    },
+    {
+      "name": "travel_plan_create",
+      "category": "Location and Navigation",
+      "risk": "DEVICE_CONTROL",
+      "approval": "需要核准",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "儲存使用者要求的一份完整新旅行計畫。如宿主上下文提供了新計畫 id，須使用該確切 id，否則提供明確且穩定的計畫 id；並提供 revision 0、目的地、時區、所選日期、活動、行前準備和行李清單。外掛歸屬由宿主本輪上下文綁定，模型 JSON 中的 templateId 不能變更歸屬。使用者提供時須包含人數、總預算和 departureTime。不得以固定範例行程代替。以相同計畫 id 重試完全相同的內容時回傳既有計畫；既有 id 的內容不同時拒絕建立，絕不覆寫。不建立日曆活動、待辦、預訂、共享成員或照片。"
     },
     {
       "name": "travel_plan_read",
@@ -681,7 +689,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要核准",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "讀取最新 JSON 後替換已儲存旅行計畫的可編輯內容。可改目的地、出發地、地點、時區、節奏、日期、每日標題、停靠點名稱、開始時間、時長、備註、準備事項、行李分類、行李項及勾選狀態。保留 travel_plan_read 回傳的確切計畫 id、目前 revision 及現有停靠點/清單項 id；只為新增項產生 id。保留使用者未要求修改的內容。updatedPlanJson 必須是完整的 TravelPlan JSON 物件而非修補內容。revision 衝突時重新讀取並合併使用者要求，絕不覆蓋並行編輯。工具成功後才可聲稱已更新。不建立日曆活動或待辦。"
+      "description": "讀取最新 JSON 後更新已儲存的旅行計畫。將旅行資訊儲存在計畫欄位中，不只放在活動備註或回覆。針對性修改使用 changeScope=EDIT，只傳送變更欄位，包括以現有確切停靠點 id 為鍵的 stopEdits。針對性修改成功後回傳包含 planId、revision 及 currentVersion 的回執。替換日期或重新規劃時，使用 id 及 revision 相符的完整 TravelPlan JSON；保留現有停靠點及清單項 id，只為新增項產生 id。宿主只在每日行程實際改變時封存版本；共享旅行資訊、準備事項及行李的更新仍會儲存。只在使用者要求整體重新規劃行程時使用 changeScope=REPLAN。revision 衝突時重新讀取並合併至最新計畫。工具成功後才可聲稱已更新。不建立日曆活動或待辦。"
     },
     {
       "name": "mail_account_list",
@@ -969,7 +977,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "回傳結果標題、精確來源 URL 與簡短摘要。最終回覆摘要每項結果時，請保留其精確 URL。"
+      "description": "搜尋相關網頁。回傳結果標題、精確來源 URL、簡短摘要，以及搜尋供應商提供的日期（如有）。日期是來源中繼資料，並非經獨立核實的發布時間。缺失日期維持未知。搜尋證據足夠時直接使用，只在所需答案存在實質資料缺口時擷取網頁。最終回覆摘要每項結果後，須保留其精確 URL。"
     },
     {
       "name": "scheduled_task_create",

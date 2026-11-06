@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "in",
   "fallbackLocale": "en",
-  "toolCount": 140,
+  "toolCount": 141,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Cari alat atau kemampuan",
@@ -39,7 +39,7 @@
     {
       "name": "Location and Navigation",
       "displayName": "Lokasi dan navigasi",
-      "toolCount": 6
+      "toolCount": 7
     },
     {
       "name": "Mail",
@@ -665,7 +665,15 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Tambahkan hari berurutan setelah tanggal terakhir perjalanan tersimpan. Pertahankan semua hari, persiapan, dan daftar barang yang ada. Baca rencana dahulu dan gunakan revision saat ini. Lanjutkan dari tujuan dan penginapan terakhir, kelompokkan kunjungan dekat dan urutkan wilayah antarhari agar tidak bolak-balik. Patuhi janji tetap dan urutan pengguna; sediakan waktu perjalanan dan istirahat realistis tanpa mengklaim rute langsung atau mengarang durasi tepat. Jangan ulangi kunjungan kecuali diminta atau perlu. Jika revision konflik, baca lagi; jangan timpa suntingan bersamaan. Tidak membuat acara kalender atau tugas."
+      "description": "Tambahkan hari berurutan setelah tanggal terakhir perjalanan tersimpan. Arsipkan versi sebelumnya. Pertahankan semua hari, informasi perjalanan, persiapan, dan daftar barang yang ada. Gunakan update jika pengguna juga mengubah salah satu bidang tersebut. Baca rencana dahulu dan gunakan revision saat ini. Lanjutkan dari tujuan dan penginapan terakhir, kelompokkan kunjungan dekat dan urutkan wilayah antarhari agar tidak bolak-balik. Patuhi janji tetap dan urutan pengguna; sediakan waktu perjalanan dan istirahat realistis tanpa mengklaim rute langsung atau mengarang durasi tepat. Jangan ulangi kunjungan kecuali diminta atau perlu. Jika revision konflik, baca lagi; jangan timpa suntingan bersamaan. Tidak membuat acara kalender atau tugas."
+    },
+    {
+      "name": "travel_plan_create",
+      "category": "Location and Navigation",
+      "risk": "DEVICE_CONTROL",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Simpan satu rencana perjalanan baru yang lengkap sesuai permintaan pengguna. Gunakan id rencana baru yang persis dari konteks host jika tersedia; jika tidak, berikan id eksplisit dan stabil. Sertakan revision 0, tujuan, zona waktu, hari yang dipilih, aktivitas, persiapan, dan barang bawaan. Kepemilikan plugin ditentukan konteks giliran host saat ini; templateId dalam JSON model tidak dapat mengubahnya. Sertakan jumlah wisatawan, anggaran total, dan departureTime jika diberikan. Jangan mengganti dengan contoh rencana tetap. Mengulang isi yang persis sama dengan id yang sama mengembalikan rencana yang sudah ada; isi berbeda untuk id yang sudah ada ditolak tanpa ditimpa. Tidak membuat acara kalender, tugas, reservasi, anggota bersama, atau foto."
     },
     {
       "name": "travel_plan_read",
@@ -681,7 +689,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Ganti isi rencana perjalanan tersimpan yang dapat diedit setelah membaca JSON terbarunya. Dapat mengubah tujuan, keberangkatan, tempat, zona waktu, tempo, tanggal, judul hari, nama perhentian, waktu mulai, durasi, catatan, persiapan, kategori dan barang bawaan serta centangnya. Pertahankan id rencana persis, revision saat ini, serta id perhentian/daftar yang ada dari travel_plan_read; buat id hanya untuk item baru. Pertahankan isi yang tidak diminta diubah. updatedPlanJson harus objek TravelPlan JSON lengkap, bukan patch. Jika revision konflik, baca lagi dan gabungkan permintaan ke rencana terbaru; jangan timpa suntingan bersamaan. Nyatakan diperbarui hanya setelah berhasil. Tidak membuat acara kalender atau tugas."
+      "description": "Perbarui rencana tersimpan setelah membaca JSON terbarunya. Simpan informasi perjalanan pada bidang rencana, bukan hanya di catatan aktivitas atau jawaban. Untuk suntingan terarah gunakan changeScope=EDIT dan kirim hanya bidang yang berubah, termasuk stopEdits dengan id perhentian lama yang persis sebagai kunci. Suntingan terarah yang berhasil mengembalikan tanda terima berisi planId, revision, dan currentVersion. Untuk mengganti hari atau merencanakan ulang gunakan TravelPlan JSON lengkap dengan id dan revision yang cocok; pertahankan id perhentian dan daftar yang ada, buat id hanya untuk item baru. Host mengarsipkan versi hanya saat jadwal harian benar-benar berubah; informasi bersama, persiapan, dan barang bawaan tetap disimpan. Gunakan changeScope=REPLAN hanya untuk permintaan perencanaan ulang seluruh jadwal. Jika revision konflik, baca lagi dan gabungkan ke rencana terbaru. Nyatakan diperbarui hanya setelah alat berhasil. Tidak membuat acara kalender atau tugas."
     },
     {
       "name": "mail_account_list",
@@ -969,7 +977,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Mengembalikan judul hasil, URL sumber yang tepat, dan cuplikan singkat. Pertahankan URL yang tepat setelah setiap hasil yang diringkas dalam jawaban akhir."
+      "description": "Cari halaman web yang relevan. Mengembalikan judul, URL sumber persis, cuplikan singkat, dan tanggal dari penyedia pencarian bila tersedia. Tanggal adalah metadata sumber, bukan waktu publikasi yang diverifikasi secara independen. Tanggal yang tidak ada tetap tidak diketahui. Gunakan bukti pencarian yang cukup secara langsung; ambil halaman hanya untuk menutup kekurangan penting dalam jawaban yang diminta. Pertahankan URL persis setelah setiap hasil yang diringkas dalam jawaban akhir."
     },
     {
       "name": "scheduled_task_create",

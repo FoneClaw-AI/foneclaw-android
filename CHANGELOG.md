@@ -8,6 +8,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.3.4] - 2026-11-06
+
+### Added and improved
+
+- Prepare trips from links or selected photos, save planning drafts, and organize multi-city itineraries.
+- Explore destination weather and attraction photos, edit stops and preparation lists, and ask follow-up questions with trip context.
+- Read and edit voice memos with clearer text alignment, elapsed times and steadier scrolling; open linked to-dos at their actual location.
+- Stop spoken replies from media-style notifications.
+- Navigate between existing conversations, sign-in and purchase pages more reliably.
+- Improved tool-result presentation, conversation status and news research response handling.
+
+### Scope
+
+- Travel research depends on enabled plugins, model capabilities, network and service configuration.
+- Shared recording UI and services are included in the Google build, subject to permissions and services; this version does not inherit the earlier copy-only recording exclusion.
+- Media notifications expose stop, not pause/resume, without a guarantee of uninterrupted lock-screen playback.
+- Backend deployment is separate; static publication and its worker default to disabled, and travel-community designs are not a shipped community.
+- CN has independent domestic infrastructure and explicit privacy choices; its APK is not a default GitHub asset. Google AAB remains a separate Play submission candidate.
+
 ## [v0.3.3] - 2026-11-04
 
 ### Added and improved
