@@ -265,7 +265,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Schalten Sie Bluetooth mithilfe der öffentlichen Legacy-Deaktivierungs-API aus. Wenn Android dies ablehnt, melden Sie, dass normale Android-Apps Bluetooth auf diesem Gerät nicht ausschalten können."
+      "description": "Fordert das Ausschalten von Bluetooth über die öffentliche API an, sofern Android dies erlaubt. Bei Einschränkung oder Ablehnung werden die Bluetooth-Einstellungen für den Nutzer geöffnet. Eine geöffnete Einstellungsseite belegt nicht, dass Bluetooth ausgeschaltet ist."
     },
     {
       "name": "device_app_activity_snapshot",
@@ -409,7 +409,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Fordern Sie Bluetooth zum Einschalten an. Bei älteren Ziel-SDKs wird zunächst die öffentliche Aktivierungs-API ausprobiert und dann bei Bedarf auf die Systembestätigungs-Benutzeroberfläche von Android zurückgegriffen."
+      "description": "Fordert das Einschalten von Bluetooth an. Auf unterstützten älteren Android-Versionen wird die öffentliche Aktivierungs-API versucht; Android 13 und neuer schränken sie für Apps mit Ziel-API 33 oder höher ein. Bei Einschränkung oder Ablehnung wird die Android-Systembestätigung geöffnet. Eine Anfrage oder Aufforderung belegt nicht, dass Bluetooth eingeschaltet ist."
     },
     {
       "name": "system_panel_open",
@@ -585,7 +585,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Liest die Liste der konfigurierten/gespeicherten Wi-Fi-Netzwerke auf Android. Gibt nur SSID, networkId, Sicherheitstyp, ob Anmeldeinformationen vorhanden sind, ob das Netzwerk ausgeblendet ist, den aktuellen Verbindungsstatus und den Konfigurationsstatus zurück. Gibt keine Wi-Fi-Passwörter zurück."
+      "description": "Liest konfigurierte/gespeicherte Wi-Fi-Netze nur, wenn Android sie zugänglich macht. Android 10 und neuer blockieren diese API für normale Apps mit Ziel-API 29 oder höher. Gibt nur SSID, networkId, Sicherheitstyp, ob Anmeldeinformationen vorhanden sind, ob das Netzwerk ausgeblendet ist, den aktuellen Verbindungsstatus und den Konfigurationsstatus zurück. Gibt keine Wi-Fi-Passwörter zurück."
     },
     {
       "name": "wifi_connect",
@@ -593,7 +593,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Stellen Sie eine Verbindung zu einem Wi-Fi-Netzwerk her. Das Tool überprüft zunächst die gespeicherten WLAN-Konfigurationen von Android auf die SSID und stellt eine direkte Verbindung her, sofern diese vorhanden ist. Wenn es nicht gespeichert wird, verwendet es die bereitgestellte Passphrase, um das Netzwerk hinzuzufügen/zu verbinden, oder greift auf das Wi-Fi-Panel von Android zurück, wenn eine Passworteingabe erforderlich ist."
+      "description": "Verbindet mit einem Wi-Fi-Netz über Legacy-APIs nur, sofern Android dies erlaubt. Android 10 und neuer blockieren Änderungen an gespeicherten Netzen und passwortbasierte Änderungen für Apps mit Ziel-API 29 oder höher. Daher wird das Android-Wi-Fi-Panel für Nutzeraktionen geöffnet. Erfolg erst nach Prüfung der aktiven SSID bestätigen."
     },
     {
       "name": "wifi_disconnect",
@@ -601,7 +601,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Trennen Sie die Verbindung zum aktuellen WLAN-Zugangspunkt. Das Tool versucht zunächst, eine stille, veraltete WifiManager-Trennung für Ziel-API-28-Hosts durchzuführen. Wenn Android dies ablehnt, greift es darauf zurück, das Wi-Fi-Panel von Android für Benutzeraktionen zu öffnen."
+      "description": "Trennt die Verbindung zum aktuellen Wi-Fi-Zugangspunkt. Versucht zunächst eine stille Trennung über den alten WifiManager, sofern Android dies erlaubt; bei Ablehnung wird das Android-Wi-Fi-Panel für Nutzeraktionen geöffnet."
     },
     {
       "name": "wifi_forget",
@@ -617,7 +617,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Scannen Sie WLAN-Zugangspunkte in der Nähe und geben Sie sie zurück. Wenn Wi-Fi deaktiviert ist, versucht dieses Tool zunächst, Wi-Fi direkt zu aktivieren und greift erst dann auf das Wi-Fi-Panel von Android zurück, wenn die direkte Aktivierung fehlschlägt. Erfordert Standortberechtigungen und Gerätestandortdienste. Die Ergebnisse können standortbezogene Netzwerkdaten aufdecken."
+      "description": "Scannt und liefert nahe Wi-Fi-Zugangspunkte. Bei ausgeschaltetem Wi-Fi wird eine direkte Zustandsänderung nur versucht, sofern Android dies erlaubt; schlägt die Aktivierung fehl, wird das Android-Wi-Fi-Panel geöffnet. Standortberechtigungen und Standortdienste des Geräts sind erforderlich. Ergebnisse können sensible standortbezogene Netzwerkdaten offenlegen."
     },
     {
       "name": "wifi_set_enabled",
@@ -625,7 +625,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Aktivieren oder deaktivieren Sie Android Wi-Fi. Das Tool versucht zunächst den direkten WifiManager-Vorgang und prüft dann, ob Android tatsächlich den angeforderten Zustand erreicht hat; Wenn die Anfrage fehlschlägt oder ausstehend bleibt, wird wieder das WLAN-Panel von Android geöffnet, damit der Benutzer etwas unternehmen kann."
+      "description": "Aktiviert oder deaktiviert Android-Wi-Fi. Sofern Android dies erlaubt, wird die öffentliche Operation versucht und danach der tatsächlich erreichte Zustand geprüft; bei Fehlschlag oder ausstehender Anfrage wird das Android-Wi-Fi-Panel für Nutzeraktionen geöffnet."
     },
     {
       "name": "wifi_status",
@@ -673,7 +673,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Speichert einen vom Nutzer angeforderten vollständigen neuen Reiseplan. Falls der Host-Kontext eine neue Plan-id vorgibt, exakt diese verwenden, sonst eine explizite stabile Plan-id. revision 0, Ziel, Zeitzone, ausgewählte Tage, Aktivitäten, Vorbereitung und Packliste angeben. Die Plugin-Zugehörigkeit bestimmt der Host-Kontext des aktuellen Turns; templateId im Modell-JSON kann sie nicht ändern. Angegebene Reisende, Gesamtbudget und departureTime einbeziehen. Niemals eine feste Beispielreise einsetzen. Ein erneuter Aufruf mit gleicher Plan-id und exakt gleichem Inhalt gibt den vorhandenen Plan zurück; abweichender Inhalt für eine vorhandene id wird abgelehnt und nie überschrieben. Erstellt keine Kalendertermine, Aufgaben, Buchungen, gemeinsamen Mitglieder oder Fotos."
+      "description": "Speichert einen vom Nutzer angeforderten vollständigen neuen Reiseplan. Falls der Host-Kontext eine neue Plan-id vorgibt, exakt diese verwenden, sonst eine explizite stabile Plan-id. revision 0, Ziel, Zeitzone, ausgewählte Tage, Aktivitäten, Vorbereitung und Packliste angeben. Die Plugin-Zugehörigkeit bestimmt der Host-Kontext des aktuellen Turns; templateId im Modell-JSON kann sie nicht ändern. Vor dem Erstellen Ziel oder geordnete Städteroute, Beginn und Ende je Stadt, Abreiseort und eine gültige Abreisezeit im Format HH:mm erfassen. Nur vom Nutzer bereitgestellte oder ausdrücklich akzeptierte Angaben verwenden. Fehlende Pflichtangaben erfragen; den Plan erst bei Vollständigkeit erstellen oder als gespeichert bezeichnen. Keine Felder aus anderen gespeicherten Reisen, aktuellem Standort oder einer Standard-Abreisezeit erfinden. Vor dem Erstellen auch einmal nach optionalen Besuchsvorlieben, Reisetempo, Personenzahl, Gesamtbudget samt Währung und weiteren Anforderungen wie Barrierefreiheit oder Ernährung fragen. Vorliegende Angaben nutzen, beantwortete Fragen nicht wiederholen. Erklären, dass diese Angaben optional und überspringbar sind; nach Antwort oder ausdrücklichem Wunsch zum Überspringen fortfahren. Übersprungene Angaben unbekannt lassen, nicht erfinden. Angegebene Reisende und Gesamtbudget einbeziehen. Niemals eine feste Beispielreise einsetzen. Ein erneuter Aufruf mit gleicher Plan-id und exakt gleichem Inhalt gibt den vorhandenen Plan zurück; abweichender Inhalt für eine vorhandene id wird abgelehnt und nie überschrieben. Erstellt keine Kalendertermine, Aufgaben, Buchungen, gemeinsamen Mitglieder oder Fotos."
     },
     {
       "name": "travel_plan_read",
@@ -977,7 +977,7 @@
       "risk": "LOW",
       "approval": "Automatisch",
       "approvalCode": "AUTO",
-      "description": "Sucht relevante Webseiten. Liefert Titel, exakte Quell-URLs, kurze Auszüge und, falls verfügbar, Datumsangaben des Suchanbieters. Diese sind Quellmetadaten, keine unabhängig bestätigten Veröffentlichungszeiten. Fehlende Daten bleiben unbekannt. Ausreichende Suchbelege direkt verwenden; Seiten nur abrufen, um eine wesentliche Lücke in der angeforderten Antwort zu schließen. Nach jedem zusammengefassten Ergebnis in der endgültigen Antwort die exakte URL beibehalten."
+      "description": "Sucht relevante Webseiten. Liefert Titel, exakte Quell-URLs, kurze Auszüge und, falls verfügbar, Datumsangaben des Suchanbieters. Diese sind Quellmetadaten, keine unabhängig bestätigten Veröffentlichungszeiten. Die reine Datumsgenauigkeit beibehalten: Uhrzeit und Zeitzone sind nicht verfügbar, daher keine Stunden, Minuten oder Mitternacht erfinden. Fehlende Daten bleiben unbekannt. Ausreichende Suchbelege direkt verwenden; Seiten nur abrufen, um eine wesentliche Lücke in der angeforderten Antwort zu schließen. Nach jedem zusammengefassten Ergebnis in der endgültigen Antwort die exakte URL beibehalten."
     },
     {
       "name": "scheduled_task_create",

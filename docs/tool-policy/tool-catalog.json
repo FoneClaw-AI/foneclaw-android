@@ -265,7 +265,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Turn Bluetooth off using the public legacy disable API. If Android refuses, report that normal Android apps cannot turn Bluetooth off on this device."
+      "description": "Request Bluetooth to turn off using the public API where Android permits it. When restricted or rejected, open Bluetooth settings for the user. An opened settings page is not proof that Bluetooth is off."
     },
     {
       "name": "device_app_activity_snapshot",
@@ -409,7 +409,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Request Bluetooth to turn on. For legacy target SDKs this first tries the public enable API, then falls back to Android's system confirmation UI when needed."
+      "description": "Request Bluetooth to turn on. On supported older Android versions, try the public enable API; Android 13 and later restrict this API for apps targeting API 33 or above. When restricted or rejected, open Android's system confirmation UI. A request or prompt is not proof that Bluetooth is on."
     },
     {
       "name": "system_panel_open",
@@ -585,7 +585,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Read the list of configured/saved Wi-Fi networks on Android. Returns only SSID, networkId, security type, whether credentials exist, whether the network is hidden, current connection status, and configuration state. Does not return Wi-Fi passwords."
+      "description": "Read configured/saved Wi-Fi networks only when Android exposes them. Android 10 and later block this API for normal apps targeting API 29 or above. Returns only SSID, networkId, security type, whether credentials exist, whether the network is hidden, current connection status, and configuration state. Does not return Wi-Fi passwords."
     },
     {
       "name": "wifi_connect",
@@ -593,7 +593,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Connect to a Wi-Fi network. The tool first checks Android's saved Wi-Fi configurations for the SSID and connects directly if it exists. If it is not saved, it uses the provided passphrase to add/connect the network, or falls back to Android's Wi-Fi panel when password input is needed."
+      "description": "Connect to a Wi-Fi network through legacy APIs only where Android permits them. Android 10 and later block saved-network and password-based changes for apps targeting API 29 or above, so the tool falls back to Android's Wi-Fi panel for user action. Confirm success only after the active SSID is verified."
     },
     {
       "name": "wifi_disconnect",
@@ -601,7 +601,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Disconnect from the current Wi-Fi access point. The tool first attempts a silent legacy WifiManager disconnect for target API 28 hosts; if Android rejects it, it falls back to opening Android's Wi-Fi panel for user action."
+      "description": "Disconnect from the current Wi-Fi access point. The tool first attempts a silent legacy WifiManager disconnect where Android permits it; if Android rejects it, it falls back to opening Android's Wi-Fi panel for user action."
     },
     {
       "name": "wifi_forget",
@@ -617,7 +617,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Scan and return nearby Wi-Fi access points. If Wi-Fi is off, this tool first attempts to enable Wi-Fi directly and only falls back to Android's Wi-Fi panel if direct enable fails. Requires location permissions and device location services. Results can reveal location-sensitive network data."
+      "description": "Scan and return nearby Wi-Fi access points. If Wi-Fi is off, try a direct state change only where Android permits it, otherwise open Android's Wi-Fi panel if direct enable fails. Requires location permissions and device location services. Results can reveal location-sensitive network data."
     },
     {
       "name": "wifi_set_enabled",
@@ -625,7 +625,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Enable or disable Android Wi-Fi. The tool first attempts the direct WifiManager operation, then checks whether Android actually reached the requested state; if the request fails or remains pending, it falls back to opening Android's Wi-Fi panel for user action."
+      "description": "Enable or disable Android Wi-Fi. Where Android permits it, the tool attempts the public operation, then checks whether Android actually reached the requested state; if the request fails or remains pending, it falls back to opening Android's Wi-Fi panel for user action."
     },
     {
       "name": "wifi_status",
@@ -673,7 +673,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Save one complete new travel plan requested by the user. Supply the exact new plan id from the host context when provided, otherwise a stable explicit plan id, revision 0, destination, timezone, selected days, activities, preparation and packing. Plugin ownership is bound by the host's current turn context; templateId in model JSON cannot change it. Include travelers, total budget and departureTime when supplied. Never substitute a fixed sample itinerary. Retrying the same exact content with the same plan id returns the existing plan; different content for an existing id is rejected, never overwritten. This does not create calendar events, todos, bookings, shared membership or photos."
+      "description": "Save one complete new travel plan requested by the user. Supply the exact new plan id from the host context when provided, otherwise a stable explicit plan id, revision 0, destination, timezone, selected days, activities, preparation and packing. Plugin ownership is bound by the host's current turn context; templateId in model JSON cannot change it. Before creating a travel plan, collect the destination or ordered city route, the start and end dates for each city, the departure point, and a valid departure time in HH:mm. Use only information supplied by the user or explicitly accepted by the user. Ask for missing required information and do not create or claim to save a plan until it is complete. Do not invent missing fields from another saved trip, current location, or a default departure time. Before creating, also ask once about optional visit preferences, travel pace, number of travelers, total trip budget and currency, and other requirements such as accessibility or dietary needs. Use any details already provided; do not ask the same answered question again. Tell the user these details are optional and may be skipped, and proceed after their answer or explicit request to skip. Leave skipped information unknown rather than inventing it. Include travelers and total budget when supplied. Never substitute a fixed sample itinerary. Retrying the same exact content with the same plan id returns the existing plan; different content for an existing id is rejected, never overwritten. This does not create calendar events, todos, bookings, shared membership or photos."
     },
     {
       "name": "travel_plan_read",
@@ -977,7 +977,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Search the web for relevant pages. Returns result titles, exact source URLs, and short snippets, and search-provider dates when available. Dates are source metadata, not independently verified publication times. Missing dates remain unknown. Use sufficient search evidence directly; fetch only to resolve a material gap in the requested answer. Preserve the exact URL after each result summarized in the final answer."
+      "description": "Search the web for relevant pages. Returns result titles, exact source URLs, and short snippets, and search-provider dates when available. Dates are source metadata, not independently verified publication times. Preserve date-only precision: its time and timezone are unavailable, so do not invent hours, minutes, or midnight. Missing dates remain unknown. Use sufficient search evidence directly; fetch only to resolve a material gap in the requested answer. Preserve the exact URL after each result summarized in the final answer."
     },
     {
       "name": "scheduled_task_create",

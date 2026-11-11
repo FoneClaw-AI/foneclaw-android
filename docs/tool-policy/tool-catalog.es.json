@@ -265,7 +265,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Desactive Bluetooth mediante la desactivación heredada pública API. Si Android se niega, informe que las aplicaciones Android normales no pueden desactivar Bluetooth en este dispositivo."
+      "description": "Solicita apagar Bluetooth mediante la API pública cuando Android lo permita. Si se restringe o rechaza, abre los ajustes de Bluetooth para el usuario. Abrir los ajustes no demuestra que Bluetooth esté apagado."
     },
     {
       "name": "device_app_activity_snapshot",
@@ -409,7 +409,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Solicite Bluetooth que se active. Para los SDK de destino heredados, esto primero prueba la habilitación pública API y luego recurre a la confirmación del sistema Android UI cuando es necesario."
+      "description": "Solicita encender Bluetooth. En versiones antiguas compatibles de Android, prueba la API pública de activación; Android 13 y posteriores la restringen para aplicaciones dirigidas a API 33 o superior. Si se restringe o rechaza, abre la confirmación del sistema Android. Una solicitud o aviso no demuestra que Bluetooth esté encendido."
     },
     {
       "name": "system_panel_open",
@@ -585,7 +585,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Lee la lista de redes Wi-Fi configuradas/guardadas en Android. Devuelve solo SSID, networkId, tipo de seguridad, si tiene credenciales, si la red está oculta, el estado de conexión actual y el estado de configuración. No devuelve contraseñas Wi-Fi."
+      "description": "Lee las redes Wi-Fi configuradas/guardadas solo cuando Android las expone. Android 10 y posteriores bloquean esta API para apps normales dirigidas a API 29 o superior. Devuelve solo SSID, networkId, tipo de seguridad, si tiene credenciales, si la red está oculta, el estado de conexión actual y el estado de configuración. No devuelve contraseñas Wi-Fi."
     },
     {
       "name": "wifi_connect",
@@ -593,7 +593,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Conéctese a una red Wi-Fi. La herramienta primero verifica las configuraciones Wi-Fi guardadas de Android para SSID y se conecta directamente si existe. Si no se guarda, utiliza la frase de contraseña proporcionada para agregar/conectar la red, o recurre al panel Wi-Fi de Android cuando es necesario ingresar la contraseña."
+      "description": "Conecta a una red Wi-Fi mediante API heredadas solo cuando Android lo permite. Android 10 y posteriores bloquean los cambios de redes guardadas y mediante contraseña para apps dirigidas a API 29 o superior, por lo que se abre el panel Wi-Fi de Android para que actúe el usuario. Confirma el éxito solo tras verificar el SSID activo."
     },
     {
       "name": "wifi_disconnect",
@@ -601,7 +601,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Desconéctese del punto de acceso Wi-Fi actual. La herramienta primero intenta una desconexión silenciosa del WifiManager heredado para API 28 hosts de destino; si Android lo rechaza, vuelve a abrir el panel Wi-Fi de Android para la acción del usuario."
+      "description": "Desconecta del punto de acceso Wi-Fi actual. Primero intenta una desconexión silenciosa mediante WifiManager heredado cuando Android lo permite; si Android la rechaza, abre el panel Wi-Fi de Android para que actúe el usuario."
     },
     {
       "name": "wifi_forget",
@@ -617,7 +617,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Escanea y devuelve Wi-Fi puntos de acceso cercanos. Si Wi-Fi está desactivado, esta herramienta primero intenta habilitar Wi-Fi directamente y solo recurre al panel Wi-Fi de Android si falla la habilitación directa. Requiere permisos de ubicación y servicios de ubicación del dispositivo. Los resultados pueden revelar datos de red sensibles a la ubicación."
+      "description": "Escanea y devuelve puntos de acceso Wi-Fi cercanos. Si Wi-Fi está apagado, intenta cambiar el estado directamente solo cuando Android lo permite; si la activación directa falla, abre el panel Wi-Fi de Android. Requiere permisos y servicios de ubicación del dispositivo. Los resultados pueden revelar datos de red sensibles a la ubicación."
     },
     {
       "name": "wifi_set_enabled",
@@ -625,7 +625,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Habilite o deshabilite Android Wi-Fi. La herramienta primero intenta la operación directa de WifiManager y luego verifica si Android realmente alcanzó el estado solicitado; si la solicitud falla o permanece pendiente, vuelve a abrir el panel Wi-Fi de Android para la acción del usuario."
+      "description": "Activa o desactiva Wi-Fi de Android. Cuando Android lo permite, intenta la operación pública y comprueba si se alcanzó realmente el estado solicitado; si la solicitud falla o sigue pendiente, abre el panel Wi-Fi de Android para que actúe el usuario."
     },
     {
       "name": "wifi_status",
@@ -673,7 +673,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Guarda un nuevo plan de viaje completo solicitado por el usuario. Usa el id exacto del nuevo plan del contexto del anfitrión si se proporciona; de lo contrario, un id explícito y estable. Proporciona revision 0, destino, zona horaria, días seleccionados, actividades, preparativos y equipaje. La pertenencia al complemento la determina el contexto del turno actual del anfitrión; templateId en el JSON del modelo no puede cambiarla. Incluye viajeros, presupuesto total y departureTime cuando se hayan indicado. Nunca sustituyas el viaje por un itinerario de ejemplo fijo. Reintentar el mismo contenido exacto con el mismo id devuelve el plan existente; un contenido distinto para un id existente se rechaza y nunca se sobrescribe. No crea eventos de calendario, tareas, reservas, miembros compartidos ni fotos."
+      "description": "Guarda un nuevo plan de viaje completo solicitado por el usuario. Usa el id exacto del nuevo plan del contexto del anfitrión si se proporciona; de lo contrario, un id explícito y estable. Proporciona revision 0, destino, zona horaria, días seleccionados, actividades, preparativos y equipaje. La pertenencia al complemento la determina el contexto del turno actual del anfitrión; templateId en el JSON del modelo no puede cambiarla. Antes de crear, recopila el destino o la ruta ordenada de ciudades, las fechas de inicio y fin de cada ciudad, el punto de salida y una hora de salida válida en HH:mm. Usa solo información proporcionada o aceptada explícitamente por el usuario. Pregunta por los datos obligatorios que falten y no crees ni afirmes guardar un plan hasta completarlo. No inventes campos usando otro viaje guardado, la ubicación actual ni una hora de salida predeterminada. Antes de crear, pregunta también una vez por preferencias de visitas, ritmo de viaje, número de viajeros, presupuesto total y moneda, y otros requisitos como accesibilidad o dieta; son opcionales. Aprovecha lo ya indicado y no repitas preguntas respondidas. Explica que estos datos son opcionales y pueden omitirse, y continúa tras su respuesta o petición explícita de omitirlos. Deja lo omitido como desconocido, sin inventarlo. Incluye viajeros y presupuesto total cuando se indiquen. Nunca sustituyas el viaje por un itinerario de ejemplo fijo. Reintentar el mismo contenido exacto con el mismo id devuelve el plan existente; un contenido distinto para un id existente se rechaza y nunca se sobrescribe. No crea eventos de calendario, tareas, reservas, miembros compartidos ni fotos."
     },
     {
       "name": "travel_plan_read",
@@ -977,7 +977,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Busca páginas web relevantes. Devuelve títulos, URL exactas, fragmentos breves y fechas del proveedor de búsqueda cuando existen. Las fechas son metadatos de origen, no fechas de publicación verificadas de forma independiente. Las fechas ausentes siguen siendo desconocidas. Usa directamente las pruebas de búsqueda suficientes; recupera páginas solo para resolver una carencia importante en la respuesta solicitada. Conserva la URL exacta tras cada resultado resumido en la respuesta final."
+      "description": "Busca páginas web relevantes. Devuelve títulos, URL exactas, fragmentos breves y fechas del proveedor de búsqueda cuando existen. Las fechas son metadatos de origen, no fechas de publicación verificadas de forma independiente. Conserva la precisión de solo fecha: la hora y la zona horaria no están disponibles, así que no inventes horas, minutos ni medianoche. Las fechas ausentes siguen siendo desconocidas. Usa directamente las pruebas de búsqueda suficientes; recupera páginas solo para resolver una carencia importante en la respuesta solicitada. Conserva la URL exacta tras cada resultado resumido en la respuesta final."
     },
     {
       "name": "scheduled_task_create",

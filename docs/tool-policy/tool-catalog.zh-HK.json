@@ -265,7 +265,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要審批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "使用公共舊版停用 API 關閉 Bluetooth。如果 Android 拒絕，則報告普通 Android 應用程式無法在此裝置上關閉 Bluetooth。"
+      "description": "在 Android 允許時，透過公共 API 請求關閉藍牙。如受限制或遭拒絕，則為用戶開啟藍牙設定。開啟設定頁面不代表藍牙已關閉。"
     },
     {
       "name": "device_app_activity_snapshot",
@@ -409,7 +409,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要審批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "請求Bluetooth開啟。對於舊版目標 SDK，這首先嘗試公共啟用 API，然後在需要時回退到 Android 的系統確認 UI。"
+      "description": "請求開啟藍牙。在支援的舊版 Android 上嘗試公共啟用 API；Android 13 或以上限制以 API 33 或以上為目標的應用程式使用此 API。如受限制或遭拒絕，則開啟 Android 系統確認介面。提出請求或顯示提示不代表藍牙已開啟。"
     },
     {
       "name": "system_panel_open",
@@ -585,7 +585,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要審批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "讀取 Android 已設定/已儲存的 Wi-Fi 網路清單。僅傳回 SSID、networkId、安全性類型、是否有憑據、是否隱藏網路、是否目前連線和設定狀態；不會傳回 Wi-Fi 密碼。"
+      "description": "僅在 Android 開放存取時讀取已設定/已儲存的 Wi-Fi 網絡。Android 10 或以上禁止以 API 29 或以上為目標的一般應用程式使用此 API。僅傳回 SSID、networkId、安全性類型、是否有憑據、是否隱藏網路、是否目前連線和設定狀態；不會傳回 Wi-Fi 密碼。"
     },
     {
       "name": "wifi_connect",
@@ -593,7 +593,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要審批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "連接到 Wi-Fi 網路。工具首先檢查 Android 儲存的 Wi-Fi 配置是否存在 SSID，並直接連接（如果存在）。如果未儲存，它將使用提供的密碼來新增/連接網絡，或在需要輸入密碼時退回到 Android 的 Wi-Fi 面板。"
+      "description": "僅在 Android 允許時透過舊版 API 連接 Wi-Fi 網絡。Android 10 或以上禁止以 API 29 或以上為目標的應用程式更改已儲存網絡或透過密碼更改網絡，因此工具會改為開啟 Android Wi-Fi 面板供用戶操作。只有核實目前使用的 SSID 後才可確認成功。"
     },
     {
       "name": "wifi_disconnect",
@@ -601,7 +601,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要審批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "中斷與目前 Wi-Fi 接入點的連線。該工具首先嘗試對目標 API 28 台主機進行靜默傳統 WifiManager 斷開連接；如果 Android 拒絕它，它會退回到打開 Android 的 Wi-Fi 面板以供用戶操作。"
+      "description": "中斷與目前 Wi-Fi 接入點的連線。在 Android 允許時先嘗試透過舊版 WifiManager 靜默中斷；如 Android 拒絕，則開啟 Android Wi-Fi 面板供用戶操作。"
     },
     {
       "name": "wifi_forget",
@@ -617,7 +617,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要審批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "掃描並返回附近的 Wi-Fi 接入點。如果 Wi-Fi 關閉，此工具首先嘗試直接啟用 Wi-Fi，並且僅在直接啟用失敗時才回退到 Android 的 Wi-Fi 面板。需要位置權限和設備定位服務。結果可以揭示位置敏感的網路數據。"
+      "description": "掃描並傳回附近 Wi-Fi 接入點。如 Wi-Fi 已關閉，僅在 Android 允許時嘗試直接改變狀態；直接啟用失敗則開啟 Android Wi-Fi 面板。需要位置權限和裝置定位服務。結果可能披露位置敏感的網絡資料。"
     },
     {
       "name": "wifi_set_enabled",
@@ -625,7 +625,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要審批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "啟用或停用Android Wi-Fi。該工具首先嘗試直接 WifiManager 操作，然後檢查 Android 是否確實達到了請求的狀態；如果請求失敗或仍處於待處理狀態，則會退回到開啟 Android 的 Wi-Fi 面板以供使用者操作。"
+      "description": "啟用或停用 Android Wi-Fi。在 Android 允許時嘗試公共操作，然後核實是否實際達到要求的狀態；如請求失敗或仍待處理，則開啟 Android Wi-Fi 面板供用戶操作。"
     },
     {
       "name": "wifi_status",
@@ -673,7 +673,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要審批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "儲存用戶要求的一份完整新旅行計劃。如宿主上下文提供了新計劃 id，須使用該確切 id，否則提供明確且穩定的計劃 id；並提供 revision 0、目的地、時區、所選日期、活動、行前準備和行李清單。插件歸屬由宿主本輪上下文綁定，模型 JSON 中的 templateId 不能更改歸屬。用戶提供時須包括人數、總預算和 departureTime。不得以固定示例行程代替。以相同計劃 id 重試完全相同的內容時傳回已有計劃；已有 id 的內容不同時拒絕建立，絕不覆蓋。不建立日曆活動、待辦、預訂、共享成員或照片。"
+      "description": "儲存用戶要求的一份完整新旅行計劃。如宿主上下文提供了新計劃 id，須使用該確切 id，否則提供明確且穩定的計劃 id；並提供 revision 0、目的地、時區、所選日期、活動、行前準備和行李清單。插件歸屬由宿主本輪上下文綁定，模型 JSON 中的 templateId 不能更改歸屬。建立前須收集目的地或依序排列的城市路線、每個城市的開始及結束日期、出發地和有效的 HH:mm 出發時間。只可使用用戶提供或明確接受的資料。缺少必填資料時須詢問，資料完整前不得建立或聲稱已儲存計劃。不得從其他已儲存旅程、目前位置或預設出發時間臆造缺漏欄位。建立前亦須詢問一次可選的遊覽偏好、旅遊節奏、人數、總預算及貨幣，以及無障礙或飲食等其他要求。沿用已提供的資料，不重複詢問已回答的問題。告知用戶這些資料可選且可跳過，在獲得回答或明確要求跳過後繼續。跳過的資料保持未知，不得臆造。有提供人數及總預算時須包括。不得以固定示例行程代替。以相同計劃 id 重試完全相同的內容時傳回已有計劃；已有 id 的內容不同時拒絕建立，絕不覆蓋。不建立日曆活動、待辦、預訂、共享成員或照片。"
     },
     {
       "name": "travel_plan_read",
@@ -977,7 +977,7 @@
       "risk": "LOW",
       "approval": "自動通過",
       "approvalCode": "AUTO",
-      "description": "搜尋相關網頁。傳回結果標題、確切來源 URL、簡短摘要，以及搜尋供應商提供的日期（如有）。日期是來源中繼資料，並非經獨立核實的發佈時間。缺失日期維持未知。搜尋證據足夠時直接使用，只在所需答案存在實質資料缺口時擷取網頁。最終回覆總結每項結果後，須保留其確切 URL。"
+      "description": "搜尋相關網頁。傳回結果標題、確切來源 URL、簡短摘要，以及搜尋供應商提供的日期（如有）。日期是來源中繼資料，並非經獨立核實的發佈時間。保留只有日期的精確度：其時間和時區不可用，不得虛構小時、分鐘或午夜時間。 缺失日期維持未知。搜尋證據足夠時直接使用，只在所需答案存在實質資料缺口時擷取網頁。最終回覆總結每項結果後，須保留其確切 URL。"
     },
     {
       "name": "scheduled_task_create",

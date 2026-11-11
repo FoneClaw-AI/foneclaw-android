@@ -265,7 +265,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Matikan Bluetooth menggunakan API penonaktifan warisan publik. Jika Android menolak, laporkan bahwa aplikasi Android normal tidak dapat mematikan Bluetooth di perangkat ini."
+      "description": "Minta Bluetooth dimatikan melalui API publik jika Android mengizinkan. Jika dibatasi atau ditolak, buka pengaturan Bluetooth untuk pengguna. Terbukanya pengaturan bukan bukti bahwa Bluetooth sudah mati."
     },
     {
       "name": "device_app_activity_snapshot",
@@ -409,7 +409,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Minta Bluetooth untuk dihidupkan. Untuk SDK target lama, hal ini terlebih dahulu mencoba API pengaktifan publik, lalu kembali ke UI konfirmasi sistem Android bila diperlukan."
+      "description": "Minta Bluetooth dihidupkan. Pada versi Android lama yang didukung, coba API pengaktifan publik; Android 13 dan yang lebih baru membatasi API ini bagi aplikasi yang menargetkan API 33 atau lebih tinggi. Jika dibatasi atau ditolak, buka konfirmasi sistem Android. Permintaan atau dialog bukan bukti bahwa Bluetooth sudah hidup."
     },
     {
       "name": "system_panel_open",
@@ -585,7 +585,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Baca daftar jaringan Wi-Fi yang dikonfigurasi/disimpan di Android. Hanya mengembalikan SSID, networkId, jenis keamanan, apakah ada kredensial, apakah jaringan tersembunyi, status koneksi saat ini, dan status konfigurasi. Tidak mengembalikan kata sandi Wi-Fi."
+      "description": "Baca jaringan Wi-Fi yang dikonfigurasi/disimpan hanya jika Android menyediakannya. Android 10 dan yang lebih baru memblokir API ini bagi aplikasi biasa yang menargetkan API 29 atau lebih tinggi. Hanya mengembalikan SSID, networkId, jenis keamanan, apakah ada kredensial, apakah jaringan tersembunyi, status koneksi saat ini, dan status konfigurasi. Tidak mengembalikan kata sandi Wi-Fi."
     },
     {
       "name": "wifi_connect",
@@ -593,7 +593,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Hubungkan ke jaringan Wi-Fi. Alat ini pertama-tama memeriksa konfigurasi Wi-Fi Android yang disimpan untuk SSID dan menghubungkan secara langsung jika ada. Jika tidak disimpan, ia akan menggunakan frasa sandi yang disediakan untuk menambah/menghubungkan jaringan, atau kembali ke panel Wi-Fi Android saat masukan kata sandi diperlukan."
+      "description": "Hubungkan ke jaringan Wi-Fi melalui API lama hanya jika Android mengizinkan. Android 10 dan yang lebih baru memblokir perubahan jaringan tersimpan dan perubahan berbasis kata sandi bagi aplikasi yang menargetkan API 29 atau lebih tinggi, sehingga alat membuka panel Wi-Fi Android agar pengguna bertindak. Konfirmasikan keberhasilan hanya setelah SSID aktif diverifikasi."
     },
     {
       "name": "wifi_disconnect",
@@ -601,7 +601,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Putuskan sambungan dari titik akses Wi-Fi saat ini. Alat ini pertama-tama mencoba memutuskan sambungan WifiManager lama secara senyap untuk host API 28 target; jika Android menolaknya, Android akan kembali membuka panel Wi-Fi Android untuk tindakan pengguna."
+      "description": "Putuskan sambungan dari titik akses Wi-Fi saat ini. Coba dahulu pemutusan senyap melalui WifiManager lama jika Android mengizinkan; jika Android menolak, buka panel Wi-Fi Android agar pengguna bertindak."
     },
     {
       "name": "wifi_forget",
@@ -617,7 +617,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Pindai dan kembalikan titik akses Wi-Fi terdekat. Jika Wi-Fi mati, alat ini pertama-tama akan mencoba mengaktifkan Wi-Fi secara langsung dan hanya kembali ke panel Wi-Fi Android jika pengaktifan langsung gagal. Membutuhkan izin lokasi dan layanan lokasi perangkat. Hasilnya dapat mengungkapkan data jaringan yang sensitif terhadap lokasi."
+      "description": "Pindai dan kembalikan titik akses Wi-Fi terdekat. Jika Wi-Fi mati, coba perubahan status langsung hanya jika Android mengizinkan; jika pengaktifan langsung gagal, buka panel Wi-Fi Android. Memerlukan izin lokasi dan layanan lokasi perangkat. Hasil dapat mengungkap data jaringan yang sensitif terhadap lokasi."
     },
     {
       "name": "wifi_set_enabled",
@@ -625,7 +625,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Mengaktifkan atau menonaktifkan Wi-Fi Android. Alat ini pertama-tama mencoba operasi WifiManager langsung, lalu memeriksa apakah Android benar-benar mencapai status yang diminta; jika permintaan gagal atau tetap tertunda, permintaan akan kembali membuka panel Wi-Fi Android untuk tindakan pengguna."
+      "description": "Aktifkan atau nonaktifkan Wi-Fi Android. Jika Android mengizinkan, coba operasi publik lalu periksa apakah status yang diminta benar-benar tercapai; jika permintaan gagal atau masih tertunda, buka panel Wi-Fi Android agar pengguna bertindak."
     },
     {
       "name": "wifi_status",
@@ -673,7 +673,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Simpan satu rencana perjalanan baru yang lengkap sesuai permintaan pengguna. Gunakan id rencana baru yang persis dari konteks host jika tersedia; jika tidak, berikan id eksplisit dan stabil. Sertakan revision 0, tujuan, zona waktu, hari yang dipilih, aktivitas, persiapan, dan barang bawaan. Kepemilikan plugin ditentukan konteks giliran host saat ini; templateId dalam JSON model tidak dapat mengubahnya. Sertakan jumlah wisatawan, anggaran total, dan departureTime jika diberikan. Jangan mengganti dengan contoh rencana tetap. Mengulang isi yang persis sama dengan id yang sama mengembalikan rencana yang sudah ada; isi berbeda untuk id yang sudah ada ditolak tanpa ditimpa. Tidak membuat acara kalender, tugas, reservasi, anggota bersama, atau foto."
+      "description": "Simpan satu rencana perjalanan baru yang lengkap sesuai permintaan pengguna. Gunakan id rencana baru yang persis dari konteks host jika tersedia; jika tidak, berikan id eksplisit dan stabil. Sertakan revision 0, tujuan, zona waktu, hari yang dipilih, aktivitas, persiapan, dan barang bawaan. Kepemilikan plugin ditentukan konteks giliran host saat ini; templateId dalam JSON model tidak dapat mengubahnya. Sebelum membuat, kumpulkan tujuan atau rute kota berurutan, tanggal mulai dan selesai tiap kota, titik keberangkatan, dan waktu keberangkatan valid dalam HH:mm. Gunakan hanya informasi yang diberikan atau diterima secara eksplisit oleh pengguna. Tanyakan informasi wajib yang belum ada; jangan membuat atau mengklaim menyimpan rencana sampai lengkap. Jangan mengarang kolom dari perjalanan tersimpan lain, lokasi saat ini, atau waktu keberangkatan bawaan. Sebelum membuat, tanyakan juga sekali preferensi kunjungan opsional, tempo perjalanan, jumlah wisatawan, anggaran total dan mata uang, serta kebutuhan lain seperti aksesibilitas atau diet. Gunakan informasi yang sudah ada dan jangan ulangi pertanyaan terjawab. Jelaskan bahwa rincian ini opsional dan boleh dilewati; lanjutkan setelah jawaban atau permintaan eksplisit untuk melewati. Biarkan informasi yang dilewati tetap tidak diketahui, jangan mengarangnya. Sertakan jumlah wisatawan dan anggaran total jika diberikan. Jangan mengganti dengan contoh rencana tetap. Mengulang isi yang persis sama dengan id yang sama mengembalikan rencana yang sudah ada; isi berbeda untuk id yang sudah ada ditolak tanpa ditimpa. Tidak membuat acara kalender, tugas, reservasi, anggota bersama, atau foto."
     },
     {
       "name": "travel_plan_read",
@@ -977,7 +977,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Cari halaman web yang relevan. Mengembalikan judul, URL sumber persis, cuplikan singkat, dan tanggal dari penyedia pencarian bila tersedia. Tanggal adalah metadata sumber, bukan waktu publikasi yang diverifikasi secara independen. Tanggal yang tidak ada tetap tidak diketahui. Gunakan bukti pencarian yang cukup secara langsung; ambil halaman hanya untuk menutup kekurangan penting dalam jawaban yang diminta. Pertahankan URL persis setelah setiap hasil yang diringkas dalam jawaban akhir."
+      "description": "Cari halaman web yang relevan. Mengembalikan judul, URL sumber persis, cuplikan singkat, dan tanggal dari penyedia pencarian bila tersedia. Tanggal adalah metadata sumber, bukan waktu publikasi yang diverifikasi secara independen. Pertahankan ketelitian tanggal saja: waktu dan zona waktunya tidak tersedia, jadi jangan mengarang jam, menit, atau tengah malam. Tanggal yang tidak ada tetap tidak diketahui. Gunakan bukti pencarian yang cukup secara langsung; ambil halaman hanya untuk menutup kekurangan penting dalam jawaban yang diminta. Pertahankan URL persis setelah setiap hasil yang diringkas dalam jawaban akhir."
     },
     {
       "name": "scheduled_task_create",

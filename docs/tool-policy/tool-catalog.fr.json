@@ -265,7 +265,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Désactivez Bluetooth à l’aide de l’API de désactivation publique héritée. Si Android refuse, signalez que les applications Android normales ne peuvent pas désactiver Bluetooth sur cet appareil."
+      "description": "Demande la désactivation du Bluetooth via l’API publique lorsque Android l’autorise. En cas de restriction ou de refus, ouvre les paramètres Bluetooth pour l’utilisateur. L’ouverture des paramètres ne prouve pas que le Bluetooth est désactivé."
     },
     {
       "name": "device_app_activity_snapshot",
@@ -409,7 +409,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Demandez à Bluetooth de s'activer. Pour les SDK cibles hérités, cela essaie d'abord l'API d'activation publique, puis revient à l'interface utilisateur de confirmation du système Android si nécessaire."
+      "description": "Demande l’activation du Bluetooth. Sur les anciennes versions compatibles d’Android, essaie l’API publique d’activation ; Android 13 et versions ultérieures la restreignent pour les applications ciblant l’API 33 ou plus. En cas de restriction ou de refus, ouvre la confirmation système Android. Une demande ou une invite ne prouve pas que le Bluetooth est activé."
     },
     {
       "name": "system_panel_open",
@@ -585,7 +585,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Lit la liste des réseaux Wi-Fi configurés/enregistrés sur Android. Retourne uniquement le SSID, le networkId, le type de sécurité, si des identifiants existent, si le réseau est masqué, l'état de connexion actuel et l'état de la configuration. Ne retourne pas les mots de passe Wi-Fi."
+      "description": "Lit les réseaux Wi-Fi configurés/enregistrés uniquement lorsque Android les expose. Android 10 et versions ultérieures bloquent cette API pour les applications ordinaires ciblant l’API 29 ou plus. Retourne uniquement le SSID, le networkId, le type de sécurité, si des identifiants existent, si le réseau est masqué, l'état de connexion actuel et l'état de la configuration. Ne retourne pas les mots de passe Wi-Fi."
     },
     {
       "name": "wifi_connect",
@@ -593,7 +593,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Connectez-vous à un réseau Wi-Fi. L'outil vérifie d'abord le SSID dans les configurations Wi-Fi enregistrées par Android et se connecte directement s'il existe. S'il n'est pas enregistré, il utilise la phrase secrète fournie pour ajouter/connecter le réseau, ou revient au panneau Wi-Fi d'Android lorsque la saisie d'un mot de passe est nécessaire."
+      "description": "Se connecte à un réseau Wi-Fi via les API héritées uniquement si Android l’autorise. Android 10 et versions ultérieures bloquent les modifications de réseaux enregistrés et celles basées sur un mot de passe pour les applications ciblant l’API 29 ou plus ; l’outil ouvre donc le panneau Wi-Fi d’Android pour intervention de l’utilisateur. Ne confirmez la réussite qu’après vérification du SSID actif."
     },
     {
       "name": "wifi_disconnect",
@@ -601,7 +601,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Déconnectez-vous du point d’accès Wi-Fi actuel. L'outil tente d'abord une déconnexion silencieuse de WifiManager hérité pour les hôtes de l'API cible 28 ; si Android le rejette, il revient à ouvrir le panneau Wi-Fi d'Android pour l'action de l'utilisateur."
+      "description": "Déconnecte du point d’accès Wi-Fi actuel. Tente d’abord une déconnexion silencieuse via l’ancien WifiManager lorsque Android l’autorise ; en cas de refus, ouvre le panneau Wi-Fi d’Android pour intervention de l’utilisateur."
     },
     {
       "name": "wifi_forget",
@@ -617,7 +617,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Scannez et retournez les points d'accès Wi-Fi à proximité. Si le Wi-Fi est désactivé, cet outil tente d'abord d'activer le Wi-Fi directement et ne revient au panneau Wi-Fi d'Android que si l'activation directe échoue. Nécessite des autorisations de localisation et des services de localisation de l'appareil. Les résultats peuvent révéler des données réseau sensibles à la localisation."
+      "description": "Analyse et renvoie les points d’accès Wi-Fi proches. Si le Wi-Fi est désactivé, tente une modification directe de l’état uniquement lorsque Android l’autorise ; si l’activation directe échoue, ouvre le panneau Wi-Fi d’Android. Nécessite les autorisations et services de localisation de l’appareil. Les résultats peuvent révéler des données réseau sensibles liées à la localisation."
     },
     {
       "name": "wifi_set_enabled",
@@ -625,7 +625,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Activez ou désactivez le Wi-Fi Android. L'outil tente d'abord l'opération directe WifiManager, puis vérifie si Android a réellement atteint l'état demandé ; si la demande échoue ou reste en attente, elle revient à ouvrir le panneau Wi-Fi d'Android pour l'action de l'utilisateur."
+      "description": "Active ou désactive le Wi-Fi d’Android. Lorsque Android l’autorise, tente l’opération publique puis vérifie si l’état demandé a réellement été atteint ; si la demande échoue ou reste en attente, ouvre le panneau Wi-Fi d’Android pour intervention de l’utilisateur."
     },
     {
       "name": "wifi_status",
@@ -673,7 +673,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Enregistre un nouveau voyage complet demandé par l’utilisateur. Utilisez l’id exact du nouveau plan fourni par le contexte de l’hôte, sinon un id explicite et stable. Fournissez revision 0, destination, fuseau horaire, jours sélectionnés, activités, préparatifs et bagages. L’appartenance au plugin est définie par le contexte du tour actuel de l’hôte ; templateId dans le JSON du modèle ne peut pas la modifier. Incluez les voyageurs, le budget total et departureTime lorsqu’ils sont fournis. Ne substituez jamais un itinéraire d’exemple fixe. Réessayer avec le même id et exactement le même contenu renvoie le plan existant ; un contenu différent pour un id existant est refusé, sans écrasement. Ne crée ni événements de calendrier, ni tâches, ni réservations, ni membres partagés, ni photos."
+      "description": "Enregistre un nouveau voyage complet demandé par l’utilisateur. Utilisez l’id exact du nouveau plan fourni par le contexte de l’hôte, sinon un id explicite et stable. Fournissez revision 0, destination, fuseau horaire, jours sélectionnés, activités, préparatifs et bagages. L’appartenance au plugin est définie par le contexte du tour actuel de l’hôte ; templateId dans le JSON du modèle ne peut pas la modifier. Avant de créer, recueillez la destination ou l’itinéraire ordonné des villes, les dates de début et de fin de chaque ville, le lieu de départ et une heure de départ valide en HH:mm. Utilisez uniquement les informations fournies ou explicitement acceptées par l’utilisateur. Demandez les informations obligatoires manquantes et ne créez pas de plan ni ne prétendez l’enregistrer avant qu’il soit complet. N’inventez pas de champs à partir d’un autre voyage enregistré, de la position actuelle ou d’une heure de départ par défaut. Avant de créer, demandez aussi une fois les préférences de visites, le rythme, le nombre de voyageurs, le budget total et sa devise et d’autres besoins comme l’accessibilité ou l’alimentation ; ces détails sont facultatifs. Réutilisez les informations fournies, sans répéter les questions déjà répondues. Expliquez qu’ils sont facultatifs et peuvent être omis ; poursuivez après une réponse ou une demande explicite de les ignorer. Laissez les informations omises inconnues, sans les inventer. Incluez les voyageurs et le budget total lorsqu’ils sont fournis. Ne substituez jamais un itinéraire d’exemple fixe. Réessayer avec le même id et exactement le même contenu renvoie le plan existant ; un contenu différent pour un id existant est refusé, sans écrasement. Ne crée ni événements de calendrier, ni tâches, ni réservations, ni membres partagés, ni photos."
     },
     {
       "name": "travel_plan_read",
@@ -977,7 +977,7 @@
       "risk": "LOW",
       "approval": "Automatique",
       "approvalCode": "AUTO",
-      "description": "Recherche des pages web pertinentes. Renvoie les titres, URL sources exactes, courts extraits et dates du fournisseur de recherche si disponibles. Ces dates sont des métadonnées de source, non des dates de publication vérifiées indépendamment. Une date absente reste inconnue. Utilisez directement les preuves de recherche suffisantes ; ne récupérez une page que pour combler une lacune importante dans la réponse demandée. Conservez l’URL exacte après chaque résultat résumé dans la réponse finale."
+      "description": "Recherche des pages web pertinentes. Renvoie les titres, URL sources exactes, courts extraits et dates du fournisseur de recherche si disponibles. Ces dates sont des métadonnées de source, non des dates de publication vérifiées indépendamment. Conservez la précision limitée à la date : l’heure et le fuseau horaire sont indisponibles ; n’inventez donc ni heures, ni minutes, ni minuit. Une date absente reste inconnue. Utilisez directement les preuves de recherche suffisantes ; ne récupérez une page que pour combler une lacune importante dans la réponse demandée. Conservez l’URL exacte après chaque résultat résumé dans la réponse finale."
     },
     {
       "name": "scheduled_task_create",

@@ -265,7 +265,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "使用公共旧版禁用 API 关闭 Bluetooth。如果 Android 拒绝，则报告普通 Android 应用无法在此设备上关闭 Bluetooth。"
+      "description": "在 Android 允许时，通过公共 API 请求关闭蓝牙。若受限或被拒绝，则为用户打开蓝牙设置。打开设置页面并不证明蓝牙已关闭。"
     },
     {
       "name": "device_app_activity_snapshot",
@@ -409,7 +409,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "请求Bluetooth打开。对于旧版目标 SDK，这首先尝试公共启用 API，然后在需要时回退到 Android 的系统确认 UI。"
+      "description": "请求打开蓝牙。在支持的旧版 Android 上尝试公共启用 API；Android 13 及以上会限制以 API 33 或以上为目标的应用使用此 API。若受限或被拒绝，则打开 Android 系统确认界面。发出请求或显示提示并不证明蓝牙已开启。"
     },
     {
       "name": "system_panel_open",
@@ -585,7 +585,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "读取 Android 已配置/已保存的 Wi-Fi 网络列表。只返回 SSID、networkId、安全类型、是否有凭据、是否隐藏网络、是否当前连接和配置状态；不会返回 Wi-Fi 密码。"
+      "description": "仅在 Android 开放访问时读取已配置/已保存的 Wi-Fi 网络。Android 10 及以上禁止以 API 29 或以上为目标的普通应用使用此 API。只返回 SSID、networkId、安全类型、是否有凭据、是否隐藏网络、是否当前连接和配置状态；不会返回 Wi-Fi 密码。"
     },
     {
       "name": "wifi_connect",
@@ -593,7 +593,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "连接到 Wi-Fi 网络。该工具首先检查 Android 保存的 Wi-Fi 配置是否存在 SSID，并直接连接（如果存在）。如果未保存，它将使用提供的密码来添加/连接网络，或者在需要输入密码时退回到 Android 的 Wi-Fi 面板。"
+      "description": "仅在 Android 允许时通过旧版 API 连接 Wi-Fi 网络。Android 10 及以上会阻止以 API 29 或以上为目标的应用更改已保存网络或使用密码更改网络，因此工具会回退到 Android Wi-Fi 面板由用户操作。只有核实当前活动 SSID 后才能确认成功。"
     },
     {
       "name": "wifi_disconnect",
@@ -601,7 +601,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "断开与当前 Wi-Fi 接入点的连接。该工具首先尝试对目标 API 28 台主机进行静默传统 WifiManager 断开连接；如果 Android 拒绝它，它会退回到打开 Android 的 Wi-Fi 面板以供用户操作。"
+      "description": "断开当前 Wi-Fi 接入点。在 Android 允许时，先尝试通过旧版 WifiManager 静默断开；若 Android 拒绝，则打开 Android Wi-Fi 面板供用户操作。"
     },
     {
       "name": "wifi_forget",
@@ -617,7 +617,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "扫描并返回附近的 Wi-Fi 接入点。如果 Wi-Fi 关闭，此工具首先尝试直接启用 Wi-Fi，并且仅在直接启用失败时才回退到 Android 的 Wi-Fi 面板。需要位置权限和设备定位服务。结果可以揭示位置敏感的网络数据。"
+      "description": "扫描并返回附近 Wi-Fi 接入点。若 Wi-Fi 关闭，仅在 Android 允许时尝试直接改变状态；直接启用失败则打开 Android Wi-Fi 面板。需要位置权限和设备定位服务。结果可能暴露位置敏感的网络数据。"
     },
     {
       "name": "wifi_set_enabled",
@@ -625,7 +625,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "启用或禁用Android Wi-Fi。该工具首先尝试直接 WifiManager 操作，然后检查 Android 是否确实达到了请求的状态；如果请求失败或仍处于待处理状态，则会退回到打开 Android 的 Wi-Fi 面板以供用户操作。"
+      "description": "启用或禁用 Android Wi-Fi。在 Android 允许时尝试公共操作，然后核查是否实际达到请求状态；若请求失败或仍待处理，则打开 Android Wi-Fi 面板供用户操作。"
     },
     {
       "name": "wifi_status",
@@ -673,7 +673,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "保存用户要求的一份完整新旅行计划。如果宿主上下文提供了新计划 id，须使用该精确 id，否则提供明确且稳定的计划 id；并提供 revision 0、目的地、时区、选定日期、活动、行前准备和行李清单。插件归属由宿主本轮上下文绑定，模型 JSON 中的 templateId 不能修改归属。用户提供时须包含人数、总预算和 departureTime。不得用固定示例行程替代。使用相同计划 id 重试完全相同的内容时返回已有计划；已有 id 的内容不同时拒绝创建，绝不覆盖。不创建日历事件、待办、预订、共享成员或照片。"
+      "description": "保存用户要求的一份完整新旅行计划。如果宿主上下文提供了新计划 id，须使用该精确 id，否则提供明确且稳定的计划 id；并提供 revision 0、目的地、时区、选定日期、活动、行前准备和行李清单。插件归属由宿主本轮上下文绑定，模型 JSON 中的 templateId 不能修改归属。创建前须收集目的地或按顺序的城市路线、每个城市的起止日期、出发地以及有效的 HH:mm 出发时间。只能使用用户提供或明确接受的信息。缺少必填信息时须询问，信息完整前不得创建或声称已保存计划。不得从其他已保存旅行、当前位置或默认出发时间中臆造缺失字段。创建前还须询问一次可选的游览偏好、旅行节奏、人数、总预算及币种，以及无障碍或饮食等其他要求。使用已经提供的信息，不重复询问已回答的问题。明确告知这些信息可选且可以跳过，得到回答或明确要求跳过后再继续。跳过的信息保持未知，不得臆造。提供人数和总预算时须包含。不得用固定示例行程替代。使用相同计划 id 重试完全相同的内容时返回已有计划；已有 id 的内容不同时拒绝创建，绝不覆盖。不创建日历事件、待办、预订、共享成员或照片。"
     },
     {
       "name": "travel_plan_read",
@@ -977,7 +977,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "搜索相关网页。返回结果标题、精确来源 URL 和简短片段，以及搜索提供方给出的日期（若有）。日期是来源元数据，不是经独立核实的发布时间。缺失日期保持未知。搜索证据足够时直接使用，仅在回答所需信息存在实质缺口时抓取网页。最终回答中总结每个结果后，须保留其精确 URL。"
+      "description": "搜索相关网页。返回结果标题、精确来源 URL 和简短片段，以及搜索提供方给出的日期（若有）。日期是来源元数据，不是经独立核实的发布时间。保持仅有日期的精度：其具体时间和时区不可用，不得臆造小时、分钟或午夜时间。 缺失日期保持未知。搜索证据足够时直接使用，仅在回答所需信息存在实质缺口时抓取网页。最终回答中总结每个结果后，须保留其精确 URL。"
     },
     {
       "name": "scheduled_task_create",

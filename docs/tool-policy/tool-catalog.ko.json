@@ -265,7 +265,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "공개 레거시 비활성화 API을 사용하여 Bluetooth을 끄세요. Android가 거부하는 경우 일반 Android 앱이 이 기기에서 Bluetooth을 끌 수 없다고 보고하세요."
+      "description": "Android가 허용하는 경우 공개 API로 Bluetooth 끄기를 요청합니다. 제한되거나 거부되면 사용자를 위해 Bluetooth 설정을 엽니다. 설정 화면이 열렸다고 Bluetooth가 꺼진 것은 아닙니다."
     },
     {
       "name": "device_app_activity_snapshot",
@@ -409,7 +409,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Bluetooth을(를) 켜도록 요청하세요. 레거시 대상 SDK의 경우 먼저 공개 활성화 API를 시도한 다음 필요할 때 Android의 시스템 확인 UI으로 대체합니다."
+      "description": "Bluetooth 켜기를 요청합니다. 지원되는 이전 Android 버전에서는 공개 활성화 API를 시도합니다. Android 13 이상은 API 33 이상을 대상으로 하는 앱의 이 API 사용을 제한합니다. 제한되거나 거부되면 Android 시스템 확인 화면을 엽니다. 요청이나 안내 표시만으로 Bluetooth가 켜졌다고 볼 수 없습니다."
     },
     {
       "name": "system_panel_open",
@@ -585,7 +585,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Android에서 구성/저장된 Wi-Fi 네트워크 목록을 읽습니다. SSID, networkId, 보안 유형, 자격 증명 여부, 숨겨진 네트워크 여부, 현재 연결 상태 및 구성 상태만 반환합니다. Wi-Fi 비밀번호는 반환하지 않습니다."
+      "description": "Android가 공개하는 경우에만 구성/저장된 Wi-Fi 네트워크를 읽습니다. Android 10 이상은 API 29 이상을 대상으로 하는 일반 앱의 이 API 사용을 차단합니다. SSID, networkId, 보안 유형, 자격 증명 여부, 숨겨진 네트워크 여부, 현재 연결 상태 및 구성 상태만 반환합니다. Wi-Fi 비밀번호는 반환하지 않습니다."
     },
     {
       "name": "wifi_connect",
@@ -593,7 +593,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Wi-Fi 네트워크에 연결하세요. 이 도구는 먼저 SSID에 대해 Android의 저장된 Wi-Fi 구성을 확인하고 존재하는 경우 직접 연결합니다. 저장되지 않으면 제공된 암호를 사용하여 네트워크를 추가/연결하거나, 암호 입력이 필요할 때 Android의 Wi-Fi 패널로 대체됩니다."
+      "description": "Android가 허용하는 경우에만 레거시 API로 Wi-Fi 네트워크에 연결합니다. Android 10 이상은 API 29 이상을 대상으로 하는 앱의 저장된 네트워크 변경과 비밀번호 기반 변경을 차단하므로 사용자 조작을 위해 Android Wi-Fi 패널을 엽니다. 활성 SSID를 확인한 뒤에만 성공으로 판단하세요."
     },
     {
       "name": "wifi_disconnect",
@@ -601,7 +601,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "현재 Wi-Fi 액세스 포인트에서 연결을 끊습니다. 이 도구는 먼저 대상 API 28개 호스트에 대해 자동 레거시 WifiManager 연결 해제를 시도합니다. Android가 이를 거부하면 사용자 작업을 위해 Android의 Wi-Fi 패널을 여는 것으로 돌아갑니다."
+      "description": "현재 Wi-Fi 액세스 포인트에서 연결을 끊습니다. Android가 허용하는 경우 레거시 WifiManager로 먼저 조용히 연결 해제를 시도하며, Android가 거부하면 사용자가 조작하도록 Android Wi-Fi 패널을 엽니다."
     },
     {
       "name": "wifi_forget",
@@ -617,7 +617,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "근처 Wi-Fi 액세스 포인트를 스캔하고 반환하세요. Wi-Fi이 꺼져 있으면 이 도구는 먼저 Wi-Fi를 직접 활성화하려고 시도하고 직접 활성화가 실패하는 경우에만 Android의 Wi-Fi 패널로 대체합니다. 위치 권한 및 장치 위치 서비스가 필요합니다. 결과를 통해 위치에 민감한 네트워크 데이터를 확인할 수 있습니다."
+      "description": "주변 Wi-Fi 액세스 포인트를 검색하여 반환합니다. Wi-Fi가 꺼져 있으면 Android가 허용할 때만 직접 상태 변경을 시도하고 활성화가 실패하면 Android Wi-Fi 패널을 엽니다. 위치 권한과 기기 위치 서비스가 필요합니다. 결과에 위치 관련 민감한 네트워크 정보가 드러날 수 있습니다."
     },
     {
       "name": "wifi_set_enabled",
@@ -625,7 +625,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Android Wi-Fi을 활성화하거나 비활성화합니다. 도구는 먼저 직접 WifiManager 작업을 시도한 다음 Android가 실제로 요청된 상태에 도달했는지 확인합니다. 요청이 실패하거나 보류 중인 경우 사용자 작업을 위해 Android의 Wi-Fi 패널을 여는 것으로 대체됩니다."
+      "description": "Android Wi-Fi를 켜거나 끕니다. Android가 허용하면 공개 작업을 시도한 뒤 요청한 상태에 실제로 도달했는지 확인합니다. 요청이 실패하거나 대기 중이면 사용자 조작을 위해 Android Wi-Fi 패널을 엽니다."
     },
     {
       "name": "wifi_status",
@@ -673,7 +673,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "사용자가 요청한 완전한 새 여행 계획 한 건을 저장합니다. 호스트 컨텍스트에 새 계획 id가 있으면 그 정확한 id를 사용하고, 없으면 명시적이고 안정적인 계획 id를 제공하세요. revision 0, 목적지, 시간대, 선택한 날짜, 활동, 사전 준비 및 짐 목록도 제공하세요. 플러그인 소유권은 호스트의 현재 턴 컨텍스트에 의해 결정되며 모델 JSON의 templateId로 바꿀 수 없습니다. 사용자가 제공한 인원, 총예산 및 departureTime을 포함하세요. 고정 예시 일정으로 대체하지 마세요. 같은 계획 id와 완전히 같은 내용으로 재시도하면 기존 계획을 반환합니다. 기존 id에 다른 내용을 지정하면 거부하며 덮어쓰지 않습니다. 캘린더 일정, 할 일, 예약, 공유 멤버 또는 사진은 만들지 않습니다."
+      "description": "사용자가 요청한 완전한 새 여행 계획 한 건을 저장합니다. 호스트 컨텍스트에 새 계획 id가 있으면 그 정확한 id를 사용하고, 없으면 명시적이고 안정적인 계획 id를 제공하세요. revision 0, 목적지, 시간대, 선택한 날짜, 활동, 사전 준비 및 짐 목록도 제공하세요. 플러그인 소유권은 호스트의 현재 턴 컨텍스트에 의해 결정되며 모델 JSON의 templateId로 바꿀 수 없습니다. 생성 전에 목적지 또는 순서가 있는 도시 경로, 각 도시의 시작일과 종료일, 출발지, 유효한 HH:mm 형식의 출발 시간을 수집하세요. 사용자가 제공하거나 명시적으로 수락한 정보만 사용하세요. 필수 정보가 없으면 질문하고 완성되기 전에는 계획을 생성하거나 저장했다고 말하지 마세요. 다른 저장된 여행, 현재 위치 또는 기본 출발 시간으로 누락된 필드를 지어내지 마세요. 생성 전에 선택 항목인 방문 선호, 여행 속도, 인원, 총예산과 통화, 접근성이나 식이 요구 같은 기타 사항도 한 번 물으세요. 이미 제공된 정보는 활용하고 답변한 질문을 반복하지 마세요. 선택 사항이며 건너뛸 수 있음을 알리고 답변이나 명시적인 건너뛰기 요청 후 진행하세요. 건너뛴 정보는 모르는 상태로 두고 지어내지 마세요. 인원과 총예산이 제공되면 포함하세요. 고정 예시 일정으로 대체하지 마세요. 같은 계획 id와 완전히 같은 내용으로 재시도하면 기존 계획을 반환합니다. 기존 id에 다른 내용을 지정하면 거부하며 덮어쓰지 않습니다. 캘린더 일정, 할 일, 예약, 공유 멤버 또는 사진은 만들지 않습니다."
     },
     {
       "name": "travel_plan_read",
@@ -977,7 +977,7 @@
       "risk": "LOW",
       "approval": "자동",
       "approvalCode": "AUTO",
-      "description": "관련 웹페이지를 검색합니다. 결과 제목, 정확한 출처 URL, 짧은 발췌문과 검색 제공자가 제공하는 날짜가 있으면 반환합니다. 날짜는 출처 메타데이터이며 독립적으로 확인된 게시 시각이 아닙니다. 날짜가 없으면 알 수 없음으로 유지합니다. 검색 근거가 충분하면 바로 사용하고 요청된 답변에 중요한 정보 공백이 있을 때만 페이지를 가져오세요. 최종 답변에서 요약한 각 결과 뒤에 정확한 URL을 유지하세요."
+      "description": "관련 웹페이지를 검색합니다. 결과 제목, 정확한 출처 URL, 짧은 발췌문과 검색 제공자가 제공하는 날짜가 있으면 반환합니다. 날짜는 출처 메타데이터이며 독립적으로 확인된 게시 시각이 아닙니다. 날짜만 있는 정밀도를 유지하세요. 시간과 시간대는 알 수 없으므로 시, 분 또는 자정 시각을 지어내지 마세요. 날짜가 없으면 알 수 없음으로 유지합니다. 검색 근거가 충분하면 바로 사용하고 요청된 답변에 중요한 정보 공백이 있을 때만 페이지를 가져오세요. 최종 답변에서 요약한 각 결과 뒤에 정확한 URL을 유지하세요."
     },
     {
       "name": "scheduled_task_create",

@@ -265,7 +265,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Tắt Bluetooth bằng API vô hiệu hóa kế thừa công khai. Nếu Android từ chối, hãy báo cáo rằng các ứng dụng Android thông thường không thể tắt Bluetooth trên thiết bị này."
+      "description": "Yêu cầu tắt Bluetooth qua API công khai khi Android cho phép. Nếu bị hạn chế hoặc từ chối, mở cài đặt Bluetooth cho người dùng. Việc mở trang cài đặt không chứng minh Bluetooth đã tắt."
     },
     {
       "name": "device_app_activity_snapshot",
@@ -409,7 +409,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Yêu cầu bật Bluetooth. Đối với SDK mục tiêu cũ, điều này trước tiên sẽ thử API kích hoạt công khai, sau đó quay lại giao diện người dùng xác nhận hệ thống của Android khi cần."
+      "description": "Yêu cầu bật Bluetooth. Trên phiên bản Android cũ được hỗ trợ, thử API bật công khai; Android 13 trở lên hạn chế API này với ứng dụng nhắm API 33 trở lên. Nếu bị hạn chế hoặc từ chối, mở giao diện xác nhận hệ thống Android. Yêu cầu hoặc lời nhắc không chứng minh Bluetooth đã bật."
     },
     {
       "name": "system_panel_open",
@@ -585,7 +585,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Đọc danh sách mạng Wi-Fi đã cấu hình/lưu trên Android. Chỉ trả về SSID, networkId, loại bảo mật, có thông tin xác thực hay không, mạng có bị ẩn hay không, trạng thái kết nối hiện tại và trạng thái cấu hình. Không trả về mật khẩu Wi-Fi."
+      "description": "Chỉ đọc mạng Wi-Fi đã cấu hình/lưu khi Android cho phép truy cập. Android 10 trở lên chặn API này đối với ứng dụng thông thường nhắm API 29 trở lên. Chỉ trả về SSID, networkId, loại bảo mật, có thông tin xác thực hay không, mạng có bị ẩn hay không, trạng thái kết nối hiện tại và trạng thái cấu hình. Không trả về mật khẩu Wi-Fi."
     },
     {
       "name": "wifi_connect",
@@ -593,7 +593,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Kết nối với mạng Wi-Fi. Trước tiên, công cụ này sẽ kiểm tra cấu hình Wi-Fi đã lưu của Android để tìm SSID và kết nối trực tiếp nếu nó tồn tại. Nếu không được lưu, nó sẽ sử dụng cụm mật khẩu được cung cấp để thêm/kết nối mạng hoặc quay lại bảng điều khiển Wi-Fi của Android khi cần nhập mật khẩu."
+      "description": "Kết nối mạng Wi-Fi qua API cũ chỉ khi Android cho phép. Android 10 trở lên chặn thay đổi mạng đã lưu và thay đổi bằng mật khẩu đối với ứng dụng nhắm API 29 trở lên, nên công cụ mở bảng Wi-Fi của Android để người dùng thao tác. Chỉ xác nhận thành công sau khi kiểm tra SSID đang hoạt động."
     },
     {
       "name": "wifi_disconnect",
@@ -601,7 +601,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Ngắt kết nối khỏi điểm truy cập Wi-Fi hiện tại. Trước tiên, công cụ này thử ngắt kết nối WifiManager cũ một cách im lặng đối với các máy chủ API 28 mục tiêu; nếu Android từ chối, nó sẽ quay lại mở bảng điều khiển Wi-Fi của Android để người dùng thực hiện thao tác."
+      "description": "Ngắt kết nối khỏi điểm truy cập Wi-Fi hiện tại. Trước tiên thử ngắt âm thầm qua WifiManager cũ khi Android cho phép; nếu Android từ chối, mở bảng Wi-Fi của Android để người dùng thao tác."
     },
     {
       "name": "wifi_forget",
@@ -617,7 +617,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Quét và trả lại các điểm truy cập Wi-Fi gần đó. Nếu Wi-Fi tắt, trước tiên, công cụ này sẽ cố gắng bật Wi-Fi trực tiếp và chỉ quay lại bảng điều khiển Wi-Fi của Android nếu bật trực tiếp không thành công. Yêu cầu quyền truy cập vị trí và dịch vụ định vị thiết bị. Kết quả có thể tiết lộ dữ liệu mạng nhạy cảm với vị trí."
+      "description": "Quét và trả về các điểm truy cập Wi-Fi gần đó. Nếu Wi-Fi tắt, chỉ thử đổi trạng thái trực tiếp khi Android cho phép; nếu bật trực tiếp thất bại, mở bảng Wi-Fi của Android. Cần quyền vị trí và dịch vụ định vị thiết bị. Kết quả có thể tiết lộ dữ liệu mạng nhạy cảm về vị trí."
     },
     {
       "name": "wifi_set_enabled",
@@ -625,7 +625,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Bật hoặc tắt Wi-Fi Android. Trước tiên, công cụ này thử thao tác WifiManager trực tiếp, sau đó kiểm tra xem Android có thực sự đạt đến trạng thái được yêu cầu hay không; nếu yêu cầu không thành công hoặc vẫn đang chờ xử lý, yêu cầu sẽ quay lại mở bảng điều khiển Wi-Fi của Android để người dùng thực hiện hành động."
+      "description": "Bật hoặc tắt Wi-Fi Android. Khi Android cho phép, thử thao tác công khai rồi kiểm tra đã thực sự đạt trạng thái yêu cầu chưa; nếu yêu cầu thất bại hoặc còn chờ, mở bảng Wi-Fi của Android để người dùng thao tác."
     },
     {
       "name": "wifi_status",
@@ -673,7 +673,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Lưu một kế hoạch du lịch mới hoàn chỉnh theo yêu cầu của người dùng. Dùng đúng id kế hoạch mới từ ngữ cảnh ứng dụng chủ nếu có, nếu không thì cung cấp id rõ ràng và ổn định. Cung cấp revision 0, điểm đến, múi giờ, các ngày đã chọn, hoạt động, việc chuẩn bị và hành lý. Quyền sở hữu plugin do ngữ cảnh lượt hiện tại của ứng dụng chủ quyết định; templateId trong JSON của mô hình không thể thay đổi quyền này. Bao gồm số người, tổng ngân sách và departureTime nếu được cung cấp. Không thay bằng lịch trình mẫu cố định. Thử lại nội dung giống hệt với cùng id sẽ trả về kế hoạch hiện có; nội dung khác cho id đã tồn tại bị từ chối, không ghi đè. Không tạo sự kiện lịch, việc cần làm, đặt chỗ, thành viên chia sẻ hay ảnh."
+      "description": "Lưu một kế hoạch du lịch mới hoàn chỉnh theo yêu cầu của người dùng. Dùng đúng id kế hoạch mới từ ngữ cảnh ứng dụng chủ nếu có, nếu không thì cung cấp id rõ ràng và ổn định. Cung cấp revision 0, điểm đến, múi giờ, các ngày đã chọn, hoạt động, việc chuẩn bị và hành lý. Quyền sở hữu plugin do ngữ cảnh lượt hiện tại của ứng dụng chủ quyết định; templateId trong JSON của mô hình không thể thay đổi quyền này. Trước khi tạo, thu thập điểm đến hoặc tuyến các thành phố theo thứ tự, ngày bắt đầu và kết thúc tại mỗi thành phố, điểm khởi hành và giờ khởi hành hợp lệ theo HH:mm. Chỉ dùng thông tin người dùng cung cấp hoặc chấp nhận rõ ràng. Hỏi thông tin bắt buộc còn thiếu; không tạo hoặc tuyên bố lưu kế hoạch cho đến khi đầy đủ. Không tự điền từ chuyến đi khác đã lưu, vị trí hiện tại hay giờ khởi hành mặc định. Trước khi tạo, cũng hỏi một lần về sở thích tham quan, nhịp độ, số người, tổng ngân sách và tiền tệ, cùng yêu cầu khác như hỗ trợ tiếp cận hoặc ăn uống; đây là thông tin tùy chọn. Dùng thông tin đã có và không hỏi lại câu đã trả lời. Nói rõ có thể bỏ qua và chỉ tiếp tục sau câu trả lời hoặc yêu cầu bỏ qua rõ ràng. Để thông tin bỏ qua ở trạng thái chưa biết, không bịa. Bao gồm số người và tổng ngân sách khi được cung cấp. Không thay bằng lịch trình mẫu cố định. Thử lại nội dung giống hệt với cùng id sẽ trả về kế hoạch hiện có; nội dung khác cho id đã tồn tại bị từ chối, không ghi đè. Không tạo sự kiện lịch, việc cần làm, đặt chỗ, thành viên chia sẻ hay ảnh."
     },
     {
       "name": "travel_plan_read",
@@ -977,7 +977,7 @@
       "risk": "LOW",
       "approval": "Tự động",
       "approvalCode": "AUTO",
-      "description": "Tìm các trang web liên quan. Trả tiêu đề, URL nguồn chính xác, đoạn trích ngắn và ngày do nhà cung cấp tìm kiếm cung cấp nếu có. Ngày là siêu dữ liệu nguồn, không phải thời điểm xuất bản đã được kiểm chứng độc lập. Không có ngày thì vẫn để chưa biết. Dùng trực tiếp bằng chứng tìm kiếm khi đủ; chỉ tải trang để giải quyết thiếu sót quan trọng trong câu trả lời được yêu cầu. Giữ URL chính xác sau mỗi kết quả được tóm tắt trong câu trả lời cuối."
+      "description": "Tìm các trang web liên quan. Trả tiêu đề, URL nguồn chính xác, đoạn trích ngắn và ngày do nhà cung cấp tìm kiếm cung cấp nếu có. Ngày là siêu dữ liệu nguồn, không phải thời điểm xuất bản đã được kiểm chứng độc lập. Giữ độ chính xác chỉ đến ngày: không có giờ và múi giờ, nên không tự đặt giờ, phút hoặc nửa đêm. Không có ngày thì vẫn để chưa biết. Dùng trực tiếp bằng chứng tìm kiếm khi đủ; chỉ tải trang để giải quyết thiếu sót quan trọng trong câu trả lời được yêu cầu. Giữ URL chính xác sau mỗi kết quả được tóm tắt trong câu trả lời cuối."
     },
     {
       "name": "scheduled_task_create",

@@ -8,6 +8,29 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.3.5] - 2026-11-11
+
+### Added and improved
+
+- News workspace with bookmarks, notes and source-linked To-do Center entries. Fetch reports again without replacing earlier results.
+- Independent, remembered model selection for each conversation.
+- Unified Message Center with search, read/unread filters, read acknowledgements and selected-item removal.
+- Spoken-reply and news pause/resume, playback speed and supported navigation controls, including media notifications.
+- Public sharing of one completed question-and-answer pair when the publication service is enabled, excluding reasoning, tool traces and attachments.
+
+### Breaking change
+
+- Online-model endpoints require HTTPS, including localhost and local-network servers. Migrate existing HTTP endpoints before upgrading an HTTP-only setup.
+
+### Scope
+
+- Publication creation and its worker default to disabled and require backend deployment/configuration. News webpage support does not establish a complete Android news-sharing entry flow.
+- Public-page Listen, Report and Subscribe controls open download guidance only, not browser playback, report submission or subscription creation.
+- Configurable voice point waivers default to off and do not promise permanently free voice services or bypass account/model access checks.
+- Google includes shared news, Message Center and recording surfaces, not direct-only floating controls or external-plugin execution. Play review and rollout are independent.
+- CN uses independent domestic services and updates with a domestic toolbox catalog and shared GitHub plugin repository. GitHub access is network-dependent, and the CN APK is not a default public GitHub asset.
+- Offline speech does not make network-backed features offline. Seamless lock-screen playback or recovery after process termination is not guaranteed. Lebest remains discontinued.
+
 ## [v0.3.4] - 2026-11-06
 
 ### Added and improved
