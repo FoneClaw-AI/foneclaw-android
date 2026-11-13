@@ -8,6 +8,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.3.6] - 2026-11-13
+
+### Added and improved
+
+- Share news reports or individual stories as text, or as public links for eligible structured content when the publication service is enabled.
+- More reliable reading of historical news formats, retaining unclear content as original text. Refetches use earlier successful results for the same occurrence as exclusion context, without a duplicate-free guarantee.
+- Clearer model-waiting feedback and handling of interrupted streamed replies.
+- Confirmation before opening subscription purchases, with attachment drafts retained after subscription or points errors.
+- More reliable travel-plan saving and targeted edits, preserving unrequested content.
+- Grouped task-result notifications that resolve currently posted results and distinguish old dismissals from newer results.
+- Eligible Free allowances can renew after the active Free entitlement expires when enabled, not on exhaustion of an unexpired allowance and not as unlimited usage.
+
+### Scope and compatibility
+
+- Public links require matching backend deployment, storage and runtime configuration. Creation and worker processing default to off with runtime overrides, and guest creation has its own control. Recovered original-text news is not necessarily eligible for publication.
+- Public-page Listen, Report and Subscribe actions remain download guidance only.
+- Managed waiting feedback, Responses streaming/tool continuation and Free renewal depend on matching services, provider configuration and verified entitlement eligibility. App distribution does not establish backend deployment.
+- Online models continue to require HTTPS, as introduced in 0.3.5. Backend V47 migration and downgrade compatibility require separate verification.
+- Google shares these built-in flows, not external Android APK plugin execution or direct-only floating controls. AAB submission and Play rollout are separate.
+- CN uses independent domestic services and updates with no Firebase. Offline synthesis does not make online services offline. No seamless process-restart recovery or device-acceptance result is asserted. Lebest remains discontinued.
+
 ## [v0.3.5] - 2026-11-11
 
 ### Added and improved
