@@ -8,6 +8,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.3.7] - 2026-11-18
+
+### Added and improved
+
+- Five locally animated pet companions with names and independent reply styles, a refreshed direct-distribution startup guide and a personal first greeting for newly completed onboarding.
+- Clearer Ask entry points, streamed replies, reasoning and news-table presentation, with less tool-protocol text exposed.
+- Confirmed chat-based changes between quick news summaries and standard research. Quick mode searches once without opening articles.
+- Improved article-body extraction, search-failure handling and task-record navigation.
+- Removing an active news report also requests a stop for its exact execution without deleting task history.
+- Clearer failed voice-memo summary/chapter retries and safer cancellation before deleting multiple travel drafts.
+
+### Scope and compatibility
+
+- Pet presentation does not change permissions or approvals. News presets stay off by default. Memory-driven recommendations and proactive companion notifications are not claimed as newly shipped.
+- Existing public sharing remains gated by content eligibility, enabled services and review. Publication creation/worker default to off with runtime controls. Public-page Listen, Report and Subscribe remain download guidance.
+- Article access, cloud services, voice and models depend on network, permissions and account access. HTTPS remains required for online models.
+- Backend travel queries require deployment/configuration and are not integrated into the current Android web-research travel workflow. Development acceptance is not production availability. No complete booking, ticketing or route-matrix service is claimed.
+- Google retains its legacy startup guide and shared built-in flows, not direct floating controls or external APK plugin execution, and is denied by dedicated backend travel APIs. Play submission and rollout are independent.
+- CN retains shared built-in flows with independent domestic services and no Firebase/FCM token provider. Offline speech is not offline AI. Lebest remains discontinued.
+
 ## [v0.3.6] - 2026-11-13
 
 ### Added and improved

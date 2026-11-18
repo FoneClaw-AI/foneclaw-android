@@ -97,7 +97,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Prend une nouvelle photo et la renvoie en pièce jointe image lorsque la vision du modèle est disponible. Utilisez-le lorsque l'intention de l'utilisateur est de capturer une nouvelle photo. Laissez lensFacing désactivé ou automatique pour une capture photo normale. Choisissez lensFacing=front uniquement pour une intention de face ou de selfie ; choisissez de revenir uniquement lorsque l'utilisateur demande explicitement la caméra arrière. Gardez explicitLensSelection false pour la capture de photo simple/par défaut, même si l'objectif physique par défaut est de retour. Définissez explicitLensSelection sur true uniquement lorsque l’utilisateur demande explicitement une capture avant, arrière, arrière ou selfie. N'appelez pas camera(command=open_photo) après cet outil à moins que l'utilisateur ne demande explicitement à afficher ou à ouvrir la photo. Appelez cet outil directement. Capture utilise d'abord la caméra système native. La capture avant/arrière explicite peut utiliser le backend direct uniquement si l'appareil photo natif ne peut pas honorer l'objectif demandé. Ne demandez pas à l'utilisateur d'accorder l'autorisation avant d'appeler cet outil."
+      "description": "Prend une nouvelle photo et la renvoie en pièce jointe image lorsque la vision du modèle est disponible. Utilisez cet outil pour prendre une nouvelle photo. Pour une prise normale, laissez lensFacing non défini ou sur auto. Choisissez lensFacing=front uniquement pour la caméra avant ou un selfie, et back uniquement sur demande explicite de caméra arrière. Gardez explicitLensSelection sur false pour une prise normale ou par défaut, même si l’objectif physique par défaut est arrière. Mettez explicitLensSelection sur true uniquement sur demande explicite de caméra avant, arrière ou selfie. N’appelez pas ensuite camera(command=open_photo) sauf demande explicite d’afficher ou d’ouvrir la photo. Appelez cet outil directement. La caméra native du système est utilisée en premier. Une prise avant/arrière explicite ne peut utiliser le backend direct que si la caméra native ne peut respecter l’objectif demandé. Ne demandez pas d’autorisation à l’utilisateur avant d’appeler l’outil."
     },
     {
       "name": "cross_app_read_screen",
@@ -137,7 +137,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Ouvrez une application Android lançable par nom de package ou nom d'affichage de l'application installée. Cela modifie l'application au premier plan et peut exposer l'écran de cette application. Utilisez un nom de package exact lorsque cela est possible. Si le résultat est ambigu, demandez à l'utilisateur de choisir un colis retourné."
+      "description": "Ouvre une application Android lançable par nom de package ou nom affiché de l’application installée. Change l’application au premier plan et peut exposer son écran. Utilisez-la si le seul résultat demandé est l’ouverture ; après réussite, arrêtez sans lire ni vérifier l’écran. Si la tâche demande aussi de lire, rechercher, saisir ou toucher dans l’application, utilisez l’outil combiné d’ouverture et de lecture pour vérifier les prérequis GUI avant l’ouverture. Préférez un outil de domaine ou de capture dédié s’il peut réaliser le résultat demandé. Utilisez si possible un nom de package exact. Si le résultat est ambigu, demandez à l’utilisateur de choisir parmi les packages d’application renvoyés."
     },
     {
       "name": "play_store_check_app",
@@ -257,7 +257,7 @@
       "risk": "LOW",
       "approval": "Automatique",
       "approvalCode": "AUTO",
-      "description": "Renvoie l'état actuel de l'adaptateur Bluetooth : activé, désactivé, tournant_on, tournant_off ou inconnu. Identifiants techniques: turning_on, turning_off."
+      "description": "Renvoie l’état actuel de l’adaptateur Bluetooth : on (activé), off (désactivé), turning_on (activation en cours), turning_off (désactivation en cours) ou unknown (inconnu)."
     },
     {
       "name": "close_bluetooth",
@@ -273,7 +273,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Renvoie un instantané compact de l’activité récente de l’application à partir d’Android UsageStats. Si l’accès à l’utilisation ou l’activité récente est indisponible, renvoie status=skipped afin que les autres vérifications d’état puissent continuer. Ce n’est pas un moniteur de processus en arrière-plan en direct."
+      "description": "Renvoie un instantané compact de l’activité récente des applications depuis Android UsageStats. Nécessite l’accès aux données d’utilisation. En l’absence d’activité récente disponible, renvoie status=skipped pour permettre les autres contrôles d’état. Ce n’est pas un moniteur en direct des processus en arrière-plan."
     },
     {
       "name": "device_app_permission_audit",
@@ -609,7 +609,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Oubliez un réseau Wi-Fi enregistré. L'outil tente d'abord de supprimer le réseau silencieux existant de WifiManager, puis revient au panneau Wi-Fi d'Android pour l'action de l'utilisateur. Identifiants techniques: removeNetwork."
+      "description": "Oublie un réseau Wi-Fi enregistré. L’outil tente d’abord l’ancien appel removeNetwork de WifiManager sans interface, puis ouvre le panneau Wi-Fi d’Android pour une action de l’utilisateur."
     },
     {
       "name": "wifi_scan_networks",
@@ -793,7 +793,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Créez un événement de calendrier Android. Pour un événement sur toute la journée, définissez allDay=true, avec le début à minuit local le jour concerné et la fin exclusive à minuit local le lendemain.Début et fin obligatoires. Si la demande ne précise ni fin ni durée déterminable, demandez ; n’inventez jamais de durée. Rappel facultatif par défaut de 30 minutes. Un nom de lieu fourni par l'utilisateur est suffisant et doit être transmis directement en tant que locationName. Ne recherchez pas une adresse ou des coordonnées exactes à moins que l'utilisateur ne demande explicitement de vérifier, résoudre, choisir ou naviguer vers le lieu. Préférez startLocalDateTime/endLocalDateTime en yyyy-MM-dd HH:mm[:ss] pour les dates utilisateur et les dates relatives ; l'outil les analysera dans le fuseau horaire de l'appareil. Ne créez pas d'événements à partir des millisecondes d'époque calculées par le modèle. Utilisez calendarId=0 sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier. Après la création, utilisez le résultat de l'outil actualStart/actualEnd comme heure de création destinée à l'utilisateur. Identifiants techniques: calendarId=0."
+      "description": "Créez un événement de calendrier Android. Pour un événement sur toute la journée, définissez allDay=true, avec le début à minuit local le jour concerné et la fin exclusive à minuit local le lendemain.Début et fin obligatoires. Si la demande ne précise ni fin ni durée déterminable, demandez ; n’inventez jamais de durée. Rappel facultatif par défaut de 30 minutes. Un nom de lieu fourni par l'utilisateur est suffisant et doit être transmis directement en tant que locationName. Ne recherchez pas une adresse ou des coordonnées exactes à moins que l'utilisateur ne demande explicitement de vérifier, résoudre, choisir ou naviguer vers le lieu. Préférez startLocalDateTime/endLocalDateTime en yyyy-MM-dd HH:mm[:ss] pour les dates utilisateur et les dates relatives ; l'outil les analysera dans le fuseau horaire de l'appareil. Ne créez pas d'événements à partir des millisecondes d'époque calculées par le modèle. Utilisez calendarId=0 sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier. Après la création, utilisez le résultat de l'outil actualStart/actualEnd comme heure de création destinée à l'utilisateur."
     },
     {
       "name": "calendar_delete_event",
@@ -809,7 +809,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Répertoriez les calendriers Android inscriptibles. Utilisez-le pour permettre à l'utilisateur de choisir un calendrier ; ne supposez pas que calendarId=1 est le calendrier local ou cible. Identifiants techniques: calendarId=1."
+      "description": "Répertoriez les calendriers Android inscriptibles. Utilisez-le pour permettre à l'utilisateur de choisir un calendrier ; ne supposez pas que calendarId=1 est le calendrier local ou cible."
     },
     {
       "name": "calendar_list_events",
@@ -817,7 +817,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Répertoriez les événements du calendrier Android dans une plage horaire concrète. À utiliser pour les demandes telles que le programme d'aujourd'hui, le programme de demain, les événements existants ou les événements de cette semaine. Préférez startLocalDateTime/endLocalDateTime en yyyy-MM-dd HH:mm[:ss] ; l'outil les analysera dans le fuseau horaire de l'appareil. Ne devinez pas calendarId ; utilisez calendarId=0 pour rechercher tous les calendriers, sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier. Identifiants techniques: calendarId, calendarId=0."
+      "description": "Répertoriez les événements du calendrier Android dans une plage horaire concrète. À utiliser pour les demandes telles que le programme d'aujourd'hui, le programme de demain, les événements existants ou les événements de cette semaine. Préférez startLocalDateTime/endLocalDateTime en yyyy-MM-dd HH:mm[:ss] ; l'outil les analysera dans le fuseau horaire de l'appareil. Ne devinez pas calendarId ; utilisez calendarId=0 pour rechercher tous les calendriers, sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier."
     },
     {
       "name": "calendar_open_event",
@@ -833,7 +833,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Recherchez les événements du calendrier Android par mot-clé dans une plage horaire concrète. À utiliser avant d'ouvrir, de mettre à jour ou de supprimer un événement lorsque l'utilisateur décrit l'événement par son titre ou son contenu. Préférez startLocalDateTime/endLocalDateTime en yyyy-MM-dd HH:mm[:ss] ; l'outil les analysera dans le fuseau horaire de l'appareil. Ne devinez pas calendarId ; utilisez calendarId=0 pour rechercher tous les calendriers, sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier. Identifiants techniques: calendarId, calendarId=0."
+      "description": "Recherchez les événements du calendrier Android par mot-clé dans une plage horaire concrète. À utiliser avant d'ouvrir, de mettre à jour ou de supprimer un événement lorsque l'utilisateur décrit l'événement par son titre ou son contenu. Préférez startLocalDateTime/endLocalDateTime en yyyy-MM-dd HH:mm[:ss] ; l'outil les analysera dans le fuseau horaire de l'appareil. Ne devinez pas calendarId ; utilisez calendarId=0 pour rechercher tous les calendriers, sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier."
     },
     {
       "name": "calendar_update_event",
@@ -841,7 +841,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Mettez à jour un événement du calendrier Android par identifiant. Recherchez/répertoriez d'abord les événements lorsque l'utilisateur décrit la cible en langage naturel et transmettez les détails de la cible connue avec les champs modifiés. Ne devinez pas l'identifiant du calendrier ou de l'événement ; recherchez tous les calendriers avec calendarId = 0, sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier. Les champs de texte vides sont ignorés. Utilisez blank startLocalDateTime/endLocalDateTime pour conserver les heures existantes. Utilisez rappelMinutes=-2 pour conserver les rappels, -1 pour supprimer des rappels et >=0 pour remplacer les rappels. Identifiants techniques: calendarId, calendarId=0, reminderMinutes=-2. yyyy-MM-dd HH:mm[:ss]."
+      "description": "Mettez à jour un événement du calendrier Android par identifiant. Recherchez/répertoriez d'abord les événements lorsque l'utilisateur décrit la cible en langage naturel et transmettez les détails de la cible connue avec les champs modifiés. Ne devinez ni calendarId ni l’identifiant de l’événement ; recherchez tous les calendriers avec calendarId=0, sauf si l'utilisateur a explicitement sélectionné un identifiant de calendrier. Les champs de texte vides sont ignorés. Utilisez blank startLocalDateTime/endLocalDateTime pour conserver les heures existantes. Utilisez reminderMinutes=-2 pour conserver les rappels, -1 pour supprimer des rappels et >=0 pour remplacer les rappels. yyyy-MM-dd HH:mm[:ss]."
     },
     {
       "name": "memo_create",
@@ -913,7 +913,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Supprimez définitivement le cache SysInfo local FoneClaw correspondant uniquement. Cela ne supprime jamais les notifications Android d'origine, les SMS, les journaux d'appels ou les événements du calendrier. Au moins un filtre est requis, sauf si deleteAll=true. Plusieurs filtres sont combinés avec AND."
+      "description": "Supprime définitivement uniquement le cache local SysInfo de FoneClaw correspondant. Ne supprime jamais les notifications Android d’origine, SMS, courriels, journaux d’appels ou événements du calendrier. Au moins un filtre est requis sauf si deleteAll=true. Plusieurs filtres sont combinés avec AND."
     },
     {
       "name": "sysinfo_mark_reviewed",
@@ -969,7 +969,7 @@
       "risk": "LOW",
       "approval": "Automatique",
       "approvalCode": "AUTO",
-      "description": "Récupère une page HTTP/HTTPS par URL et renvoie du texte lisible limité à maxChars caractères. Lecture HTTP seule, pas de navigateur interactif ni de rendu JavaScript ; un texte vide ou tronqué ne prouve pas la lecture intégrale."
+      "description": "Récupère une page HTTP/HTTPS par URL et renvoie du texte lisible limité à maxChars caractères. Utilisez l’URL source exacte fournie par l’utilisateur ou les éléments probants : ne remplacez jamais l’hôte, le chemin ni les paramètres de requête. Le fragment peut être retiré car il n’est pas envoyé par HTTP. Les exécutions explicites de NewsBrief exigent du texte reconnu comme corps de l’article, pas la navigation, les commentaires ni les publicités. Lecture HTTP seule, pas de navigateur interactif ni de rendu JavaScript ; un texte vide ou tronqué ne prouve pas la lecture intégrale."
     },
     {
       "name": "web_search",
@@ -993,7 +993,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Permanently delete a local automation by id and cancel its triggers."
+      "description": "Supprime définitivement une automatisation locale par id et annule ses déclencheurs."
     },
     {
       "name": "scheduled_task_list",
@@ -1001,7 +1001,7 @@
       "risk": "LOW",
       "approval": "Automatique",
       "approvalCode": "AUTO",
-      "description": "List the user's local automations (time-triggered scheduled tasks). Use the product name Automations when guiding users to the sidebar. Returns each task id, title, local trigger time, repeat rule, and enabled state. Read-only."
+      "description": "Liste les automatisations locales de l’utilisateur (tâches déclenchées à une heure prévue). Utilisez le nom du produit Automations pour orienter vers la barre latérale. Renvoie pour chaque tâche son id, titre, heure locale de déclenchement, règle de répétition, état d’activation, type d’exécution et research_mode effectif pour les synthèses d’actualité. Lecture seule."
     },
     {
       "name": "scheduled_task_run_now",
@@ -1017,7 +1017,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Enable or disable a local automation by id. Disabling cancels future system triggers but keeps the task and its run history."
+      "description": "Active ou désactive une automatisation locale par id. La désactivation annule les futurs déclencheurs système, mais conserve la tâche et son historique d’exécution."
     },
     {
       "name": "scheduled_task_update",
@@ -1025,7 +1025,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Modifie les instructions futures d’une automatisation existante. Utilisez d’abord scheduled_task(command=list) pour l’identifier et conservez les autres instructions. Ne crée ni ne lance de tâche. Préserve titre, horaire et activation. Demandez laquelle si ambiguë."
+      "description": "Modifie l’instruction et/ou le mode de recherche d’actualité pour les futures exécutions d’une automatisation existante. Identifiez-la d’abord avec scheduled_task(command=list) et conservez les instructions sans rapport. Ne crée pas de tâche et ne l’exécute pas maintenant. Préserve titre, horaire et activation. Seules les tâches NEWS_BRIEF acceptent researchMode. quick_summary autorise au plus une recherche et aucune récupération de page ; standard permet la recherche normale multisource et la récupération de pages dans les limites existantes. Pour modifier uniquement le mode, omettez prompt ; ne réécrivez pas l’instruction pour simuler ce changement. Modifier prompt sans researchMode efface le mode de recherche prédéfini précédent ; passez researchMode explicitement si l’utilisateur souhaite ce mode avec la nouvelle instruction. Demandez quelle tâche si la cible est ambiguë."
     },
     {
       "name": "shortcut_save_agent_prompt",

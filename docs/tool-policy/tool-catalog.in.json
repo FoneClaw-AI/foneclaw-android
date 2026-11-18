@@ -97,7 +97,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Ambil foto baru dan kembalikan sebagai lampiran gambar jika visi model tersedia. Gunakan ini saat pengguna ingin mengambil foto baru. Biarkan lensFacing tidak disetel atau otomatis untuk pengambilan foto normal. Pilih lensFacing=front only untuk menghadap ke depan atau selfie; pilih kembali hanya ketika pengguna secara eksplisit meminta kamera belakang. Pertahankan eksplisitLensSelection false untuk pengambilan foto biasa/default, meskipun lensa fisik default kembali. Setel eksplisitLensSelection ke benar hanya ketika pengguna secara eksplisit meminta pengambilan gambar depan, belakang, belakang, atau selfie. Jangan panggil camera(command=open_photo) setelah alat ini kecuali pengguna secara eksplisit meminta untuk melihat atau membuka foto. Hubungi alat ini secara langsung. Capture uses the native system camera first. Pengambilan gambar depan/belakang secara eksplisit dapat menggunakan backend langsung hanya jika kamera asli tidak dapat memenuhi lensa yang diminta. Jangan meminta pengguna untuk memberikan izin sebelum memanggil alat ini. Pengenal teknis: explicitLensSelection."
+      "description": "Ambil foto baru dan kembalikan sebagai lampiran gambar jika visi model tersedia. Gunakan ketika pengguna ingin mengambil foto baru. Untuk foto normal biarkan lensFacing tidak disetel atau gunakan auto. Pilih lensFacing=front hanya untuk kamera depan atau swafoto; pilih back hanya jika pengguna secara eksplisit meminta kamera belakang. Pertahankan explicitLensSelection sebagai false untuk foto biasa atau bawaan meskipun lensa fisik bawaan adalah belakang. Setel explicitLensSelection ke true hanya jika pengguna secara eksplisit meminta kamera depan, belakang, atau swafoto. Jangan panggil camera(command=open_photo) setelahnya kecuali pengguna secara eksplisit meminta melihat atau membuka foto. Panggil alat ini langsung. Kamera sistem native digunakan terlebih dahulu. Pengambilan depan/belakang yang diminta eksplisit hanya boleh menggunakan backend langsung jika kamera native tidak dapat memenuhi lensa yang diminta. Jangan minta pengguna memberikan izin sebelum memanggil alat."
     },
     {
       "name": "cross_app_read_screen",
@@ -137,7 +137,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Buka aplikasi Android yang dapat diluncurkan berdasarkan nama paket atau nama tampilan aplikasi yang diinstal. Ini mengubah aplikasi latar depan dan mungkin mengekspos layar aplikasi tersebut. Gunakan nama paket yang tepat bila memungkinkan. Jika hasilnya ambigu, minta pengguna untuk memilih satu paket yang dikembalikan."
+      "description": "Buka aplikasi Android yang dapat diluncurkan berdasarkan nama paket atau nama tampilan aplikasi terpasang. Ini mengubah aplikasi latar depan dan dapat menampilkan layarnya. Gunakan jika hasil yang diminta hanya membuka aplikasi; berhenti setelah berhasil tanpa membaca atau memverifikasi layar. Jika tugas juga perlu membaca, mencari, mengetik, atau mengetuk di dalamnya, gunakan alat gabungan pembuka dan pembaca agar prasyarat GUI diperiksa sebelum membuka. Utamakan alat domain atau pengambilan gambar khusus bila dapat menyelesaikan permintaan. Gunakan nama paket persis bila memungkinkan. Jika hasil ambigu, minta pengguna memilih salah satu paket aplikasi yang dikembalikan."
     },
     {
       "name": "play_store_check_app",
@@ -153,7 +153,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Buka halaman detail aplikasi Google Play tertentu berdasarkan nama paket persisnya, ketuk Instal, dan tunggu hingga instalasi selesai. Alat ini tidak membuka aplikasi yang diinstal. Gunakan hanya ketika nama paket Android yang tepat diketahui. Jangan pernah menggunakan ini untuk hasil pencarian yang tidak jelas atau untuk menebak aplikasi pertama. Jika nama paket tidak diketahui, tanyakan terlebih dahulu paket aplikasi yang sebenarnya kepada pengguna. Berhenti jika Google Play menampilkan UI berbayar, pembelian, langganan, pembaruan, ambigu, atau jika pemasangan tidak selesai sebelum waktu habis. Pengenal teknis: packageName."
+      "description": "Buka halaman detail aplikasi Google Play tertentu dengan nama paket persis, ketuk Instal, lalu tunggu pemasangan selesai. Alat ini tidak membuka aplikasi terpasang. Gunakan hanya jika packageName Android yang tepat diketahui. Jangan pernah gunakan untuk hasil pencarian samar atau menebak aplikasi pertama. Jika packageName tidak diketahui, tanyakan paket aplikasi yang tepat kepada pengguna terlebih dahulu. Berhenti jika Google Play menampilkan aplikasi berbayar, pembelian, langganan, pembaruan, antarmuka ambigu, atau jika pemasangan belum selesai saat waktu habis."
     },
     {
       "name": "screen_ime_enter",
@@ -257,7 +257,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Mengembalikan status adaptor Bluetooth saat ini: hidup, mati, hidup_hidup, mati_mati, atau tidak diketahui. Pengenal teknis: turning_on, turning_off."
+      "description": "Kembalikan status adaptor Bluetooth saat ini: on (hidup), off (mati), turning_on (sedang dihidupkan), turning_off (sedang dimatikan), atau unknown (tidak diketahui)."
     },
     {
       "name": "close_bluetooth",
@@ -273,7 +273,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Mengembalikan cuplikan aktivitas aplikasi terkini yang ringkas dari Android UsageStats. Jika akses penggunaan atau aktivitas terkini tidak tersedia, kembalikan status=skipped agar pemeriksaan status lainnya dapat melanjutkan. Ini bukan monitor proses latar belakang langsung."
+      "description": "Kembalikan cuplikan ringkas aktivitas aplikasi terkini dari Android UsageStats. Memerlukan akses penggunaan. Jika aktivitas terkini tidak tersedia, kembalikan status=skipped agar pemeriksaan kondisi lain dapat berlanjut. Ini bukan pemantau proses latar belakang waktu nyata."
     },
     {
       "name": "device_app_permission_audit",
@@ -345,7 +345,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Mengembalikan zona waktu sistem Android saat ini serta tanggal dan waktu lokal yang diformat untuk panggilan alat yang bergantung pada waktu. Setel verifyWithNtp=true hanya ketika waktu sistem diperdebatkan atau referensi online diperlukan. Verifikasi NTP menggunakan ntp1.aliyun.com dan tidak pernah mengubah jam sistem. Pengenal teknis: verifyWithNtp=true."
+      "description": "Mengembalikan zona waktu sistem Android saat ini serta tanggal dan waktu lokal yang diformat untuk panggilan alat yang bergantung pada waktu. Setel verifyWithNtp=true hanya ketika waktu sistem diperdebatkan atau referensi online diperlukan. Verifikasi NTP menggunakan ntp1.aliyun.com dan tidak pernah mengubah jam sistem."
     },
     {
       "name": "dnd_open_policy_access_settings",
@@ -609,7 +609,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Lupakan jaringan Wi-Fi yang tersimpan. Alat ini pertama-tama mencoba menghapusNetwork WifiManager lama secara senyap, lalu kembali ke panel Wi-Fi Android untuk tindakan pengguna. Pengenal teknis: removeNetwork."
+      "description": "Lupakan jaringan Wi-Fi tersimpan. Alat terlebih dahulu mencoba panggilan removeNetwork lama dari WifiManager secara senyap, lalu beralih membuka panel Wi-Fi Android agar pengguna bertindak."
     },
     {
       "name": "wifi_scan_networks",
@@ -713,7 +713,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Pindahkan hingga 20 messageRef yang tepat ke sampah, atau hapus secara permanen hanya jika pengguna secara eksplisit meminta penghapusan permanen. Jangan pernah mencoba lagi hasil yang tidak pasti. Pengenal teknis: messageRefs."
+      "description": "Pindahkan hingga 20 messageRefs yang persis ke sampah, atau hapus permanen hanya jika pengguna meminta penghapusan permanen secara eksplisit. Jangan pernah mengulang percobaan jika hasilnya tidak pasti."
     },
     {
       "name": "mail_list",
@@ -793,7 +793,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Buat acara kalender Android. Untuk acara sepanjang hari, tetapkan allDay=true, gunakan tengah malam lokal pada hari mulai dan tengah malam lokal hari berikutnya secara eksklusif sebagai akhir.Awal dan akhir wajib. Jika akhir atau durasi tidak dapat ditentukan dari permintaan, tanyakan; jangan mengarang durasi. Pengingat opsional bawaan 30 menit. Nama tempat yang disediakan pengguna sudah cukup dan harus diteruskan langsung sebagai locationName. Jangan menelusuri alamat atau koordinat yang tepat kecuali pengguna secara eksplisit meminta untuk memverifikasi, menyelesaikan, memilih, atau menavigasi ke tempat tersebut. Lebih suka startLocalDateTime/endLocalDateTime dalam yyyy-MM-dd HH:mm[:ss] untuk tanggal pengguna dan tanggal relatif; alat ini akan menguraikannya dalam zona waktu perangkat. Jangan membuat peristiwa dari epoch milidetik yang dihitung model. Gunakan kalenderId=0 kecuali pengguna secara eksplisit memilih id kalender. Setelah pembuatan, gunakan hasil alat aktualStart/actualEnd sebagai waktu pembuatan yang dapat dilihat pengguna. Pengenal teknis: calendarId=0, actualStart."
+      "description": "Buat acara kalender Android. Untuk acara sepanjang hari, tetapkan allDay=true, gunakan tengah malam lokal pada hari mulai dan tengah malam lokal hari berikutnya secara eksklusif sebagai akhir.Awal dan akhir wajib. Jika akhir atau durasi tidak dapat ditentukan dari permintaan, tanyakan; jangan mengarang durasi. Pengingat opsional bawaan 30 menit. Nama tempat yang disediakan pengguna sudah cukup dan harus diteruskan langsung sebagai locationName. Jangan menelusuri alamat atau koordinat yang tepat kecuali pengguna secara eksplisit meminta untuk memverifikasi, menyelesaikan, memilih, atau menavigasi ke tempat tersebut. Lebih suka startLocalDateTime/endLocalDateTime dalam yyyy-MM-dd HH:mm[:ss] untuk tanggal pengguna dan tanggal relatif; alat ini akan menguraikannya dalam zona waktu perangkat. Jangan membuat peristiwa dari epoch milidetik yang dihitung model. Gunakan calendarId=0 kecuali pengguna secara eksplisit memilih id kalender. Setelah pembuatan, gunakan hasil alat actualStart/actualEnd sebagai waktu pembuatan yang dapat dilihat pengguna."
     },
     {
       "name": "calendar_delete_event",
@@ -809,7 +809,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Daftar kalender Android yang dapat ditulis. Gunakan ini untuk memungkinkan pengguna memilih kalender; jangan berasumsi bahwa kalenderId=1 adalah kalender lokal atau target. Pengenal teknis: calendarId=1."
+      "description": "Daftar kalender Android yang dapat ditulis. Gunakan ini untuk memungkinkan pengguna memilih kalender; jangan berasumsi bahwa calendarId=1 adalah kalender lokal atau target."
     },
     {
       "name": "calendar_list_events",
@@ -817,7 +817,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Cantumkan acara kalender Android dalam rentang waktu yang konkret. Gunakan untuk permintaan seperti jadwal hari ini, jadwal besok, acara yang ada, atau acara minggu ini. Lebih suka startLocalDateTime/endLocalDateTime di yyyy-MM-dd HH:mm[:ss]; alat ini akan menguraikannya dalam zona waktu perangkat. Jangan menebak Id kalender; gunakan kalenderId=0 untuk mencari semua kalender kecuali pengguna secara eksplisit memilih id kalender. Pengenal teknis: calendarId, calendarId=0."
+      "description": "Cantumkan acara kalender Android dalam rentang waktu yang konkret. Gunakan untuk permintaan seperti jadwal hari ini, jadwal besok, acara yang ada, atau acara minggu ini. Lebih suka startLocalDateTime/endLocalDateTime di yyyy-MM-dd HH:mm[:ss]; alat ini akan menguraikannya dalam zona waktu perangkat. Jangan menebak calendarId; gunakan calendarId=0 untuk mencari semua kalender kecuali pengguna secara eksplisit memilih id kalender."
     },
     {
       "name": "calendar_open_event",
@@ -833,7 +833,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Cari acara kalender Android berdasarkan kata kunci dalam rentang waktu tertentu. Gunakan sebelum membuka, memperbarui, atau menghapus acara ketika pengguna mendeskripsikan acara berdasarkan judul atau konten. Lebih suka startLocalDateTime/endLocalDateTime di yyyy-MM-dd HH:mm[:ss]; alat ini akan menguraikannya dalam zona waktu perangkat. Jangan menebak Id kalender; gunakan kalenderId=0 untuk mencari semua kalender kecuali pengguna secara eksplisit memilih id kalender. Pengenal teknis: calendarId, calendarId=0."
+      "description": "Cari acara kalender Android berdasarkan kata kunci dalam rentang waktu tertentu. Gunakan sebelum membuka, memperbarui, atau menghapus acara ketika pengguna mendeskripsikan acara berdasarkan judul atau konten. Lebih suka startLocalDateTime/endLocalDateTime di yyyy-MM-dd HH:mm[:ss]; alat ini akan menguraikannya dalam zona waktu perangkat. Jangan menebak calendarId; gunakan calendarId=0 untuk mencari semua kalender kecuali pengguna secara eksplisit memilih id kalender."
     },
     {
       "name": "calendar_update_event",
@@ -841,7 +841,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Perbarui acara kalender Android berdasarkan id. Cari/daftar peristiwa terlebih dahulu ketika pengguna mendeskripsikan target dalam bahasa alami, dan meneruskan detail target yang diketahui dengan bidang yang diubah. Jangan menebak Id kalender atau id acara; telusuri semua kalender dengan calendarId=0 kecuali pengguna secara eksplisit memilih id kalender. Bidang teks kosong diabaikan. Gunakan blank startLocalDateTime/endLocalDateTime untuk menyimpan waktu yang ada. Gunakan reminderMinutes=-2 untuk menyimpan pengingat, -1 untuk menghapus pengingat, dan >=0 untuk mengganti pengingat. Pengenal teknis: calendarId, calendarId=0, reminderMinutes=-2. yyyy-MM-dd HH:mm[:ss]."
+      "description": "Perbarui acara kalender Android berdasarkan id. Cari/daftar peristiwa terlebih dahulu ketika pengguna mendeskripsikan target dalam bahasa alami, dan meneruskan detail target yang diketahui dengan bidang yang diubah. Jangan menebak calendarId atau id acara; telusuri semua kalender dengan calendarId=0 kecuali pengguna secara eksplisit memilih id kalender. Bidang teks kosong diabaikan. Gunakan blank startLocalDateTime/endLocalDateTime untuk menyimpan waktu yang ada. Gunakan reminderMinutes=-2 untuk menyimpan pengingat, -1 untuk menghapus pengingat, dan >=0 untuk mengganti pengingat. yyyy-MM-dd HH:mm[:ss]."
     },
     {
       "name": "memo_create",
@@ -913,7 +913,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Hapus secara permanen cache SysInfo lokal FoneClaw yang cocok saja. Ini tidak pernah menghapus notifikasi Android asli, SMS, log panggilan, atau acara kalender. Setidaknya satu filter diperlukan kecuali deleteAll=true. Beberapa filter digabungkan dengan AND."
+      "description": "Hapus permanen hanya cache SysInfo lokal FoneClaw yang cocok. Tidak pernah menghapus notifikasi Android asli, SMS, surel, log panggilan, atau acara kalender. Wajib ada setidaknya satu filter kecuali deleteAll=true. Beberapa filter digabungkan dengan AND."
     },
     {
       "name": "sysinfo_mark_reviewed",
@@ -969,7 +969,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Ambil satu halaman HTTP/HTTPS lewat URL dan kembalikan teks terbaca hingga maxChars karakter. Ini pengambilan HTTP hanya-baca, bukan peramban interaktif atau perender JavaScript; teks kosong atau terpotong tidak membuktikan halaman dibaca penuh."
+      "description": "Ambil satu halaman HTTP/HTTPS lewat URL dan kembalikan teks terbaca hingga maxChars karakter. Gunakan URL sumber persis dari pengguna atau bukti: jangan pernah mengganti host, jalur, atau parameter kueri. Fragmen boleh dihapus karena tidak dikirim melalui HTTP. Eksekusi NewsBrief yang eksplisit memerlukan teks yang dikenali sebagai isi artikel, bukan navigasi, komentar, atau iklan. Ini pengambilan HTTP hanya-baca, bukan peramban interaktif atau perender JavaScript; teks kosong atau terpotong tidak membuktikan halaman dibaca penuh."
     },
     {
       "name": "web_search",
@@ -993,7 +993,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Permanently delete a local automation by id and cancel its triggers."
+      "description": "Hapus otomasi lokal secara permanen berdasarkan id dan batalkan pemicunya."
     },
     {
       "name": "scheduled_task_list",
@@ -1001,7 +1001,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "List the user's local automations (time-triggered scheduled tasks). Use the product name Automations when guiding users to the sidebar. Returns each task id, title, local trigger time, repeat rule, and enabled state. Read-only."
+      "description": "Daftar otomasi lokal pengguna (tugas terjadwal berdasarkan waktu). Gunakan nama produk Automations saat mengarahkan pengguna ke bilah samping. Kembalikan id, judul, waktu pemicu lokal, aturan pengulangan, status aktif, jenis eksekusi, serta research_mode yang efektif untuk ringkasan berita setiap tugas. Hanya-baca."
     },
     {
       "name": "scheduled_task_run_now",
@@ -1017,7 +1017,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Enable or disable a local automation by id. Disabling cancels future system triggers but keeps the task and its run history."
+      "description": "Aktifkan atau nonaktifkan otomasi lokal berdasarkan id. Penonaktifan membatalkan pemicu sistem mendatang tetapi mempertahankan tugas dan riwayat eksekusinya."
     },
     {
       "name": "scheduled_task_update",
@@ -1025,7 +1025,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Perbarui instruksi eksekusi mendatang dari otomasi yang ada. Gunakan scheduled_task(command=list) dahulu untuk identifikasi dan pertahankan instruksi lain. Tidak membuat tugas atau menjalankannya sekarang. Pertahankan judul, jadwal, dan status aktif. Tanyakan tugas mana jika ambigu."
+      "description": "Perbarui instruksi dan/atau mode riset berita untuk eksekusi mendatang dari otomasi yang ada. Identifikasi dahulu dengan scheduled_task(command=list) dan pertahankan instruksi yang tidak terkait. Tidak membuat tugas atau menjalankannya sekarang. Judul, jadwal, dan status aktif tetap. Hanya tugas NEWS_BRIEF mendukung researchMode. quick_summary berarti paling banyak satu pencarian dan tanpa pengambilan halaman; standard mengizinkan riset normal multisumber serta pengambilan halaman dalam batas yang ada. Untuk perubahan mode saja, hilangkan prompt; jangan menulis ulang instruksi untuk meniru perubahan mode. Mengubah prompt tanpa researchMode menghapus mode riset prasetel sebelumnya; kirim researchMode secara eksplisit jika pengguna ingin mode itu dengan instruksi baru. Tanyakan tugas mana jika target ambigu."
     },
     {
       "name": "shortcut_save_agent_prompt",

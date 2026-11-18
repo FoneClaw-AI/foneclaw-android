@@ -969,7 +969,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "Fetch one HTTP/HTTPS page by URL and return readable text up to maxChars. This is a read-only HTTP fetch, not an interactive browser or JavaScript renderer; empty or truncated text does not establish that the full page was read."
+      "description": "Fetch one HTTP/HTTPS page by URL and return readable text up to maxChars. Use the exact source URL from the user or evidence: never substitute a host, path or query parameters. A fragment may be removed because it is not sent over HTTP. Explicit NewsBrief runs require recognized article-body text, not page navigation, comments or advertisements. This is a read-only HTTP fetch, not an interactive browser or JavaScript renderer; empty or truncated text does not establish that the full page was read."
     },
     {
       "name": "web_search",
@@ -1001,7 +1001,7 @@
       "risk": "LOW",
       "approval": "Auto",
       "approvalCode": "AUTO",
-      "description": "List the user's local automations (time-triggered scheduled tasks). Use the product name Automations when guiding users to the sidebar. Returns each task id, title, local trigger time, repeat rule, and enabled state. Read-only."
+      "description": "List the user's local automations (time-triggered scheduled tasks). Use the product name Automations when guiding users to the sidebar. Returns each task id, title, local trigger time, repeat rule, enabled state, execution type, and effective research_mode for news briefs. Read-only."
     },
     {
       "name": "scheduled_task_run_now",
@@ -1025,7 +1025,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Update the instruction for future runs of an existing automation. First use scheduled_task(command=list) to identify the existing task and preserve unrelated instructions. Does not create a task or run it now. Preserves title, schedule and enabled state. Ask which task if the target is ambiguous."
+      "description": "Update the instruction and/or news research mode for future runs of an existing automation. First use scheduled_task(command=list) to identify the existing task and preserve unrelated instructions. Does not create a task or run it now. Preserves title, schedule and enabled state. Only NEWS_BRIEF tasks support researchMode. quick_summary means at most one search and no page fetches; standard allows normal multi-source research and page fetches within existing limits. For a mode-only change omit prompt; do not rewrite the instruction to simulate a mode change. Changing prompt without researchMode clears the previous preset research mode; pass researchMode explicitly when the user wants that mode with the new instruction. Ask which task if the target is ambiguous."
     },
     {
       "name": "shortcut_save_agent_prompt",

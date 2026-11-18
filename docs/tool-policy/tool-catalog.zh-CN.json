@@ -137,7 +137,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "通过包名称或已安装的应用程序显示名称打开可启动的 Android 应用程序。这会更改前台应用程序，并可能会暴露该应用程序的屏幕。尽可能使用准确的包名称。如果结果不明确，请用户选择一个退回的包裹。"
+      "description": "按包名或已安装应用的显示名称打开可启动的 Android 应用。这会改变前台应用，并可能暴露该应用的屏幕。仅当请求结果只是打开应用时使用；成功后即停止，不读取或验证屏幕。如果任务还要求在目标应用内读取、搜索、输入或点击，改用合并的打开应用并读取工具，以便在打开前检查 GUI 前置条件。专用领域或捕获工具能完成请求结果时应优先使用。尽可能使用精确包名。结果不明确时，请用户从返回的应用包中选择一个。"
     },
     {
       "name": "play_store_check_app",
@@ -273,7 +273,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "从 Android UsageStats 返回紧凑的最近应用活动快照。如果使用权限或近期活动不可用，返回 status=skipped 以便其他健康检查继续。它不是实时后台进程监视器。"
+      "description": "从 Android UsageStats 返回紧凑的最近应用活动快照。需要使用情况访问权限。若无近期活动可用，返回 status=skipped，以便其他健康检查继续。它不是实时后台进程监视器。"
     },
     {
       "name": "device_app_permission_audit",
@@ -913,7 +913,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "仅永久删除匹配的 FoneClaw 本地 SysInfo 缓存。这永远不会删除原始 Android 通知、SMS、通话记录或日历事件。除非deleteAll=true，否则至少需要一个过滤器。多个过滤器通过 AND 组合。"
+      "description": "仅永久删除匹配的 FoneClaw 本地 SysInfo 缓存，绝不删除原始 Android 通知、SMS、邮件、通话记录或日历事件。除非 deleteAll=true，否则至少需要一个筛选条件。多个条件以 AND 组合。"
     },
     {
       "name": "sysinfo_mark_reviewed",
@@ -969,7 +969,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "按 URL 抓取一个 HTTP/HTTPS 页面，返回最多 maxChars 字符的可读文本。这是只读 HTTP 抓取，不是交互式浏览器或 JavaScript 渲染器；空白或截断文本不能证明已读完整页面。"
+      "description": "按 URL 抓取一个 HTTP/HTTPS 页面，返回最多 maxChars 字符的可读文本。使用用户或证据提供的精确来源 URL，绝不替换主机、路径或查询参数。片段可移除，因为 HTTP 不发送片段。明确的 NewsBrief 运行需要识别出的文章正文，而不是导航、评论或广告。这是只读 HTTP 抓取，不是交互式浏览器或 JavaScript 渲染器；空白或截断文本不能证明已读完整页面。"
     },
     {
       "name": "web_search",
@@ -993,7 +993,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Permanently delete a local automation by id and cancel its triggers."
+      "description": "按 id 永久删除本地自动化并取消其触发器。"
     },
     {
       "name": "scheduled_task_list",
@@ -1001,7 +1001,7 @@
       "risk": "LOW",
       "approval": "自动通过",
       "approvalCode": "AUTO",
-      "description": "List the user's local automations (time-triggered scheduled tasks). Use the product name Automations when guiding users to the sidebar. Returns each task id, title, local trigger time, repeat rule, and enabled state. Read-only."
+      "description": "列出用户本地的自动化（按时间触发的定时任务）。引导用户前往侧栏时使用产品名称 Automations。返回每项任务的 id、标题、本地触发时间、重复规则、启用状态、执行类型，以及新闻简报实际生效的 research_mode。只读。"
     },
     {
       "name": "scheduled_task_run_now",
@@ -1017,7 +1017,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Enable or disable a local automation by id. Disabling cancels future system triggers but keeps the task and its run history."
+      "description": "按 id 启用或禁用本地自动化。禁用会取消未来的系统触发器，但保留任务及其运行历史。"
     },
     {
       "name": "scheduled_task_update",
@@ -1025,7 +1025,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "需要审批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "更新已有自动化后续运行的指令。先使用 scheduled_task(command=list) 识别任务，保留不相关的指令。不创建任务也不立即运行。保留标题、计划和启用状态。目标不明确时询问是哪项任务。"
+      "description": "更新已有自动化后续运行的指令和/或新闻研究模式。先使用 scheduled_task(command=list) 识别任务，保留不相关的指令。不创建任务也不立即运行。保留标题、计划和启用状态。只有 NEWS_BRIEF 任务支持 researchMode。quick_summary 最多搜索一次且不抓取网页；standard 允许在现有限制内进行正常的多来源研究和网页抓取。仅改变模式时省略 prompt，不要通过改写指令模拟模式变化。修改 prompt 而不传 researchMode 会清除之前预设的研究模式；若用户希望新指令保留该模式，须显式传入 researchMode。目标不明确时询问是哪项任务。"
     },
     {
       "name": "shortcut_save_agent_prompt",

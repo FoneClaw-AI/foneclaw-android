@@ -97,7 +97,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Captura una foto nueva y la devuelve como imagen adjunta cuando hay visión del modelo disponible. Úselo cuando la intención del usuario sea capturar una nueva foto. Deje lensFacing sin configurar o en automático para la captura de fotografías normal. Elija lensFacing=front solo para mirar de frente o tomar selfies; elija volver solo cuando el usuario solicite explícitamente la cámara trasera. Mantenga explicitLensSelection falso para la captura de fotografías simples/predeterminadas, incluso si la lente física predeterminada ha vuelto. Establezca explicitLensSelection como verdadero solo cuando el usuario solicite explícitamente una captura frontal, trasera, trasera o selfie. No llame a camera(command=open_photo) después de esta herramienta a menos que el usuario solicite explícitamente ver o abrir la foto. Llame a esta herramienta directamente. Capture utiliza primero la cámara del sistema nativo. La captura frontal/posterior explícita puede utilizar el backend directo solo si la cámara nativa no puede respetar la lente solicitada. No solicite al usuario que otorgue permiso antes de llamar a esta herramienta."
+      "description": "Captura una foto nueva y la devuelve como imagen adjunta cuando está disponible la visión del modelo. Úsala para la intención de tomar una foto nueva. Para una foto normal deja lensFacing sin definir o en auto. Usa lensFacing=front solo para cámara frontal o selfie, y back solo si se pide explícitamente la cámara trasera. Mantén explicitLensSelection en false para una foto normal o predeterminada aunque la lente física predeterminada sea trasera. Pon explicitLensSelection en true solo si se pide explícitamente cámara frontal, trasera o selfie. No llames después a camera(command=open_photo) salvo petición explícita de ver o abrir la foto. Llama directamente a esta herramienta. Primero usa la cámara nativa del sistema. Una captura frontal o trasera explícita solo puede usar el backend directo si la cámara nativa no admite la lente solicitada. No pidas al usuario permiso antes de llamar a la herramienta."
     },
     {
       "name": "cross_app_read_screen",
@@ -137,7 +137,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Abra una aplicación Android ejecutable por nombre de paquete o nombre para mostrar de la aplicación instalada. Esto cambia la aplicación en primer plano y puede exponer la pantalla de esa aplicación. Utilice un nombre de paquete exacto cuando sea posible. Si el resultado es ambiguo, pida al usuario que elija un paquete devuelto."
+      "description": "Abre una aplicación Android ejecutable por nombre de paquete o nombre visible de una aplicación instalada. Cambia la aplicación en primer plano y puede exponer su pantalla. Úsala cuando solo se pide abrir la aplicación; tras el éxito, detente sin leer ni verificar su pantalla. Si la tarea también requiere leer, buscar, escribir o pulsar dentro de ella, usa la herramienta combinada de apertura y lectura para comprobar los requisitos GUI antes de abrir. Prefiere una herramienta de dominio o captura dedicada cuando pueda completar el resultado solicitado. Usa un nombre de paquete exacto si es posible. Si el resultado es ambiguo, pide al usuario que elija un paquete de aplicación de los devueltos."
     },
     {
       "name": "play_store_check_app",
@@ -273,7 +273,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Devuelve una instantánea compacta de la actividad reciente de la aplicación desde Android UsageStats. Si el acceso de uso o la actividad reciente no están disponibles, devuelve status=skipped para que otras comprobaciones de estado puedan continuar. No es un monitor de procesos en segundo plano en vivo."
+      "description": "Devuelve una instantánea compacta de actividad reciente de aplicaciones desde Android UsageStats. Requiere acceso de uso. Si no hay actividad reciente disponible, devuelve status=skipped para que continúen otras comprobaciones de estado. No es un monitor en vivo de procesos en segundo plano."
     },
     {
       "name": "device_app_permission_audit",
@@ -913,7 +913,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Elimine permanentemente la caché FoneClaw local SysInfo coincidente únicamente. Esto nunca elimina las notificaciones Android originales, SMS, los registros de llamadas ni los eventos del calendario. Se requiere al menos un filtro a menos que deleteAll=true. Se combinan varios filtros con AND."
+      "description": "Elimina permanentemente solo la caché local SysInfo de FoneClaw que coincida. Nunca elimina notificaciones Android originales, SMS, correo, registros de llamadas ni eventos del calendario. Se exige al menos un filtro salvo si deleteAll=true. Los filtros múltiples se combinan con AND."
     },
     {
       "name": "sysinfo_mark_reviewed",
@@ -969,7 +969,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "Obtiene una página HTTP/HTTPS por URL y devuelve texto legible de hasta maxChars caracteres. Es una consulta HTTP de solo lectura, no un navegador interactivo ni un renderizador JavaScript; el texto vacío o truncado no demuestra una lectura completa."
+      "description": "Obtiene una página HTTP/HTTPS por URL y devuelve texto legible de hasta maxChars caracteres. Usa la URL de origen exacta del usuario o de las pruebas: nunca sustituyas el host, la ruta ni los parámetros de consulta. Puede quitarse el fragmento porque no se envía por HTTP. Las ejecuciones explícitas de NewsBrief requieren texto reconocido como cuerpo del artículo, no navegación, comentarios ni anuncios. Es una consulta HTTP de solo lectura, no un navegador interactivo ni un renderizador JavaScript; el texto vacío o truncado no demuestra una lectura completa."
     },
     {
       "name": "web_search",
@@ -993,7 +993,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Permanently delete a local automation by id and cancel its triggers."
+      "description": "Elimina permanentemente una automatización local por id y cancela sus disparadores."
     },
     {
       "name": "scheduled_task_list",
@@ -1001,7 +1001,7 @@
       "risk": "LOW",
       "approval": "Automática",
       "approvalCode": "AUTO",
-      "description": "List the user's local automations (time-triggered scheduled tasks). Use the product name Automations when guiding users to the sidebar. Returns each task id, title, local trigger time, repeat rule, and enabled state. Read-only."
+      "description": "Enumera las automatizaciones locales del usuario (tareas programadas por hora). Usa el nombre del producto Automations al dirigir al usuario a la barra lateral. Devuelve el id, título, hora local de activación, regla de repetición, estado habilitado, tipo de ejecución y research_mode efectivo para los resúmenes de noticias de cada tarea. Solo lectura."
     },
     {
       "name": "scheduled_task_run_now",
@@ -1017,7 +1017,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Enable or disable a local automation by id. Disabling cancels future system triggers but keeps the task and its run history."
+      "description": "Habilita o deshabilita una automatización local por id. Deshabilitar cancela los futuros disparadores del sistema, pero conserva la tarea y su historial de ejecuciones."
     },
     {
       "name": "scheduled_task_update",
@@ -1025,7 +1025,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Actualiza las instrucciones futuras de una automatización existente. Usa primero scheduled_task(command=list) para identificarla y conserva instrucciones no relacionadas. No crea ni ejecuta tareas. Mantiene título, horario y estado habilitado. Pregunta cuál si es ambiguo."
+      "description": "Actualiza las instrucciones y/o el modo de investigación de noticias para futuras ejecuciones de una automatización existente. Usa primero scheduled_task(command=list) para identificarla y conserva las instrucciones ajenas al cambio. No crea una tarea ni la ejecuta ahora. Mantiene título, horario y estado habilitado. Solo las tareas NEWS_BRIEF admiten researchMode. quick_summary permite como máximo una búsqueda y ninguna obtención de páginas; standard permite investigación normal con varias fuentes y obtención de páginas dentro de los límites existentes. Para cambiar solo el modo, omite prompt; no reescribas la instrucción para simular el cambio. Cambiar prompt sin researchMode borra el modo de investigación preestablecido anterior; pasa researchMode explícitamente si el usuario quiere ese modo con la nueva instrucción. Pregunta cuál es la tarea si el objetivo es ambiguo."
     },
     {
       "name": "shortcut_save_agent_prompt",

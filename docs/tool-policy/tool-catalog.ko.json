@@ -137,7 +137,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "패키지 이름 또는 설치된 앱 표시 이름으로 실행 가능한 Android 앱을 엽니다. 이렇게 하면 포그라운드 앱이 변경되고 해당 앱의 화면이 노출될 수 있습니다. 가능하면 정확한 패키지 이름을 사용하세요. 결과가 모호한 경우 사용자에게 반환된 패키지 중 하나를 선택하도록 요청합니다."
+      "description": "패키지 이름 또는 설치된 앱의 표시 이름으로 실행 가능한 Android 앱을 엽니다. 전경 앱이 바뀌며 그 화면이 노출될 수 있습니다. 요청 결과가 앱 열기뿐일 때 사용하고, 성공 후 화면을 읽거나 검증하지 말고 중단하세요. 대상 앱에서 읽기, 검색, 입력 또는 탭도 필요하면 열기 전에 GUI 전제 조건을 확인하는 앱 열기·읽기 통합 도구를 사용하세요. 전용 도메인 도구나 촬영·캡처 도구로 요청을 완료할 수 있으면 이를 우선하세요. 가능하면 정확한 패키지 이름을 사용하고 결과가 모호하면 반환된 앱 패키지 중 하나를 선택하도록 사용자에게 요청하세요."
     },
     {
       "name": "play_store_check_app",
@@ -273,7 +273,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Android UsageStats에서 간단한 최근 앱 활동 스냅샷을 반환합니다. 사용 액세스 또는 최근 활동을 사용할 수 없으면 status=skipped를 반환하여 다른 상태 확인이 계속 진행되게 합니다. 라이브 백그라운드 프로세스 모니터가 아닙니다."
+      "description": "Android UsageStats에서 최근 앱 활동의 간단한 스냅샷을 반환합니다. 사용 정보 접근 권한이 필요합니다. 최근 활동이 없으면 status=skipped를 반환하여 다른 상태 확인을 계속할 수 있습니다. 실시간 백그라운드 프로세스 모니터가 아닙니다."
     },
     {
       "name": "device_app_permission_audit",
@@ -913,7 +913,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "일치하는 FoneClaw 로컬 SysInfo 캐시만 영구적으로 삭제합니다. 원본 Android 알림, SMS, 통화 기록 또는 캘린더 이벤트는 삭제되지 않습니다. deleteAll=true가 아닌 이상 필터가 하나 이상 필요합니다. 여러 필터는 AND로 결합됩니다."
+      "description": "일치하는 FoneClaw 로컬 SysInfo 캐시만 영구 삭제합니다. 원본 Android 알림, SMS, 메일, 통화 기록 또는 캘린더 이벤트는 절대 삭제하지 않습니다. deleteAll=true가 아니면 필터가 하나 이상 필요하며 여러 필터는 AND로 결합합니다."
     },
     {
       "name": "sysinfo_mark_reviewed",
@@ -969,7 +969,7 @@
       "risk": "LOW",
       "approval": "자동",
       "approvalCode": "AUTO",
-      "description": "URL로 HTTP/HTTPS 페이지 하나를 가져와 최대 maxChars자의 읽기 쉬운 텍스트를 반환합니다. 읽기 전용 HTTP 요청이며 대화형 브라우저나 JavaScript 렌더러가 아닙니다. 비어 있거나 잘린 텍스트로 전체 페이지를 읽었다고 판단할 수 없습니다."
+      "description": "URL로 HTTP/HTTPS 페이지 하나를 가져와 최대 maxChars자의 읽기 쉬운 텍스트를 반환합니다. 사용자나 근거에 있는 정확한 원본 URL을 사용하고 호스트, 경로 또는 쿼리 매개변수를 절대 바꾸지 마세요. 프래그먼트는 HTTP로 전송되지 않으므로 제거할 수 있습니다. 명시적인 NewsBrief 실행에는 탐색 메뉴, 댓글이나 광고가 아닌 식별된 기사 본문이 필요합니다. 읽기 전용 HTTP 요청이며 대화형 브라우저나 JavaScript 렌더러가 아닙니다. 비어 있거나 잘린 텍스트로 전체 페이지를 읽었다고 판단할 수 없습니다."
     },
     {
       "name": "web_search",
@@ -993,7 +993,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Permanently delete a local automation by id and cancel its triggers."
+      "description": "id로 로컬 자동화를 영구 삭제하고 해당 트리거를 취소합니다."
     },
     {
       "name": "scheduled_task_list",
@@ -1001,7 +1001,7 @@
       "risk": "LOW",
       "approval": "자동",
       "approvalCode": "AUTO",
-      "description": "List the user's local automations (time-triggered scheduled tasks). Use the product name Automations when guiding users to the sidebar. Returns each task id, title, local trigger time, repeat rule, and enabled state. Read-only."
+      "description": "사용자의 로컬 자동화(시간 기반 예약 작업)를 나열합니다. 사이드바를 안내할 때는 제품명 Automations를 사용하세요. 각 작업의 id, 제목, 로컬 실행 시각, 반복 규칙, 활성 상태, 실행 유형 및 뉴스 브리핑에 실제로 적용되는 research_mode를 반환합니다. 읽기 전용입니다."
     },
     {
       "name": "scheduled_task_run_now",
@@ -1017,7 +1017,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Enable or disable a local automation by id. Disabling cancels future system triggers but keeps the task and its run history."
+      "description": "id로 로컬 자동화를 활성화하거나 비활성화합니다. 비활성화하면 향후 시스템 트리거는 취소되지만 작업과 실행 기록은 유지됩니다."
     },
     {
       "name": "scheduled_task_update",
@@ -1025,7 +1025,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "기존 자동화의 향후 실행 지침을 수정합니다. 먼저 scheduled_task(command=list)로 식별하고 관련 없는 지침은 유지합니다. 작업 생성이나 즉시 실행은 하지 않습니다. 제목, 일정, 활성 상태를 유지하며 모호하면 어느 작업인지 묻습니다."
+      "description": "기존 자동화의 향후 실행 지침 및/또는 뉴스 조사 모드를 수정합니다. 먼저 scheduled_task(command=list)로 식별하고 관련 없는 지침은 유지합니다. 작업을 생성하거나 즉시 실행하지 않으며 제목, 일정, 활성 상태를 유지합니다. NEWS_BRIEF 작업만 researchMode를 지원합니다. quick_summary는 최대 한 번 검색하며 페이지를 가져오지 않습니다. standard는 기존 제한 내에서 일반적인 다중 출처 조사와 페이지 가져오기를 허용합니다. 모드만 바꾸려면 prompt를 생략하고 지침을 고쳐 모드 변경을 흉내 내지 마세요. researchMode 없이 prompt를 바꾸면 이전에 설정된 조사 모드가 지워집니다. 새 지침에도 해당 모드를 원하면 researchMode를 명시하세요. 대상이 모호하면 어느 작업인지 물어보세요."
     },
     {
       "name": "shortcut_save_agent_prompt",

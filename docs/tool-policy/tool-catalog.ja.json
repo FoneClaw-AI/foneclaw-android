@@ -137,7 +137,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "パッケージ名またはインストールされているアプリの表示名で、起動可能な Android アプリを開きます。これによりフォアグラウンド アプリが変更され、そのアプリの画面が公開される可能性があります。可能であれば、正確なパッケージ名を使用してください。結果があいまいな場合は、返されたパッケージを 1 つ選択するようにユーザーに依頼します。"
+      "description": "パッケージ名またはインストール済みアプリの表示名で、起動可能な Android アプリを開きます。前面のアプリが変わり、その画面が表示される場合があります。目的がアプリを開くだけの場合に使用し、成功後は画面を読んだり検証したりせず終了します。対象アプリ内での読み取り、検索、入力、タップも必要なら、開く前に GUI の前提条件を確認できる一体型のアプリ起動・読み取りツールを使います。専用ドメインまたは撮影・キャプチャツールで目的を達成できる場合はそちらを優先します。可能なら正確なパッケージ名を使い、結果が曖昧なら返されたアプリパッケージから1つ選ぶようユーザーに尋ねます。"
     },
     {
       "name": "play_store_check_app",
@@ -273,7 +273,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Android UsageStats から最近のアプリアクティビティのコンパクトなスナップショットを返します。使用アクセスや最近のアクティビティが利用できない場合は status=skipped を返し、他のヘルスチェックを続行できるようにします。これはライブのバックグラウンドプロセスモニターではありません。"
+      "description": "Android UsageStats から最近のアプリ活動の簡潔なスナップショットを返します。使用状況へのアクセス権が必要です。最近の活動がない場合は status=skipped を返し、他のヘルスチェックを続行できるようにします。リアルタイムのバックグラウンドプロセス監視ではありません。"
     },
     {
       "name": "device_app_permission_audit",
@@ -913,7 +913,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "一致する FoneClaw ローカル SysInfo キャッシュのみを完全に削除します。これにより、元の Android 通知、SMS、通話記録、カレンダー イベントが削除されることはありません。 deleteAll=true を除き、少なくとも 1 つのフィルタが必要です。複数のフィルターを AND で結合します。"
+      "description": "一致する FoneClaw ローカル SysInfo キャッシュのみを完全に削除します。元の Android 通知、SMS、メール、通話履歴、カレンダーイベントは決して削除しません。deleteAll=true の場合を除き、少なくとも1つのフィルターが必要です。複数の条件は AND で結合します。"
     },
     {
       "name": "sysinfo_mark_reviewed",
@@ -969,7 +969,7 @@
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "URL で HTTP/HTTPS ページを取得し、最大 maxChars 文字の可読テキストを返します。読み取り専用 HTTP 取得で、対話型ブラウザや JavaScript レンダラーではありません。空または切り詰めたテキストは全文を読んだ証拠になりません。"
+      "description": "URL で HTTP/HTTPS ページを1つ取得し、最大 maxChars 文字の可読テキストを返します。ユーザーまたは証拠が示した正確なソース URL を使い、ホスト、パス、クエリパラメータを置き換えてはいけません。フラグメントは HTTP で送信されないため削除できます。明示的な NewsBrief 実行では、ナビゲーション、コメント、広告ではなく、識別された記事本文が必要です。読み取り専用 HTTP 取得で、対話型ブラウザや JavaScript レンダラーではありません。空または切り詰めたテキストは全文を読んだ証拠になりません。"
     },
     {
       "name": "web_search",
@@ -993,7 +993,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Permanently delete a local automation by id and cancel its triggers."
+      "description": "id でローカル自動化を完全に削除し、そのトリガーを取り消します。"
     },
     {
       "name": "scheduled_task_list",
@@ -1001,7 +1001,7 @@
       "risk": "LOW",
       "approval": "自動",
       "approvalCode": "AUTO",
-      "description": "List the user's local automations (time-triggered scheduled tasks). Use the product name Automations when guiding users to the sidebar. Returns each task id, title, local trigger time, repeat rule, and enabled state. Read-only."
+      "description": "ユーザーのローカル自動化（時刻で起動する定期タスク）を一覧表示します。サイドバーへ案内するときは製品名 Automations を使います。各タスクの id、タイトル、ローカル起動時刻、繰り返し規則、有効状態、実行タイプ、ニュース概要で実際に適用される research_mode を返します。読み取り専用です。"
     },
     {
       "name": "scheduled_task_run_now",
@@ -1017,7 +1017,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Enable or disable a local automation by id. Disabling cancels future system triggers but keeps the task and its run history."
+      "description": "id でローカル自動化を有効または無効にします。無効化すると今後のシステムトリガーは取り消されますが、タスクと実行履歴は保持されます。"
     },
     {
       "name": "scheduled_task_update",
@@ -1025,7 +1025,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "既存自動化の今後の実行指示を更新します。まず scheduled_task(command=list) で特定し、無関係な指示を保持します。新規作成や即時実行はしません。タイトル・予定・有効状態を保持し、曖昧なら対象を質問します。"
+      "description": "既存自動化の今後の指示やニュース調査モードを更新します。まず scheduled_task(command=list) で対象を特定し、無関係な指示を保持します。新規作成や即時実行はせず、タイトル、予定、有効状態を保持します。researchMode は NEWS_BRIEF タスクのみ対応します。quick_summary は検索を最大1回、ページ取得なしに制限し、standard は既存の制限内で通常の複数ソース調査とページ取得を許可します。モードだけを変える場合は prompt を省略し、指示の書き換えでモード変更を模倣しないでください。researchMode なしで prompt を変更すると以前のプリセット調査モードは解除されます。新しい指示でもそのモードを望む場合は researchMode を明示します。対象が曖昧ならどのタスクか質問します。"
     },
     {
       "name": "shortcut_save_agent_prompt",

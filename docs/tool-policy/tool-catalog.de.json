@@ -97,7 +97,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Nimmt ein neues Foto auf und liefert es als Bildanhang, wenn Modell-Bildverarbeitung verfügbar ist. Verwenden Sie diese Option, wenn der Benutzer beabsichtigt, ein neues Foto aufzunehmen. Lassen Sie „lensFacing“ für die normale Fotoaufnahme deaktiviert oder „Auto“. Wählen Sie „lensFacing=front“ nur für den Blick nach vorne oder für Selfies; Wählen Sie „Zurück“ nur, wenn der Benutzer ausdrücklich nach der Rückkamera fragt. Behalten Sie „explicitLensSelection“ für die einfache/standardmäßige Fotoaufnahme bei „false“, auch wenn das standardmäßige physische Objektiv wieder vorhanden ist. Setzen Sie „explicitLensSelection“ nur dann auf „true“, wenn der Benutzer explizit nach der Aufnahme von vorne, hinten, hinten oder einem Selfie fragt. Rufen Sie camera(command=open_photo) nach diesem Tool nicht auf, es sei denn, der Benutzer fordert ausdrücklich dazu auf, das Foto anzuzeigen oder zu öffnen. Rufen Sie dieses Tool direkt auf. Capture verwendet zunächst die native Systemkamera. Bei der expliziten Vorder-/Rückaufnahme kann das direkte Backend nur dann verwendet werden, wenn die native Kamera das angeforderte Objektiv nicht unterstützen kann. Bitten Sie den Benutzer nicht um eine Erlaubnis, bevor Sie dieses Tool aufrufen."
+      "description": "Nimmt ein neues Foto auf und liefert es als Bildanhang, wenn die Bildverarbeitung des Modells verfügbar ist. Für den Wunsch nach einem neuen Foto verwenden. Bei normaler Aufnahme lensFacing nicht setzen oder auto verwenden. lensFacing=front nur für Frontkamera oder Selfie wählen; back nur bei ausdrücklichem Wunsch nach der Rückkamera. explicitLensSelection für normale oder standardmäßige Aufnahmen auf false belassen, auch wenn die physische Standardkamera hinten liegt. explicitLensSelection nur bei ausdrücklicher Front-, Rückkamera- oder Selfie-Anforderung auf true setzen. Danach camera(command=open_photo) nur auf ausdrücklichen Wunsch zum Ansehen oder Öffnen des Fotos aufrufen. Dieses Werkzeug direkt aufrufen. Zuerst wird die native Systemkamera verwendet. Explizite Front-/Rückaufnahmen dürfen das direkte Backend nur nutzen, wenn die native Kamera das gewünschte Objektiv nicht bedienen kann. Vor dem Werkzeugaufruf den Nutzer nicht zur Berechtigungsvergabe auffordern."
     },
     {
       "name": "cross_app_read_screen",
@@ -137,7 +137,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Öffnen Sie eine startfähige Android-App über den Paketnamen oder den Anzeigenamen der installierten App. Dadurch wird die Vordergrund-App geändert und möglicherweise der Bildschirm dieser App angezeigt. Verwenden Sie nach Möglichkeit einen genauen Paketnamen. Wenn das Ergebnis nicht eindeutig ist, bitten Sie den Benutzer, ein zurückgegebenes Paket auszuwählen."
+      "description": "Öffnet eine startfähige Android-App anhand des Paketnamens oder Anzeigenamens einer installierten App. Ändert die Vordergrund-App und kann deren Bildschirm zeigen. Nur verwenden, wenn ausschließlich das Öffnen verlangt wird; nach Erfolg ohne Lesen oder Prüfen des Bildschirms stoppen. Erfordert die Aufgabe auch Lesen, Suchen, Eingeben oder Tippen innerhalb der App, das kombinierte Öffnen-und-Lesen-Werkzeug verwenden, damit GUI-Voraussetzungen vor dem Öffnen geprüft werden. Ein spezielles Fach- oder Aufnahme-Werkzeug bevorzugen, wenn es das gewünschte Ergebnis erreichen kann. Möglichst einen genauen Paketnamen verwenden. Bei mehrdeutigem Ergebnis den Nutzer eines der zurückgegebenen App-Pakete auswählen lassen."
     },
     {
       "name": "play_store_check_app",
@@ -273,7 +273,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Gibt einen kompakten Snapshot der letzten App-Aktivitäten von Android UsageStats zurück. Wenn der Nutzungszugriff oder die letzte Aktivität nicht verfügbar ist, wird status=skipped zurückgegeben, damit andere Gesundheitsprüfungen fortfahren können. Dies ist kein Live-Hintergrundprozessmonitor."
+      "description": "Gibt einen kompakten Snapshot jüngster App-Aktivitäten aus Android UsageStats zurück. Benötigt Nutzungszugriff. Falls keine jüngsten Aktivitäten verfügbar sind, wird status=skipped zurückgegeben, damit andere Zustandsprüfungen fortfahren können. Kein Echtzeitmonitor für Hintergrundprozesse."
     },
     {
       "name": "device_app_permission_audit",
@@ -913,7 +913,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Löschen Sie nur den passenden lokalen SysInfo-Cache von FoneClaw dauerhaft. Dadurch werden niemals ursprüngliche Android-Benachrichtigungen, SMS, Anrufprotokolle oder Kalenderereignisse gelöscht. Es ist mindestens ein Filter erforderlich, es sei denn, deleteAll=true. Mehrere Filter werden mit UND verknüpft."
+      "description": "Löscht nur den passenden lokalen SysInfo-Cache von FoneClaw dauerhaft. Löscht niemals ursprüngliche Android-Benachrichtigungen, SMS, E-Mails, Anrufprotokolle oder Kalenderereignisse. Mindestens ein Filter ist nötig, außer bei deleteAll=true. Mehrere Filter werden mit AND verknüpft."
     },
     {
       "name": "sysinfo_mark_reviewed",
@@ -969,7 +969,7 @@
       "risk": "LOW",
       "approval": "Automatisch",
       "approvalCode": "AUTO",
-      "description": "Ruft eine HTTP/HTTPS-Seite per URL ab und liefert lesbaren Text bis maxChars Zeichen. Nur lesender HTTP-Abruf, kein interaktiver Browser oder JavaScript-Renderer; leerer oder gekürzter Text belegt keine vollständige Lektüre."
+      "description": "Ruft eine HTTP/HTTPS-Seite per URL ab und liefert lesbaren Text bis maxChars Zeichen. Die genaue Quell-URL des Nutzers oder der Belege verwenden: Host, Pfad oder Abfrageparameter niemals ersetzen. Ein Fragment darf entfernt werden, da es nicht über HTTP gesendet wird. Explizite NewsBrief-Läufe benötigen erkannten Artikeltext, keine Navigation, Kommentare oder Werbung. Nur lesender HTTP-Abruf, kein interaktiver Browser oder JavaScript-Renderer; leerer oder gekürzter Text belegt keine vollständige Lektüre."
     },
     {
       "name": "web_search",
@@ -993,7 +993,7 @@
       "risk": "DESTRUCTIVE",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Permanently delete a local automation by id and cancel its triggers."
+      "description": "Löscht eine lokale Automatisierung anhand ihrer id dauerhaft und hebt ihre Auslöser auf."
     },
     {
       "name": "scheduled_task_list",
@@ -1001,7 +1001,7 @@
       "risk": "LOW",
       "approval": "Automatisch",
       "approvalCode": "AUTO",
-      "description": "List the user's local automations (time-triggered scheduled tasks). Use the product name Automations when guiding users to the sidebar. Returns each task id, title, local trigger time, repeat rule, and enabled state. Read-only."
+      "description": "Listet die lokalen Automatisierungen des Nutzers (zeitgesteuerte Aufgaben) auf. Bei Hinweisen auf die Seitenleiste den Produktnamen Automations verwenden. Gibt je Aufgabe id, Titel, lokale Auslösezeit, Wiederholungsregel, Aktivierungszustand, Ausführungstyp und den wirksamen research_mode für Nachrichtenübersichten zurück. Nur lesend."
     },
     {
       "name": "scheduled_task_run_now",
@@ -1017,7 +1017,7 @@
       "risk": "DEVICE_CONTROL",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Enable or disable a local automation by id. Disabling cancels future system triggers but keeps the task and its run history."
+      "description": "Aktiviert oder deaktiviert eine lokale Automatisierung anhand ihrer id. Deaktivieren hebt künftige Systemauslöser auf, behält aber die Aufgabe und ihren Ausführungsverlauf."
     },
     {
       "name": "scheduled_task_update",
@@ -1025,7 +1025,7 @@
       "risk": "EXTERNAL_EFFECT",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Aktualisiert Anweisungen für künftige Läufe einer vorhandenen Automatisierung. Zuerst scheduled_task(command=list) zur Identifikation verwenden und übrige Anweisungen bewahren. Erstellt oder startet keine Aufgabe. Bewahrt Titel, Zeitplan und Aktivierungszustand. Bei Unklarheit nach der Aufgabe fragen."
+      "description": "Aktualisiert die Anweisung und/oder den Nachrichtenrecherchemodus für künftige Läufe einer vorhandenen Automatisierung. Zuerst mit scheduled_task(command=list) identifizieren und nicht betroffene Anweisungen bewahren. Erstellt keine Aufgabe und startet sie nicht jetzt. Bewahrt Titel, Zeitplan und Aktivierungszustand. Nur NEWS_BRIEF-Aufgaben unterstützen researchMode. quick_summary erlaubt höchstens eine Suche und keine Seitenabrufe; standard erlaubt normale Recherche mit mehreren Quellen und Seitenabrufe innerhalb bestehender Grenzen. Für reine Modusänderungen prompt weglassen; die Anweisung nicht zur Simulation einer Modusänderung umschreiben. Eine Änderung von prompt ohne researchMode löscht den bisherigen voreingestellten Recherchemodus; researchMode explizit übergeben, wenn der Nutzer diesen Modus mit der neuen Anweisung wünscht. Bei unklarem Ziel nach der Aufgabe fragen."
     },
     {
       "name": "shortcut_save_agent_prompt",
