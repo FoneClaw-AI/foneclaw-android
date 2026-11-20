@@ -8,6 +8,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.3.8] - 2026-11-20
+
+### Added and improved
+
+- More stable pet visuals: fixed avatar flicker when navigating back and smoother animation loop seams.
+- Switching pet companions in the startup guide now switches the reply style to that companion’s default (refreshed guide builds).
+- Clearer reply style names (for example, “Playful and cute”) synced across all languages.
+- Starting a voice recording on the home screen pauses playing speech automatically and resumes it afterwards.
+- News notes convert to to-dos with more accurate leading-date recognition, smoother to-do updates and jumps.
+- The direct-distribution download package is about 40 MB while keeping pet animations fully offline.
+
+### Scope and compatibility
+
+- Companion appearance and reply style do not change permissions or approvals. Bundled animation is not offline AI. Playback pausing applies only to active, pausable speech.
+- Backend travel capabilities (domestic scenic search/details, cited web-evidence fallback, weather/ticket references, licensed photos) remain in development-environment acceptance and provider configuration, are not integrated into the Android web-research travel workflow, and do not establish production availability. No complete booking, ticketing or route-matrix service is claimed.
+- Search, voice and models require network, permissions and account access. HTTPS remains required for online models.
+- Google retains its legacy startup guide and shared built-in flows, not direct floating controls or external APK plugin execution. CN retains shared flows with independent domestic services and no Firebase. Lebest remains discontinued.
+
 ## [v0.3.7] - 2026-11-18
 
 ### Added and improved
