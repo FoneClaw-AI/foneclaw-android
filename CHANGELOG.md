@@ -8,6 +8,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.3.9] - 2026-11-25
+
+### Added and improved
+
+- Domestic trip reference details: attraction visiting information (regular hours, confirmed closures, last admission, official booking guidance), walking and driving estimate comparisons between nearby stops, and train/flight reference links (reference only).
+- Free-form attraction visit questions answered as web-search summaries with cited sources, with unverified details clearly marked.
+- Weather forecast status and data-time labels (available, partial, past date, too early, no data) with stale-forecast notices.
+- Richer chat message actions: copy, text selection, quoted follow-ups with removal, like/dislike on replies, and edit-a-message into the composer.
+- Step-by-step execution view with per-step status, plus a per-conversation stop button shared by the assistant panels.
+- Custom news, artist updates and competition updates share one task workspace and execution chain with real per-run failure reasons, interrupted and skipped states, and in-place refetch.
+- Stricter time-range filtering for scheduled news with honest omission notices, tap-to-edit run times with repeat rules, and optional one-card feature links appended to replies.
+
+### Scope and compatibility
+
+- Travel visiting, weather and route references require the companion backend travel service deployed and configured with its providers. Train and flight links contain no live availability or prices; route estimates are not navigation promises.
+- Message actions change local presentation and the next request only; tool permissions and approval rules are unchanged. Stopping acts on the current conversation's run only.
+- Online research, models, voice and sharing require network access, account eligibility, permissions and enabled services. HTTPS remains required for online models.
+- Google keeps its legacy startup guide overlay and the web-research travel path; dedicated backend travel interfaces stay unavailable on that channel. CN retains shared flows with independent domestic services and no Firebase/FCM token provider. Lebest remains discontinued.
+- Backend source delivery is not production deployment; no unconditional service availability is asserted.
+
 ## [v0.3.8] - 2026-11-20
 
 ### Added and improved
