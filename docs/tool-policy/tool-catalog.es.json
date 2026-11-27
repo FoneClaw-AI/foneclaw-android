@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "es",
   "fallbackLocale": "en",
-  "toolCount": 141,
+  "toolCount": 145,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Buscar herramientas o funciones",
@@ -59,7 +59,7 @@
     {
       "name": "Memo",
       "displayName": "Notas",
-      "toolCount": 8
+      "toolCount": 12
     },
     {
       "name": "System Information",
@@ -89,7 +89,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Abra una foto visible específica de la galería del sistema. Úselo solo cuando el usuario solicite explícitamente ver o abrir una foto específica. No utilice esto como seguimiento después de camera(command=take_photo) a menos que el usuario solicite explícitamente ver o abrir la foto capturada. indexFromLatest está basado en 1 en el orden más nuevo: primero: 1 abre la foto más reciente, 2 abre la segunda foto más reciente, 3 abre la tercera foto más reciente."
+      "description": "Abre una foto visible específica, incluidas las capturas de FoneClaw y las fotos del sistema accesibles. Úselo solo cuando el usuario solicite explícitamente ver o abrir una foto específica. No lo use como seguimiento después de camera(command=take_photo) a menos que el usuario solicite explícitamente ver o abrir la foto capturada. indexFromLatest está basado en 1 en orden de más reciente a más antigua: 1 abre la foto más reciente, 2 abre la segunda foto más reciente, 3 abre la tercera foto más reciente."
     },
     {
       "name": "camera_take_photo",
@@ -890,6 +890,38 @@
       "approval": "Requiere aprobación",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Edita una tarea del usuario en To-do Center por id. Si el objetivo se describe en lenguaje natural, busca o enumera primero las tareas y envía los datos conocidos con los campos modificados. Edita tareas del usuario, no la memoria de perfil del asistente ni el plan interno de Main. title/content/tags y fechas en blanco conservan sus valores. Usa fechas yyyy-MM-dd del entorno entorno de ejecución; no calcules milisegundos de época ni llames a Calendar o Alarm solo para resolver una fecha. Programa únicamente con una fecha concreta, una fecha relativa inequívoca (hoy, mañana, pasado mañana, exactamente dentro de dos días / 两天后) o un intervalo explícito aportado por la solicitud o fuente citada. la hora original de la solicitud proporcionada por el entorno de ejecución y la zona horaria solo sirven para calcular, no son una fecha del usuario. Sin fecha o con tiempo impreciso (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), omite o vacía startDate y endDate para dejar la tarea en Unscheduled. No uses hoy por defecto, elijas un día conveniente ni conviertas un periodo impreciso en varios días; conserva la expresión en el contenido. Si se conoce el contenido, no preguntes una fecha. Resuelve fechas concretas con el contexto actual; una hora desconocida no elimina un día explícito. Si solo cambia el contenido y no hay intención de programación, conserva las fechas. Si el usuario elimina la programación, dice que está por decidir o la sustituye por un momento impreciso, usa clearStartDate=true con fechas vacías para borrar ambas y mover a Unscheduled. Informa según la sección Unscheduled o fecha guardada del resultado del Tool, no por suposición. El marcador interno task_pool identifica la sección sin fecha; exprésala en el idioma de respuesta sin repetir el marcador ni añadir traducciones a otro idioma. Estas reglas no se aplican a eventos de calendario ni alarmas."
+    },
+    {
+      "name": "memory_add",
+      "category": "Memo",
+      "risk": "LOW",
+      "approval": "Automática",
+      "approvalCode": "AUTO",
+      "description": "Añade una nueva entrada de memoria. Para relationship_context, proporcione contactQuery y relationshipRole."
+    },
+    {
+      "name": "memory_batch",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "Requiere aprobación",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Aplica de 1 a 32 cambios como una sola transacción. Use cada destino una sola vez. Compruebe la capacidad en el resultado final. Si elimina una entrada, cambia una relación de contacto o borra una caducidad, agrupe solo los cambios que el usuario actual solicite explícitamente."
+    },
+    {
+      "name": "memory_remove",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "Requiere aprobación",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Elimina una entrada a petición explícita del usuario actual."
+    },
+    {
+      "name": "memory_replace",
+      "category": "Memo",
+      "risk": "LOW",
+      "approval": "Automática",
+      "approvalCode": "AUTO",
+      "description": "Reemplaza una entrada con su texto actualizado completo. Conserve los hechos y las condiciones que sigan aplicando. Omita ambos campos de caducidad para mantener la fecha límite. Para las entradas de relación, proporcione contactQuery y relationshipRole para el mismo contacto."
     },
     {
       "name": "voice_memo_read",

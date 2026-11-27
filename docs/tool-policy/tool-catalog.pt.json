@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "pt",
   "fallbackLocale": "en",
-  "toolCount": 141,
+  "toolCount": 145,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Pesquisar ferramentas ou recursos",
@@ -59,7 +59,7 @@
     {
       "name": "Memo",
       "displayName": "Notas",
-      "toolCount": 8
+      "toolCount": 12
     },
     {
       "name": "System Information",
@@ -89,7 +89,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Requer aprovação",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Abra uma foto visível específica da galeria do sistema. Use isto apenas quando o usuário solicitar explicitamente para visualizar ou abrir uma foto específica. Não use isso como acompanhamento após camera(command=take_photo), a menos que o usuário solicite explicitamente para visualizar ou abrir a foto capturada. indexFromLatest é baseado em 1 na ordem mais recente: 1 abre a foto mais recente, 2 abre a segunda foto mais recente, 3 abre a terceira foto mais recente."
+      "description": "Abra uma foto visível específica, incluindo capturas do FoneClaw e fotos do sistema acessíveis. Use isto apenas quando o usuário solicitar explicitamente visualizar ou abrir uma foto específica. Não use isto como acompanhamento após camera(command=take_photo), a menos que o usuário solicite explicitamente visualizar ou abrir a foto capturada. indexFromLatest é baseado em 1 na ordem do mais recente: 1 abre a foto mais recente, 2 abre a segunda foto mais recente, 3 abre a terceira foto mais recente."
     },
     {
       "name": "camera_take_photo",
@@ -890,6 +890,38 @@
       "approval": "Requer aprovação",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Edita uma tarefa do usuário no To-do Center por id. Se o alvo for descrito em linguagem natural, primeiro pesquise ou liste tarefas e envie os detalhes conhecidos com os campos alterados. Edita tarefas do usuário, não a memória de perfil do assistente nem o plano interno de Main. title/content/tags e datas vazias preservam os valores. Use datas yyyy-MM-dd do ambiente ambiente de execução; não calcule milissegundos de época nem chame Calendar ou Alarm só para resolver uma data. Agende somente com data definida, data relativa inequívoca (hoje, amanhã, depois de amanhã, exatamente daqui a dois dias / 两天后) ou intervalo explícito fornecido pela solicitação ou fonte citada. o horário original da solicitação fornecido pelo runtime e fuso horário são apenas base de cálculo, não uma data do usuário. Sem data ou com tempo vago (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), omita ou esvazie startDate e endDate para deixar em Unscheduled. Não use hoje por padrão, escolha um dia conveniente ou transforme período vago em vários dias; preserve a expressão no conteúdo. Se o conteúdo for conhecido, não pergunte data. Resolva datas definidas pelo contexto atual; hora desconhecida não elimina um dia explícito. Se só o conteúdo mudar sem intenção de agendamento, mantenha as datas. Se o usuário remover o agendamento, disser que está indefinido ou trocar por tempo vago, use clearStartDate=true com datas vazias para apagar ambas e mover para Unscheduled. Informe a seção Unscheduled ou data salva do resultado do Tool, não por suposição. O marcador interno task_pool identifica a seção sem data; expresse-a no idioma da resposta sem repetir o marcador nem adicionar tradução em outro idioma. Estas regras não se aplicam a eventos de calendário ou alarmes."
+    },
+    {
+      "name": "memory_add",
+      "category": "Memo",
+      "risk": "LOW",
+      "approval": "Automática",
+      "approvalCode": "AUTO",
+      "description": "Adiciona uma nova entrada de memória. Para relationship_context, forneça contactQuery e relationshipRole."
+    },
+    {
+      "name": "memory_batch",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "Requer aprovação",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Aplica de 1 a 32 alterações como uma única transação. Use cada destino uma única vez. Verifique a capacidade no resultado final. Se remover uma entrada, alterar um relacionamento de contato ou limpar uma expiração, agrupe apenas as alterações que o usuário atual solicitar explicitamente."
+    },
+    {
+      "name": "memory_remove",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "Requer aprovação",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Remove uma entrada a pedido explícito do usuário atual."
+    },
+    {
+      "name": "memory_replace",
+      "category": "Memo",
+      "risk": "LOW",
+      "approval": "Automática",
+      "approvalCode": "AUTO",
+      "description": "Substitui uma entrada pelo texto atualizado completo. Mantenha os fatos e as condições que ainda se aplicam. Omita ambos os campos de expiração para manter o prazo. Para entradas de relacionamento, forneça contactQuery e relationshipRole para o mesmo contato."
     },
     {
       "name": "voice_memo_read",

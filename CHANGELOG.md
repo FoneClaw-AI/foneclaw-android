@@ -8,6 +8,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 No unreleased changes.
 
+## [v0.4.0] - 2026-11-27
+
+### Added and improved
+
+- To-do Center: clearer daily/list grouping, completion and restoration, manual and assistant-aided entry, and improved editing.
+- Smart memory: conversation review and similar-suggestion handling in the enabled mode, plus personal-memory review, editing and conflict feedback.
+- Scheduled news: stronger source and publication-time checks, shortfall reporting and conditional supplemental search when an explicitly requested count falls short.
+- Direct/CN camera and gallery: optional in-app fallback when an explicitly requested lens cannot be confirmed in the system camera, and access to app-saved photos even with limited gallery permission.
+
+### Scope and compatibility
+
+- Smart memory requires its setting, a compatible model and available services. News source availability and requested story counts are not guaranteed. Online models continue to require HTTPS.
+- Camera/gallery changes are limited to direct/CN implementations; Google shares the other improvements, not direct-only camera fallback, floating controls or external APK plugins. CN uses separate services and updates without Firebase; Lebest remains discontinued.
+- Companion backend model-level speech/voice routing is configuration- and deployment-dependent, not evidence of production availability. Backend schema migrations V56–V63 need separate verification.
+- Memory Room schema v3 includes forward migration from v2; downgrade has not been verified. Candidate artifacts, Play submission, Play review and production deployment are separate milestones.
+
 ## [v0.3.9] - 2026-11-25
 
 ### Added and improved

@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "fr",
   "fallbackLocale": "en",
-  "toolCount": 141,
+  "toolCount": 145,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Rechercher des outils ou des fonctionnalités",
@@ -59,7 +59,7 @@
     {
       "name": "Memo",
       "displayName": "Notes",
-      "toolCount": 8
+      "toolCount": 12
     },
     {
       "name": "System Information",
@@ -89,7 +89,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Ouvrez une photo visible spécifique dans la galerie système. Utilisez-le uniquement lorsque l'utilisateur demande explicitement à afficher ou à ouvrir une photo spécifique. Ne l'utilisez pas comme suivi après camera(command=take_photo) à moins que l'utilisateur ne demande explicitement à voir ou à ouvrir la photo capturée. indexFromLatest est basé sur 1 dans l'ordre le plus récent : 1 ouvre la dernière photo, 2 ouvre la deuxième photo la plus récente, 3 ouvre la troisième photo la plus récente."
+      "description": "Ouvre une photo visible spécifique, y compris les captures FoneClaw et les photos système accessibles. Utilisez-le uniquement lorsque l'utilisateur demande explicitement à afficher ou à ouvrir une photo spécifique. Ne l'utilisez pas comme suivi après camera(command=take_photo) à moins que l'utilisateur ne demande explicitement à voir ou à ouvrir la photo capturée. indexFromLatest est basé sur 1 dans l'ordre du plus récent au plus ancien : 1 ouvre la dernière photo, 2 ouvre la deuxième photo la plus récente, 3 ouvre la troisième photo la plus récente."
     },
     {
       "name": "camera_take_photo",
@@ -890,6 +890,38 @@
       "approval": "Approbation requise",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Modifie une tâche utilisateur du To-do Center par id. Si la cible est décrite en langage naturel, recherchez ou répertoriez d’abord les tâches et transmettez les détails connus avec les champs modifiés. Cela modifie les tâches utilisateur, pas la mémoire de profil de l’assistant ni le plan interne de Main. Les title/content/tags et dates vides conservent leurs valeurs. Utilisez des dates yyyy-MM-dd de l’environnement exécution ; ne calculez pas les millisecondes depuis l’époque et n’appelez pas Calendar ou Alarm uniquement pour une date. Planifiez seulement avec une date précise, une date relative sans ambiguïté (aujourd’hui, demain, après-demain, dans exactement deux jours / 两天后) ou une plage explicite fournie par la demande ou une source citée. l’heure de la demande d’origine fournie à l’exécution et le fuseau horaire ne sont qu’une base de calcul, pas une date utilisateur. Sans date ou avec un moment vague (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), omettez ou videz startDate et endDate pour placer la tâche dans Unscheduled. Ne choisissez pas aujourd’hui par défaut ou un jour pratique et ne transformez pas une période vague en plusieurs jours ; conservez l’expression dans le contenu. Si le contenu est connu, ne demandez pas de date. Résolvez les dates précises avec le contexte actuel ; une heure inconnue n’annule pas un jour explicite. Si seul le contenu change sans intention de planification, conservez les dates. Si l’utilisateur retire la planification, dit que l’heure reste à définir ou la remplace par un moment vague, utilisez clearStartDate=true et des dates vides pour effacer les deux et déplacer vers Unscheduled. Indiquez la section Unscheduled ou la date enregistrée du résultat du Tool, sans supposition. Le marqueur interne task_pool identifie la section sans date ; exprimez-la dans la langue de réponse sans répéter le marqueur ni ajouter une traduction dans une autre langue. Ces règles ne concernent pas les événements de calendrier ni les alarmes."
+    },
+    {
+      "name": "memory_add",
+      "category": "Memo",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Ajoute une nouvelle entrée de mémoire. Pour relationship_context, fournissez contactQuery et relationshipRole."
+    },
+    {
+      "name": "memory_batch",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Applique de 1 à 32 modifications en une seule transaction. Utilisez chaque cible une seule fois. Vérifiez la capacité sur le résultat final. Si vous supprimez une entrée, modifiez une relation de contact ou effacez une expiration, regroupez uniquement les modifications que l'utilisateur actuel demande explicitement."
+    },
+    {
+      "name": "memory_remove",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "Approbation requise",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Supprime une entrée à la demande explicite de l'utilisateur actuel."
+    },
+    {
+      "name": "memory_replace",
+      "category": "Memo",
+      "risk": "LOW",
+      "approval": "Automatique",
+      "approvalCode": "AUTO",
+      "description": "Remplace une entrée par son texte mis à jour complet. Conservez les faits et conditions qui s'appliquent toujours. Omettez les deux champs d'expiration pour conserver l'échéance. Pour les entrées de relation, fournissez contactQuery et relationshipRole pour le même contact."
     },
     {
       "name": "voice_memo_read",

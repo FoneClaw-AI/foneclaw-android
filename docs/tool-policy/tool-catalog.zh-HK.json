@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "zh-HK",
   "fallbackLocale": "en",
-  "toolCount": 141,
+  "toolCount": 145,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "搜尋工具或功能",
@@ -59,7 +59,7 @@
     {
       "name": "Memo",
       "displayName": "備忘",
-      "toolCount": 8
+      "toolCount": 12
     },
     {
       "name": "System Information",
@@ -89,7 +89,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "需要審批",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "從系統圖庫中開啟特定的可見照片。僅當使用者明確要求查看或開啟特定照片時才使用此選項。除非使用者明確要求查看或打開捕獲的照片，否則請勿將其用作 camera(command=take_photo) 之後的後續操作。 indexFromLatest 從 1 開始，按最新到第一的順序：1 開啟最新的照片，2 開啟第二張最新的照片，3 開啟第三個最新的照片。"
+      "description": "開啟特定的可見照片，包括 FoneClaw 拍攝的照片和可存取的系統照片。僅當使用者明確要求查看或開啟特定照片時才使用此選項。除非使用者明確要求查看或開啟拍攝的照片，否則請勿將其用作 camera(command=take_photo) 之後的後續操作。indexFromLatest 從 1 開始，按從新到舊的順序：1 開啟最新的照片，2 開啟第二新的照片，3 開啟第三新的照片。"
     },
     {
       "name": "camera_take_photo",
@@ -890,6 +890,38 @@
       "approval": "需要審批",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "按 id 編輯 To-do Center 中的一項使用者待辦。當使用者以自然語言描述目標時，先搜尋或列出待辦，並將已知目標詳情與變更欄位一起傳入。此操作編輯使用者待辦，而不是助理的使用者設定檔記憶或 Main 的內部執行計劃。空白 title/content/tags 及日期字串會保留現有值。使用從目前 執行階段 環境解析的 yyyy-MM-dd 日期；切勿計算紀元毫秒，也不要只為解析待辦日期而呼叫 Calendar 或 Alarm 工具。待辦排程：只有當使用者要求或明確引用的來源提供確定的日曆日期、可唯一解析的相對日期（今天、明天、後天、恰好兩天後 / 两天后）或明確日期範圍時才排程。執行階段提供的原始要求時間 和時區內容只作計算基準，絕不是使用者提供的排程。未提日期或時間模糊（这两天、这个两天、过几天、近期、有空、改天、soon、sometime this week、in a couple of days）時，以省略或留空的 startDate 和 endDate 將待辦保留或移至 Unscheduled。切勿預設為今天、任選方便的日期，或把模糊時段變成多日排程；把模糊時間保留在待辦內容中。內容已知時，不要只為處理待辦而追問日期。根據執行階段提供的原始要求時間及時區解析確定日期；未知具體小時不會令明確日期變成無日期。更新時，若使用者只修改內容且沒有排程意圖，保留現有日期。若使用者明確移除排程、表示時間待定或改成模糊時間，使用 clearStartDate=true 和空白日期字串移至 Unscheduled，並清除兩個日期。報告 Tool 結果中已儲存的 Unscheduled 分區或排程日期，不要依賴假設。 內部 task_pool 標記表示無日期分區；回覆時以回覆語言表達，不要複述標記或附加其他語言翻譯。 這些規則適用於待辦，不適用於日曆事件或鬧鐘。"
+    },
+    {
+      "name": "memory_add",
+      "category": "Memo",
+      "risk": "LOW",
+      "approval": "自動通過",
+      "approvalCode": "AUTO",
+      "description": "新增一條記憶條目。對於 relationship_context，請提供 contactQuery 和 relationshipRole。"
+    },
+    {
+      "name": "memory_batch",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "需要審批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "將 1 到 32 項修改作為一次事務套用。每個目標只使用一次。在最終結果上檢查容量。如果要移除條目、變更聯絡人關係或清除過期時間，只批次處理當前使用者明確要求的修改。"
+    },
+    {
+      "name": "memory_remove",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "需要審批",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "僅在當前使用者明確要求時移除一條記憶條目。"
+    },
+    {
+      "name": "memory_replace",
+      "category": "Memo",
+      "risk": "LOW",
+      "approval": "自動通過",
+      "approvalCode": "AUTO",
+      "description": "用完整的更新文字取代一條記憶條目。保留仍然成立的事實與條件。兩個過期欄位都省略即可保留原期限。對於關係條目，請為同一聯絡人提供 contactQuery 和 relationshipRole。"
     },
     {
       "name": "voice_memo_read",

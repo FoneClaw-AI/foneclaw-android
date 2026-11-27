@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "ko",
   "fallbackLocale": "en",
-  "toolCount": 141,
+  "toolCount": 145,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "도구 또는 기능 검색",
@@ -59,7 +59,7 @@
     {
       "name": "Memo",
       "displayName": "메모",
-      "toolCount": 8
+      "toolCount": 12
     },
     {
       "name": "System Information",
@@ -89,7 +89,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "시스템 갤러리에서 눈에 보이는 특정 사진을 엽니다. 사용자가 특정 사진을 보거나 열 것을 명시적으로 요청하는 경우에만 이 기능을 사용하세요. 사용자가 캡처한 사진을 보거나 열도록 명시적으로 요청하지 않는 한 camera(command=take_photo) 이후의 후속 작업으로 이 작업을 사용하지 마세요. indexFromLatest은 1부터 최신순으로 이루어집니다. 1은 최신 사진을 열고, 2는 두 번째 최신 사진을 열고, 3은 세 번째 최신 사진을 엽니다."
+      "description": "눈에 보이는 특정 사진을 엽니다. FoneClaw로 촬영한 사진과 접근 가능한 시스템 사진이 포함됩니다. 사용자가 특정 사진을 보거나 열 것을 명시적으로 요청하는 경우에만 사용하세요. 사용자가 촬영한 사진을 보거나 열도록 명시적으로 요청하지 않는 한 camera(command=take_photo) 이후의 후속 작업으로 사용하지 마세요. indexFromLatest는 1부터 시작하는 최신순입니다. 1은 최신 사진을 열고, 2는 두 번째로 최신 사진을 열고, 3은 세 번째로 최신 사진을 엽니다."
     },
     {
       "name": "camera_take_photo",
@@ -890,6 +890,38 @@
       "approval": "승인 필요",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "To-do Center의 사용자 할 일을 id로 편집합니다. 사용자가 대상을 자연어로 설명하면 먼저 할 일을 검색하거나 나열하고 알려진 대상 정보와 변경 필드를 전달합니다. 사용자 할 일을 편집하며 어시스턴트 프로필 메모리나 Main의 내부 실행 계획은 편집하지 않습니다. 빈 title/content/tags와 날짜 문자열은 기존 값을 유지합니다. 런타임이 제공한 원래 요청 시간과 시간대 환경에서 확인한 yyyy-MM-dd를 사용하고 날짜 확인만을 위해 에포크 밀리초를 계산하거나 Calendar 또는 Alarm Tool을 호출하지 않습니다. 일정은 요청이나 명시적 참조 출처에 확정 날짜, 하나로 해석되는 상대 날짜(오늘, 내일, 모레, 정확히 이틀 뒤 / 两天后) 또는 명시적 범위가 있을 때만 지정합니다. 런타임이 제공한 원래 요청 시간와 시간대는 계산 기준일 뿐 사용자 지정 일정이 아닙니다. 날짜가 없거나 시간이 모호하면(这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days) startDate와 endDate를 생략하거나 비워 Unscheduled에 둡니다. 오늘을 기본값으로 삼거나 편한 날을 고르거나 모호한 기간을 여러 날 일정으로 바꾸지 말고, 모호한 표현은 내용에 보존합니다. 내용을 알면 날짜만을 묻지 않습니다. 확정 날짜는 런타임이 제공한 원래 요청 시간과 시간대에서 해석하며 시간 불명확은 명시된 날짜를 미정으로 만들지 않습니다. 내용만 바꾸고 일정 의도가 없으면 기존 날짜를 유지합니다. 일정을 제거하거나 시간 미정을 말하거나 모호한 시간으로 바꾸면 빈 날짜 문자열과 clearStartDate=true로 두 날짜를 지우고 Unscheduled로 이동합니다. 추측이 아니라 Tool 결과의 Unscheduled 섹션이나 저장 날짜를 보고합니다. 내부 task_pool은 날짜 미정 섹션을 나타냅니다. 응답 언어로 표현하고 마커를 그대로 쓰거나 다른 언어 번역을 추가하지 않습니다. 이 규칙은 할 일에만 적용되며 캘린더 일정이나 알람에는 적용되지 않습니다."
+    },
+    {
+      "name": "memory_add",
+      "category": "Memo",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "새 기억 항목을 하나 추가합니다. relationship_context의 경우 contactQuery와 relationshipRole을 제공하세요."
+    },
+    {
+      "name": "memory_batch",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "1에서 32개의 변경을 하나의 트랜잭션으로 적용합니다. 각 대상은 한 번만 사용합니다. 최종 결과에서 용량을 확인합니다. 항목 제거, 연락처 관계 변경 또는 만료 지우기를 수행하는 경우 현재 사용자가 명시적으로 요청한 변경만 일괄 처리합니다."
+    },
+    {
+      "name": "memory_remove",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "승인 필요",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "현재 사용자의 명시적 요청에 따라 기억 항목 하나를 제거합니다."
+    },
+    {
+      "name": "memory_replace",
+      "category": "Memo",
+      "risk": "LOW",
+      "approval": "자동",
+      "approvalCode": "AUTO",
+      "description": "하나의 기억 항목을 전체 업데이트 텍스트로 교체합니다. 여전히 성립하는 사실과 조건은 유지합니다. 두 만료 필드를 모두 생략하면 기한을 유지합니다. 관계 항목의 경우 동일한 연락처에 대해 contactQuery와 relationshipRole을 제공하세요."
     },
     {
       "name": "voice_memo_read",

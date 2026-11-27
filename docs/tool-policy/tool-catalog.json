@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "en",
   "fallbackLocale": "en",
-  "toolCount": 141,
+  "toolCount": 145,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Search tools or capabilities",
@@ -59,7 +59,7 @@
     {
       "name": "Memo",
       "displayName": "Memo",
-      "toolCount": 8
+      "toolCount": 12
     },
     {
       "name": "System Information",
@@ -89,7 +89,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Open a specific visible photo from the system gallery. Use this only when the user explicitly asks to view or open a specific photo. Do not use this as a follow-up after camera(command=take_photo) unless the user explicitly asks to view or open the captured photo. indexFromLatest is 1-based in newest-first order: 1 opens the latest photo, 2 opens the second latest photo, 3 opens the third latest photo."
+      "description": "Open a specific visible photo, including FoneClaw captures and accessible system photos. Use this only when the user explicitly asks to view or open a specific photo. Do not use this as a follow-up after camera(command=take_photo) unless the user explicitly asks to view or open the captured photo. indexFromLatest is 1-based in newest-first order: 1 opens the latest photo, 2 opens the second latest photo, 3 opens the third latest photo."
     },
     {
       "name": "camera_take_photo",
@@ -890,6 +890,38 @@
       "approval": "Require approval",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Edit a user to-do in To-do Center by id. Search/list to-dos first when the user describes the target in natural language, and pass known target details with changed fields. This edits user to-dos, not assistant profile memory or Main's internal execution plan. Blank title/content/tags and date strings keep existing values. Use yyyy-MM-dd dates resolved from the original request time and timezone supplied by runtime; never calculate epoch milliseconds or call Calendar or Alarm Tools only to resolve a to-do date. To-do scheduling: Schedule a to-do only when the user's request or explicitly referenced source gives a definite calendar date, a uniquely resolvable relative date (today, tomorrow, the day after tomorrow, in exactly two days / 两天后), or an explicit date range. The runtime-provided original request time and timezone are only a calculation base, never a user-supplied schedule. If no date is mentioned, or timing is vague (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), create an undated to-do in Unscheduled with both startDate and endDate omitted or empty. Never default to today, pick a convenient day, or turn a vague window into a multi-day scheduled event. Preserve vague timing in the to-do content. When the content is known, do not ask for a date just to create the to-do. Resolve definite dates from the original request time and timezone supplied by runtime; an unknown hour does not make an explicit day undated. For updates, keep existing dates when the user only changes content and gives no scheduling intent. If the user explicitly removes the schedule, says time undecided, or replaces it with vague timing, use clearStartDate=true with empty date strings to move it to Unscheduled and clear both dates. Report the saved Unscheduled section or scheduled date from the Tool result, not from assumptions. The internal task_pool result marker identifies the undated section; express that section in the response language without echoing the marker or adding a translation in another language. These rules apply to to-dos, not calendar events or alarms."
+    },
+    {
+      "name": "memory_add",
+      "category": "Memo",
+      "risk": "LOW",
+      "approval": "Auto",
+      "approvalCode": "AUTO",
+      "description": "Add one new entry. For relationship_context, supply contactQuery and relationshipRole."
+    },
+    {
+      "name": "memory_batch",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "Require approval",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Apply 1 to 32 changes as one transaction. Use each target once. Check capacity on the final result. If removing an entry, changing a contact relationship, or clearing an expiry, batch only changes the current user explicitly requests."
+    },
+    {
+      "name": "memory_remove",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "Require approval",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Remove one entry at the current user's explicit request."
+    },
+    {
+      "name": "memory_replace",
+      "category": "Memo",
+      "risk": "LOW",
+      "approval": "Auto",
+      "approvalCode": "AUTO",
+      "description": "Replace one entry with its full updated text. Keep facts and conditions that still apply. Omit both expiry fields to keep the deadline. For relationship entries, supply contactQuery and relationshipRole for the same contact."
     },
     {
       "name": "voice_memo_read",

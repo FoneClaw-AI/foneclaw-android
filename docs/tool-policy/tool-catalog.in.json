@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "in",
   "fallbackLocale": "en",
-  "toolCount": 141,
+  "toolCount": 145,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Cari alat atau kemampuan",
@@ -59,7 +59,7 @@
     {
       "name": "Memo",
       "displayName": "Memo",
-      "toolCount": 8
+      "toolCount": 12
     },
     {
       "name": "System Information",
@@ -89,7 +89,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Open a specific visible photo from the system gallery. Gunakan ini hanya ketika pengguna secara eksplisit meminta untuk melihat atau membuka foto tertentu. Do not use this as a follow-up after camera(command=take_photo) unless the user explicitly asks to view or open the captured photo. indexFromLatest berbasis 1 pada urutan terbaru-pertama: 1 membuka foto terbaru, 2 membuka foto terbaru kedua, 3 membuka foto terbaru ketiga."
+      "description": "Buka foto terlihat tertentu, termasuk tangkapan FoneClaw dan foto sistem yang dapat diakses. Gunakan ini hanya ketika pengguna secara eksplisit meminta untuk melihat atau membuka foto tertentu. Jangan gunakan ini sebagai tindak lanjut setelah camera(command=take_photo) kecuali pengguna secara eksplisit meminta untuk melihat atau membuka foto yang diambil. indexFromLatest berbasis 1 pada urutan terbaru ke terlama: 1 membuka foto terbaru, 2 membuka foto terbaru kedua, 3 membuka foto terbaru ketiga."
     },
     {
       "name": "camera_take_photo",
@@ -113,7 +113,7 @@
       "risk": "LOW",
       "approval": "Otomatis",
       "approvalCode": "AUTO",
-      "description": "Query installed map apps supported by map tools. Mengembalikan nama tampilan dan nama paket setiap aplikasi."
+      "description": "Kueri aplikasi peta terpasang yang didukung oleh alat peta. Mengembalikan nama tampilan dan nama paket setiap aplikasi."
     },
     {
       "name": "get_screen_info",
@@ -890,6 +890,38 @@
       "approval": "Perlu persetujuan",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Mengedit tugas pengguna di To-do Center berdasarkan id. Jika target dijelaskan dengan bahasa alami, cari atau tampilkan tugas terlebih dahulu dan teruskan detail yang diketahui bersama kolom yang diubah. Ini mengedit tugas pengguna, bukan memori profil asisten atau rencana internal Main. title/content/tags dan string tanggal kosong mempertahankan nilai. Gunakan yyyy-MM-dd dari lingkungan runtime; jangan hitung milidetik epoch atau panggil Calendar atau Alarm hanya untuk tanggal. Jadwalkan hanya dengan tanggal pasti, tanggal relatif yang jelas (hari ini, besok, lusa, tepat dua hari lagi / 两天后), atau rentang eksplisit dari permintaan atau sumber rujukan. waktu permintaan asli yang disediakan runtime dan zona waktu hanya dasar perhitungan, bukan tanggal pengguna. Tanpa tanggal atau dengan waktu samar (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days), hilangkan atau kosongkan startDate dan endDate lalu tempatkan tugas di Unscheduled. Jangan tetapkan hari ini, pilih hari yang nyaman, atau ubah periode samar menjadi beberapa hari; pertahankan ungkapan dalam konten. Jika konten diketahui, jangan tanyakan tanggal. Tentukan tanggal pasti dari konteks saat ini; jam yang tidak diketahui tidak membatalkan hari eksplisit. Jika hanya konten berubah tanpa niat penjadwalan, pertahankan tanggal. Jika pengguna menghapus jadwal, menyatakan waktu belum ditentukan, atau menggantinya dengan waktu samar, gunakan clearStartDate=true dan tanggal kosong untuk menghapus keduanya serta pindah ke Unscheduled. Laporkan bagian Unscheduled atau tanggal tersimpan dari hasil Tool, bukan asumsi. Penanda internal task_pool menunjukkan bagian tanpa tanggal; sebutkan dalam bahasa jawaban tanpa mengulang penanda atau menambahkan terjemahan bahasa lain. Aturan tidak berlaku untuk acara kalender atau alarm."
+    },
+    {
+      "name": "memory_add",
+      "category": "Memo",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Tambahkan satu entri memori baru. Untuk relationship_context, sediakan contactQuery dan relationshipRole."
+    },
+    {
+      "name": "memory_batch",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Terapkan 1 hingga 32 perubahan sebagai satu transaksi. Gunakan setiap target satu kali. Periksa kapasitas pada hasil akhir. Jika menghapus entri, mengubah hubungan kontak, atau menghapus kedaluwarsa, kelompokkan hanya perubahan yang diminta secara eksplisit oleh pengguna saat ini."
+    },
+    {
+      "name": "memory_remove",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "Perlu persetujuan",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Hapus satu entri atas permintaan eksplisit pengguna saat ini."
+    },
+    {
+      "name": "memory_replace",
+      "category": "Memo",
+      "risk": "LOW",
+      "approval": "Otomatis",
+      "approvalCode": "AUTO",
+      "description": "Ganti satu entri dengan teks terbarunya secara lengkap. Pertahankan fakta dan kondisi yang masih berlaku. Lewati kedua field kedaluwarsa untuk mempertahankan tenggat. Untuk entri relasi, sediakan contactQuery dan relationshipRole untuk kontak yang sama."
     },
     {
       "name": "voice_memo_read",

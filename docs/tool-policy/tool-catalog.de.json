@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "de",
   "fallbackLocale": "en",
-  "toolCount": 141,
+  "toolCount": 145,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Tools oder Funktionen suchen",
@@ -59,7 +59,7 @@
     {
       "name": "Memo",
       "displayName": "Notizen",
-      "toolCount": 8
+      "toolCount": 12
     },
     {
       "name": "System Information",
@@ -89,7 +89,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Öffnen Sie ein bestimmtes sichtbares Foto aus der Systemgalerie. Verwenden Sie dies nur, wenn der Benutzer ausdrücklich darum bittet, ein bestimmtes Foto anzuzeigen oder zu öffnen. Verwenden Sie dies nicht als Folge nach camera(command=take_photo), es sei denn, der Benutzer fordert ausdrücklich dazu auf, das aufgenommene Foto anzuzeigen oder zu öffnen. indexFromLatest basiert auf 1 in der Reihenfolge „Neueste zuerst“: 1 öffnet das neueste Foto, 2 öffnet das zweitletzte Foto, 3 öffnet das drittletzte Foto."
+      "description": "Öffnet ein bestimmtes sichtbares Foto, einschließlich FoneClaw-Aufnahmen und zugänglicher Systemfotos. Verwenden Sie dies nur, wenn der Benutzer ausdrücklich darum bittet, ein bestimmtes Foto anzuzeigen oder zu öffnen. Verwenden Sie dies nicht als Folge nach camera(command=take_photo), es sei denn, der Benutzer fordert ausdrücklich auf, das aufgenommene Foto anzuzeigen oder zu öffnen. indexFromLatest basiert auf 1 in der Reihenfolge „Neueste zuerst“: 1 öffnet das neueste Foto, 2 öffnet das zweitneueste Foto, 3 öffnet das drittneueste Foto."
     },
     {
       "name": "camera_take_photo",
@@ -890,6 +890,38 @@
       "approval": "Genehmigung erforderlich",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Bearbeitet eine Benutzeraufgabe im To-do Center anhand der id. Wird das Ziel natürlich beschrieben, suchen oder listen Sie zuerst Aufgaben und übergeben bekannte Details mit geänderten Feldern. Bearbeitet werden Benutzeraufgaben, nicht der Profilspeicher des Assistenten oder der interne Plan von Main. Leere title/content/tags und Datumszeichenfolgen behalten ihre Werte. Verwenden Sie yyyy-MM-dd aus der ausführende Laufzeit-Umgebung; berechnen Sie keine Epochen-Millisekunden und rufen Calendar oder Alarm nicht nur für ein Datum auf. Planen Sie nur mit einem festen Datum, eindeutig auflösbaren relativen Datum (heute, morgen, übermorgen, in genau zwei Tagen / 两天后) oder ausdrücklichen Bereich aus Anfrage oder zitierter Quelle. die von der Laufzeit bereitgestellte ursprüngliche Anfragezeit und Zeitzone sind nur Berechnungsgrundlage, kein Benutzerdatum. Ohne Datum oder bei vager Zeit (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days) lassen Sie startDate und endDate weg oder leer und legen die Aufgabe in Unscheduled. Setzen Sie nicht heute als Standard, wählen keinen bequemen Tag und machen keinen mehrtägigen Termin daraus; bewahren Sie die Angabe im Inhalt. Ist der Inhalt bekannt, fragen Sie nicht nach einem Datum. Bestimmen Sie feste Daten aus dem aktuellen Kontext; eine unbekannte Uhrzeit hebt einen ausdrücklichen Tag nicht auf. Wenn nur Inhalt ohne Planungsabsicht geändert wird, behalten Sie die Daten. Wird die Planung entfernt, als unbestimmt bezeichnet oder durch eine vage Angabe ersetzt, verwenden Sie clearStartDate=true und leere Daten, um beide zu löschen und nach Unscheduled zu verschieben. Melden Sie Abschnitt Unscheduled oder gespeichertes Datum aus dem Tool-Ergebnis, nicht aus Annahmen. Der interne Marker task_pool bezeichnet den undatierten Abschnitt; in der Antwortsprache ausdrücken, ohne Marker oder zusätzliche Übersetzung in eine andere Sprache. Die Regeln gelten nicht für Kalenderereignisse oder Alarme."
+    },
+    {
+      "name": "memory_add",
+      "category": "Memo",
+      "risk": "LOW",
+      "approval": "Automatisch",
+      "approvalCode": "AUTO",
+      "description": "Fügt einen neuen Memory-Eintrag hinzu. Für relationship_context geben Sie contactQuery und relationshipRole an."
+    },
+    {
+      "name": "memory_batch",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "Genehmigung erforderlich",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Wendet 1 bis 32 Änderungen als eine Transaktion an. Verwenden Sie jedes Ziel nur einmal. Prüfen Sie die Kapazität am Endergebnis. Wenn Sie einen Eintrag entfernen, eine Kontaktbeziehung ändern oder ein Ablaufdatum löschen, bündeln Sie nur die Änderungen, die der aktuelle Benutzer ausdrücklich anfordert."
+    },
+    {
+      "name": "memory_remove",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "Genehmigung erforderlich",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Entfernt einen Eintrag auf ausdrückliche Anfrage des aktuellen Benutzers."
+    },
+    {
+      "name": "memory_replace",
+      "category": "Memo",
+      "risk": "LOW",
+      "approval": "Automatisch",
+      "approvalCode": "AUTO",
+      "description": "Ersetzt einen Eintrag durch seinen vollständig aktualisierten Text. Behalten Sie Fakten und Bedingungen, die weiterhin gelten. Lassen Sie beide Ablauffelder weg, um die Frist beizubehalten. Für Beziehungseinträge geben Sie contactQuery und relationshipRole für denselben Kontakt an."
     },
     {
       "name": "voice_memo_read",

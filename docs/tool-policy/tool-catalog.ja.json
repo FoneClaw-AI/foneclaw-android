@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "ja",
   "fallbackLocale": "en",
-  "toolCount": 141,
+  "toolCount": 145,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "ツールや機能を検索",
@@ -59,7 +59,7 @@
     {
       "name": "Memo",
       "displayName": "メモ",
-      "toolCount": 8
+      "toolCount": 12
     },
     {
       "name": "System Information",
@@ -89,7 +89,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "システム ギャラリーから特定の表示可能な写真を開きます。これは、ユーザーが特定の写真を表示または開くことを明示的に要求した場合にのみ使用します。ユーザーがキャプチャした写真を表示するか開くことを明示的に要求しない限り、これを camera(command=take_photo) の後のフォローアップとして使用しないでください。 indexFromLatest は 1 から始まり、新しいものから順に並べられます。1 は最新の写真を開き、2 は 2 番目に新しい写真を開き、3 は 3 番目に新しい写真を開きます。"
+      "description": "特定の表示可能な写真を開きます。FoneClaw で撮影した写真やアクセス可能なシステムの写真も含まれます。これは、ユーザーが特定の写真を表示または開くことを明示的に要求した場合にのみ使用します。ユーザーが撮影した写真を表示または開くことを明示的に要求しない限り、camera(command=take_photo) の後のフォローアップとして使用しないでください。indexFromLatest は 1 から始まる最新順です。1 は最新の写真を開き、2 は 2 番目に新しい写真を開き、3 は 3 番目に新しい写真を開きます。"
     },
     {
       "name": "camera_take_photo",
@@ -890,6 +890,38 @@
       "approval": "承認が必要",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "To-do Center のユーザー To-do を id で編集します。対象が自然言語で説明された場合は、先に To-do を検索または一覧表示し、既知の対象情報と変更フィールドを渡します。編集対象はユーザーの To-do であり、アシスタントのプロファイルメモリや Main の内部実行計画ではありません。空の title/content/tags と日付文字列は既存値を維持します。現在の ランタイム 環境から解決した yyyy-MM-dd を使い、エポックミリ秒を計算したり、日付解決だけのために Calendar や Alarm Tool を呼んだりしません。スケジュールは、依頼または明示的な参照元に確定日、一意に解決できる相対日（今日、明日、明後日、ちょうど 2 日後 / 两天后）、または明示的な範囲がある場合だけ設定します。ランタイムが提供した元の依頼時刻 とタイムゾーンは計算基準であり、ユーザー指定の予定ではありません。日付がない、または時期が曖昧（这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days）なら、startDate と endDate を省略または空にして Unscheduledにします。今日を既定にしたり、都合のよい日を選んだり、曖昧な期間を複数日の予定に変えたりせず、曖昧な時期は内容に残します。内容が分かっているなら日付だけを尋ねません。確定日はランタイム提供の元の依頼時刻とタイムゾーンから解決し、時刻不明でも明示日を未定にしません。内容だけの更新で予定の意図がなければ既存日を保持します。予定の削除、時期未定、曖昧な時期への変更が明示されたら、空の日付文字列と clearStartDate=true で両方の日付を消去して Unscheduled に移します。推測ではなく Tool 結果の Unscheduled セクションまたは保存日を報告します。 内部 task_pool は日付未定のセクションを示します。応答言語で表現し、マーカーや別言語の訳を付けません。 この規則は To-do に適用し、カレンダーイベントやアラームには適用しません。"
+    },
+    {
+      "name": "memory_add",
+      "category": "Memo",
+      "risk": "LOW",
+      "approval": "自動",
+      "approvalCode": "AUTO",
+      "description": "新しい記憶エントリを 1 件追加します。relationship_context の場合は、contactQuery と relationshipRole を指定してください。"
+    },
+    {
+      "name": "memory_batch",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "承認が必要",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "1 から 32 個の変更を 1 つのトランザクションとして適用します。各ターゲットは 1 回だけ使用します。最終結果で容量を確認します。エントリの削除、連絡先の関係の変更、有効期限のクリアを行う場合は、現在のユーザーが明示的に要求した変更のみをまとめます。"
+    },
+    {
+      "name": "memory_remove",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "承認が必要",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "現在のユーザーの明示的な要求に応じて、記憶エントリを 1 件削除します。"
+    },
+    {
+      "name": "memory_replace",
+      "category": "Memo",
+      "risk": "LOW",
+      "approval": "自動",
+      "approvalCode": "AUTO",
+      "description": "1 件の記憶エントリを完全な更新テキストで置き換えます。今も当てはまる事実と条件は保持します。両方の有効期限フィールドを省略すると期限を維持します。関係エントリの場合は、同じ連絡先に対して contactQuery と relationshipRole を指定してください。"
     },
     {
       "name": "voice_memo_read",

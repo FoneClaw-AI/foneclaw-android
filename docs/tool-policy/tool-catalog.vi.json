@@ -3,7 +3,7 @@
   "catalogType": "foneclaw-built-in-tools",
   "locale": "vi",
   "fallbackLocale": "en",
-  "toolCount": 141,
+  "toolCount": 145,
   "categoryCount": 11,
   "uiLabels": {
     "searchPlaceholder": "Tìm kiếm công cụ hoặc khả năng",
@@ -59,7 +59,7 @@
     {
       "name": "Memo",
       "displayName": "Ghi chú",
-      "toolCount": 8
+      "toolCount": 12
     },
     {
       "name": "System Information",
@@ -89,7 +89,7 @@
       "risk": "SENSITIVE_READ",
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
-      "description": "Mở một bức ảnh hiển thị cụ thể từ thư viện hệ thống. Chỉ sử dụng tùy chọn này khi người dùng yêu cầu xem hoặc mở một ảnh cụ thể một cách rõ ràng. Không sử dụng tùy chọn này để theo dõi sau camera(command=take_photo) trừ khi người dùng yêu cầu xem hoặc mở ảnh đã chụp một cách rõ ràng. indexFromLatest dựa trên 1 theo thứ tự mới nhất: 1 mở ảnh mới nhất, 2 mở ảnh mới nhất thứ hai, 3 mở ảnh mới nhất thứ ba."
+      "description": "Mở một bức ảnh hiển thị cụ thể, bao gồm ảnh chụp từ FoneClaw và ảnh hệ thống có thể truy cập. Chỉ sử dụng tùy chọn này khi người dùng yêu cầu xem hoặc mở một ảnh cụ thể một cách rõ ràng. Không sử dụng tùy chọn này để theo dõi sau camera(command=take_photo) trừ khi người dùng yêu cầu xem hoặc mở ảnh đã chụp một cách rõ ràng. indexFromLatest dựa trên 1 theo thứ tự mới nhất đến cũ nhất: 1 mở ảnh mới nhất, 2 mở ảnh mới nhất thứ hai, 3 mở ảnh mới nhất thứ ba."
     },
     {
       "name": "camera_take_photo",
@@ -890,6 +890,38 @@
       "approval": "Cần phê duyệt",
       "approvalCode": "REQUIRE_APPROVAL",
       "description": "Chỉnh sửa việc cần làm của người dùng trong To-do Center theo id. Nếu mục tiêu được mô tả bằng ngôn ngữ tự nhiên, hãy tìm kiếm hoặc liệt kê trước rồi truyền chi tiết đã biết cùng trường thay đổi. Chỉnh sửa việc của người dùng, không phải bộ nhớ hồ sơ trợ lý hay kế hoạch nội bộ của Main. title/content/tags và chuỗi ngày trống giữ nguyên giá trị. Dùng yyyy-MM-dd từ môi trường thời gian chạy; không tính mili giây epoch hoặc gọi Calendar hay Alarm chỉ để xác định ngày. Chỉ lên lịch với ngày cụ thể, ngày tương đối rõ ràng (hôm nay, ngày mai, ngày kia, đúng hai ngày nữa / 两天后) hoặc khoảng rõ ràng từ yêu cầu hay nguồn dẫn chiếu. thời điểm yêu cầu gốc do môi trường chạy cung cấp và múi giờ chỉ là cơ sở tính toán, không phải ngày của người dùng. Không có ngày hoặc thời gian mơ hồ (这两天, 这个两天, 过几天, 近期, 有空, 改天, soon, sometime this week, in a couple of days) thì bỏ qua hoặc để trống startDate và endDate, đặt việc trong Unscheduled. Không mặc định hôm nay, chọn ngày thuận tiện hoặc biến khoảng mơ hồ thành nhiều ngày; giữ cách nói đó trong nội dung. Nếu đã biết nội dung, không hỏi ngày. Xác định ngày cụ thể từ ngữ cảnh hiện tại; không biết giờ không hủy một ngày rõ ràng. Nếu chỉ đổi nội dung và không có ý định lên lịch, giữ ngày hiện có. Nếu người dùng xóa lịch, nói thời gian chưa quyết định hoặc thay bằng thời gian mơ hồ, dùng clearStartDate=true và ngày trống để xóa cả hai rồi chuyển sang Unscheduled. Báo phần Unscheduled hoặc ngày đã lưu từ kết quả Tool, không từ giả định. Dấu nội bộ task_pool chỉ phần chưa có ngày; diễn đạt bằng ngôn ngữ trả lời, không lặp dấu hay thêm bản dịch ngôn ngữ khác. Quy tắc không áp dụng cho sự kiện lịch hoặc báo thức."
+    },
+    {
+      "name": "memory_add",
+      "category": "Memo",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Thêm một mục trí nhớ mới. Đối với relationship_context, cung cấp contactQuery và relationshipRole."
+    },
+    {
+      "name": "memory_batch",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Áp dụng 1 đến 32 thay đổi như một giao dịch. Sử dụng mỗi mục tiêu một lần. Kiểm tra dung lượng trên kết quả cuối cùng. Nếu xóa một mục, thay đổi mối quan hệ liên hệ hoặc xóa ngày hết hạn, chỉ gom các thay đổi mà người dùng hiện tại yêu cầu rõ ràng."
+    },
+    {
+      "name": "memory_remove",
+      "category": "Memo",
+      "risk": "DESTRUCTIVE",
+      "approval": "Cần phê duyệt",
+      "approvalCode": "REQUIRE_APPROVAL",
+      "description": "Xóa một mục theo yêu cầu rõ ràng của người dùng hiện tại."
+    },
+    {
+      "name": "memory_replace",
+      "category": "Memo",
+      "risk": "LOW",
+      "approval": "Tự động",
+      "approvalCode": "AUTO",
+      "description": "Thay thế một mục bằng văn bản đã cập nhật đầy đủ. Giữ lại các dữ kiện và điều kiện vẫn còn áp dụng. Bỏ qua cả hai trường hết hạn để giữ nguyên thời hạn. Đối với mục quan hệ, cung cấp contactQuery và relationshipRole cho cùng một liên hệ."
     },
     {
       "name": "voice_memo_read",
